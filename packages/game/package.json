@@ -1,0 +1,27 @@
+{
+  "name": "@repo/game",
+  "version": "0.0.0",
+  "private": true,
+  "exports": {
+    "./types": "./types/index.ts",
+    "./utils": "./utils/index.ts",
+    "./data": "./data/index.ts"
+  },
+  "scripts": {
+    "lint": "eslint . --max-warnings 0"
+  },
+  "devDependencies": {
+    "@repo/eslint-config": "*",
+    "@repo/typescript-config": "*",
+    "@types/eslint": "^8.56.5",
+    "@types/node": "^20.11.24",
+    "@types/uuid": "^10.0.0",
+    "eslint": "^8.57.0",
+    "typescript": "^5.3.3",
+    "uuid": "^10.0.0"
+  },
+  "dependencies": {
+    "nanoid": "^5.0.7",
+    "random": "^4.1.0"
+  }
+}

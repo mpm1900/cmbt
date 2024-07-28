@@ -1,0 +1,24 @@
+import { nanoid } from 'nanoid'
+import { Modifier, ModifierProps } from './Modifier'
+import { GameContext, Id } from '.'
+
+export type TriggerEvent = 'onTurnStart' | 'onTurnEnd' | 'onUnitEnter'
+export const AllTriggerEvents: TriggerEvent[] = ['onTurnStart', 'onTurnEnd']
+
+export const TriggerId = () => `Trigger@${nanoid()}`
+
+export type TriggerProps<T = {}> = ModifierProps<T> & {
+  modifiers?: (ctx: GameContext) => Modifier[]
+}
+
+export abstract class Trigger extends Modifier {
+  readonly events: TriggerEvent[]
+  modifiers?: (ctx: GameContext) => Modifier[]
+
+  constructor(id: Id, props: TriggerProps & { events: TriggerEvent[] }) {
+    super(id, props)
+
+    this.modifiers = props.modifiers
+    this.events = props.events ?? []
+  }
+}

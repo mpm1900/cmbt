@@ -18,6 +18,7 @@ export class IcyWind extends Action {
       sourceId,
       teamId,
       cost: new Identity({ sourceId }),
+      attackType: 'magic',
     })
   }
 

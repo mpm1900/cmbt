@@ -4,7 +4,7 @@ import { useActions, useTurn } from '../state'
 import { useGameContext } from '../useGameContext'
 import { useGameActions } from '../useGameActions'
 
-export function useIdleController() {
+export function useInputController() {
   const { queue, sort } = useActions()
   const { turn, setStatus } = useTurn()
   const ctx = useGameContext()
@@ -17,7 +17,7 @@ export function useIdleController() {
   }
 
   useEffect(() => {
-    if (turn.status === 'idle') {
+    if (turn.status === 'waiting-for-input') {
       const actionableUnits = getActionableUnitsCtx(ctx)
 
       const checkLength = actionableUnits.length

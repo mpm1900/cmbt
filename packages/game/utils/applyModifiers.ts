@@ -17,7 +17,7 @@ export function applyModifiers(
   unit: Unit,
   ctx: GameContext
 ): ApplyModifiersResult {
-  if (unit.modified) {
+  if (unit.metadata.modified) {
     console.log('double modified', unit.name)
     return { unit, appliedModifiers: [], registeredTriggers: [] }
   }
@@ -46,7 +46,10 @@ export function applyModifiers(
     ...result,
     unit: {
       ...result.unit,
-      modified: true,
+      metadata: {
+        ...result.unit.metadata,
+        modified: true,
+      },
     },
   }
 }

@@ -1,7 +1,7 @@
 import { useGameContext } from '@/hooks'
 import { Id } from '@repo/game/types'
 import { Badge } from './ui/badge'
-import { applyModifiers } from '@repo/game/utils'
+import { applyModifiers, isUnitAlive } from '@repo/game/utils'
 import { cn } from '@/lib/utils'
 
 export type TeamBenchProps = {
@@ -16,17 +16,28 @@ export function TeamBench(props: TeamBenchProps) {
     <div className="p-2 space-x-2">
       {ctx.units
         .filter((u) => u.teamId === teamId)
-        .map((u) => {
+        .map((u, i) => {
           const { unit } = applyModifiers(u, ctx)
           return (
             <Badge
               key={u.id}
-              variant={unit.flags.isActive ? 'default' : 'secondary'}
+              variant={
+                !isUnitAlive(unit)
+                  ? 'destructive'
+                  : unit.flags.isActive
+                    ? 'default'
+                    : 'secondary'
+              }
               className={cn({
-                'opacity-40': unit.values.damage >= unit.stats.health,
+                'opacity-40 line-through': !isUnitAlive(unit),
               })}
             >
-              {u.name}
+              {teamId === ctx.user ||
+              unit.flags.isActive ||
+              unit.metadata.hasBeenSeen ||
+              !isUnitAlive(unit)
+                ? u.name
+                : i + 1}
             </Badge>
           )
         })}

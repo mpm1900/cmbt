@@ -1,3 +1,6 @@
 export * from './commitNextActionItem'
 export * from './getResultFromActionItem'
 export * from './getTeamsWithSelectionRequired'
+export * from './logActionResult'
+export * from './logModifiers'
+export * from './logMutations'

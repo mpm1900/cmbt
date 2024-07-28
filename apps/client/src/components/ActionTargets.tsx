@@ -9,7 +9,7 @@ export type UnitActionTargetsProps = {
   onConfirmClick: () => void
 }
 
-export function UnitActionTargets(props: UnitActionTargetsProps) {
+export function ActionTargets(props: UnitActionTargetsProps) {
   const { action, targets, onConfirmClick, onTargetClick } = props
   const ctx = useGameContext()
   const possibleTargets = ctx.units.filter((u) => action.targets(u, ctx))

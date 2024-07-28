@@ -2,10 +2,10 @@ import { useEffect } from 'react'
 import { makeUnit } from '@repo/game/utils'
 import { Identity, Potion, PowerDownAllOtherOnUnitEnter } from '@repo/game/data'
 import { faker } from '@faker-js/faker'
-import { useGameContext } from '@/hooks'
+import { useGameContext, useScrollToBottom } from '@/hooks'
 import {
   useAiActions,
-  useIdleController,
+  useInputController,
   useTurnController,
 } from '@/hooks/controllers'
 import {
@@ -36,8 +36,9 @@ function App() {
   const logs = useCombatLog()
   const item = useItems()
   useTurnController()
-  useIdleController()
+  useInputController()
   useAiActions()
+  const ref = useScrollToBottom(logs.logs.length)
 
   useEffect(() => {
     if (unitsStore.units.length === 0) {
@@ -45,7 +46,7 @@ function App() {
       teamsStore.setUser(user)
       const userTeam = teamsStore.teams.find((t) => t.id === user) as Team
       const aiTeam = teamsStore.teams.find((t) => t.id !== user) as Team
-      const testUnit = makeUnit(userTeam.id, 'Unit with Intimidate', false)
+      const testUnit = makeUnit(userTeam.id, 'Salamence', false)
       const units = unitsStore.add(
         makeUnit(userTeam.id, faker.person.fullName(), true),
         makeUnit(userTeam.id, faker.person.fullName(), true),
@@ -97,7 +98,7 @@ function App() {
         <Separator />
       </div>
     )
-    turn.setStatus('idle')
+    turn.setStatus('waiting-for-input')
   }, [])
 
   const userTeam = teamsStore.teams.find((t) => t.id === teamsStore.user)
@@ -106,8 +107,6 @@ function App() {
   if (turn.turn.status === 'done') {
     return <h1>battle over!</h1>
   }
-
-  console.log(modifiersStore.modifiers)
 
   return (
     <div className="flex min-h-screen w-full flex-col bg-muted/40 overflow-auto">
@@ -128,7 +127,7 @@ function App() {
               </div>
             </div>
             <div className="flex flex-1 items-center justify-center">
-              <RequireTurnStatus status="idle">
+              <RequireTurnStatus status="waiting-for-input">
                 <ActiveUnit />
               </RequireTurnStatus>
               <RequireTurnStatus status="cleanup">
@@ -157,9 +156,12 @@ function App() {
             </div>
           </div>
         </div>
-        <div className="w-[360px] bg-slate-950 overflow-auto h-screen">
+        <div
+          className="w-[360px] bg-slate-950 overflow-auto h-screen"
+          ref={ref}
+        >
           {logs.logs.map((log, i) => (
-            <div key={i} className="px-2 py-1 overflow-hidden">
+            <div key={i} className="px-2 py-0.5 overflow-hidden">
               {log}
             </div>
           ))}

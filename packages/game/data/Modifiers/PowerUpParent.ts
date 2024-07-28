@@ -22,7 +22,7 @@ export class PowerUpParent extends Modifier {
   fn = (unit: Unit): Partial<Unit> => {
     return {
       stats: Modifier.setStats(unit, (stats) => ({
-        power: stats.power * this.coef,
+        physical: stats.physical * this.coef,
       })),
     }
   }

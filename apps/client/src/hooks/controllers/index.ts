@@ -1,3 +1,3 @@
 export * from './useAiActions'
-export * from './useIdleController'
+export * from './useInputController'
 export * from './useTurnController'

@@ -6,16 +6,14 @@ import {
   TriggerEvent,
   Unit,
 } from '@repo/game/types'
-
-import {
-  applyModifier,
-  getTriggersByEvent,
-  isUnitAliveCtx,
-  ZERO_UNIT,
-} from '@repo/game/utils'
-import { SetDeadAsInactive, SetLastUsedActionId } from '@repo/game/data'
+import { getTriggersByEvent, isUnitAliveCtx } from '@repo/game/utils'
+import { SetDeadAsInactive } from '@repo/game/data'
 import { useActions, useCleanup, useModifiers, useUnits } from './state'
 import { Separator } from '@/components/ui/separator'
+import { logModifiers, logMutations } from '@/utils'
+import { ModifierRenderers } from '@/renderers'
+import { logTriggers } from '@/utils/logTriggers'
+import { LogCritical } from '@/components/ui/log'
 
 export type CommitResultOptions = {
   enableLog?: boolean
@@ -26,28 +24,6 @@ export type CommitResults = (
   context: GameContext,
   options?: CommitResultOptions
 ) => GameContext
-
-function logMutations(mutations: Modifier[], context: GameContext) {
-  mutations
-    .filter((m) => m.id !== SetLastUsedActionId)
-    .forEach((mutation) => {
-      const diffs = applyModifier(ZERO_UNIT, mutation)
-      const parent = context.units.find((u) => u.id === mutation.parentId)
-      if (!parent || mutation.filter(parent, context)) {
-        logMutationDiffs(parent, diffs, context)
-      }
-    })
-}
-
-function logMutationDiffs(
-  parent: Unit | undefined,
-  diffs: Unit,
-  context: GameContext
-) {
-  const name = parent?.name ?? 'Multiple Units'
-  if (diffs.values.damage > 0)
-    context.log(`${name} take${!!parent && 's'} ${diffs.values.damage} damage.`)
-}
 
 export function useGameActions() {
   const unitStore = useUnits()
@@ -68,7 +44,7 @@ export function useGameActions() {
       context.units = unitStore.update(mutations, context)
     }
     if (modifiers?.length) {
-      console.log(modifiers)
+      if (options?.enableLog) logModifiers(modifiers, context)
       context.modifiers = modifierStore.add(modifiers)
     }
     if (updateModifiers) {
@@ -86,7 +62,7 @@ export function useGameActions() {
       (u) => u.flags.isActive && !isUnitAliveCtx(u.id, context)
     )
     deadActiveUnits.forEach((u) => {
-      context.log(`${u.name} died.`)
+      context.log(<LogCritical>{u.name} died.</LogCritical>)
     })
     context.units = unitStore.update([new SetDeadAsInactive()], context)
     context.modifiers = modifierStore.removeWhere((modifier) => {
@@ -99,25 +75,19 @@ export function useGameActions() {
 
   function runTriggers(event: TriggerEvent, context: GameContext): GameContext {
     const triggers = getTriggersByEvent(context.modifiers, event)
-    if (triggers.length > 0) {
-      context.log(
-        <div className="flex flex-row items-center space-x-2 text-muted-foreground/40 font-bold">
-          {event}
-          <Separator />
-        </div>
-      )
-    }
-
     const result: ActionRenderResult = {
       modifiers: triggers
         .filter((trigger) => trigger.modifiers !== undefined)
         .flatMap(
-          (trigger) =>
-            (trigger.modifiers && trigger.modifiers(context)) as Modifier[]
+          (trigger) => (trigger.modifiers && trigger.modifiers(context)) ?? []
         ),
       mutations: triggers.filter((trigger) => !trigger.modifiers),
     }
+
+    logTriggers(triggers, event, context)
+    logModifiers(result.modifiers ?? [], context)
     logMutations(result.mutations ?? [], context)
+
     return commitResult(result, context)
   }
 

@@ -1,6 +1,5 @@
-import { Separator } from '@radix-ui/react-separator'
 import { Card, CardContent } from './ui/card'
-import { UnitActionTargets } from './UnitActionTargets'
+import { ActionTargets } from './ActionTargets'
 import { Action, Unit } from '@repo/game/types'
 import { ActionRenderers } from '@/renderers'
 import { Badge } from './ui/badge'
@@ -71,19 +70,21 @@ export function ActiveAction(props: ActiveActionProps) {
             </div>
           )}
         </div>
+
         {renderer.lore && (
           <>
+            <div className="bg-white/5 h-[1px] flex-1 mt-2" />
             <div className="text-center text-sm text-muted-foreground/70 italic mt-4">
               {renderer.lore(action)}
             </div>
           </>
         )}
-        <div className="flex my-4 mb-3 flex-row items-center space-x-4 uppercase text-sm font-bold text-muted-foreground/40">
-          <Separator className="flex-1" />
-          <span>targets ({action.maxTargetCount})</span>
-          <Separator className="flex-1" />
+        <div className="flex my-4 mb-3 flex-row items-center space-x-4 uppercase text-sm text-muted-foreground/40">
+          <div className="bg-white/10 h-[1px] flex-1" />
+          <span>select targets ({action.maxTargetCount})</span>
+          <div className="bg-white/10 h-[1px] flex-1" />
         </div>
-        <UnitActionTargets
+        <ActionTargets
           action={action}
           targets={targets}
           onTargetClick={onTargetClick}

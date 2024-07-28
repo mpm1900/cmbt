@@ -42,7 +42,7 @@ export function ActiveUnit() {
   }, [unit?.id])
 
   useEffect(() => {
-    if (turn.status === 'idle') {
+    if (turn.status === 'waiting-for-input') {
       const unit = ctx.units
         .filter((u) => u.flags.isActive && u.teamId === user)
         .map((u) => applyModifiers(u, ctx).unit)

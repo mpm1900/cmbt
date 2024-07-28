@@ -15,11 +15,11 @@ export function useTurnController() {
   const ctx = useGameContext()
 
   function nextTurn() {
-    ctx.modifiers = fns.decrementModifierDurations()
     fns.runTriggers('onTurnEnd', ctx)
+    ctx.modifiers = fns.decrementModifierDurations()
     next()
-    ctx.log(<LogHeader>turn {turn.count + 1}</LogHeader>)
-    setStatus('idle')
+    ctx.log(<LogHeader>turn {turn.count + 2}</LogHeader>)
+    setStatus('waiting-for-input')
   }
 
   function handleCleanup() {

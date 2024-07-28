@@ -1,3 +1,4 @@
+import { LogUnit } from '@/components/ui/log'
 import {
   SwordsDanceId,
   Fireball,
@@ -17,7 +18,7 @@ import {
   PowerWordKillId,
   SetIsActiveId,
 } from '@repo/game/data'
-import { Action, Unit } from '@repo/game/types'
+import { Action, GameContext, Unit } from '@repo/game/types'
 import { ReactNode } from 'react'
 
 export type ActionRenderer = {
@@ -26,7 +27,12 @@ export type ActionRenderer = {
   description: (action: Action) => ReactNode
   help?: (action: Action) => ReactNode
   lore?: (action: Action) => ReactNode
-  log?: (action: Action, source: Unit, targets: Unit[]) => ReactNode
+  log?: (
+    action: Action,
+    source: Unit,
+    targets: Unit[],
+    ctx: GameContext
+  ) => ReactNode
 }
 
 export const ACTION_NAMES: Record<string, string> = {
@@ -54,13 +60,30 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
     name: ACTION_NAMES[SetIsActiveId],
     cost: '',
     description: () => <></>,
-    log: (_, __, [target]) => <>{target.name} joins the battle</>,
+    log: (_, __, [target], ctx) => (
+      <span>
+        <LogUnit teamId={target.teamId} user={ctx.user}>
+          {target.name}
+        </LogUnit>{' '}
+        joins the battle!
+      </span>
+    ),
   },
   [SwitchUnitId]: {
     name: ACTION_NAMES[SwitchUnitId],
     cost: '',
     description: () => <></>,
-    log: (_, __, [target]) => <>{target.name} joins the battle</>,
+    log: (_, source, [target], ctx) => (
+      <span>
+        <LogUnit teamId={target.teamId} user={ctx.user}>
+          {target.name}
+        </LogUnit>{' '}
+        is switched in for{' '}
+        <LogUnit teamId={source.teamId} user={ctx.user}>
+          {source.name}
+        </LogUnit>
+      </span>
+    ),
   },
 
   /// OTHER ACTIONS
@@ -81,8 +104,8 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
     cost: '',
     description: (action) => (
       <>
-        Deals damage equal to 4 times this unit's power to all other units. This
-        unit's health becomes zero.
+        Deals damage equal to 4 times this unit's physical stat to all other
+        units. This unit's health becomes zero.
         {action.priority !== 0 && <> Priority {action.priority}.</>}
       </>
     ),
@@ -145,7 +168,7 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
     ),
     help: () => (
       <div className="text-muted-foreground">
-        (The unit's power stat is multiplied by 1.5)
+        (The unit's physical stat is multiplied by 1.5)
       </div>
     ),
   },
@@ -232,7 +255,7 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
     ),
     help: () => (
       <div className="text-modifiers-burned/50">
-        (The unit's power stat is halved. At the end of each turn, the unit
+        (The unit's physical stat is halved. At the end of each turn, the unit
         takes 10 damage.)
       </div>
     ),

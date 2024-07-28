@@ -6,7 +6,7 @@ export type UnitActionDetailsProps = {
   action: Action
 }
 
-export function UnitActionDetails(props: UnitActionDetailsProps) {
+export function ActionDetails(props: UnitActionDetailsProps) {
   const { action } = props
   const renderer = ActionRenderers[action.id]
 

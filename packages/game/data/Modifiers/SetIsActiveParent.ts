@@ -20,6 +20,10 @@ export class SetIsActiveParent extends Modifier {
       flags: Modifier.setFlags(unit, (flags) => ({
         isActive: this.isActive,
       })),
+      metadata: {
+        ...unit.metadata,
+        hasBeenSeen: this.isActive ?? unit.metadata.hasBeenSeen,
+      },
     }
   }
 

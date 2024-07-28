@@ -11,6 +11,8 @@ import { Progress } from '@/components/ui/progress'
 import { cn } from '@/lib/utils'
 import { Button } from './ui/button'
 import { Popover, PopoverContent, PopoverTrigger } from './ui/popover'
+import { HealthBar } from './ui/HealthBar'
+import { ModifierIcon } from './ModifierIcon'
 
 export type UnitDebugProps = {
   unit: Unit
@@ -30,7 +32,7 @@ export function UnitDebug(props: UnitDebugProps) {
 
   return (
     <div
-      className={cn('cursor-pointer w-[400px]', {
+      className={cn('cursor-pointer w-[400px] rounded', {
         'bg-slate-600': isActive,
       })}
       onClick={() => {
@@ -39,7 +41,7 @@ export function UnitDebug(props: UnitDebugProps) {
         }
       }}
     >
-      <div className="p-2 flex flex-row items-center justify-between">
+      <div className="p-2 pb-1 flex flex-row items-center justify-between">
         <div>
           {unit.name}
           {stagedItem && '*'}
@@ -62,19 +64,19 @@ export function UnitDebug(props: UnitDebugProps) {
               </span>
               {' - '}
               <span>
-                <strong>NRG</strong> ({Math.max(unit.values.energy, 0)}/
+                <strong>SP</strong> ({Math.max(unit.values.energy, 0)}/
                 {unit.stats.energy})
               </span>
             </div>
             <div>
-              <strong>Speed</strong>:{' '}
-              <StatDebug stat="speed" unit={unit} comp={props.unit} />,{' '}
               <strong>Physical</strong>:{' '}
               <StatDebug stat="physical" unit={unit} comp={props.unit} />,{' '}
               <strong>Defense</strong>:{' '}
               <StatDebug stat="defense" unit={unit} comp={props.unit} />,{' '}
               <strong>Magic</strong>:{' '}
-              <StatDebug stat="magic" unit={unit} comp={props.unit} />
+              <StatDebug stat="magic" unit={unit} comp={props.unit} />,{' '}
+              <strong>Speed</strong>:{' '}
+              <StatDebug stat="speed" unit={unit} comp={props.unit} />
             </div>
             <div>
               <strong>Fire</strong>:{' '}
@@ -94,7 +96,7 @@ export function UnitDebug(props: UnitDebugProps) {
                   .filter((u) => stagedItem.targetIds.includes(u.id))
                   .map((u) => u.name)
                   .join(',')}]`}
-                <RequireTurnStatus status="idle">
+                <RequireTurnStatus status="waiting-for-input">
                   <a
                     onClick={() =>
                       removeWhere((i) => i.action.sourceId === unit.id)
@@ -110,11 +112,7 @@ export function UnitDebug(props: UnitDebugProps) {
       </div>
       <CardContent className="p-2 pt-0">
         <div className="space-y-1">
-          <Progress
-            value={(remainingHealth / unit.stats.health) * 100}
-            className="h-3"
-            variant="bg-red-400"
-          />
+          <HealthBar unit={unit} />
           {!props.hideStats && (
             <div className="flex space-x-1">
               {unit.stats.focus > 0 && (
@@ -140,13 +138,19 @@ export function UnitDebug(props: UnitDebugProps) {
           )}
         </div>
 
-        <div className="space-x-2">
+        <div className="mt-2 space-x-2 flex flex-row">
           {[...appliedModifiers, ...registeredTriggers].map((m) => {
             const r = ModifierRenderers[m.rid]
             return (
-              <span key={m.rtid} className="font-bold">
-                {r?.Inline ? <r.Inline /> : `${r?.name ?? m.id}`}
-              </span>
+              <ModifierIcon
+                key={m.rid}
+                modifier={m}
+                fallback={
+                  <span key={m.rtid} className="font-bold">
+                    {r.Inline ? <r.Inline /> : `${r?.name ?? m.id}`}
+                  </span>
+                }
+              />
             )
           })}
         </div>

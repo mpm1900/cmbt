@@ -54,6 +54,10 @@ module.exports = {
         modifiers: {
           burned: 'orange',
         },
+        log: {
+          enemy: 'orange',
+          user: 'lightblue',
+        },
       },
       borderRadius: {
         lg: 'var(--radius)',

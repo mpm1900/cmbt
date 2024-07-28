@@ -7,8 +7,13 @@ import {
   InvertSpeedAllId,
   PowerDownParentId,
   PowerUpParentId,
+  PowerDownAllOtherOnUnitEnterId,
 } from '@repo/game/data'
 import { ReactNode } from 'react'
+import { GiBiceps, GiBatteryPackAlt } from 'react-icons/gi'
+import { AiFillCaretDown } from 'react-icons/ai'
+import { HiFire } from 'react-icons/hi2'
+import { IconType } from 'react-icons/lib'
 
 export type ModifierRenderer = {
   name: ReactNode
@@ -23,7 +28,33 @@ export const MODIFIER_NAMES: Record<string, string> = {
   [SetRechargingParentId]: 'Recharging',
   [InvertSpeedAllId]: 'Invert Speed',
   [PowerDownParentId]: 'Power Down',
+  [PowerDownAllOtherOnUnitEnterId]: 'Intimidate',
   [PowerUpParentId]: 'Power Up',
+}
+
+export const MODIFIER_BASE_ICONS: Record<
+  string,
+  [IconType, IconType | undefined, string | undefined, string | undefined]
+> = {
+  [BurnDamageOnTurnEndId]: [HiFire, undefined, 'fill-orange-300', undefined],
+  [BurnedPowerDownId]: [
+    GiBiceps,
+    AiFillCaretDown,
+    'fill-orange-300',
+    'fill-red-500',
+  ],
+  [PowerDownParentId]: [
+    GiBiceps,
+    AiFillCaretDown,
+    'fill-white',
+    'fill-red-500',
+  ],
+  [SetRechargingParentId]: [
+    GiBatteryPackAlt,
+    undefined,
+    'fill-red-400',
+    undefined,
+  ],
 }
 
 export const ModifierRenderers: Record<string, ModifierRenderer> = {
@@ -62,6 +93,9 @@ export const ModifierRenderers: Record<string, ModifierRenderer> = {
   },
   [PowerDownParentId]: {
     name: MODIFIER_NAMES[PowerDownParentId],
+  },
+  [PowerDownAllOtherOnUnitEnterId]: {
+    name: MODIFIER_NAMES[PowerDownAllOtherOnUnitEnterId],
   },
   [PowerUpParentId]: {
     name: MODIFIER_NAMES[PowerUpParentId],

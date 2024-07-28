@@ -28,6 +28,8 @@ export type Registry = Record<RegistryKey, string[]>
 
 export type UnitMetadata = {
   lastUsedActionId: string | undefined
+  modified: boolean
+  hasBeenSeen: boolean
 }
 
 export type Unit = {
@@ -41,5 +43,4 @@ export type Unit = {
   modifiers(): Modifier[] // unused, undercooked
   actions: Action[]
   metadata: UnitMetadata
-  modified: boolean
 }

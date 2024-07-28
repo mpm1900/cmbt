@@ -20,12 +20,13 @@ export function ActionButton(props: ActionButtonProps) {
   const modified = applyModifiers(source, ctx)
   const baseAccuracy = action.threshold(source)
   const accuracy = action.threshold(modified.unit)
+  const costCheck = action.checkCost(source)
 
   return (
     <Button
       variant={isActive ? 'default' : 'secondary'}
       className="items-start h-full flex-col"
-      disabled={!action.checkCost(source)}
+      disabled={!costCheck}
       onClick={onClick}
     >
       <span
@@ -44,7 +45,11 @@ export function ActionButton(props: ActionButtonProps) {
             'text-slate-700': isActive,
           })}
         >
-          {renderer.cost && <span>{renderer.cost}</span>}
+          {renderer.cost && (
+            <span className={cn({ 'text-red-300': !costCheck })}>
+              {renderer.cost}
+            </span>
+          )}
           {accuracy !== undefined && baseAccuracy !== undefined && (
             <span>
               <span

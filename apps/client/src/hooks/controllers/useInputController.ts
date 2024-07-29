@@ -20,7 +20,7 @@ export function useInputController() {
     if (turn.status === 'waiting-for-input') {
       const actionableUnits = getActionableUnitsCtx(ctx)
 
-      const checkLength = actionableUnits.length
+      const checkLength = 1 // actionableUnits.length
       if (queue.length === checkLength && queue.length > 0) {
         startTurn()
       }

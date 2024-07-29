@@ -99,7 +99,7 @@ export function makeUnit(teamId: string, name?: string, isActive?: boolean) {
     },
     (unit) => ({
       values: {
-        damage: 0,
+        damage: 30,
         focus: unit.stats.focus,
         energy: unit.stats.energy,
       },

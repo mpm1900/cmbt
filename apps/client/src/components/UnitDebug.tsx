@@ -90,6 +90,18 @@ export function UnitDebug(props: UnitDebugProps) {
                 comp={props.unit}
               />
             </div>
+            <div>
+              <strong>Fire</strong>:{' '}
+              <StatDebug stat="fireExpansion" unit={unit} comp={props.unit} />,{' '}
+              <strong>Force</strong>:{' '}
+              <StatDebug stat="forceExpansion" unit={unit} comp={props.unit} />,{' '}
+              <strong>Lightning</strong>:{' '}
+              <StatDebug
+                stat="lightningExpansion"
+                unit={unit}
+                comp={props.unit}
+              />
+            </div>
             {stagedItem && (
               <span>
                 {`${ActionRenderers[stagedItem.action.id ?? '']?.name} => [${ctx.units

@@ -51,8 +51,8 @@ export function LogUnit(
   return (
     <span
       className={cn(props.className, {
-        'text-log-enemy': props.teamId !== props.user,
-        'text-teal-300': props.teamId === props.user,
+        'text-orange-300': props.teamId !== props.user,
+        'text-cyan-300': props.teamId === props.user,
       })}
     >
       {props.children}

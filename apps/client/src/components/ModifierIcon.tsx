@@ -15,11 +15,11 @@ export function ModifierIcon(props: ModifierIconProps) {
   const [Icon, Overlay, iconClass, overlayClass] = icons
 
   return (
-    <div className="relative" style={{ height: 32, width: 32 }}>
-      <Icon size="32px" className={iconClass} />
+    <div className="relative" style={{ height: 28, width: 28 }}>
+      <Icon size="28px" className={iconClass} />
       {Overlay && (
         <Overlay
-          size="32px"
+          size="28px"
           className={cn('absolute top-2 left-1', overlayClass)}
         />
       )}

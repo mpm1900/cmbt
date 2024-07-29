@@ -1,5 +1,6 @@
 import { ActionRenderResult, GameContext, Unit } from '../../types'
 import { Item, ItemId, ItemProps } from '../../types/Item'
+import { DamageParent } from '../Modifiers'
 
 export const PotionId = ItemId()
 
@@ -10,7 +11,7 @@ export class Potion extends Item {
   }
 
   targets = (unit: Unit, ctx: GameContext): boolean => {
-    return super.targets(unit, ctx) && unit.teamId !== this.teamId
+    return unit.teamId === this.teamId
   }
 
   threshold = (source: Unit): number | undefined => undefined
@@ -21,10 +22,17 @@ export class Potion extends Item {
     targets: Unit[],
     ctx: GameContext
   ): ActionRenderResult => {
+    const target = targets[0]
     return {
       source,
       targets,
-      mutations: [],
+      mutations: [
+        new DamageParent({
+          sourceId: source.id,
+          parentId: target.id,
+          damage: -20,
+        }),
+      ],
       modifiers: [],
     }
   }

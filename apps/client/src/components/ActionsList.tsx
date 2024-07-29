@@ -1,18 +1,17 @@
 import { useActiveUiUnit } from '@/hooks/state'
 import { ActionButton } from './ActionButton'
 import { ActiveAction } from './ActiveAction'
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from './ui/card'
+import { Card, CardContent, CardHeader, CardTitle } from './ui/card'
 import { useEffect, useState } from 'react'
 import { Action, Id, Unit } from '@repo/game/types'
 import { useGameContext } from '@/hooks'
-import { Button } from './ui/button'
 
 export type ActionsListProps = {
   onConfirm: (action: Action, targetIds: Id[]) => void
 }
 
 export function ActionsList(props: ActionsListProps) {
-  const { onConfirm: onConfirm } = props
+  const { onConfirm } = props
   const unit = useActiveUiUnit((s) => s.unit)
   const ctx = useGameContext()
   const [activeAction, setActiveAction] = useState<Action>()
@@ -54,7 +53,7 @@ export function ActionsList(props: ActionsListProps) {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Select an Action for {unit.name}</CardTitle>
+        <CardTitle>Select an Action for {unit.name}...</CardTitle>
       </CardHeader>
       <CardContent className="space-y-4">
         <div className="grid grid-cols-2 gap-2">

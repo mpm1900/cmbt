@@ -36,14 +36,14 @@ export function ActionTargets(props: UnitActionTargetsProps) {
           </div>
         )}
       </div>
-      <div className="space-x-2 flex justify-center">
+      <div className="space-x-2 flex justify-center flex-wrap">
         {possibleTargets.map((target) => {
           const isSelected = targets.some((t) => t.id === target.id)
 
           return (
             <Button
               key={target.id}
-              className="h-full px-8"
+              className="h-full px-8 mb-2"
               variant={isSelected ? 'default' : 'outline'}
               onClick={() => onTargetClick(target, isSelected)}
             >

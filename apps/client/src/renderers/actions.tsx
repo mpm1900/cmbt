@@ -17,6 +17,7 @@ import {
   SwitchUnitId,
   PowerWordKillId,
   SetIsActiveId,
+  PotionId,
 } from '@repo/game/data'
 import { Action, GameContext, Unit } from '@repo/game/types'
 import { ReactNode } from 'react'
@@ -52,6 +53,8 @@ export const ACTION_NAMES: Record<string, string> = {
   [SwordsDanceId]: 'Swords Dance',
   [TrickRoomId]: 'Trick Room',
   [WillOWispId]: 'Will-o-wisp',
+
+  [PotionId]: 'Potion',
 }
 
 export const ActionRenderers: Record<string, ActionRenderer> = {
@@ -258,6 +261,20 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
         (The unit's physical stat is halved. At the end of each turn, the unit
         takes 10 damage.)
       </div>
+    ),
+  },
+  [PotionId]: {
+    name: ACTION_NAMES[PotionId],
+    cost: '',
+    description: () => 'Heals 20 damage from target friendly unit.',
+    log: (action, source, [target], ctx) => (
+      <span>
+        <span className="text-purple-300">{ACTION_NAMES[PotionId]}</span> was
+        used on{' '}
+        <LogUnit teamId={target.teamId} user={ctx.user}>
+          {target.name}
+        </LogUnit>
+      </span>
     ),
   },
 }

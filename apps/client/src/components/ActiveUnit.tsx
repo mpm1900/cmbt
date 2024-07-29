@@ -78,7 +78,9 @@ export function ActiveUnit() {
         />
       </TabsContent>
       <TabsContent value="items">
-        <ItemsList />
+        <ItemsList
+          onConfirm={(action, targetIds) => commitAction(action, targetIds)}
+        />
       </TabsContent>
     </Tabs>
   )

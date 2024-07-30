@@ -1,4 +1,4 @@
-export * from './commitNextActionItem'
+export * from './handleNextAction'
 export * from './getResultFromActionItem'
 export * from './getTeamsWithSelectionRequired'
 export * from './logActionResult'

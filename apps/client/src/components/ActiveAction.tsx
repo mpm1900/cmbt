@@ -37,8 +37,11 @@ export function ActiveAction(props: ActiveActionProps) {
             {action.attackType}
           </Badge>
           {renderer.cost && (
-            <Badge variant="outline" className="text-muted-foreground">
-              {renderer.cost}
+            <Badge
+              variant="outline"
+              className="bg-slate-950 text-muted-foreground"
+            >
+              {renderer.costAlt ?? renderer.cost}
             </Badge>
           )}
 

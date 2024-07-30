@@ -1,7 +1,7 @@
 import {
   Action,
   ActionId,
-  ActionRenderResult,
+  ActionResult,
   GameContext,
   Id,
   Unit,
@@ -30,13 +30,10 @@ export class MagicMissile extends Action {
   threshold = (source: Unit): number | undefined => undefined
   critical = (source: Unit): number | undefined => undefined
 
-  resolve = (
-    source: Unit,
-    targets: Unit[],
-    ctx: GameContext
-  ): ActionRenderResult => {
+  resolve = (source: Unit, targets: Unit[], ctx: GameContext): ActionResult => {
     const data = getActionData(source, this, ctx)
     return {
+      action: this,
       source,
       targets,
       mutations: [

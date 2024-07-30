@@ -23,7 +23,7 @@ export function SwitchUnits(props: SwitchUnitsProps) {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Select a Unit to swap in...</CardTitle>
+        <CardTitle>Select a Unit...</CardTitle>
       </CardHeader>
       <CardContent>
         <div className="grid grid-cols-2 gap-2">

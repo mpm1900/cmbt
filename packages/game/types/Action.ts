@@ -21,7 +21,8 @@ export type AiAction = {
   targetIds: Id[]
 }
 
-export type ActionRenderResult = {
+export type ActionResult = {
+  action?: Action
   source?: Unit
   targets?: Unit[]
   data?: ActionRenderData
@@ -66,7 +67,7 @@ export abstract class Action {
     targets: Unit[],
     ctx: GameContext,
     options?: ActionRenderOptions
-  ): ActionRenderResult
+  ): ActionResult
 
   targets(unit: Unit, ctx: GameContext): boolean {
     return unit.flags.isActive

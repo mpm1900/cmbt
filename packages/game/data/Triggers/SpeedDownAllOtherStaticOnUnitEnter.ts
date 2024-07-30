@@ -16,7 +16,7 @@ export class SpeedDownAllOtherStaticOnUnitEnter extends Trigger {
   constructor(props: TriggerProps<{ coef: number }>) {
     super(SpeedDownAllOtherStaticOnUnitEnterId, {
       ...props,
-      events: ['onUnitEnter'],
+      events: ['on Unit Enter'],
       modifiers: (ctx) => [
         new SpeedDownAllOther({
           sourceId: props.sourceId,

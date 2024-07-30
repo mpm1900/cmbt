@@ -1,7 +1,7 @@
 import {
   Action,
   ActionId,
-  ActionRenderResult,
+  ActionResult,
   GameContext,
   Id,
   Unit,
@@ -30,12 +30,9 @@ export class Disable extends Action {
     return super.targets(unit, ctx) && unit.teamId !== this.teamId
   }
 
-  resolve = (
-    source: Unit,
-    targets: Unit[],
-    ctx: GameContext
-  ): ActionRenderResult => {
+  resolve = (source: Unit, targets: Unit[], ctx: GameContext): ActionResult => {
     return {
+      action: this,
       source,
       targets,
       mutations: [

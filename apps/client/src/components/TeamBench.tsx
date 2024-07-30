@@ -5,15 +5,16 @@ import { applyModifiers, isUnitAlive } from '@repo/game/utils'
 import { cn } from '@/lib/utils'
 
 export type TeamBenchProps = {
+  className?: string
   teamId: Id | undefined
 }
 
 export function TeamBench(props: TeamBenchProps) {
-  const { teamId } = props
+  const { teamId, className } = props
   const ctx = useGameContext()
 
   return (
-    <div className="p-2 space-x-2">
+    <div className={cn('p-2 space-x-2 flex', className)}>
       {ctx.units
         .filter((u) => u.teamId === teamId)
         .map((u, i) => {

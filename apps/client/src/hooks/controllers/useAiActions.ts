@@ -35,7 +35,7 @@ export function useAiActions() {
           .sort((a, b) => b.weight - a.weight)
 
         const bestAiAction = aiActions[0]
-        console.log('pushing action', bestAiAction)
+        // console.log('pushing action', bestAiAction)
         fns.pushAction({
           id: nanoid(),
           action: bestAiAction.action,

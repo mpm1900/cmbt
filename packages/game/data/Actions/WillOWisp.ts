@@ -1,11 +1,14 @@
 import {
   Action,
   ActionId,
-  ActionRenderResult,
+  ActionRenderOptions,
+  ActionResult,
   GameContext,
   Id,
   Unit,
 } from '../../types'
+import { getActionData, parseSuccess } from '../../utils'
+import { modifyRenderContext } from '../../utils/modifyRenderContext'
 import { PowerDownParent, BurnedPowerDownId } from '../Modifiers'
 import { ReduceFocusParent } from '../Modifiers/costs'
 import { SetLastUsedAction } from '../Modifiers/system'
@@ -44,36 +47,40 @@ export class WillOWisp extends Action {
   resolve = (
     source: Unit,
     targets: Unit[],
-    ctx: GameContext
-  ): ActionRenderResult => {
-    return {
-      source,
-      targets,
-      mutations: [
-        new SetLastUsedAction({
-          sourceId: this.sourceId,
-          parentId: this.sourceId,
-          actionId: this.id,
-        }),
-      ],
-      modifiers: targets.flatMap((target) => [
-        new PowerDownParent({
-          sourceId: source.id,
-          parentId: target.id,
-          coef: 2,
-          duration: 5,
-          maxInstances: 1,
-          rid: BurnedPowerDownId,
-        }),
-        new DamageParentOnTurnEnd({
-          sourceId: source.id,
-          parentId: target.id,
-          damage: 10,
-          duration: 5,
-          maxInstances: 1,
-          rid: BurnDamageOnTurnEndId,
-        }),
-      ]),
-    }
+    ctx: GameContext,
+    options: ActionRenderOptions
+  ): ActionResult => {
+    ctx = modifyRenderContext(options, ctx)
+    const data = getActionData(source, this, ctx)
+    return parseSuccess(this, data, source, targets, {
+      onSuccess: {
+        mutations: [
+          new SetLastUsedAction({
+            sourceId: this.sourceId,
+            parentId: this.sourceId,
+            actionId: this.id,
+          }),
+        ],
+        modifiers: targets.flatMap((target) => [
+          new PowerDownParent({
+            sourceId: source.id,
+            parentId: target.id,
+            coef: 2,
+            duration: 5,
+            maxInstances: 1,
+            rid: BurnedPowerDownId,
+          }),
+          new DamageParentOnTurnEnd({
+            sourceId: source.id,
+            parentId: target.id,
+            damage: 10,
+            duration: 5,
+            maxInstances: 1,
+            rid: BurnDamageOnTurnEndId,
+          }),
+        ]),
+      },
+      onFailure: {},
+    })
   }
 }

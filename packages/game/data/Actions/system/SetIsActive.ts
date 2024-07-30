@@ -1,7 +1,7 @@
 import {
   Action,
   ActionId,
-  ActionRenderResult,
+  ActionResult,
   AiAction,
   GameContext,
   Id,
@@ -51,11 +51,7 @@ export class SetIsActive extends Action {
     }
   }
 
-  resolve = (
-    source: Unit,
-    targets: Unit[],
-    ctx: GameContext
-  ): ActionRenderResult => {
+  resolve = (source: Unit, targets: Unit[], ctx: GameContext): ActionResult => {
     const target = targets[0]
     if (!target) throw new Error('No target for SwitchUnit action.')
     return {

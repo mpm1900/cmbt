@@ -21,8 +21,8 @@ export type ModifierRenderer = {
 }
 
 export const MODIFIER_NAMES: Record<string, string> = {
-  [BurnDamageOnTurnEndId]: 'Burned:Damage',
-  [BurnedPowerDownId]: 'Burned:Power-Down',
+  [BurnDamageOnTurnEndId]: 'Burn:Damage',
+  [BurnedPowerDownId]: 'Burn:Power-Down',
   [DamageParentOnTurnEndId]: 'Damage OTE',
   [DefenseUpAllId]: 'Defense Buff',
   [SetRechargingParentId]: 'Recharging',

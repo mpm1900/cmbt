@@ -1,5 +1,5 @@
 import {
-  ActionRenderResult,
+  ActionResult,
   ActionsQueueItem,
   GameContext,
   Modifier,
@@ -9,9 +9,7 @@ import {
 import { getTriggersByEvent, isUnitAliveCtx } from '@repo/game/utils'
 import { SetDeadAsInactive } from '@repo/game/data'
 import { useActions, useCleanup, useModifiers, useUnits } from './state'
-import { Separator } from '@/components/ui/separator'
 import { logModifiers, logMutations } from '@/utils'
-import { ModifierRenderers } from '@/renderers'
 import { logTriggers } from '@/utils/logTriggers'
 import { LogCritical } from '@/components/ui/log'
 
@@ -20,7 +18,7 @@ export type CommitResultOptions = {
 }
 
 export type CommitResults = (
-  result: ActionRenderResult,
+  result: ActionResult,
   context: GameContext,
   options?: CommitResultOptions
 ) => GameContext
@@ -30,6 +28,23 @@ export function useGameActions() {
   const modifierStore = useModifiers()
   const actionsStore = useActions()
   const cleanupStore = useCleanup()
+
+  const cleanupResult = (context: GameContext): GameContext => {
+    // round cleanup
+    const deadActiveUnits = context.units.filter(
+      (u) => u.flags.isActive && !isUnitAliveCtx(u.id, context)
+    )
+    deadActiveUnits.forEach((u) => {
+      context.log(<LogCritical>{u.name} died.</LogCritical>)
+    })
+    context.units = unitStore.update([new SetDeadAsInactive()], context)
+    context.modifiers = modifierStore.removeWhere((modifier) => {
+      const parent = context.units.find((u) => u.id === modifier.parentId)
+      return !parent?.flags.isActive
+    })
+    context.modifiers = modifierStore.removeZeroDurations()
+    return context
+  }
 
   const commitResult: CommitResults = (result, context, options) => {
     const {
@@ -54,28 +69,15 @@ export function useGameActions() {
       actionsStore.setQueue(updateActionQueue)
     }
     if (addedUnits?.length) {
-      context = runTriggers('onUnitEnter', context)
+      context = runTriggers('on Unit Enter', context)
     }
 
-    // round cleanup
-    const deadActiveUnits = context.units.filter(
-      (u) => u.flags.isActive && !isUnitAliveCtx(u.id, context)
-    )
-    deadActiveUnits.forEach((u) => {
-      context.log(<LogCritical>{u.name} died.</LogCritical>)
-    })
-    context.units = unitStore.update([new SetDeadAsInactive()], context)
-    context.modifiers = modifierStore.removeWhere((modifier) => {
-      const parent = context.units.find((u) => u.id === modifier.parentId)
-      return !parent?.flags.isActive
-    })
-    context.modifiers = modifierStore.removeZeroDurations()
     return context
   }
 
   function runTriggers(event: TriggerEvent, context: GameContext): GameContext {
     const triggers = getTriggersByEvent(context.modifiers, event)
-    const result: ActionRenderResult = {
+    const result: ActionResult = {
       modifiers: triggers
         .filter((trigger) => trigger.modifiers !== undefined)
         .flatMap(
@@ -93,6 +95,7 @@ export function useGameActions() {
 
   return {
     commitResult,
+    cleanupResult,
     runTriggers,
     removeZeroDurations: modifierStore.removeZeroDurations,
     decrementModifierDurations: () => {

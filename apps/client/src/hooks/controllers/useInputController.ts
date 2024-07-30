@@ -7,13 +7,13 @@ import { useGameActions } from '../useGameActions'
 export function useInputController() {
   const { queue, sort } = useActions()
   const { turn, setStatus } = useTurn()
-  const ctx = useGameContext()
   const fns = useGameActions()
+  let ctx = useGameContext()
 
   function startTurn() {
     setStatus('running')
-    const context = fns.runTriggers('onTurnStart', ctx)
-    sort(context)
+    ctx = fns.runTriggers('on Turn Start', ctx)
+    sort(ctx)
   }
 
   useEffect(() => {

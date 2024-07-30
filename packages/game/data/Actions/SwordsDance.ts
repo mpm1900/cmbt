@@ -2,7 +2,7 @@ import {
   Action,
   ActionId,
   ActionRenderOptions,
-  ActionRenderResult,
+  ActionResult,
   GameContext,
   Id,
   Unit,
@@ -45,10 +45,11 @@ export class SwordsDance extends Action {
     targets: Unit[],
     ctx: GameContext,
     options: ActionRenderOptions
-  ): ActionRenderResult => {
+  ): ActionResult => {
     ctx = modifyRenderContext(options, ctx)
     const data = getActionData(source, this, ctx)
     return {
+      action: this,
       source,
       targets,
       mutations: [

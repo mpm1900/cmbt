@@ -2,7 +2,7 @@ import {
   Action,
   ActionId,
   ActionRenderOptions,
-  ActionRenderResult,
+  ActionResult,
   GameContext,
   Id,
   Unit,
@@ -52,10 +52,10 @@ export class Fireball extends Action {
     targets: Unit[],
     ctx: GameContext,
     options: ActionRenderOptions
-  ): ActionRenderResult => {
+  ): ActionResult => {
     ctx = modifyRenderContext(options, ctx)
     const data = getActionData(source, this, ctx)
-    return parseSuccess(data, source, targets, {
+    return parseSuccess(this, data, source, targets, {
       onSuccess: {
         mutations: this.expandTargets(targets, ctx)
           .map((target) => [target, applyModifiers(target, ctx).unit])

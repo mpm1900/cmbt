@@ -1,7 +1,7 @@
 import {
   Action,
   ActionId,
-  ActionRenderResult,
+  ActionResult,
   GameContext,
   Id,
   Unit,
@@ -35,11 +35,7 @@ export class SwitchUnit extends Action {
   threshold = (source: Unit): number | undefined => undefined
   critical = (source: Unit): number | undefined => undefined
 
-  resolve = (
-    source: Unit,
-    targets: Unit[],
-    ctx: GameContext
-  ): ActionRenderResult => {
+  resolve = (source: Unit, targets: Unit[], ctx: GameContext): ActionResult => {
     const target = targets[0]
     if (!target) throw new Error('No target for SwitchUnit action.')
     return {

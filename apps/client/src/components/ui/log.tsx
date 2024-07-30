@@ -27,12 +27,15 @@ export function LogHeader(props: PropsWithChildren<{ className?: string }>) {
   return (
     <div
       className={cn(
-        'flex flex-row items-center w-full space-x-2 text-muted-foreground/40 font-bold uppercase overflow-hidden',
+        'flex flex-row items-center w-full space-x-2 text-lg text-muted-foreground/40 font-bold uppercase',
         props.className
       )}
     >
       <div className="text-nowrap">{props.children}</div>
-      <Separator />
+      <div
+        className="h-4 bg-muted-foreground/20 flex-1"
+        style={{ marginRight: -8 }}
+      />
     </div>
   )
 }

@@ -10,9 +10,8 @@ export function logTriggers(
 ) {
   if (triggers.length > 0) {
     ctx.log(
-      <div className="flex flex-row items-center space-x-2 text-muted-foreground/40 font-bold">
+      <div className="flex flex-row items-center space-x-2 text-muted-foreground/40 uppercase">
         {event}
-        <Separator />
       </div>
     )
 

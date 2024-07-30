@@ -2,8 +2,8 @@ import { nanoid } from 'nanoid'
 import { Modifier, ModifierProps } from './Modifier'
 import { GameContext, Id } from '.'
 
-export type TriggerEvent = 'onTurnStart' | 'onTurnEnd' | 'onUnitEnter'
-export const AllTriggerEvents: TriggerEvent[] = ['onTurnStart', 'onTurnEnd']
+export type TriggerEvent = 'on Turn Start' | 'on Turn End' | 'on Unit Enter'
+export const AllTriggerEvents: TriggerEvent[] = ['on Turn Start', 'on Turn End']
 
 export const TriggerId = () => `Trigger@${nanoid()}`
 

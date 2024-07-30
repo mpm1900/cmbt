@@ -1,24 +1,33 @@
-import { isUnitAliveCtx } from '@repo/game/utils'
 import { useEffect } from 'react'
 import { useActions, useCleanup, useTurn } from '../state'
 import { useGameActions } from '../useGameActions'
 import { useGameContext } from '../useGameContext'
-import { getTeamsWithSelectionRequired } from '@/utils/getTeamsWithSelectionRequired'
-import { commitNextActionItem } from '@/utils'
+import { handleNextAction } from '@/utils'
 import { LogHeader } from '@/components/ui/log'
+import { GAME_SPEED } from '@/constants'
+import { handleCleanup } from '@/utils/handleCleanup'
+import { isUnitAliveCtx } from '@repo/game/utils'
 
 export function useTurnController() {
-  const { turn, setStatus, next } = useTurn()
-  const actions = useActions()
-  const cleanup = useCleanup()
+  const { turn, setStatus, next, pushResult } = useTurn()
+  const actionsQueue = useActions()
+  const cleanupQueue = useCleanup()
   const fns = useGameActions()
-  const ctx = useGameContext()
+  let ctx = useGameContext()
 
-  function nextTurn(runTriggers: boolean) {
-    if (runTriggers) {
-      fns.runTriggers('onTurnEnd', ctx)
+  const cleanup = (runEndOfTurnTriggers: boolean) =>
+    handleCleanup(
+      ctx,
+      () => nextTurn(runEndOfTurnTriggers),
+      () => setStatus('cleanup'),
+      () => setStatus('done')
+    )
+
+  function nextTurn(runEndOfTurnTriggers: boolean) {
+    if (runEndOfTurnTriggers) {
+      ctx = fns.runTriggers('on Turn End', ctx)
       ctx.modifiers = fns.decrementModifierDurations()
-      handleCleanup(false)
+      cleanup(false)
     } else {
       next()
       ctx.log(<LogHeader>turn {turn.count + 2}</LogHeader>)
@@ -26,36 +35,67 @@ export function useTurnController() {
     }
   }
 
-  function handleCleanup(runTriggers: boolean) {
-    const aliveTeams = ctx.teams.filter((team) =>
-      ctx.units.some((u) => u.teamId === team.id && isUnitAliveCtx(u.id, ctx))
-    )
-
-    if (aliveTeams.length !== 2) {
-      setStatus('done')
-    } else {
-      const cleanupTeams = getTeamsWithSelectionRequired(ctx)
-      if (cleanupTeams.length === 0) {
-        nextTurn(runTriggers)
-      } else {
-        setStatus('cleanup')
-      }
-    }
-  }
-
   useEffect(() => {
     if (turn.status === 'running') {
-      commitNextActionItem(turn.status, actions, ctx, fns.commitResult, () =>
-        handleCleanup(true)
+      handleNextAction(
+        'running',
+        actionsQueue,
+        ctx,
+        fns.commitResult,
+        (result) => pushResult(result),
+        () => cleanup(true)
       )
     }
-  }, [turn.status, actions.queue.length])
+  }, [turn.status, actionsQueue.queue.length])
 
   useEffect(() => {
     if (turn.status === 'cleanup') {
-      commitNextActionItem(turn.status, cleanup, ctx, fns.commitResult, () =>
-        handleCleanup(true)
+      handleNextAction(
+        'cleanup',
+        cleanupQueue,
+        ctx,
+        fns.commitResult,
+        (result) => {
+          if (result) {
+            ctx = fns.commitResult(result, ctx)
+            ctx = fns.cleanupResult(ctx)
+            cleanupQueue.dequeue()
+          }
+        },
+        () => cleanup(true)
       )
     }
-  }, [turn.status, cleanup.queue.length])
+  }, [turn.status, cleanupQueue.queue.length])
+
+  const active = turn.results[turn.results.length - 1]
+  function nextAction() {
+    setTimeout(
+      () => {
+        actionsQueue.dequeue()
+      },
+      GAME_SPEED * 2 * (active ? 1 : 0)
+    )
+  }
+
+  useEffect(() => {
+    if (turn.results.length > 0) {
+      if (active) {
+        setTimeout(() => {
+          ctx = fns.commitResult(active, ctx, { enableLog: true })
+          const deadActiveUnits = ctx.units.filter(
+            (u) => u.flags.isActive && !isUnitAliveCtx(u.id, ctx)
+          )
+          setTimeout(
+            () => {
+              ctx = fns.cleanupResult(ctx)
+              nextAction()
+            },
+            GAME_SPEED * 2 * (deadActiveUnits.length > 0 ? 1 : 0)
+          )
+        }, GAME_SPEED)
+      } else {
+        nextAction()
+      }
+    }
+  }, [turn.results.length])
 }

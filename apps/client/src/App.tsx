@@ -21,10 +21,11 @@ import { PendingTeamAction } from './components/PendingTeamAction'
 import { RequireTurnStatus } from './components/RequireTurnStatus'
 import { TeamBench } from './components/TeamBench'
 import { getTeamsWithSelectionRequired } from './utils/getTeamsWithSelectionRequired'
-import { UnitDebug } from './components/UnitDebug'
-import { Separator } from './components/ui/separator'
+import { UnitCard } from './components/UnitCard'
 import { Team } from '@repo/game/types'
 import { useItems } from './hooks/state/useItems'
+import { LogHeader } from './components/ui/log'
+import { RunningTurn } from './components/RunningTurn'
 
 function App() {
   const ctx = useGameContext()
@@ -92,12 +93,7 @@ function App() {
         })
       )
     }
-    ctx.log(
-      <div className="flex flex-row items-center space-x-2 text-muted-foreground/40 font-bold uppercase">
-        <span className="text-nowrap">turn {turn.turn.count + 1}</span>
-        <Separator />
-      </div>
-    )
+    ctx.log(<LogHeader>turn {turn.turn.count + 1}</LogHeader>)
     turn.setStatus('waiting-for-input')
   }, [])
 
@@ -115,18 +111,21 @@ function App() {
           <div className="flex flex-1 flex-col p-2 justify-between">
             <div className="flex flex-col justify-end">
               <span>{}</span>
-              <TeamBench teamId={aiTeam?.id} />
+              <TeamBench teamId={aiTeam?.id} className="items-end" />
               <div className="flex flex-1 items-start justify-center">
                 {ctx.units
                   .filter((u) => u.teamId !== ctx.user && u.flags.isActive)
                   .map((unit) => (
                     <div key={unit.id} className="text-left p-4">
-                      <UnitDebug unit={unit} hideStats={true} />
+                      <UnitCard unit={unit} hideStats={true} />
                     </div>
                   ))}
               </div>
             </div>
             <div className="flex flex-1 items-center justify-center">
+              <RequireTurnStatus status="running">
+                <RunningTurn />
+              </RequireTurnStatus>
               <RequireTurnStatus status="waiting-for-input">
                 <ActiveUnit />
               </RequireTurnStatus>
@@ -142,14 +141,13 @@ function App() {
               </RequireTurnStatus>
             </div>
             <div className="flex flex-col-reverse justify-end">
-              {' '}
               <TeamBench teamId={userTeam?.id} />{' '}
               <div className="flex flex-1 items-start justify-center">
                 {ctx.units
                   .filter((u) => u.teamId === ctx.user && u.flags.isActive)
                   .map((unit) => (
                     <div key={unit.id} className="text-left p-4">
-                      <UnitDebug unit={unit} hideStats={false} />
+                      <UnitCard unit={unit} hideStats={false} />
                     </div>
                   ))}
               </div>

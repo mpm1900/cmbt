@@ -9,7 +9,8 @@ export type StatKey =
   | 'speed'
   | 'health'
   | 'focus'
-  | 'energy'
+  | 'stamina'
+  | 'devotion'
   | 'accuracy'
   | 'defense'
   | AttackTypes
@@ -17,7 +18,7 @@ export type StatKey =
   | `${DamageType}Expansion`
 
 export type Stats = Record<StatKey, number>
-export type ValueKey = 'damage' | 'focus' | 'energy'
+export type ValueKey = 'damage' | 'focus' | 'stamina' | 'devotion'
 export type Values = Record<ValueKey, number>
 
 export type FlagKey = 'isRecharging' | 'isActive'

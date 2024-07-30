@@ -1,12 +1,13 @@
-import { ActionRenderResult, Unit } from '../types'
+import { Action, ActionResult, Unit } from '../types'
 import { ActionRenderData } from './getActionData'
 
 export type ParseActionResult = Omit<
-  ActionRenderResult,
-  'source' | 'targets' | 'data'
+  ActionResult,
+  'source' | 'targets' | 'data' | 'action'
 >
 
 export function parseSuccess(
+  action: Action,
   data: ActionRenderData,
   source: Unit,
   targets: Unit[],
@@ -14,12 +15,13 @@ export function parseSuccess(
     onSuccess: ParseActionResult
     onFailure: ParseActionResult
   }
-): ActionRenderResult {
+): ActionResult {
   const { accuracyRoll, setLastUsed } = data
   const { onSuccess, onFailure } = config
   if (accuracyRoll.success) {
     return {
       ...onSuccess,
+      action,
       data,
       source,
       targets,
@@ -28,6 +30,7 @@ export function parseSuccess(
   } else {
     return {
       ...onFailure,
+      action,
       data,
       source,
       targets,

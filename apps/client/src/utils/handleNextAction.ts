@@ -1,16 +1,16 @@
-import { GAME_SPEED } from '@/constants'
 import { CommitResults } from '@/hooks'
 import { ActionStore, TurnStatus } from '@/hooks/state'
-import { GameContext } from '@repo/game/types'
+import { ActionResult, GameContext } from '@repo/game/types'
 import { isUnitAliveCtx } from '@repo/game/utils'
 import { getResultFromActionItem } from './getResultFromActionItem'
 
-export function commitNextActionItem(
+export function handleNextAction(
   status: TurnStatus,
   queue: ActionStore,
   ctx: GameContext,
   commitResult: CommitResults,
-  next: () => void
+  handleResult: (result: ActionResult | undefined) => void,
+  handleNext: () => void
 ) {
   const item = queue.sort(ctx)[0]
   if (item) {
@@ -18,15 +18,13 @@ export function commitNextActionItem(
       status === 'cleanup' || isUnitAliveCtx(item.action.sourceId, ctx)
 
     if (shouldCommitAction) {
-      ctx = commitResult({ mutations: [item.action.cost] }, ctx)
+      commitResult({ action: item.action, mutations: [item.action.cost] }, ctx)
       const result = getResultFromActionItem(item, ctx)
-      commitResult(result, ctx, { enableLog: true })
+      return handleResult(result)
     }
 
-    setTimeout(() => {
-      queue.dequeue()
-    }, GAME_SPEED)
-  } else {
-    next()
+    return handleResult(undefined)
   }
+
+  return handleNext()
 }

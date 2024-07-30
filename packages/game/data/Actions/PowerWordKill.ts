@@ -2,7 +2,7 @@ import {
   Action,
   ActionId,
   ActionRenderOptions,
-  ActionRenderResult,
+  ActionResult,
   GameContext,
   Id,
   Unit,
@@ -43,13 +43,13 @@ export class PowerWordKill extends Action {
     targets: Unit[],
     ctx: GameContext,
     options?: ActionRenderOptions
-  ): ActionRenderResult => {
+  ): ActionResult => {
     if (options?.disableLogging) {
       ctx = { ...ctx, log: () => {} }
     }
     ctx = modifyRenderContext(options, ctx)
     const data = getActionData(source, this, ctx)
-    return parseSuccess(data, source, targets, {
+    return parseSuccess(this, data, source, targets, {
       onSuccess: {
         mutations: targets
           .map((target) => [target, applyModifiers(target, ctx).unit])

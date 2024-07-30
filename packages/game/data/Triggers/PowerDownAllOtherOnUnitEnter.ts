@@ -16,7 +16,7 @@ export class PowerDownAllOtherOnUnitEnter extends Trigger {
   constructor(props: TriggerProps<{ coef: number }>) {
     super(PowerDownAllOtherOnUnitEnterId, {
       ...props,
-      events: ['onUnitEnter'],
+      events: ['on Unit Enter'],
       modifiers: (ctx) =>
         ctx.units
           .filter((u) => this.filter(u, ctx) && u.id !== props.sourceId)

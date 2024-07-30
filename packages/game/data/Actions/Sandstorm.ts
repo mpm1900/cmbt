@@ -1,7 +1,7 @@
 import {
   Action,
   ActionId,
-  ActionRenderResult,
+  ActionResult,
   GameContext,
   Id,
   Unit,
@@ -31,12 +31,9 @@ export class Sandstorm extends Action {
   threshold = (source: Unit): number | undefined => undefined
   critical = (source: Unit): number | undefined => undefined
 
-  resolve = (
-    source: Unit,
-    targets: Unit[],
-    ctx: GameContext
-  ): ActionRenderResult => {
+  resolve = (source: Unit, targets: Unit[], ctx: GameContext): ActionResult => {
     return {
+      action: this,
       source,
       targets,
       mutations: [

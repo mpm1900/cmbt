@@ -15,7 +15,7 @@ export class DamageParentOnTurnEnd extends Trigger {
   constructor(props: TriggerProps<{ damage: number }>) {
     super(DamageParentOnTurnEndId, {
       ...props,
-      events: ['onTurnEnd'],
+      events: ['on Turn End'],
     })
     this.damage = props.damage
   }

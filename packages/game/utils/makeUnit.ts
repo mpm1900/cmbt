@@ -28,7 +28,8 @@ export const ZERO_UNIT: Unit = {
     speed: 0,
     accuracy: 0,
     focus: 0,
-    energy: 0,
+    stamina: 0,
+    devotion: 0,
 
     fireNegation: 0,
     forceNegation: 0,
@@ -41,7 +42,8 @@ export const ZERO_UNIT: Unit = {
   values: {
     damage: 0,
     focus: 0,
-    energy: 0,
+    stamina: 0,
+    devotion: 0,
   },
   flags: {
     isActive: false,
@@ -90,7 +92,8 @@ export function makeUnit(teamId: string, name?: string, isActive?: boolean) {
         defense: random.int(50, 100),
         health: random.int(250, 440),
         focus: random.int(0, 100),
-        energy: random.int(0, 100),
+        stamina: random.int(0, 100),
+        devotion: random.int(0, 20),
       },
       flags: {
         isActive: isActive ?? false,
@@ -101,7 +104,8 @@ export function makeUnit(teamId: string, name?: string, isActive?: boolean) {
       values: {
         damage: 30,
         focus: unit.stats.focus,
-        energy: unit.stats.energy,
+        stamina: unit.stats.stamina,
+        devotion: unit.stats.devotion,
       },
       actions: [
         new Explosion(unit.id, unit.teamId),

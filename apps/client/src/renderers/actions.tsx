@@ -25,6 +25,7 @@ import { ReactNode } from 'react'
 export type ActionRenderer = {
   name: string
   cost: ReactNode
+  costAlt?: ReactNode
   description: (action: Action) => ReactNode
   help?: (action: Action) => ReactNode
   lore?: (action: Action) => ReactNode
@@ -204,8 +205,9 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
     },
   },
   [HyperBeamId]: {
-    name: 'Hyper Beam',
+    name: ACTION_NAMES[HyperBeamId],
     cost: '30 FP',
+    costAlt: <span className="text-blue-300">30 FP</span>,
     description: (action) => (
       <>
         Deals base force damage equal to this unit's magic stat to target enemy
@@ -242,7 +244,8 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
   },
   [WillOWispId]: {
     name: 'Will-O-Wisp',
-    cost: <span>20 FP</span>,
+    cost: '20 FP',
+    costAlt: <span className="text-blue-300">20 FP</span>,
     lore: () => (
       <>
         The user shoots a sinister, bluish-white flame at the target. Said to

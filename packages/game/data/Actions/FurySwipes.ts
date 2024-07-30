@@ -1,7 +1,7 @@
 import {
   Action,
   ActionId,
-  ActionRenderResult,
+  ActionResult,
   Damage,
   GameContext,
   Id,
@@ -42,13 +42,10 @@ export class FurySwipes extends Action {
   }
   critical = (source: Unit): number | undefined => undefined
 
-  resolve = (
-    source: Unit,
-    targets: Unit[],
-    ctx: GameContext
-  ): ActionRenderResult => {
+  resolve = (source: Unit, targets: Unit[], ctx: GameContext): ActionResult => {
     const data = getActionData(source, this, ctx)
     return {
+      action: this,
       source,
       targets,
       mutations: [

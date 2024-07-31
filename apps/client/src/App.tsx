@@ -27,6 +27,7 @@ import { useItems } from './hooks/state/useItems'
 import { LogHeader } from './components/ui/log'
 import { RunningTurn } from './components/RunningTurn'
 import { useCleanupController } from './hooks/controllers/useCleanupController'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from './components/ui/tabs'
 
 function App() {
   const ctx = useGameContext()
@@ -160,11 +161,24 @@ function App() {
           className="w-[360px] bg-slate-950 overflow-auto h-screen"
           ref={ref}
         >
-          {logs.logs.map((log, i) => (
-            <div key={i} className="px-2 py-0.5 overflow-hidden">
-              {log}
-            </div>
-          ))}
+          <Tabs defaultValue="log">
+            <TabsList className="grid w-full grid-cols-2">
+              <TabsTrigger value="log">Action Log</TabsTrigger>
+              <TabsTrigger value="mods">Modifiers</TabsTrigger>
+            </TabsList>
+            <TabsContent value="log">
+              {logs.logs.map((log, i) => (
+                <div key={i} className="px-2 py-0.5 overflow-hidden">
+                  {log}
+                </div>
+              ))}
+            </TabsContent>
+            <TabsContent value="mods">
+              {modifiersStore.modifiers.map((mod) => (
+                <pre key={mod.rtid}>{JSON.stringify(mod)}</pre>
+              ))}
+            </TabsContent>
+          </Tabs>
         </div>
       </div>
     </div>

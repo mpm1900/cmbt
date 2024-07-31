@@ -110,12 +110,12 @@ export function makeUnit(teamId: string, name?: string, isActive?: boolean) {
       actions: [
         new Explosion(unit.id, unit.teamId),
         new PowerWordKill(unit.id, unit.teamId),
-        new HyperBeam(unit.id, unit.teamId),
+        new QuickAttack(unit.id, unit.teamId),
 
         new WillOWisp(unit.id, unit.teamId),
         new Disable(unit.id, unit.teamId),
         new Fireball(unit.id, unit.teamId),
-        new QuickAttack(unit.id, unit.teamId),
+        new HyperBeam(unit.id, unit.teamId),
         new FurySwipes(unit.id, unit.teamId),
         new SwordsDance(unit.id, unit.teamId),
         new MagicMissile(unit.id, unit.teamId),

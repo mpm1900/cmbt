@@ -50,7 +50,7 @@ export function ActionButton(props: ActionButtonProps) {
               {renderer.cost}
             </span>
           )}
-          {accuracy !== undefined && baseAccuracy !== undefined && (
+          {accuracy !== undefined && baseAccuracy !== undefined ? (
             <span>
               <span
                 className={cn({
@@ -64,6 +64,8 @@ export function ActionButton(props: ActionButtonProps) {
               </span>
               <span> Accuracy</span>
             </span>
+          ) : (
+            <span>-- Accuracy</span>
           )}
         </div>
       )}

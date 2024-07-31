@@ -24,7 +24,7 @@ export function UnitModifiers(props: UnitModifiersProps) {
             modifier={m}
             fallback={
               <span key={m.rtid} className="font-bold">
-                {r.Inline ? <r.Inline /> : `${r?.name ?? m.id}`}
+                {r?.Inline ? <r.Inline /> : `${r?.name ?? m.id}`}
               </span>
             }
           />

@@ -64,6 +64,14 @@ export function ActiveAction(props: ActiveActionProps) {
             )}
             <span className="pl-1">Accuracy</span>
           </Badge>
+          {action.priority !== 0 && (
+            <Badge
+              variant="outline"
+              className="bg-slate-950 text-muted-foreground"
+            >
+              Priority {action.priority}
+            </Badge>
+          )}
         </div>
         <div>
           <div>{renderer?.description(action)}</div>

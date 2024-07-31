@@ -5,6 +5,13 @@ import { Card, CardContent, CardHeader, CardTitle } from './ui/card'
 import { useEffect, useState } from 'react'
 import { Action, Id, Unit } from '@repo/game/types'
 import { useGameContext } from '@/hooks'
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from './ui/carousel'
 
 export type ActionsListProps = {
   onConfirm: (action: Action, targetIds: Id[]) => void
@@ -49,6 +56,7 @@ export function ActionsList(props: ActionsListProps) {
   }, [targets.length])
 
   if (!unit) return null
+  const pages = Math.ceil(unit.actions.length / 4)
 
   return (
     <Card>
@@ -56,22 +64,32 @@ export function ActionsList(props: ActionsListProps) {
         <CardTitle>Select an Action for {unit.name}...</CardTitle>
       </CardHeader>
       <CardContent className="space-y-4">
-        <div className="grid grid-cols-2 gap-2">
-          {unit.actions
-            //
-            .slice(0, 4)
-            .map((action) => (
-              <ActionButton
-                key={action.id}
-                source={unit}
-                action={action}
-                isActive={action.id === activeAction?.id}
-                onClick={() => {
-                  updateActiveAction(action)
-                }}
-              />
+        <Carousel className="w-full">
+          <CarouselContent>
+            {Array.from({ length: pages }).map((_, i) => (
+              <CarouselItem key={i}>
+                <div className="grid grid-cols-2 gap-2">
+                  {unit.actions
+                    //
+                    .slice(4 * i, 4 * i + 4)
+                    .map((action) => (
+                      <ActionButton
+                        key={action.id}
+                        source={unit}
+                        action={action}
+                        isActive={action.id === activeAction?.id}
+                        onClick={() => {
+                          updateActiveAction(action)
+                        }}
+                      />
+                    ))}
+                </div>
+              </CarouselItem>
             ))}
-        </div>
+          </CarouselContent>
+          <CarouselPrevious />
+          <CarouselNext />
+        </Carousel>
         {activeAction && (
           <ActiveAction
             action={activeAction}

@@ -47,9 +47,10 @@ export function useGameActions() {
       context.log(<LogCritical>{u.name} died.</LogCritical>)
     })
     context.units = unitStore.update([new SetDeadAsInactive()], context)
+
     context.modifiers = modifierStore.removeWhere((modifier) => {
       const parent = context.units.find((u) => u.id === modifier.parentId)
-      return !parent?.flags.isActive
+      return !!parent && !parent?.flags.isActive
     })
     context.modifiers = modifierStore.removeZeroDurations()
     return context
@@ -69,6 +70,10 @@ export function useGameActions() {
       context.units = unitStore.update(mutations, context)
     }
     if (modifiers?.length) {
+      console.log(
+        'adding mods',
+        modifiers.map((m) => m.id)
+      )
       if (options?.enableLog) logModifiers(modifiers, context)
       context.modifiers = modifierStore.add(modifiers)
     }

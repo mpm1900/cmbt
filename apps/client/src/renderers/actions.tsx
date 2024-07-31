@@ -98,7 +98,6 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
       <>
         Applies <span className="font-bold">Disabled)</span> to target enemy
         unit for 2 turns.
-        {action.priority !== 0 && <> Priority {action.priority}.</>}
       </>
     ),
     help: () => <div>(The unit cannot use their last used action.)</div>,
@@ -110,7 +109,6 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
       <>
         Deals damage equal to 4 times this unit's physical stat to all other
         units. This unit's health becomes zero.
-        {action.priority !== 0 && <> Priority {action.priority}.</>}
       </>
     ),
   },
@@ -118,21 +116,13 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
     name: 'Magic Missile',
     cost: '',
     description: (action) => (
-      <>
-        Deals 6 damage to 2 target enemy units. This action cannot miss.
-        {action.priority !== 0 && <> Priority {action.priority}.</>}
-      </>
+      <>Deals 6 damage to 2 target enemy units. This action cannot miss.</>
     ),
   },
   [QuickAttackId]: {
     name: 'Quick Attack',
     cost: '',
-    description: (action) => (
-      <>
-        Deals 5 damage to target enemy unit.
-        {action.priority !== 0 && <> Priority {action.priority}.</>}
-      </>
-    ),
+    description: (action) => <>Deals 5 damage to target enemy unit.</>,
   },
   [PowerWordKillId]: {
     name: ACTION_NAMES[PowerWordKillId],
@@ -154,7 +144,6 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
       <>
         Applies <span className="font-bold">Sandstorm</span> to all units for 5
         turns.
-        {action.priority !== 0 && <> Priority {action.priority}.</>}
       </>
     ),
     help: () => <>(At the end of each turn, the unit takes 10 damage.)</>,
@@ -167,7 +156,6 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
         Applies{' '}
         <span className="font-bold text-muted-foreground">Power Up</span> to
         this unit.
-        {action.priority !== 0 && <> Priority {action.priority}.</>}
       </>
     ),
     help: () => (
@@ -186,7 +174,6 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
           Deals {fireball.damage} base fire damage to target enemy unit. Other
           active units on the target unit's team also take 30% of the damage
           dealt.
-          {action.priority !== 0 && <> Priority {action.priority}.</>}
         </>
       )
     },
@@ -199,7 +186,6 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
       return (
         <>
           Deals {furySwipes.damage} damage to target enemy unit. Repeat 6 times.
-          {action.priority !== 0 && <> Priority {action.priority}.</>}
         </>
       )
     },
@@ -214,7 +200,6 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
         unit. Apply{' '}
         <span className="font-bold text-muted-foreground">Recharging</span> to
         this unit for 1 turn.
-        {action.priority !== 0 && <> Priority {action.priority}.</>}
       </>
     ),
     help: () => <>(The unit cannot act while Recharging.)</>,
@@ -237,7 +222,6 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
     description: (action) => (
       <>
         Apply <span className="font-bold">Trick Room</span> to all units.
-        {action.priority !== 0 && <> Priority {action.priority}.</>}
       </>
     ),
     help: () => <>(The unit's speed stat is multiplied by -1.)</>,
@@ -256,7 +240,6 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
       <>
         Applies <span className="font-bold text-modifiers-burned">Burn</span> to
         target enemy unit for 5 turns.
-        {action.priority !== 0 && <> Priority {action.priority}.</>}
       </>
     ),
     help: () => (

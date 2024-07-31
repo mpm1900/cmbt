@@ -4,10 +4,11 @@ export type StatDebugProps = {
   stat: StatKey
   unit: Unit
   comp: Unit
+  map?: (value: number) => number
 }
 
 export function StatDebug(props: StatDebugProps) {
-  const { stat, unit, comp } = props
+  const { stat, unit, comp, map } = props
   const value = unit.stats[stat]
   const compValue = comp.stats[stat]
   const color =
@@ -17,5 +18,9 @@ export function StatDebug(props: StatDebugProps) {
         ? 'lightcoral'
         : 'inherit'
 
-  return <span style={{ color }}>{parseFloat(value.toFixed(1))}</span>
+  return (
+    <span style={{ color }}>
+      {parseFloat((map ? map(value) : value).toFixed(1))}
+    </span>
+  )
 }

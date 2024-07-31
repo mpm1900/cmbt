@@ -65,42 +65,64 @@ export function UnitStats(props: UnitStatsProps) {
             </div>
           </div>
         </div>
-        <div className="flex space-x-4">
+        <div className="flex flex-1 space-x-4">
           <div className="flex flex-col text-left flex-1">
             <div>Damage</div>
-            <div>
-              <strong>Fire</strong>:{' '}
-              <StatDebug stat="fireNegation" unit={unit} comp={props.unit} />
-            </div>
-            <div>
-              <strong>Force</strong>:{' '}
-              <StatDebug stat="forceNegation" unit={unit} comp={props.unit} />
-            </div>
-            <div>
-              <strong>Lightning</strong>:{' '}
+            <div className="flex space-x-4 justify-between">
+              <strong className="text-muted-foreground">Fire</strong>
               <StatDebug
-                stat="lightningNegation"
+                stat="fireExpansion"
                 unit={unit}
                 comp={props.unit}
+                map={(v) => (v + 1) * 100}
+              />
+            </div>
+            <div className="flex space-x-4 justify-between">
+              <strong className="text-muted-foreground">Force</strong>
+              <StatDebug
+                stat="forceExpansion"
+                unit={unit}
+                comp={props.unit}
+                map={(v) => (v + 1) * 100}
+              />
+            </div>
+            <div className="flex space-x-4 justify-between">
+              <strong className="text-muted-foreground">Lightning</strong>
+              <StatDebug
+                stat="lightningExpansion"
+                unit={unit}
+                comp={props.unit}
+                map={(v) => (v + 1) * 100}
               />
             </div>
           </div>
           <div className="flex flex-col text-left flex-1">
             <div>Negation</div>
-            <div>
-              <strong>Fire</strong>:{' '}
-              <StatDebug stat="fireExpansion" unit={unit} comp={props.unit} />
-            </div>
-            <div>
-              <strong>Force</strong>:{' '}
-              <StatDebug stat="forceExpansion" unit={unit} comp={props.unit} />
-            </div>
-            <div>
-              <strong>Lightning</strong>:{' '}
+            <div className="flex space-x-4 justify-between">
+              <strong className="text-muted-foreground">Fire</strong>
               <StatDebug
-                stat="lightningExpansion"
+                stat="fireNegation"
                 unit={unit}
                 comp={props.unit}
+                map={(v) => v * 100}
+              />
+            </div>
+            <div className="flex space-x-4 justify-between">
+              <strong className="text-muted-foreground">Force</strong>
+              <StatDebug
+                stat="forceNegation"
+                unit={unit}
+                comp={props.unit}
+                map={(v) => v * 100}
+              />
+            </div>
+            <div className="flex space-x-4 justify-between">
+              <strong className="text-muted-foreground">Lightning</strong>
+              <StatDebug
+                stat="lightningNegation"
+                unit={unit}
+                comp={props.unit}
+                map={(v) => v * 100}
               />
             </div>
           </div>

@@ -39,6 +39,7 @@ export class SwitchUnit extends Action {
     const target = targets[0]
     if (!target) throw new Error('No target for SwitchUnit action.')
     return {
+      action: this,
       source,
       targets,
       mutations: [

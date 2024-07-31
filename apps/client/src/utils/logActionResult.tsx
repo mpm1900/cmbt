@@ -1,7 +1,5 @@
-import { LogActionName, LogSecondary, LogUnit } from '@/components/ui/log'
-import { cn } from '@/lib/utils'
+import { LogActionName, LogUnit } from '@/components/ui/log'
 import { ActionRenderers } from '@/renderers'
-import { Unit } from '@faker-js/faker'
 import { Action, ActionResult, GameContext } from '@repo/game/types'
 
 export function logActionResult(
@@ -23,13 +21,5 @@ export function logActionResult(
     ctx.log(
       renderer?.log ? renderer.log(action, source, targets, ctx) : baseLog
     )
-    if (result.data && !result.data.accuracyRoll.success) {
-      ctx.log(
-        <LogSecondary>
-          Miss! ({result.data.accuracyRoll.roll}, needed{' '}
-          {result.data.accuracyRoll.threshold})
-        </LogSecondary>
-      )
-    }
   }
 }

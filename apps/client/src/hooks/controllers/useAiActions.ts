@@ -53,7 +53,7 @@ export function useAiActions() {
       if (aiTeam) {
         const item = getBestAiAction(
           new SetIsActive('', aiTeam.id),
-          ctx.units.map((u) => applyModifiers(u, ctx).unit),
+          ctx.units,
           ctx
         )
         item.action.sourceId = item.targetIds[0]

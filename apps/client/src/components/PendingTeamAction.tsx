@@ -12,16 +12,18 @@ export function PendingTeamAction(props: PendingTeamActionProps) {
   const fns = useGameActions()
 
   return (
-    <SwitchUnits
-      action={new SetIsActive('', teamId)}
-      onClick={(action, unit) => {
-        action.sourceId = unit.id
-        fns.pushCleanupAction({
-          id: nanoid(),
-          action,
-          targetIds: [unit.id],
-        })
-      }}
-    />
+    <div className="w-[580px]">
+      <SwitchUnits
+        action={new SetIsActive('', teamId)}
+        onClick={(action, unit) => {
+          action.sourceId = unit.id
+          fns.pushCleanupAction({
+            id: nanoid(),
+            action,
+            targetIds: [unit.id],
+          })
+        }}
+      />
+    </div>
   )
 }

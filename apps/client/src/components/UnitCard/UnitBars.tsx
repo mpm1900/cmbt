@@ -74,7 +74,6 @@ export function UnitBars(props: UnitBarsProps) {
               />
             )}
           </div>
-          <Progress value={0} className="h-1" />
         </>
       )}
     </div>

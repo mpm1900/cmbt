@@ -11,6 +11,7 @@ import { Button } from '../ui/button'
 import { FaSearch } from 'react-icons/fa'
 import { UnitModifiers } from './UnitModifiers'
 import { UnitBars } from './UnitBars'
+import { SwitchUnitId } from '@repo/game/data'
 
 export type UnitDebugProps = {
   unit: Unit
@@ -27,17 +28,25 @@ export function UnitCard(props: UnitDebugProps) {
   const { unit: activeUnit, setUnit: setActiveUnit } = useActiveUiUnit()
   const { unit } = applyModifiers(props.unit, ctx)
   const stagedItem = queue.find((i) => i.action.sourceId === unit.id)
+
+  const isTargeted =
+    status === 'running' && !!result?.targets?.find((t) => t.id === unit.id)
+
   const isActive =
-    status === 'running'
+    (status === 'running'
       ? result?.action?.sourceId === unit.id
-      : activeUnit?.id === unit.id
-  const isSelectable = !unit.flags.isRecharging && !stagedItem
+      : status === 'waiting-for-input' && activeUnit?.id === unit.id) ||
+    (isTargeted && result?.action?.id === SwitchUnitId)
+
+  const isSelectable =
+    status === 'waiting-for-input' && !unit.flags.isRecharging && !stagedItem
 
   return (
     <div>
       <div
-        className={cn('w-[400px] rounded transition-colors', {
+        className={cn('w-[400px] rounded transition-colors ease-in-out', {
           'bg-slate-200': isActive,
+          'bg-red-500/40': isTargeted && !isActive,
           'cursor-pointer': isSelectable,
         })}
         onClick={() => {

@@ -20,7 +20,7 @@ export function UnitModifiers(props: UnitModifiersProps) {
         const r = ModifierRenderers[m.rid]
         return (
           <ModifierIcon
-            key={m.rid}
+            key={m.rtid}
             modifier={m}
             fallback={
               <span key={m.rtid} className="font-bold">

@@ -7,12 +7,7 @@ import {
   Id,
   Unit,
 } from '../../types'
-import {
-  applyModifiers,
-  calculateDamage,
-  getActionData,
-  parseSuccess,
-} from '../../utils'
+import { applyModifiers, getActionData, parseSuccess } from '../../utils'
 import { modifyRenderContext } from '../../utils/modifyRenderContext'
 import { DamageParent, Identity } from '../Modifiers'
 
@@ -34,7 +29,7 @@ export class PowerWordKill extends Action {
   }
 
   threshold = (source: Unit): number | undefined => {
-    return 30 + source.stats.accuracy
+    return 90 + source.stats.accuracy
   }
   critical = (source: Unit): number | undefined => undefined
 

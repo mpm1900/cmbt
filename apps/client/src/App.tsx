@@ -26,6 +26,7 @@ import { Team } from '@repo/game/types'
 import { useItems } from './hooks/state/useItems'
 import { LogHeader } from './components/ui/log'
 import { RunningTurn } from './components/RunningTurn'
+import { useCleanupController } from './hooks/controllers/useCleanupController'
 
 function App() {
   const ctx = useGameContext()
@@ -39,6 +40,7 @@ function App() {
   useTurnController()
   useInputController()
   useAiActions()
+  useCleanupController()
   const ref = useScrollToBottom(logs.logs.length)
 
   useEffect(() => {
@@ -111,7 +113,7 @@ function App() {
           <div className="flex flex-1 flex-col p-2 justify-between">
             <div className="flex flex-col justify-end">
               <span>{}</span>
-              <TeamBench teamId={aiTeam?.id} className="items-end" />
+              <TeamBench teamId={aiTeam?.id} className="justify-end" />
               <div className="flex flex-1 items-start justify-center">
                 {ctx.units
                   .filter((u) => u.teamId !== ctx.user && u.flags.isActive)

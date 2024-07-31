@@ -8,10 +8,18 @@ import {
 } from '@repo/game/types'
 import { getTriggersByEvent, isUnitAliveCtx } from '@repo/game/utils'
 import { SetDeadAsInactive } from '@repo/game/data'
-import { useActions, useCleanup, useModifiers, useUnits } from './state'
+import {
+  useActions,
+  useCleanup,
+  useModifiers,
+  useTurn,
+  useUnits,
+} from './state'
 import { logModifiers, logMutations } from '@/utils'
 import { logTriggers } from '@/utils/logTriggers'
-import { LogCritical } from '@/components/ui/log'
+import { LogCritical, LogHeader } from '@/components/ui/log'
+import { handleCleanup } from '@/utils/handleCleanup'
+import { logFailure } from '@/utils/logFailure'
 
 export type CommitResultOptions = {
   enableLog?: boolean
@@ -24,6 +32,7 @@ export type CommitResults = (
 ) => GameContext
 
 export function useGameActions() {
+  const turnStore = useTurn()
   const unitStore = useUnits()
   const modifierStore = useModifiers()
   const actionsStore = useActions()
@@ -54,6 +63,7 @@ export function useGameActions() {
       updateModifiers,
       updateActionQueue,
     } = result
+    logFailure(result, context)
     if (mutations?.length) {
       if (options?.enableLog) logMutations(mutations, context)
       context.units = unitStore.update(mutations, context)
@@ -93,15 +103,40 @@ export function useGameActions() {
     return commitResult(result, context)
   }
 
+  function decrementModifierDurations() {
+    modifierStore.decrementDurations()
+    return modifierStore.removeZeroDurations()
+  }
+
+  function nextTurn(runEndOfTurnTriggers: boolean, context: GameContext) {
+    if (runEndOfTurnTriggers) {
+      context = runTriggers('on Turn End', context)
+      context.modifiers = decrementModifierDurations()
+      cleanup(false, context)
+    } else {
+      turnStore.next()
+      context.log(<LogHeader>turn {turnStore.turn.count + 2}</LogHeader>)
+      turnStore.setStatus('waiting-for-input')
+    }
+  }
+
+  const cleanup = (runEndOfTurnTriggers: boolean, context: GameContext) => {
+    handleCleanup(
+      context,
+      () => nextTurn(runEndOfTurnTriggers, context),
+      () => turnStore.setStatus('cleanup'),
+      () => turnStore.setStatus('done')
+    )
+  }
+
   return {
     commitResult,
     cleanupResult,
+    cleanup,
+    decrementModifierDurations,
+    nextTurn,
     runTriggers,
     removeZeroDurations: modifierStore.removeZeroDurations,
-    decrementModifierDurations: () => {
-      modifierStore.decrementDurations()
-      return modifierStore.removeZeroDurations()
-    },
     pushAction: (...items: ActionsQueueItem[]) => {
       actionsStore.enqueue(...items)
     },

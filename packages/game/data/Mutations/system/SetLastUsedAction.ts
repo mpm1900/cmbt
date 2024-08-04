@@ -1,22 +1,22 @@
 import {
   GameContext,
-  Modifier,
-  ModifierId,
-  ModifierProps,
+  Mutation,
+  MutationId,
+  MutationProps,
   Unit,
 } from '../../../types'
 
-export const SetLastUsedActionId = ModifierId()
+export const SetLastUsedActionId = MutationId()
 
-export class SetLastUsedAction extends Modifier {
+export class SetLastUsedAction extends Mutation {
   readonly actionId: string
 
-  constructor(props: ModifierProps<{ actionId: string }>) {
+  constructor(props: MutationProps<{ actionId: string }>) {
     super(SetLastUsedActionId, props)
     this.actionId = props.actionId
   }
 
-  fn = (unit: Unit): Partial<Unit> => {
+  resolve = (unit: Unit): Partial<Unit> => {
     return {
       metadata: {
         ...unit.metadata,

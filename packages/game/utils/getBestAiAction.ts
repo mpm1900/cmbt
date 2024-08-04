@@ -6,7 +6,7 @@ export function getBestAiAction(
   units: Unit[],
   ctx: GameContext
 ) {
-  const possibleTargets = units.filter((u) => action.targets(u, ctx))
+  const possibleTargets = action.targets.resolve(ctx)
   const targetSets = getPermutations(possibleTargets, action.maxTargetCount)
   const weightedSets = targetSets
     .map((targets) => action.getAiAction(targets, ctx))

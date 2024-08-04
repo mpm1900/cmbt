@@ -12,7 +12,7 @@ export type UnitActionTargetsProps = {
 export function ActionTargets(props: UnitActionTargetsProps) {
   const { action, targets, onConfirmClick, onTargetClick } = props
   const ctx = useGameContext()
-  const possibleTargets = ctx.units.filter((u) => action.targets(u, ctx))
+  const possibleTargets = action.targets.resolve(ctx)
 
   return (
     <div>

@@ -12,7 +12,8 @@ import {
   getModifiersFromUnit,
   isUnitAliveCtx,
 } from '../../../utils'
-import { SetIsActiveParent, Identity } from '../../Modifiers'
+import { Identity, SetIsActiveParent } from '../../Mutations'
+import { GetUnits } from '../../Queries'
 
 export const SetIsActiveId = ActionId()
 export class SetIsActive extends Action {
@@ -22,19 +23,16 @@ export class SetIsActive extends Action {
     super(SetIsActiveId, {
       sourceId,
       teamId,
-      cost: new Identity({}),
+      cost: new Identity(),
       attackType: 'physical',
     })
   }
 
-  targets = (unit: Unit, ctx: GameContext): boolean => {
-    return (
-      unit.teamId === this.teamId &&
-      unit.flags.isActive === false &&
-      isUnitAliveCtx(unit.id, ctx)
-    )
-  }
-
+  targets = new GetUnits({
+    teamId: this.teamId,
+    isActive: false,
+    isAlive: true,
+  })
   threshold = (source: Unit): number | undefined => undefined
   critical = (source: Unit): number | undefined => undefined
 
@@ -65,7 +63,7 @@ export class SetIsActive extends Action {
           isActive: true,
         }),
       ],
-      modifiers: [],
+      addedModifiers: [],
       addedUnits: [target],
       updateModifiers: (modifiers) => {
         return modifiers.concat(...getModifiersFromUnit(target))

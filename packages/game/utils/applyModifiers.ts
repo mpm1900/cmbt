@@ -1,4 +1,5 @@
 import { GameContext, Modifier, Trigger, Unit } from '../types'
+import { Mutation } from '../types/Mutation'
 
 export type ApplyModifiersResult = {
   unit: Unit
@@ -6,10 +7,10 @@ export type ApplyModifiersResult = {
   registeredTriggers: Trigger[]
 }
 
-export function applyModifier(unit: Unit, modifer: Modifier): Unit {
+export function applyMutation(unit: Unit, mutation: Mutation): Unit {
   return {
     ...unit,
-    ...modifer.fn(unit),
+    ...mutation.resolve(unit),
   }
 }
 
@@ -34,7 +35,7 @@ export function applyModifiers(
             result.registeredTriggers.push(modifier)
           } else {
             result.appliedModifiers.push(modifier)
-            result.unit = applyModifier(result.unit, modifier)
+            result.unit = applyMutation(result.unit, modifier)
           }
         }
         return result

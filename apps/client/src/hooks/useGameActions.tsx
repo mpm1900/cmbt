@@ -7,7 +7,6 @@ import {
   Unit,
 } from '@repo/game/types'
 import { getTriggersByEvent, isUnitAliveCtx } from '@repo/game/utils'
-import { SetDeadAsInactive } from '@repo/game/data'
 import {
   useActions,
   useCleanup,
@@ -20,6 +19,7 @@ import { logTriggers } from '@/utils/logTriggers'
 import { LogCritical, LogHeader } from '@/components/ui/log'
 import { handleCleanup } from '@/utils/handleCleanup'
 import { logFailure } from '@/utils/logFailure'
+import { SetDeadAsInactive } from '@repo/game/data'
 
 export type CommitResultOptions = {
   enableLog?: boolean
@@ -46,7 +46,7 @@ export function useGameActions() {
     deadActiveUnits.forEach((u) => {
       context.log(<LogCritical>{u.name} died.</LogCritical>)
     })
-    context.units = unitStore.update([new SetDeadAsInactive()], context)
+    context.units = unitStore.mutate([new SetDeadAsInactive()], context)
 
     context.modifiers = modifierStore.removeWhere((modifier) => {
       const parent = context.units.find((u) => u.id === modifier.parentId)
@@ -58,7 +58,7 @@ export function useGameActions() {
 
   const commitResult: CommitResults = (result, context, options) => {
     const {
-      modifiers,
+      addedModifiers: modifiers,
       mutations,
       addedUnits,
       updateModifiers,
@@ -67,7 +67,7 @@ export function useGameActions() {
     logFailure(result, context)
     if (mutations?.length) {
       if (options?.enableLog) logMutations(mutations, context)
-      context.units = unitStore.update(mutations, context)
+      context.units = unitStore.mutate(mutations, context)
     }
     if (modifiers?.length) {
       console.log(
@@ -78,7 +78,7 @@ export function useGameActions() {
       context.modifiers = modifierStore.add(modifiers)
     }
     if (updateModifiers) {
-      context.modifiers = modifierStore.setModifiers(updateModifiers)
+      context.modifiers = modifierStore.updateModifiers(updateModifiers)
     }
     if (updateActionQueue) {
       actionsStore.setQueue(updateActionQueue)
@@ -93,7 +93,7 @@ export function useGameActions() {
   function runTriggers(event: TriggerEvent, context: GameContext): GameContext {
     const triggers = getTriggersByEvent(context.modifiers, event)
     const result: ActionResult = {
-      modifiers: triggers
+      addedModifiers: triggers
         .filter((trigger) => trigger.modifiers !== undefined)
         .flatMap(
           (trigger) => (trigger.modifiers && trigger.modifiers(context)) ?? []
@@ -102,7 +102,7 @@ export function useGameActions() {
     }
 
     logTriggers(triggers, event, context)
-    logModifiers(result.modifiers ?? [], context)
+    logModifiers(result.addedModifiers ?? [], context)
     logMutations(result.mutations ?? [], context)
 
     return commitResult(result, context)
@@ -147,10 +147,6 @@ export function useGameActions() {
     },
     pushCleanupAction: (...items: ActionsQueueItem[]) => {
       cleanupStore.enqueue(...items)
-    },
-    removeUnit: (unit: Unit) => {
-      unitStore.remove(unit.id)
-      modifierStore.removeWhere((m) => m.parentId === unit.id)
     },
   }
 }

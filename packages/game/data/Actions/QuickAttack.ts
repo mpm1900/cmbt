@@ -7,8 +7,8 @@ import {
   Unit,
 } from '../../types'
 import { applyModifiers, calculateDamage, getActionData } from '../../utils'
-import { DamageParent, Identity } from '../Modifiers'
-import { SetLastUsedAction } from '../Modifiers/system'
+import { DamageParent, Identity, SetLastUsedAction } from '../Mutations'
+import { GetUnits } from '../Queries'
 
 export const QuickAttackId = ActionId()
 
@@ -25,10 +25,10 @@ export class QuickAttack extends Action {
     })
   }
 
-  targets = (unit: Unit, ctx: GameContext): boolean => {
-    return super.targets(unit, ctx) && unit.teamId !== this.teamId
-  }
-
+  targets = new GetUnits({
+    notTeamId: this.teamId,
+    isActive: true,
+  })
   threshold = (source: Unit): number | undefined => {
     return 95 + source.stats.accuracy
   }
@@ -63,7 +63,7 @@ export class QuickAttack extends Action {
             })
           }),
       ],
-      modifiers: [],
+      addedModifiers: [],
     }
   }
 }

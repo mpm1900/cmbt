@@ -19,6 +19,7 @@ export function SwitchUnits(props: SwitchUnitsProps) {
   const queuedSwitchActions = queue.filter(
     (i) => i.action.id === SwitchUnitId && action.teamId === ctx.user
   )
+  const targets = action.targets.resolve(ctx)
 
   return (
     <Card>
@@ -42,7 +43,7 @@ export function SwitchUnits(props: SwitchUnitsProps) {
                 <Button
                   key={u.id}
                   variant={'secondary'}
-                  disabled={!action.targets(u, ctx) || isPending}
+                  disabled={!targets.find((t) => t.id === u.id) || isPending}
                   className="items-start h-full flex-col"
                   onClick={() => onClick(action, u)}
                 >

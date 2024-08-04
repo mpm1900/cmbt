@@ -66,7 +66,12 @@ export function UnitCard(props: UnitDebugProps) {
           </div>
           <Popover>
             <PopoverTrigger asChild>
-              <Button className={cn('p-2 h-full m-0')} variant="secondary">
+              <Button
+                className={cn('p-2 h-full m-0', {
+                  'text-slate-900': isActive,
+                })}
+                variant="ghost"
+              >
                 <FaSearch />
               </Button>
             </PopoverTrigger>

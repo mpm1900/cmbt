@@ -16,7 +16,7 @@ export class SpeedOffsetParent extends Modifier {
     this.offset = props.offset
   }
 
-  fn = (unit: Unit): Partial<Unit> => {
+  resolve = (unit: Unit): Partial<Unit> => {
     return {
       stats: Modifier.setStats(unit, (stats) => ({
         speed: stats.speed + this.offset,

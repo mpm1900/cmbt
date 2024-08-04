@@ -12,7 +12,7 @@ export class SetRechargingParent extends Modifier {
     super(SetRechargingParentId, props)
   }
 
-  fn = (unit: Unit): Partial<Unit> => {
+  resolve = (unit: Unit): Partial<Unit> => {
     return {
       flags: Modifier.setFlags(unit, (flags) => ({
         isRecharging: true,

@@ -9,7 +9,8 @@ import {
 } from '../../types'
 import { applyModifiers, getActionData, parseSuccess } from '../../utils'
 import { modifyRenderContext } from '../../utils/modifyRenderContext'
-import { DamageParent, Identity } from '../Modifiers'
+import { DamageParent, Identity } from '../Mutations'
+import { GetUnits } from '../Queries'
 
 export const PowerWordKillId = ActionId()
 export class PowerWordKill extends Action {
@@ -24,10 +25,10 @@ export class PowerWordKill extends Action {
     })
   }
 
-  targets = (unit: Unit, ctx: GameContext): boolean => {
-    return super.targets(unit, ctx) && unit.teamId !== this.teamId
-  }
-
+  targets = new GetUnits({
+    notTeamId: this.teamId,
+    isActive: true,
+  })
   threshold = (source: Unit): number | undefined => {
     return 90 + source.stats.accuracy
   }
@@ -56,7 +57,7 @@ export class PowerWordKill extends Action {
               damage,
             })
           }),
-        modifiers: [],
+        addedModifiers: [],
       },
       onFailure: {},
     })

@@ -6,8 +6,9 @@ import {
   Id,
   Unit,
 } from '../../types'
-import { Identity, InvertSpeedAll } from '../Modifiers'
-import { SetLastUsedAction } from '../Modifiers/system'
+import { InvertSpeedAll } from '../Modifiers'
+import { Identity, SetLastUsedAction } from '../Mutations'
+import { EmptyArray } from '../Queries/EmptyArray'
 
 export const TrickRoomId = ActionId()
 
@@ -23,10 +24,7 @@ export class TrickRoom extends Action {
     })
   }
 
-  targets = (unit: Unit): boolean => {
-    return false
-  }
-
+  targets = new EmptyArray()
   threshold = (source: Unit): number | undefined => undefined
   critical = (source: Unit): number | undefined => undefined
 
@@ -42,7 +40,7 @@ export class TrickRoom extends Action {
           actionId: this.id,
         }),
       ],
-      modifiers: [new InvertSpeedAll({ sourceId: source.id })],
+      addedModifiers: [new InvertSpeedAll({ sourceId: source.id })],
     }
   }
 }

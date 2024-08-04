@@ -10,8 +10,8 @@ import {
 import { getActionData } from '../../utils'
 import { modifyRenderContext } from '../../utils/modifyRenderContext'
 import { PowerUpParent } from '../Modifiers'
-import { ReduceFocusParent } from '../Modifiers/costs'
-import { SetLastUsedAction } from '../Modifiers/system'
+import { ReduceFocusParent, SetLastUsedAction } from '../Mutations'
+import { EmptyArray } from '../Queries/EmptyArray'
 
 export const SwordsDanceId = ActionId()
 export class SwordsDance extends Action {
@@ -23,6 +23,7 @@ export class SwordsDance extends Action {
       teamId,
       cost: new ReduceFocusParent({
         sourceId: sourceId,
+        parentId: sourceId,
         offset: 30,
       }),
       attackType: 'magic',
@@ -33,10 +34,7 @@ export class SwordsDance extends Action {
     return source.values.focus >= 30
   }
 
-  targets = (unit: Unit): boolean => {
-    return false
-  }
-
+  targets = new EmptyArray()
   threshold = (source: Unit): number | undefined => undefined
   critical = (source: Unit): number | undefined => undefined
 
@@ -59,7 +57,7 @@ export class SwordsDance extends Action {
           actionId: this.id,
         }),
       ],
-      modifiers: [
+      addedModifiers: [
         new PowerUpParent({
           sourceId: source.id,
           parentId: source.id,

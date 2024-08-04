@@ -24,9 +24,7 @@ export function ItemsList(props: ItemsListProps) {
   function updateActiveItem(item: Item | undefined) {
     setActiveItem(item)
     if (item) {
-      const possibleTargets = ctx.units.filter((unit) =>
-        item.targets(unit, ctx)
-      )
+      const possibleTargets = item.targets.resolve(ctx)
       if (possibleTargets.length <= item.maxTargetCount) {
         setTargets(possibleTargets)
       } else {

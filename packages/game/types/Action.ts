@@ -5,15 +5,17 @@ import {
   GameContext,
   Id,
   Modifier,
+  Query,
   Unit,
 } from '.'
 import {
   ActionRenderData,
-  applyModifier,
+  applyMutation,
   applyModifiers,
   ZERO_UNIT,
 } from '../utils'
 import random from 'random'
+import { Mutation } from './Mutation'
 
 export type AiAction = {
   action: Action
@@ -26,8 +28,8 @@ export type ActionResult = {
   source?: Unit
   targets?: Unit[]
   data?: ActionRenderData
-  mutations?: Modifier[]
-  modifiers?: Modifier[]
+  mutations?: Mutation[]
+  addedModifiers?: Modifier[]
   addedUnits?: Unit[]
   updateModifiers?: (modifiers: Modifier[]) => Modifier[]
   updateActionQueue?: (queue: ActionsQueueItem[]) => ActionsQueueItem[]
@@ -42,7 +44,7 @@ export type ActionRenderOptions = {
 export type ActionProps = {
   sourceId: Id
   teamId: Id
-  cost: Modifier
+  cost: Mutation
   attackType: AttackTypes
   priority?: number
   maxTargetCount?: number
@@ -55,7 +57,7 @@ export abstract class Action {
   readonly rtid: Id
   sourceId: Id
   readonly teamId: Id
-  readonly cost: Modifier
+  readonly cost: Mutation
   readonly priority: number
   readonly attackType: AttackTypes
 
@@ -68,10 +70,7 @@ export abstract class Action {
     ctx: GameContext,
     options?: ActionRenderOptions
   ): ActionResult
-
-  targets(unit: Unit, ctx: GameContext): boolean {
-    return unit.flags.isActive
-  }
+  abstract targets: Query<Unit[]>
 
   // this only works for damage actions
   getAiAction = (targets: Unit[], ctx: GameContext): AiAction => {
@@ -111,7 +110,7 @@ export abstract class Action {
       disableRandomness: true,
     })
     return mutations
-      .map((m) => applyModifier(ZERO_UNIT, m))
+      .map((m) => applyMutation(ZERO_UNIT, m))
       .flatMap((u) => u.values.damage)
       .filter((d) => d > 0)
   }

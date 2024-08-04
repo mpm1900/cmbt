@@ -7,8 +7,8 @@ import {
   Unit,
 } from '../../types'
 import { applyModifiers, calculateDamage, getActionData } from '../../utils'
-import { DamageParent, Identity } from '../Modifiers'
-import { SetLastUsedAction } from '../Modifiers/system'
+import { DamageParent, Identity, SetLastUsedAction } from '../Mutations'
+import { GetUnits } from '../Queries'
 
 export const MagicMissileId = ActionId()
 export class MagicMissile extends Action {
@@ -23,10 +23,10 @@ export class MagicMissile extends Action {
     })
   }
 
-  targets = (unit: Unit, ctx: GameContext): boolean => {
-    return super.targets(unit, ctx) && unit.teamId !== this.teamId
-  }
-
+  targets = new GetUnits({
+    notTeamId: this.teamId,
+    isActive: true,
+  })
   threshold = (source: Unit): number | undefined => undefined
   critical = (source: Unit): number | undefined => undefined
 
@@ -58,7 +58,7 @@ export class MagicMissile extends Action {
             })
           }),
       ],
-      modifiers: [],
+      addedModifiers: [],
     }
   }
 }

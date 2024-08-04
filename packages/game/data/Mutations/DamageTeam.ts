@@ -1,24 +1,23 @@
 import {
   GameContext,
-  Id,
-  Modifier,
-  ModifierId,
-  ModifierProps,
+  Mutation,
+  MutationId,
+  MutationProps,
   Unit,
 } from '../../types'
 
-export const DamageTeamId = ModifierId()
+export const DamageTeamId = MutationId()
 
-export class DamageTeam extends Modifier {
+export class DamageTeam extends Mutation {
   private damage: number
-  constructor(props: ModifierProps & { damage: number }) {
+  constructor(props: MutationProps & { damage: number }) {
     super(DamageTeamId, props)
     this.damage = props.damage
   }
 
-  fn = (unit: Unit): Partial<Unit> => {
+  resolve = (unit: Unit): Partial<Unit> => {
     return {
-      values: Modifier.setValues(unit, (values) => ({
+      values: Mutation.setValues(unit, (values) => ({
         damage: values.damage + this.damage,
       })),
     }

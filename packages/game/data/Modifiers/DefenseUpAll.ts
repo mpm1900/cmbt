@@ -17,7 +17,7 @@ export class DefenseUpAll extends Modifier {
     return `${this.id}`
   }
 
-  fn = (unit: Unit): Partial<Unit> => {
+  resolve = (unit: Unit): Partial<Unit> => {
     return {
       stats: Modifier.setStats(unit, (stats) => ({
         defense: stats.defense + 10,

@@ -8,9 +8,8 @@ type ModifiersState = {
 
 type ModifiersStore = ModifiersState & {
   add(modifiers: Modifier[]): Modifier[]
-  remove(...ids: Id[]): Modifier[]
   removeWhere(filter: (modifier: Modifier) => boolean): Modifier[]
-  setModifiers: (setter: (modifiers: Modifier[]) => Modifier[]) => Modifier[]
+  updateModifiers: (setter: (modifiers: Modifier[]) => Modifier[]) => Modifier[]
   removeZeroDurations(): Modifier[]
   decrementDurations(): Modifier[]
 }
@@ -23,19 +22,13 @@ export const useModifiers = create<ModifiersStore>((set, get) => ({
     }))
     return get().modifiers
   },
-  remove(...rtids) {
-    set(({ modifiers }) => ({
-      modifiers: modifiers.filter((modifier) => !rtids.includes(modifier.rtid)),
-    }))
-    return get().modifiers
-  },
   removeWhere(clause) {
     set(({ modifiers }) => ({
       modifiers: modifiers.filter((m) => !clause(m)),
     }))
     return get().modifiers
   },
-  setModifiers(setter) {
+  updateModifiers(setter) {
     set(({ modifiers }) => ({
       modifiers: setter(modifiers),
     }))

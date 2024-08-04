@@ -1,13 +1,13 @@
 import { LogSecondary, LogUnit } from '@/components/ui/log'
 import { SetLastUsedActionId } from '@repo/game/data'
-import { GameContext, Modifier, Unit } from '@repo/game/types'
-import { applyModifier, ZERO_UNIT } from '@repo/game/utils'
+import { GameContext, Mutation, Unit } from '@repo/game/types'
+import { applyMutation, ZERO_UNIT } from '@repo/game/utils'
 
-export function logMutations(mutations: Modifier[], ctx: GameContext) {
+export function logMutations(mutations: Mutation[], ctx: GameContext) {
   mutations
     .filter((m) => m.id !== SetLastUsedActionId)
     .forEach((mutation) => {
-      const diffs = applyModifier(ZERO_UNIT, mutation)
+      const diffs = applyMutation(ZERO_UNIT, mutation)
       const parent = ctx.units.find((u) => u.id === mutation.parentId)
       if (!parent || mutation.filter(parent, ctx)) {
         logMutationDiffs(parent, diffs, ctx)

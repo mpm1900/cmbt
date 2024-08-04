@@ -19,7 +19,7 @@ export class PowerUpParent extends Modifier {
     this.coef = props.coef
   }
 
-  fn = (unit: Unit): Partial<Unit> => {
+  resolve = (unit: Unit): Partial<Unit> => {
     return {
       stats: Modifier.setStats(unit, (stats) => ({
         physical: stats.physical * this.coef,

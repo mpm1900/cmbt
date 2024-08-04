@@ -10,8 +10,8 @@ import {
 import { getActionData, parseSuccess } from '../../utils'
 import { modifyRenderContext } from '../../utils/modifyRenderContext'
 import { PowerDownParent, BurnedPowerDownId } from '../Modifiers'
-import { ReduceFocusParent } from '../Modifiers/costs'
-import { SetLastUsedAction } from '../Modifiers/system'
+import { ReduceFocusParent, SetLastUsedAction } from '../Mutations'
+import { GetUnits } from '../Queries'
 import { BurnDamageOnTurnEndId, DamageParentOnTurnEnd } from '../Triggers'
 
 export const WillOWispId = ActionId()
@@ -25,6 +25,7 @@ export class WillOWisp extends Action {
       teamId,
       cost: new ReduceFocusParent({
         sourceId: sourceId,
+        parentId: sourceId,
         offset: 20,
       }),
       attackType: 'magic',
@@ -35,10 +36,10 @@ export class WillOWisp extends Action {
     return source.values.focus >= 20
   }
 
-  targets = (unit: Unit, ctx: GameContext): boolean => {
-    return super.targets(unit, ctx) && unit.teamId !== this.teamId
-  }
-
+  targets = new GetUnits({
+    notTeamId: this.teamId,
+    isActive: true,
+  })
   threshold = (source: Unit): number | undefined => {
     return 70 + source.stats.accuracy
   }
@@ -61,7 +62,7 @@ export class WillOWisp extends Action {
             actionId: this.id,
           }),
         ],
-        modifiers: targets.flatMap((target) => [
+        addedModifiers: targets.flatMap((target) => [
           new PowerDownParent({
             sourceId: source.id,
             parentId: target.id,

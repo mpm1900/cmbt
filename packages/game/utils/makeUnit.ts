@@ -31,13 +31,21 @@ export const ZERO_UNIT: Unit = {
     stamina: 0,
     devotion: 0,
 
+    arcaneNegation: 0,
+    bluntNegation: 0,
     fireNegation: 0,
     forceNegation: 0,
-    lightningNegation: 0,
+    shockNegation: 0,
+    slashNegation: 0,
+    thrustNegation: 0,
 
+    arcaneExpansion: 0,
+    bluntExpansion: 0,
     fireExpansion: 0,
     forceExpansion: 0,
-    lightningExpansion: 0,
+    shockExpansion: 0,
+    slashExpansion: 0,
+    thrustExpansion: 0,
   },
   values: {
     damage: 0,

@@ -6,8 +6,9 @@ import {
   Id,
   Unit,
 } from '../../types'
-import { AddActionToRegistryParent, Identity } from '../Modifiers'
-import { SetLastUsedAction } from '../Modifiers/system'
+import { AddActionToRegistryParent } from '../Modifiers'
+import { Identity, SetLastUsedAction } from '../Mutations'
+import { GetUnits } from '../Queries'
 
 export const DisableId = ActionId()
 export class Disable extends Action {
@@ -25,10 +26,7 @@ export class Disable extends Action {
 
   threshold = (source: Unit): number | undefined => undefined
   critical = (source: Unit): number | undefined => undefined
-
-  targets = (unit: Unit, ctx: GameContext): boolean => {
-    return super.targets(unit, ctx) && unit.teamId !== this.teamId
-  }
+  targets = new GetUnits({ isActive: true, notTeamId: this.sourceId })
 
   resolve = (source: Unit, targets: Unit[], ctx: GameContext): ActionResult => {
     return {
@@ -42,7 +40,7 @@ export class Disable extends Action {
           actionId: this.id,
         }),
       ],
-      modifiers: targets.map((target) => {
+      addedModifiers: targets.map((target) => {
         return new AddActionToRegistryParent({
           sourceId: source.id,
           parentId: target.id,

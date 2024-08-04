@@ -20,7 +20,7 @@ export class DamageParentOnTurnEnd extends Trigger {
     this.damage = props.damage
   }
 
-  fn = (unit: Unit): Partial<Unit> => {
+  resolve = (unit: Unit): Partial<Unit> => {
     return {
       values: Modifier.setValues(unit, (values) => ({
         damage: values.damage + this.damage,

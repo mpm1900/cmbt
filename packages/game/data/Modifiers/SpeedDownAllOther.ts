@@ -19,7 +19,7 @@ export class SpeedDownAllOther extends Modifier {
     this.coef = props.coef
   }
 
-  fn = (unit: Unit): Partial<Unit> => {
+  resolve = (unit: Unit): Partial<Unit> => {
     return {
       stats: Modifier.setStats(unit, (stats) => ({
         speed: stats.speed / this.coef,

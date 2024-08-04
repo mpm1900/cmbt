@@ -17,7 +17,7 @@ export class AddActionToRegistryParent extends Modifier {
     this.duration = props.duration
   }
 
-  fn = (unit: Unit): Partial<Unit> => {
+  resolve = (unit: Unit): Partial<Unit> => {
     if (!this.actionId) return unit
     return {
       registry: {

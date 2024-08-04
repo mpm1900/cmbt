@@ -1,4 +1,4 @@
-import { Unit, Id, Modifier, GameContext } from '@repo/game/types'
+import { Unit, Id, GameContext, Mutation } from '@repo/game/types'
 import { create } from 'zustand'
 
 type UnitsState = {
@@ -6,33 +6,27 @@ type UnitsState = {
 }
 
 type UnitsStore = UnitsState & {
-  add(...units: Unit[]): Unit[]
-  remove(...ids: Id[]): Unit[]
-  update(modifiers: Modifier[], ctx: GameContext): Unit[]
+  addUnits(...units: Unit[]): Unit[]
+  mutate(mutations: Mutation[], ctx: GameContext): Unit[]
 }
 
 export const useUnits = create<UnitsStore>((set, get) => ({
   units: [],
-  add(...units) {
+  addUnits(...units) {
     set((state) => ({
       units: [...state.units, ...units],
     }))
     return get().units
   },
-  remove(...rtids) {
-    set(({ units }) => ({
-      units: units.filter((unit) => !rtids.includes(unit.id)),
-    }))
-    return get().units
-  },
-  update(modifiers, ctx) {
+  mutate(mutations, ctx) {
     set(({ units }) => ({
       units: units.map((unit) => {
-        return modifiers.reduce<Unit>((u, modifier) => {
-          return modifier.filter(u, ctx) ? { ...u, ...modifier.fn(u) } : u
+        return mutations.reduce<Unit>((u, mutation) => {
+          return mutation.filter(u, ctx) ? { ...u, ...mutation.resolve(u) } : u
         }, unit)
       }),
     }))
+
     return get().units
   },
 }))

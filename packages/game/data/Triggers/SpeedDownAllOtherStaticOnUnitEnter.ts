@@ -28,7 +28,7 @@ export class SpeedDownAllOtherStaticOnUnitEnter extends Trigger {
     this.coef = props.coef
   }
 
-  fn = (unit: Unit): Partial<Unit> => unit
+  resolve = (unit: Unit): Partial<Unit> => unit
 
   filter = (unit: Unit, ctx: GameContext): boolean => {
     return super.filter(unit, ctx)

@@ -18,7 +18,7 @@ export class InvertSpeedAll extends Modifier {
     super(InvertSpeedAllId, props)
   }
 
-  fn = (unit: Unit): Partial<Unit> => {
+  resolve = (unit: Unit): Partial<Unit> => {
     return {
       stats: Modifier.setStats(unit, (stats) => ({
         speed: stats.speed * -1,

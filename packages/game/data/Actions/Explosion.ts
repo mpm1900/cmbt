@@ -9,12 +9,12 @@ import {
 import {
   applyModifiers,
   calculateDamage,
-  applyModifier,
+  applyMutation,
   ZERO_UNIT,
   getActionData,
 } from '../../utils'
-import { DamageParent, Identity } from '../Modifiers'
-import { SetLastUsedAction } from '../Modifiers/system'
+import { DamageParent, Identity } from '../Mutations'
+import { EmptyArray } from '../Queries/EmptyArray'
 
 export const ExplosionId = ActionId()
 
@@ -30,16 +30,14 @@ export class Explosion extends Action {
     })
   }
 
-  targets = (unit: Unit): boolean => {
-    return false
-  }
+  targets = new EmptyArray()
 
   getDamage = (source: Unit, targets: Unit[], ctx: GameContext): number[] => {
     const { mutations } = this.resolve(source, targets, ctx)
     if (!mutations) return []
     return mutations
       .filter((m) => m.parentId !== this.sourceId)
-      .map((m) => applyModifier(ZERO_UNIT, m))
+      .map((m) => applyMutation(ZERO_UNIT, m))
       .map((u) => u.values.damage)
   }
 
@@ -80,7 +78,7 @@ export class Explosion extends Action {
             })
           }),
       ],
-      modifiers: [],
+      addedModifiers: [],
     }
   }
 }

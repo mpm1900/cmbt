@@ -28,38 +28,38 @@ export function UnitStats(props: UnitStatsProps) {
               ({remainingHealth}/{unit.stats.health})
             </span>
           </div>
-          <div className="flex justify-between">
+          <div className="flex justify-between space-x-2">
             <strong>FP</strong>
             <span>
               ({Math.max(unit.values.focus, 0)}/{unit.stats.focus})
             </span>
           </div>
-          <div className="flex justify-between">
+          <div className="flex justify-between space-x-2">
             <strong>SP</strong>
             <span>
               ({Math.max(unit.values.stamina, 0)}/{unit.stats.stamina})
             </span>
           </div>
-          <div className="flex justify-between">
+          <div className="flex justify-between space-x-2">
             <strong>DEV</strong>
             <span>
               ({Math.max(unit.values.devotion, 0)}/{unit.stats.devotion})
             </span>
           </div>
           <div>
-            <div className="flex justify-between">
+            <div className="flex justify-between space-x-2">
               <strong>Physical</strong>
               <StatDebug stat="physical" unit={unit} comp={props.unit} />
             </div>
-            <div className="flex justify-between">
+            <div className="flex justify-between space-x-2">
               <strong>Defense</strong>
               <StatDebug stat="defense" unit={unit} comp={props.unit} />
             </div>
-            <div className="flex justify-between">
+            <div className="flex justify-between space-x-2">
               <strong>Magic</strong>
               <StatDebug stat="magic" unit={unit} comp={props.unit} />
             </div>
-            <div className="flex justify-between">
+            <div className="flex justify-between space-x-2">
               <strong>Speed</strong>
               <StatDebug stat="speed" unit={unit} comp={props.unit} />
             </div>
@@ -68,6 +68,25 @@ export function UnitStats(props: UnitStatsProps) {
         <div className="flex flex-1 space-x-4">
           <div className="flex flex-col text-left flex-1">
             <div>Damage</div>
+
+            <div className="flex space-x-4 justify-between">
+              <strong className="text-muted-foreground">Arcane</strong>
+              <StatDebug
+                stat="arcaneExpansion"
+                unit={unit}
+                comp={props.unit}
+                map={(v) => (v + 1) * 100}
+              />
+            </div>
+            <div className="flex space-x-4 justify-between">
+              <strong className="text-muted-foreground">Blunt</strong>
+              <StatDebug
+                stat="bluntExpansion"
+                unit={unit}
+                comp={props.unit}
+                map={(v) => (v + 1) * 100}
+              />
+            </div>
             <div className="flex space-x-4 justify-between">
               <strong className="text-muted-foreground">Fire</strong>
               <StatDebug
@@ -87,9 +106,27 @@ export function UnitStats(props: UnitStatsProps) {
               />
             </div>
             <div className="flex space-x-4 justify-between">
-              <strong className="text-muted-foreground">Lightning</strong>
+              <strong className="text-muted-foreground">Shock</strong>
               <StatDebug
-                stat="lightningExpansion"
+                stat="shockExpansion"
+                unit={unit}
+                comp={props.unit}
+                map={(v) => (v + 1) * 100}
+              />
+            </div>
+            <div className="flex space-x-4 justify-between">
+              <strong className="text-muted-foreground">Slash</strong>
+              <StatDebug
+                stat="slashExpansion"
+                unit={unit}
+                comp={props.unit}
+                map={(v) => (v + 1) * 100}
+              />
+            </div>
+            <div className="flex space-x-4 justify-between">
+              <strong className="text-muted-foreground">Thrust</strong>
+              <StatDebug
+                stat="thrustExpansion"
                 unit={unit}
                 comp={props.unit}
                 map={(v) => (v + 1) * 100}
@@ -117,9 +154,9 @@ export function UnitStats(props: UnitStatsProps) {
               />
             </div>
             <div className="flex space-x-4 justify-between">
-              <strong className="text-muted-foreground">Lightning</strong>
+              <strong className="text-muted-foreground">Shock</strong>
               <StatDebug
-                stat="lightningNegation"
+                stat="shockNegation"
                 unit={unit}
                 comp={props.unit}
                 map={(v) => v * 100}

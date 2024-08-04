@@ -6,8 +6,8 @@ import {
   Id,
   Unit,
 } from '../../types'
-import { Identity } from '../Modifiers'
-import { SetLastUsedAction } from '../Modifiers/system'
+import { Identity, SetLastUsedAction } from '../Mutations'
+import { EmptyArray } from '../Queries/EmptyArray'
 import { DamageAllOnTurnEnd } from '../Triggers'
 
 export const SandstormId = ActionId()
@@ -24,10 +24,7 @@ export class Sandstorm extends Action {
     })
   }
 
-  targets = (unit: Unit): boolean => {
-    return false
-  }
-
+  targets = new EmptyArray()
   threshold = (source: Unit): number | undefined => undefined
   critical = (source: Unit): number | undefined => undefined
 
@@ -43,7 +40,7 @@ export class Sandstorm extends Action {
           actionId: this.id,
         }),
       ],
-      modifiers: [
+      addedModifiers: [
         new DamageAllOnTurnEnd({
           sourceId: source.id,
           damage: 10,

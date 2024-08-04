@@ -16,7 +16,7 @@ export class AccuracyDownParent extends Modifier {
     this.offset = props.offset
   }
 
-  fn = (unit: Unit): Partial<Unit> => {
+  resolve = (unit: Unit): Partial<Unit> => {
     return {
       stats: Modifier.setStats(unit, (stats) => ({
         accuracy: stats.accuracy - this.offset,

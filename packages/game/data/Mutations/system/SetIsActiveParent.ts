@@ -1,23 +1,24 @@
 import {
   GameContext,
-  Modifier,
-  ModifierId,
-  ModifierProps,
+  Mutation,
+  MutationId,
+  MutationProps,
   Unit,
-} from '../../types'
+} from '../../../types'
 
-export const SetIsActiveParentId = ModifierId()
+export const SetIsActiveParentId = MutationId()
 
-export class SetIsActiveParent extends Modifier {
+export class SetIsActiveParent extends Mutation {
   readonly isActive: boolean
-  constructor(props: ModifierProps<{ isActive: boolean }>) {
+
+  constructor(props: MutationProps<{ isActive: boolean }>) {
     super(SetIsActiveParentId, props)
     this.isActive = props.isActive
   }
 
-  fn = (unit: Unit): Partial<Unit> => {
+  resolve = (unit: Unit): Partial<Unit> => {
     return {
-      flags: Modifier.setFlags(unit, (flags) => ({
+      flags: Mutation.setFlags(unit, (flags) => ({
         isActive: this.isActive,
       })),
       metadata: {

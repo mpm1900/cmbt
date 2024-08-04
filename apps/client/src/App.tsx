@@ -47,11 +47,13 @@ function App() {
   useEffect(() => {
     if (unitsStore.units.length === 0) {
       const user = teamsStore.getRandomTeamId()
-      teamsStore.setUser(user)
+      if (!teamsStore.user) {
+        teamsStore.setUser(user)
+      }
       const userTeam = teamsStore.teams.find((t) => t.id === user) as Team
       const aiTeam = teamsStore.teams.find((t) => t.id !== user) as Team
       const testUnit = makeUnit(userTeam.id, 'Salamence', false)
-      const units = unitsStore.add(
+      const units = unitsStore.addUnits(
         makeUnit(userTeam.id, faker.person.fullName(), true),
         makeUnit(userTeam.id, faker.person.fullName(), true),
         makeUnit(userTeam.id, faker.person.fullName(), false),
@@ -115,11 +117,11 @@ function App() {
             <div className="flex flex-col justify-end">
               <span>{}</span>
               <TeamBench teamId={aiTeam?.id} className="justify-end" />
-              <div className="flex flex-1 items-start justify-center">
+              <div className="flex flex-1 items-start justify-end">
                 {ctx.units
                   .filter((u) => u.teamId !== ctx.user && u.flags.isActive)
                   .map((unit) => (
-                    <div key={unit.id} className="text-left p-4">
+                    <div key={unit.id} className="text-left p-4 px-8">
                       <UnitCard unit={unit} hideStats={true} />
                     </div>
                   ))}
@@ -145,11 +147,11 @@ function App() {
             </div>
             <div className="flex flex-col-reverse justify-end">
               <TeamBench teamId={userTeam?.id} />{' '}
-              <div className="flex flex-1 items-start justify-center">
+              <div className="flex flex-1 items-start justify-start">
                 {ctx.units
                   .filter((u) => u.teamId === ctx.user && u.flags.isActive)
                   .map((unit) => (
-                    <div key={unit.id} className="text-left p-4">
+                    <div key={unit.id} className="text-left p-4 px-8">
                       <UnitCard unit={unit} hideStats={false} />
                     </div>
                   ))}
@@ -157,27 +159,32 @@ function App() {
             </div>
           </div>
         </div>
-        <div
-          className="w-[360px] bg-slate-950 overflow-auto h-screen"
-          ref={ref}
-        >
-          <Tabs defaultValue="log">
-            <TabsList className="grid w-full grid-cols-2">
-              <TabsTrigger value="log">Action Log</TabsTrigger>
-              <TabsTrigger value="mods">Modifiers</TabsTrigger>
-            </TabsList>
-            <TabsContent value="log">
-              {logs.logs.map((log, i) => (
-                <div key={i} className="px-2 py-0.5 overflow-hidden">
-                  {log}
-                </div>
-              ))}
-            </TabsContent>
-            <TabsContent value="mods">
-              {modifiersStore.modifiers.map((mod) => (
-                <pre key={mod.rtid}>{JSON.stringify(mod)}</pre>
-              ))}
-            </TabsContent>
+        <div className="w-[360px] bg-slate-950 h-screen flex" ref={ref}>
+          <Tabs defaultValue="log" className="flex flex-1">
+            <div className="flex flex-col w-full">
+              <div className="p-2">
+                <TabsList className="grid w-full grid-cols-2">
+                  <TabsTrigger value="log">Action Log</TabsTrigger>
+                  <TabsTrigger value="mods">Modifiers</TabsTrigger>
+                </TabsList>
+              </div>
+              <div className="flex-1 overflow-auto w-full">
+                <TabsContent value="log">
+                  <div className="overflow-auto">
+                    {logs.logs.map((log, i) => (
+                      <div key={i} className="px-2 py-0.5 overflow-hidden">
+                        {log}
+                      </div>
+                    ))}
+                  </div>
+                </TabsContent>
+                <TabsContent value="mods">
+                  {modifiersStore.modifiers.map((mod) => (
+                    <pre key={mod.rtid}>{JSON.stringify(mod)}</pre>
+                  ))}
+                </TabsContent>
+              </div>
+            </div>
           </Tabs>
         </div>
       </div>

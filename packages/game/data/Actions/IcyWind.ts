@@ -6,8 +6,9 @@ import {
   Id,
   Unit,
 } from '../../types'
-import { Identity, SpeedOffsetParent } from '../Modifiers'
-import { SetLastUsedAction } from '../Modifiers/system'
+import { SpeedOffsetParent } from '../Modifiers'
+import { Identity, SetLastUsedAction } from '../Mutations'
+import { GetUnits } from '../Queries'
 
 export const IcyWindId = ActionId()
 export class IcyWind extends Action {
@@ -22,10 +23,10 @@ export class IcyWind extends Action {
     })
   }
 
-  targets = (unit: Unit, ctx: GameContext): boolean => {
-    return super.targets(unit, ctx) && unit.teamId !== this.teamId
-  }
-
+  targets = new GetUnits({
+    notTeamId: this.teamId,
+    isActive: true,
+  })
   threshold = (source: Unit): number | undefined => undefined
   critical = (source: Unit): number | undefined => undefined
 
@@ -41,7 +42,7 @@ export class IcyWind extends Action {
           actionId: this.id,
         }),
       ],
-      modifiers: targets.map(
+      addedModifiers: targets.map(
         (target) =>
           new SpeedOffsetParent({
             sourceId: source.id,

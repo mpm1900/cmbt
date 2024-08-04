@@ -14,8 +14,9 @@ import {
   parseSuccess,
 } from '../../utils'
 import { modifyRenderContext } from '../../utils/modifyRenderContext'
-import { DamageParent, SetRechargingParent } from '../Modifiers'
-import { ReduceFocusParent } from '../Modifiers/costs'
+import { SetRechargingParent } from '../Modifiers'
+import { DamageParent, ReduceFocusParent } from '../Mutations'
+import { GetUnits } from '../Queries'
 
 export const HyperBeamId = ActionId()
 export class HyperBeam extends Action {
@@ -27,6 +28,7 @@ export class HyperBeam extends Action {
       teamId,
       cost: new ReduceFocusParent({
         sourceId: sourceId,
+        parentId: sourceId,
         offset: 30,
       }),
       attackType: 'magic',
@@ -37,10 +39,10 @@ export class HyperBeam extends Action {
     return source.values.focus >= 30
   }
 
-  targets = (unit: Unit, ctx: GameContext): boolean => {
-    return super.targets(unit, ctx) && unit.teamId !== this.teamId
-  }
-
+  targets = new GetUnits({
+    notTeamId: this.teamId,
+    isActive: true,
+  })
   threshold = (source: Unit): number | undefined => 95 + source.stats.accuracy
   critical = (source: Unit): number | undefined => 5
 
@@ -74,7 +76,7 @@ export class HyperBeam extends Action {
               damage,
             })
           }),
-        modifiers: [
+        addedModifiers: [
           new SetRechargingParent({
             sourceId: source.id,
             parentId: source.id,

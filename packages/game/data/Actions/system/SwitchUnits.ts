@@ -7,7 +7,12 @@ import {
   Unit,
 } from '../../../types'
 import { getModifiersFromUnit, isUnitAliveCtx } from '../../../utils'
-import { SetIsActiveParent, Identity } from '../../Modifiers'
+import {
+  AddModifiersToParent,
+  Identity,
+  SetIsActiveParent,
+} from '../../Mutations'
+import { GetUnits } from '../../Queries'
 
 export const SwitchUnitId = ActionId()
 export class SwitchUnit extends Action {
@@ -18,20 +23,16 @@ export class SwitchUnit extends Action {
       sourceId,
       teamId,
       priority: 2,
-      cost: new Identity({}),
+      cost: new Identity(),
       attackType: 'physical',
     })
   }
 
-  targets = (unit: Unit, ctx: GameContext): boolean => {
-    return (
-      unit.id !== this.sourceId &&
-      unit.teamId === this.teamId &&
-      unit.flags.isActive === false &&
-      isUnitAliveCtx(unit.id, ctx)
-    )
-  }
-
+  targets = new GetUnits({
+    teamId: this.teamId,
+    isActive: false,
+    isAlive: true,
+  })
   threshold = (source: Unit): number | undefined => undefined
   critical = (source: Unit): number | undefined => undefined
 
@@ -53,8 +54,15 @@ export class SwitchUnit extends Action {
           parentId: target.id,
           isActive: true,
         }),
+        new AddModifiersToParent({
+          sourceId: source.id,
+          parentId: source.id,
+          modifiers: ctx.modifiers.filter(
+            (m) => m.parentId === source.id && m.persist
+          ),
+        }),
       ],
-      modifiers: getModifiersFromUnit(target),
+      addedModifiers: getModifiersFromUnit(target),
       addedUnits: [target],
       updateModifiers: (modifiers) => {
         return (

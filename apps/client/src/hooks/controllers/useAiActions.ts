@@ -23,11 +23,10 @@ export function useAiActions() {
   const status = useTurn((t) => t.turn.status)
 
   useEffect(() => {
-    return
     if (status === 'waiting-for-input' && queue.length === 0) {
       const units = ctx.units.map((u) => applyModifiers(u, ctx).unit)
       const aiUnits = getActionableUnits(units).filter((u) => u.teamId !== user)
-      aiUnits.forEach((unit) => {
+      const aiActions = aiUnits.map((unit) => {
         const aiActions = unit.actions
           .filter((a) => a.checkCost(unit))
           .map((action) => {
@@ -36,13 +35,15 @@ export function useAiActions() {
           .sort((a, b) => b.weight - a.weight)
 
         const bestAiAction = aiActions[0]
-        // console.log('pushing action', bestAiAction)
-        fns.pushAction({
-          id: nanoid(),
-          action: bestAiAction.action,
-          targetIds: bestAiAction.targetIds,
-        })
+        return bestAiAction
       })
+      fns.pushAction(
+        ...aiActions.map((aiAction) => ({
+          id: nanoid(),
+          action: aiAction.action,
+          targetIds: aiAction.targetIds,
+        }))
+      )
     }
   }, [status, queue.length])
 

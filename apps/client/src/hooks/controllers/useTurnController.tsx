@@ -31,6 +31,7 @@ export function useTurnController() {
   function nextAction() {
     setTimeout(
       () => {
+        console.log('dequeue')
         queue.dequeue()
       },
       GAME_SPEED * 2 * (active ? 1 : 0)
@@ -38,23 +39,25 @@ export function useTurnController() {
   }
 
   useEffect(() => {
-    if (active) {
-      setTimeout(() => {
-        ctx = fns.commitResult(active, ctx, { enableLog: true })
+    if (turn.status === 'running') {
+      if (active) {
+        setTimeout(() => {
+          ctx = fns.commitResult(active, ctx, { enableLog: true })
 
-        const deadActiveUnits = ctx.units.filter(
-          (u) => u.flags.isActive && !isUnitAliveCtx(u.id, ctx)
-        )
-        setTimeout(
-          () => {
-            ctx = fns.cleanupResult(ctx)
-            nextAction()
-          },
-          GAME_SPEED * 2 * (deadActiveUnits.length > 0 ? 1 : 0)
-        )
-      }, GAME_SPEED)
-    } else {
-      nextAction()
+          const deadActiveUnits = ctx.units.filter(
+            (u) => u.flags.isActive && !isUnitAliveCtx(u.id, ctx)
+          )
+          setTimeout(
+            () => {
+              ctx = fns.cleanupResult(ctx)
+              nextAction()
+            },
+            GAME_SPEED * 2 * (deadActiveUnits.length > 0 ? 1 : 0)
+          )
+        }, GAME_SPEED)
+      } else {
+        nextAction()
+      }
     }
   }, [turn.results.length])
 }

@@ -41,7 +41,7 @@ export type Unit = {
   values: Values
   flags: Flags
   registry: Registry
-  modifiers(): Modifier[] // unused, undercooked
+  modifiers(): Modifier[]
   actions: Action[]
   metadata: UnitMetadata
 }

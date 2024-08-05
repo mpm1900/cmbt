@@ -11,7 +11,7 @@ export function handleNextAction(
   ctx: GameContext,
   commitResult: CommitResults,
   handleResult: (result: ActionResult | undefined, queueLength: number) => void,
-  handleNext: () => void
+  handleNext?: () => void
 ) {
   queue.sort(ctx)
   const sorted = queue.queue.sort(queueComparator(ctx))
@@ -30,5 +30,5 @@ export function handleNextAction(
     return handleResult(undefined, sorted.length)
   }
 
-  return handleNext()
+  return handleNext && handleNext()
 }

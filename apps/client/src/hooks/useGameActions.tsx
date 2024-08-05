@@ -3,6 +3,7 @@ import {
   ActionsQueueItem,
   GameContext,
   Modifier,
+  Trigger,
   TriggerEvent,
   Unit,
 } from '@repo/game/types'

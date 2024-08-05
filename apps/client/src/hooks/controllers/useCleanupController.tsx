@@ -15,7 +15,7 @@ export function useCleanupController() {
   useEffect(() => {
     if (status === 'cleanup') {
       const teams = getTeamsWithSelectionRequired(ctx)
-      if (queue.queue.length === teams.length) {
+      if (queue.queue.length === teams.length && teams.length > 0) {
         queue = queue.setQueue((items) => [
           {
             id: nanoid(),
@@ -23,22 +23,14 @@ export function useCleanupController() {
             targetIds: items.flatMap((i) => i.targetIds),
           },
         ])
-        handleNextAction(
-          'cleanup',
-          queue,
-          ctx,
-          fns.commitResult,
-          (result) => {
-            if (result) {
-              ctx = fns.commitResult(result, ctx, { enableLog: true })
-              ctx = fns.cleanupResult(ctx)
-              fns.cleanup(true, ctx)
-            }
-          },
-          () => {
+        handleNextAction('cleanup', queue, ctx, fns.commitResult, (result) => {
+          if (result) {
+            ctx = fns.commitResult(result, ctx, { enableLog: true })
+            ctx = fns.cleanupResult(ctx)
+            queue.setQueue(() => [])
             fns.cleanup(true, ctx)
           }
-        )
+        })
       }
     }
   }, [status, queue.queue.length])

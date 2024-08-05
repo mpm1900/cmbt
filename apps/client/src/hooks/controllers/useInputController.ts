@@ -21,7 +21,6 @@ export function useInputController() {
       const actionableUnits = getActionableUnitsCtx(ctx)
 
       const checkLength = actionableUnits.length
-      console.log(queue.length, checkLength)
       if (queue.length === checkLength && queue.length > 0) {
         startTurn()
       }

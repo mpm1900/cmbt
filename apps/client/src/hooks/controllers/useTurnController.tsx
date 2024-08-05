@@ -31,7 +31,6 @@ export function useTurnController() {
   function nextAction() {
     setTimeout(
       () => {
-        console.log('dequeue')
         queue.dequeue()
       },
       GAME_SPEED * 2 * (active ? 1 : 0)

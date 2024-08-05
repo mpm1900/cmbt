@@ -1,5 +1,5 @@
 import {
-  GameContext,
+  CombatContext,
   Mutation,
   MutationId,
   MutationProps,
@@ -24,7 +24,7 @@ export class DamageAll extends Mutation {
     }
   }
 
-  filter = (unit: Unit, ctx: GameContext): boolean => {
+  filter = (unit: Unit, ctx: CombatContext): boolean => {
     return super.filter(unit, ctx)
   }
 }

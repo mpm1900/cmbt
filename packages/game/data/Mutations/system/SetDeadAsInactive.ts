@@ -1,5 +1,5 @@
 import {
-  GameContext,
+  CombatContext,
   Mutation,
   MutationId,
   MutationProps,
@@ -22,7 +22,7 @@ export class SetDeadAsInactive extends Mutation {
     }
   }
 
-  filter = (unit: Unit, ctx: GameContext): boolean => {
+  filter = (unit: Unit, ctx: CombatContext): boolean => {
     const base = unit.flags.isActive
     return base && !isUnitAliveCtx(unit.id, ctx)
   }

@@ -1,6 +1,6 @@
 import { ActionRenderers } from '@/renderers'
 import { Action } from '@repo/game/types'
-import { Separator } from './ui/separator'
+import { Separator } from '../ui/separator'
 
 export type UnitActionDetailsProps = {
   action: Action

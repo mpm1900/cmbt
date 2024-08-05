@@ -1,6 +1,6 @@
-import { useGameContext } from '@/hooks'
+import { useCombatContext } from '@/hooks'
 import { Id } from '@repo/game/types'
-import { Badge } from './ui/badge'
+import { Badge } from '../ui/badge'
 import { applyModifiers, isUnitAlive } from '@repo/game/utils'
 import { cn } from '@/lib/utils'
 
@@ -11,7 +11,7 @@ export type TeamBenchProps = {
 
 export function TeamBench(props: TeamBenchProps) {
   const { teamId, className } = props
-  const ctx = useGameContext()
+  const ctx = useCombatContext()
 
   return (
     <div className={cn('p-2 space-x-2 flex', className)}>

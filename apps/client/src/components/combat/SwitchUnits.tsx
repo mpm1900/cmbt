@@ -1,11 +1,17 @@
-import { useGameContext } from '../hooks'
-import { Button } from './ui/button'
-import { Badge } from './ui/badge'
+import { useCombatContext } from '../../hooks'
+import { Button } from '../ui/button'
+import { Badge } from '../ui/badge'
 import { applyModifiers } from '@repo/game/utils'
 import { Action, Unit } from '@repo/game/types'
 import { useActions } from '@/hooks/state'
 import { SwitchUnitId } from '@repo/game/data'
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from './ui/card'
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '../ui/card'
 import { useState } from 'react'
 
 export type SwitchUnitsProps = {
@@ -16,7 +22,7 @@ export type SwitchUnitsProps = {
 
 export function SwitchUnits(props: SwitchUnitsProps) {
   const { action, onClick, onConfirm } = props
-  const ctx = useGameContext()
+  const ctx = useCombatContext()
   const queue = useActions((s) => s.queue)
   const queuedSwitchActions = queue.filter(
     (i) => i.action.id === SwitchUnitId && action.teamId === ctx.user

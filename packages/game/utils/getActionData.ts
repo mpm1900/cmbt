@@ -1,5 +1,5 @@
 import { SetLastUsedAction } from '../data'
-import { Action, GameContext, Unit } from '../types'
+import { Action, CombatContext, Unit } from '../types'
 import { applyModifiers } from './applyModifiers'
 import { rollThreshold, RollAccuracyResult } from './rollThreshold'
 
@@ -12,7 +12,7 @@ export type ActionRenderData = {
 export function getActionData(
   source: Unit,
   action: Action,
-  ctx: GameContext
+  ctx: CombatContext
 ): ActionRenderData {
   const modifiedSource = applyModifiers(source, ctx).unit
   const accuracyRoll = rollThreshold(modifiedSource, action)

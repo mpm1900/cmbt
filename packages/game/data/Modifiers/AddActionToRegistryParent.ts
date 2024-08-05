@@ -1,5 +1,5 @@
 import {
-  GameContext,
+  CombatContext,
   Modifier,
   ModifierId,
   ModifierProps,
@@ -27,6 +27,6 @@ export class AddActionToRegistryParent extends Modifier {
     }
   }
 
-  filter = (unit: Unit, ctx: GameContext): boolean =>
+  filter = (unit: Unit, ctx: CombatContext): boolean =>
     super.filter(unit, ctx) && unit.id === this.parentId
 }

@@ -4,7 +4,7 @@ import {
   ActionId,
   ActionResult,
   Damage,
-  GameContext,
+  CombatContext,
   Id,
   Unit,
 } from '../../types'
@@ -30,7 +30,7 @@ export class FurySwipes extends Action {
     })
   }
 
-  expandTargets = (targets: Unit[], ctx: GameContext): Unit[] => {
+  expandTargets = (targets: Unit[], ctx: CombatContext): Unit[] => {
     return targets.reduce<Unit[]>((result, current) => {
       const count = random.int(4, 6)
       return [...result, ...Array(count).fill(current)]
@@ -42,7 +42,11 @@ export class FurySwipes extends Action {
   }
   critical = (source: Unit): number | undefined => undefined
 
-  resolve = (source: Unit, targets: Unit[], ctx: GameContext): ActionResult => {
+  resolve = (
+    source: Unit,
+    targets: Unit[],
+    ctx: CombatContext
+  ): ActionResult => {
     const data = getActionData(source, this, ctx)
     return {
       action: this,

@@ -1,5 +1,5 @@
 import {
-  GameContext,
+  CombatContext,
   Modifier,
   Mutation,
   MutationId,
@@ -23,7 +23,7 @@ export class AddModifiersToParent extends Mutation {
     }
   }
 
-  filter = (unit: Unit, ctx: GameContext): boolean => {
+  filter = (unit: Unit, ctx: CombatContext): boolean => {
     return unit.id === this.parentId
   }
 }

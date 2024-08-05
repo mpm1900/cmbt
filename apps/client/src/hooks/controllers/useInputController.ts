@@ -1,14 +1,14 @@
 import { useEffect } from 'react'
 import { getActionableUnitsCtx } from '@repo/game/utils'
 import { useActions, useTurn } from '../state'
-import { useGameContext } from '../useGameContext'
-import { useGameActions } from '../useGameActions'
+import { useCombatContext } from '../useCombatContext'
+import { useCombatActions } from '../useCombatActions'
 
 export function useInputController() {
   const { queue, sort } = useActions()
   const { turn, setStatus } = useTurn()
-  const fns = useGameActions()
-  let ctx = useGameContext()
+  const fns = useCombatActions()
+  let ctx = useCombatContext()
 
   function startTurn() {
     setStatus('running')

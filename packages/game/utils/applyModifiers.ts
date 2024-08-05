@@ -1,4 +1,4 @@
-import { GameContext, Modifier, Trigger, Unit } from '../types'
+import { CombatContext, Modifier, Trigger, Unit } from '../types'
 import { Mutation } from '../types/Mutation'
 
 export type ApplyModifiersResult = {
@@ -16,7 +16,7 @@ export function applyMutation(unit: Unit, mutation: Mutation): Unit {
 
 export function applyModifiers(
   unit: Unit,
-  ctx: GameContext
+  ctx: CombatContext
 ): ApplyModifiersResult {
   if (unit.metadata.modified) {
     console.log('double modified', unit.name)

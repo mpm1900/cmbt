@@ -1,4 +1,4 @@
-import { GameContext, Unit } from '../types'
+import { CombatContext, Unit } from '../types'
 import { applyModifiers } from './applyModifiers'
 
 function canAct(unit: Unit) {
@@ -9,6 +9,6 @@ export function getActionableUnits(units: Unit[]) {
   return units.filter((u) => canAct(u))
 }
 
-export function getActionableUnitsCtx(ctx: GameContext) {
+export function getActionableUnitsCtx(ctx: CombatContext) {
   return getActionableUnits(ctx.units.map((u) => applyModifiers(u, ctx).unit))
 }

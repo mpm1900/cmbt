@@ -3,7 +3,7 @@ import {
   ActionId,
   ActionRenderOptions,
   ActionResult,
-  GameContext,
+  CombatContext,
   Id,
   Unit,
 } from '../../types'
@@ -36,7 +36,7 @@ export class Fireball extends Action {
     this.damage = damage
   }
 
-  expandTargets = (targets: Unit[], ctx: GameContext): Unit[] => {
+  expandTargets = (targets: Unit[], ctx: CombatContext): Unit[] => {
     const teamIds = targets.map((t) => t.teamId)
     return ctx.units.filter(
       (u) => u.flags.isActive && teamIds.includes(u.teamId)
@@ -51,7 +51,7 @@ export class Fireball extends Action {
   resolve = (
     source: Unit,
     targets: Unit[],
-    ctx: GameContext,
+    ctx: CombatContext,
     options: ActionRenderOptions
   ): ActionResult => {
     ctx = modifyRenderContext(options, ctx)

@@ -2,7 +2,7 @@ import {
   Action,
   ActionId,
   ActionResult,
-  GameContext,
+  CombatContext,
   Id,
   Unit,
 } from '../../types'
@@ -27,7 +27,11 @@ export class Sandstorm extends Action {
   threshold = (source: Unit): number | undefined => undefined
   critical = (source: Unit): number | undefined => undefined
 
-  resolve = (source: Unit, targets: Unit[], ctx: GameContext): ActionResult => {
+  resolve = (
+    source: Unit,
+    targets: Unit[],
+    ctx: CombatContext
+  ): ActionResult => {
     return {
       action: this,
       source,

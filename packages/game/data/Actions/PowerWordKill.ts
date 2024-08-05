@@ -3,7 +3,7 @@ import {
   ActionId,
   ActionRenderOptions,
   ActionResult,
-  GameContext,
+  CombatContext,
   Id,
   Unit,
 } from '../../types'
@@ -29,14 +29,14 @@ export class PowerWordKill extends Action {
   }
 
   threshold = (source: Unit): number | undefined => {
-    return 90 + source.stats.accuracy
+    return 40 + source.stats.accuracy
   }
   critical = (source: Unit): number | undefined => undefined
 
   resolve = (
     source: Unit,
     targets: Unit[],
-    ctx: GameContext,
+    ctx: CombatContext,
     options?: ActionRenderOptions
   ): ActionResult => {
     if (options?.disableLogging) {

@@ -1,9 +1,9 @@
 import { LogSecondary, LogUnit } from '@/components/ui/log'
 import { SetLastUsedActionId } from '@repo/game/data'
-import { GameContext, Mutation, Unit } from '@repo/game/types'
+import { CombatContext, Mutation, Unit } from '@repo/game/types'
 import { applyMutation, ZERO_UNIT } from '@repo/game/utils'
 
-export function logMutations(mutations: Mutation[], ctx: GameContext) {
+export function logMutations(mutations: Mutation[], ctx: CombatContext) {
   mutations
     .filter((m) => m.id !== SetLastUsedActionId)
     .forEach((mutation) => {
@@ -18,7 +18,7 @@ export function logMutations(mutations: Mutation[], ctx: GameContext) {
 export function logMutationDiffs(
   parent: Unit | undefined,
   diffs: Unit,
-  ctx: GameContext
+  ctx: CombatContext
 ) {
   const name = parent?.name ?? 'Multiple Units'
   if (diffs.values.damage > 0)

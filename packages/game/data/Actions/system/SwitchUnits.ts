@@ -2,7 +2,7 @@ import {
   Action,
   ActionId,
   ActionResult,
-  GameContext,
+  CombatContext,
   Id,
   Unit,
 } from '../../../types'
@@ -35,7 +35,11 @@ export class SwitchUnit extends Action {
   threshold = (source: Unit): number | undefined => undefined
   critical = (source: Unit): number | undefined => undefined
 
-  resolve = (source: Unit, targets: Unit[], ctx: GameContext): ActionResult => {
+  resolve = (
+    source: Unit,
+    targets: Unit[],
+    ctx: CombatContext
+  ): ActionResult => {
     const target = targets[0]
     if (!target) throw new Error('No target for SwitchUnit action.')
     return {

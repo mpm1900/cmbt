@@ -3,7 +3,7 @@ import {
   ActionId,
   ActionResult,
   AiAction,
-  GameContext,
+  CombatContext,
   Id,
   Unit,
 } from '../../../types'
@@ -31,7 +31,7 @@ export class SetIsActive extends Action {
   threshold = (source: Unit): number | undefined => undefined
   critical = (source: Unit): number | undefined => undefined
 
-  getAiAction = (targets: Unit[], ctx: GameContext): AiAction => {
+  getAiAction = (targets: Unit[], ctx: CombatContext): AiAction => {
     const modified = targets.map((target) => applyModifiers(target, ctx).unit)
     const remainingHealth = modified.map(
       (unit) => unit.stats.health - unit.values.damage
@@ -47,7 +47,7 @@ export class SetIsActive extends Action {
   resolve = (
     source: Unit | undefined,
     targets: Unit[],
-    ctx: GameContext
+    ctx: CombatContext
   ): ActionResult => {
     return {
       action: this,

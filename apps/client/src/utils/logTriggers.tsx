@@ -1,12 +1,12 @@
 import { LogUnit } from '@/components/ui/log'
 import { ModifierRenderers } from '@/renderers'
 import { Separator } from '@radix-ui/react-separator'
-import { GameContext, Trigger, TriggerEvent, Unit } from '@repo/game/types'
+import { CombatContext, Trigger, TriggerEvent, Unit } from '@repo/game/types'
 
 export function logTriggers(
   triggers: Trigger[],
   event: TriggerEvent,
-  ctx: GameContext
+  ctx: CombatContext
 ) {
   if (triggers.length > 0) {
     ctx.log(

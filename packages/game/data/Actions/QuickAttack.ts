@@ -2,7 +2,7 @@ import {
   Action,
   ActionId,
   ActionResult,
-  GameContext,
+  CombatContext,
   Id,
   Unit,
 } from '../../types'
@@ -33,7 +33,11 @@ export class QuickAttack extends Action {
   }
   critical = (source: Unit): number | undefined => undefined
 
-  resolve = (source: Unit, targets: Unit[], ctx: GameContext): ActionResult => {
+  resolve = (
+    source: Unit,
+    targets: Unit[],
+    ctx: CombatContext
+  ): ActionResult => {
     const data = getActionData(source, this, ctx)
 
     return {

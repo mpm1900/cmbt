@@ -1,13 +1,13 @@
 import {
   ActionResult,
   ActionsQueueItem,
-  GameContext,
+  CombatContext,
   Unit,
 } from '@repo/game/types'
 
 export function getResultFromActionItem(
   item: ActionsQueueItem,
-  ctx: GameContext
+  ctx: CombatContext
 ): ActionResult {
   const { action, targetIds } = item
   const targets = ctx.units.filter((u) => targetIds.includes(u.id))

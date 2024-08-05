@@ -1,5 +1,5 @@
 import {
-  GameContext,
+  CombatContext,
   Modifier,
   Trigger,
   TriggerId,
@@ -40,7 +40,7 @@ export class PowerDownAllOtherOnUnitEnter extends Trigger {
     }
   }
 
-  filter = (unit: Unit, ctx: GameContext): boolean => {
+  filter = (unit: Unit, ctx: CombatContext): boolean => {
     return super.filter(unit, ctx)
   }
 }

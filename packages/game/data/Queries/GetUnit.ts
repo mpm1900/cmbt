@@ -1,4 +1,4 @@
-import { GameContext, Id, Query, Unit } from '../../types'
+import { CombatContext, Id, Query, Unit } from '../../types'
 import { applyModifiers } from '../../utils'
 
 export type GetUnitProps = {
@@ -16,7 +16,7 @@ export class GetUnit extends Query<Unit | undefined> {
     this.modified = props.modified || false
   }
 
-  resolve(ctx: GameContext) {
+  resolve(ctx: CombatContext) {
     const unit = ctx.units.find((u) => u.id === this.unitId)
     if (unit && this.modified) {
       return applyModifiers(unit, ctx).unit

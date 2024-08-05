@@ -2,7 +2,7 @@ import { nanoid } from 'nanoid'
 import {
   ActionsQueueItem,
   AttackTypes,
-  GameContext,
+  CombatContext,
   Id,
   Modifier,
   Query,
@@ -69,12 +69,12 @@ export abstract class Action {
   abstract resolve(
     source: Unit,
     targets: Unit[],
-    ctx: GameContext,
+    ctx: CombatContext,
     options?: ActionRenderOptions
   ): ActionResult
 
   // this only works for damage actions
-  getAiAction = (targets: Unit[], ctx: GameContext): AiAction => {
+  getAiAction = (targets: Unit[], ctx: CombatContext): AiAction => {
     const source = ctx.units.find((u) => u.id === this.sourceId) as Unit
     const modifiedSource = applyModifiers(source, ctx).unit
     const unModifiedTargets = ctx.units.filter(
@@ -106,7 +106,7 @@ export abstract class Action {
     this.maxTargetCount = props.maxTargetCount
   }
 
-  getDamage(source: Unit, targets: Unit[], ctx: GameContext): number[] {
+  getDamage(source: Unit, targets: Unit[], ctx: CombatContext): number[] {
     const { mutations = [] } = this.resolve(source, targets, ctx, {
       bypassAccuracyRolls: true,
       disableLogging: true,

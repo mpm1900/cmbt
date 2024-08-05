@@ -1,9 +1,9 @@
-import { Button } from '../ui/button'
+import { Button } from '../../ui/button'
 import { StatDebug } from '../StatDebug'
 import { ActionsQueueItem, Unit } from '@repo/game/types'
 import { RequireTurnStatus } from '../RequireTurnStatus'
 import { applyModifiers } from '@repo/game/utils'
-import { useGameContext } from '@/hooks'
+import { useCombatContext } from '@/hooks'
 import { ActionRenderers } from '@/renderers'
 
 export type UnitStatsProps = {
@@ -14,7 +14,7 @@ export type UnitStatsProps = {
 
 export function UnitStats(props: UnitStatsProps) {
   const { stagedItem, onClearClick } = props
-  const ctx = useGameContext()
+  const ctx = useCombatContext()
   const { unit } = applyModifiers(props.unit, ctx)
   const remainingHealth = Math.max(unit.stats.health - unit.values.damage, 0)
 

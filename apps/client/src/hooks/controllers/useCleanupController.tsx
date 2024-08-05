@@ -1,16 +1,16 @@
 import { useEffect } from 'react'
 import { useCleanup, useTurn } from '../state'
-import { useGameContext } from '../useGameContext'
-import { useGameActions } from '../useGameActions'
+import { useCombatContext } from '../useCombatContext'
+import { useCombatActions } from '../useCombatActions'
 import { getTeamsWithSelectionRequired, handleNextAction } from '@/utils'
 import { nanoid } from 'nanoid/non-secure'
 import { SetIsActive } from '@repo/game/data'
 
 export function useCleanupController() {
   const status = useTurn((s) => s.turn.status)
-  const fns = useGameActions()
+  const fns = useCombatActions()
   let queue = useCleanup()
-  let ctx = useGameContext()
+  let ctx = useCombatContext()
 
   useEffect(() => {
     if (status === 'cleanup') {

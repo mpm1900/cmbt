@@ -1,6 +1,6 @@
 import { Action, Unit } from '@repo/game/types'
-import { useGameContext } from '../hooks'
-import { Button } from './ui/button'
+import { useCombatContext } from '../../hooks'
+import { Button } from '../ui/button'
 
 export type UnitActionTargetsProps = {
   action: Action
@@ -11,7 +11,7 @@ export type UnitActionTargetsProps = {
 
 export function ActionTargets(props: UnitActionTargetsProps) {
   const { action, targets, onConfirmClick, onTargetClick } = props
-  const ctx = useGameContext()
+  const ctx = useCombatContext()
   const possibleTargets = action.targets.resolve(ctx)
 
   return (

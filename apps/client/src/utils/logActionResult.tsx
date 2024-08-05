@@ -1,11 +1,11 @@
 import { LogActionName, LogUnit } from '@/components/ui/log'
 import { ActionRenderers } from '@/renderers'
-import { Action, ActionResult, GameContext } from '@repo/game/types'
+import { Action, ActionResult, CombatContext } from '@repo/game/types'
 
 export function logActionResult(
   action: Action,
   result: ActionResult,
-  ctx: GameContext
+  ctx: CombatContext
 ) {
   const { source, targets } = result
   const renderer = ActionRenderers[action.id]

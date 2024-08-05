@@ -1,6 +1,6 @@
 import { CommitResults } from '@/hooks'
 import { ActionStore, queueComparator, TurnStatus } from '@/hooks/state'
-import { ActionResult, GameContext } from '@repo/game/types'
+import { ActionResult, CombatContext } from '@repo/game/types'
 import { isUnitAliveCtx } from '@repo/game/utils'
 import { getResultFromActionItem } from './getResultFromActionItem'
 import { logActionResult } from './logActionResult'
@@ -8,7 +8,7 @@ import { logActionResult } from './logActionResult'
 export function handleNextAction(
   status: TurnStatus,
   queue: ActionStore,
-  ctx: GameContext,
+  ctx: CombatContext,
   commitResult: CommitResults,
   handleResult: (result: ActionResult | undefined, queueLength: number) => void,
   handleNext?: () => void

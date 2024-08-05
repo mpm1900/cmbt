@@ -1,13 +1,13 @@
 import { Unit } from '@repo/game/types'
-import { useActions, useTurn } from '../../hooks/state'
+import { useActions, useTurn } from '../../../hooks/state'
 import { applyModifiers } from '@repo/game/utils'
-import { useGameContext } from '../../hooks'
-import { useActiveUiUnit } from '../../hooks/state'
-import { CardContent } from '../ui/card'
+import { useCombatContext } from '../../../hooks'
+import { useActiveUiUnit } from '../../../hooks/state'
+import { CardContent } from '../../ui/card'
 import { cn } from '@/lib/utils'
 import { UnitStats } from './UnitStats'
-import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover'
-import { Button } from '../ui/button'
+import { Popover, PopoverContent, PopoverTrigger } from '../../ui/popover'
+import { Button } from '../../ui/button'
 import { FaSearch } from 'react-icons/fa'
 import { UnitModifiers } from './UnitModifiers'
 import { UnitBars } from './UnitBars'
@@ -19,7 +19,7 @@ export type UnitDebugProps = {
 }
 
 export function UnitCard(props: UnitDebugProps) {
-  const ctx = useGameContext()
+  const ctx = useCombatContext()
   const { result, status } = useTurn((s) => ({
     status: s.turn.status,
     result: s.turn.results[s.turn.results.length - 1],

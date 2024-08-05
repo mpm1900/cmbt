@@ -1,11 +1,11 @@
-import { GameContext, Id, Query, Unit } from '../../types'
+import { CombatContext, Id, Query, Unit } from '../../types'
 
 export class EmptyArray extends Query<Unit[]> {
   constructor() {
     super()
   }
 
-  resolve(ctx: GameContext) {
+  resolve(ctx: CombatContext) {
     return []
   }
 }

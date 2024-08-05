@@ -19,7 +19,7 @@ import {
   SetIsActiveId,
   PotionId,
 } from '@repo/game/data'
-import { Action, GameContext, Unit } from '@repo/game/types'
+import { Action, CombatContext, Unit } from '@repo/game/types'
 import { Fragment, ReactNode } from 'react'
 
 export type ActionRenderer = {
@@ -33,7 +33,7 @@ export type ActionRenderer = {
     action: Action,
     source: Unit | undefined,
     targets: Unit[],
-    ctx: GameContext
+    ctx: CombatContext
   ) => ReactNode
 }
 

@@ -1,7 +1,7 @@
 import { ModifierRenderers } from '@/renderers'
 import { ModifierIcon } from '../ModifierIcon'
 import { applyModifiers } from '@repo/game/utils'
-import { useGameContext } from '@/hooks'
+import { useCombatContext } from '@/hooks'
 import { Unit } from '@repo/game/types'
 
 export type UnitModifiersProps = {
@@ -9,7 +9,7 @@ export type UnitModifiersProps = {
 }
 
 export function UnitModifiers(props: UnitModifiersProps) {
-  const ctx = useGameContext()
+  const ctx = useCombatContext()
   const { appliedModifiers, registeredTriggers } = applyModifiers(
     props.unit,
     ctx

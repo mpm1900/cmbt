@@ -1,5 +1,5 @@
 import {
-  GameContext,
+  CombatContext,
   Modifier,
   Trigger,
   TriggerId,
@@ -30,7 +30,7 @@ export class SpeedDownAllOtherStaticOnUnitEnter extends Trigger {
 
   resolve = (unit: Unit): Partial<Unit> => unit
 
-  filter = (unit: Unit, ctx: GameContext): boolean => {
+  filter = (unit: Unit, ctx: CombatContext): boolean => {
     return super.filter(unit, ctx)
   }
 }

@@ -1,5 +1,5 @@
 import {
-  GameContext,
+  CombatContext,
   Mutation,
   MutationId,
   MutationProps,
@@ -28,7 +28,7 @@ export class SetIsActiveParent extends Mutation {
     }
   }
 
-  filter = (unit: Unit, ctx: GameContext): boolean => {
+  filter = (unit: Unit, ctx: CombatContext): boolean => {
     return unit.id === this.parentId
   }
 }

@@ -1,5 +1,5 @@
 import {
-  GameContext,
+  CombatContext,
   Modifier,
   ModifierId,
   ModifierProps,
@@ -24,7 +24,7 @@ export class AccuracyDownParent extends Modifier {
     }
   }
 
-  filter = (unit: Unit, ctx: GameContext): boolean => {
+  filter = (unit: Unit, ctx: CombatContext): boolean => {
     return super.filter(unit, ctx) && unit.id === this.parentId
   }
 }

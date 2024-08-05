@@ -1,5 +1,5 @@
 import {
-  GameContext,
+  CombatContext,
   Modifier,
   ModifierId,
   ModifierProps,
@@ -25,7 +25,7 @@ export class DefenseUpAll extends Modifier {
     }
   }
 
-  filter = (unit: Unit, ctx: GameContext): boolean => {
+  filter = (unit: Unit, ctx: CombatContext): boolean => {
     return super.filter(unit, ctx)
   }
 }

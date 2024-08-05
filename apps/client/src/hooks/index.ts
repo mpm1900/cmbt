@@ -1,3 +1,3 @@
-export * from './useGameActions'
-export * from './useGameContext'
+export * from './useCombatActions'
+export * from './useCombatContext'
 export * from './useScrollToBottom'

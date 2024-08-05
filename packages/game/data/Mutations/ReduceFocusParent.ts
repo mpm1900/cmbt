@@ -1,5 +1,5 @@
 import {
-  GameContext,
+  CombatContext,
   Modifier,
   Mutation,
   MutationId,
@@ -25,6 +25,6 @@ export class ReduceFocusParent extends Mutation {
     }
   }
 
-  filter = (unit: Unit, ctx: GameContext): boolean =>
+  filter = (unit: Unit, ctx: CombatContext): boolean =>
     super.filter(unit, ctx) && unit.id === this.parentId
 }

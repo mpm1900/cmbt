@@ -1,4 +1,4 @@
-import { GameContext, Id, Query, Unit } from '../../types'
+import { CombatContext, Id, Query, Unit } from '../../types'
 import { isUnitAliveCtx } from '../../utils'
 
 export type GetUnitsProps = {
@@ -22,7 +22,7 @@ export class GetUnits extends Query<Unit[]> {
     this.isAlive = props.isAlive
   }
 
-  resolve(ctx: GameContext) {
+  resolve(ctx: CombatContext) {
     return ctx.units.filter((unit) => {
       let value = true
       if (this.teamId !== undefined) {

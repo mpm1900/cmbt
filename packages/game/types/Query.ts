@@ -1,5 +1,5 @@
-import { GameContext } from '.'
+import { CombatContext } from '.'
 
 export abstract class Query<T = unknown> {
-  abstract resolve(ctx: GameContext): T
+  abstract resolve(ctx: CombatContext): T
 }

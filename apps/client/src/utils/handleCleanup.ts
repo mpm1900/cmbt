@@ -1,9 +1,9 @@
-import { GameContext } from '@repo/game/types'
+import { CombatContext } from '@repo/game/types'
 import { isUnitAliveCtx } from '@repo/game/utils'
 import { getTeamsWithSelectionRequired } from './getTeamsWithSelectionRequired'
 
 export function handleCleanup(
-  ctx: GameContext,
+  ctx: CombatContext,
   handleNext: () => void,
   handleCleanup: () => void,
   handleDone: () => void

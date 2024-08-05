@@ -1,9 +1,9 @@
 import { Action, Unit } from '@repo/game/types'
-import { Button } from './ui/button'
+import { Button } from '../ui/button'
 import { ActionRenderers } from '@/renderers'
-import { useGameContext } from '@/hooks'
+import { useCombatContext } from '@/hooks'
 import { applyModifiers } from '@repo/game/utils'
-import { Badge } from './ui/badge'
+import { Badge } from '../ui/badge'
 import { cn } from '@/lib/utils'
 
 export type ActionButtonProps = {
@@ -15,7 +15,7 @@ export type ActionButtonProps = {
 
 export function ActionButton(props: ActionButtonProps) {
   const { action, source, isActive, onClick } = props
-  const ctx = useGameContext()
+  const ctx = useCombatContext()
   const renderer = ActionRenderers[action.id]
   const modified = applyModifiers(source, ctx)
   const baseAccuracy = action.threshold(source)

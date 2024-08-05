@@ -1,20 +1,11 @@
 import {
   ActionResult,
   ActionsQueueItem,
-  GameContext,
-  Modifier,
-  Trigger,
+  CombatContext,
   TriggerEvent,
-  Unit,
 } from '@repo/game/types'
 import { getTriggersByEvent, isUnitAliveCtx } from '@repo/game/utils'
-import {
-  useActions,
-  useCleanup,
-  useModifiers,
-  useTurn,
-  useUnits,
-} from './state'
+import { useActions, useCleanup, useCombat, useTurn } from './state'
 import { logModifiers, logMutations } from '@/utils'
 import { logTriggers } from '@/utils/logTriggers'
 import { LogCritical, LogHeader } from '@/components/ui/log'
@@ -28,18 +19,17 @@ export type CommitResultOptions = {
 
 export type CommitResults = (
   result: ActionResult,
-  context: GameContext,
+  context: CombatContext,
   options?: CommitResultOptions
-) => GameContext
+) => CombatContext
 
-export function useGameActions() {
+export function useCombatActions() {
   const turnStore = useTurn()
-  const unitStore = useUnits()
-  const modifierStore = useModifiers()
+  const combat = useCombat()
   const actionsStore = useActions()
   const cleanupStore = useCleanup()
 
-  const cleanupResult = (context: GameContext): GameContext => {
+  const cleanupResult = (context: CombatContext): CombatContext => {
     // round cleanup
     const deadActiveUnits = context.units.filter(
       (u) => u.flags.isActive && !isUnitAliveCtx(u.id, context)
@@ -47,13 +37,13 @@ export function useGameActions() {
     deadActiveUnits.forEach((u) => {
       context.log(<LogCritical>{u.name} died.</LogCritical>)
     })
-    context.units = unitStore.mutate([new SetDeadAsInactive()], context)
+    context.units = combat.mutate([new SetDeadAsInactive()], context)
 
-    context.modifiers = modifierStore.removeWhere((modifier) => {
+    context.modifiers = combat.removeWhere((modifier) => {
       const parent = context.units.find((u) => u.id === modifier.parentId)
       return !!parent && !parent?.flags.isActive
     })
-    context.modifiers = modifierStore.removeZeroDurations()
+    context.modifiers = combat.removeZeroDurations()
     return context
   }
 
@@ -68,14 +58,14 @@ export function useGameActions() {
     logFailure(result, context)
     if (mutations?.length) {
       if (options?.enableLog) logMutations(mutations, context)
-      context.units = unitStore.mutate(mutations, context)
+      context.units = combat.mutate(mutations, context)
     }
     if (modifiers?.length) {
       if (options?.enableLog) logModifiers(modifiers, context)
-      context.modifiers = modifierStore.add(modifiers)
+      context.modifiers = combat.add(modifiers)
     }
     if (updateModifiers) {
-      context.modifiers = modifierStore.updateModifiers(updateModifiers)
+      context.modifiers = combat.updateModifiers(updateModifiers)
     }
     if (updateActionQueue) {
       actionsStore.setQueue(updateActionQueue)
@@ -87,7 +77,10 @@ export function useGameActions() {
     return context
   }
 
-  function runTriggers(event: TriggerEvent, context: GameContext): GameContext {
+  function runTriggers(
+    event: TriggerEvent,
+    context: CombatContext
+  ): CombatContext {
     const triggers = getTriggersByEvent(context.modifiers, event)
     const result: ActionResult = {
       addedModifiers: triggers
@@ -102,15 +95,16 @@ export function useGameActions() {
     logModifiers(result.addedModifiers ?? [], context)
     logMutations(result.mutations ?? [], context)
 
-    return commitResult(result, context)
+    context = commitResult(result, context)
+    return cleanupResult(context)
   }
 
   function decrementModifierDurations() {
-    modifierStore.decrementDurations()
-    return modifierStore.removeZeroDurations()
+    combat.decrementDurations()
+    return combat.removeZeroDurations()
   }
 
-  function nextTurn(runEndOfTurnTriggers: boolean, context: GameContext) {
+  function nextTurn(runEndOfTurnTriggers: boolean, context: CombatContext) {
     if (runEndOfTurnTriggers) {
       context = runTriggers('on Turn End', context)
       context.modifiers = decrementModifierDurations()
@@ -122,7 +116,7 @@ export function useGameActions() {
     }
   }
 
-  const cleanup = (runEndOfTurnTriggers: boolean, context: GameContext) => {
+  const cleanup = (runEndOfTurnTriggers: boolean, context: CombatContext) => {
     handleCleanup(
       context,
       () => nextTurn(runEndOfTurnTriggers, context),
@@ -138,7 +132,7 @@ export function useGameActions() {
     decrementModifierDurations,
     nextTurn,
     runTriggers,
-    removeZeroDurations: modifierStore.removeZeroDurations,
+    removeZeroDurations: combat.removeZeroDurations,
     pushAction: (...items: ActionsQueueItem[]) => {
       actionsStore.enqueue(...items)
     },

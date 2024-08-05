@@ -1,7 +1,7 @@
-import { Action, GameContext, Unit } from '../types'
+import { Action, CombatContext, Unit } from '../types'
 import { getPermutations } from './getPermutations'
 
-export function getBestAiAction(action: Action, ctx: GameContext) {
+export function getBestAiAction(action: Action, ctx: CombatContext) {
   const possibleTargets = action.targets.resolve(ctx)
   const targetSets = getPermutations(possibleTargets, action.maxTargetCount)
   const weightedSets = targetSets

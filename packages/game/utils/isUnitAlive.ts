@@ -1,5 +1,5 @@
 import { applyModifiers } from '.'
-import { GameContext, Id, Unit } from '../types'
+import { CombatContext, Id, Unit } from '../types'
 
 export function isUnitAlive(unit: Unit) {
   return unit.stats.health > unit.values.damage
@@ -7,7 +7,7 @@ export function isUnitAlive(unit: Unit) {
 
 export function isUnitAliveCtx(
   unitId: Id | undefined,
-  ctx: GameContext
+  ctx: CombatContext
 ): boolean {
   const unit = ctx.units.find((u) => u.id === unitId)
   if (!unit) return false

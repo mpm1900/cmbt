@@ -1,9 +1,9 @@
-import { ActionRenderOptions, GameContext } from '../types'
+import { ActionRenderOptions, CombatContext } from '../types'
 
 export function modifyRenderContext(
   options: ActionRenderOptions | undefined,
-  ctx: GameContext
-): GameContext {
+  ctx: CombatContext
+): CombatContext {
   return {
     ...ctx,
     log: options?.disableLogging ? () => {} : ctx.log,

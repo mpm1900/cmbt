@@ -1,5 +1,5 @@
 import {
-  GameContext,
+  CombatContext,
   Mutation,
   MutationId,
   MutationProps,
@@ -23,7 +23,7 @@ export class DamageTeam extends Mutation {
     }
   }
 
-  filter = (unit: Unit, ctx: GameContext): boolean => {
+  filter = (unit: Unit, ctx: CombatContext): boolean => {
     const parent = ctx.units.find((u) => u.id === this.parentId)
     return super.filter(unit, ctx) && unit.teamId === parent?.teamId
   }

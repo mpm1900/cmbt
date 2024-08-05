@@ -1,4 +1,4 @@
-import { ActionResult, GameContext, Unit } from '../../types'
+import { ActionResult, CombatContext, Unit } from '../../types'
 import { Item, ItemId, ItemProps } from '../../types/Item'
 import { DamageParent } from '../Mutations'
 import { GetUnits } from '../Queries'
@@ -18,7 +18,11 @@ export class Potion extends Item {
   threshold = (source: Unit): number | undefined => undefined
   critical = (source: Unit): number | undefined => undefined
 
-  resolve = (source: Unit, targets: Unit[], ctx: GameContext): ActionResult => {
+  resolve = (
+    source: Unit,
+    targets: Unit[],
+    ctx: CombatContext
+  ): ActionResult => {
     const target = targets[0]
     return {
       action: this,

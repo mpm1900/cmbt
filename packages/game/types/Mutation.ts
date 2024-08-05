@@ -1,5 +1,5 @@
 import { nanoid } from 'nanoid'
-import { Flags, GameContext, Id, Stats, Unit, Values } from '.'
+import { Flags, CombatContext, Id, Stats, Unit, Values } from '.'
 
 export const MutationId = () => `Mutation@${nanoid()}`
 
@@ -30,7 +30,7 @@ export abstract class Mutation {
     this.parentId = props.parentId
   }
 
-  filter(unit: Unit, ctx: GameContext): boolean {
+  filter(unit: Unit, ctx: CombatContext): boolean {
     const isImmune = unit.registry.modifiers.includes(this.id)
     const isActive = unit.flags.isActive
     return isActive && !isImmune

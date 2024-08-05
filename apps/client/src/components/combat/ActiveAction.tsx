@@ -1,9 +1,9 @@
-import { Card, CardContent } from './ui/card'
+import { Card, CardContent } from '../ui/card'
 import { ActionTargets } from './ActionTargets'
 import { Action, Unit } from '@repo/game/types'
 import { ActionRenderers } from '@/renderers'
-import { Badge } from './ui/badge'
-import { useGameContext } from '@/hooks'
+import { Badge } from '../ui/badge'
+import { useCombatContext } from '@/hooks'
 import { applyModifiers } from '@repo/game/utils'
 import { cn } from '@/lib/utils'
 
@@ -17,7 +17,7 @@ export type ActiveActionProps = {
 
 export function ActiveAction(props: ActiveActionProps) {
   const { action, source, targets, onConfirmClick, onTargetClick } = props
-  const ctx = useGameContext()
+  const ctx = useCombatContext()
   const renderer = ActionRenderers[action.id]
   const baseAccuracy = action.threshold(source)
   const modified = applyModifiers(source, ctx)

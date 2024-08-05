@@ -1,25 +1,24 @@
 import { useEffect } from 'react'
-import { useGameContext } from '../useGameContext'
+import { useCombatContext } from '../useCombatContext'
 import { useTurn } from '../state/useTurn'
-import { useTeams } from '../state/useTeams'
 import {
   applyModifiers,
   getActionableUnits,
   getBestAiAction,
 } from '@repo/game/utils'
-import { useGameActions } from '../useGameActions'
+import { useCombatActions } from '../useCombatActions'
 import { nanoid } from 'nanoid/non-secure'
-import { useActions, useCleanup } from '../state'
+import { useActions, useCleanup, useCombat } from '../state'
 import { GetUnits, SetIsActive } from '@repo/game/data'
 import { getTeamsWithSelectionRequired } from '@/utils'
 import { MAX_ACTIVE_UNITS_COUNT } from '@/constants'
 
 export function useAiActions() {
-  const ctx = useGameContext()
-  const fns = useGameActions()
+  const ctx = useCombatContext()
+  const fns = useCombatActions()
   const queue = useActions((s) => s.queue)
   const cleanup = useCleanup((s) => s.queue)
-  const user = useTeams((t) => t.user)
+  const user = useCombat((t) => t.user)
   const status = useTurn((t) => t.turn.status)
 
   useEffect(() => {

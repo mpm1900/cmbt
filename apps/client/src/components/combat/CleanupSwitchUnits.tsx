@@ -1,0 +1,39 @@
+import { useCombatActions, useCombatContext } from '../../hooks'
+import { nanoid } from 'nanoid/non-secure'
+import { GetUnits, SetIsActive } from '@repo/game/data'
+import { SwitchUnits } from './SwitchUnits'
+import { MAX_ACTIVE_UNITS_COUNT } from '@/constants'
+import { getTeamsWithSelectionRequired } from '@/utils'
+
+export type CleanupSwitchUnitsProps = {}
+
+export function CleanupSwitchUnits(props: CleanupSwitchUnitsProps) {
+  const ctx = useCombatContext()
+  const fns = useCombatActions()
+  const aliveActiveUnits = new GetUnits({
+    teamId: ctx.user,
+    isActive: true,
+    isAlive: true,
+  }).resolve(ctx)
+  const selectCount = MAX_ACTIVE_UNITS_COUNT - aliveActiveUnits.length
+  const team = getTeamsWithSelectionRequired(ctx).find(
+    (team) => team.id === ctx.user
+  )
+
+  return (
+    <div className="w-[580px]">
+      {team && (
+        <SwitchUnits
+          action={new SetIsActive('', team.id, selectCount)}
+          onConfirm={(selectedTargets) => {
+            fns.pushCleanupAction({
+              id: nanoid(),
+              action: new SetIsActive('', team.id),
+              targetIds: selectedTargets.map((u) => u.id),
+            })
+          }}
+        />
+      )}
+    </div>
+  )
+}

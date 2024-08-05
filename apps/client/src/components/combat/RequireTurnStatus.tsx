@@ -1,5 +1,5 @@
 import { PropsWithChildren } from 'react'
-import { TurnStatus, useTurn } from '../hooks/state/useTurn'
+import { TurnStatus, useTurn } from '../../hooks/state/useTurn'
 
 export type RequireTurnStatusProps = PropsWithChildren<{ status: TurnStatus }>
 

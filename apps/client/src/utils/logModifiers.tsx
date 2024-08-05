@@ -1,8 +1,8 @@
 import { LogSecondary, LogUnit } from '@/components/ui/log'
 import { ModifierRenderers } from '@/renderers'
-import { GameContext, Modifier } from '@repo/game/types'
+import { CombatContext, Modifier } from '@repo/game/types'
 
-export function logModifiers(modifiers: Modifier[], ctx: GameContext) {
+export function logModifiers(modifiers: Modifier[], ctx: CombatContext) {
   const parentIds = modifiers.map((m) => m.parentId)
   const units = ctx.units.filter((u) => parentIds.includes(u.id))
   units.forEach((unit) => {

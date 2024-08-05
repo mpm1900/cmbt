@@ -1,4 +1,4 @@
-import { ActionsQueueItem, GameContext, Unit } from '@repo/game/types'
+import { ActionsQueueItem, CombatContext, Unit } from '@repo/game/types'
 import { applyModifiers } from '@repo/game/utils'
 import { create } from 'zustand'
 
@@ -13,11 +13,11 @@ export type ActionStore = ActionsState & {
   setQueue: (
     setter: (items: ActionsQueueItem[]) => ActionsQueueItem[]
   ) => ActionStore
-  sort: (ctx: GameContext) => ActionsQueueItem[]
+  sort: (ctx: CombatContext) => ActionsQueueItem[]
 }
 
 export const queueComparator =
-  (ctx: GameContext) => (a: ActionsQueueItem, b: ActionsQueueItem) => {
+  (ctx: CombatContext) => (a: ActionsQueueItem, b: ActionsQueueItem) => {
     if (a.action.priority === b.action.priority) {
       const _aSource = ctx.units.find((u) => u.id === a.action.sourceId)
       const aSource = _aSource ? applyModifiers(_aSource, ctx).unit : _aSource
@@ -63,7 +63,7 @@ const makeQueueHook = () =>
       }))
       return get()
     },
-    sort: (ctx: GameContext) => {
+    sort: (ctx: CombatContext) => {
       set((s) => ({
         queue: s.queue.sort(queueComparator(ctx)),
       }))

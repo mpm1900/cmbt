@@ -3,7 +3,7 @@ import {
   ActionId,
   ActionRenderOptions,
   ActionResult,
-  GameContext,
+  CombatContext,
   Id,
   Unit,
 } from '../../types'
@@ -44,7 +44,7 @@ export class HyperBeam extends Action {
   resolve = (
     source: Unit,
     targets: Unit[],
-    ctx: GameContext,
+    ctx: CombatContext,
     options?: ActionRenderOptions
   ): ActionResult => {
     ctx = modifyRenderContext(options, ctx)

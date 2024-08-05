@@ -1,5 +1,5 @@
 import {
-  GameContext,
+  CombatContext,
   Id,
   Modifier,
   ModifierId,
@@ -26,7 +26,7 @@ export class InvertSpeedAll extends Modifier {
     }
   }
 
-  filter = (unit: Unit, ctx: GameContext): boolean => {
+  filter = (unit: Unit, ctx: CombatContext): boolean => {
     return super.filter(unit, ctx)
   }
 }

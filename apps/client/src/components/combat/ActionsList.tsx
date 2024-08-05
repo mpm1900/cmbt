@@ -1,7 +1,7 @@
 import { useActiveUiUnit } from '@/hooks/state'
 import { ActionButton } from './ActionButton'
 import { ActiveAction } from './ActiveAction'
-import { Card, CardContent, CardHeader, CardTitle } from './ui/card'
+import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
 import { useEffect, useState } from 'react'
 import { Action, Id, Unit } from '@repo/game/types'
 import {
@@ -11,7 +11,7 @@ import {
   CarouselNext,
   CarouselPrevious,
   useCarouselApi,
-} from './ui/carousel'
+} from '../ui/carousel'
 import { cn } from '@/lib/utils'
 
 export type ActionsListProps = {

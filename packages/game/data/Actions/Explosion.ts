@@ -2,7 +2,7 @@ import {
   Action,
   ActionId,
   ActionResult,
-  GameContext,
+  CombatContext,
   Id,
   Unit,
 } from '../../types'
@@ -30,7 +30,7 @@ export class Explosion extends Action {
     })
   }
 
-  getDamage = (source: Unit, targets: Unit[], ctx: GameContext): number[] => {
+  getDamage = (source: Unit, targets: Unit[], ctx: CombatContext): number[] => {
     const { mutations } = this.resolve(source, targets, ctx)
     if (!mutations) return []
     return mutations
@@ -42,7 +42,11 @@ export class Explosion extends Action {
   threshold = (source: Unit): number | undefined => undefined
   critical = (source: Unit): number | undefined => undefined
 
-  resolve = (source: Unit, targets: Unit[], ctx: GameContext): ActionResult => {
+  resolve = (
+    source: Unit,
+    targets: Unit[],
+    ctx: CombatContext
+  ): ActionResult => {
     const data = getActionData(source, this, ctx)
     const remainingHealth = data.source.stats.health - data.source.values.damage
     return {

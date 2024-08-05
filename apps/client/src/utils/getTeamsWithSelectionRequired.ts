@@ -1,8 +1,8 @@
 import { MAX_ACTIVE_UNITS_COUNT } from '@/constants'
 import { GetUnits } from '@repo/game/data'
-import { GameContext } from '@repo/game/types'
+import { CombatContext } from '@repo/game/types'
 
-export function getTeamsWithSelectionRequired(ctx: GameContext) {
+export function getTeamsWithSelectionRequired(ctx: CombatContext) {
   return ctx.teams.filter((team) => {
     const activeUnits = new GetUnits({
       teamId: team.id,

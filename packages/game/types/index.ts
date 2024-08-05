@@ -12,11 +12,11 @@ export type ActionsQueueItem = {
   targetIds: string[]
 }
 
-export type GameContext = {
+export type CombatContext = {
   units: Unit[]
   modifiers: Modifier[]
   teams: Team[]
-  user: string
+  user: Id
   log: (node: React.ReactNode) => void
   // queue: ActionsQueueItem[]
 }

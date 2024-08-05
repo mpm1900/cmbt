@@ -6,17 +6,16 @@ import { applyModifiers } from '@repo/game/utils'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { SwitchUnits } from './SwitchUnits'
 import { ItemsList } from './ItemsList'
-import { useGameActions, useGameContext } from '@/hooks'
-import { useActiveUiUnit, useTeams, useTurn } from '@/hooks/state'
+import { useCombatActions, useCombatContext } from '@/hooks'
+import { useActiveUiUnit, useTurn } from '@/hooks/state'
 import { ActionsList } from './ActionsList'
 
 export type ActiveUnitProps = {}
 
 export function ActiveUnit() {
-  const ctx = useGameContext()
-  const { pushAction } = useGameActions()
+  const ctx = useCombatContext()
+  const { pushAction } = useCombatActions()
   const { turn } = useTurn()
-  const { user } = useTeams()
   const { unit, setUnit } = useActiveUiUnit()
   const [activeTab, setActiveTab] = useState('actions')
   const switchAction = new SwitchUnit(unit?.id ?? '', unit?.teamId ?? '')
@@ -45,7 +44,7 @@ export function ActiveUnit() {
   useEffect(() => {
     if (turn.status === 'waiting-for-input') {
       const unit = ctx.units
-        .filter((u) => u.flags.isActive && u.teamId === user)
+        .filter((u) => u.flags.isActive && u.teamId === ctx.user)
         .map((u) => applyModifiers(u, ctx).unit)
         .find((u) => !u.flags.isRecharging)
 

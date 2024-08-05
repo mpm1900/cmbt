@@ -1,5 +1,5 @@
 import {
-  GameContext,
+  CombatContext,
   Mutation,
   MutationId,
   MutationProps,
@@ -25,6 +25,6 @@ export class SetLastUsedAction extends Mutation {
     }
   }
 
-  filter = (unit: Unit, ctx: GameContext): boolean =>
+  filter = (unit: Unit, ctx: CombatContext): boolean =>
     super.filter(unit, ctx) && unit.id === this.parentId
 }

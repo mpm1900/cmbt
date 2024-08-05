@@ -71,8 +71,12 @@ function App() {
             }),
           ],
         },
+        makeUnit(userTeam.id, faker.person.fullName(), false),
+        makeUnit(userTeam.id, faker.person.fullName(), false),
         makeUnit(aiTeam.id, faker.person.fullName(), true),
         makeUnit(aiTeam.id, faker.person.fullName(), true),
+        makeUnit(aiTeam.id, faker.person.fullName(), false),
+        makeUnit(aiTeam.id, faker.person.fullName(), false),
         makeUnit(aiTeam.id, faker.person.fullName(), false),
         makeUnit(aiTeam.id, faker.person.fullName(), false)
       )

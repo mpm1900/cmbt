@@ -34,7 +34,7 @@ export function Team(props: TeamProps) {
           .filter((u) => u.teamId === teamId && u.flags.isActive)
           .map((unit) => (
             <div key={unit.id} className="text-left p-4 px-8">
-              <UnitCard unit={unit} hideStats={true} />
+              <UnitCard unit={unit} hideStats={teamId !== ctx.user} />
             </div>
           ))}
       </div>

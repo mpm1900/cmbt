@@ -13,6 +13,7 @@ import { GetUnits } from '../Queries'
 export const QuickAttackId = ActionId()
 
 export class QuickAttack extends Action {
+  damage: number = 40
   constructor(sourceId: Id, teamId: Id) {
     super(QuickAttackId, {
       sourceId,
@@ -54,7 +55,7 @@ export class QuickAttack extends Action {
           .map((target) => [target, applyModifiers(target, ctx).unit])
           .map(([target, modifiedTarget]) => {
             const damage = calculateDamage(
-              { value: 40, attackType: this.attackType },
+              { value: this.damage, attackType: this.attackType },
               data.source,
               modifiedTarget,
               data.accuracyRoll

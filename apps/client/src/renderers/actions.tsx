@@ -18,6 +18,7 @@ import {
   PowerWordKillId,
   SetIsActiveId,
   PotionId,
+  QuickAttack,
 } from '@repo/game/data'
 import { Action, CombatContext, Unit } from '@repo/game/types'
 import { Fragment, ReactNode } from 'react'
@@ -128,7 +129,10 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
   [QuickAttackId]: {
     name: 'Quick Attack',
     cost: '',
-    description: (action) => <>Deals 5 damage to target enemy unit.</>,
+    description: (action) => {
+      const quickAttack = action as QuickAttack
+      return <>Deals {quickAttack.damage} damage to target enemy unit.</>
+    },
   },
   [PowerWordKillId]: {
     name: ACTION_NAMES[PowerWordKillId],
@@ -177,9 +181,8 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
       const fireball = action as Fireball
       return (
         <>
-          Deals {fireball.damage} base fire damage to target enemy unit. Other
-          active units on the target unit's team also take 30% of the damage
-          dealt.
+          Deals {fireball.damage} base fire damage to target enemy unit. Deals{' '}
+          {fireball.damage / 3} base fire damage to all other neighboring units.
         </>
       )
     },

@@ -1,20 +1,16 @@
-import {
-  Action,
-  ActionId,
-  ActionResult,
-  CombatContext,
-  Id,
-  Unit,
-} from '../../types'
+import { ActionResult, AiAction, CombatContext, Id, Unit } from '../../types'
+import { Action } from '../../types/Action'
 import {
   applyModifiers,
   calculateDamage,
   applyMutation,
-  ZERO_UNIT,
   getActionData,
+  getDamageAiAction,
 } from '../../utils'
+import { ActionId } from '../Id'
 import { DamageParent, Identity } from '../Mutations'
-import { EmptyArray } from '../Queries/EmptyArray'
+import { EmptyArray } from '../Queries'
+import { ZERO_UNIT } from '../Units'
 
 export const ExplosionId = ActionId()
 
@@ -41,6 +37,9 @@ export class Explosion extends Action {
 
   threshold = (source: Unit): number | undefined => undefined
   critical = (source: Unit): number | undefined => undefined
+  getAiAction(targets: Unit[], ctx: CombatContext): AiAction {
+    return getDamageAiAction(this, targets, ctx)
+  }
 
   resolve = (
     source: Unit,

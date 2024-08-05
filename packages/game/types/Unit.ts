@@ -1,7 +1,7 @@
-import { nanoid } from 'nanoid'
-import { Action, DamageType, Id, Modifier } from '.'
-
-export const UnitId = () => `Unit@${nanoid()}`
+import { Action } from './Action'
+import { DamageType } from './Damage'
+import { Modifier } from './Modifier'
+import { Id } from '.'
 
 export type AttackTypes = 'physical' | 'magic'
 

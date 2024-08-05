@@ -1,6 +1,5 @@
 import {
   Action,
-  ActionId,
   ActionResult,
   AiAction,
   CombatContext,
@@ -8,7 +7,9 @@ import {
   Unit,
 } from '../../../types'
 import { applyModifiers, getModifiersFromUnit } from '../../../utils'
-import { Identity, SetIsActiveParent } from '../../Mutations'
+import { ActionId } from '../../Id'
+import { Identity } from '../../Mutations'
+import { SetIsActiveParent } from '../../Mutations/system'
 import { GetUnits } from '../../Queries'
 
 export const SetIsActiveId = ActionId()

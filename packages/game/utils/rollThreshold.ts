@@ -1,13 +1,5 @@
 import random from 'random'
-import { Action, Unit } from '../types'
-
-export type RollAccuracyResult = {
-  roll: number
-  success: boolean
-  threshold: number | undefined
-  critical: number | undefined
-  criticalSuccess: boolean
-}
+import { Action, RollAccuracyResult, Unit } from '../types'
 
 export function rollThreshold(
   source: Unit,

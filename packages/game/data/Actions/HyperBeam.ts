@@ -1,8 +1,8 @@
 import {
   Action,
-  ActionId,
   ActionRenderOptions,
   ActionResult,
+  AiAction,
   CombatContext,
   Id,
   Unit,
@@ -13,7 +13,9 @@ import {
   getActionData,
   parseSuccess,
 } from '../../utils'
+import { getDamageAiAction } from '../../utils/getDamageAiAction'
 import { modifyRenderContext } from '../../utils/modifyRenderContext'
+import { ActionId } from '../Id'
 import { SetRechargingParent } from '../Modifiers'
 import { DamageParent, ReduceFocusParent } from '../Mutations'
 import { GetUnits } from '../Queries'
@@ -40,6 +42,9 @@ export class HyperBeam extends Action {
 
   threshold = (source: Unit): number | undefined => 95 + source.stats.accuracy
   critical = (source: Unit): number | undefined => 5
+  getAiAction(targets: Unit[], ctx: CombatContext): AiAction {
+    return getDamageAiAction(this, targets, ctx)
+  }
 
   resolve = (
     source: Unit,

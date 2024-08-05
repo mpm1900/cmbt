@@ -1,16 +1,18 @@
 import {
   Action,
-  ActionId,
   ActionRenderOptions,
   ActionResult,
+  AiAction,
   CombatContext,
   Id,
   Unit,
 } from '../../types'
 import { getActionData } from '../../utils'
 import { modifyRenderContext } from '../../utils/modifyRenderContext'
+import { ActionId } from '../Id'
 import { PowerUpParent } from '../Modifiers'
-import { ReduceFocusParent, SetLastUsedAction } from '../Mutations'
+import { ReduceFocusParent } from '../Mutations'
+import { SetLastUsedAction } from '../Mutations/system'
 import { EmptyArray } from '../Queries/EmptyArray'
 
 export const SwordsDanceId = ActionId()
@@ -33,6 +35,9 @@ export class SwordsDance extends Action {
 
   threshold = (source: Unit): number | undefined => undefined
   critical = (source: Unit): number | undefined => undefined
+  getAiAction(targets: Unit[], ctx: CombatContext): AiAction {
+    return { action: this, weight: 0, targetIds: [] }
+  }
 
   resolve = (
     source: Unit,

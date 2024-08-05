@@ -1,14 +1,20 @@
 import {
   Action,
-  ActionId,
   ActionRenderOptions,
   ActionResult,
+  AiAction,
   CombatContext,
   Id,
   Unit,
 } from '../../types'
-import { applyModifiers, getActionData, parseSuccess } from '../../utils'
+import {
+  applyModifiers,
+  getActionData,
+  getDamageAiAction,
+  parseSuccess,
+} from '../../utils'
 import { modifyRenderContext } from '../../utils/modifyRenderContext'
+import { ActionId } from '../Id'
 import { DamageParent, Identity } from '../Mutations'
 import { GetUnits } from '../Queries'
 
@@ -32,6 +38,9 @@ export class PowerWordKill extends Action {
     return 40 + source.stats.accuracy
   }
   critical = (source: Unit): number | undefined => undefined
+  getAiAction(targets: Unit[], ctx: CombatContext): AiAction {
+    return getDamageAiAction(this, targets, ctx)
+  }
 
   resolve = (
     source: Unit,

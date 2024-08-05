@@ -1,4 +1,4 @@
-import { AttackTypes, Unit } from './Unit'
+import { AttackTypes } from './Unit'
 
 export type DamageType =
   | 'arcane'

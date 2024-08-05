@@ -1,13 +1,20 @@
 import {
   Action,
-  ActionId,
   ActionResult,
+  AiAction,
   CombatContext,
   Id,
   Unit,
 } from '../../types'
-import { applyModifiers, calculateDamage, getActionData } from '../../utils'
-import { DamageParent, Identity, SetLastUsedAction } from '../Mutations'
+import {
+  applyModifiers,
+  calculateDamage,
+  getActionData,
+  getDamageAiAction,
+} from '../../utils'
+import { ActionId } from '../Id'
+import { DamageParent, Identity } from '../Mutations'
+import { SetLastUsedAction } from '../Mutations/system'
 import { GetUnits } from '../Queries'
 
 export const QuickAttackId = ActionId()
@@ -33,6 +40,9 @@ export class QuickAttack extends Action {
     return 95 + source.stats.accuracy
   }
   critical = (source: Unit): number | undefined => undefined
+  getAiAction(targets: Unit[], ctx: CombatContext): AiAction {
+    return getDamageAiAction(this, targets, ctx)
+  }
 
   resolve = (
     source: Unit,

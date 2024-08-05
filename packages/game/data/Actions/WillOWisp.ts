@@ -1,16 +1,18 @@
 import {
   Action,
-  ActionId,
   ActionRenderOptions,
   ActionResult,
+  AiAction,
   CombatContext,
   Id,
   Unit,
 } from '../../types'
 import { getActionData, parseSuccess } from '../../utils'
 import { modifyRenderContext } from '../../utils/modifyRenderContext'
+import { ActionId } from '../Id'
 import { PowerDownParent, BurnedPowerDownId } from '../Modifiers'
-import { ReduceFocusParent, SetLastUsedAction } from '../Mutations'
+import { ReduceFocusParent } from '../Mutations'
+import { SetLastUsedAction } from '../Mutations/system'
 import { GetUnits } from '../Queries'
 import { BurnDamageOnTurnEndId, DamageParentOnTurnEnd } from '../Triggers'
 
@@ -39,6 +41,9 @@ export class WillOWisp extends Action {
     return 90 + source.stats.accuracy
   }
   critical = (source: Unit): number | undefined => undefined
+  getAiAction(targets: Unit[], ctx: CombatContext): AiAction {
+    return { action: this, weight: 0, targetIds: [] }
+  }
 
   resolve = (
     source: Unit,

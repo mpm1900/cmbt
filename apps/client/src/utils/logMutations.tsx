@@ -1,7 +1,7 @@
 import { LogSecondary, LogUnit } from '@/components/ui/log'
-import { SetLastUsedActionId } from '@repo/game/data'
+import { SetLastUsedActionId, ZERO_UNIT } from '@repo/game/data'
 import { CombatContext, Mutation, Unit } from '@repo/game/types'
-import { applyMutation, ZERO_UNIT } from '@repo/game/utils'
+import { applyMutation } from '@repo/game/utils'
 
 export function logMutations(mutations: Mutation[], ctx: CombatContext) {
   mutations

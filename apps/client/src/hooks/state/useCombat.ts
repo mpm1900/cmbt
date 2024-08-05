@@ -1,10 +1,10 @@
+import { TeamId } from '@repo/game/data'
 import {
   CombatContext,
   Id,
   Modifier,
   Mutation,
   Team,
-  TeamId,
   Unit,
 } from '@repo/game/types'
 import { validateModifiers } from '@repo/game/utils'

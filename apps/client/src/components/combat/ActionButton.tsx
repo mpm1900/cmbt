@@ -2,7 +2,7 @@ import { Action, Unit } from '@repo/game/types'
 import { Button } from '../ui/button'
 import { ActionRenderers } from '@/renderers'
 import { useCombatContext } from '@/hooks'
-import { applyModifiers } from '@repo/game/utils'
+import { applyModifiers, checkActionCost } from '@repo/game/utils'
 import { Badge } from '../ui/badge'
 import { cn } from '@/lib/utils'
 
@@ -20,7 +20,7 @@ export function ActionButton(props: ActionButtonProps) {
   const modified = applyModifiers(source, ctx)
   const baseAccuracy = action.threshold(source)
   const accuracy = action.threshold(modified.unit)
-  const costCheck = action.checkCost(source)
+  const costCheck = checkActionCost(action, source)
 
   return (
     <Button

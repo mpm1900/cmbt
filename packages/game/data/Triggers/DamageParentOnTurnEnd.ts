@@ -2,10 +2,10 @@ import {
   CombatContext,
   Modifier,
   Trigger,
-  TriggerId,
   TriggerProps,
   Unit,
 } from '../../types'
+import { TriggerId } from '../Id'
 
 export const DamageParentOnTurnEndId = TriggerId()
 

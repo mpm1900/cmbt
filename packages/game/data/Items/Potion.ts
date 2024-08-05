@@ -1,4 +1,4 @@
-import { ActionResult, CombatContext, Unit } from '../../types'
+import { ActionResult, AiAction, CombatContext, Unit } from '../../types'
 import { Item, ItemId, ItemProps } from '../../types/Item'
 import { DamageParent } from '../Mutations'
 import { GetUnits } from '../Queries'
@@ -17,6 +17,9 @@ export class Potion extends Item {
 
   threshold = (source: Unit): number | undefined => undefined
   critical = (source: Unit): number | undefined => undefined
+  getAiAction(targets: Unit[], ctx: CombatContext): AiAction {
+    return { action: this, weight: 0, targetIds: [] }
+  }
 
   resolve = (
     source: Unit,

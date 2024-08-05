@@ -1,11 +1,5 @@
-import {
-  CombatContext,
-  Id,
-  Modifier,
-  ModifierId,
-  ModifierProps,
-  Unit,
-} from '../../types'
+import { CombatContext, Modifier, ModifierProps, Unit } from '../../types'
+import { ModifierId } from '../Id'
 
 export const InvertSpeedAllId = ModifierId()
 

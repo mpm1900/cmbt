@@ -1,17 +1,15 @@
 import {
   Action,
-  ActionId,
   ActionResult,
+  AiAction,
   CombatContext,
   Id,
   Unit,
 } from '../../../types'
-import { getModifiersFromUnit, isUnitAliveCtx } from '../../../utils'
-import {
-  AddModifiersToParent,
-  Identity,
-  SetIsActiveParent,
-} from '../../Mutations'
+import { getModifiersFromUnit } from '../../../utils'
+import { ActionId } from '../../Id'
+import { Identity } from '../../Mutations'
+import { AddModifiersToParent, SetIsActiveParent } from '../../Mutations/system'
 import { GetUnits } from '../../Queries'
 
 export const SwitchUnitId = ActionId()
@@ -34,6 +32,9 @@ export class SwitchUnit extends Action {
 
   threshold = (source: Unit): number | undefined => undefined
   critical = (source: Unit): number | undefined => undefined
+  getAiAction(targets: Unit[], ctx: CombatContext): AiAction {
+    return { action: this, weight: 0, targetIds: [] }
+  }
 
   resolve = (
     source: Unit,

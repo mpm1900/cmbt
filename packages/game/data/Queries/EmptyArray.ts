@@ -1,4 +1,5 @@
-import { CombatContext, Id, Query, Unit } from '../../types'
+import { CombatContext, Unit } from '../../types'
+import { Query } from '../../types/Query'
 
 export class EmptyArray extends Query<Unit[]> {
   constructor() {

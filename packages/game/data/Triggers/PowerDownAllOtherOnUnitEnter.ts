@@ -2,10 +2,10 @@ import {
   CombatContext,
   Modifier,
   Trigger,
-  TriggerId,
   TriggerProps,
   Unit,
 } from '../../types'
+import { TriggerId } from '../Id'
 import { PowerDownParent } from '../Modifiers'
 
 export const PowerDownAllOtherOnUnitEnterId = TriggerId()

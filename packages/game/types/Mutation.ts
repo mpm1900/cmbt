@@ -1,7 +1,7 @@
 import { nanoid } from 'nanoid'
-import { Flags, CombatContext, Id, Stats, Unit, Values } from '.'
-
-export const MutationId = () => `Mutation@${nanoid()}`
+import { CombatContext } from './CombatContext'
+import { Flags, Stats, Unit, Values } from './Unit'
+import { Id } from '.'
 
 export type MutationProps<T = {}> = T & {
   id?: Id

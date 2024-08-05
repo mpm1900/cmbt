@@ -1,11 +1,9 @@
-import { nanoid } from 'nanoid'
+import { CombatContext } from './CombatContext'
 import { Modifier, ModifierProps } from './Modifier'
-import { CombatContext, Id } from '.'
+import { Id } from '.'
 
 export type TriggerEvent = 'on Turn Start' | 'on Turn End' | 'on Unit Enter'
 export const AllTriggerEvents: TriggerEvent[] = ['on Turn Start', 'on Turn End']
-
-export const TriggerId = () => `Trigger@${nanoid()}`
 
 export type TriggerProps<T = {}> = ModifierProps<T> & {
   modifiers?: (ctx: CombatContext) => Modifier[]

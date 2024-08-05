@@ -1,19 +1,13 @@
 import { SetLastUsedAction } from '../data'
-import { Action, CombatContext, Unit } from '../types'
+import { Action, ActionResolveData, CombatContext, Unit } from '../types'
 import { applyModifiers } from './applyModifiers'
-import { rollThreshold, RollAccuracyResult } from './rollThreshold'
-
-export type ActionRenderData = {
-  source: Unit
-  accuracyRoll: RollAccuracyResult
-  setLastUsed: SetLastUsedAction
-}
+import { rollThreshold } from './rollThreshold'
 
 export function getActionData(
   source: Unit,
   action: Action,
   ctx: CombatContext
-): ActionRenderData {
+): ActionResolveData {
   const modifiedSource = applyModifiers(source, ctx).unit
   const accuracyRoll = rollThreshold(modifiedSource, action)
   const setLastUsed = new SetLastUsedAction({

@@ -1,16 +1,19 @@
 import random from 'random'
 import {
   Action,
-  ActionId,
   ActionResult,
   Damage,
   CombatContext,
   Id,
   Unit,
+  AiAction,
 } from '../../types'
 import { applyModifiers, calculateDamage, getActionData } from '../../utils'
-import { DamageParent, Identity, SetLastUsedAction } from '../Mutations'
+import { DamageParent, Identity } from '../Mutations'
 import { GetUnits } from '../Queries'
+import { SetLastUsedAction } from '../Mutations/system'
+import { getDamageAiAction } from '../../utils/getDamageAiAction'
+import { ActionId } from '../Id'
 
 export const FurySwipesId = ActionId()
 export class FurySwipes extends Action {
@@ -41,6 +44,9 @@ export class FurySwipes extends Action {
     return 100 + source.stats.accuracy
   }
   critical = (source: Unit): number | undefined => undefined
+  getAiAction(targets: Unit[], ctx: CombatContext): AiAction {
+    return getDamageAiAction(this, targets, ctx)
+  }
 
   resolve = (
     source: Unit,

@@ -1,6 +1,10 @@
-import random from 'random'
-import { AttackTypes, Damage, DamageType, Unit } from '../types'
-import { RollAccuracyResult } from './rollThreshold'
+import {
+  AttackTypes,
+  Damage,
+  DamageType,
+  RollAccuracyResult,
+  Unit,
+} from '../types'
 
 export function calculateBaseDamage(
   power: number,

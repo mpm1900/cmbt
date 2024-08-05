@@ -1,13 +1,15 @@
 import {
   Action,
-  ActionId,
   ActionResult,
+  AiAction,
   CombatContext,
   Id,
   Unit,
 } from '../../types'
+import { ActionId } from '../Id'
 import { AddActionToRegistryParent } from '../Modifiers'
-import { Identity, SetLastUsedAction } from '../Mutations'
+import { Identity } from '../Mutations'
+import { SetLastUsedAction } from '../Mutations/system'
 import { GetUnits } from '../Queries'
 
 export const DisableId = ActionId()
@@ -26,6 +28,9 @@ export class Disable extends Action {
 
   threshold = (source: Unit): number | undefined => undefined
   critical = (source: Unit): number | undefined => undefined
+  getAiAction(targets: Unit[], ctx: CombatContext): AiAction {
+    return { action: this, weight: 0, targetIds: [] }
+  }
 
   resolve = (
     source: Unit,

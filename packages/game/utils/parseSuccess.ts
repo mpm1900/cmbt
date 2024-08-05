@@ -1,5 +1,4 @@
-import { Action, ActionResult, Unit } from '../types'
-import { ActionRenderData } from './getActionData'
+import { Action, ActionResolveData, ActionResult, Unit } from '../types'
 
 export type ParseActionResult = Omit<
   ActionResult,
@@ -8,7 +7,7 @@ export type ParseActionResult = Omit<
 
 export function parseSuccess(
   action: Action,
-  data: ActionRenderData,
+  data: ActionResolveData,
   source: Unit,
   targets: Unit[],
   config: {

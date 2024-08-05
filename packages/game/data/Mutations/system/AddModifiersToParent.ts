@@ -2,10 +2,10 @@ import {
   CombatContext,
   Modifier,
   Mutation,
-  MutationId,
   MutationProps,
   Unit,
 } from '../../../types'
+import { MutationId } from '../../Id'
 
 export const AddModifiersToParentId = MutationId()
 

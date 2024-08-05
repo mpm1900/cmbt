@@ -3,6 +3,7 @@ import { useCombatContext } from '../useCombatContext'
 import { useTurn } from '../state/useTurn'
 import {
   applyModifiers,
+  checkActionCost,
   getActionableUnits,
   getBestAiAction,
 } from '@repo/game/utils'
@@ -27,7 +28,7 @@ export function useAiActions() {
       const aiUnits = getActionableUnits(units).filter((u) => u.teamId !== user)
       const aiActions = aiUnits.map((unit) => {
         const aiActions = unit.actions
-          .filter((a) => a.checkCost(unit))
+          .filter((a) => checkActionCost(a, unit))
           .map((action) => {
             return getBestAiAction(action, ctx)
           })

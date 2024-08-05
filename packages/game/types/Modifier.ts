@@ -1,8 +1,6 @@
-import { nanoid } from 'nanoid'
-import { Id, Unit } from '.'
+import { Id } from '.'
 import { Mutation, MutationProps } from './Mutation'
-
-export const ModifierId = () => `Modifier@${nanoid()}`
+import { Unit } from './Unit'
 
 export type ModifierProps<T = {}> = MutationProps<T> & {
   maxInstances?: number

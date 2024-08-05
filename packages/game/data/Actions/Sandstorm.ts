@@ -1,12 +1,14 @@
 import {
   Action,
-  ActionId,
   ActionResult,
+  AiAction,
   CombatContext,
   Id,
   Unit,
 } from '../../types'
-import { Identity, SetLastUsedAction } from '../Mutations'
+import { ActionId } from '../Id'
+import { Identity } from '../Mutations'
+import { SetLastUsedAction } from '../Mutations/system'
 import { EmptyArray } from '../Queries/EmptyArray'
 import { DamageAllOnTurnEnd } from '../Triggers'
 
@@ -26,6 +28,9 @@ export class Sandstorm extends Action {
 
   threshold = (source: Unit): number | undefined => undefined
   critical = (source: Unit): number | undefined => undefined
+  getAiAction(targets: Unit[], ctx: CombatContext): AiAction {
+    return { action: this, weight: 0, targetIds: [] }
+  }
 
   resolve = (
     source: Unit,

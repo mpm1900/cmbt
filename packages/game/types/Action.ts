@@ -1,21 +1,9 @@
 import { nanoid } from 'nanoid'
-import {
-  ActionsQueueItem,
-  AttackTypes,
-  CombatContext,
-  Id,
-  Modifier,
-  Query,
-  Unit,
-  ValueKey,
-} from '.'
-import {
-  ActionRenderData,
-  applyMutation,
-  applyModifiers,
-  ZERO_UNIT,
-} from '../utils'
-import random from 'random'
+import { Id } from './'
+import { CombatContext } from './CombatContext'
+import { Query } from './Query'
+import { AttackTypes, Unit } from './Unit'
+import { Modifier } from './Modifier'
 import { Mutation } from './Mutation'
 
 export type AiAction = {
@@ -24,11 +12,31 @@ export type AiAction = {
   targetIds: Id[]
 }
 
+export type RollAccuracyResult = {
+  roll: number
+  success: boolean
+  threshold: number | undefined
+  critical: number | undefined
+  criticalSuccess: boolean
+}
+
+export type ActionResolveData = {
+  source: Unit
+  accuracyRoll: RollAccuracyResult
+  setLastUsed: Mutation
+}
+
+export type ActionsQueueItem = {
+  id: string
+  action: Action
+  targetIds: string[]
+}
+
 export type ActionResult = {
   action?: Action
   source?: Unit
   targets?: Unit[]
-  data?: ActionRenderData
+  data?: ActionResolveData
   mutations?: Mutation[]
   addedModifiers?: Modifier[]
   addedUnits?: Unit[]
@@ -52,8 +60,6 @@ export type ActionProps = {
   maxTargetCount: number
 }
 
-export const ActionId = () => `Action@${nanoid()}`
-
 export abstract class Action {
   readonly id: Id
   readonly rtid: Id
@@ -72,27 +78,7 @@ export abstract class Action {
     ctx: CombatContext,
     options?: ActionRenderOptions
   ): ActionResult
-
-  // this only works for damage actions
-  getAiAction = (targets: Unit[], ctx: CombatContext): AiAction => {
-    const source = ctx.units.find((u) => u.id === this.sourceId) as Unit
-    const modifiedSource = applyModifiers(source, ctx).unit
-    const unModifiedTargets = ctx.units.filter(
-      (u) => !!targets.find((t) => t.id === u.id)
-    )
-    const accuracy = (this.threshold(modifiedSource) ?? 100) / 100
-    const damage = this.getDamage(source, unModifiedTargets, ctx).reduce(
-      (p, c) => p + c,
-      0
-    )
-    const weight = damage * accuracy * random.float(0.85, 1.15)
-
-    return {
-      action: this,
-      targetIds: targets.map((t) => t.id),
-      weight,
-    }
-  }
+  abstract getAiAction(targets: Unit[], ctx: CombatContext): AiAction
 
   constructor(id: Id, props: ActionProps) {
     this.id = id
@@ -104,24 +90,5 @@ export abstract class Action {
     this.priority = props.priority ?? 0
     this.attackType = props.attackType
     this.maxTargetCount = props.maxTargetCount
-  }
-
-  getDamage(source: Unit, targets: Unit[], ctx: CombatContext): number[] {
-    const { mutations = [] } = this.resolve(source, targets, ctx, {
-      bypassAccuracyRolls: true,
-      disableLogging: true,
-      disableRandomness: true,
-    })
-    return mutations
-      .map((m) => applyMutation(ZERO_UNIT, m))
-      .flatMap((u) => u.values.damage)
-      .filter((d) => d > 0)
-  }
-
-  checkCost(source: Unit): boolean {
-    const costs = applyMutation(ZERO_UNIT, this.cost).values
-    return Object.entries(costs).every(([key, value]) => {
-      return value * -1 <= source.values[key as ValueKey]
-    })
   }
 }

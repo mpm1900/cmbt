@@ -1,10 +1,6 @@
-import {
-  CombatContext,
-  Mutation,
-  MutationId,
-  MutationProps,
-  Unit,
-} from '../../types'
+import { CombatContext, Unit } from '../../types'
+import { Mutation, MutationProps } from '../../types/Mutation'
+import { MutationId } from '../Id'
 
 export const DamageAllId = MutationId()
 

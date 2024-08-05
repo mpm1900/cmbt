@@ -9,7 +9,6 @@ import { ItemsList } from './ItemsList'
 import { useGameActions, useGameContext } from '@/hooks'
 import { useActiveUiUnit, useTeams, useTurn } from '@/hooks/state'
 import { ActionsList } from './ActionsList'
-import { ActiveUnitSwitchUnits } from './ActiveUnitSwitchUnits'
 
 export type ActiveUnitProps = {}
 
@@ -20,6 +19,7 @@ export function ActiveUnit() {
   const { user } = useTeams()
   const { unit, setUnit } = useActiveUiUnit()
   const [activeTab, setActiveTab] = useState('actions')
+  const switchAction = new SwitchUnit(unit?.id ?? '', unit?.teamId ?? '')
 
   function commitAction(action: Action, targetIds: Id[]) {
     if (action) {
@@ -67,15 +67,16 @@ export function ActiveUnit() {
       </TabsList>
       <TabsContent value="actions">
         <ActionsList
+          unit={unit}
           onConfirm={(action, targetIds) => commitAction(action, targetIds)}
         />
       </TabsContent>
       <TabsContent value="units">
-        <ActiveUnitSwitchUnits
-          unit={unit}
+        <SwitchUnits
+          action={switchAction}
           onConfirm={(targets) => {
             commitAction(
-              new SwitchUnit(unit.id, unit.teamId),
+              switchAction,
               targets.map((t) => t.id)
             )
           }}

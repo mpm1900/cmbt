@@ -15,40 +15,40 @@ import {
 import { cn } from '@/lib/utils'
 
 export type ActionsListProps = {
+  unit: Unit
   onConfirm: (action: Action, targetIds: Id[]) => void
 }
 
 export function ActionsList(props: ActionsListProps) {
-  const { onConfirm } = props
-  const unit = useActiveUiUnit((s) => s.unit)
-  const [activeAction, setActiveAction] = useState<Action>()
-  const [targets, setTargets] = useState<Unit[]>([])
+  const { unit, onConfirm } = props
+  const [selectedAction, setSelectedAction] = useState<Action>()
+  const [selectedTargets, setSelectedTargets] = useState<Unit[]>([])
   const carousel = useCarouselApi()
 
   function updateActiveAction(action: Action | undefined) {
-    setActiveAction(action)
-    setTargets([])
+    setSelectedAction(action)
+    setSelectedTargets([])
   }
 
   useEffect(() => {
     updateActiveAction(undefined)
   }, [unit?.id])
 
-  function confirmActiveAction() {
-    if (activeAction) {
+  function handleConfirm() {
+    if (selectedAction) {
       onConfirm(
-        activeAction,
-        targets.map((t) => t.id)
+        selectedAction,
+        selectedTargets.map((t) => t.id)
       )
       updateActiveAction(undefined)
     }
   }
 
   useEffect(() => {
-    if (targets.length === activeAction?.maxTargetCount) {
-      confirmActiveAction()
+    if (selectedTargets.length === selectedAction?.maxTargetCount) {
+      handleConfirm()
     }
-  }, [targets.length])
+  }, [selectedTargets.length])
 
   if (!unit) return null
   const pages = Math.ceil(unit.actions.length / 4)
@@ -86,7 +86,7 @@ export function ActionsList(props: ActionsListProps) {
                           key={action.id}
                           source={unit}
                           action={action}
-                          isActive={action.id === activeAction?.id}
+                          isActive={action.id === selectedAction?.id}
                           onClick={() => {
                             updateActiveAction(action)
                           }}
@@ -100,20 +100,20 @@ export function ActionsList(props: ActionsListProps) {
             <CarouselNext />
           </Carousel>
         </div>
-        {activeAction && (
+        {selectedAction && (
           <ActiveAction
-            action={activeAction}
+            action={selectedAction}
             source={unit}
-            targets={targets}
+            targets={selectedTargets}
             onTargetClick={(target, isSelected) => {
-              setTargets((s) =>
+              setSelectedTargets((s) =>
                 isSelected
                   ? s.filter((t) => t.id !== target.id)
                   : s.concat(target)
               )
             }}
             onConfirmClick={() => {
-              confirmActiveAction()
+              handleConfirm()
             }}
           />
         )}

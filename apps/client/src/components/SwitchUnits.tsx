@@ -6,16 +6,16 @@ import { Action, Unit } from '@repo/game/types'
 import { useActions } from '@/hooks/state'
 import { SwitchUnitId } from '@repo/game/data'
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from './ui/card'
+import { useState } from 'react'
 
 export type SwitchUnitsProps = {
   action: Action
-  selectedTargets: Unit[]
-  onClick: (unit: Unit) => void
-  onConfirm: () => void
+  onClick?: (unit: Unit) => void
+  onConfirm: (selectedTargets: Unit[]) => void
 }
 
 export function SwitchUnits(props: SwitchUnitsProps) {
-  const { action, selectedTargets, onClick, onConfirm } = props
+  const { action, onClick, onConfirm } = props
   const ctx = useGameContext()
   const queue = useActions((s) => s.queue)
   const queuedSwitchActions = queue.filter(
@@ -23,6 +23,7 @@ export function SwitchUnits(props: SwitchUnitsProps) {
   )
 
   const targets = action.targets.resolve(ctx)
+  const [selectedTargets, setSelectedTargets] = useState<Unit[]>([])
 
   return (
     <Card>
@@ -54,7 +55,16 @@ export function SwitchUnits(props: SwitchUnitsProps) {
                       selectedTargets.length === action.maxTargetCount)
                   }
                   className="items-start h-full flex-col"
-                  onClick={() => onClick(u)}
+                  onClick={() => {
+                    if (selectedTargets.find((u) => u.id === unit.id)) {
+                      setSelectedTargets((t) =>
+                        t.filter((u) => u.id !== unit.id)
+                      )
+                    } else {
+                      setSelectedTargets((t) => [...t, unit])
+                    }
+                    onClick && onClick(u)
+                  }}
                 >
                   <div className="flex w-full items-center">
                     <span className="text-lg text-left flex-1 text-ellipsis overflow-hidden">
@@ -89,7 +99,7 @@ export function SwitchUnits(props: SwitchUnitsProps) {
       </CardContent>
       {selectedTargets.length === action.maxTargetCount && (
         <CardFooter className="justify-end">
-          <Button onClick={() => onConfirm()}>Switch In</Button>
+          <Button onClick={() => onConfirm(selectedTargets)}>Switch In</Button>
         </CardFooter>
       )}
     </Card>

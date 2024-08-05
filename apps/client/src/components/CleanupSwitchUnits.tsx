@@ -14,7 +14,6 @@ export function CleanupSwitchUnits(props: CleanupSwitchUnitsProps) {
   const { teamId } = props
   const ctx = useGameContext()
   const fns = useGameActions()
-  const [targets, setTargets] = useState<Unit[]>([])
   const aliveActiveUnits = new GetUnits({
     teamId: ctx.user,
     isActive: true,
@@ -25,21 +24,13 @@ export function CleanupSwitchUnits(props: CleanupSwitchUnitsProps) {
   return (
     <div className="w-[580px]">
       <SwitchUnits
-        selectedTargets={targets}
         action={new SetIsActive('', teamId, selectCount)}
-        onConfirm={() => {
+        onConfirm={(selectedTargets) => {
           fns.pushCleanupAction({
             id: nanoid(),
             action: new SetIsActive('', teamId),
-            targetIds: targets.map((u) => u.id),
+            targetIds: selectedTargets.map((u) => u.id),
           })
-        }}
-        onClick={(unit) => {
-          if (targets.find((u) => u.id === unit.id)) {
-            setTargets((t) => t.filter((u) => u.id !== unit.id))
-          } else {
-            setTargets((t) => [...t, unit])
-          }
         }}
       />
     </div>

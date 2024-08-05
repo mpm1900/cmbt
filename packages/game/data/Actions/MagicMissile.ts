@@ -12,21 +12,20 @@ import { GetUnits } from '../Queries'
 
 export const MagicMissileId = ActionId()
 export class MagicMissile extends Action {
-  maxTargetCount: number = 2
-
   constructor(sourceId: Id, teamId: Id) {
     super(MagicMissileId, {
       sourceId,
       teamId,
       cost: new Identity({ sourceId }),
+      targets: new GetUnits({
+        notTeamId: teamId,
+        isActive: true,
+      }),
       attackType: 'magic',
+      maxTargetCount: 2,
     })
   }
 
-  targets = new GetUnits({
-    notTeamId: this.teamId,
-    isActive: true,
-  })
   threshold = (source: Unit): number | undefined => undefined
   critical = (source: Unit): number | undefined => undefined
 

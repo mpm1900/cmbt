@@ -6,15 +6,15 @@ import { GetUnits } from '../Queries'
 export const PotionId = ItemId()
 
 export class Potion extends Item {
-  maxTargetCount: number = 1
-
-  constructor(props: ItemProps) {
-    super(PotionId, props)
+  constructor(props: Omit<ItemProps, 'targets'>) {
+    super(PotionId, {
+      ...props,
+      targets: new GetUnits({
+        teamId: props.teamId,
+      }),
+    })
   }
 
-  targets = new GetUnits({
-    teamId: this.teamId,
-  })
   threshold = (source: Unit): number | undefined => undefined
   critical = (source: Unit): number | undefined => undefined
 

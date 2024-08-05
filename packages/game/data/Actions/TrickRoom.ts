@@ -13,18 +13,17 @@ import { EmptyArray } from '../Queries/EmptyArray'
 export const TrickRoomId = ActionId()
 
 export class TrickRoom extends Action {
-  maxTargetCount: number = 0
-
   constructor(sourceId: Id, teamId: Id) {
     super(TrickRoomId, {
       sourceId,
       teamId,
       cost: new Identity({ sourceId }),
+      targets: new EmptyArray(),
       attackType: 'magic',
+      maxTargetCount: 0,
     })
   }
 
-  targets = new EmptyArray()
   threshold = (source: Unit): number | undefined => undefined
   critical = (source: Unit): number | undefined => undefined
 

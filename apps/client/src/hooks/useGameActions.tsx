@@ -70,10 +70,6 @@ export function useGameActions() {
       context.units = unitStore.mutate(mutations, context)
     }
     if (modifiers?.length) {
-      console.log(
-        'adding mods',
-        modifiers.map((m) => m.id)
-      )
       if (options?.enableLog) logModifiers(modifiers, context)
       context.modifiers = modifierStore.add(modifiers)
     }

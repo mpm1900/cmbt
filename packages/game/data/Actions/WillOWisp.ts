@@ -17,8 +17,6 @@ import { BurnDamageOnTurnEndId, DamageParentOnTurnEnd } from '../Triggers'
 export const WillOWispId = ActionId()
 
 export class WillOWisp extends Action {
-  maxTargetCount: number = 1
-
   constructor(sourceId: Id, teamId: Id) {
     super(WillOWispId, {
       sourceId,
@@ -28,18 +26,15 @@ export class WillOWisp extends Action {
         parentId: sourceId,
         offset: 20,
       }),
+      targets: new GetUnits({
+        notTeamId: teamId,
+        isActive: true,
+      }),
       attackType: 'magic',
+      maxTargetCount: 1,
     })
   }
 
-  checkCost = (source: Unit): boolean => {
-    return source.values.focus >= 20
-  }
-
-  targets = new GetUnits({
-    notTeamId: this.teamId,
-    isActive: true,
-  })
   threshold = (source: Unit): number | undefined => {
     return 70 + source.stats.accuracy
   }

@@ -14,21 +14,20 @@ import { GetUnits } from '../Queries'
 
 export const PowerWordKillId = ActionId()
 export class PowerWordKill extends Action {
-  maxTargetCount: number = 1
-
   constructor(sourceId: Id, teamId: Id) {
     super(PowerWordKillId, {
       sourceId,
       teamId,
       cost: new Identity({ sourceId }),
+      targets: new GetUnits({
+        notTeamId: teamId,
+        isActive: true,
+      }),
       attackType: 'magic',
+      maxTargetCount: 1,
     })
   }
 
-  targets = new GetUnits({
-    notTeamId: this.teamId,
-    isActive: true,
-  })
   threshold = (source: Unit): number | undefined => {
     return 90 + source.stats.accuracy
   }

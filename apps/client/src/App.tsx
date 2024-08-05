@@ -95,6 +95,7 @@ function App() {
           cost: new Identity({}),
           count: 1,
           attackType: 'physical',
+          maxTargetCount: 1,
         })
       )
     }
@@ -140,8 +141,7 @@ function App() {
                     .filter((team) => team.id === ctx.user)
                     .map((team) => (
                       <PendingTeamAction key={team.id} teamId={team.id} />
-                    ))
-                    .find(Boolean)}
+                    ))}
                 </div>
               </RequireTurnStatus>
             </div>

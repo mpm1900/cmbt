@@ -13,18 +13,17 @@ import { DamageAllOnTurnEnd } from '../Triggers'
 export const SandstormId = ActionId()
 
 export class Sandstorm extends Action {
-  maxTargetCount: number = 0
-
   constructor(sourceId: Id, teamId: Id) {
     super(SandstormId, {
       sourceId,
       teamId,
       cost: new Identity({ sourceId }),
+      targets: new EmptyArray(),
       attackType: 'magic',
+      maxTargetCount: 0,
     })
   }
 
-  targets = new EmptyArray()
   threshold = (source: Unit): number | undefined => undefined
   critical = (source: Unit): number | undefined => undefined
 

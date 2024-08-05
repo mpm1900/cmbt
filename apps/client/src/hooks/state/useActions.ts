@@ -10,17 +10,23 @@ export type ActionStore = ActionsState & {
   enqueue: (...items: ActionsQueueItem[]) => void
   dequeue: () => ActionsQueueItem | undefined
   removeWhere: (filter: (item: ActionsQueueItem) => boolean) => void
-  setQueue: (setter: (items: ActionsQueueItem[]) => ActionsQueueItem[]) => void
+  setQueue: (
+    setter: (items: ActionsQueueItem[]) => ActionsQueueItem[]
+  ) => ActionStore
   sort: (ctx: GameContext) => ActionsQueueItem[]
 }
 
 export const queueComparator =
   (ctx: GameContext) => (a: ActionsQueueItem, b: ActionsQueueItem) => {
     if (a.action.priority === b.action.priority) {
-      const _aSource = ctx.units.find((u) => u.id === a.action.sourceId) as Unit
-      const aSource = applyModifiers(_aSource, ctx).unit
-      const _bSource = ctx.units.find((u) => u.id === b.action.sourceId) as Unit
-      const bSource = applyModifiers(_bSource, ctx).unit
+      const _aSource = ctx.units.find((u) => u.id === a.action.sourceId)
+      const aSource = _aSource ? applyModifiers(_aSource, ctx).unit : _aSource
+      const _bSource = ctx.units.find((u) => u.id === b.action.sourceId)
+      const bSource = _bSource ? applyModifiers(_bSource, ctx).unit : _bSource
+
+      if (!aSource && !bSource) return 0
+      if (!aSource) return -1
+      if (!bSource) return 1
 
       if (aSource.stats.speed === bSource.stats.speed) {
         return [-1, 1][Math.round(Math.random())]
@@ -55,6 +61,7 @@ const makeQueueHook = () =>
       set(({ queue }) => ({
         queue: setter(queue),
       }))
+      return get()
     },
     sort: (ctx: GameContext) => {
       set((s) => ({

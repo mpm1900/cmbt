@@ -16,23 +16,22 @@ import { GetUnits } from '../../Queries'
 
 export const SwitchUnitId = ActionId()
 export class SwitchUnit extends Action {
-  maxTargetCount: number = 1
-
   constructor(sourceId: Id, teamId: Id) {
     super(SwitchUnitId, {
       sourceId,
       teamId,
       priority: 2,
       cost: new Identity(),
+      targets: new GetUnits({
+        teamId: teamId,
+        isActive: false,
+        isAlive: true,
+      }),
       attackType: 'physical',
+      maxTargetCount: 1,
     })
   }
 
-  targets = new GetUnits({
-    teamId: this.teamId,
-    isActive: false,
-    isAlive: true,
-  })
   threshold = (source: Unit): number | undefined => undefined
   critical = (source: Unit): number | undefined => undefined
 

@@ -37,7 +37,7 @@ export function ItemsList(props: ItemsListProps) {
 
   function handleConfirm() {
     if (activeItem) {
-      activeItem.sourceId = targets[0].id
+      ;(activeItem as any).sourceId = targets[0].id
       onConfirm(
         activeItem,
         targets.map((t) => t.id)

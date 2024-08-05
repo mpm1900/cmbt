@@ -10,8 +10,9 @@ import {
 import { useGameActions } from '../useGameActions'
 import { nanoid } from 'nanoid/non-secure'
 import { useActions, useCleanup } from '../state'
-import { SetIsActive } from '@repo/game/data'
+import { GetUnits, SetIsActive } from '@repo/game/data'
 import { getTeamsWithSelectionRequired } from '@/utils'
+import { MAX_ACTIVE_UNITS_COUNT } from '@/constants'
 
 export function useAiActions() {
   const ctx = useGameContext()
@@ -30,7 +31,7 @@ export function useAiActions() {
         const aiActions = unit.actions
           .filter((a) => a.checkCost(unit))
           .map((action) => {
-            return getBestAiAction(action, units, ctx)
+            return getBestAiAction(action, ctx)
           })
           .sort((a, b) => b.weight - a.weight)
 
@@ -51,12 +52,22 @@ export function useAiActions() {
         (t) => t.id !== ctx.user
       )
       if (aiTeam) {
-        const item = getBestAiAction(
-          new SetIsActive('', aiTeam.id),
-          ctx.units,
-          ctx
+        const aliveActiveUnits = new GetUnits({
+          notTeamId: ctx.user,
+          isActive: true,
+          isAlive: true,
+        }).resolve(ctx)
+        const aliveInactiveUnits = new GetUnits({
+          notTeamId: ctx.user,
+          isActive: false,
+          isAlive: true,
+        }).resolve(ctx)
+
+        const count = Math.min(
+          MAX_ACTIVE_UNITS_COUNT - aliveActiveUnits.length,
+          aliveInactiveUnits.length
         )
-        item.action.sourceId = item.targetIds[0]
+        const item = getBestAiAction(new SetIsActive('', aiTeam.id, count), ctx)
         fns.pushCleanupAction({
           id: nanoid(),
           action: item.action,

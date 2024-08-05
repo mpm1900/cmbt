@@ -19,7 +19,6 @@ import { GetUnits } from '../Queries'
 
 export const FireballId = ActionId()
 export class Fireball extends Action {
-  maxTargetCount: number = 1
   damage: number
 
   constructor(sourceId: Id, teamId: Id, damage: number = 90) {
@@ -27,7 +26,12 @@ export class Fireball extends Action {
       sourceId,
       teamId,
       cost: new Identity({ sourceId }),
+      targets: new GetUnits({
+        notTeamId: teamId,
+        isActive: true,
+      }),
       attackType: 'magic',
+      maxTargetCount: 1,
     })
     this.damage = damage
   }
@@ -39,10 +43,6 @@ export class Fireball extends Action {
     )
   }
 
-  targets = new GetUnits({
-    notTeamId: this.teamId,
-    isActive: true,
-  })
   threshold = (source: Unit): number | undefined => {
     return 95 + source.stats.accuracy
   }

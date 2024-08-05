@@ -7,66 +7,65 @@ import {
   Id,
   Unit,
 } from '../../../types'
-import {
-  applyModifiers,
-  getModifiersFromUnit,
-  isUnitAliveCtx,
-} from '../../../utils'
+import { applyModifiers, getModifiersFromUnit } from '../../../utils'
 import { Identity, SetIsActiveParent } from '../../Mutations'
 import { GetUnits } from '../../Queries'
 
 export const SetIsActiveId = ActionId()
 export class SetIsActive extends Action {
-  maxTargetCount: number = 1
-
-  constructor(sourceId: Id, teamId: Id) {
+  constructor(sourceId: Id, teamId: Id, maxTargetCount = 1) {
     super(SetIsActiveId, {
       sourceId,
       teamId,
       cost: new Identity(),
+      targets: new GetUnits({
+        teamId: teamId,
+        isActive: false,
+        isAlive: true,
+      }),
       attackType: 'physical',
+      maxTargetCount,
     })
   }
 
-  targets = new GetUnits({
-    teamId: this.teamId,
-    isActive: false,
-    isAlive: true,
-  })
   threshold = (source: Unit): number | undefined => undefined
   critical = (source: Unit): number | undefined => undefined
 
   getAiAction = (targets: Unit[], ctx: GameContext): AiAction => {
-    const target = targets[0]
-    const modified = applyModifiers(target, ctx)
-    const remainingHealth =
-      modified.unit.stats.health - modified.unit.values.damage
+    const modified = targets.map((target) => applyModifiers(target, ctx).unit)
+    const remainingHealth = modified.map(
+      (unit) => unit.stats.health - unit.values.damage
+    )
 
     return {
       action: this,
       targetIds: targets.map((t) => t.id),
-      weight: remainingHealth,
+      weight: remainingHealth.reduce((a, b) => a + b, 0),
     }
   }
 
-  resolve = (source: Unit, targets: Unit[], ctx: GameContext): ActionResult => {
-    const target = targets[0]
-    if (!target) throw new Error('No target for SwitchUnit action.')
+  resolve = (
+    source: Unit | undefined,
+    targets: Unit[],
+    ctx: GameContext
+  ): ActionResult => {
     return {
       action: this,
       source,
       targets,
-      mutations: [
-        new SetIsActiveParent({
-          sourceId: source.id,
-          parentId: source.id,
-          isActive: true,
-        }),
-      ],
+      mutations: targets.map(
+        (t) =>
+          new SetIsActiveParent({
+            sourceId: source?.id,
+            parentId: t.id,
+            isActive: true,
+          })
+      ),
       addedModifiers: [],
-      addedUnits: [target],
+      addedUnits: targets,
       updateModifiers: (modifiers) => {
-        return modifiers.concat(...getModifiersFromUnit(target))
+        const targetsModifiers = targets.flatMap((t) => getModifiersFromUnit(t))
+        return modifiers.concat(...targetsModifiers)
       },
     }
   }

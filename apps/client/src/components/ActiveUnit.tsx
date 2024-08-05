@@ -71,6 +71,7 @@ export function ActiveUnit() {
       </TabsContent>
       <TabsContent value="units">
         <SwitchUnits
+          selectedTargets={[]}
           action={new SwitchUnit(unit.id, unit.teamId)}
           onClick={(action, target) => {
             commitAction(action, [target.id])

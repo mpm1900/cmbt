@@ -19,18 +19,16 @@ import { EmptyArray } from '../Queries/EmptyArray'
 export const ExplosionId = ActionId()
 
 export class Explosion extends Action {
-  maxTargetCount: number = 0
-
   constructor(sourceId: Id, teamId: Id) {
     super(ExplosionId, {
       sourceId,
       teamId,
       cost: new Identity({ sourceId }),
+      targets: new EmptyArray(),
       attackType: 'physical',
+      maxTargetCount: 0,
     })
   }
-
-  targets = new EmptyArray()
 
   getDamage = (source: Unit, targets: Unit[], ctx: GameContext): number[] => {
     const { mutations } = this.resolve(source, targets, ctx)

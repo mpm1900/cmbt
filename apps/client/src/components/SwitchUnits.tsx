@@ -9,11 +9,12 @@ import { Card, CardContent, CardHeader, CardTitle } from './ui/card'
 
 export type SwitchUnitsProps = {
   action: Action
+  selectedTargets: Unit[]
   onClick: (action: Action, unit: Unit) => void
 }
 
 export function SwitchUnits(props: SwitchUnitsProps) {
-  const { action, onClick } = props
+  const { action, selectedTargets, onClick } = props
   const ctx = useGameContext()
   const queue = useActions((s) => s.queue)
   const queuedSwitchActions = queue.filter(
@@ -42,7 +43,11 @@ export function SwitchUnits(props: SwitchUnitsProps) {
               return (
                 <Button
                   key={u.id}
-                  variant={'secondary'}
+                  variant={
+                    selectedTargets.find((t) => t.id === u.id)
+                      ? 'default'
+                      : 'secondary'
+                  }
                   disabled={!targets.find((t) => t.id === u.id) || isPending}
                   className="items-start h-full flex-col"
                   onClick={() => onClick(action, u)}

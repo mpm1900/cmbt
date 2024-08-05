@@ -20,7 +20,7 @@ import {
   PotionId,
 } from '@repo/game/data'
 import { Action, GameContext, Unit } from '@repo/game/types'
-import { ReactNode } from 'react'
+import { Fragment, ReactNode } from 'react'
 
 export type ActionRenderer = {
   name: string
@@ -31,7 +31,7 @@ export type ActionRenderer = {
   lore?: (action: Action) => ReactNode
   log?: (
     action: Action,
-    source: Unit,
+    source: Unit | undefined,
     targets: Unit[],
     ctx: GameContext
   ) => ReactNode
@@ -64,12 +64,18 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
     name: ACTION_NAMES[SetIsActiveId],
     cost: '',
     description: () => <></>,
-    log: (_, __, [target], ctx) => (
+    log: (_, __, targets, ctx) => (
       <span>
-        <LogUnit teamId={target.teamId} user={ctx.user}>
-          {target.name}
-        </LogUnit>{' '}
-        joins the battle!
+        {targets.map((target, i) => (
+          <Fragment key={target.id}>
+            {i > 0 && i !== targets.length - 1 ? ',' : ''}
+            {targets.length > 1 && i === targets.length - 1 ? ' and ' : ' '}
+            <LogUnit teamId={target.teamId} user={ctx.user}>
+              {target.name}
+            </LogUnit>
+          </Fragment>
+        ))}{' '}
+        join{targets.length > 0 ? '' : 's'} the battle!
       </span>
     ),
   },
@@ -83,8 +89,8 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
           {target.name}
         </LogUnit>{' '}
         is switched in for{' '}
-        <LogUnit teamId={source.teamId} user={ctx.user}>
-          {source.name}
+        <LogUnit teamId={source?.teamId} user={ctx.user}>
+          {source?.name}
         </LogUnit>
       </span>
     ),
@@ -96,8 +102,8 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
     cost: '',
     description: (action) => (
       <>
-        Applies <span className="font-bold">Disabled)</span> to target enemy
-        unit for 2 turns.
+        Applies <span className="font-bold">Disabled</span> to target enemy unit
+        for 2 turns.
       </>
     ),
     help: () => <div>(The unit cannot use their last used action.)</div>,
@@ -185,7 +191,8 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
       const furySwipes = action as FurySwipes
       return (
         <>
-          Deals {furySwipes.damage} damage to target enemy unit. Repeat 6 times.
+          Deals {furySwipes.damage.value} damage to target enemy unit. Repeats
+          4-6 times.
         </>
       )
     },
@@ -221,7 +228,7 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
     cost: '',
     description: (action) => (
       <>
-        Apply <span className="font-bold">Trick Room</span> to all units.
+        Applies <span className="font-bold">Trick Room</span> to all units.
       </>
     ),
     help: () => <>(The unit's speed stat is multiplied by -1.)</>,

@@ -15,8 +15,6 @@ import { EmptyArray } from '../Queries/EmptyArray'
 
 export const SwordsDanceId = ActionId()
 export class SwordsDance extends Action {
-  maxTargetCount = 0
-
   constructor(sourceId: Id, teamId: Id) {
     super(SwordsDanceId, {
       sourceId,
@@ -26,15 +24,13 @@ export class SwordsDance extends Action {
         parentId: sourceId,
         offset: 30,
       }),
+
+      targets: new EmptyArray(),
       attackType: 'magic',
+      maxTargetCount: 0,
     })
   }
 
-  checkCost = (source: Unit): boolean => {
-    return source.values.focus >= 30
-  }
-
-  targets = new EmptyArray()
   threshold = (source: Unit): number | undefined => undefined
   critical = (source: Unit): number | undefined => undefined
 

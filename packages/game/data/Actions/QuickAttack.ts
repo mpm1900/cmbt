@@ -13,22 +13,21 @@ import { GetUnits } from '../Queries'
 export const QuickAttackId = ActionId()
 
 export class QuickAttack extends Action {
-  maxTargetCount: number = 1
-
   constructor(sourceId: Id, teamId: Id) {
     super(QuickAttackId, {
       sourceId,
       teamId,
       cost: new Identity({ sourceId }),
+      targets: new GetUnits({
+        notTeamId: teamId,
+        isActive: true,
+      }),
       priority: 1,
       attackType: 'physical',
+      maxTargetCount: 1,
     })
   }
 
-  targets = new GetUnits({
-    notTeamId: this.teamId,
-    isActive: true,
-  })
   threshold = (source: Unit): number | undefined => {
     return 95 + source.stats.accuracy
   }

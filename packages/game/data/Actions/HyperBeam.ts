@@ -20,8 +20,6 @@ import { GetUnits } from '../Queries'
 
 export const HyperBeamId = ActionId()
 export class HyperBeam extends Action {
-  maxTargetCount: number = 1
-
   constructor(sourceId: Id, teamId: Id) {
     super(HyperBeamId, {
       sourceId,
@@ -31,18 +29,15 @@ export class HyperBeam extends Action {
         parentId: sourceId,
         offset: 30,
       }),
+      targets: new GetUnits({
+        notTeamId: teamId,
+        isActive: true,
+      }),
       attackType: 'magic',
+      maxTargetCount: 1,
     })
   }
 
-  checkCost = (source: Unit): boolean => {
-    return source.values.focus >= 30
-  }
-
-  targets = new GetUnits({
-    notTeamId: this.teamId,
-    isActive: true,
-  })
   threshold = (source: Unit): number | undefined => 95 + source.stats.accuracy
   critical = (source: Unit): number | undefined => 5
 

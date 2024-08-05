@@ -9,11 +9,11 @@ export function logActionResult(
 ) {
   const { source, targets } = result
   const renderer = ActionRenderers[action.id]
-  if (source && targets) {
+  if (targets) {
     const baseLog = (
       <span className="">
-        <LogUnit teamId={source.teamId} user={ctx.user} className="font-bold">
-          {source.name}
+        <LogUnit teamId={source?.teamId} user={ctx.user} className="font-bold">
+          {source?.name}
         </LogUnit>{' '}
         uses <LogActionName action={action} />
       </span>

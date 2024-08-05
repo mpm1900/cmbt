@@ -7,6 +7,7 @@ import {
   Modifier,
   Query,
   Unit,
+  ValueKey,
 } from '.'
 import {
   ActionRenderData,
@@ -45,9 +46,10 @@ export type ActionProps = {
   sourceId: Id
   teamId: Id
   cost: Mutation
+  targets: Query<Unit[]>
   attackType: AttackTypes
   priority?: number
-  maxTargetCount?: number
+  maxTargetCount: number
 }
 
 export const ActionId = () => `Action@${nanoid()}`
@@ -55,13 +57,13 @@ export const ActionId = () => `Action@${nanoid()}`
 export abstract class Action {
   readonly id: Id
   readonly rtid: Id
-  sourceId: Id
+  readonly sourceId: Id
   readonly teamId: Id
-  readonly cost: Mutation
   readonly priority: number
+  readonly maxTargetCount: number
   readonly attackType: AttackTypes
-
-  abstract maxTargetCount: number
+  readonly cost: Mutation
+  readonly targets: Query<Unit[]>
   abstract threshold: (source: Unit) => number | undefined
   abstract critical: (source: Unit) => number | undefined
   abstract resolve(
@@ -70,7 +72,6 @@ export abstract class Action {
     ctx: GameContext,
     options?: ActionRenderOptions
   ): ActionResult
-  abstract targets: Query<Unit[]>
 
   // this only works for damage actions
   getAiAction = (targets: Unit[], ctx: GameContext): AiAction => {
@@ -99,8 +100,10 @@ export abstract class Action {
     this.sourceId = props.sourceId
     this.teamId = props.teamId
     this.cost = props.cost
+    this.targets = props.targets
     this.priority = props.priority ?? 0
     this.attackType = props.attackType
+    this.maxTargetCount = props.maxTargetCount
   }
 
   getDamage(source: Unit, targets: Unit[], ctx: GameContext): number[] {
@@ -116,6 +119,9 @@ export abstract class Action {
   }
 
   checkCost(source: Unit): boolean {
-    return true
+    const costs = applyMutation(ZERO_UNIT, this.cost).values
+    return Object.entries(costs).every(([key, value]) => {
+      return value * -1 <= source.values[key as ValueKey]
+    })
   }
 }

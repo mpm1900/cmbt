@@ -41,7 +41,7 @@ export function UnitStats(props: UnitStatsProps) {
             </span>
           </div>
           <div className="flex justify-between space-x-2">
-            <strong>DEV</strong>
+            <strong>DV</strong>
             <span>
               ({Math.max(unit.values.devotion, 0)}/{unit.stats.devotion})
             </span>

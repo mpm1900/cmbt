@@ -1,7 +1,7 @@
 import {
   Action,
   ActionResult,
-  AiAction,
+  ActionAi,
   CombatContext,
   Id,
   Unit,
@@ -30,7 +30,7 @@ export class IcyWind extends Action {
 
   threshold = (source: Unit): number | undefined => undefined
   critical = (source: Unit): number | undefined => undefined
-  getAiAction(targets: Unit[], ctx: CombatContext): AiAction {
+  getAi(targets: Unit[], ctx: CombatContext): ActionAi {
     return { action: this, weight: 0, targetIds: [] }
   }
 

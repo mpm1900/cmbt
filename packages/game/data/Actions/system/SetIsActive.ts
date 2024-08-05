@@ -1,7 +1,7 @@
 import {
   Action,
   ActionResult,
-  AiAction,
+  ActionAi,
   CombatContext,
   Id,
   Unit,
@@ -32,7 +32,7 @@ export class SetIsActive extends Action {
   threshold = (source: Unit): number | undefined => undefined
   critical = (source: Unit): number | undefined => undefined
 
-  getAiAction = (targets: Unit[], ctx: CombatContext): AiAction => {
+  getAi = (targets: Unit[], ctx: CombatContext): ActionAi => {
     const modified = targets.map((target) => applyModifiers(target, ctx).unit)
     const remainingHealth = modified.map(
       (unit) => unit.stats.health - unit.values.damage

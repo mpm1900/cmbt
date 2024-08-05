@@ -1,8 +1,8 @@
 import {
   Action,
-  ActionRenderOptions,
+  ActionResolveOptions,
   ActionResult,
-  AiAction,
+  ActionAi,
   CombatContext,
   Id,
   Unit,
@@ -11,7 +11,7 @@ import {
   applyModifiers,
   calculateDamage,
   getActionData,
-  getDamageAiAction,
+  getDamageAi,
   parseSuccess,
 } from '../../utils'
 import { modifyRenderContext } from '../../utils/modifyRenderContext'
@@ -49,15 +49,15 @@ export class Fireball extends Action {
     return 95 + source.stats.accuracy
   }
   critical = (source: Unit): number | undefined => undefined
-  getAiAction(targets: Unit[], ctx: CombatContext): AiAction {
-    return getDamageAiAction(this, targets, ctx)
+  getAi(targets: Unit[], ctx: CombatContext): ActionAi {
+    return getDamageAi(this, targets, ctx)
   }
 
   resolve = (
     source: Unit,
     targets: Unit[],
     ctx: CombatContext,
-    options: ActionRenderOptions
+    options: ActionResolveOptions
   ): ActionResult => {
     ctx = modifyRenderContext(options, ctx)
     const data = getActionData(source, this, ctx)

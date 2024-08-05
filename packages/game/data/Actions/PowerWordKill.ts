@@ -1,8 +1,8 @@
 import {
   Action,
-  ActionRenderOptions,
+  ActionResolveOptions,
   ActionResult,
-  AiAction,
+  ActionAi,
   CombatContext,
   Id,
   Unit,
@@ -10,7 +10,7 @@ import {
 import {
   applyModifiers,
   getActionData,
-  getDamageAiAction,
+  getDamageAi,
   parseSuccess,
 } from '../../utils'
 import { modifyRenderContext } from '../../utils/modifyRenderContext'
@@ -38,15 +38,15 @@ export class PowerWordKill extends Action {
     return 40 + source.stats.accuracy
   }
   critical = (source: Unit): number | undefined => undefined
-  getAiAction(targets: Unit[], ctx: CombatContext): AiAction {
-    return getDamageAiAction(this, targets, ctx)
+  getAi(targets: Unit[], ctx: CombatContext): ActionAi {
+    return getDamageAi(this, targets, ctx)
   }
 
   resolve = (
     source: Unit,
     targets: Unit[],
     ctx: CombatContext,
-    options?: ActionRenderOptions
+    options?: ActionResolveOptions
   ): ActionResult => {
     if (options?.disableLogging) {
       ctx = { ...ctx, log: () => {} }

@@ -1,7 +1,7 @@
-import { ActionRenderOptions, CombatContext } from '../types'
+import { ActionResolveOptions, CombatContext } from '../types'
 
 export function modifyRenderContext(
-  options: ActionRenderOptions | undefined,
+  options: ActionResolveOptions | undefined,
   ctx: CombatContext
 ): CombatContext {
   return {

@@ -1,10 +1,10 @@
 import random from 'random'
-import { Action, RollAccuracyResult, Unit } from '../types'
+import { Action, ActionAccuracyResult, Unit } from '../types'
 
 export function rollThreshold(
   source: Unit,
   action: Action
-): RollAccuracyResult {
+): ActionAccuracyResult {
   const threshold = action.threshold(source)
   const critical = action.critical(source)
   const roll = random.int(0, 100)

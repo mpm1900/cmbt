@@ -1,10 +1,16 @@
-import { RouterProvider } from '@tanstack/react-router'
-import { router } from './pages'
-import { Combat } from './domain'
+import { createRouter, RouterProvider } from '@tanstack/react-router'
+import { routeTree } from './routeTree.gen'
+
+const router = createRouter({ routeTree })
+
+declare module '@tanstack/react-router' {
+  interface Register {
+    router: typeof router
+  }
+}
 
 function App() {
-  return <Combat />
-  return <RouterProvider router={router} />
+  return <RouterProvider basepath="/cmbt/" router={router} />
 }
 
 export default App

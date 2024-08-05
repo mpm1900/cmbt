@@ -1,7 +1,7 @@
 import {
   Action,
   ActionResult,
-  AiAction,
+  ActionAi,
   CombatContext,
   Id,
   Unit,
@@ -10,7 +10,7 @@ import {
   applyModifiers,
   calculateDamage,
   getActionData,
-  getDamageAiAction,
+  getDamageAi,
 } from '../../utils'
 import { ActionId } from '../Id'
 import { DamageParent, Identity } from '../Mutations'
@@ -35,8 +35,8 @@ export class MagicMissile extends Action {
 
   threshold = (source: Unit): number | undefined => undefined
   critical = (source: Unit): number | undefined => undefined
-  getAiAction(targets: Unit[], ctx: CombatContext): AiAction {
-    return getDamageAiAction(this, targets, ctx)
+  getAi(targets: Unit[], ctx: CombatContext): ActionAi {
+    return getDamageAi(this, targets, ctx)
   }
 
   resolve = (

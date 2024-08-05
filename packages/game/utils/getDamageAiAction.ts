@@ -3,7 +3,7 @@ import { Action, CombatContext, Unit } from '../types'
 import { applyModifiers } from './applyModifiers'
 import { getActionDamage } from './getActionDamage'
 
-export function getDamageAiAction(
+export function getDamageAi(
   action: Action,
   targets: Unit[],
   ctx: CombatContext

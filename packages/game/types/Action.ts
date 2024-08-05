@@ -6,13 +6,13 @@ import { AttackTypes, Unit } from './Unit'
 import { Modifier } from './Modifier'
 import { Mutation } from './Mutation'
 
-export type AiAction = {
+export type ActionAi = {
   action: Action
   weight: number
   targetIds: Id[]
 }
 
-export type RollAccuracyResult = {
+export type ActionAccuracyResult = {
   roll: number
   success: boolean
   threshold: number | undefined
@@ -22,7 +22,7 @@ export type RollAccuracyResult = {
 
 export type ActionResolveData = {
   source: Unit
-  accuracyRoll: RollAccuracyResult
+  accuracyRoll: ActionAccuracyResult
   setLastUsed: Mutation
 }
 
@@ -44,7 +44,7 @@ export type ActionResult = {
   updateActionQueue?: (queue: ActionsQueueItem[]) => ActionsQueueItem[]
 }
 
-export type ActionRenderOptions = {
+export type ActionResolveOptions = {
   disableLogging?: boolean
   disableRandomness?: boolean
   bypassAccuracyRolls?: boolean
@@ -76,9 +76,12 @@ export abstract class Action {
     source: Unit,
     targets: Unit[],
     ctx: CombatContext,
-    options?: ActionRenderOptions
+    options?: ActionResolveOptions
   ): ActionResult
-  abstract getAiAction(targets: Unit[], ctx: CombatContext): AiAction
+
+  getAi(targets: Unit[], ctx: CombatContext): ActionAi {
+    return { action: this, weight: 0, targetIds: [] }
+  }
 
   constructor(id: Id, props: ActionProps) {
     this.id = id

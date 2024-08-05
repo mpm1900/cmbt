@@ -1,8 +1,8 @@
 import {
   Action,
-  ActionRenderOptions,
+  ActionResolveOptions,
   ActionResult,
-  AiAction,
+  ActionAi,
   CombatContext,
   Id,
   Unit,
@@ -41,7 +41,7 @@ export class WillOWisp extends Action {
     return 90 + source.stats.accuracy
   }
   critical = (source: Unit): number | undefined => undefined
-  getAiAction(targets: Unit[], ctx: CombatContext): AiAction {
+  getAi(targets: Unit[], ctx: CombatContext): ActionAi {
     return { action: this, weight: 0, targetIds: [] }
   }
 
@@ -49,7 +49,7 @@ export class WillOWisp extends Action {
     source: Unit,
     targets: Unit[],
     ctx: CombatContext,
-    options: ActionRenderOptions
+    options: ActionResolveOptions
   ): ActionResult => {
     ctx = modifyRenderContext(options, ctx)
     const data = getActionData(source, this, ctx)

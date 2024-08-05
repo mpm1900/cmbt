@@ -1,11 +1,11 @@
-import { ActionResult, AiAction, CombatContext, Id, Unit } from '../../types'
+import { ActionResult, ActionAi, CombatContext, Id, Unit } from '../../types'
 import { Action } from '../../types/Action'
 import {
   applyModifiers,
   calculateDamage,
   applyMutation,
   getActionData,
-  getDamageAiAction,
+  getDamageAi,
 } from '../../utils'
 import { ActionId } from '../Id'
 import { DamageParent, Identity } from '../Mutations'
@@ -37,8 +37,8 @@ export class Explosion extends Action {
 
   threshold = (source: Unit): number | undefined => undefined
   critical = (source: Unit): number | undefined => undefined
-  getAiAction(targets: Unit[], ctx: CombatContext): AiAction {
-    return getDamageAiAction(this, targets, ctx)
+  getAi(targets: Unit[], ctx: CombatContext): ActionAi {
+    return getDamageAi(this, targets, ctx)
   }
 
   resolve = (

@@ -1,7 +1,7 @@
 import {
   Action,
   ActionResult,
-  AiAction,
+  ActionAi,
   CombatContext,
   Id,
   Unit,
@@ -28,9 +28,6 @@ export class Disable extends Action {
 
   threshold = (source: Unit): number | undefined => undefined
   critical = (source: Unit): number | undefined => undefined
-  getAiAction(targets: Unit[], ctx: CombatContext): AiAction {
-    return { action: this, weight: 0, targetIds: [] }
-  }
 
   resolve = (
     source: Unit,

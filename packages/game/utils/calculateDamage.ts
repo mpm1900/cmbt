@@ -2,7 +2,7 @@ import {
   AttackTypes,
   Damage,
   DamageType,
-  RollAccuracyResult,
+  ActionAccuracyResult,
   Unit,
 } from '../types'
 
@@ -37,7 +37,7 @@ export function getCriticalFactor(critical: boolean, source: Unit) {
   return critical ? 1.5 : 1
 }
 
-export type CalculateDamageConfig = RollAccuracyResult & {
+export type CalculateDamageConfig = ActionAccuracyResult & {
   randomFactor?: number
 }
 

@@ -17,7 +17,7 @@ import {
 } from '@/hooks/state'
 import { ActiveUnit } from './components/ActiveUnit'
 import { useCombatLog } from './hooks/state/useCombatLog'
-import { PendingTeamAction } from './components/PendingTeamAction'
+import { CleanupSwitchUnits } from './components/CleanupSwitchUnits'
 import { RequireTurnStatus } from './components/RequireTurnStatus'
 import { TeamBench } from './components/TeamBench'
 import { getTeamsWithSelectionRequired } from './utils/getTeamsWithSelectionRequired'
@@ -140,7 +140,7 @@ function App() {
                   {getTeamsWithSelectionRequired(ctx)
                     .filter((team) => team.id === ctx.user)
                     .map((team) => (
-                      <PendingTeamAction key={team.id} teamId={team.id} />
+                      <CleanupSwitchUnits key={team.id} teamId={team.id} />
                     ))}
                 </div>
               </RequireTurnStatus>

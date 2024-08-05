@@ -9,6 +9,7 @@ import { ItemsList } from './ItemsList'
 import { useGameActions, useGameContext } from '@/hooks'
 import { useActiveUiUnit, useTeams, useTurn } from '@/hooks/state'
 import { ActionsList } from './ActionsList'
+import { ActiveUnitSwitchUnits } from './ActiveUnitSwitchUnits'
 
 export type ActiveUnitProps = {}
 
@@ -70,11 +71,13 @@ export function ActiveUnit() {
         />
       </TabsContent>
       <TabsContent value="units">
-        <SwitchUnits
-          selectedTargets={[]}
-          action={new SwitchUnit(unit.id, unit.teamId)}
-          onClick={(action, target) => {
-            commitAction(action, [target.id])
+        <ActiveUnitSwitchUnits
+          unit={unit}
+          onConfirm={(targets) => {
+            commitAction(
+              new SwitchUnit(unit.id, unit.teamId),
+              targets.map((t) => t.id)
+            )
           }}
         />
       </TabsContent>

@@ -5,27 +5,29 @@ import { applyModifiers } from '@repo/game/utils'
 import { Action, Unit } from '@repo/game/types'
 import { useActions } from '@/hooks/state'
 import { SwitchUnitId } from '@repo/game/data'
-import { Card, CardContent, CardHeader, CardTitle } from './ui/card'
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from './ui/card'
 
 export type SwitchUnitsProps = {
   action: Action
   selectedTargets: Unit[]
-  onClick: (action: Action, unit: Unit) => void
+  onClick: (unit: Unit) => void
+  onConfirm: () => void
 }
 
 export function SwitchUnits(props: SwitchUnitsProps) {
-  const { action, selectedTargets, onClick } = props
+  const { action, selectedTargets, onClick, onConfirm } = props
   const ctx = useGameContext()
   const queue = useActions((s) => s.queue)
   const queuedSwitchActions = queue.filter(
     (i) => i.action.id === SwitchUnitId && action.teamId === ctx.user
   )
+
   const targets = action.targets.resolve(ctx)
 
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Select a Unit...</CardTitle>
+        <CardTitle>Select a Unit to switch in...</CardTitle>
       </CardHeader>
       <CardContent>
         <div className="grid grid-cols-2 gap-2">
@@ -33,6 +35,7 @@ export function SwitchUnits(props: SwitchUnitsProps) {
             .filter((u) => u.teamId === action.teamId)
             .map((u) => {
               const { unit } = applyModifiers(u, ctx)
+              const isSelected = !!selectedTargets.find((t) => t.id === u.id)
               const remainingHealth = Math.max(
                 unit.stats.health - unit.values.damage,
                 0
@@ -43,14 +46,15 @@ export function SwitchUnits(props: SwitchUnitsProps) {
               return (
                 <Button
                   key={u.id}
-                  variant={
-                    selectedTargets.find((t) => t.id === u.id)
-                      ? 'default'
-                      : 'secondary'
+                  variant={isSelected ? 'default' : 'secondary'}
+                  disabled={
+                    !targets.find((t) => t.id === u.id) ||
+                    isPending ||
+                    (!isSelected &&
+                      selectedTargets.length === action.maxTargetCount)
                   }
-                  disabled={!targets.find((t) => t.id === u.id) || isPending}
                   className="items-start h-full flex-col"
-                  onClick={() => onClick(action, u)}
+                  onClick={() => onClick(u)}
                 >
                   <div className="flex w-full items-center">
                     <span className="text-lg text-left flex-1 text-ellipsis overflow-hidden">
@@ -83,6 +87,11 @@ export function SwitchUnits(props: SwitchUnitsProps) {
             })}
         </div>
       </CardContent>
+      {selectedTargets.length === action.maxTargetCount && (
+        <CardFooter className="justify-end">
+          <Button onClick={() => onConfirm()}>Switch In</Button>
+        </CardFooter>
+      )}
     </Card>
   )
 }

@@ -6,11 +6,11 @@ import { useState } from 'react'
 import { Unit } from '@repo/game/types'
 import { MAX_ACTIVE_UNITS_COUNT } from '@/constants'
 
-export type PendingTeamActionProps = {
+export type CleanupSwitchUnitsProps = {
   teamId: string
 }
 
-export function PendingTeamAction(props: PendingTeamActionProps) {
+export function CleanupSwitchUnits(props: CleanupSwitchUnitsProps) {
   const { teamId } = props
   const ctx = useGameContext()
   const fns = useGameActions()
@@ -26,7 +26,8 @@ export function PendingTeamAction(props: PendingTeamActionProps) {
       <SwitchUnits
         selectedTargets={targets}
         action={new SetIsActive('', teamId, aliveActiveUnits.length)}
-        onClick={(action, unit) => {
+        onConfirm={() => {}}
+        onClick={(unit) => {
           if (targets.find((u) => u.id === unit.id)) {
             setTargets((t) => t.filter((u) => u.id !== unit.id))
           } else {

@@ -20,29 +20,25 @@ export function CleanupSwitchUnits(props: CleanupSwitchUnitsProps) {
     isActive: true,
     isAlive: true,
   }).resolve(ctx)
+  const selectCount = MAX_ACTIVE_UNITS_COUNT - aliveActiveUnits.length
 
   return (
     <div className="w-[580px]">
       <SwitchUnits
         selectedTargets={targets}
-        action={new SetIsActive('', teamId, aliveActiveUnits.length)}
-        onConfirm={() => {}}
+        action={new SetIsActive('', teamId, selectCount)}
+        onConfirm={() => {
+          fns.pushCleanupAction({
+            id: nanoid(),
+            action: new SetIsActive('', teamId),
+            targetIds: targets.map((u) => u.id),
+          })
+        }}
         onClick={(unit) => {
           if (targets.find((u) => u.id === unit.id)) {
             setTargets((t) => t.filter((u) => u.id !== unit.id))
           } else {
-            if (
-              targets.length + 1 ===
-              MAX_ACTIVE_UNITS_COUNT - aliveActiveUnits.length
-            ) {
-              fns.pushCleanupAction({
-                id: nanoid(),
-                action: new SetIsActive(unit.id, teamId),
-                targetIds: [...targets.map((u) => u.id), unit.id],
-              })
-            } else {
-              setTargets((t) => [...t, unit])
-            }
+            setTargets((t) => [...t, unit])
           }
         }}
       />

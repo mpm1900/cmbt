@@ -5,7 +5,7 @@ import {
   TriggerEvent,
 } from '@repo/game/types'
 import { getTriggersByEvent, isUnitAliveCtx } from '@repo/game/utils'
-import { useActions, useCleanup, useCombat, useTurn } from './state'
+import { useActions, useActiveUnit, useCleanup, useCombat } from './state'
 import { logModifiers, logMutations } from '@/utils'
 import { logTriggers } from '@/utils/logTriggers'
 import { LogCritical, LogHeader } from '@/components/ui/log'
@@ -24,8 +24,8 @@ export type CommitResults = (
 ) => CombatContext
 
 export function useCombatActions() {
-  const turnStore = useTurn()
   const combat = useCombat()
+  const activeUnit = useActiveUnit()
   const actionsStore = useActions()
   const cleanupStore = useCleanup()
 
@@ -110,9 +110,12 @@ export function useCombatActions() {
       context.modifiers = decrementModifierDurations()
       cleanup(false, context)
     } else {
-      turnStore.next()
-      context.log(<LogHeader>turn {turnStore.turn.count + 2}</LogHeader>)
-      turnStore.setStatus('waiting-for-input')
+      combat.next()
+      context.log(<LogHeader>turn {combat.turn.count + 1}</LogHeader>)
+      activeUnit.setUnit(
+        context.units.find((u) => u.flags.isActive && u.teamId === context.user)
+      )
+      combat.setStatus('waiting-for-input')
     }
   }
 
@@ -120,8 +123,8 @@ export function useCombatActions() {
     handleCleanup(
       context,
       () => nextTurn(runEndOfTurnTriggers, context),
-      () => turnStore.setStatus('cleanup'),
-      () => turnStore.setStatus('done')
+      () => combat.setStatus('cleanup'),
+      () => combat.setStatus('done')
     )
   }
 

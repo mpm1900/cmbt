@@ -6,7 +6,7 @@ export type ActiveUiUnitStore = {
   setUnit: (unit: Unit | undefined) => void
 }
 
-export const useActiveUiUnit = create<ActiveUiUnitStore>((set) => ({
+export const useActiveUnit = create<ActiveUiUnitStore>((set) => ({
   unit: undefined,
   setUnit: (unit) => set({ unit }),
 }))

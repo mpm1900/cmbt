@@ -1,17 +1,27 @@
-import { TeamId } from '@repo/game/data'
 import {
+  ActionResult,
   CombatContext,
   Id,
   Modifier,
   Mutation,
   Team,
+  Turn,
+  TurnStatus,
   Unit,
 } from '@repo/game/types'
 import { validateModifiers } from '@repo/game/utils'
 import { create } from 'zustand'
 
+export type InitializeProps = {
+  teams: Team[]
+  units: Unit[]
+  user: string
+}
+
 export type CombatState = Omit<CombatContext, 'log'>
 export type CombatStore = CombatState & {
+  initialize: (props: InitializeProps) => CombatStore
+
   // units
   setUnits: (units: Unit[]) => Unit[]
   mutate(mutations: Mutation[], ctx: CombatContext): Unit[]
@@ -27,10 +37,28 @@ export type CombatStore = CombatState & {
   setTeams: (teams: Team[]) => void
   setUser: (id: Id) => void
   getRandomTeamId: () => string
+
+  // turn
+  next: () => void
+  setStatus: (status: TurnStatus) => void
+  setTurn: (fn: (turn: Turn) => Partial<Turn>) => void
+  pushResult: (result: ActionResult | undefined) => void
 }
 
 export const useCombat = create<CombatStore>((set, get) => {
   return {
+    initialize: (props) => {
+      const modifiers = props.units
+        .filter((u) => u.flags.isActive)
+        .flatMap((u) => u.modifiers())
+      set({
+        units: props.units,
+        teams: props.teams,
+        user: props.user,
+        modifiers: validateModifiers(modifiers, []),
+      })
+      return get()
+    },
     units: [],
     setUnits(units) {
       set({
@@ -81,10 +109,35 @@ export const useCombat = create<CombatStore>((set, get) => {
       }))
       return get().modifiers
     },
-    teams: [{ id: TeamId() }, { id: TeamId() }],
+    teams: [],
     user: '',
     setTeams: (teams) => set({ teams }),
     setUser: (user) => set({ user }),
     getRandomTeamId: () => get().teams[Math.round(Math.random())]?.id,
+
+    turn: {
+      count: 0,
+      status: 'init',
+      results: [],
+    },
+    next: () =>
+      set((s) => ({
+        turn: { ...s.turn, count: s.turn.count + 1, results: [] },
+      })),
+    setStatus: (status) => set((s) => ({ turn: { ...s.turn, status } })),
+    setTurn: (fn) =>
+      set((s) => ({
+        turn: {
+          ...s.turn,
+          ...fn(s.turn),
+        },
+      })),
+    pushResult: (result) =>
+      set((s) => ({
+        turn: {
+          ...s.turn,
+          results: [...s.turn.results, result],
+        },
+      })),
   }
 })

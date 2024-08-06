@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { useActions, useTurn } from '../state'
+import { useActions, useCombat } from '../state'
 import { useCombatActions } from '../useCombatActions'
 import { useCombatContext } from '../useCombatContext'
 import { handleNextAction } from '@/utils'
@@ -7,7 +7,7 @@ import { GAME_SPEED } from '@/constants'
 import { isUnitAliveCtx } from '@repo/game/utils'
 
 export function useTurnController() {
-  const { turn, pushResult } = useTurn()
+  const { turn, pushResult } = useCombat()
   const active = turn.results[turn.results.length - 1]
   const queue = useActions()
   const fns = useCombatActions()

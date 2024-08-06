@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 import { Action, Id, Item, Unit } from '@repo/game/types'
 import { useCombatContext } from '@/hooks'
 import { ActionTargets } from './ActionTargets'
-import { useActiveUiUnit } from '@/hooks/state'
+import { useActiveUnit } from '@/hooks/state'
 import { ActionRenderers } from '@/renderers'
 
 export type ItemsListProps = {
@@ -15,7 +15,7 @@ export type ItemsListProps = {
 export function ItemsList(props: ItemsListProps) {
   const { onConfirm } = props
   const { items } = useItems()
-  const unit = useActiveUiUnit((u) => u.unit)
+  const unit = useActiveUnit((u) => u.unit)
   const ctx = useCombatContext()
   const [activeItem, setActiveItem] = useState<Item>()
   const [targets, setTargets] = useState<Unit[]>([])
@@ -87,6 +87,11 @@ export function ItemsList(props: ItemsListProps) {
             )
           })}
         </div>
+        {items.length === 0 && (
+          <div className=" text-center text-muted-foreground italic">
+            No Items
+          </div>
+        )}
         {activeItem && (
           <Card className="dark:bg-muted/40 space-y-2">
             <CardContent className="p-4 pt-6">

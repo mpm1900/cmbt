@@ -1,6 +1,5 @@
 import { useEffect } from 'react'
 import { useCombatContext } from '../useCombatContext'
-import { useTurn } from '../state/useTurn'
 import {
   applyModifiers,
   checkActionCost,
@@ -20,12 +19,11 @@ export function useAiActions() {
   const queue = useActions((s) => s.queue)
   const cleanup = useCleanup((s) => s.queue)
   const user = useCombat((t) => t.user)
-  const status = useTurn((t) => t.turn.status)
   const debug = useDebugMode()
 
   useEffect(() => {
     if (debug.active) return
-    if (status === 'waiting-for-input' && queue.length === 0) {
+    if (ctx.turn.status === 'waiting-for-input' && queue.length === 0) {
       const units = ctx.units.map((u) => applyModifiers(u, ctx).unit)
       const aiUnits = getActionableUnits(units).filter((u) => u.teamId !== user)
       const aiActions = aiUnits.map((unit) => {
@@ -47,10 +45,10 @@ export function useAiActions() {
         }))
       )
     }
-  }, [status, queue.length])
+  }, [ctx.turn.status, queue.length])
 
   useEffect(() => {
-    if (status === 'cleanup' && cleanup.length === 0) {
+    if (ctx.turn.status === 'cleanup' && cleanup.length === 0) {
       const aiTeam = getTeamsWithSelectionRequired(ctx).find(
         (t) => t.id !== ctx.user
       )
@@ -78,5 +76,5 @@ export function useAiActions() {
         })
       }
     }
-  }, [status, cleanup.length])
+  }, [ctx.turn.status, cleanup.length])
 }

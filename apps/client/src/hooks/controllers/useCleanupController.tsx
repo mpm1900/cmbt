@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { useCleanup, useTurn } from '../state'
+import { useCleanup } from '../state'
 import { useCombatContext } from '../useCombatContext'
 import { useCombatActions } from '../useCombatActions'
 import { getTeamsWithSelectionRequired, handleNextAction } from '@/utils'
@@ -7,13 +7,12 @@ import { nanoid } from 'nanoid/non-secure'
 import { SetIsActive } from '@repo/game/data'
 
 export function useCleanupController() {
-  const status = useTurn((s) => s.turn.status)
   const fns = useCombatActions()
   let queue = useCleanup()
   let ctx = useCombatContext()
 
   useEffect(() => {
-    if (status === 'cleanup') {
+    if (ctx.turn.status === 'cleanup') {
       const teams = getTeamsWithSelectionRequired(ctx)
       if (queue.queue.length === teams.length && teams.length > 0) {
         queue = queue.setQueue((items) => [
@@ -33,5 +32,5 @@ export function useCleanupController() {
         })
       }
     }
-  }, [status, queue.queue.length])
+  }, [ctx.turn.status, queue.queue.length])
 }

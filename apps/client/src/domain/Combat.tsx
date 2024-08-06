@@ -32,7 +32,7 @@ export function Combat() {
   return (
     <div className="flex min-h-screen w-full flex-col bg-muted/40 overflow-auto">
       <div className="flex flex-1 flex-row">
-        <div className="w-[48px] h-full bg-slate-950 py-2 flex justify-center">
+        <div className="w-[64px] h-full bg-slate-950 py-2 flex justify-center">
           <Button
             className="p-1"
             variant={debug.active ? 'default' : 'secondary'}
@@ -41,7 +41,7 @@ export function Combat() {
               debug.set(!debug.active)
             }}
           >
-            DM
+            Debug
           </Button>
         </div>
         <div className="flex flex-1 flex-col justify-center overflow-auto">

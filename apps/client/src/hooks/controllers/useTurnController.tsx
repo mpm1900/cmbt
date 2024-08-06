@@ -1,13 +1,13 @@
 import { useEffect } from 'react'
-import { useActions, useCombat } from '../state'
+import { useActions, useCombat, useCombatSettings } from '../state'
 import { useCombatActions } from '../useCombatActions'
 import { useCombatContext } from '../useCombatContext'
 import { handleNextAction } from '@/utils'
-import { GAME_SPEED } from '@/constants'
 import { isUnitAliveCtx } from '@repo/game/utils'
 
 export function useTurnController() {
   const { turn, pushResult } = useCombat()
+  const gameSpeed = useCombatSettings((s) => s.gameSpeed)
   const active = turn.results[turn.results.length - 1]
   const queue = useActions()
   const fns = useCombatActions()
@@ -33,7 +33,7 @@ export function useTurnController() {
       () => {
         queue.dequeue()
       },
-      GAME_SPEED * 2 * (active ? 1 : 0)
+      gameSpeed * 2 * (active ? 1 : 0)
     )
   }
 
@@ -51,9 +51,9 @@ export function useTurnController() {
               ctx = fns.cleanupResult(ctx)
               nextAction()
             },
-            GAME_SPEED * 2 * (deadActiveUnits.length > 0 ? 1 : 0)
+            gameSpeed * 2 * (deadActiveUnits.length > 0 ? 1 : 0)
           )
-        }, GAME_SPEED)
+        }, gameSpeed)
       } else {
         nextAction()
       }

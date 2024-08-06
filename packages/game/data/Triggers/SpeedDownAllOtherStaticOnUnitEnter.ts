@@ -1,5 +1,5 @@
 import { CombatContext, Trigger, TriggerProps, Unit } from '../../types'
-import { TriggerId } from '../Id'
+import { TriggerId } from '../Ids'
 import { SpeedDownAllOther } from '../Modifiers/SpeedDownAllOther'
 
 export const SpeedDownAllOtherStaticOnUnitEnterId = TriggerId()

@@ -12,7 +12,7 @@ import {
   getActionData,
   getDamageAi,
 } from '../../utils'
-import { ActionId } from '../Id'
+import { ActionId } from '../Ids'
 import { DamageParent, Identity } from '../Mutations'
 import { SetLastUsedAction } from '../Mutations/system'
 import { GetUnits } from '../Queries'

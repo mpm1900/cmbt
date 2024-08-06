@@ -11,7 +11,7 @@ import {
   useTurnController,
 } from '@/hooks/controllers'
 import { useCleanupController } from '@/hooks/controllers/useCleanupController'
-import { useActions, useCombat, useDebugMode } from '@/hooks/state'
+import { useActions, useCombat, useCombatSettings } from '@/hooks/state'
 import { useCombatSetup } from '@/hooks/useCombatSetup'
 
 export function Combat() {
@@ -27,7 +27,7 @@ export function Combat() {
   const userTeam = combat.teams.find((t) => t.id === combat.user)
   const aiTeam = combat.teams.find((t) => t.id !== combat.user)
 
-  const debug = useDebugMode()
+  const debug = useCombatSettings()
 
   return (
     <div className="flex min-h-screen w-full flex-col bg-muted/40 overflow-auto">
@@ -35,10 +35,10 @@ export function Combat() {
         <div className="w-[64px] h-full bg-slate-950 py-2 flex justify-center">
           <Button
             className="p-1"
-            variant={debug.active ? 'default' : 'secondary'}
+            variant={debug.isDebugMode ? 'default' : 'secondary'}
             onClick={() => {
               queue.setQueue(() => [])
-              debug.set(!debug.active)
+              debug.setIsDebugMode(!debug.isDebugMode)
             }}
           >
             Debug

@@ -5,7 +5,7 @@ import {
   TriggerEvent,
 } from '@repo/game/types'
 import { getTriggersByEvent, isUnitAliveCtx } from '@repo/game/utils'
-import { useActions, useActiveUnit, useCleanup, useCombat } from './state'
+import { useActions, useCombatUi, useCleanup, useCombat } from './state'
 import { logModifiers, logMutations } from '@/utils'
 import { logTriggers } from '@/utils/logTriggers'
 import { LogCritical, LogHeader } from '@/components/ui/log'
@@ -25,7 +25,7 @@ export type CommitResults = (
 
 export function useCombatActions() {
   const combat = useCombat()
-  const activeUnit = useActiveUnit()
+  const activeUnit = useCombatUi()
   const actionsStore = useActions()
   const cleanupStore = useCleanup()
 
@@ -112,7 +112,7 @@ export function useCombatActions() {
     } else {
       combat.next()
       context.log(<LogHeader>turn {combat.turn.count + 1}</LogHeader>)
-      activeUnit.setUnit(
+      activeUnit.setActiveUnit(
         context.units.find((u) => u.flags.isActive && u.teamId === context.user)
       )
       combat.setStatus('waiting-for-input')

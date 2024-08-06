@@ -7,7 +7,7 @@ import {
   Unit,
 } from '../../../types'
 import { applyModifiers, getModifiersFromUnit } from '../../../utils'
-import { ActionId } from '../../Id'
+import { ActionId } from '../../Ids'
 import { Identity } from '../../Mutations'
 import { SetIsActiveParent } from '../../Mutations/system'
 import { GetUnits } from '../../Queries'

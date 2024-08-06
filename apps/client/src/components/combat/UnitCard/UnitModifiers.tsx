@@ -15,7 +15,7 @@ export function UnitModifiers(props: UnitModifiersProps) {
     ctx
   )
   return (
-    <div className="mt-2 space-x-2 flex flex-row">
+    <div className="mt-2 px-3 space-x-2 flex flex-row">
       {[...appliedModifiers, ...registeredTriggers].map((m) => {
         const r = ModifierRenderers[m.rid]
         return (

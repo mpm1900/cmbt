@@ -7,7 +7,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { SwitchUnits } from './SwitchUnits'
 import { ItemsList } from './ItemsList'
 import { useCombatActions, useCombatContext } from '@/hooks'
-import { useActiveUnit } from '@/hooks/state'
+import { useCombatUi } from '@/hooks/state'
 import { ActionsList } from './ActionsList'
 
 export type ActiveUnitProps = {}
@@ -15,7 +15,7 @@ export type ActiveUnitProps = {}
 export function ActiveUnit() {
   const ctx = useCombatContext()
   const { pushAction } = useCombatActions()
-  const { unit, setUnit } = useActiveUnit()
+  const { activeUnit: unit, setActiveUnit: setUnit } = useCombatUi()
   const [activeTab, setActiveTab] = useState('actions')
   const switchAction = new SwitchUnit(unit?.id ?? '', unit?.teamId ?? '')
 

@@ -1,5 +1,5 @@
 import { CombatContext, Modifier, ModifierProps, Unit } from '../../types'
-import { ModifierId } from '../Id'
+import { ModifierId } from '../Ids'
 
 export const PowerDownAllId = ModifierId()
 export class PowerDownAll extends Modifier {

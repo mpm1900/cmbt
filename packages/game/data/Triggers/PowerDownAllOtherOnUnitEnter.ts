@@ -5,7 +5,7 @@ import {
   TriggerProps,
   Unit,
 } from '../../types'
-import { TriggerId } from '../Id'
+import { TriggerId } from '../Ids'
 import { PowerDownParent } from '../Modifiers'
 
 export const PowerDownAllOtherOnUnitEnterId = TriggerId()

@@ -5,7 +5,7 @@ import {
   MutationProps,
   Unit,
 } from '../../../types'
-import { MutationId } from '../../Id'
+import { MutationId } from '../../Ids'
 
 export const AddModifiersToParentId = MutationId()
 

@@ -1,5 +1,5 @@
 import { CombatContext, Mutation, MutationProps, Unit } from '../../../types'
-import { MutationId } from '../../Id'
+import { MutationId } from '../../Ids'
 
 export const SetLastUsedActionId = MutationId()
 

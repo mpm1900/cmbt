@@ -15,7 +15,7 @@ import {
 } from '../../utils'
 import { getDamageAi } from '../../utils/getDamageAiAction'
 import { modifyRenderContext } from '../../utils/modifyRenderContext'
-import { ActionId } from '../Id'
+import { ActionId } from '../Ids'
 import { SetRechargingParent } from '../Modifiers'
 import { DamageParent, ReduceFocusParent } from '../Mutations'
 import { GetUnits } from '../Queries'

@@ -1,5 +1,5 @@
 import { CombatContext, Modifier, ModifierProps, Unit } from '../../types'
-import { ModifierId } from '../Id'
+import { ModifierId } from '../Ids'
 
 export const SetRechargingParentId = ModifierId()
 export class SetRechargingParent extends Modifier {

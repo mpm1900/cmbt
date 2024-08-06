@@ -1,22 +1,22 @@
 import { useEffect } from 'react'
 import { useCombatContext } from './useCombatContext'
 import { Identity, Potion } from '@repo/game/data'
-import { useItems } from './state/useItems'
 import { useNavigate } from '@tanstack/react-router'
 import { useCombatActions } from './useCombatActions'
+import { useCombat } from './state'
 
 export function useCombatSetup() {
+  const combat = useCombat()
   const ctx = useCombatContext()
   const fns = useCombatActions()
-  const item = useItems()
   const navigate = useNavigate()
 
   useEffect(() => {
     if (ctx.units.length === 0) {
       navigate({ to: '/' })
     } else {
-      /*
-      item.addItems(
+      combat.addItems(
+        combat.user,
         new Potion({
           sourceId: ctx.user,
           teamId: ctx.user,
@@ -26,7 +26,7 @@ export function useCombatSetup() {
           maxTargetCount: 1,
         })
       )
-        */
+
       fns.nextTurn(false, ctx)
     }
   }, [])

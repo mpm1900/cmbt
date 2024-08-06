@@ -9,7 +9,7 @@ import {
 } from '../../types'
 import { getActionData, parseSuccess } from '../../utils'
 import { modifyRenderContext } from '../../utils/modifyRenderContext'
-import { ActionId } from '../Id'
+import { ActionId } from '../Ids'
 import { PowerDownParent, BurnedPowerDownId } from '../Modifiers'
 import { ReduceFocusParent } from '../Mutations'
 import { SetLastUsedAction } from '../Mutations/system'

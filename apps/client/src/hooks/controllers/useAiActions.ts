@@ -8,7 +8,7 @@ import {
 } from '@repo/game/utils'
 import { useCombatActions } from '../useCombatActions'
 import { nanoid } from 'nanoid/non-secure'
-import { useActions, useCleanup, useCombat, useDebugMode } from '../state'
+import { useActions, useCleanup, useCombat, useCombatSettings } from '../state'
 import { GetUnits, SetIsActive } from '@repo/game/data'
 import { getTeamsWithSelectionRequired } from '@/utils'
 import { MAX_ACTIVE_UNITS_COUNT } from '@/constants'
@@ -19,10 +19,10 @@ export function useAiActions() {
   const queue = useActions((s) => s.queue)
   const cleanup = useCleanup((s) => s.queue)
   const user = useCombat((t) => t.user)
-  const debug = useDebugMode()
+  const debug = useCombatSettings()
 
   useEffect(() => {
-    if (debug.active) return
+    if (debug.isDebugMode) return
     if (ctx.turn.status === 'waiting-for-input' && queue.length === 0) {
       const units = ctx.units.map((u) => applyModifiers(u, ctx).unit)
       const aiUnits = getActionableUnits(units).filter((u) => u.teamId !== user)

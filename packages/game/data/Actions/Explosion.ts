@@ -7,7 +7,7 @@ import {
   getActionData,
   getDamageAi,
 } from '../../utils'
-import { ActionId } from '../Id'
+import { ActionId } from '../Ids'
 import { DamageParent, Identity } from '../Mutations'
 import { EmptyArray } from '../Queries'
 import { ZERO_UNIT } from '../Units'

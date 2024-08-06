@@ -1,13 +1,13 @@
 import { useEffect } from 'react'
 import { getActionableUnitsCtx } from '@repo/game/utils'
-import { useActions, useCombat, useDebugMode } from '../state'
+import { useActions, useCombat, useCombatSettings } from '../state'
 import { useCombatContext } from '../useCombatContext'
 import { useCombatActions } from '../useCombatActions'
 
 export function useInputController() {
   const combat = useCombat()
   const { queue, sort } = useActions()
-  const debug = useDebugMode()
+  const debug = useCombatSettings()
   const fns = useCombatActions()
   let ctx = useCombatContext()
 
@@ -21,7 +21,7 @@ export function useInputController() {
     if (ctx.turn.status === 'waiting-for-input') {
       const actionableUnits = getActionableUnitsCtx(ctx)
 
-      const checkLength = debug.active ? 1 : actionableUnits.length
+      const checkLength = debug.isDebugMode ? 1 : actionableUnits.length
       if (queue.length === checkLength && queue.length > 0) {
         startTurn()
       }

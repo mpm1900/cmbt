@@ -13,7 +13,7 @@ import { DamageParent, Identity } from '../Mutations'
 import { GetUnits } from '../Queries'
 import { SetLastUsedAction } from '../Mutations/system'
 import { getDamageAi } from '../../utils/getDamageAiAction'
-import { ActionId } from '../Id'
+import { ActionId } from '../Ids'
 
 export const FurySwipesId = ActionId()
 export class FurySwipes extends Action {

@@ -6,7 +6,7 @@ import {
   Id,
   Unit,
 } from '../../types'
-import { ActionId } from '../Id'
+import { ActionId } from '../Ids'
 import { InvertSpeedAll } from '../Modifiers'
 import { Identity } from '../Mutations'
 import { SetLastUsedAction } from '../Mutations/system'

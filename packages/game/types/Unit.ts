@@ -33,6 +33,17 @@ export type UnitMetadata = {
   hasBeenSeen: boolean
 }
 
+export type UnitBase = {
+  id: Id
+  name: string
+  stats: Stats
+}
+
+export type UnitBaseConfig = {
+  actionsCount: number
+  actions: Action[]
+}
+
 export type Unit = {
   readonly id: Id
   readonly teamId: Id
@@ -44,4 +55,13 @@ export type Unit = {
   modifiers(): Modifier[]
   actions: Action[]
   metadata: UnitMetadata
+}
+
+export type UnitBuilder = {
+  readonly id: Id
+  readonly teamId: Id
+  name: string
+  base: UnitBase
+  config: UnitBaseConfig
+  actions: Action[]
 }

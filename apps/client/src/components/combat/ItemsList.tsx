@@ -1,11 +1,10 @@
-import { useItems } from '@/hooks/state/useItems'
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
 import { Button } from '../ui/button'
 import { useEffect, useState } from 'react'
 import { Action, Id, Item, Unit } from '@repo/game/types'
 import { useCombatContext } from '@/hooks'
 import { ActionTargets } from './ActionTargets'
-import { useActiveUnit } from '@/hooks/state'
+import { useCombatUi } from '@/hooks/state'
 import { ActionRenderers } from '@/renderers'
 
 export type ItemsListProps = {
@@ -14,9 +13,10 @@ export type ItemsListProps = {
 
 export function ItemsList(props: ItemsListProps) {
   const { onConfirm } = props
-  const { items } = useItems()
-  const unit = useActiveUnit((u) => u.unit)
+  const unit = useCombatUi((u) => u.activeUnit)
   const ctx = useCombatContext()
+  const team = ctx.teams.find((t) => t.id === unit?.teamId)
+  const items = team?.items ?? []
   const [activeItem, setActiveItem] = useState<Item>()
   const [targets, setTargets] = useState<Unit[]>([])
   const renderer = ActionRenderers[activeItem?.id ?? '']

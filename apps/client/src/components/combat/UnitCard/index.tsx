@@ -2,7 +2,7 @@ import { Unit } from '@repo/game/types'
 import { useActions, useCombat } from '../../../hooks/state'
 import { applyModifiers } from '@repo/game/utils'
 import { useCombatContext } from '../../../hooks'
-import { useActiveUnit } from '../../../hooks/state'
+import { useCombatUi } from '../../../hooks/state'
 import { CardContent } from '../../ui/card'
 import { cn } from '@/lib/utils'
 import { UnitStats } from './UnitStats'
@@ -23,7 +23,7 @@ export function UnitCard(props: UnitDebugProps) {
   const status = ctx.turn.status
   const result = ctx.turn.results[ctx.turn.results.length - 1]
   const { queue, removeWhere } = useActions()
-  const { unit: activeUnit, setUnit: setActiveUnit } = useActiveUnit()
+  const { activeUnit: activeUnit, setActiveUnit: setActiveUnit } = useCombatUi()
   const { unit } = applyModifiers(props.unit, ctx)
   const stagedItem = queue.find((i) => i.action.sourceId === unit.id)
 

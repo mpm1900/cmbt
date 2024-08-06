@@ -6,7 +6,7 @@ import {
   Id,
   Unit,
 } from '../../types'
-import { ActionId } from '../Id'
+import { ActionId } from '../Ids'
 import { Identity } from '../Mutations'
 import { SetLastUsedAction } from '../Mutations/system'
 import { EmptyArray } from '../Queries/EmptyArray'

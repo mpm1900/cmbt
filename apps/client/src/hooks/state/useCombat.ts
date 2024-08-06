@@ -2,6 +2,7 @@ import {
   ActionResult,
   CombatContext,
   Id,
+  Item,
   Modifier,
   Mutation,
   Team,
@@ -10,6 +11,7 @@ import {
   Unit,
 } from '@repo/game/types'
 import { validateModifiers } from '@repo/game/utils'
+import { ReactNode } from 'react'
 import { create } from 'zustand'
 
 export type InitializeProps = {
@@ -18,7 +20,9 @@ export type InitializeProps = {
   user: string
 }
 
-export type CombatState = Omit<CombatContext, 'log'>
+export type CombatState = CombatContext & {
+  logs: ReactNode[]
+}
 export type CombatStore = CombatState & {
   initialize: (props: InitializeProps) => CombatStore
 
@@ -37,6 +41,8 @@ export type CombatStore = CombatState & {
   setTeams: (teams: Team[]) => void
   setUser: (id: Id) => void
   getRandomTeamId: () => string
+  addItems: (teamId: Id, ...items: Item[]) => void
+  decrementWhere: (teamId: Id, fn: (item: Item) => boolean) => void
 
   // turn
   next: () => void
@@ -56,6 +62,11 @@ export const useCombat = create<CombatStore>((set, get) => {
         teams: props.teams,
         user: props.user,
         modifiers: validateModifiers(modifiers, []),
+        turn: {
+          count: 0,
+          status: 'init',
+          results: [],
+        },
       })
       return get()
     },
@@ -114,6 +125,23 @@ export const useCombat = create<CombatStore>((set, get) => {
     setTeams: (teams) => set({ teams }),
     setUser: (user) => set({ user }),
     getRandomTeamId: () => get().teams[Math.round(Math.random())]?.id,
+    addItems: (teamId, ...items) =>
+      set((s) => ({
+        teams: s.teams.map((t) =>
+          t.id === teamId ? { ...t, items: t.items.concat(...items) } : t
+        ),
+      })),
+    decrementWhere: (teamId, fn) =>
+      set((s) => ({
+        teams: s.teams.map((t) =>
+          t.id === teamId
+            ? {
+                ...t,
+                items: t.items.map((i) => (fn(i) ? i.decrementCount() : i)),
+              }
+            : t
+        ),
+      })),
 
     turn: {
       count: 0,
@@ -139,5 +167,8 @@ export const useCombat = create<CombatStore>((set, get) => {
           results: [...s.turn.results, result],
         },
       })),
+
+    logs: [],
+    log: (node) => set((s) => ({ logs: s.logs.concat(node) })),
   }
 })

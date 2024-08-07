@@ -43,29 +43,44 @@ export type CalculateDamageConfig = ActionAccuracyResult & {
 
 export type CalculateDamageResult = {
   damage: number
+  physicalArmor: number
+  magicArmor: number
 }
 
 export function calculateDamage(
-  power: Damage,
+  damage: Damage,
   source: Unit,
   target: Unit,
   config: CalculateDamageConfig
 ): CalculateDamageResult {
   const base = calculateBaseDamage(
-    power.value,
-    power.attackType,
+    damage.value,
+    damage.attackType,
     source,
     target
   )
-  const negation = getDamageNegation(power.damageType, target)
-  const expansion = getDamageExpansion(power.damageType, target)
-  if (negation != 1) console.log(power, negation, target)
+  const negation = getDamageNegation(damage.damageType, target)
+  const expansion = getDamageExpansion(damage.damageType, target)
+  if (negation != 1) console.log(damage, negation, target)
 
   const criticalFactor = config.criticalSuccess ? (config.critical ?? 1) : 1
   const randomFactor =
     config.randomFactor !== undefined ? config.randomFactor : 1
-  const damage = Math.round(
+  const damageAmount = Math.round(
     base * negation * expansion * criticalFactor * randomFactor
   )
-  return { damage }
+  const physicalArmor =
+    damage.attackType === 'physical'
+      ? Math.min(target.values.physicalArmor, damageAmount)
+      : 0
+  const magicArmor =
+    damage.attackType === 'magic'
+      ? Math.min(target.values.magicArmor, damageAmount)
+      : 0
+
+  return {
+    damage: damageAmount - physicalArmor - magicArmor,
+    physicalArmor,
+    magicArmor,
+  }
 }

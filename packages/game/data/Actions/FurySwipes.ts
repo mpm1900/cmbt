@@ -6,7 +6,6 @@ import {
   Id,
   Unit,
   ActionAi,
-  AttackTypes,
   ActionResolveOptions,
   Damage,
 } from '../../types'
@@ -15,8 +14,9 @@ import {
   getActionData,
   modifyRenderContext,
   buildActionResult,
+  getMutationsFromDamageResult,
 } from '../../utils'
-import { DamageParent, Identity } from '../Mutations'
+import { Identity } from '../Mutations'
 import { GetUnits } from '../Queries'
 import { getDamageAi } from '../../utils/getDamageAiAction'
 import { ActionId } from '../Ids'
@@ -77,18 +77,14 @@ export class FurySwipes extends Action {
       ctx,
       (modifiedTargets) => ({
         onSuccess: {
-          mutations: modifiedTargets.map((target) => {
-            const { damage } = calculateDamage(
+          mutations: modifiedTargets.flatMap((target) => {
+            const damage = calculateDamage(
               this.damage,
               data.source,
               target,
               data.accuracyRoll
             )
-            return new DamageParent({
-              sourceId: source.id,
-              parentId: target.id,
-              damage,
-            })
+            return getMutationsFromDamageResult(source, target, damage)
           }),
         },
       })

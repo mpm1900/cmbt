@@ -15,9 +15,10 @@ import {
   getDamageAi,
   modifyRenderContext,
   buildActionResult,
+  getMutationsFromDamageResult,
 } from '../../utils'
 import { ActionId } from '../Ids'
-import { DamageParent, Identity } from '../Mutations'
+import { Identity } from '../Mutations'
 import { GetUnits } from '../Queries'
 import { DefenseDownParent } from '../Modifiers'
 
@@ -75,20 +76,14 @@ export class Crunch extends Action {
       (modifiedTargets) => ({
         onSuccess: {
           mutations: modifiedTargets.flatMap((target) => {
-            const { damage } = calculateDamage(
+            const damage = calculateDamage(
               this.damage,
               data.source,
               target,
               data.accuracyRoll
             )
 
-            return [
-              new DamageParent({
-                sourceId: source.id,
-                parentId: target.id,
-                damage,
-              }),
-            ]
+            return getMutationsFromDamageResult(source, target, damage)
           }),
           addedModifiers: applyDefenseDown
             ? modifiedTargets.map(

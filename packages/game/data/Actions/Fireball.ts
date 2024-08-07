@@ -6,7 +6,6 @@ import {
   CombatContext,
   Id,
   Unit,
-  AttackTypes,
   Damage,
 } from '../../types'
 import {
@@ -14,10 +13,11 @@ import {
   getActionData,
   getDamageAi,
   buildActionResult,
+  getMutationsFromDamageResult,
 } from '../../utils'
 import { modifyRenderContext } from '../../utils/modifyRenderContext'
 import { ActionId } from '../Ids'
-import { DamageParent, Identity } from '../Mutations'
+import { Identity } from '../Mutations'
 import { GetUnits } from '../Queries'
 
 export const FireballId = ActionId()
@@ -76,9 +76,9 @@ export class Fireball extends Action {
       ctx,
       (modifiedTargets) => ({
         onSuccess: {
-          mutations: modifiedTargets.map((target) => {
-            const isTarget = targets.map((t) => t.id).includes(target.id)
-            const { damage } = calculateDamage(
+          mutations: modifiedTargets.flatMap((target) => {
+            const isTarget = !!targets.find((t) => t.id === target.id)
+            const damage = calculateDamage(
               {
                 ...this.damage,
                 value: this.damage.value * (isTarget ? 1 : 0.3),
@@ -87,11 +87,7 @@ export class Fireball extends Action {
               target,
               data.accuracyRoll
             )
-            return new DamageParent({
-              sourceId: source.id,
-              parentId: target.id,
-              damage,
-            })
+            return getMutationsFromDamageResult(source, target, damage)
           }),
         },
       })

@@ -1,5 +1,5 @@
 import { Unit } from '@repo/game/types'
-import { useActions, useCombat } from '../../../hooks/state'
+import { useActions } from '../../../hooks/state'
 import { applyModifiers } from '@repo/game/utils'
 import { useCombatContext } from '../../../hooks'
 import { useCombatUi } from '../../../hooks/state'
@@ -9,9 +9,11 @@ import { UnitStats } from './UnitStats'
 import { Popover, PopoverContent, PopoverTrigger } from '../../ui/popover'
 import { Button } from '../../ui/button'
 import { FaSearch } from 'react-icons/fa'
+import { FaShieldHalved } from 'react-icons/fa6'
 import { UnitModifiers } from './UnitModifiers'
 import { UnitBars } from './UnitBars'
 import { SwitchUnitId } from '@repo/game/data'
+import { Badge } from '@/components/ui/badge'
 
 export type UnitDebugProps = {
   unit: Unit
@@ -62,27 +64,47 @@ export function UnitCard(props: UnitDebugProps) {
             {unit.name}
             {stagedItem && '*'}
           </div>
-          <Popover>
-            <PopoverTrigger asChild>
-              <Button
-                className={cn('p-2 h-full m-0', {
-                  'text-slate-900': isActive,
-                })}
-                variant="ghost"
+          <div className="flex items-center space-x-2">
+            {unit.values.physicalArmor > 0 && (
+              <Badge
+                variant="outline"
+                className="space-x-1 bg-green-600 text-white"
               >
-                <FaSearch />
-              </Button>
-            </PopoverTrigger>
-            <PopoverContent className="w-full text-center">
-              <UnitStats
-                unit={props.unit}
-                stagedItem={stagedItem}
-                onClearClick={() =>
-                  removeWhere((i) => i.action.sourceId === unit.id)
-                }
-              />
-            </PopoverContent>
-          </Popover>
+                <FaShieldHalved />
+                <span>{unit.values.physicalArmor}</span>
+              </Badge>
+            )}
+            {unit.values.magicArmor > 0 && (
+              <Badge
+                variant="outline"
+                className="space-x-1 bg-blue-600 text-white"
+              >
+                <FaShieldHalved />
+                <span>{unit.values.magicArmor}</span>
+              </Badge>
+            )}
+            <Popover>
+              <PopoverTrigger asChild>
+                <Button
+                  className={cn('p-2 h-full m-0', {
+                    'text-slate-900': isActive,
+                  })}
+                  variant="ghost"
+                >
+                  <FaSearch />
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent className="w-full text-center">
+                <UnitStats
+                  unit={props.unit}
+                  stagedItem={stagedItem}
+                  onClearClick={() =>
+                    removeWhere((i) => i.action.sourceId === unit.id)
+                  }
+                />
+              </PopoverContent>
+            </Popover>
+          </div>
         </div>
         <CardContent className="p-2 pt-0">
           <UnitBars

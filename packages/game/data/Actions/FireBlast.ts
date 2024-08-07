@@ -7,7 +7,6 @@ import {
   CombatContext,
   Id,
   Unit,
-  AttackTypes,
   Damage,
 } from '../../types'
 import {
@@ -15,10 +14,11 @@ import {
   getActionData,
   getDamageAi,
   buildActionResult,
+  getMutationsFromDamageResult,
 } from '../../utils'
 import { modifyRenderContext } from '../../utils/modifyRenderContext'
 import { ActionId } from '../Ids'
-import { DamageParent, Identity } from '../Mutations'
+import { Identity } from '../Mutations'
 import { GetUnits } from '../Queries'
 import { BurnedPowerDownId, PowerDownParent } from '../Modifiers'
 import { BurnDamageOnTurnEndId, DamageParentOnTurnEnd } from '../Triggers'
@@ -75,18 +75,14 @@ export class FireBlast extends Action {
       ctx,
       (modifiedTargets) => ({
         onSuccess: {
-          mutations: modifiedTargets.map((target) => {
-            const { damage } = calculateDamage(
+          mutations: modifiedTargets.flatMap((target) => {
+            const damage = calculateDamage(
               this.damage,
               data.source,
               target,
               data.accuracyRoll
             )
-            return new DamageParent({
-              sourceId: source.id,
-              parentId: target.id,
-              damage,
-            })
+            return getMutationsFromDamageResult(source, target, damage)
           }),
           addedModifiers: applyDefenseDown
             ? modifiedTargets.flatMap((target) => [

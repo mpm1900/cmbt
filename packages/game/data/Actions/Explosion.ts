@@ -15,6 +15,7 @@ import {
   getDamageAi,
   modifyRenderContext,
   buildActionResult,
+  getMutationsFromDamageResult,
 } from '../../utils'
 import { ActionId } from '../Ids'
 import { DamageParent, Identity } from '../Mutations'
@@ -79,8 +80,8 @@ export class Explosion extends Action {
               parentId: source.id,
               damage: remainingHealth,
             }),
-            ...modifiedTargets.map((target) => {
-              const { damage } = calculateDamage(
+            ...modifiedTargets.flatMap((target) => {
+              const damage = calculateDamage(
                 {
                   value: data.source.stats.physical * 4,
                   attackType: this.attackType as AttackTypes,
@@ -89,11 +90,8 @@ export class Explosion extends Action {
                 target,
                 data.accuracyRoll
               )
-              return new DamageParent({
-                sourceId: source.id,
-                parentId: target.id,
-                damage,
-              })
+
+              return getMutationsFromDamageResult(source, target, damage)
             }),
           ],
         },

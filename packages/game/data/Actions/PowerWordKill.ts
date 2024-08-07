@@ -61,7 +61,6 @@ export class PowerWordKill extends Action {
               damage,
             })
           }),
-          addedModifiers: [],
         },
       })
     )

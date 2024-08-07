@@ -20,8 +20,9 @@ export function logMutationDiffs(
   diffs: Unit,
   ctx: CombatContext
 ) {
+  console.log('logging', parent?.name, diffs.values)
   const name = parent?.name ?? 'Multiple Units'
-  if (diffs.values.damage > 0)
+  if (diffs.values.damage > 0) {
     ctx.log(
       <LogSecondary>
         <LogUnit teamId={parent?.teamId} user={ctx.user} className="opacity-70">
@@ -30,4 +31,27 @@ export function logMutationDiffs(
         take{!!parent && 's'} {diffs.values.damage} damage.
       </LogSecondary>
     )
+  }
+  if (diffs.values.physicalArmor !== 0) {
+    ctx.log(
+      <LogSecondary>
+        <LogUnit teamId={parent?.teamId} user={ctx.user} className="opacity-70">
+          {name}
+        </LogUnit>{' '}
+        {diffs.values.physicalArmor > 0 ? 'gained' : 'lost'}{' '}
+        {Math.abs(diffs.values.physicalArmor)} physical armor.
+      </LogSecondary>
+    )
+  }
+  if (diffs.values.magicArmor !== 0) {
+    ctx.log(
+      <LogSecondary>
+        <LogUnit teamId={parent?.teamId} user={ctx.user} className="opacity-70">
+          {name}
+        </LogUnit>{' '}
+        {diffs.values.magicArmor > 0 ? 'gained' : 'lost'}{' '}
+        {Math.abs(diffs.values.magicArmor)} magic armor.
+      </LogSecondary>
+    )
+  }
 }

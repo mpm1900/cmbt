@@ -15,6 +15,7 @@ import {
   getDamageAi,
   modifyRenderContext,
   buildActionResult,
+  getMutationsFromDamageResult,
 } from '../../utils'
 import { ActionId } from '../Ids'
 import { DamageParent, Identity } from '../Mutations'
@@ -71,18 +72,14 @@ export class QuickAttack extends Action {
       ctx,
       (modifiedTargets) => ({
         onSuccess: {
-          mutations: modifiedTargets.map((target) => {
-            const { damage } = calculateDamage(
+          mutations: modifiedTargets.flatMap((target) => {
+            const damage = calculateDamage(
               this.damage,
               data.source,
               target,
               data.accuracyRoll
             )
-            return new DamageParent({
-              sourceId: source.id,
-              parentId: target.id,
-              damage,
-            })
+            return getMutationsFromDamageResult(source, target, damage)
           }),
         },
       })

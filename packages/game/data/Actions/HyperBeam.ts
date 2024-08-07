@@ -8,12 +8,17 @@ import {
   Unit,
   AttackTypes,
 } from '../../types'
-import { calculateDamage, getActionData, buildActionResult } from '../../utils'
+import {
+  calculateDamage,
+  getActionData,
+  buildActionResult,
+  getMutationsFromDamageResult,
+} from '../../utils'
 import { getDamageAi } from '../../utils/getDamageAiAction'
 import { modifyRenderContext } from '../../utils/modifyRenderContext'
 import { ActionId } from '../Ids'
 import { SetRechargingParent } from '../Modifiers'
-import { DamageParent, ReduceFocusParent } from '../Mutations'
+import { ReduceFocusParent } from '../Mutations'
 import { GetUnits } from '../Queries'
 
 export const HyperBeamId = ActionId()
@@ -59,8 +64,8 @@ export class HyperBeam extends Action {
       ctx,
       (modifiedTargets) => ({
         onSuccess: {
-          mutations: modifiedTargets.map((target) => {
-            const { damage } = calculateDamage(
+          mutations: modifiedTargets.flatMap((target) => {
+            const damage = calculateDamage(
               {
                 value: data.source.stats.magic,
                 attackType: this.attackType as AttackTypes,
@@ -70,11 +75,7 @@ export class HyperBeam extends Action {
               target,
               data.accuracyRoll
             )
-            return new DamageParent({
-              sourceId: source.id,
-              parentId: target.id,
-              damage,
-            })
+            return getMutationsFromDamageResult(source, target, damage)
           }),
           addedModifiers: [
             new SetRechargingParent({

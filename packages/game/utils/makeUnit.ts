@@ -60,10 +60,11 @@ export function makeUnit(teamId: string, name?: string, isActive?: boolean) {
     (unit) => ({
       values: {
         ...ZERO_UNIT.values,
-        damage: 30,
         focus: unit.stats.focus,
         stamina: unit.stats.stamina,
         devotion: unit.stats.devotion,
+        physicalArmor: 100,
+        magicArmor: 50,
       },
       actions: [
         new Crunch(unit.id, unit.teamId),

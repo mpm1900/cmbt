@@ -21,6 +21,7 @@ export function ActionButton(props: ActionButtonProps) {
   const baseAccuracy = action.threshold(source)
   const accuracy = action.threshold(modified.unit)
   const costCheck = checkActionCost(action, source)
+  const baseDamage = renderer?.baseDamage(action)
 
   return (
     <Button
@@ -39,11 +40,15 @@ export function ActionButton(props: ActionButtonProps) {
       >
         {renderer?.name}
       </span>
+
       {renderer && (
         <div
-          className={cn('text-xs text-muted-foreground space-x-2', {
-            'text-slate-700': isActive,
-          })}
+          className={cn(
+            'text-xs text-muted-foreground flex w-full justify-between',
+            {
+              'text-slate-700': isActive,
+            }
+          )}
         >
           {renderer.cost && (
             <span className={cn({ 'text-red-300': !costCheck })}>
@@ -62,11 +67,12 @@ export function ActionButton(props: ActionButtonProps) {
               >
                 {accuracy}%
               </span>
-              <span> Accuracy</span>
+              <span></span>
             </span>
           ) : (
-            <span>-- Accuracy</span>
+            <span>--</span>
           )}
+          {baseDamage && <span>{baseDamage} DMG</span>}
         </div>
       )}
     </Button>

@@ -273,6 +273,7 @@ function useCarouselApi() {
     setApi,
     current,
     count,
+    setCount,
   }
 }
 

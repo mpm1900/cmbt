@@ -53,7 +53,7 @@ export class FurySwipes extends Action {
   }
 
   threshold = (source: Unit): number | undefined => {
-    return 100 + source.stats.accuracy
+    return 95 + source.stats.accuracy
   }
   critical = (source: Unit): number | undefined => undefined
   getAi(targets: Unit[], ctx: CombatContext): ActionAi {

@@ -50,8 +50,12 @@ export function ActionsList(props: ActionsListProps) {
     }
   }, [selectedTargets.length])
 
-  if (!unit) return null
   const pages = Math.ceil(unit.actions.length / 4)
+  useEffect(() => {
+    carousel.setCount(pages)
+  }, [unit.id])
+
+  if (!unit) return null
 
   return (
     <Card>

@@ -68,7 +68,7 @@ export function ActiveAction(props: ActiveActionProps) {
           {action.priority !== 0 && (
             <Badge
               variant="outline"
-              className="bg-slate-950 text-muted-foreground"
+              className="bg-slate-950 text-muted-foreground mb-4"
             >
               Priority {action.priority}
             </Badge>

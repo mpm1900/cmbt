@@ -65,13 +65,12 @@ export function ActionButton(props: ActionButtonProps) {
               <span></span>
             </span>
           ) : (
-            <span>—</span>
+            <span className="opacity-25">—</span>
           )}
-
           <span className={cn({ 'text-red-300': !costCheck })}>
-            {renderer.cost}
+            {renderer.cost || <span className="opacity-25">N/A</span>}
           </span>
-          <span>{baseDamage}</span>
+          <span>{baseDamage || <span className="opacity-25">N/A</span>}</span>
         </div>
       )}
     </Button>

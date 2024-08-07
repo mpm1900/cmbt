@@ -120,7 +120,8 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
       return (
         <>
           Deals {crunch.damage.value} base damage to target enemy unit. 20%
-          chance to lower target's defence by 1.5x
+          chance to apply <span className="font-bold">Defense Down</span> to
+          target.
         </>
       )
     },

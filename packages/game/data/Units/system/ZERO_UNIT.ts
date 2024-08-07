@@ -33,6 +33,8 @@ export const ZERO_UNIT: Unit = {
   },
   values: {
     damage: 0,
+    physicalArmor: 0,
+    magicArmor: 0,
     focus: 0,
     stamina: 0,
     devotion: 0,
@@ -40,6 +42,7 @@ export const ZERO_UNIT: Unit = {
   flags: {
     isActive: false,
     isRecharging: false,
+    isProtected: false,
   },
   registry: {
     actions: [],
@@ -51,5 +54,6 @@ export const ZERO_UNIT: Unit = {
     lastUsedActionId: undefined,
     modified: false,
     hasBeenSeen: false,
+    activeTurns: 0,
   },
 }

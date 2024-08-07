@@ -5,21 +5,26 @@ import {
   CombatContext,
   Id,
   Unit,
+  ActionResolveOptions,
+  Damage,
 } from '../../types'
 import {
-  applyModifiers,
   calculateDamage,
   getActionData,
   getDamageAi,
+  modifyRenderContext,
+  buildActionResult,
 } from '../../utils'
 import { ActionId } from '../Ids'
 import { DamageParent, Identity } from '../Mutations'
-import { SetLastUsedAction } from '../Mutations/system'
 import { GetUnits } from '../Queries'
 
 export const MagicMissileId = ActionId()
 export class MagicMissile extends Action {
+  damage: Damage
+
   constructor(sourceId: Id, teamId: Id) {
+    const attackType = 'magic'
     super(MagicMissileId, {
       sourceId,
       teamId,
@@ -28,9 +33,14 @@ export class MagicMissile extends Action {
         notTeamId: teamId,
         isActive: true,
       }),
-      attackType: 'magic',
+      attackType,
       maxTargetCount: 2,
     })
+
+    this.damage = {
+      value: 55,
+      attackType,
+    }
   }
 
   threshold = (source: Unit): number | undefined => undefined
@@ -42,26 +52,25 @@ export class MagicMissile extends Action {
   resolve = (
     source: Unit,
     targets: Unit[],
-    ctx: CombatContext
+    ctx: CombatContext,
+    options: ActionResolveOptions
   ): ActionResult => {
+    ctx = modifyRenderContext(options, ctx)
     const data = getActionData(source, this, ctx)
-    return {
-      action: this,
+
+    return buildActionResult(
+      this,
+      data,
       source,
       targets,
-      mutations: [
-        new SetLastUsedAction({
-          sourceId: this.sourceId,
-          parentId: this.sourceId,
-          actionId: this.id,
-        }),
-        ...targets
-          .map((target) => [target, applyModifiers(target, ctx).unit])
-          .map(([target, modifiedTarget]) => {
-            const damage = calculateDamage(
-              { value: 55, attackType: 'magic' },
+      ctx,
+      (modifiedTargets) => ({
+        onSuccess: {
+          mutations: modifiedTargets.map((target) => {
+            const { damage } = calculateDamage(
+              this.damage,
               data.source,
-              modifiedTarget,
+              target,
               data.accuracyRoll
             )
             return new DamageParent({
@@ -70,8 +79,8 @@ export class MagicMissile extends Action {
               damage,
             })
           }),
-      ],
-      addedModifiers: [],
-    }
+        },
+      })
+    )
   }
 }

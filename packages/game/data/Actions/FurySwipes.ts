@@ -2,24 +2,31 @@ import random from 'random'
 import {
   Action,
   ActionResult,
-  Damage,
   CombatContext,
   Id,
   Unit,
   ActionAi,
+  AttackTypes,
+  ActionResolveOptions,
+  Damage,
 } from '../../types'
-import { applyModifiers, calculateDamage, getActionData } from '../../utils'
+import {
+  calculateDamage,
+  getActionData,
+  modifyRenderContext,
+  buildActionResult,
+} from '../../utils'
 import { DamageParent, Identity } from '../Mutations'
 import { GetUnits } from '../Queries'
-import { SetLastUsedAction } from '../Mutations/system'
 import { getDamageAi } from '../../utils/getDamageAiAction'
 import { ActionId } from '../Ids'
 
 export const FurySwipesId = ActionId()
 export class FurySwipes extends Action {
-  damage: Damage = { value: 4, attackType: 'physical' }
+  damage: Damage
 
   constructor(sourceId: Id, teamId: Id) {
+    const attackType = 'physical'
     super(FurySwipesId, {
       sourceId,
       teamId,
@@ -28,15 +35,20 @@ export class FurySwipes extends Action {
         notTeamId: teamId,
         isActive: true,
       }),
-      attackType: 'physical',
+      attackType,
       maxTargetCount: 1,
     })
+
+    this.damage = {
+      value: 4,
+      attackType,
+    }
   }
 
-  expandTargets = (targets: Unit[], ctx: CombatContext): Unit[] => {
+  mapTargets = (targets: Unit[], ctx: CombatContext): Unit[] => {
     return targets.reduce<Unit[]>((result, current) => {
-      const count = random.int(4, 6)
-      return [...result, ...Array(count).fill(current)]
+      const length = random.int(4, 6)
+      return [...result, ...Array(length).fill(current)]
     }, [])
   }
 
@@ -51,26 +63,25 @@ export class FurySwipes extends Action {
   resolve = (
     source: Unit,
     targets: Unit[],
-    ctx: CombatContext
+    ctx: CombatContext,
+    options: ActionResolveOptions
   ): ActionResult => {
+    ctx = modifyRenderContext(options, ctx)
     const data = getActionData(source, this, ctx)
-    return {
-      action: this,
+
+    return buildActionResult(
+      this,
+      data,
       source,
       targets,
-      mutations: [
-        new SetLastUsedAction({
-          sourceId: this.sourceId,
-          parentId: this.sourceId,
-          actionId: this.id,
-        }),
-        ...this.expandTargets(targets, ctx)
-          .map((target) => [target, applyModifiers(target, ctx).unit])
-          .map(([target, modifiedTarget]) => {
-            const damage = calculateDamage(
+      ctx,
+      (modifiedTargets) => ({
+        onSuccess: {
+          mutations: modifiedTargets.map((target) => {
+            const { damage } = calculateDamage(
               this.damage,
               data.source,
-              modifiedTarget,
+              target,
               data.accuracyRoll
             )
             return new DamageParent({
@@ -79,8 +90,8 @@ export class FurySwipes extends Action {
               damage,
             })
           }),
-      ],
-      addedModifiers: [],
-    }
+        },
+      })
+    )
   }
 }

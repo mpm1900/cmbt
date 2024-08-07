@@ -5,11 +5,16 @@ import {
   CombatContext,
   Id,
   Unit,
+  ActionResolveOptions,
 } from '../../types'
+import {
+  getActionData,
+  modifyRenderContext,
+  buildActionResult,
+} from '../../utils'
 import { ActionId } from '../Ids'
 import { SpeedOffsetParent } from '../Modifiers'
 import { Identity } from '../Mutations'
-import { SetLastUsedAction } from '../Mutations/system'
 import { GetUnits } from '../Queries'
 
 export const IcyWindId = ActionId()
@@ -37,27 +42,30 @@ export class IcyWind extends Action {
   resolve = (
     source: Unit,
     targets: Unit[],
-    ctx: CombatContext
+    ctx: CombatContext,
+    options: ActionResolveOptions
   ): ActionResult => {
-    return {
-      action: this,
+    ctx = modifyRenderContext(options, ctx)
+    const data = getActionData(source, this, ctx)
+
+    return buildActionResult(
+      this,
+      data,
       source,
       targets,
-      mutations: [
-        new SetLastUsedAction({
-          sourceId: this.sourceId,
-          parentId: this.sourceId,
-          actionId: this.id,
-        }),
-      ],
-      addedModifiers: targets.map(
-        (target) =>
-          new SpeedOffsetParent({
-            sourceId: source.id,
-            parentId: target.id,
-            offset: -10,
-          })
-      ),
-    }
+      ctx,
+      (modifiedTargets) => ({
+        onSuccess: {
+          addedModifiers: modifiedTargets.map(
+            (target) =>
+              new SpeedOffsetParent({
+                sourceId: source.id,
+                parentId: target.id,
+                offset: -10,
+              })
+          ),
+        },
+      })
+    )
   }
 }

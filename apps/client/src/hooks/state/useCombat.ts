@@ -67,6 +67,7 @@ export const useCombat = create<CombatStore>((set, get) => {
           status: 'init',
           results: [],
         },
+        logs: [],
       })
       return get()
     },
@@ -151,6 +152,17 @@ export const useCombat = create<CombatStore>((set, get) => {
     next: () =>
       set((s) => ({
         turn: { ...s.turn, count: s.turn.count + 1, results: [] },
+        units: s.units.map((u) =>
+          u.flags.isActive
+            ? {
+                ...u,
+                metadata: {
+                  ...u.metadata,
+                  activeTurns: u.metadata.activeTurns + 1,
+                },
+              }
+            : u
+        ),
       })),
     setStatus: (status) => set((s) => ({ turn: { ...s.turn, status } })),
     setTurn: (fn) =>

@@ -1,5 +1,5 @@
 import { nanoid } from 'nanoid'
-import { Id } from './'
+import { Damage, Id } from './'
 import { CombatContext } from './CombatContext'
 import { Query } from './Query'
 import { AttackTypes, Unit } from './Unit'
@@ -44,6 +44,11 @@ export type ActionResult = {
   updateActionQueue?: (queue: ActionsQueueItem[]) => ActionsQueueItem[]
 }
 
+export type ActionMaker = {
+  id: Id
+  make: (source: Unit) => Action
+}
+
 export type ActionResolveOptions = {
   disableLogging?: boolean
   disableRandomness?: boolean
@@ -55,7 +60,7 @@ export type ActionProps = {
   teamId: Id
   cost: Mutation
   targets: Query<Unit[]>
-  attackType: AttackTypes
+  attackType?: AttackTypes
   priority?: number
   maxTargetCount: number
 }
@@ -67,9 +72,10 @@ export abstract class Action {
   readonly teamId: Id
   readonly priority: number
   readonly maxTargetCount: number
-  readonly attackType: AttackTypes
+  readonly attackType: AttackTypes | undefined
   readonly cost: Mutation
   readonly targets: Query<Unit[]>
+  damage?: Damage
   abstract threshold: (source: Unit) => number | undefined
   abstract critical: (source: Unit) => number | undefined
   abstract resolve(
@@ -81,6 +87,10 @@ export abstract class Action {
 
   getAi(targets: Unit[], ctx: CombatContext): ActionAi {
     return { action: this, weight: 0, targetIds: [] }
+  }
+
+  mapTargets = (targets: Unit[], ctx: CombatContext): Unit[] => {
+    return targets
   }
 
   constructor(id: Id, props: ActionProps) {

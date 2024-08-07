@@ -1,15 +1,19 @@
 import {
   Action,
+  ActionResolveOptions,
   ActionResult,
-  ActionAi,
   CombatContext,
   Id,
   Unit,
 } from '../../types'
+import {
+  getActionData,
+  modifyRenderContext,
+  buildActionResult,
+} from '../../utils'
 import { ActionId } from '../Ids'
 import { AddActionToRegistryParent } from '../Modifiers'
 import { Identity } from '../Mutations'
-import { SetLastUsedAction } from '../Mutations/system'
 import { GetUnits } from '../Queries'
 
 export const DisableId = ActionId()
@@ -32,27 +36,30 @@ export class Disable extends Action {
   resolve = (
     source: Unit,
     targets: Unit[],
-    ctx: CombatContext
+    ctx: CombatContext,
+    options: ActionResolveOptions
   ): ActionResult => {
-    return {
-      action: this,
+    ctx = modifyRenderContext(options, ctx)
+    const data = getActionData(source, this, ctx)
+
+    return buildActionResult(
+      this,
+      data,
       source,
       targets,
-      mutations: [
-        new SetLastUsedAction({
-          sourceId: this.sourceId,
-          parentId: this.sourceId,
-          actionId: this.id,
-        }),
-      ],
-      addedModifiers: targets.map((target) => {
-        return new AddActionToRegistryParent({
-          sourceId: source.id,
-          parentId: target.id,
-          actionId: target.metadata.lastUsedActionId,
-          duration: 2,
-        })
-      }),
-    }
+      ctx,
+      (modifiedTargets) => ({
+        onSuccess: {
+          addedModifiers: modifiedTargets.map((target) => {
+            return new AddActionToRegistryParent({
+              sourceId: source.id,
+              parentId: target.id,
+              actionId: target.metadata.lastUsedActionId,
+              duration: 2,
+            })
+          }),
+        },
+      })
+    )
   }
 }

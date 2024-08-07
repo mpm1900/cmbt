@@ -6,13 +6,9 @@ import {
   CombatContext,
   Id,
   Unit,
+  AttackTypes,
 } from '../../types'
-import {
-  applyModifiers,
-  calculateDamage,
-  getActionData,
-  parseSuccess,
-} from '../../utils'
+import { calculateDamage, getActionData, buildActionResult } from '../../utils'
 import { getDamageAi } from '../../utils/getDamageAiAction'
 import { modifyRenderContext } from '../../utils/modifyRenderContext'
 import { ActionId } from '../Ids'
@@ -55,19 +51,23 @@ export class HyperBeam extends Action {
     ctx = modifyRenderContext(options, ctx)
     const data = getActionData(source, this, ctx)
 
-    return parseSuccess(this, data, source, targets, {
-      onSuccess: {
-        mutations: targets
-          .map((target) => [target, applyModifiers(target, ctx).unit])
-          .map(([target, modifiedTarget]) => {
-            const damage = calculateDamage(
+    return buildActionResult(
+      this,
+      data,
+      source,
+      targets,
+      ctx,
+      (modifiedTargets) => ({
+        onSuccess: {
+          mutations: modifiedTargets.map((target) => {
+            const { damage } = calculateDamage(
               {
-                damageType: 'force',
                 value: data.source.stats.magic,
-                attackType: this.attackType,
+                attackType: this.attackType as AttackTypes,
+                damageType: 'force',
               },
               data.source,
-              modifiedTarget,
+              target,
               data.accuracyRoll
             )
             return new DamageParent({
@@ -76,15 +76,15 @@ export class HyperBeam extends Action {
               damage,
             })
           }),
-        addedModifiers: [
-          new SetRechargingParent({
-            sourceId: source.id,
-            parentId: source.id,
-            duration: 2,
-          }),
-        ],
-      },
-      onFailure: {},
-    })
+          addedModifiers: [
+            new SetRechargingParent({
+              sourceId: source.id,
+              parentId: source.id,
+              duration: 2,
+            }),
+          ],
+        },
+      })
+    )
   }
 }

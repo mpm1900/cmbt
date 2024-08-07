@@ -1,11 +1,20 @@
-import { ActionResult, ActionAi, CombatContext, Id, Unit } from '../../types'
+import {
+  ActionResult,
+  ActionAi,
+  CombatContext,
+  Id,
+  Unit,
+  AttackTypes,
+  ActionResolveOptions,
+} from '../../types'
 import { Action } from '../../types/Action'
 import {
-  applyModifiers,
   calculateDamage,
   applyMutation,
   getActionData,
   getDamageAi,
+  modifyRenderContext,
+  buildActionResult,
 } from '../../utils'
 import { ActionId } from '../Ids'
 import { DamageParent, Identity } from '../Mutations'
@@ -27,7 +36,7 @@ export class Explosion extends Action {
   }
 
   getDamage = (source: Unit, targets: Unit[], ctx: CombatContext): number[] => {
-    const { mutations } = this.resolve(source, targets, ctx)
+    const { mutations } = this.resolve(source, targets, ctx, {})
     if (!mutations) return []
     return mutations
       .filter((m) => m.parentId !== this.sourceId)
@@ -37,49 +46,58 @@ export class Explosion extends Action {
 
   threshold = (source: Unit): number | undefined => undefined
   critical = (source: Unit): number | undefined => undefined
+
   getAi(targets: Unit[], ctx: CombatContext): ActionAi {
     return getDamageAi(this, targets, ctx)
+  }
+
+  mapTargets = (targets: Unit[], ctx: CombatContext): Unit[] => {
+    return ctx.units.filter((u) => u.flags.isActive && u.id !== this.sourceId)
   }
 
   resolve = (
     source: Unit,
     targets: Unit[],
-    ctx: CombatContext
+    ctx: CombatContext,
+    options: ActionResolveOptions
   ): ActionResult => {
+    ctx = modifyRenderContext(options, ctx)
     const data = getActionData(source, this, ctx)
     const remainingHealth = data.source.stats.health - data.source.values.damage
-    return {
-      action: this,
+
+    return buildActionResult(
+      this,
+      data,
       source,
       targets,
-      mutations: [
-        data.setLastUsed,
-        new DamageParent({
-          sourceId: source.id,
-          parentId: source.id,
-          damage: remainingHealth,
-        }),
-        ...ctx.units
-          .filter((u) => u.id !== this.sourceId)
-          .map((target) => [target, applyModifiers(target, ctx).unit])
-          .map(([target, modifiedTarget]) => {
-            const damage = calculateDamage(
-              {
-                value: data.source.stats.physical * 4,
-                attackType: this.attackType,
-              },
-              data.source,
-              modifiedTarget,
-              data.accuracyRoll
-            )
-            return new DamageParent({
+      ctx,
+      (modifiedTargets) => ({
+        onSuccess: {
+          mutations: [
+            new DamageParent({
               sourceId: source.id,
-              parentId: target.id,
-              damage,
-            })
-          }),
-      ],
-      addedModifiers: [],
-    }
+              parentId: source.id,
+              damage: remainingHealth,
+            }),
+            ...modifiedTargets.map((target) => {
+              const { damage } = calculateDamage(
+                {
+                  value: data.source.stats.physical * 4,
+                  attackType: this.attackType as AttackTypes,
+                },
+                data.source,
+                target,
+                data.accuracyRoll
+              )
+              return new DamageParent({
+                sourceId: source.id,
+                parentId: target.id,
+                damage,
+              })
+            }),
+          ],
+        },
+      })
+    )
   }
 }

@@ -41,12 +41,16 @@ export type CalculateDamageConfig = ActionAccuracyResult & {
   randomFactor?: number
 }
 
+export type CalculateDamageResult = {
+  damage: number
+}
+
 export function calculateDamage(
   power: Damage,
   source: Unit,
   target: Unit,
   config: CalculateDamageConfig
-): number {
+): CalculateDamageResult {
   const base = calculateBaseDamage(
     power.value,
     power.attackType,
@@ -60,5 +64,8 @@ export function calculateDamage(
   const criticalFactor = config.criticalSuccess ? (config.critical ?? 1) : 1
   const randomFactor =
     config.randomFactor !== undefined ? config.randomFactor : 1
-  return Math.round(base * negation * expansion * criticalFactor * randomFactor)
+  const damage = Math.round(
+    base * negation * expansion * criticalFactor * randomFactor
+  )
+  return { damage }
 }

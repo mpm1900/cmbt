@@ -6,13 +6,14 @@ import {
   CombatContext,
   Id,
   Unit,
+  AttackTypes,
+  Damage,
 } from '../../types'
 import {
-  applyModifiers,
   calculateDamage,
   getActionData,
   getDamageAi,
-  parseSuccess,
+  buildActionResult,
 } from '../../utils'
 import { modifyRenderContext } from '../../utils/modifyRenderContext'
 import { ActionId } from '../Ids'
@@ -21,9 +22,10 @@ import { GetUnits } from '../Queries'
 
 export const FireballId = ActionId()
 export class Fireball extends Action {
-  damage: number
+  damage: Damage
 
-  constructor(sourceId: Id, teamId: Id, damage: number = 90) {
+  constructor(sourceId: Id, teamId: Id) {
+    const attackType = 'magic'
     super(FireballId, {
       sourceId,
       teamId,
@@ -32,13 +34,18 @@ export class Fireball extends Action {
         notTeamId: teamId,
         isActive: true,
       }),
-      attackType: 'magic',
+      attackType,
       maxTargetCount: 1,
     })
-    this.damage = damage
+
+    this.damage = {
+      value: 70,
+      attackType: 'magic',
+      damageType: 'fire',
+    }
   }
 
-  expandTargets = (targets: Unit[], ctx: CombatContext): Unit[] => {
+  mapTargets = (targets: Unit[], ctx: CombatContext): Unit[] => {
     const teamIds = targets.map((t) => t.teamId)
     return ctx.units.filter(
       (u) => u.flags.isActive && teamIds.includes(u.teamId)
@@ -61,21 +68,24 @@ export class Fireball extends Action {
   ): ActionResult => {
     ctx = modifyRenderContext(options, ctx)
     const data = getActionData(source, this, ctx)
-    return parseSuccess(this, data, source, targets, {
-      onSuccess: {
-        mutations: this.expandTargets(targets, ctx)
-          .map((target) => [target, applyModifiers(target, ctx).unit])
-          .map(([target, modifiedTarget]) => {
+    return buildActionResult(
+      this,
+      data,
+      source,
+      targets,
+      ctx,
+      (modifiedTargets) => ({
+        onSuccess: {
+          mutations: modifiedTargets.map((target) => {
             const isTarget = targets.map((t) => t.id).includes(target.id)
-            const damage = calculateDamage(
+            const { damage } = calculateDamage(
               {
-                value: isTarget ? this.damage : this.damage * 0.3,
-                damageType: 'fire',
-                attackType: this.attackType,
+                ...this.damage,
+                value: this.damage.value * (isTarget ? 1 : 0.3),
               },
               data.source,
-              modifiedTarget,
-              { ...data.accuracyRoll }
+              target,
+              data.accuracyRoll
             )
             return new DamageParent({
               sourceId: source.id,
@@ -83,8 +93,8 @@ export class Fireball extends Action {
               damage,
             })
           }),
-      },
-      onFailure: {},
-    })
+        },
+      })
+    )
   }
 }

@@ -7,12 +7,11 @@ import {
   Id,
   Unit,
 } from '../../types'
-import { getActionData } from '../../utils'
+import { getActionData, buildActionResult } from '../../utils'
 import { modifyRenderContext } from '../../utils/modifyRenderContext'
 import { ActionId } from '../Ids'
 import { PowerUpParent } from '../Modifiers'
 import { ReduceFocusParent } from '../Mutations'
-import { SetLastUsedAction } from '../Mutations/system'
 import { EmptyArray } from '../Queries/EmptyArray'
 
 export const SwordsDanceId = ActionId()
@@ -47,25 +46,25 @@ export class SwordsDance extends Action {
   ): ActionResult => {
     ctx = modifyRenderContext(options, ctx)
     const data = getActionData(source, this, ctx)
-    return {
-      action: this,
+
+    return buildActionResult(
+      this,
+      data,
       source,
       targets,
-      mutations: [
-        new SetLastUsedAction({
-          sourceId: this.sourceId,
-          parentId: this.sourceId,
-          actionId: this.id,
-        }),
-      ],
-      addedModifiers: [
-        new PowerUpParent({
-          sourceId: source.id,
-          parentId: source.id,
-          coef: 1.5,
-          maxInstances: 6,
-        }),
-      ],
-    }
+      ctx,
+      (modifiedTargets) => ({
+        onSuccess: {
+          addedModifiers: [
+            new PowerUpParent({
+              sourceId: source.id,
+              parentId: source.id,
+              coef: 1.5,
+              maxInstances: 6,
+            }),
+          ],
+        },
+      })
+    )
   }
 }

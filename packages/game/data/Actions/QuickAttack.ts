@@ -5,23 +5,28 @@ import {
   CombatContext,
   Id,
   Unit,
+  AttackTypes,
+  ActionResolveOptions,
+  Damage,
 } from '../../types'
 import {
-  applyModifiers,
   calculateDamage,
   getActionData,
   getDamageAi,
+  modifyRenderContext,
+  buildActionResult,
 } from '../../utils'
 import { ActionId } from '../Ids'
 import { DamageParent, Identity } from '../Mutations'
-import { SetLastUsedAction } from '../Mutations/system'
 import { GetUnits } from '../Queries'
 
 export const QuickAttackId = ActionId()
 
 export class QuickAttack extends Action {
-  damage: number = 40
+  damage: Damage
+
   constructor(sourceId: Id, teamId: Id) {
+    const attackType = 'physical'
     super(QuickAttackId, {
       sourceId,
       teamId,
@@ -31,9 +36,14 @@ export class QuickAttack extends Action {
         isActive: true,
       }),
       priority: 1,
-      attackType: 'physical',
+      attackType,
       maxTargetCount: 1,
     })
+
+    this.damage = {
+      value: 40,
+      attackType,
+    }
   }
 
   threshold = (source: Unit): number | undefined => {
@@ -47,27 +57,25 @@ export class QuickAttack extends Action {
   resolve = (
     source: Unit,
     targets: Unit[],
-    ctx: CombatContext
+    ctx: CombatContext,
+    options: ActionResolveOptions
   ): ActionResult => {
+    ctx = modifyRenderContext(options, ctx)
     const data = getActionData(source, this, ctx)
 
-    return {
-      action: this,
+    return buildActionResult(
+      this,
+      data,
       source,
       targets,
-      mutations: [
-        new SetLastUsedAction({
-          sourceId: this.sourceId,
-          parentId: this.sourceId,
-          actionId: this.id,
-        }),
-        ...targets
-          .map((target) => [target, applyModifiers(target, ctx).unit])
-          .map(([target, modifiedTarget]) => {
-            const damage = calculateDamage(
-              { value: this.damage, attackType: this.attackType },
+      ctx,
+      (modifiedTargets) => ({
+        onSuccess: {
+          mutations: modifiedTargets.map((target) => {
+            const { damage } = calculateDamage(
+              this.damage,
               data.source,
-              modifiedTarget,
+              target,
               data.accuracyRoll
             )
             return new DamageParent({
@@ -76,8 +84,8 @@ export class QuickAttack extends Action {
               damage,
             })
           }),
-      ],
-      addedModifiers: [],
-    }
+        },
+      })
+    )
   }
 }

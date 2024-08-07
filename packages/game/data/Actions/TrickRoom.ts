@@ -5,7 +5,13 @@ import {
   CombatContext,
   Id,
   Unit,
+  ActionResolveOptions,
 } from '../../types'
+import {
+  getActionData,
+  modifyRenderContext,
+  buildActionResult,
+} from '../../utils'
 import { ActionId } from '../Ids'
 import { InvertSpeedAll } from '../Modifiers'
 import { Identity } from '../Mutations'
@@ -35,20 +41,23 @@ export class TrickRoom extends Action {
   resolve = (
     source: Unit,
     targets: Unit[],
-    ctx: CombatContext
+    ctx: CombatContext,
+    options: ActionResolveOptions
   ): ActionResult => {
-    return {
-      action: this,
+    ctx = modifyRenderContext(options, ctx)
+    const data = getActionData(source, this, ctx)
+
+    return buildActionResult(
+      this,
+      data,
       source,
       targets,
-      mutations: [
-        new SetLastUsedAction({
-          sourceId: this.sourceId,
-          parentId: this.sourceId,
-          actionId: this.id,
-        }),
-      ],
-      addedModifiers: [new InvertSpeedAll({ sourceId: source.id })],
-    }
+      ctx,
+      (modifiedTargets) => ({
+        onSuccess: {
+          addedModifiers: [new InvertSpeedAll({ sourceId: source.id })],
+        },
+      })
+    )
   }
 }

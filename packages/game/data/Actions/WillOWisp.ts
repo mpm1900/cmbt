@@ -7,7 +7,7 @@ import {
   Id,
   Unit,
 } from '../../types'
-import { getActionData, parseSuccess } from '../../utils'
+import { getActionData, buildActionResult } from '../../utils'
 import { modifyRenderContext } from '../../utils/modifyRenderContext'
 import { ActionId } from '../Ids'
 import { PowerDownParent, BurnedPowerDownId } from '../Modifiers'
@@ -53,35 +53,35 @@ export class WillOWisp extends Action {
   ): ActionResult => {
     ctx = modifyRenderContext(options, ctx)
     const data = getActionData(source, this, ctx)
-    return parseSuccess(this, data, source, targets, {
-      onSuccess: {
-        mutations: [
-          new SetLastUsedAction({
-            sourceId: this.sourceId,
-            parentId: this.sourceId,
-            actionId: this.id,
-          }),
-        ],
-        addedModifiers: targets.flatMap((target) => [
-          new PowerDownParent({
-            sourceId: source.id,
-            parentId: target.id,
-            coef: 2,
-            duration: 5,
-            maxInstances: 1,
-            rid: BurnedPowerDownId,
-          }),
-          new DamageParentOnTurnEnd({
-            sourceId: source.id,
-            parentId: target.id,
-            damage: 10,
-            duration: 5,
-            maxInstances: 1,
-            rid: BurnDamageOnTurnEndId,
-          }),
-        ]),
-      },
-      onFailure: {},
-    })
+
+    return buildActionResult(
+      this,
+      data,
+      source,
+      targets,
+      ctx,
+      (modifiedTargets) => ({
+        onSuccess: {
+          addedModifiers: modifiedTargets.flatMap((target) => [
+            new PowerDownParent({
+              sourceId: source.id,
+              parentId: target.id,
+              coef: 2,
+              duration: 5,
+              maxInstances: 1,
+              rid: BurnedPowerDownId,
+            }),
+            new DamageParentOnTurnEnd({
+              sourceId: source.id,
+              parentId: target.id,
+              damage: 10,
+              duration: 5,
+              maxInstances: 1,
+              rid: BurnDamageOnTurnEndId,
+            }),
+          ]),
+        },
+      })
+    )
   }
 }

@@ -1,5 +1,6 @@
 import { Unit } from '../types'
 import {
+  Crunch,
   Fireball,
   FurySwipes,
   HyperBeam,
@@ -18,7 +19,7 @@ import { Explosion } from '../data/Actions/Explosion'
 import { Disable } from '../data/Actions/Disable'
 import { ZERO_UNIT } from '../data/Units'
 
-export function unitBuilder(
+export function unitMaker(
   partial: Partial<Unit>,
   map: (unit: Unit) => Partial<Unit>
 ): Unit {
@@ -35,7 +36,7 @@ export function unitBuilder(
 
 export function makeUnit(teamId: string, name?: string, isActive?: boolean) {
   const id = UnitId()
-  return unitBuilder(
+  return unitMaker(
     {
       id,
       name: name ?? id,
@@ -52,18 +53,20 @@ export function makeUnit(teamId: string, name?: string, isActive?: boolean) {
         devotion: random.int(0, 20),
       },
       flags: {
+        ...ZERO_UNIT.flags,
         isActive: isActive ?? false,
-        isRecharging: false,
       },
     },
     (unit) => ({
       values: {
+        ...ZERO_UNIT.values,
         damage: 30,
         focus: unit.stats.focus,
         stamina: unit.stats.stamina,
         devotion: unit.stats.devotion,
       },
       actions: [
+        new Crunch(unit.id, unit.teamId),
         new Explosion(unit.id, unit.teamId),
         new PowerWordKill(unit.id, unit.teamId),
         new QuickAttack(unit.id, unit.teamId),

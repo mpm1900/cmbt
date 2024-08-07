@@ -7,12 +7,7 @@ import {
   Id,
   Unit,
 } from '../../types'
-import {
-  applyModifiers,
-  getActionData,
-  getDamageAi,
-  parseSuccess,
-} from '../../utils'
+import { getActionData, getDamageAi, buildActionResult } from '../../utils'
 import { modifyRenderContext } from '../../utils/modifyRenderContext'
 import { ActionId } from '../Ids'
 import { DamageParent, Identity } from '../Mutations'
@@ -48,26 +43,27 @@ export class PowerWordKill extends Action {
     ctx: CombatContext,
     options?: ActionResolveOptions
   ): ActionResult => {
-    if (options?.disableLogging) {
-      ctx = { ...ctx, log: () => {} }
-    }
     ctx = modifyRenderContext(options, ctx)
     const data = getActionData(source, this, ctx)
-    return parseSuccess(this, data, source, targets, {
-      onSuccess: {
-        mutations: targets
-          .map((target) => [target, applyModifiers(target, ctx).unit])
-          .map(([target, modifiedTarget]) => {
-            const damage = modifiedTarget.stats.health
+    return buildActionResult(
+      this,
+      data,
+      source,
+      targets,
+      ctx,
+      (modifiedTargets) => ({
+        onSuccess: {
+          mutations: modifiedTargets.map((target) => {
+            const damage = target.stats.health
             return new DamageParent({
               sourceId: source.id,
               parentId: target.id,
               damage,
             })
           }),
-        addedModifiers: [],
-      },
-      onFailure: {},
-    })
+          addedModifiers: [],
+        },
+      })
+    )
   }
 }

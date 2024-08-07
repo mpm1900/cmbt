@@ -1,7 +1,7 @@
 import { faker } from '@faker-js/faker'
 import { PowerDownAllOtherOnUnitEnter, TeamId } from '@repo/game/data'
-import { Team } from '@repo/game/types'
-import { makeUnit } from '@repo/game/utils'
+import { Team, Unit, UnitBuilder } from '@repo/game/types'
+import { makeUnit, resolveUnitBuilder } from '@repo/game/utils'
 import { useCombat } from './state'
 import { useNavigate } from '@tanstack/react-router'
 
@@ -9,12 +9,22 @@ export function useInitializeCombat() {
   const combat = useCombat()
   const navigate = useNavigate()
 
-  return () => {
+  return (builders: UnitBuilder[]) => {
     const userTeam: Team = { id: TeamId(), items: [] }
     const aiTeam: Team = { id: TeamId(), items: [] }
     const teams: Team[] = [userTeam, aiTeam]
+    const inputUnits = builders
+      .map((b) => resolveUnitBuilder(b, userTeam.id))
+      .map((u, i) => ({
+        ...u,
+        flags: {
+          ...u.flags,
+          isActive: i <= 1,
+        },
+      }))
     const testUnit = makeUnit(userTeam.id, 'Salamence', false)
     const units = [
+      /*
       makeUnit(userTeam.id, faker.person.fullName(), true),
       makeUnit(userTeam.id, faker.person.fullName(), true),
       makeUnit(userTeam.id, faker.person.fullName(), false),
@@ -30,6 +40,8 @@ export function useInitializeCombat() {
       },
       makeUnit(userTeam.id, faker.person.fullName(), false),
       makeUnit(userTeam.id, faker.person.fullName(), false),
+      */
+      ...inputUnits,
       makeUnit(aiTeam.id, faker.person.fullName(), true),
       makeUnit(aiTeam.id, faker.person.fullName(), true),
       makeUnit(aiTeam.id, faker.person.fullName(), false),

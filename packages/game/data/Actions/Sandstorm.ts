@@ -5,10 +5,15 @@ import {
   CombatContext,
   Id,
   Unit,
+  ActionResolveOptions,
 } from '../../types'
+import {
+  getActionData,
+  modifyRenderContext,
+  buildActionResult,
+} from '../../utils'
 import { ActionId } from '../Ids'
 import { Identity } from '../Mutations'
-import { SetLastUsedAction } from '../Mutations/system'
 import { EmptyArray } from '../Queries/EmptyArray'
 import { DamageAllOnTurnEnd } from '../Triggers'
 
@@ -21,7 +26,6 @@ export class Sandstorm extends Action {
       teamId,
       cost: new Identity({ sourceId }),
       targets: new EmptyArray(),
-      attackType: 'magic',
       maxTargetCount: 0,
     })
   }
@@ -35,27 +39,23 @@ export class Sandstorm extends Action {
   resolve = (
     source: Unit,
     targets: Unit[],
-    ctx: CombatContext
+    ctx: CombatContext,
+    options: ActionResolveOptions
   ): ActionResult => {
-    return {
-      action: this,
-      source,
-      targets,
-      mutations: [
-        new SetLastUsedAction({
-          sourceId: this.sourceId,
-          parentId: this.sourceId,
-          actionId: this.id,
-        }),
-      ],
-      addedModifiers: [
-        new DamageAllOnTurnEnd({
-          sourceId: source.id,
-          damage: 10,
-          duration: 5,
-          maxInstances: 1,
-        }),
-      ],
-    }
+    ctx = modifyRenderContext(options, ctx)
+    const data = getActionData(source, this, ctx)
+
+    return buildActionResult(this, data, source, targets, ctx, () => ({
+      onSuccess: {
+        addedModifiers: [
+          new DamageAllOnTurnEnd({
+            sourceId: source.id,
+            damage: 10,
+            duration: 5,
+            maxInstances: 1,
+          }),
+        ],
+      },
+    }))
   }
 }

@@ -20,7 +20,6 @@ export function logMutationDiffs(
   diffs: Unit,
   ctx: CombatContext
 ) {
-  console.log('logging', parent?.name, diffs.values)
   const name = parent?.name ?? 'Multiple Units'
   if (diffs.values.damage > 0) {
     ctx.log(

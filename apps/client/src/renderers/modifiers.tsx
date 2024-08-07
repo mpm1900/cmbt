@@ -3,7 +3,7 @@ import {
   BurnedPowerDownId,
   DamageParentOnTurnEndId,
   DefenseUpAllId,
-  SetRechargingParentId,
+  SetIsStunnedParentId,
   InvertSpeedAllId,
   PowerDownParentId,
   PowerUpParentId,
@@ -25,7 +25,7 @@ export const MODIFIER_NAMES: Record<string, string> = {
   [BurnedPowerDownId]: 'Burn:Power-Down',
   [DamageParentOnTurnEndId]: 'Damage OTE',
   [DefenseUpAllId]: 'Defense Buff',
-  [SetRechargingParentId]: 'Recharging',
+  [SetIsStunnedParentId]: 'Recharging',
   [InvertSpeedAllId]: 'Invert Speed',
   [PowerDownParentId]: 'Power Down',
   [PowerDownAllOtherOnUnitEnterId]: 'Intimidate',
@@ -49,7 +49,7 @@ export const MODIFIER_BASE_ICONS: Record<
     'fill-white',
     'fill-red-500',
   ],
-  [SetRechargingParentId]: [
+  [SetIsStunnedParentId]: [
     GiBatteryPackAlt,
     undefined,
     'fill-red-400',
@@ -80,11 +80,11 @@ export const ModifierRenderers: Record<string, ModifierRenderer> = {
   [DefenseUpAllId]: {
     name: MODIFIER_NAMES[DefenseUpAllId],
   },
-  [SetRechargingParentId]: {
-    name: MODIFIER_NAMES[SetRechargingParentId],
+  [SetIsStunnedParentId]: {
+    name: MODIFIER_NAMES[SetIsStunnedParentId],
     Inline: () => (
       <span className="text-red-400">
-        {MODIFIER_NAMES[SetRechargingParentId]}
+        {MODIFIER_NAMES[SetIsStunnedParentId]}
       </span>
     ),
   },

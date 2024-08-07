@@ -63,7 +63,9 @@ export function calculateDamage(
   const expansion = getDamageExpansion(damage.damageType, target)
   if (negation != 1) console.log(damage, negation, target)
 
-  const criticalFactor = config.criticalSuccess ? (config.critical ?? 1) : 1
+  const criticalFactor = config.criticalSuccess
+    ? (config.critical ?? 1) + target.stats.criticalDamage
+    : 1
   const randomFactor =
     config.randomFactor !== undefined ? config.randomFactor : 1
   const damageAmount = Math.round(

@@ -17,7 +17,7 @@ import {
 import { getDamageAi } from '../../utils/getDamageAiAction'
 import { modifyRenderContext } from '../../utils/modifyRenderContext'
 import { ActionId } from '../Ids'
-import { SetRechargingParent } from '../Modifiers'
+import { SetIsStunnedParent } from '../Modifiers'
 import { ReduceFocusParent } from '../Mutations'
 import { GetUnits } from '../Queries'
 
@@ -78,7 +78,7 @@ export class HyperBeam extends Action {
             return getMutationsFromDamageResult(source, target, damage)
           }),
           addedModifiers: [
-            new SetRechargingParent({
+            new SetIsStunnedParent({
               sourceId: source.id,
               parentId: source.id,
               duration: 2,

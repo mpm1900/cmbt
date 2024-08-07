@@ -26,30 +26,32 @@ export function ActiveAction(props: ActiveActionProps) {
   return (
     <Card className="dark:bg-muted/40 space-y-2">
       <CardContent className="p-4 pt-6">
-        <div className="mb-4 flex space-x-2">
-          <Badge
-            className={cn('border-none hover:text-white', {
-              'bg-blue-600 text-blue-200': action.attackType === 'magic',
-              'bg-green-600 text-green-100': action.attackType === 'physical',
-            })}
-            variant="outline"
-          >
-            {action.attackType}
-          </Badge>
+        <div className="flex space-x-2">
+          {action.attackType && (
+            <Badge
+              className={cn('border-none hover:text-white mb-4', {
+                'bg-blue-600 text-blue-200': action.attackType === 'magic',
+                'bg-green-600 text-green-100': action.attackType === 'physical',
+              })}
+              variant="outline"
+            >
+              {action.attackType}
+            </Badge>
+          )}
           {renderer.cost && (
             <Badge
               variant="outline"
-              className="bg-slate-950 text-muted-foreground"
+              className="bg-slate-950 text-muted-foreground mb-4"
             >
               {renderer.costAlt ?? renderer.cost}
             </Badge>
           )}
 
-          <Badge
-            variant="outline"
-            className="bg-slate-950 text-muted-foreground"
-          >
-            {accuracy !== undefined && baseAccuracy !== undefined ? (
+          {accuracy !== undefined && baseAccuracy !== undefined && (
+            <Badge
+              variant="outline"
+              className="bg-slate-950 text-muted-foreground mb-4"
+            >
               <span
                 className={cn({
                   '': accuracy === baseAccuracy,
@@ -59,11 +61,10 @@ export function ActiveAction(props: ActiveActionProps) {
               >
                 {accuracy}%
               </span>
-            ) : (
-              <span>--</span>
-            )}
-            <span className="pl-1">Accuracy</span>
-          </Badge>
+
+              <span className="pl-1">Accuracy</span>
+            </Badge>
+          )}
           {action.priority !== 0 && (
             <Badge
               variant="outline"
@@ -73,7 +74,7 @@ export function ActiveAction(props: ActiveActionProps) {
             </Badge>
           )}
         </div>
-        <div>
+        <div className="space-y-1">
           <div>{renderer?.description(action)}</div>
           {renderer?.help && (
             <div className="text-sm text-muted-foreground/80 italic">

@@ -1,3 +1,6 @@
+import { ActionMaker, Unit } from '../../types'
+import { InspectAll, InspectAllId } from './system'
+
 export * from './system'
 
 export * from './Crunch'
@@ -18,3 +21,10 @@ export * from './SwordsDance'
 export * from './system/SwitchUnits'
 export * from './TrickRoom'
 export * from './WillOWisp'
+
+export const GLOBAL_ACTIONS: ActionMaker[] = [
+  {
+    id: InspectAllId,
+    make: (unit: Unit) => new InspectAll(unit.id, unit.teamId),
+  },
+]

@@ -1,4 +1,4 @@
-import { HyperBeam, UnitId, ZERO_UNIT } from '../data'
+import { GLOBAL_ACTIONS, HyperBeam, UnitId, ZERO_UNIT } from '../data'
 import { Id, Unit, UnitBuilder } from '../types'
 
 export function resolveUnitBuilder(builder: UnitBuilder, teamId: Id): Unit {
@@ -22,7 +22,10 @@ export function resolveUnitBuilder(builder: UnitBuilder, teamId: Id): Unit {
     devotion: unit.stats.devotion,
   }
 
-  unit.actions = builder.actions.map((a) => a.make(unit))
+  unit.actions = [
+    ...builder.actions.map((a) => a.make(unit)),
+    ...GLOBAL_ACTIONS.map((a) => a.make(unit)),
+  ]
   //unit.actions = [new HyperBeam(unit.id, unit.teamId)]
 
   return unit

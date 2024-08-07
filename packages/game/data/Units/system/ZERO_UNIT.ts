@@ -10,7 +10,11 @@ export const ZERO_UNIT: Unit = {
     physical: 0,
     magic: 0,
     speed: 0,
+
     accuracy: 0,
+    criticalChance: 0,
+    criticalDamage: 0,
+
     focus: 0,
     stamina: 0,
     devotion: 0,
@@ -41,8 +45,9 @@ export const ZERO_UNIT: Unit = {
   },
   flags: {
     isActive: false,
-    isRecharging: false,
     isProtected: false,
+    isInspected: false,
+    isStunned: false,
   },
   registry: {
     actions: [],

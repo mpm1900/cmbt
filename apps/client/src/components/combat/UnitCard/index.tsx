@@ -39,7 +39,7 @@ export function UnitCard(props: UnitDebugProps) {
     (isTargeted && result?.action?.id === SwitchUnitId)
 
   const isSelectable =
-    status === 'waiting-for-input' && !unit.flags.isRecharging && !stagedItem
+    status === 'waiting-for-input' && !unit.flags.isStunned && !stagedItem
 
   return (
     <div>
@@ -83,27 +83,29 @@ export function UnitCard(props: UnitDebugProps) {
                 <span>{unit.values.magicArmor}</span>
               </Badge>
             )}
-            <Popover>
-              <PopoverTrigger asChild>
-                <Button
-                  className={cn('p-2 h-full m-0', {
-                    'text-slate-900': isActive,
-                  })}
-                  variant="ghost"
-                >
-                  <FaSearch />
-                </Button>
-              </PopoverTrigger>
-              <PopoverContent className="w-full text-center">
-                <UnitStats
-                  unit={props.unit}
-                  stagedItem={stagedItem}
-                  onClearClick={() =>
-                    removeWhere((i) => i.action.sourceId === unit.id)
-                  }
-                />
-              </PopoverContent>
-            </Popover>
+            {(unit.teamId === ctx.user || unit.flags.isInspected) && (
+              <Popover>
+                <PopoverTrigger asChild>
+                  <Button
+                    className={cn('p-2 h-full m-0', {
+                      'text-slate-900': isActive,
+                    })}
+                    variant="ghost"
+                  >
+                    <FaSearch />
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent className="w-full text-center">
+                  <UnitStats
+                    unit={props.unit}
+                    stagedItem={stagedItem}
+                    onClearClick={() =>
+                      removeWhere((i) => i.action.sourceId === unit.id)
+                    }
+                  />
+                </PopoverContent>
+              </Popover>
+            )}
           </div>
         </div>
         <CardContent className="p-2 pt-0">

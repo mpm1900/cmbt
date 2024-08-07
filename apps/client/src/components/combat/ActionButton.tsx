@@ -50,11 +50,6 @@ export function ActionButton(props: ActionButtonProps) {
             }
           )}
         >
-          {renderer.cost && (
-            <span className={cn({ 'text-red-300': !costCheck })}>
-              {renderer.cost}
-            </span>
-          )}
           {accuracy !== undefined && baseAccuracy !== undefined ? (
             <span>
               <span
@@ -70,9 +65,13 @@ export function ActionButton(props: ActionButtonProps) {
               <span></span>
             </span>
           ) : (
-            <span>--</span>
+            <span>—</span>
           )}
-          {baseDamage && <span>{baseDamage} DMG</span>}
+
+          <span className={cn({ 'text-red-300': !costCheck })}>
+            {renderer.cost}
+          </span>
+          <span>{baseDamage}</span>
         </div>
       )}
     </Button>

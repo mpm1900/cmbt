@@ -7,12 +7,14 @@ export type AttackTypes = 'physical' | 'magic'
 
 export type StatKey =
   | 'speed'
+  | 'accuracy'
+  | 'criticalChance'
+  | 'criticalDamage'
+  | 'defense'
   | 'health'
   | 'focus'
   | 'stamina'
   | 'devotion'
-  | 'accuracy'
-  | 'defense'
   | AttackTypes
   | `${DamageType}Negation`
   | `${DamageType}Expansion`
@@ -26,7 +28,7 @@ export type ValueKey =
   | `${AttackTypes}Armor`
 export type Values = Record<ValueKey, number>
 
-export type FlagKey = 'isRecharging' | 'isActive' | 'isProtected'
+export type FlagKey = 'isActive' | 'isInspected' | 'isProtected' | 'isStunned'
 export type Flags = Record<FlagKey, boolean>
 
 export type RegistryKey = 'modifiers' | 'actions'

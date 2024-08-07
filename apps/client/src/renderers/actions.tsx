@@ -25,6 +25,7 @@ import {
   EarthquakeId,
   ProtectId,
   FireBlastId,
+  InspectAllId,
 } from '@repo/game/data'
 import { Action, CombatContext, Unit } from '@repo/game/types'
 import { Fragment, ReactNode } from 'react'
@@ -48,6 +49,7 @@ export type ActionRenderer = {
 export const ACTION_NAMES: Record<string, string> = {
   [SetIsActiveId]: 'Set IsActive',
   [SwitchUnitId]: 'Switch Units',
+  [InspectAllId]: 'Inspect',
 
   [CrunchId]: 'Crunch',
   [DisableId]: 'Disable',
@@ -109,6 +111,12 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
       </span>
     ),
   },
+  [InspectAllId]: {
+    name: ACTION_NAMES[InspectAllId],
+    baseDamage: () => '',
+    cost: '',
+    description: () => <>Allows you to view enemy units stats.</>,
+  },
 
   /// OTHER ACTIONS
   [CrunchId]: {
@@ -148,7 +156,7 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
   },
   [ExplosionId]: {
     name: 'Explosion',
-    baseDamage: () => 'x4 Physical',
+    baseDamage: () => 'ƒx',
     cost: '',
     description: (action) => (
       <>
@@ -156,6 +164,84 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
         units. This unit's health becomes zero.
       </>
     ),
+  },
+
+  [FireballId]: {
+    name: ACTION_NAMES[FireballId],
+    baseDamage: (action) =>
+      `${action.damage?.value} (${Math.round((action.damage?.value ?? 0) / 3)})`,
+    cost: '',
+    description: (action) => {
+      const fireball = action as Fireball
+      return (
+        <>
+          Deals {fireball.damage?.value} base fire damage to target enemy unit.
+          Deals {Math.round(fireball.damage.value / 3)} base fire damage to all
+          other active enemy units.
+        </>
+      )
+    },
+  },
+  [FireBlastId]: {
+    name: ACTION_NAMES[FireBlastId],
+    baseDamage: (action) => `${action.damage?.value}`,
+    cost: '',
+    description: (action) => (
+      <>
+        Deals {action.damage?.value} base fire damage to target enemy unit. 10%
+        chance to apply{' '}
+        <span className="font-bold text-modifiers-burned">Burn</span> to target
+        unit for 5 turns.
+      </>
+    ),
+    help: () => (
+      <div className="text-modifiers-burned/50">
+        (The unit's physical stat is halved. At the end of each turn, the unit
+        takes 10 damage.)
+      </div>
+    ),
+  },
+  [FurySwipesId]: {
+    name: 'Fury Swipes',
+    baseDamage: (action) => `${action.damage?.value}`,
+    cost: '',
+    description: (action) => {
+      const furySwipes = action as any as FurySwipes
+      return (
+        <>
+          Deals {furySwipes.damage?.value} damage to target enemy unit. Repeats
+          4-6 times.
+        </>
+      )
+    },
+  },
+  [HyperBeamId]: {
+    name: ACTION_NAMES[HyperBeamId],
+    baseDamage: () => 'ƒ(x)',
+    cost: '30 FP',
+    costAlt: <span className="text-blue-300">30 FP</span>,
+    description: (action) => (
+      <>
+        Deals base force damage equal to this unit's magic stat to target enemy
+        unit. Applies{' '}
+        <span className="font-bold text-muted-foreground">Stun</span> to this
+        unit for 1 turn.
+      </>
+    ),
+    help: () => <>(The unit cannot act while Stunned.)</>,
+  },
+  [IcyWindId]: {
+    name: 'Icy Wind',
+    baseDamage: () => '',
+    cost: '',
+    description: (action) => (
+      <>
+        Applies <span className="font-bold">Speed Down</span> to target enemy
+        unit.
+        {action.priority !== 0 && <> Priority {action.priority}.</>}
+      </>
+    ),
+    help: () => <>(The unit's speed stat is reduced by 10.)</>,
   },
   [MagicMissileId]: {
     name: 'Magic Missile',
@@ -230,83 +316,6 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
         (The unit's physical stat is multiplied by 1.5)
       </div>
     ),
-  },
-  [FireballId]: {
-    name: ACTION_NAMES[FireballId],
-    baseDamage: (action) =>
-      `${action.damage?.value} (${Math.round((action.damage?.value ?? 0) / 3)})`,
-    cost: '',
-    description: (action) => {
-      const fireball = action as Fireball
-      return (
-        <>
-          Deals {fireball.damage?.value} base fire damage to target enemy unit.
-          Deals {Math.round(fireball.damage.value / 3)} base fire damage to all
-          other active enemy units.
-        </>
-      )
-    },
-  },
-  [FireBlastId]: {
-    name: ACTION_NAMES[FireBlastId],
-    baseDamage: (action) => `${action.damage?.value}`,
-    cost: '',
-    description: (action) => (
-      <>
-        Deals {action.damage?.value} base fire damage to target enemy unit. 10%
-        chance to apply{' '}
-        <span className="font-bold text-modifiers-burned">Burn</span> to target
-        unit for 5 turns.
-      </>
-    ),
-    help: () => (
-      <div className="text-modifiers-burned/50">
-        (The unit's physical stat is halved. At the end of each turn, the unit
-        takes 10 damage.)
-      </div>
-    ),
-  },
-  [FurySwipesId]: {
-    name: 'Fury Swipes',
-    baseDamage: (action) => `${action.damage?.value}`,
-    cost: '',
-    description: (action) => {
-      const furySwipes = action as any as FurySwipes
-      return (
-        <>
-          Deals {furySwipes.damage?.value} damage to target enemy unit. Repeats
-          4-6 times.
-        </>
-      )
-    },
-  },
-  [HyperBeamId]: {
-    name: ACTION_NAMES[HyperBeamId],
-    baseDamage: () => 'x1 Magic',
-    cost: '30 FP',
-    costAlt: <span className="text-blue-300">30 FP</span>,
-    description: (action) => (
-      <>
-        Deals base force damage equal to this unit's magic stat to target enemy
-        unit. Applies{' '}
-        <span className="font-bold text-muted-foreground">Recharging</span> to
-        this unit for 1 turn.
-      </>
-    ),
-    help: () => <>(The unit cannot act while Recharging.)</>,
-  },
-  [IcyWindId]: {
-    name: 'Icy Wind',
-    baseDamage: () => '',
-    cost: '',
-    description: (action) => (
-      <>
-        Applies <span className="font-bold">Speed Down</span> to target enemy
-        unit.
-        {action.priority !== 0 && <> Priority {action.priority}.</>}
-      </>
-    ),
-    help: () => <>(The unit's speed stat is reduced by 10.)</>,
   },
   [TrickRoomId]: {
     name: 'Trick Room',

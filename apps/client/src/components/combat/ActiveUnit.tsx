@@ -45,7 +45,7 @@ export function ActiveUnit() {
       const unit = ctx.units
         .filter((u) => u.flags.isActive && u.teamId === ctx.user)
         .map((u) => applyModifiers(u, ctx).unit)
-        .find((u) => !u.flags.isRecharging)
+        .find((u) => !u.flags.isStunned)
 
       setUnit(ctx.units.find((u) => u.id === unit?.id))
     }

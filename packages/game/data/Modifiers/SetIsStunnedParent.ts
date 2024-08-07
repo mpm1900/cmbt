@@ -1,16 +1,19 @@
 import { CombatContext, Modifier, ModifierProps, Unit } from '../../types'
 import { ModifierId } from '../Ids'
 
-export const SetRechargingParentId = ModifierId()
-export class SetRechargingParent extends Modifier {
-  constructor(props: ModifierProps) {
-    super(SetRechargingParentId, props)
+export const SetIsStunnedParentId = ModifierId()
+export class SetIsStunnedParent extends Modifier {
+  private isStunned?: boolean
+
+  constructor(props: ModifierProps & { isStunned?: boolean }) {
+    super(SetIsStunnedParentId, props)
+    this.isStunned = props.isStunned
   }
 
   resolve = (unit: Unit): Partial<Unit> => {
     return {
       flags: Modifier.setFlags(unit, (flags) => ({
-        isRecharging: true,
+        isStunned: this.isStunned || true,
       })),
     }
   }

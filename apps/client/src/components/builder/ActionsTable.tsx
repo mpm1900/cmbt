@@ -14,6 +14,7 @@ import { useUnitBuilders } from '@/hooks/state/useUnitBuilders'
 import { cn } from '@/lib/utils'
 import { Badge } from '../ui/badge'
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '../ui/hover-card'
+import { HoverCardPortal } from '@radix-ui/react-hover-card'
 
 export type ActionsTablePrpos = {
   builder: UnitBuilder
@@ -108,9 +109,11 @@ export function ActionsTable(props: ActionsTablePrpos) {
                   <TableCell>{renderer.cost || '--'}</TableCell>
                 </TableRow>
               </HoverCardTrigger>
-              <HoverCardContent side="right">
-                {renderer.description(action)}
-              </HoverCardContent>
+              <HoverCardPortal>
+                <HoverCardContent side="right">
+                  {renderer.description(action)}
+                </HoverCardContent>
+              </HoverCardPortal>
             </HoverCard>
           )
         })}

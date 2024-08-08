@@ -23,14 +23,20 @@ export function useCleanupController() {
             targetIds: items.flatMap((i) => i.targetIds),
           },
         ])
-        handleNextAction('cleanup', queue, ctx, fns.commitResult, (result) => {
-          if (result) {
-            ctx = fns.commitResult(result, ctx, { enableLog: true })
-            ctx = fns.cleanupResult(ctx)
-            queue.setQueue(() => [])
-            fns.cleanup(ctx.turn.count > 0, ctx)
+        handleNextAction(
+          'cleanup',
+          queue,
+          ctx,
+          fns.commitResult,
+          (result, queueLength, ctx) => {
+            if (result) {
+              ctx = fns.commitResult(result, ctx, { enableLog: true })
+              ctx = fns.cleanupResult(ctx)
+              queue.setQueue(() => [])
+              fns.cleanup(ctx.turn.count > 0, ctx)
+            }
           }
-        })
+        )
       }
     }
   }, [ctx.turn.status, queue.queue.length])

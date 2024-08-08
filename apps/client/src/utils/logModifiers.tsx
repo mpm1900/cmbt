@@ -4,7 +4,6 @@ import { CombatContext, Modifier } from '@repo/game/types'
 import { validateModifiers } from '@repo/game/utils'
 
 export function logModifiers(modifiers: Modifier[], ctx: CombatContext) {
-  console.log(modifiers)
   const units = ctx.units.filter((u) => modifiers.some((m) => m.filter(u, ctx)))
   units.forEach((unit) => {
     const unitModifiers = validateModifiers(

@@ -10,8 +10,12 @@ export function handleNextAction(
   queue: ActionStore,
   ctx: CombatContext,
   commitResult: CommitResults,
-  handleResult: (result: ActionResult | undefined, queueLength: number) => void,
-  handleNext?: () => void
+  handleResult: (
+    result: ActionResult | undefined,
+    queueLength: number,
+    ctx: CombatContext
+  ) => void,
+  handleNext?: (ctx: CombatContext) => void
 ) {
   queue.sort(ctx)
   const sorted = queue.queue.sort(queueComparator(ctx))
@@ -21,14 +25,17 @@ export function handleNextAction(
       status === 'cleanup' || isUnitAliveCtx(item.action.sourceId, ctx)
 
     if (shouldCommitAction) {
-      commitResult({ action: item.action, mutations: [item.action.cost] }, ctx)
+      ctx = commitResult(
+        { action: item.action, mutations: [item.action.cost] },
+        ctx
+      )
       const result = getResultFromActionItem(item, ctx)
       logActionResult(item.action, result, ctx)
-      return handleResult(result, sorted.length)
+      return handleResult(result, sorted.length, ctx)
     }
 
-    return handleResult(undefined, sorted.length)
+    return handleResult(undefined, sorted.length, ctx)
   }
 
-  return handleNext && handleNext()
+  return handleNext && handleNext(ctx)
 }

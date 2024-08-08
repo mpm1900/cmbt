@@ -92,8 +92,8 @@ export function useCombatActions() {
     }
 
     logTriggers(triggers, event, context)
-    logModifiers(result.addedModifiers ?? [], context)
-    logMutations(result.mutations ?? [], context)
+    if (result.addedModifiers) logModifiers(result.addedModifiers, context)
+    if (result.mutations) logMutations(result.mutations, context)
 
     context = commitResult(result, context)
     return cleanupResult(context)

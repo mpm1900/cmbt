@@ -2,10 +2,8 @@ import { useEffect } from 'react'
 import { useActions, useCombat, useCombatSettings } from '../state'
 import { useCombatActions } from '../useCombatActions'
 import { useCombatContext } from '../useCombatContext'
-import { getTeamsWithSelectionRequired, handleNextAction } from '@/utils'
+import { handleNextAction } from '@/utils'
 import { isUnitAliveCtx } from '@repo/game/utils'
-import { nanoid } from 'nanoid'
-import { SetIsActive } from '@repo/game/data'
 
 export function useTurnController() {
   const { turn, pushResult } = useCombat()
@@ -23,7 +21,8 @@ export function useTurnController() {
         queue,
         ctx,
         fns.commitResult,
-        (result) => {
+        (result, length, _ctx) => {
+          ctx = _ctx
           pushResult(result)
         },
         () => fns.cleanup(true, ctx)

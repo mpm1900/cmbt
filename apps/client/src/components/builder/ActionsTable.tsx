@@ -99,14 +99,14 @@ export function ActionsTable(props: ActionsTablePrpos) {
                         {action.attackType}
                       </Badge>
                     ) : (
-                      '--'
+                      '—'
                     )}
                   </TableCell>
                   <TableCell>
-                    {accuracy !== undefined ? `${accuracy}%` : '--'}
+                    {accuracy !== undefined ? `${accuracy}%` : '—'}
                   </TableCell>
-                  <TableCell>{renderer.baseDamage(action) || '--'}</TableCell>
-                  <TableCell>{renderer.cost || '--'}</TableCell>
+                  <TableCell>{renderer.baseDamage(action) || '—'}</TableCell>
+                  <TableCell>{renderer.cost || '—'}</TableCell>
                 </TableRow>
               </HoverCardTrigger>
               <HoverCardPortal>

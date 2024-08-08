@@ -11,6 +11,7 @@ import {
   DamageAllOnTurnEnd,
   DamageAllOnTurnEndId,
   CreateSandstormOnUnitEnterId,
+  SetIsInspectedAllId,
 } from '@repo/game/data'
 import { ReactNode } from 'react'
 import { GiBiceps, GiBatteryPackAlt } from 'react-icons/gi'
@@ -18,6 +19,7 @@ import { AiFillCaretDown } from 'react-icons/ai'
 import { HiFire } from 'react-icons/hi2'
 import { IconType } from 'react-icons/lib'
 import { GiSandstorm } from 'react-icons/gi'
+import { BiSearch } from 'react-icons/bi'
 
 export type ModifierRenderer = {
   name: ReactNode
@@ -25,6 +27,7 @@ export type ModifierRenderer = {
 }
 
 export const MODIFIER_NAMES: Record<string, string> = {
+  [SetIsInspectedAllId]: 'Inspected',
   [BurnDamageOnTurnEndId]: 'Burn:Damage',
   [BurnedPowerDownId]: 'Burn:Power-Down',
   [DamageParentOnTurnEndId]: 'Damage OTE',
@@ -43,6 +46,7 @@ export const MODIFIER_BASE_ICONS: Record<
   string,
   [IconType, IconType | undefined, string | undefined, string | undefined]
 > = {
+  [SetIsInspectedAllId]: [BiSearch, undefined, 'fill-white', undefined],
   [BurnDamageOnTurnEndId]: [HiFire, undefined, 'fill-orange-300', undefined],
   [BurnedPowerDownId]: [
     GiBiceps,
@@ -66,6 +70,9 @@ export const MODIFIER_BASE_ICONS: Record<
 }
 
 export const ModifierRenderers: Record<string, ModifierRenderer> = {
+  [SetIsInspectedAllId]: {
+    name: MODIFIER_NAMES[SetIsInspectedAllId],
+  },
   [BurnDamageOnTurnEndId]: {
     name: MODIFIER_NAMES[BurnDamageOnTurnEndId],
     Inline: () => (

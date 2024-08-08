@@ -3,10 +3,9 @@ import { ModifierRenderers } from '@/renderers'
 import { CombatContext, Modifier } from '@repo/game/types'
 
 export function logModifiers(modifiers: Modifier[], ctx: CombatContext) {
-  const parentIds = modifiers.map((m) => m.parentId)
-  const units = ctx.units.filter((u) => parentIds.includes(u.id))
+  const units = ctx.units.filter((u) => modifiers.some((m) => m.filter(u, ctx)))
   units.forEach((unit) => {
-    const unitModifiers = modifiers.filter((m) => m.parentId === unit.id)
+    const unitModifiers = modifiers.filter((m) => m.filter(unit, ctx))
     const renderers = unitModifiers.map((m) => ModifierRenderers[m.rid])
     ctx.log(
       <LogSecondary>

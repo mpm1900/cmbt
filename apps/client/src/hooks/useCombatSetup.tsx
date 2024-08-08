@@ -26,8 +26,6 @@ export function useCombatSetup() {
           maxTargetCount: 1,
         })
       )
-
-      fns.nextTurn(false, ctx)
     }
   }, [])
 }

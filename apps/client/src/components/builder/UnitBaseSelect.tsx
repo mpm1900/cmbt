@@ -24,17 +24,15 @@ export function UnitBaseSelect(props: UnitBaseSelectProps) {
         onChange(ALL_BASES.find((base) => base.id === id) as UnitBase)
       }
     >
-      <SelectTrigger className="">
+      <SelectTrigger>
         <SelectValue placeholder="Select a base" />
       </SelectTrigger>
       <SelectContent>
-        <SelectGroup>
-          {ALL_BASES.map((base) => (
-            <SelectItem key={base.id} value={base.id}>
-              {base.name}
-            </SelectItem>
-          ))}
-        </SelectGroup>
+        {ALL_BASES.map((base) => (
+          <SelectItem key={base.id} value={base.id}>
+            {base.name}
+          </SelectItem>
+        ))}
       </SelectContent>
     </Select>
   )

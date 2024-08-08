@@ -7,6 +7,7 @@ import { UnitBaseSelect } from './UnitBaseSelect'
 import { UnitBaseStats } from './UnitBaseStats'
 import { BASE_CONFIGS, ZERO_UNIT } from '@repo/game/data'
 import { ActionsTable } from './ActionsTable'
+import { UnitAbilitySelect } from './UnitAbilitySelect'
 
 export function ActiveUnit() {
   const ui = useBuilderUi()
@@ -60,6 +61,20 @@ export function ActiveUnit() {
                   />
                 </div>
                 <UnitBaseStats base={builder.base} />
+                <div className="flex items-center space-x-2">
+                  <Label htmlFor="name" className="min-w-[72px]">
+                    Ability
+                  </Label>
+                  <UnitAbilitySelect
+                    options={builder.config.abilities}
+                    value={builder.ability}
+                    onChnage={(ability) =>
+                      store.updateBuilder(builder.id, (b) => ({
+                        ability,
+                      }))
+                    }
+                  />
+                </div>
               </div>
             </CardContent>
           </Card>

@@ -17,6 +17,7 @@ import {
   Sandstorm,
   SandstormId,
 } from '../Actions'
+import { Intimidate, SandStream } from '../Augments'
 
 export const Tyranitar: UnitBase = {
   id: nanoid(),
@@ -36,6 +37,7 @@ export const Tyranitar: UnitBase = {
 }
 
 export const TyranitarConfig: UnitBaseConfig = {
+  abilities: [new Intimidate(), new SandStream()],
   actionsCount: 4,
   actions: [
     {
@@ -67,5 +69,5 @@ export const TyranitarConfig: UnitBaseConfig = {
       make: (unit) => new Sandstorm(unit.id, unit.teamId),
     },
   ],
-  defaultActionIds: [CrunchId, EarthquakeId, FireBlastId, SandstormId],
+  defaultActionIds: [CrunchId, EarthquakeId, FireBlastId, ProtectId],
 }

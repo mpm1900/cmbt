@@ -20,6 +20,7 @@ export const Steelix: UnitBase = {
 }
 
 export const SteelixConfig: UnitBaseConfig = {
+  abilities: [],
   actionsCount: 5,
   actions: [],
   defaultActionIds: [],

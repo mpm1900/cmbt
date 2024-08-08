@@ -20,6 +20,7 @@ export const Salamence: UnitBase = {
 }
 
 export const SalamenceConfig: UnitBaseConfig = {
+  abilities: [],
   actionsCount: 5,
   actions: [],
   defaultActionIds: [],

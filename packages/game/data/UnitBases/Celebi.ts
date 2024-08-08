@@ -20,6 +20,7 @@ export const Celebi: UnitBase = {
 }
 
 export const CelebiConfig: UnitBaseConfig = {
+  abilities: [],
   actionsCount: 5,
   actions: [],
   defaultActionIds: [],

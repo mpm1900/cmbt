@@ -20,6 +20,7 @@ export const Blissy: UnitBase = {
 }
 
 export const BlissyConfig: UnitBaseConfig = {
+  abilities: [],
   actionsCount: 5,
   actions: [],
   defaultActionIds: [],

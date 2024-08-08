@@ -20,6 +20,7 @@ export const Snorlax: UnitBase = {
 }
 
 export const SnorlaxConfig: UnitBaseConfig = {
+  abilities: [],
   actionsCount: 5,
   actions: [],
   defaultActionIds: [],

@@ -20,6 +20,7 @@ export const DeoxysS: UnitBase = {
 }
 
 export const DeoxysSConfig: UnitBaseConfig = {
+  abilities: [],
   actionsCount: 5,
   actions: [],
   defaultActionIds: [],

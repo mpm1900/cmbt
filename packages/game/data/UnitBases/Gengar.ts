@@ -20,6 +20,7 @@ export const Gengar: UnitBase = {
 }
 
 export const GengarConfig: UnitBaseConfig = {
+  abilities: [],
   actionsCount: 4,
   actions: [],
   defaultActionIds: [],

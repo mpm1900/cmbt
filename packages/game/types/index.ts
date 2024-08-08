@@ -2,6 +2,7 @@ export type Id = string
 export type Entity = { id: Id }
 
 export * from './Action'
+export * from './Augment'
 export * from './CombatContext'
 export * from './Damage'
 export * from './Item'

@@ -1,5 +1,16 @@
-import { GLOBAL_ACTIONS, HyperBeam, UnitId, ZERO_UNIT } from '../data'
-import { Id, Unit, UnitBuilder } from '../types'
+import { GLOBAL_ACTIONS, UnitId, ZERO_UNIT } from '../data'
+import { Id, Modifier, Mutation, Unit, UnitBuilder } from '../types'
+import { applyMutations } from './applyModifiers'
+
+function getMutationsFromBuilder(builder: UnitBuilder, unit: Unit): Mutation[] {
+  const abilityMutations = builder.ability?.mutations(unit) ?? []
+  return abilityMutations
+}
+
+function getModifiersFromBuilder(builder: UnitBuilder, unit: Unit): Modifier[] {
+  const abilityModifiers = builder.ability?.modifiers(unit) ?? []
+  return abilityModifiers
+}
 
 export function resolveUnitBuilder(builder: UnitBuilder, teamId: Id): Unit {
   let unit: Unit = {
@@ -26,7 +37,9 @@ export function resolveUnitBuilder(builder: UnitBuilder, teamId: Id): Unit {
     ...builder.actions.map((a) => a.make(unit)),
     ...GLOBAL_ACTIONS.map((a) => a.make(unit)),
   ]
-  //unit.actions = [new HyperBeam(unit.id, unit.teamId)]
 
-  return unit
+  const mutations = getMutationsFromBuilder(builder, unit)
+  const modifiers = getModifiersFromBuilder(builder, unit)
+  unit.modifiers = () => modifiers
+  return applyMutations(unit, mutations)
 }

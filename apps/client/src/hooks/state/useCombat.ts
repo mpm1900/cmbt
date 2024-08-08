@@ -64,7 +64,7 @@ export const useCombat = create<CombatStore>((set, get) => {
         modifiers: validateModifiers(modifiers, []),
         turn: {
           count: 0,
-          status: 'init',
+          status: 'cleanup',
           results: [],
         },
         logs: [],

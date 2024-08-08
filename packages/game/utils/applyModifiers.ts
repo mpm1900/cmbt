@@ -14,6 +14,12 @@ export function applyMutation(unit: Unit, mutation: Mutation): Unit {
   }
 }
 
+export function applyMutations(unit: Unit, mutations: Mutation[]): Unit {
+  return mutations.reduce<Unit>((u: Unit, mutation: Mutation) => {
+    return applyMutation(u, mutation)
+  }, unit)
+}
+
 export function applyModifiers(
   unit: Unit,
   ctx: CombatContext

@@ -8,12 +8,16 @@ import {
   PowerDownParentId,
   PowerUpParentId,
   PowerDownAllOtherOnUnitEnterId,
+  DamageAllOnTurnEnd,
+  DamageAllOnTurnEndId,
+  CreateSandstormOnUnitEnterId,
 } from '@repo/game/data'
 import { ReactNode } from 'react'
 import { GiBiceps, GiBatteryPackAlt } from 'react-icons/gi'
 import { AiFillCaretDown } from 'react-icons/ai'
 import { HiFire } from 'react-icons/hi2'
 import { IconType } from 'react-icons/lib'
+import { GiSandstorm } from 'react-icons/gi'
 
 export type ModifierRenderer = {
   name: ReactNode
@@ -28,8 +32,11 @@ export const MODIFIER_NAMES: Record<string, string> = {
   [SetIsStunnedParentId]: 'Recharging',
   [InvertSpeedAllId]: 'Invert Speed',
   [PowerDownParentId]: 'Power Down',
-  [PowerDownAllOtherOnUnitEnterId]: 'Intimidate',
   [PowerUpParentId]: 'Power Up',
+
+  [CreateSandstormOnUnitEnterId]: 'Sand Stream',
+  [DamageAllOnTurnEndId]: 'Sandstorm',
+  [PowerDownAllOtherOnUnitEnterId]: 'Intimidate',
 }
 
 export const MODIFIER_BASE_ICONS: Record<
@@ -55,6 +62,7 @@ export const MODIFIER_BASE_ICONS: Record<
     'fill-red-400',
     undefined,
   ],
+  [DamageAllOnTurnEndId]: [GiSandstorm, undefined, 'fill-amber-100', undefined],
 }
 
 export const ModifierRenderers: Record<string, ModifierRenderer> = {
@@ -94,10 +102,18 @@ export const ModifierRenderers: Record<string, ModifierRenderer> = {
   [PowerDownParentId]: {
     name: MODIFIER_NAMES[PowerDownParentId],
   },
-  [PowerDownAllOtherOnUnitEnterId]: {
-    name: MODIFIER_NAMES[PowerDownAllOtherOnUnitEnterId],
-  },
   [PowerUpParentId]: {
     name: MODIFIER_NAMES[PowerUpParentId],
+  },
+
+  // Triggers
+  [CreateSandstormOnUnitEnterId]: {
+    name: MODIFIER_NAMES[CreateSandstormOnUnitEnterId],
+  },
+  [DamageAllOnTurnEndId]: {
+    name: MODIFIER_NAMES[DamageAllOnTurnEndId],
+  },
+  [PowerDownAllOtherOnUnitEnterId]: {
+    name: MODIFIER_NAMES[PowerDownAllOtherOnUnitEnterId],
   },
 }

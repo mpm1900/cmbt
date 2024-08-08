@@ -14,6 +14,7 @@ export function useCleanupController() {
   useEffect(() => {
     if (ctx.turn.status === 'cleanup') {
       const teams = getTeamsWithSelectionRequired(ctx)
+      console.log('teams', teams)
       if (queue.queue.length === teams.length && teams.length > 0) {
         queue = queue.setQueue((items) => [
           {
@@ -27,7 +28,7 @@ export function useCleanupController() {
             ctx = fns.commitResult(result, ctx, { enableLog: true })
             ctx = fns.cleanupResult(ctx)
             queue.setQueue(() => [])
-            fns.cleanup(true, ctx)
+            fns.cleanup(ctx.turn.count > 0, ctx)
           }
         })
       }

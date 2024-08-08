@@ -60,6 +60,9 @@ export function Combat() {
               <RequireTurnStatus status="cleanup">
                 <CleanupSwitchUnits />
               </RequireTurnStatus>
+              <RequireTurnStatus status="init">
+                <CleanupSwitchUnits />
+              </RequireTurnStatus>
             </div>
             <Team teamId={userTeam?.id} reverse />
           </div>

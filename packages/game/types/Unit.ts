@@ -1,7 +1,7 @@
 import { Action } from './Action'
 import { DamageType } from './Damage'
 import { Modifier } from './Modifier'
-import { ActionMaker, Id } from '.'
+import { ActionMaker, Augment, Id } from '.'
 
 export type AttackTypes = 'physical' | 'magic'
 
@@ -48,6 +48,7 @@ export type UnitBase = {
 }
 
 export type UnitBaseConfig = {
+  abilities: Augment[]
   actionsCount: number
   actions: ActionMaker[]
   defaultActionIds: Id[]
@@ -71,5 +72,6 @@ export type UnitBuilder = {
   name: string
   base: UnitBase
   config: UnitBaseConfig
+  ability: Augment | undefined
   actions: ActionMaker[]
 }

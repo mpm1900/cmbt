@@ -1,4 +1,5 @@
 export * from './CreateSandstormOnUnitEnter'
+export * from './DamageNewUnitsOnUnitEnter'
 export * from './DamageAllOnTurnEnd'
 export * from './DamageParentOnTurnEnd'
 export * from './PowerDownAllOtherOnUnitEnter'

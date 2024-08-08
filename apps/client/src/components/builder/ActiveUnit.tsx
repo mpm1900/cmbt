@@ -53,6 +53,9 @@ export function ActiveUnit() {
                       store.updateBuilder(builder.id, (b) => ({
                         base,
                         config,
+                        ability: config.abilities.find(
+                          (a) => a.id === config.defaultAbilityId
+                        ),
                         actions: config.actions.filter((m) =>
                           config.defaultActionIds.includes(m.id)
                         ),

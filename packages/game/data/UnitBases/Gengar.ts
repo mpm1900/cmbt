@@ -23,5 +23,6 @@ export const GengarConfig: UnitBaseConfig = {
   abilities: [],
   actionsCount: 4,
   actions: [],
+  defaultAbilityId: undefined,
   defaultActionIds: [],
 }

@@ -51,6 +51,7 @@ export type UnitBaseConfig = {
   abilities: Augment[]
   actionsCount: number
   actions: ActionMaker[]
+  defaultAbilityId: Id | undefined
   defaultActionIds: Id[]
 }
 

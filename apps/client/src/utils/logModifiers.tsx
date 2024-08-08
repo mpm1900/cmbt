@@ -1,11 +1,15 @@
 import { LogSecondary, LogUnit } from '@/components/ui/log'
 import { ModifierRenderers } from '@/renderers'
 import { CombatContext, Modifier } from '@repo/game/types'
+import { validateModifiers } from '@repo/game/utils'
 
 export function logModifiers(modifiers: Modifier[], ctx: CombatContext) {
   const units = ctx.units.filter((u) => modifiers.some((m) => m.filter(u, ctx)))
   units.forEach((unit) => {
-    const unitModifiers = modifiers.filter((m) => m.filter(unit, ctx))
+    const unitModifiers = validateModifiers(
+      modifiers.filter((m) => m.filter(unit, ctx)),
+      []
+    )
     const renderers = unitModifiers.map((m) => ModifierRenderers[m.rid])
     ctx.log(
       <LogSecondary>

@@ -11,7 +11,7 @@ export const makeBuilder = (): UnitBuilder => {
     name: faker.person.fullName(),
     base,
     config,
-    ability: undefined,
+    ability: config.abilities.find((a) => a.id === config.defaultAbilityId),
     actions: config.actions.filter((m) =>
       config.defaultActionIds.includes(m.id)
     ),

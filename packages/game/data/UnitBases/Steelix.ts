@@ -23,5 +23,6 @@ export const SteelixConfig: UnitBaseConfig = {
   abilities: [],
   actionsCount: 5,
   actions: [],
+  defaultAbilityId: undefined,
   defaultActionIds: [],
 }

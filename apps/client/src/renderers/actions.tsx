@@ -21,7 +21,6 @@ import {
   QuickAttack,
   CrunchId,
   Crunch,
-  Earthquake,
   EarthquakeId,
   ProtectId,
   FireBlastId,
@@ -29,6 +28,7 @@ import {
 } from '@repo/game/data'
 import { Action, CombatContext, Unit } from '@repo/game/types'
 import { Fragment, ReactNode } from 'react'
+import { SpikesId } from '../../../../packages/game/data/Actions/Spikes'
 
 export type ActionRenderer = {
   name: string
@@ -65,6 +65,7 @@ export const ACTION_NAMES: Record<string, string> = {
   [ProtectId]: 'Protect',
   [QuickAttackId]: 'Quick Attack',
   [SandstormId]: 'Sandstorm',
+  [SpikesId]: 'Spikes',
   [SwordsDanceId]: 'Swords Dance',
   [TrickRoomId]: 'Trick Room',
   [WillOWispId]: 'Will-o-wisp',
@@ -299,6 +300,16 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
       </>
     ),
     help: () => <>(At the end of each turn, the unit takes 10 damage.)</>,
+  },
+  [SpikesId]: {
+    name: 'Spikes',
+    baseDamage: () => '',
+    cost: '',
+    description: (action) => (
+      <>
+        Applies <span className="font-bold">Sandstorm</span> to all units
+      </>
+    ),
   },
   [SwordsDanceId]: {
     name: 'Swords Dance',

@@ -17,7 +17,8 @@ import {
   Sandstorm,
   SandstormId,
 } from '../Actions'
-import { Intimidate, SandStream } from '../Augments'
+import { Intimidate, SandStream, SandStreamId } from '../Augments'
+import { Spikes, SpikesId } from '../Actions/Spikes'
 
 export const Tyranitar: UnitBase = {
   id: nanoid(),
@@ -68,6 +69,11 @@ export const TyranitarConfig: UnitBaseConfig = {
       id: SandstormId,
       make: (unit) => new Sandstorm(unit.id, unit.teamId),
     },
+    {
+      id: SpikesId,
+      make: (unit) => new Spikes(unit.id, unit.teamId),
+    },
   ],
+  defaultAbilityId: SandStreamId,
   defaultActionIds: [CrunchId, EarthquakeId, FireBlastId, ProtectId],
 }

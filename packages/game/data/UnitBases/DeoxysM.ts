@@ -23,5 +23,6 @@ export const DeoxysMConfig: UnitBaseConfig = {
   abilities: [],
   actionsCount: 5,
   actions: [],
+  defaultAbilityId: undefined,
   defaultActionIds: [],
 }

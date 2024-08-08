@@ -7,20 +7,15 @@ import {
 } from '../../types'
 import { TriggerId } from '../Ids'
 
-export const DamageAllOnTurnEndId = TriggerId()
-export const BurnDamageOnTurnEndId = TriggerId()
+export const DamageNewUnitsOnUnitEnterId = TriggerId()
 
-export class DamageAllOnTurnEnd extends Trigger {
+export class DamageNewUnitsOnUnitEnter extends Trigger {
   private damage: number
 
-  get key() {
-    return this.id
-  }
-
   constructor(props: TriggerProps<{ damage: number }>) {
-    super(DamageAllOnTurnEndId, {
+    super(DamageNewUnitsOnUnitEnterId, {
       ...props,
-      events: ['on Turn End'],
+      events: ['on Unit Enter'],
     })
     this.damage = props.damage
   }
@@ -30,10 +25,14 @@ export class DamageAllOnTurnEnd extends Trigger {
       values: Modifier.setValues(unit, (values) => ({
         damage: values.damage + this.damage,
       })),
+      metadata: {
+        ...unit.metadata,
+        activeTurns: 1,
+      },
     }
   }
 
   filter = (unit: Unit, ctx: CombatContext): boolean => {
-    return super.filter(unit, ctx)
+    return super.filter(unit, ctx) && unit.metadata.activeTurns == 0
   }
 }

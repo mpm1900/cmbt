@@ -93,7 +93,10 @@ export const useCombat = create<CombatStore>((set, get) => {
     modifiers: [],
     add(modifiers) {
       set((state) => ({
-        modifiers: validateModifiers(modifiers, state.modifiers),
+        modifiers: [
+          ...state.modifiers,
+          ...validateModifiers(modifiers, state.modifiers),
+        ],
       }))
       return get().modifiers
     },

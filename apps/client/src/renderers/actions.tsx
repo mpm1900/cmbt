@@ -25,10 +25,10 @@ import {
   ProtectId,
   FireBlastId,
   InspectAllId,
+  SpikesId,
 } from '@repo/game/data'
 import { Action, CombatContext, Unit } from '@repo/game/types'
 import { Fragment, ReactNode } from 'react'
-import { SpikesId } from '../../../../packages/game/data/Actions/Spikes'
 
 export type ActionRenderer = {
   name: string
@@ -302,7 +302,7 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
     help: () => <>(At the end of each turn, the unit takes 10 damage.)</>,
   },
   [SpikesId]: {
-    name: 'Spikes',
+    name: ACTION_NAMES[SpikesId],
     baseDamage: () => '',
     cost: '',
     description: (action) => (

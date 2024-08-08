@@ -25,6 +25,6 @@ export class CreateSandstormOnUnitEnter extends Trigger {
   }
 
   filter = (unit: Unit, ctx: CombatContext): boolean => {
-    return super.filter(unit, ctx)
+    return super.filter(unit, ctx) && unit.id === this.sourceId
   }
 }

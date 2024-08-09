@@ -26,6 +26,10 @@ export function resolveUnitBuilder(builder: UnitBuilder, teamId: Id): Unit {
     metadata: ZERO_UNIT.metadata,
   }
 
+  unit.stats = {
+    ...unit.stats,
+  }
+
   unit.values = {
     ...unit.values,
     focus: unit.stats.focus,

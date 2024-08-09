@@ -1,6 +1,12 @@
 import { nanoid } from 'nanoid'
 import { UnitBase, UnitBaseConfig } from '../../types'
 import { ZERO_UNIT } from '../Units'
+import {
+  MagicMissile,
+  MagicMissileId,
+  PowerWordKill,
+  PowerWordKillId,
+} from '../Actions'
 
 export const Gengar: UnitBase = {
   id: nanoid(),
@@ -22,7 +28,16 @@ export const Gengar: UnitBase = {
 export const GengarConfig: UnitBaseConfig = {
   abilities: [],
   actionsCount: 4,
-  actions: [],
+  actions: [
+    {
+      id: MagicMissileId,
+      make: (u) => new MagicMissile(u.id, u.teamId),
+    },
+    {
+      id: PowerWordKillId,
+      make: (u) => new PowerWordKill(u.id, u.teamId),
+    },
+  ],
   defaultAbilityId: undefined,
-  defaultActionIds: [],
+  defaultActionIds: [MagicMissileId, PowerWordKillId],
 }

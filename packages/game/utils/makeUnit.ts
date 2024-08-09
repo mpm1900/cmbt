@@ -60,7 +60,6 @@ export function makeUnit(teamId: string, name?: string, isActive?: boolean) {
     (unit) => ({
       values: {
         ...ZERO_UNIT.values,
-        damage: unit.stats.health - 20,
         focus: unit.stats.focus,
         stamina: unit.stats.stamina,
         devotion: unit.stats.devotion,

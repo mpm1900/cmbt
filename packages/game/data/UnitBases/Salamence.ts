@@ -1,6 +1,15 @@
 import { nanoid } from 'nanoid'
 import { UnitBase, UnitBaseConfig } from '../../types'
 import { ZERO_UNIT } from '../Units'
+import {
+  Fireball,
+  FireballId,
+  FireBlast,
+  FireBlastId,
+  HyperBeam,
+  HyperBeamId,
+} from '../Actions'
+import { Intimidate, IntimidateId } from '../Augments'
 
 export const Salamence: UnitBase = {
   id: nanoid(),
@@ -20,9 +29,22 @@ export const Salamence: UnitBase = {
 }
 
 export const SalamenceConfig: UnitBaseConfig = {
-  abilities: [],
+  abilities: [new Intimidate()],
   actionsCount: 5,
-  actions: [],
-  defaultAbilityId: undefined,
-  defaultActionIds: [],
+  actions: [
+    {
+      id: FireballId,
+      make: (unit) => new Fireball(unit.id, unit.teamId),
+    },
+    {
+      id: FireBlastId,
+      make: (unit) => new FireBlast(unit.id, unit.teamId),
+    },
+    {
+      id: HyperBeamId,
+      make: (unit) => new HyperBeam(unit.id, unit.teamId),
+    },
+  ],
+  defaultAbilityId: IntimidateId,
+  defaultActionIds: [FireballId, FireBlastId, HyperBeamId],
 }

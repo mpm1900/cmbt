@@ -10,8 +10,6 @@ import {
   FireballId,
   FireBlast,
   FireBlastId,
-  HyperBeam,
-  HyperBeamId,
   Protect,
   ProtectId,
   Sandstorm,
@@ -38,7 +36,7 @@ export const Tyranitar: UnitBase = {
 }
 
 export const TyranitarConfig: UnitBaseConfig = {
-  abilities: [new Intimidate(), new SandStream()],
+  abilities: [new SandStream()],
   actionsCount: 4,
   actions: [
     {
@@ -56,10 +54,6 @@ export const TyranitarConfig: UnitBaseConfig = {
     {
       id: FireBlastId,
       make: (unit) => new FireBlast(unit.id, unit.teamId),
-    },
-    {
-      id: HyperBeamId,
-      make: (unit) => new HyperBeam(unit.id, unit.teamId),
     },
     {
       id: ProtectId,

@@ -1,7 +1,7 @@
 import { nanoid } from 'nanoid'
 import { UnitBase, UnitBaseConfig } from '../../types'
 import { ZERO_UNIT } from '../Units'
-import { ArmorUp, Spikes } from '../Actions'
+import { ArmorUp, ArmorUpId, Spikes, SpikesId } from '../Actions'
 
 export const Blissy: UnitBase = {
   id: nanoid(),
@@ -25,14 +25,14 @@ export const BlissyConfig: UnitBaseConfig = {
   actionsCount: 5,
   actions: [
     {
-      id: nanoid(),
+      id: ArmorUpId,
       make: (u) => new ArmorUp(u.id, u.teamId),
     },
     {
-      id: nanoid(),
+      id: SpikesId,
       make: (u) => new Spikes(u.id, u.teamId),
     },
   ],
   defaultAbilityId: undefined,
-  defaultActionIds: [],
+  defaultActionIds: [ArmorUpId, SpikesId],
 }

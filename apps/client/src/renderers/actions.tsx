@@ -28,6 +28,7 @@ import {
   SpikesId,
   ArmorUpId,
   ArmorUp,
+  RestId,
 } from '@repo/game/data'
 import { Action, ActionResult, CombatContext, Unit } from '@repo/game/types'
 import { Fragment, ReactNode } from 'react'
@@ -69,6 +70,7 @@ export const ACTION_NAMES: Record<string, string> = {
   [PowerWordKillId]: 'Power Word Kill',
   [ProtectId]: 'Protect',
   [QuickAttackId]: 'Quick Attack',
+  [RestId]: 'Rest',
   [SandstormId]: 'Sandstorm',
   [SpikesId]: 'Spikes',
   [SwordsDanceId]: 'Swords Dance',
@@ -303,6 +305,17 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
       </>
     ),
     failureLog: (result) => <>Protect failed.</>,
+  },
+  [RestId]: {
+    name: ACTION_NAMES[RestId],
+    baseDamage: () => '',
+    cost: '',
+    description: () => (
+      <>
+        Removes all damage from this unit. Applies{' '}
+        <span className="font-bold">Stun</span> to this unit for 2 turns.
+      </>
+    ),
   },
   [SandstormId]: {
     name: 'Sandstorm',

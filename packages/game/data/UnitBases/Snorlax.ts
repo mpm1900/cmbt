@@ -1,6 +1,7 @@
 import { nanoid } from 'nanoid'
 import { UnitBase, UnitBaseConfig } from '../../types'
 import { ZERO_UNIT } from '../Units'
+import { Rest, RestId } from '../Actions'
 
 export const Snorlax: UnitBase = {
   id: nanoid(),
@@ -22,7 +23,12 @@ export const Snorlax: UnitBase = {
 export const SnorlaxConfig: UnitBaseConfig = {
   abilities: [],
   actionsCount: 5,
-  actions: [],
+  actions: [
+    {
+      id: RestId,
+      make: (u) => new Rest(u.id, u.teamId),
+    },
+  ],
   defaultAbilityId: undefined,
-  defaultActionIds: [],
+  defaultActionIds: [RestId],
 }

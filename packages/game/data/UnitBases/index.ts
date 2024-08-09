@@ -14,7 +14,6 @@ export const ALL_BASES: UnitBase[] = [
   Tyranitar,
   Blissy,
   Celebi,
-  DeoxysM,
   DeoxysP,
   DeoxysS,
   Gengar,
@@ -26,7 +25,6 @@ export const ALL_BASES: UnitBase[] = [
 export const BASE_CONFIGS: Record<Id, UnitBaseConfig> = {
   [Blissy.id]: BlissyConfig,
   [Celebi.id]: CelebiConfig,
-  [DeoxysM.id]: DeoxysMConfig,
   [DeoxysP.id]: DeoxysPConfig,
   [DeoxysS.id]: DeoxysSConfig,
   [Gengar.id]: GengarConfig,

@@ -73,11 +73,11 @@ export function calculateDamage(
   )
   const physicalArmor =
     damage.attackType === 'physical'
-      ? Math.min(target.values.physicalArmor, damageAmount)
+      ? Math.max(Math.min(target.values.physicalArmor, damageAmount), 0)
       : 0
   const magicArmor =
     damage.attackType === 'magic'
-      ? Math.min(target.values.magicArmor, damageAmount)
+      ? Math.max(Math.min(target.values.magicArmor, damageAmount), 0)
       : 0
 
   return {

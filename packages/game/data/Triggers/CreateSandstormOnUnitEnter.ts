@@ -16,7 +16,6 @@ export class CreateSandstormOnUnitEnter extends Trigger {
       maxInstances: 1,
       modifiers: (ctx) => [
         new DamageAllOnTurnEnd({
-          sourceId: props.sourceId,
           damage: 30,
           duration: 5,
           maxInstances: 1,

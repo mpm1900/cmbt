@@ -5,7 +5,7 @@ import { routeTransitionProps } from '@/constants'
 
 export const Route = createFileRoute('/')({
   component: () => (
-    <div className="flex-1 bg-black">
+    <div className="flex-1 bg-slate-950">
       <motion.div className="flex-1" {...routeTransitionProps}>
         <Builder />
       </motion.div>

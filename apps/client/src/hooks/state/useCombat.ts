@@ -50,7 +50,7 @@ export type CombatStore = CombatState & {
   // turn
   next: () => void
   setStatus: (status: TurnStatus) => void
-  setTurn: (fn: (turn: Turn) => Partial<Turn>) => void
+  setTurn: (fn: (turn: Turn) => Partial<Turn>) => Turn
   pushResult: (result: ActionResult | undefined) => void
 }
 
@@ -69,6 +69,7 @@ export const useCombat = create<CombatStore>((set, get) => {
           count: 0,
           status: 'cleanup',
           results: [],
+          hasRanOnTurnEndTriggers: false,
         },
         logs: [],
       })
@@ -154,10 +155,16 @@ export const useCombat = create<CombatStore>((set, get) => {
       count: 0,
       status: 'init',
       results: [],
+      hasRanOnTurnEndTriggers: false,
     },
     next: () =>
       set((s) => ({
-        turn: { ...s.turn, count: s.turn.count + 1, results: [] },
+        turn: {
+          ...s.turn,
+          count: s.turn.count + 1,
+          results: [],
+          hasRanOnTurnEndTriggers: false,
+        },
         units: s.units.map((u) =>
           u.flags.isActive
             ? {
@@ -171,13 +178,15 @@ export const useCombat = create<CombatStore>((set, get) => {
         ),
       })),
     setStatus: (status) => set((s) => ({ turn: { ...s.turn, status } })),
-    setTurn: (fn) =>
+    setTurn: (fn) => {
       set((s) => ({
         turn: {
           ...s.turn,
           ...fn(s.turn),
         },
-      })),
+      }))
+      return get().turn
+    },
     pushResult: (result) =>
       set((s) => ({
         turn: {

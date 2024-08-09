@@ -17,6 +17,7 @@ import { LogCritical, LogHeader } from '@/components/ui/log'
 import { handleCleanup } from '@/utils/handleCleanup'
 import { logMiss } from '@/utils'
 import { SetDeadAsInactive } from '@repo/game/data'
+import { useState } from 'react'
 
 export type CommitResultOptions = {
   enableLog?: boolean
@@ -117,15 +118,14 @@ export function useCombatActions() {
   }
 
   function nextTurn(runEndOfTurnTriggers: boolean, context: CombatContext) {
-    if (runEndOfTurnTriggers) {
+    if (runEndOfTurnTriggers && !context.turn.hasRanOnTurnEndTriggers) {
       context = runTriggers('on Turn End', context)
       context.modifiers = decrementModifierDurations()
+      context.turn = combat.setTurn((t) => ({ hasRanOnTurnEndTriggers: true }))
       cleanup(false, context)
     } else {
       combat.next()
-      setTimeout(() => {
-        context.log(<LogHeader>turn {combat.turn.count + 1}</LogHeader>)
-      }, 500)
+      context.log(<LogHeader>turn {combat.turn.count + 1}</LogHeader>)
       activeUnit.setActiveUnit(
         context.units.find((u) => u.flags.isActive && u.teamId === context.user)
       )

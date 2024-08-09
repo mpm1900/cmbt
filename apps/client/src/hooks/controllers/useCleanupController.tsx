@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useCleanup } from '../state'
 import { useCombatContext } from '../useCombatContext'
 import { useCombatActions } from '../useCombatActions'
@@ -33,6 +33,7 @@ export function useCleanupController() {
               ctx = fns.commitResult(result, ctx, { enableLog: true })
               ctx = fns.cleanupResult(ctx)
               queue.setQueue(() => [])
+
               fns.cleanup(ctx.turn.count > 0, ctx)
             }
           }

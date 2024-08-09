@@ -13,6 +13,7 @@ import {
   getActionData,
   buildActionResult,
   getMutationsFromDamageResult,
+  applyModifiers,
 } from '../../utils'
 import { getDamageAi } from '../../utils/getDamageAiAction'
 import { modifyRenderContext } from '../../utils/modifyRenderContext'
@@ -49,7 +50,9 @@ export class Earthquake extends Action {
   }
 
   mapTargets = (targets: Unit[], ctx: CombatContext): Unit[] => {
-    return ctx.units.filter((u) => u.flags.isActive && u.id !== this.sourceId)
+    return ctx.units
+      .map((u) => applyModifiers(u, ctx).unit)
+      .filter((u) => u.flags.isActive && u.id !== this.sourceId)
   }
 
   resolve = (

@@ -26,7 +26,7 @@ export function logMutationDiffs(
   const name = parent.name
   if (diffs.values.damage > 0) {
     ctx.log(
-      <LogSecondary>
+      <LogSecondary className="italic">
         <LogUnit teamId={parent?.teamId} user={ctx.user} className="opacity-70">
           {name}
         </LogUnit>{' '}
@@ -37,7 +37,7 @@ export function logMutationDiffs(
   }
   if (diffs.values.physicalArmor !== 0) {
     ctx.log(
-      <LogSecondary>
+      <LogSecondary className="italic">
         <LogUnit teamId={parent?.teamId} user={ctx.user} className="opacity-70">
           {name}
         </LogUnit>{' '}
@@ -49,7 +49,7 @@ export function logMutationDiffs(
   }
   if (diffs.values.magicArmor !== 0) {
     ctx.log(
-      <LogSecondary>
+      <LogSecondary className="italic">
         <LogUnit teamId={parent?.teamId} user={ctx.user} className="opacity-70">
           {name}
         </LogUnit>{' '}

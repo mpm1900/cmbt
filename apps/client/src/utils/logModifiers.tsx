@@ -14,8 +14,8 @@ export function logModifiers(modifiers: Modifier[], ctx: CombatContext) {
     if (renderers.length === 0) return
 
     ctx.log(
-      <LogSecondary>
-        <LogUnit teamId={unit.teamId} user={ctx.user}>
+      <LogSecondary className="italic">
+        <LogUnit teamId={unit.teamId} user={ctx.user} className="opacity-70">
           {unit.name}
         </LogUnit>{' '}
         gained{' '}

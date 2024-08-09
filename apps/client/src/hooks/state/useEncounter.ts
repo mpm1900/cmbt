@@ -8,6 +8,7 @@ export type EncounterState = {
 
 export type EncounterStore = EncounterState & {
   getActiveNode: () => EncounterNode | undefined
+  updateEncounter: (fn: (e: Encounter) => Partial<Encounter>) => void
 }
 
 export const useEncounter = create<EncounterStore>((set, get) => ({
@@ -18,4 +19,11 @@ export const useEncounter = create<EncounterStore>((set, get) => ({
       (n) => n.id === state.encounter.activeNodeId
     )
   },
+  updateEncounter: (fn) =>
+    set((s) => ({
+      encounter: {
+        ...s.encounter,
+        ...fn(s.encounter),
+      },
+    })),
 }))

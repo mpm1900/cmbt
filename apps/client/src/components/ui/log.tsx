@@ -40,9 +40,13 @@ export function LogHeader(props: PropsWithChildren<{ className?: string }>) {
   )
 }
 
-export function LogSecondary(props: PropsWithChildren) {
+export function LogSecondary(
+  props: PropsWithChildren & { className?: string }
+) {
   return (
-    <span className="pl-4 text-muted-foreground font-thin italic">
+    <span
+      className={cn('pl-4 text-muted-foreground font-thin', props.className)}
+    >
       {props.children}
     </span>
   )

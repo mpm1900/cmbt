@@ -24,6 +24,22 @@ const TestNode1: EncounterNode = {
     {
       id: nanoid(),
       label: 'No',
+      resolve: (ctx) =>
+        ctx.updateEncounter((e) => ({ activeNodeId: TestNode2.id })),
+      options: [],
+    },
+  ],
+}
+
+const TestNode2: EncounterNode = {
+  id: nanoid(),
+  description: 'Are you sure??',
+  choices: [
+    {
+      id: nanoid(),
+      label: 'No',
+      resolve: (ctx) =>
+        ctx.updateEncounter((e) => ({ activeNodeId: TestNode1.id })),
       options: [],
     },
   ],
@@ -32,6 +48,6 @@ const TestNode1: EncounterNode = {
 export const TestEncounterId = nanoid()
 export const TestEncounter: Encounter = {
   id: TestEncounterId,
-  nodes: [TestNode1],
+  nodes: [TestNode1, TestNode2],
   activeNodeId: TestNode1.id,
 }

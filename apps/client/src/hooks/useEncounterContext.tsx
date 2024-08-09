@@ -18,5 +18,6 @@ export function useEncounterContext(): EncounterContext {
     activeNode: store.getActiveNode() as EncounterNode,
     encounter: store.encounter,
     initializeCombat,
+    updateEncounter: store.updateEncounter,
   }
 }

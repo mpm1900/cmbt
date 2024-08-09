@@ -4,6 +4,7 @@ export type EncounterContext = {
   encounter: Encounter
   activeNode: EncounterNode
   initializeCombat: () => void
+  updateEncounter: (fn: (e: Encounter) => Partial<Encounter>) => void
 }
 
 export type Encounter = {

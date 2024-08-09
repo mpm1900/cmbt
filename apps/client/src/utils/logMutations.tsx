@@ -8,11 +8,13 @@ export function logMutations(mutations: Mutation[], ctx: CombatContext) {
   const units = ctx.units.filter((u) =>
     logMutations.some((m) => m.filter(u, ctx))
   )
-  units.forEach((unit) => {
+  units.forEach((unit, i) => {
     const unitMutations = logMutations.filter((m) => m.filter(unit, ctx))
     if (unitMutations.length > 0) {
       const diffs = applyMutations(ZERO_UNIT, unitMutations)
-      logMutationDiffs(unit, diffs, ctx)
+      setTimeout(() => {
+        logMutationDiffs(unit, diffs, ctx)
+      }, i * 100)
     }
   })
 }

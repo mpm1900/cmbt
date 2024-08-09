@@ -41,7 +41,6 @@ export class Protect extends Action {
   ): ActionResult => {
     ctx = modifyRenderContext(options, ctx)
     const data = getActionData(source, this, ctx)
-    console.log(source.metadata.lastUsedActionId === this.id)
 
     return buildActionResult(this, data, source, targets, ctx, () => ({
       forceFailure: source.metadata.lastUsedActionId === this.id,

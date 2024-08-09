@@ -3,6 +3,7 @@ import { InspectAll, InspectAllId } from './system'
 
 export * from './system'
 
+export * from './ArmorUp'
 export * from './Crunch'
 export * from './Disable'
 export * from './Earthquake'

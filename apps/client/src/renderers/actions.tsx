@@ -26,6 +26,8 @@ import {
   FireBlastId,
   InspectAllId,
   SpikesId,
+  ArmorUpId,
+  ArmorUp,
 } from '@repo/game/data'
 import { Action, ActionResult, CombatContext, Unit } from '@repo/game/types'
 import { Fragment, ReactNode } from 'react'
@@ -53,6 +55,7 @@ export const ACTION_NAMES: Record<string, string> = {
   [SwitchUnitId]: 'Switch Units',
   [InspectAllId]: 'Inspect',
 
+  [ArmorUpId]: 'Armor Up',
   [CrunchId]: 'Crunch',
   [DisableId]: 'Disable',
   [EarthquakeId]: 'Earthquake',
@@ -122,8 +125,17 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
   },
 
   /// OTHER ACTIONS
+  [ArmorUpId]: {
+    name: ACTION_NAMES[ArmorUpId],
+    baseDamage: () => '',
+    cost: '',
+    description: (action) => {
+      const armorup = action as ArmorUp
+      return <>This unit gains {armorup.amount * -1} physical armor.</>
+    },
+  },
   [CrunchId]: {
-    name: 'Crunch',
+    name: ACTION_NAMES[CrunchId],
     baseDamage: (action) => `${action.damage?.value}`,
     cost: '',
     description: (action) => {

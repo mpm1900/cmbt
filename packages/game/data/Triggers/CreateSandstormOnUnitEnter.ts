@@ -5,10 +5,15 @@ import { DamageAllOnTurnEnd } from './DamageAllOnTurnEnd'
 export const CreateSandstormOnUnitEnterId = TriggerId()
 
 export class CreateSandstormOnUnitEnter extends Trigger {
+  get key() {
+    return this.id
+  }
+
   constructor(props: TriggerProps) {
     super(CreateSandstormOnUnitEnterId, {
       ...props,
       events: ['on Unit Enter'],
+      maxInstances: 1,
       modifiers: (ctx) => [
         new DamageAllOnTurnEnd({
           sourceId: props.sourceId,

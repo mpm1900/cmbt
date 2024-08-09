@@ -2,9 +2,14 @@ import {
   ActionResult,
   ActionsQueueItem,
   CombatContext,
+  Trigger,
   TriggerEvent,
 } from '@repo/game/types'
-import { getTriggersByEvent, isUnitAliveCtx } from '@repo/game/utils'
+import {
+  getTriggersByEvent,
+  isUnitAliveCtx,
+  validateModifiers,
+} from '@repo/game/utils'
 import { useActions, useCombatUi, useCleanup, useCombat } from './state'
 import { logActionResults, logModifiers, logMutations } from '@/utils'
 import { logTriggers } from '@/utils/logTriggers'
@@ -85,7 +90,10 @@ export function useCombatActions() {
     event: TriggerEvent,
     context: CombatContext
   ): CombatContext {
-    const triggers = getTriggersByEvent(context.modifiers, event)
+    const triggers = validateModifiers(
+      getTriggersByEvent(context.modifiers, event),
+      []
+    ) as Trigger[]
     const result: ActionResult = {
       addedModifiers: triggers
         .filter((trigger) => trigger.modifiers !== undefined)

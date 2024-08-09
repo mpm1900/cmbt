@@ -6,52 +6,38 @@ import {
   Id,
   Unit,
   ActionResolveOptions,
-  Damage,
 } from '../../types'
 import {
-  calculateDamage,
   getActionData,
-  getDamageAi,
   modifyRenderContext,
   buildActionResult,
-  getMutationsFromDamageResult,
 } from '../../utils'
 import { ActionId } from '../Ids'
 import { Identity } from '../Mutations'
-import { GetUnits } from '../Queries'
+import { RemovePhysicalArmorParent } from '../Mutations/RemovePhysicalArmorParent'
+import { EmptyArray } from '../Queries'
 
-export const QuickAttackId = ActionId()
+export const ArmorUpId = ActionId()
 
-export class QuickAttack extends Action {
-  damage: Damage
-
+export class ArmorUp extends Action {
+  amount: number
   constructor(sourceId: Id, teamId: Id) {
-    const attackType = 'physical'
-    super(QuickAttackId, {
+    super(ArmorUpId, {
       sourceId,
       teamId,
       cost: new Identity({ sourceId }),
-      targets: new GetUnits({
-        notTeamId: teamId,
-        isActive: true,
-      }),
-      priority: 1,
-      attackType,
-      maxTargetCount: 1,
+      targets: new EmptyArray(),
+      maxTargetCount: 0,
     })
-
-    this.damage = {
-      value: 40,
-      attackType,
-    }
+    this.amount = -50
   }
 
   threshold = (source: Unit): number | undefined => {
-    return 95 + source.stats.accuracy
+    return undefined
   }
   critical = (source: Unit): number | undefined => undefined
   getAi(targets: Unit[], ctx: CombatContext): ActionAi {
-    return getDamageAi(this, targets, ctx)
+    return { action: this, weight: 0, targetIds: [] }
   }
 
   resolve = (
@@ -71,15 +57,13 @@ export class QuickAttack extends Action {
       ctx,
       (modifiedTargets) => ({
         onSuccess: {
-          mutations: modifiedTargets.flatMap((target) => {
-            const damage = calculateDamage(
-              this.damage,
-              data.source,
-              target,
-              data.accuracyRoll
-            )
-            return getMutationsFromDamageResult(source, target, damage)
-          }),
+          mutations: [
+            new RemovePhysicalArmorParent({
+              sourceId: source.id,
+              parentId: source.id,
+              amount: this.amount,
+            }),
+          ],
         },
       })
     )

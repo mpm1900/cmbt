@@ -16,17 +16,19 @@ export function logTriggers(
     )
 
     triggers.forEach((trigger) => {
-      const source = ctx.units.find((u) => u.id === trigger.sourceId) as Unit
+      const source = ctx.units.find((u) => u.id === trigger.sourceId)
       const renderer = ModifierRenderers[trigger.rid]
       ctx.log(
         <div className="text-muted-foreground">
-          <LogUnit
-            teamId={source.teamId}
-            user={ctx.user}
-            className="opacity-70 font-normal"
-          >
-            {source.name}'s
-          </LogUnit>{' '}
+          {source && (
+            <LogUnit
+              teamId={source.teamId}
+              user={ctx.user}
+              className="opacity-70 font-normal"
+            >
+              {source.name}'s{' '}
+            </LogUnit>
+          )}
           <span className="text-white">{renderer?.name}</span> Trigger
         </div>
       )

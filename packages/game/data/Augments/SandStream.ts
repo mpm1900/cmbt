@@ -12,7 +12,6 @@ export class SandStream extends Augment {
   modifiers(unit: Unit): Modifier[] {
     return [
       new CreateSandstormOnUnitEnter({
-        sourceId: unit.id,
         duration: 0,
       }),
     ]

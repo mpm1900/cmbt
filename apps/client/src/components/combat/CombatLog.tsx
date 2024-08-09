@@ -1,7 +1,9 @@
+import { useScrollToBottom } from '@/hooks'
 import { useCombat } from '@/hooks/state'
 
 export function CombatLog() {
   const logs = useCombat((s) => s.logs)
+  const ref = useScrollToBottom(logs.length)
 
   return (
     <div className="overflow-auto">
@@ -10,6 +12,7 @@ export function CombatLog() {
           {log}
         </div>
       ))}
+      <div ref={ref} className="mt-4" />
     </div>
   )
 }

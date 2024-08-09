@@ -1,3 +1,6 @@
 export * from './useCombatActions'
 export * from './useCombatContext'
+export * from './useCombatSetup'
+export * from './useEncounterContext'
+export * from './useInitializeCombat'
 export * from './useScrollToBottom'

@@ -8,7 +8,6 @@ export function logMutations(mutations: Mutation[], ctx: CombatContext) {
   const units = ctx.units.filter((u) =>
     logMutations.some((m) => m.filter(u, ctx))
   )
-  console.log(ctx.units.map((u) => u.values.damage))
   units.forEach((unit) => {
     const unitMutations = logMutations.filter((m) => m.filter(unit, ctx))
     if (unitMutations.length > 0) {

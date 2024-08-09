@@ -6,11 +6,11 @@ import {
 } from '@repo/game/types'
 import { getTriggersByEvent, isUnitAliveCtx } from '@repo/game/utils'
 import { useActions, useCombatUi, useCleanup, useCombat } from './state'
-import { logModifiers, logMutations } from '@/utils'
+import { logActionResults, logModifiers, logMutations } from '@/utils'
 import { logTriggers } from '@/utils/logTriggers'
 import { LogCritical, LogHeader } from '@/components/ui/log'
 import { handleCleanup } from '@/utils/handleCleanup'
-import { logFailure } from '@/utils/logFailure'
+import { logMiss } from '@/utils'
 import { SetDeadAsInactive } from '@repo/game/data'
 
 export type CommitResultOptions = {
@@ -55,7 +55,7 @@ export function useCombatActions() {
       updateModifiers,
       updateActionQueue,
     } = result
-    logFailure(result, context)
+
     if (mutations?.length) {
       if (options?.enableLog) logMutations(mutations, context)
       context.units = combat.mutate(mutations, context)
@@ -74,6 +74,10 @@ export function useCombatActions() {
       context = runTriggers('on Unit Enter', context)
     }
 
+    if (options?.enableLog) {
+      logMiss(result, context)
+      logActionResults(result, context)
+    }
     return context
   }
 

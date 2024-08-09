@@ -3,7 +3,7 @@ import { ActionStore, queueComparator } from '@/hooks/state'
 import { ActionResult, CombatContext, TurnStatus } from '@repo/game/types'
 import { isUnitAliveCtx } from '@repo/game/utils'
 import { getResultFromActionItem } from './getResultFromActionItem'
-import { logActionResult } from './logActionResult'
+import { logActionIntent } from './logActionIntent'
 
 export function handleNextAction(
   status: TurnStatus,
@@ -30,7 +30,7 @@ export function handleNextAction(
         ctx
       )
       const result = getResultFromActionItem(item, ctx)
-      logActionResult(item.action, result, ctx)
+      logActionIntent(item.action, result, ctx)
       return handleResult(result, sorted.length, ctx)
     }
 

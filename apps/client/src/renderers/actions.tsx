@@ -27,7 +27,7 @@ import {
   InspectAllId,
   SpikesId,
 } from '@repo/game/data'
-import { Action, CombatContext, Unit } from '@repo/game/types'
+import { Action, ActionResult, CombatContext, Unit } from '@repo/game/types'
 import { Fragment, ReactNode } from 'react'
 
 export type ActionRenderer = {
@@ -44,6 +44,8 @@ export type ActionRenderer = {
     targets: Unit[],
     ctx: CombatContext
   ) => ReactNode
+  successLog?: (result: ActionResult) => ReactNode
+  failureLog?: (result: ActionResult) => ReactNode
 }
 
 export const ACTION_NAMES: Record<string, string> = {
@@ -288,6 +290,7 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
         turn. Cannot be used twice in a row.
       </>
     ),
+    failureLog: (result) => <>Protect failed.</>,
   },
   [SandstormId]: {
     name: 'Sandstorm',
@@ -307,8 +310,18 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
     cost: '',
     description: (action) => (
       <>
-        Applies <span className="font-bold">Sandstorm</span> to all units
+        Applies <span className="font-bold">Spikes</span> to all units.
       </>
+    ),
+    help: () => (
+      <div className="text-muted-foreground">
+        (On unit enter, that unit takes 30 damage.)
+      </div>
+    ),
+    successLog: () => (
+      <span className="text-muted-foreground">
+        Spikes were put onto the battle!
+      </span>
     ),
   },
   [SwordsDanceId]: {

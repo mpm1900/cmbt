@@ -138,3 +138,373 @@
 2024-08-08T06:33:02.533982Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
 2024-08-08T06:33:27.133368Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/utils/logMutations.tsx")}
 2024-08-08T06:33:27.133381Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T06:33:57.621129Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/vite.config.ts.timestamp-1723098837544-4d3326ffff297.mjs")}
+2024-08-08T06:33:57.621137Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T06:33:57.720838Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/vite.config.ts.timestamp-1723098837544-4d3326ffff297.mjs")}
+2024-08-08T06:33:57.720847Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T06:37:25.217277Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/renderers/modifiers.tsx")}
+2024-08-08T06:37:25.217296Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T06:37:57.015799Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/renderers/modifiers.tsx")}
+2024-08-08T06:37:57.015807Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T06:38:02.616065Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/vite.config.ts.timestamp-1723099082534-bc745c6d28bf9.mjs")}
+2024-08-08T06:38:02.616073Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T06:38:02.716073Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/vite.config.ts.timestamp-1723099082534-bc745c6d28bf9.mjs")}
+2024-08-08T06:38:02.716082Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T06:41:36.715733Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/utils/logMutations.tsx")}
+2024-08-08T06:41:36.715749Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T13:40:42.383368Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages/game/data/Triggers/DamageAllOnTurnEnd.ts")}
+2024-08-08T13:40:42.383376Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@repo/game"), path: AnchoredSystemPathBuf("packages/game") }}))
+2024-08-08T13:41:44.084061Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages/game/data/Triggers/CreateSandstormOnUnitEnter.ts")}
+2024-08-08T13:41:44.084073Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@repo/game"), path: AnchoredSystemPathBuf("packages/game") }}))
+2024-08-08T13:41:59.483061Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages/game/data/Triggers/CreateSandstormOnUnitEnter.ts")}
+2024-08-08T13:41:59.483070Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@repo/game"), path: AnchoredSystemPathBuf("packages/game") }}))
+2024-08-08T13:42:20.482333Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages/game/data/Triggers/CreateSandstormOnUnitEnter.ts")}
+2024-08-08T13:42:20.482346Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@repo/game"), path: AnchoredSystemPathBuf("packages/game") }}))
+2024-08-08T13:43:13.382928Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages/game/data/Triggers/CreateSandstormOnUnitEnter.ts")}
+2024-08-08T13:43:13.382939Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@repo/game"), path: AnchoredSystemPathBuf("packages/game") }}))
+2024-08-08T13:47:19.382351Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/renderers/actions.tsx")}
+2024-08-08T13:47:19.382365Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T13:48:25.682479Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/renderers/actions.tsx")}
+2024-08-08T13:48:25.682488Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T13:55:58.981014Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages/game/data/Actions/IcyWind.ts")}
+2024-08-08T13:55:58.981023Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@repo/game"), path: AnchoredSystemPathBuf("packages/game") }}))
+2024-08-08T13:55:58.981063Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2024-08-08T13:59:40.479768Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/renderers/actions.tsx")}
+2024-08-08T13:59:40.479786Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T14:00:14.579791Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/renderers/actions.tsx")}
+2024-08-08T14:00:14.579810Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T14:02:59.180382Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages/game/types/Action.ts")}
+2024-08-08T14:02:59.180401Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@repo/game"), path: AnchoredSystemPathBuf("packages/game") }}))
+2024-08-08T14:03:17.480915Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages/game/utils/buildActionResult.ts")}
+2024-08-08T14:03:17.480934Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@repo/game"), path: AnchoredSystemPathBuf("packages/game") }}))
+2024-08-08T14:03:29.480841Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages/game/utils/buildActionResult.ts")}
+2024-08-08T14:03:29.480849Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@repo/game"), path: AnchoredSystemPathBuf("packages/game") }}))
+2024-08-08T14:03:39.780404Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages/game/utils/buildActionResult.ts")}
+2024-08-08T14:03:39.780414Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@repo/game"), path: AnchoredSystemPathBuf("packages/game") }}))
+2024-08-08T14:05:23.679953Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/utils/logActionSuccessOrFailure.ts")}
+2024-08-08T14:05:23.679961Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T16:38:06.724323Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/utils/logActionSuccessOrFailure.ts")}
+2024-08-08T16:38:06.724332Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T16:38:35.718937Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/utils/logActionResult.tsx"), AnchoredSystemPathBuf("apps/client/src/utils/handleNextAction.ts")}
+2024-08-08T16:38:35.718955Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T16:38:43.018130Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/utils/logActionIntent.tsx"), AnchoredSystemPathBuf("apps/client/src/utils/logActionResult.tsx")}
+2024-08-08T16:38:43.018141Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T16:38:45.618098Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/utils/index.ts"), AnchoredSystemPathBuf("apps/client/src/utils/handleNextAction.ts")}
+2024-08-08T16:38:45.618106Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T16:39:01.417874Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/utils/handleNextAction.ts")}
+2024-08-08T16:39:01.417898Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T16:39:01.442590Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2024-08-08T16:39:14.918449Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/utils/logActionResults.ts")}
+2024-08-08T16:39:14.918464Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T16:39:46.017932Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/utils/logActionResults.ts")}
+2024-08-08T16:39:46.017951Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T16:40:02.318018Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/utils/logActionResults.ts")}
+2024-08-08T16:40:02.318029Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T16:41:23.816854Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/utils/logActionResults.ts")}
+2024-08-08T16:41:23.816862Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T16:41:28.617221Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/utils/index.ts")}
+2024-08-08T16:41:28.617234Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T16:42:31.216485Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/utils/logActionResults.ts")}
+2024-08-08T16:42:31.216500Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T16:42:35.516849Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/utils/logActionResults.ts")}
+2024-08-08T16:42:35.516857Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T16:42:44.517588Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/hooks/useCombatActions.tsx")}
+2024-08-08T16:42:44.517610Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T16:43:20.916644Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/renderers/actions.tsx")}
+2024-08-08T16:43:20.916657Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T16:43:48.816782Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/renderers/actions.tsx")}
+2024-08-08T16:43:48.816795Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T16:43:53.916681Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/renderers/actions.tsx")}
+2024-08-08T16:43:53.916689Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T16:44:12.016219Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/renderers/actions.tsx")}
+2024-08-08T16:44:12.016228Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T16:45:24.616007Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/hooks/useCombatActions.tsx")}
+2024-08-08T16:45:24.616023Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T16:46:00.115943Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/hooks/useCombatActions.tsx"), AnchoredSystemPathBuf("apps/client/src/utils/logFailure.tsx")}
+2024-08-08T16:46:00.115954Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T16:46:05.517161Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/utils/logMiss.tsx"), AnchoredSystemPathBuf("apps/client/src/utils/logFailure.tsx")}
+2024-08-08T16:46:05.517178Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T16:46:06.616255Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/utils/logMiss.tsx")}
+2024-08-08T16:46:06.616267Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T16:46:06.616301Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2024-08-08T16:46:09.015712Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/utils/index.ts")}
+2024-08-08T16:46:09.015724Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T16:46:09.015775Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2024-08-08T16:46:21.916253Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/utils/index.ts")}
+2024-08-08T16:46:21.916262Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T16:46:27.115756Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/hooks/useCombatActions.tsx")}
+2024-08-08T16:46:27.115771Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T16:47:45.515213Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages/game/utils/buildActionResult.ts")}
+2024-08-08T16:47:45.515221Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@repo/game"), path: AnchoredSystemPathBuf("packages/game") }}))
+2024-08-08T16:48:38.915203Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages/game/utils/buildActionResult.ts")}
+2024-08-08T16:48:38.915225Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@repo/game"), path: AnchoredSystemPathBuf("packages/game") }}))
+2024-08-08T16:48:43.615052Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages/game/utils/buildActionResult.ts")}
+2024-08-08T16:48:43.615061Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@repo/game"), path: AnchoredSystemPathBuf("packages/game") }}))
+2024-08-08T16:48:43.615098Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2024-08-08T16:49:20.814988Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages/game/data/Actions/Protect.ts")}
+2024-08-08T16:49:20.814998Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@repo/game"), path: AnchoredSystemPathBuf("packages/game") }}))
+2024-08-08T16:49:27.114430Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages/game/data/Actions/Protect.ts")}
+2024-08-08T16:49:27.114444Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@repo/game"), path: AnchoredSystemPathBuf("packages/game") }}))
+2024-08-08T16:49:31.615546Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages/game/data/Actions/Protect.ts")}
+2024-08-08T16:49:31.615555Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@repo/game"), path: AnchoredSystemPathBuf("packages/game") }}))
+2024-08-08T16:50:22.713898Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/renderers/actions.tsx")}
+2024-08-08T16:50:22.713907Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T16:50:47.514586Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/renderers/actions.tsx")}
+2024-08-08T16:50:47.514602Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T16:50:47.514655Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2024-08-08T16:51:14.314055Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages/game/utils/buildActionResult.ts")}
+2024-08-08T16:51:14.314064Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@repo/game"), path: AnchoredSystemPathBuf("packages/game") }}))
+2024-08-08T16:52:00.614686Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/hooks/useCombatActions.tsx")}
+2024-08-08T16:52:00.614701Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T16:52:40.714498Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/utils/logActionResults.ts")}
+2024-08-08T16:52:40.714515Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T16:53:10.013731Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/utils/logActionResults.ts")}
+2024-08-08T16:53:10.013742Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T16:54:20.813514Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages/game/utils/getActionData.ts")}
+2024-08-08T16:54:20.813534Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@repo/game"), path: AnchoredSystemPathBuf("packages/game") }}))
+2024-08-08T16:54:20.813600Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2024-08-08T16:55:06.813395Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages/game/data/Mutations/system/SetLastUsedAction.ts")}
+2024-08-08T16:55:06.813414Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@repo/game"), path: AnchoredSystemPathBuf("packages/game") }}))
+2024-08-08T16:55:06.813465Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2024-08-08T16:55:35.513744Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages/game/data/Actions/Protect.ts")}
+2024-08-08T16:55:35.513753Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@repo/game"), path: AnchoredSystemPathBuf("packages/game") }}))
+2024-08-08T16:56:11.534935Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages/game/data/Actions/Protect.ts")}
+2024-08-08T16:56:11.534953Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@repo/game"), path: AnchoredSystemPathBuf("packages/game") }}))
+2024-08-08T16:58:17.041858Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages/game/utils/buildActionResult.ts")}
+2024-08-08T16:58:17.041873Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@repo/game"), path: AnchoredSystemPathBuf("packages/game") }}))
+2024-08-08T16:58:38.443152Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages/game/utils/buildActionResult.ts")}
+2024-08-08T16:58:38.443168Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@repo/game"), path: AnchoredSystemPathBuf("packages/game") }}))
+2024-08-08T16:58:45.243428Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages/game/utils/buildActionResult.ts")}
+2024-08-08T16:58:45.243439Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@repo/game"), path: AnchoredSystemPathBuf("packages/game") }}))
+2024-08-08T16:59:10.042720Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages/game/utils/buildActionResult.ts")}
+2024-08-08T16:59:10.042737Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@repo/game"), path: AnchoredSystemPathBuf("packages/game") }}))
+2024-08-08T16:59:14.542857Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages/game/utils/buildActionResult.ts")}
+2024-08-08T16:59:14.542866Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@repo/game"), path: AnchoredSystemPathBuf("packages/game") }}))
+2024-08-08T16:59:34.242464Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages/game/utils/buildActionResult.ts")}
+2024-08-08T16:59:34.242472Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@repo/game"), path: AnchoredSystemPathBuf("packages/game") }}))
+2024-08-08T17:00:01.442771Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages/game/utils/buildActionResult.ts")}
+2024-08-08T17:00:01.442780Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@repo/game"), path: AnchoredSystemPathBuf("packages/game") }}))
+2024-08-08T17:00:15.342413Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/vite.config.ts.timestamp-1723136415259-6e8638b3171a6.mjs")}
+2024-08-08T17:00:15.342421Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T17:00:15.443455Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/vite.config.ts.timestamp-1723136415259-6e8638b3171a6.mjs")}
+2024-08-08T17:00:15.443463Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T20:44:30.754493Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/vite.config.ts.timestamp-1723149870651-b6a960f5f5b38.mjs")}
+2024-08-08T20:44:30.754501Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T20:44:30.854983Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/vite.config.ts.timestamp-1723149870651-b6a960f5f5b38.mjs")}
+2024-08-08T20:44:30.854992Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T20:45:17.653941Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/routes/encounter.tsx")}
+2024-08-08T20:45:17.653950Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T20:45:17.854686Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/routeTree.gen.ts"), AnchoredSystemPathBuf("apps/client/src/routes/encounter.tsx")}
+2024-08-08T20:45:17.854694Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T20:45:22.053517Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/routes/encounter.tsx")}
+2024-08-08T20:45:22.053525Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T20:45:35.654964Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/domain/Encounter.tsx")}
+2024-08-08T20:45:35.654980Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T20:46:00.355014Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/domain/Encounter.tsx")}
+2024-08-08T20:46:00.355030Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T20:46:16.553992Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/routes/encounter.tsx")}
+2024-08-08T20:46:16.554002Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T20:46:43.553735Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/domain/Builder.tsx")}
+2024-08-08T20:46:43.553749Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T20:48:24.253992Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/domain/Builder.tsx")}
+2024-08-08T20:48:24.254020Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T20:48:50.954560Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/domain/Builder.tsx")}
+2024-08-08T20:48:50.954581Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T20:48:50.954649Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2024-08-08T20:50:31.855786Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/domain/Builder.tsx")}
+2024-08-08T20:50:31.855797Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T20:50:46.355094Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/domain/Encounter.tsx")}
+2024-08-08T20:50:46.355102Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T20:51:06.255898Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/domain/Encounter.tsx")}
+2024-08-08T20:51:06.255906Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T20:51:51.255647Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/domain/Combat.tsx")}
+2024-08-08T20:51:51.255655Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T20:51:59.355920Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/domain/Combat.tsx")}
+2024-08-08T20:51:59.355928Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T20:53:24.455963Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages/game/types/Encounter.ts")}
+2024-08-08T20:53:24.455994Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@repo/game"), path: AnchoredSystemPathBuf("packages/game") }}))
+2024-08-08T20:56:11.356619Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages/game/types/Encounter.ts")}
+2024-08-08T20:56:11.356628Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@repo/game"), path: AnchoredSystemPathBuf("packages/game") }}))
+2024-08-08T20:56:39.756975Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages/game/types/Encounter.ts")}
+2024-08-08T20:56:39.756995Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@repo/game"), path: AnchoredSystemPathBuf("packages/game") }}))
+2024-08-08T20:59:14.340292Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages/game/types/Encounter.ts")}
+2024-08-08T20:59:14.340304Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@repo/game"), path: AnchoredSystemPathBuf("packages/game") }}))
+2024-08-08T21:00:33.738127Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/hooks/useEncounterContext.tsx")}
+2024-08-08T21:00:33.738138Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T21:01:01.337911Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages/game/types/index.ts")}
+2024-08-08T21:01:01.337929Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@repo/game"), path: AnchoredSystemPathBuf("packages/game") }}))
+2024-08-08T21:01:12.837626Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/hooks/useEncounterContext.tsx")}
+2024-08-08T21:01:12.837635Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T21:01:49.138291Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/hooks/index.ts")}
+2024-08-08T21:01:49.138303Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T21:03:39.936891Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/hooks/state/useEncounter.ts")}
+2024-08-08T21:03:39.936900Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T21:04:16.236650Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/hooks/state/useEncounter.ts")}
+2024-08-08T21:04:16.236658Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T21:04:49.436458Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/hooks/state/index.ts")}
+2024-08-08T21:04:49.436467Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T21:04:58.235923Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/hooks/useEncounterContext.tsx")}
+2024-08-08T21:04:58.235931Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T21:05:09.536585Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/hooks/useEncounterContext.tsx")}
+2024-08-08T21:05:09.536594Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T21:31:59.632266Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/hooks/state/useEncounter.ts")}
+2024-08-08T21:31:59.632274Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T21:32:42.631933Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/hooks/state/useEncounter.ts")}
+2024-08-08T21:32:42.631940Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T21:34:51.331103Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/hooks/state/useEncounter.ts")}
+2024-08-08T21:34:51.331111Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T21:36:57.429537Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/hooks/useEncounterContext.tsx")}
+2024-08-08T21:36:57.429546Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T21:37:07.330042Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/hooks/useEncounterContext.tsx")}
+2024-08-08T21:37:07.330051Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T21:38:24.229146Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/domain/Builder.tsx")}
+2024-08-08T21:38:24.229161Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T21:39:01.728495Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/hooks/useInitializeCombat.ts")}
+2024-08-08T21:39:01.728509Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T21:39:32.927803Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/hooks/useEncounterContext.tsx")}
+2024-08-08T21:39:32.927824Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T21:39:38.429076Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/hooks/useEncounterContext.tsx")}
+2024-08-08T21:39:38.429084Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T21:40:12.128121Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/hooks/useInitializeCombat.ts")}
+2024-08-08T21:40:12.128130Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T21:40:56.027722Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages/game/types/Encounter.ts")}
+2024-08-08T21:40:56.027730Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@repo/game"), path: AnchoredSystemPathBuf("packages/game") }}))
+2024-08-08T21:41:24.528308Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages/game/types/Encounter.ts")}
+2024-08-08T21:41:24.528330Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@repo/game"), path: AnchoredSystemPathBuf("packages/game") }}))
+2024-08-08T21:41:24.544319Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2024-08-08T21:41:29.427281Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/hooks/useEncounterContext.tsx")}
+2024-08-08T21:41:29.427289Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T21:42:03.427660Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/domain/Encounter.tsx")}
+2024-08-08T21:42:03.427675Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T21:42:49.226910Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/hooks/state/useEncounter.ts")}
+2024-08-08T21:42:49.226918Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T21:42:52.326313Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/hooks/state/useEncounter.ts")}
+2024-08-08T21:42:52.326323Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T21:43:38.827175Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/hooks/useEncounterContext.tsx"), AnchoredSystemPathBuf("apps/client/src/hooks/state/useEncounter.ts")}
+2024-08-08T21:43:38.827184Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T21:43:56.426062Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/hooks/state/useGame.ts"), AnchoredSystemPathBuf("apps/client/src/hooks/state/useEncounter.ts")}
+2024-08-08T21:43:56.426071Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T21:44:02.426463Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/hooks/state/useGame.ts"), AnchoredSystemPathBuf("apps/client/src/hooks/useEncounterContext.tsx")}
+2024-08-08T21:44:02.426473Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T21:44:14.025978Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/hooks/state/useGame.ts")}
+2024-08-08T21:44:14.025998Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T21:44:14.053416Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2024-08-08T21:44:42.125273Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/hooks/useEncounterContext.tsx")}
+2024-08-08T21:44:42.125292Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T21:46:09.425128Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/domain/Builder.tsx")}
+2024-08-08T21:46:09.425145Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T21:47:09.925166Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/domain/Builder.tsx")}
+2024-08-08T21:47:09.925181Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T21:47:24.623776Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/vite.config.ts.timestamp-1723153644519-c1b1505b42996.mjs")}
+2024-08-08T21:47:24.623792Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T21:47:24.725332Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/vite.config.ts.timestamp-1723153644519-c1b1505b42996.mjs")}
+2024-08-08T21:47:24.725342Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T21:47:32.324841Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/hooks/state/index.ts")}
+2024-08-08T21:47:32.324858Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T21:48:12.423979Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/domain/Builder.tsx")}
+2024-08-08T21:48:12.423987Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T21:49:01.122913Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/domain/Builder.tsx")}
+2024-08-08T21:49:01.122924Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T21:49:31.522786Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/domain/Builder.tsx")}
+2024-08-08T21:49:31.522795Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T21:51:22.322511Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages/game/data/Encounters")}
+2024-08-08T21:51:22.322520Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@repo/game"), path: AnchoredSystemPathBuf("packages/game") }}))
+2024-08-08T21:51:22.337564Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2024-08-08T21:51:28.322911Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages/game/data/Encounters/index.ts")}
+2024-08-08T21:51:28.322969Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@repo/game"), path: AnchoredSystemPathBuf("packages/game") }}))
+2024-08-08T21:51:40.621791Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages/game/data/index.ts")}
+2024-08-08T21:51:40.621800Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@repo/game"), path: AnchoredSystemPathBuf("packages/game") }}))
+2024-08-08T21:51:47.622109Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages/game/data/Encounters/TestEncounter.ts")}
+2024-08-08T21:51:47.622117Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@repo/game"), path: AnchoredSystemPathBuf("packages/game") }}))
+2024-08-08T21:51:55.922582Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages/game/data/Encounters/index.ts")}
+2024-08-08T21:51:55.922590Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@repo/game"), path: AnchoredSystemPathBuf("packages/game") }}))
+2024-08-08T21:52:07.422949Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages/game/data/Encounters/TestEncounter.ts")}
+2024-08-08T21:52:07.422958Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@repo/game"), path: AnchoredSystemPathBuf("packages/game") }}))
+2024-08-08T21:52:41.221994Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages/game/data/Encounters/TestEncounter.ts")}
+2024-08-08T21:52:41.222006Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@repo/game"), path: AnchoredSystemPathBuf("packages/game") }}))
+2024-08-08T21:52:51.522083Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages/game/data/Encounters/TestEncounter.ts")}
+2024-08-08T21:52:51.522094Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@repo/game"), path: AnchoredSystemPathBuf("packages/game") }}))
+2024-08-08T21:53:13.321787Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages/game/data/Encounters/TestEncounter.ts")}
+2024-08-08T21:53:13.321800Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@repo/game"), path: AnchoredSystemPathBuf("packages/game") }}))
+2024-08-08T21:55:09.044210Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages/game/data/Encounters/TestEncounter.ts")}
+2024-08-08T21:55:09.044220Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@repo/game"), path: AnchoredSystemPathBuf("packages/game") }}))
+2024-08-08T21:55:23.043459Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages/game/data/Encounters/TestEncounter.ts")}
+2024-08-08T21:55:23.043468Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@repo/game"), path: AnchoredSystemPathBuf("packages/game") }}))
+2024-08-08T21:55:31.944538Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages/game/data/Encounters/TestEncounter.ts")}
+2024-08-08T21:55:31.944553Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@repo/game"), path: AnchoredSystemPathBuf("packages/game") }}))
+2024-08-08T21:55:31.944616Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2024-08-08T21:56:11.043438Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/hooks/state/useEncounter.ts")}
+2024-08-08T21:56:11.043447Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T21:57:08.743827Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/hooks/state/useEncounter.ts")}
+2024-08-08T21:57:08.743842Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T21:58:53.644196Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages/game/types/Encounter.ts")}
+2024-08-08T21:58:53.644207Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@repo/game"), path: AnchoredSystemPathBuf("packages/game") }}))
+2024-08-08T21:59:00.844007Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/hooks/useEncounterContext.tsx")}
+2024-08-08T21:59:00.844017Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T22:00:46.344488Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/hooks/state/useEncounter.ts")}
+2024-08-08T22:00:46.344499Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T22:00:49.744707Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/hooks/state/useEncounter.ts")}
+2024-08-08T22:00:49.744715Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T22:01:05.144424Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/hooks/state/useEncounter.ts")}
+2024-08-08T22:01:05.144432Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T22:01:15.143880Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/hooks/state/useEncounter.ts")}
+2024-08-08T22:01:15.143894Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T22:01:52.343686Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages/game/types/Encounter.ts")}
+2024-08-08T22:01:52.343695Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@repo/game"), path: AnchoredSystemPathBuf("packages/game") }}))
+2024-08-08T22:02:21.844530Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/hooks/useEncounterContext.tsx")}
+2024-08-08T22:02:21.844537Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T22:02:58.444598Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/domain/Encounter.tsx")}
+2024-08-08T22:02:58.444607Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T22:03:09.943487Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/domain/Encounter.tsx")}
+2024-08-08T22:03:09.943495Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T22:03:26.844654Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages/game/data/Encounters/TestEncounter.ts")}
+2024-08-08T22:03:26.844662Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@repo/game"), path: AnchoredSystemPathBuf("packages/game") }}))
+2024-08-08T22:03:58.344137Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/domain/Combat.tsx")}
+2024-08-08T22:03:58.344145Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T22:04:08.844650Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/hooks/useCombatSetup.tsx")}
+2024-08-08T22:04:08.844658Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T22:04:11.844471Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/hooks/useCombatSetup.tsx")}
+2024-08-08T22:04:11.844480Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T22:04:32.243874Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/hooks/useCombatSetup.tsx")}
+2024-08-08T22:04:32.243898Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T22:05:50.844293Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/domain/Encounter.tsx")}
+2024-08-08T22:05:50.844302Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T22:07:13.644068Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages/game/data/Encounters/TestEncounter.ts")}
+2024-08-08T22:07:13.644076Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@repo/game"), path: AnchoredSystemPathBuf("packages/game") }}))
+2024-08-08T22:07:39.144153Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/domain/Encounter.tsx")}
+2024-08-08T22:07:39.144162Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T22:07:48.344466Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/domain/Encounter.tsx")}
+2024-08-08T22:07:48.344473Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T22:07:55.043298Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/domain/Encounter.tsx")}
+2024-08-08T22:07:55.043306Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T22:07:58.344571Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/domain/Encounter.tsx")}
+2024-08-08T22:07:58.344588Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T22:08:53.643694Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/domain/Encounter.tsx")}
+2024-08-08T22:08:53.643704Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T22:09:18.943934Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/domain/Encounter.tsx")}
+2024-08-08T22:09:18.943942Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T22:09:43.443885Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/domain/Encounter.tsx")}
+2024-08-08T22:09:43.443902Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T22:10:00.143204Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/domain/Encounter.tsx")}
+2024-08-08T22:10:00.143219Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T22:10:00.159741Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2024-08-08T22:10:07.644282Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages/game/data/Encounters/TestEncounter.ts")}
+2024-08-08T22:10:07.644304Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@repo/game"), path: AnchoredSystemPathBuf("packages/game") }}))
+2024-08-08T22:10:07.644368Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2024-08-08T22:10:08.043899Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages/game/data/Encounters/TestEncounter.ts")}
+2024-08-08T22:10:08.043909Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@repo/game"), path: AnchoredSystemPathBuf("packages/game") }}))
+2024-08-08T22:10:08.043947Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2024-08-08T22:10:08.543979Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages/game/data/Encounters/TestEncounter.ts")}
+2024-08-08T22:10:08.543988Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@repo/game"), path: AnchoredSystemPathBuf("packages/game") }}))
+2024-08-08T22:10:08.544030Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2024-08-08T22:10:18.343308Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("packages/game/data/Encounters/TestEncounter.ts")}
+2024-08-08T22:10:18.343327Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@repo/game"), path: AnchoredSystemPathBuf("packages/game") }}))
+2024-08-08T22:10:48.144572Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/hooks/useEncounterContext.tsx")}
+2024-08-08T22:10:48.144585Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T22:12:56.943868Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/hooks/useEncounterContext.tsx")}
+2024-08-08T22:12:56.943885Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T22:13:00.944493Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/hooks/useInitializeCombat.ts")}
+2024-08-08T22:13:00.944509Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))
+2024-08-08T22:13:00.944565Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2024-08-08T22:13:29.843658Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/client/src/hooks/useEncounterContext.tsx")}
+2024-08-08T22:13:29.843666Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("client"), path: AnchoredSystemPathBuf("apps/client") }}))

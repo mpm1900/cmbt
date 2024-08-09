@@ -2,7 +2,7 @@ import { LogActionName, LogUnit } from '@/components/ui/log'
 import { ActionRenderers } from '@/renderers'
 import { Action, ActionResult, CombatContext } from '@repo/game/types'
 
-export function logActionResult(
+export function logActionIntent(
   action: Action,
   result: ActionResult,
   ctx: CombatContext

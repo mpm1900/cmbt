@@ -11,10 +11,16 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as EncounterImport } from './routes/encounter'
 import { Route as CombatImport } from './routes/combat'
 import { Route as IndexImport } from './routes/index'
 
 // Create/Update Routes
+
+const EncounterRoute = EncounterImport.update({
+  path: '/encounter',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const CombatRoute = CombatImport.update({
   path: '/combat',
@@ -44,12 +50,23 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CombatImport
       parentRoute: typeof rootRoute
     }
+    '/encounter': {
+      id: '/encounter'
+      path: '/encounter'
+      fullPath: '/encounter'
+      preLoaderRoute: typeof EncounterImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
 // Create and export the route tree
 
-export const routeTree = rootRoute.addChildren({ IndexRoute, CombatRoute })
+export const routeTree = rootRoute.addChildren({
+  IndexRoute,
+  CombatRoute,
+  EncounterRoute,
+})
 
 /* prettier-ignore-end */
 
@@ -60,7 +77,8 @@ export const routeTree = rootRoute.addChildren({ IndexRoute, CombatRoute })
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/combat"
+        "/combat",
+        "/encounter"
       ]
     },
     "/": {
@@ -68,6 +86,9 @@ export const routeTree = rootRoute.addChildren({ IndexRoute, CombatRoute })
     },
     "/combat": {
       "filePath": "combat.tsx"
+    },
+    "/encounter": {
+      "filePath": "encounter.tsx"
     }
   }
 }

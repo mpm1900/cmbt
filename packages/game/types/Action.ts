@@ -33,6 +33,7 @@ export type ActionsQueueItem = {
 }
 
 export type ActionResult = {
+  success?: boolean
   action?: Action
   source?: Unit
   targets?: Unit[]

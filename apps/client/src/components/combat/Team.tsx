@@ -5,6 +5,7 @@ import { UnitCard } from './UnitCard'
 import { Id } from '@repo/game/types'
 import { cn } from '@/lib/utils'
 import { GetUnits } from '@repo/game/data'
+import { motion } from 'framer-motion'
 
 export type TeamProps = PropsWithClassname<{
   teamId: Id | undefined
@@ -37,9 +38,16 @@ export function Team(props: TeamProps) {
         })}
       >
         {units.map((unit) => (
-          <div key={unit.id} className="text-left p-4 px-8">
+          <motion.div
+            key={unit.id}
+            className="text-left p-4 px-8"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ delay: 0.25 }}
+          >
             <UnitCard unit={unit} hideStats={teamId !== ctx.user} />
-          </div>
+          </motion.div>
         ))}
       </div>
     </div>

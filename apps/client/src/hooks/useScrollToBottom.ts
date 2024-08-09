@@ -6,7 +6,11 @@ export function useScrollToBottom<T>(
   const ref = useRef<HTMLDivElement>(null)
   React.useEffect(() => {
     if (ref.current) {
-      ref.current.scrollTop = ref.current.scrollHeight
+      console.log('scrolling')
+      ref.current.scrollIntoView({
+        behavior: 'smooth',
+        block: 'end',
+      })
     }
   }, [dep])
   return ref

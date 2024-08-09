@@ -1,26 +1,38 @@
 import { ActiveUnit } from '@/components/builder/ActiveUnit'
 import { UnitSelectButton } from '@/components/builder/UnitSelectButton'
 import { Button } from '@/components/ui/button'
-import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { Tabs, TabsList } from '@/components/ui/tabs'
 import { MAX_UNITS_PER_TEAM } from '@/constants'
+import { useGame } from '@/hooks/state'
 import { useBuilderUi } from '@/hooks/state/useBuilderUi'
 import { useUnitBuilders } from '@/hooks/state/useUnitBuilders'
-import { useInitializeCombat } from '@/hooks/useInitializeCombat'
 import { makeBuilder } from '@/utils/makeUnitBuilder'
+import { resolveUnitBuilder } from '@repo/game/utils'
+import { useNavigate } from '@tanstack/react-router'
+import { nanoid } from 'nanoid/non-secure'
 import { useEffect } from 'react'
 
 export function Builder() {
-  const init = useInitializeCombat()
+  const nav = useNavigate()
+  const game = useGame()
   const store = useUnitBuilders()
   const ui = useBuilderUi()
   const _builders = Array.from({ length: MAX_UNITS_PER_TEAM })
+
+  function initialize() {
+    const team = { id: nanoid(), items: [] }
+    game.initialize({
+      team,
+      units: store.builders.map((b) => resolveUnitBuilder(b, team.id)),
+    })
+  }
 
   useEffect(() => {
     ui.setActiveBuilderId(store.builders[0].id)
   }, [])
 
   return (
-    <div className="flex min-h-screen w-full flex-col bg-muted/40 overflow-auto">
+    <div className="flex min-h-screen w-full flex-col bg-slate-900 overflow-auto">
       <div className="flex flex-col items-center">
         <div className="flex flex-1 p-4 space-x-4">
           <Tabs defaultValue="account w-full">
@@ -44,9 +56,12 @@ export function Builder() {
           <Button
             variant="destructive"
             disabled={store.builders.length < 2}
-            onClick={() => init(store.builders)}
+            onClick={() => {
+              initialize()
+              nav({ to: '/encounter' })
+            }}
           >
-            Initialize Combat
+            Start!
           </Button>
         </div>
       </div>

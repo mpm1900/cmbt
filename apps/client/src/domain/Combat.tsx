@@ -11,12 +11,12 @@ import {
   useTurnController,
 } from '@/hooks/controllers'
 import { useCleanupController } from '@/hooks/controllers/useCleanupController'
-import { useActions, useCombat, useCombatSettings } from '@/hooks/state'
+import { useCombat, useCombatSettings } from '@/hooks/state'
 import { useCombatSetup } from '@/hooks/useCombatSetup'
+import { Link } from '@tanstack/react-router'
 
 export function Combat() {
   const combat = useCombat()
-  const queue = useActions()
 
   useTurnController()
   useInputController()
@@ -30,19 +30,12 @@ export function Combat() {
   const debug = useCombatSettings()
 
   return (
-    <div className="flex min-h-screen w-full flex-col bg-muted/40 overflow-auto">
+    <div className="flex min-h-screen w-full flex-col bg-slate-900 overflow-auto">
       <div className="flex flex-1 flex-row">
-        <div className="w-[64px] h-full bg-slate-950 py-2 flex justify-center">
-          <Button
-            className="p-1"
-            variant={debug.isDebugMode ? 'default' : 'secondary'}
-            onClick={() => {
-              queue.setQueue(() => [])
-              debug.setIsDebugMode(!debug.isDebugMode)
-            }}
-          >
-            Debug
-          </Button>
+        <div className="w-[64px] h-screen bg-slate-950 py-2 flex justify-center">
+          <Link to="/">
+            <Button className="p-1">Restart</Button>
+          </Link>
         </div>
         <div className="flex flex-1 flex-col justify-center overflow-auto">
           <div className="flex flex-1 flex-col p-2 justify-between">

@@ -1,7 +1,7 @@
 import { LogSecondary } from '@/components/ui/log'
 import { ActionResult, CombatContext } from '@repo/game/types'
 
-export function logFailure(result: ActionResult, ctx: CombatContext) {
+export function logMiss(result: ActionResult, ctx: CombatContext) {
   if (result.data && !result.data.accuracyRoll.success) {
     ctx.log(
       <LogSecondary>

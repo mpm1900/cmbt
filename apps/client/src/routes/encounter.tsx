@@ -1,13 +1,13 @@
 import { routeTransitionProps } from '@/constants'
-import { Combat } from '@/domain'
+import { Encounter } from '@/domain/Encounter'
 import { createFileRoute } from '@tanstack/react-router'
 import { motion } from 'framer-motion'
 
-export const Route = createFileRoute('/combat')({
+export const Route = createFileRoute('/encounter')({
   component: () => (
     <div className="flex-1 bg-black">
       <motion.div className="flex-1" {...routeTransitionProps}>
-        <Combat />
+        <Encounter />
       </motion.div>
     </div>
   ),

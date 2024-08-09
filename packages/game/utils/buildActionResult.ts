@@ -9,7 +9,7 @@ import { applyModifiers } from './applyModifiers'
 
 export type ParseActionResult = Omit<
   ActionResult,
-  'source' | 'targets' | 'data' | 'action'
+  'success' | 'source' | 'targets' | 'data' | 'action'
 >
 
 export function buildActionResult(
@@ -19,6 +19,7 @@ export function buildActionResult(
   targets: Unit[],
   ctx: CombatContext,
   config: (targets: Unit[]) => {
+    forceFailure?: boolean
     onSuccess?: ParseActionResult
     onFailure?: ParseActionResult
   }
@@ -27,25 +28,20 @@ export function buildActionResult(
   const modifiedTargets = targets.map(
     (target) => applyModifiers(target, ctx).unit
   )
-  const { onSuccess = {}, onFailure = {} } = config(
+  const {
+    forceFailure,
+    onSuccess = {},
+    onFailure = {},
+  } = config(
     action
       .mapTargets(modifiedTargets, ctx)
       .filter((target) => !target.flags.isProtected)
   )
-  if (accuracyRoll.success) {
+  if (accuracyRoll.success && !forceFailure) {
     const { mutations = [] } = onSuccess
     return {
       ...onSuccess,
-      action,
-      data,
-      source,
-      targets,
-      mutations: [setLastUsed, ...mutations],
-    }
-  } else {
-    const { mutations = [] } = onFailure
-    return {
-      ...onFailure,
+      success: true,
       action,
       data,
       source,
@@ -53,4 +49,17 @@ export function buildActionResult(
       mutations: [setLastUsed, ...mutations],
     }
   }
+  if (!accuracyRoll.success || forceFailure) {
+    const { mutations = [] } = onFailure
+    return {
+      ...onFailure,
+      success: false,
+      action,
+      data,
+      source,
+      targets,
+      mutations: [setLastUsed, ...mutations],
+    }
+  }
+  return {}
 }

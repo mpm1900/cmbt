@@ -1,5 +1,6 @@
 export * from './Actions'
 export * from './Augments'
+export * from './Encounters'
 export * from './Items'
 export * from './Modifiers'
 export * from './Mutations/system'

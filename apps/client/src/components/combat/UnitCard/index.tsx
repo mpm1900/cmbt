@@ -14,6 +14,7 @@ import { UnitModifiers } from './UnitModifiers'
 import { UnitBars } from './UnitBars'
 import { SwitchUnitId } from '@repo/game/data'
 import { Badge } from '@/components/ui/badge'
+import { motion } from 'framer-motion'
 
 export type UnitDebugProps = {
   unit: Unit
@@ -42,7 +43,7 @@ export function UnitCard(props: UnitDebugProps) {
     status === 'waiting-for-input' && !unit.flags.isStunned && !stagedItem
 
   return (
-    <div>
+    <motion.div layout>
       <div
         className={cn('w-[400px] rounded transition-colors ease-in-out', {
           'bg-slate-200': isActive,
@@ -117,6 +118,6 @@ export function UnitCard(props: UnitDebugProps) {
         </CardContent>
       </div>
       <UnitModifiers unit={props.unit} />
-    </div>
+    </motion.div>
   )
 }

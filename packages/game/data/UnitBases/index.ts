@@ -13,13 +13,14 @@ import { Tyranitar, TyranitarConfig } from './Tyranitar'
 export const ALL_BASES: UnitBase[] = [
   Tyranitar,
   Blissy,
-  Celebi,
-  DeoxysP,
-  DeoxysS,
+  //Celebi,
+  //DeoxysP,
+  //DeoxysM,
+  //DeoxysS,
   Gengar,
   Salamence,
   Snorlax,
-  Steelix,
+  // Steelix,
 ]
 
 export const BASE_CONFIGS: Record<Id, UnitBaseConfig> = {

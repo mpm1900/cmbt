@@ -105,7 +105,9 @@ export function SwitchUnits(props: SwitchUnitsProps) {
       </CardContent>
       {selectedTargets.length === action.maxTargetCount && (
         <CardFooter className="justify-end">
-          <Button onClick={() => onConfirm(selectedTargets)}>Switch In</Button>
+          <Button onClick={() => onConfirm(selectedTargets)}>
+            {ctx.turn.count === 0 ? 'Start Combat' : 'Switch In'}
+          </Button>
         </CardFooter>
       )}
     </Card>

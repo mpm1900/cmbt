@@ -1,5 +1,5 @@
 import { Unit } from '@repo/game/types'
-import { useSpring, animated, config } from '@react-spring/web'
+import { motion } from 'framer-motion'
 import { cn } from '@/lib/utils'
 
 export type HealthBarProps = {
@@ -11,8 +11,6 @@ export function HealthBar(props: HealthBarProps) {
   const { unit, className } = props
   const remainingHealth = Math.max(unit.stats.health - unit.values.damage, 0)
   const ratio = (remainingHealth / unit.stats.health) * 100
-  const effect = useSpring({ width: ratio, delay: 500, config: config.slow })
-  const value = useSpring({ width: ratio, config: config.stiff })
 
   return (
     <div
@@ -22,17 +20,17 @@ export function HealthBar(props: HealthBarProps) {
       )}
       style={{ borderRadius: '8px' }}
     >
-      <animated.div
+      <motion.div
         className="absolute top-0 left-0 h-3 bg-white"
-        style={{
-          width: effect.width.to((x) => `${x}%`),
+        animate={{ width: `${ratio}%` }}
+        transition={{
+          duration: 0.5,
+          delay: 0.5,
         }}
       />
-      <animated.div
+      <motion.div
         className="absolute top-0 left-0 h-3 bg-red-400"
-        style={{
-          width: value.width.to((x) => `${x}%`),
-        }}
+        animate={{ width: `${ratio}%` }}
       />
     </div>
   )

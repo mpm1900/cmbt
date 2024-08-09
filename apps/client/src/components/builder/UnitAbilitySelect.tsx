@@ -18,6 +18,7 @@ export function UnitAbilitySelect(props: UnitAbilitySelectProps) {
 
   return (
     <Select
+      disabled={options.length === 0}
       value={value?.id}
       onValueChange={(id) => {
         onChnage(options.find((o) => o.id === id))

@@ -29,6 +29,9 @@ import {
   ArmorUpId,
   ArmorUp,
   RestId,
+  FirePunchId,
+  BodySlamId,
+  BodySlam,
 } from '@repo/game/data'
 import { Action, ActionResult, CombatContext, Unit } from '@repo/game/types'
 import { Fragment, ReactNode } from 'react'
@@ -57,12 +60,14 @@ export const ACTION_NAMES: Record<string, string> = {
   [InspectAllId]: 'Inspect',
 
   [ArmorUpId]: 'Armor Up',
+  [BodySlamId]: 'Body Slam',
   [CrunchId]: 'Crunch',
   [DisableId]: 'Disable',
   [EarthquakeId]: 'Earthquake',
   [ExplosionId]: 'Explosion',
   [FireballId]: 'Fireball',
   [FireBlastId]: 'Fire Blast',
+  [FirePunchId]: 'Fire Punch',
   [FurySwipesId]: 'Fury Swipes',
   [HyperBeamId]: 'Hyper Beam',
   [IcyWindId]: 'Icy Wind',
@@ -134,6 +139,21 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
     description: (action) => {
       const armorup = action as ArmorUp
       return <>This unit gains {armorup.amount * -1} physical armor.</>
+    },
+  },
+  [BodySlamId]: {
+    name: ACTION_NAMES[BodySlamId],
+    baseDamage: (action) => `${action.damage?.value}`,
+    cost: '',
+    description: (action) => {
+      const bodyslam = action as BodySlam
+      return (
+        <>
+          Deals {bodyslam.damage.value} base damage to target enemey unit. If
+          this attack misses, deals {bodyslam.missDamage.value} base damage to
+          this unit instead.
+        </>
+      )
     },
   },
   [CrunchId]: {
@@ -208,7 +228,26 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
         Deals {action.damage?.value} base fire damage to target enemy unit. 10%
         chance to apply{' '}
         <span className="font-bold text-modifiers-burned">Burn</span> to target
-        unit for 5 turns.
+        for 5 turns.
+      </>
+    ),
+    help: () => (
+      <div className="text-modifiers-burned/50">
+        (The unit's physical stat is halved. At the end of each turn, the unit
+        takes 10 damage.)
+      </div>
+    ),
+  },
+  [FirePunchId]: {
+    name: ACTION_NAMES[FirePunchId],
+    baseDamage: (action) => `${action.damage?.value}`,
+    cost: '',
+    description: (action) => (
+      <>
+        Deals {action.damage?.value} base fire damage to target enemy unit. 10%
+        chance to apply{' '}
+        <span className="font-bold text-modifiers-burned">Burn</span> to target
+        for 5 turns.
       </>
     ),
     help: () => (

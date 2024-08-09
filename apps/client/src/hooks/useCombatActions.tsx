@@ -62,6 +62,10 @@ export function useCombatActions() {
       updateActionQueue,
     } = result
 
+    if (options?.enableLog) {
+      logMiss(result, context)
+    }
+
     if (mutations?.length) {
       if (options?.enableLog) logMutations(mutations, context)
       context.units = combat.mutate(mutations, context)
@@ -81,7 +85,6 @@ export function useCombatActions() {
     }
 
     if (options?.enableLog) {
-      logMiss(result, context)
       logActionResults(result, context)
     }
     return context

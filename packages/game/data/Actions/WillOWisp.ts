@@ -12,7 +12,6 @@ import { modifyRenderContext } from '../../utils/modifyRenderContext'
 import { ActionId } from '../Ids'
 import { PowerDownParent, BurnedPowerDownId } from '../Modifiers'
 import { ReduceFocusParent } from '../Mutations'
-import { SetLastUsedAction } from '../Mutations/system'
 import { GetUnits } from '../Queries'
 import { BurnDamageOnTurnEndId, DamageParentOnTurnEnd } from '../Triggers'
 
@@ -32,7 +31,6 @@ export class WillOWisp extends Action {
         notTeamId: teamId,
         isActive: true,
       }),
-      attackType: 'magic',
       maxTargetCount: 1,
     })
   }

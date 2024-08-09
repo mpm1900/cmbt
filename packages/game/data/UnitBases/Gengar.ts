@@ -2,10 +2,14 @@ import { nanoid } from 'nanoid'
 import { UnitBase, UnitBaseConfig } from '../../types'
 import { ZERO_UNIT } from '../Units'
 import {
+  Disable,
+  DisableId,
   MagicMissile,
   MagicMissileId,
   PowerWordKill,
   PowerWordKillId,
+  WillOWisp,
+  WillOWispId,
 } from '../Actions'
 
 export const Gengar: UnitBase = {
@@ -30,6 +34,10 @@ export const GengarConfig: UnitBaseConfig = {
   actionsCount: 4,
   actions: [
     {
+      id: DisableId,
+      make: (u) => new Disable(u.id, u.teamId),
+    },
+    {
       id: MagicMissileId,
       make: (u) => new MagicMissile(u.id, u.teamId),
     },
@@ -37,7 +45,11 @@ export const GengarConfig: UnitBaseConfig = {
       id: PowerWordKillId,
       make: (u) => new PowerWordKill(u.id, u.teamId),
     },
+    {
+      id: WillOWispId,
+      make: (u) => new WillOWisp(u.id, u.teamId),
+    },
   ],
   defaultAbilityId: undefined,
-  defaultActionIds: [MagicMissileId, PowerWordKillId],
+  defaultActionIds: [MagicMissileId, PowerWordKillId, WillOWispId],
 }

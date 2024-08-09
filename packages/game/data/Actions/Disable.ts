@@ -25,7 +25,6 @@ export class Disable extends Action {
       cost: new Identity({ sourceId }),
       targets: new GetUnits({ isActive: true, notTeamId: teamId }),
       priority: -1,
-      attackType: 'magic',
       maxTargetCount: 1,
     })
   }

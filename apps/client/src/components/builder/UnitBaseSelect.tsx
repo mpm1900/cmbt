@@ -2,7 +2,6 @@ import { ALL_BASES } from '@repo/game/data'
 import {
   Select,
   SelectContent,
-  SelectGroup,
   SelectItem,
   SelectTrigger,
   SelectValue,

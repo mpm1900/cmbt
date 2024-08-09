@@ -1,7 +1,6 @@
-import { LogSecondary, LogUnit } from '@/components/ui/log'
+import { LogUnit } from '@/components/ui/log'
 import { ModifierRenderers } from '@/renderers'
-import { Separator } from '@radix-ui/react-separator'
-import { CombatContext, Trigger, TriggerEvent, Unit } from '@repo/game/types'
+import { CombatContext, Trigger, TriggerEvent } from '@repo/game/types'
 
 export function logTriggers(
   triggers: Trigger[],
@@ -16,17 +15,17 @@ export function logTriggers(
     )
 
     triggers.forEach((trigger) => {
-      const source = ctx.units.find((u) => u.id === trigger.sourceId)
+      const parent = ctx.units.find((u) => u.id === trigger.parentId)
       const renderer = ModifierRenderers[trigger.rid]
       ctx.log(
         <div className="text-muted-foreground">
-          {source && (
+          {parent && (
             <LogUnit
-              teamId={source.teamId}
+              teamId={parent.teamId}
               user={ctx.user}
               className="opacity-70 font-normal"
             >
-              {source.name}'s{' '}
+              {parent.name}'s{' '}
             </LogUnit>
           )}
           <span className="text-white">{renderer?.name}</span> Trigger

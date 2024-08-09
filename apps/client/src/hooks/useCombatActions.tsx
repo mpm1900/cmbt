@@ -115,7 +115,9 @@ export function useCombatActions() {
       cleanup(false, context)
     } else {
       combat.next()
-      context.log(<LogHeader>turn {combat.turn.count + 1}</LogHeader>)
+      setTimeout(() => {
+        context.log(<LogHeader>turn {combat.turn.count + 1}</LogHeader>)
+      }, 500)
       activeUnit.setActiveUnit(
         context.units.find((u) => u.flags.isActive && u.teamId === context.user)
       )

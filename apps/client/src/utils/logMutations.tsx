@@ -12,9 +12,7 @@ export function logMutations(mutations: Mutation[], ctx: CombatContext) {
     const unitMutations = logMutations.filter((m) => m.filter(unit, ctx))
     if (unitMutations.length > 0) {
       const diffs = applyMutations(ZERO_UNIT, unitMutations)
-      setTimeout(() => {
-        logMutationDiffs(unit, diffs, ctx)
-      }, i * 100)
+      logMutationDiffs(unit, diffs, i, ctx)
     }
   })
 }
@@ -22,6 +20,7 @@ export function logMutations(mutations: Mutation[], ctx: CombatContext) {
 export function logMutationDiffs(
   parent: Unit,
   diffs: Unit,
+  index: number,
   ctx: CombatContext
 ) {
   const name = parent.name
@@ -32,7 +31,8 @@ export function logMutationDiffs(
           {name}
         </LogUnit>{' '}
         take{!!parent && 's'} {diffs.values.damage} damage.
-      </LogSecondary>
+      </LogSecondary>,
+      index * 0.1
     )
   }
   if (diffs.values.physicalArmor !== 0) {
@@ -43,7 +43,8 @@ export function logMutationDiffs(
         </LogUnit>{' '}
         {diffs.values.physicalArmor > 0 ? 'gained' : 'lost'}{' '}
         {Math.abs(diffs.values.physicalArmor)} physical armor.
-      </LogSecondary>
+      </LogSecondary>,
+      index * 0.1
     )
   }
   if (diffs.values.magicArmor !== 0) {
@@ -54,7 +55,8 @@ export function logMutationDiffs(
         </LogUnit>{' '}
         {diffs.values.magicArmor > 0 ? 'gained' : 'lost'}{' '}
         {Math.abs(diffs.values.magicArmor)} magic armor.
-      </LogSecondary>
+      </LogSecondary>,
+      index * 0.1
     )
   }
 }

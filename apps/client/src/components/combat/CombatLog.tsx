@@ -1,16 +1,25 @@
-import { useScrollToBottom } from '@/hooks'
+import { useScrollToView } from '@/hooks'
 import { useCombat } from '@/hooks/state'
+import { CombatLogItem } from './CombatLogItem'
 
 export function CombatLog() {
-  const logs = useCombat((s) => s.logs)
-  const ref = useScrollToBottom(logs.length)
+  const { logs, updateLog } = useCombat((s) => ({
+    logs: s.logs,
+    updateLog: s.updateLog,
+  }))
+  const ref = useScrollToView(logs.length)
 
   return (
     <div className="overflow-auto">
-      {logs.map((log, i) => (
-        <div key={i} className="px-2 py-0.5 overflow-hidden">
-          {log}
-        </div>
+      {logs.map((log) => (
+        <CombatLogItem
+          key={log.id}
+          node={log.node}
+          delay={log.delay}
+          onAnimationComplete={(def) =>
+            updateLog(log.id, (l) => ({ delay: 0 }))
+          }
+        />
       ))}
       <div ref={ref} className="mt-4" />
     </div>

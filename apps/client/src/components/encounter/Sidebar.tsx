@@ -1,4 +1,4 @@
-import { useScrollToBottom } from '@/hooks'
+import { useScrollToView } from '@/hooks'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../ui/tabs'
 
 export function Sidebar() {

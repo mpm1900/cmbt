@@ -11,6 +11,7 @@ import {
   Unit,
 } from '@repo/game/types'
 import { validateModifiers } from '@repo/game/utils'
+import { nanoid } from 'nanoid/non-secure'
 import { ReactNode } from 'react'
 import { create } from 'zustand'
 
@@ -20,8 +21,10 @@ export type InitializeProps = {
   user: string
 }
 
+export type CombatLog = { id: Id; delay: number; node: ReactNode }
 export type CombatState = CombatContext & {
-  logs: ReactNode[]
+  logs: CombatLog[]
+  updateLog: (id: Id, fn: (log: CombatLog) => Partial<CombatLog>) => void
 }
 export type CombatStore = CombatState & {
   initialize: (props: InitializeProps) => CombatStore
@@ -184,6 +187,11 @@ export const useCombat = create<CombatStore>((set, get) => {
       })),
 
     logs: [],
-    log: (node) => set((s) => ({ logs: s.logs.concat(node) })),
+    log: (node, delay = 0) =>
+      set((s) => ({ logs: s.logs.concat({ id: nanoid(), delay, node }) })),
+    updateLog: (id, fn) =>
+      set((s) => ({
+        logs: s.logs.map((l) => (l.id === id ? { ...l, ...fn(l) } : l)),
+      })),
   }
 })

@@ -12,19 +12,19 @@ export function logModifiers(modifiers: Modifier[], ctx: CombatContext) {
     )
     const renderers = unitModifiers.map((m) => ModifierRenderers[m.rid])
     if (renderers.length === 0) return
-    setTimeout(() => {
-      ctx.log(
-        <LogSecondary>
-          <LogUnit teamId={unit.teamId} user={ctx.user}>
-            {unit.name}
-          </LogUnit>{' '}
-          gained{' '}
-          {renderers.map(
-            (r, i) =>
-              `${i === renderers.length - 1 && renderers.length > 1 ? ' and ' : i !== 0 ? ', ' : ''}${r?.name}`
-          )}
-        </LogSecondary>
-      )
-    }, i * 100)
+
+    ctx.log(
+      <LogSecondary>
+        <LogUnit teamId={unit.teamId} user={ctx.user}>
+          {unit.name}
+        </LogUnit>{' '}
+        gained{' '}
+        {renderers.map(
+          (r, i) =>
+            `${i === renderers.length - 1 && renderers.length > 1 ? ' and ' : i !== 0 ? ', ' : ''}${r?.name}`
+        )}
+      </LogSecondary>,
+      i * 0.1
+    )
   })
 }

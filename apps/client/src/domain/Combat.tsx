@@ -23,6 +23,8 @@ export function Combat() {
   useCleanupController()
   useCombatSetup()
 
+  console.log(combat.units.map((u) => u.registry.modifiers))
+
   const userTeam = combat.teams.find((t) => t.id === combat.user)
   const aiTeam = combat.teams.find((t) => t.id !== combat.user)
 

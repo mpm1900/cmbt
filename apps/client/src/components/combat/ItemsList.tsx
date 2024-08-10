@@ -93,7 +93,7 @@ export function ItemsList(props: ItemsListProps) {
                     {renderer?.name ?? action.id}
                   </span>
                   <span className="text-xs text-muted-foreground space-x-2">
-                    x{item.count}
+                    {item.count}
                   </span>
                 </Button>
               )

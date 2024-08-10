@@ -17,7 +17,6 @@ import { LogCritical, LogHeader } from '@/components/ui/log'
 import { handleCleanup } from '@/utils/handleCleanup'
 import { logMiss } from '@/utils'
 import { SetDeadAsInactive } from '@repo/game/data'
-import { useState } from 'react'
 
 export type CommitResultOptions = {
   enableLog?: boolean

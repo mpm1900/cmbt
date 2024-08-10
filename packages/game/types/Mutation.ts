@@ -2,6 +2,7 @@ import { nanoid } from 'nanoid'
 import { CombatContext } from './CombatContext'
 import { Flags, Stats, Unit, Values } from './Unit'
 import { Id } from '.'
+import { SandstormOnTurnEndId } from '../data'
 
 export type MutationProps<T = {}> = T & {
   id?: Id
@@ -31,7 +32,7 @@ export abstract class Mutation {
   }
 
   filter(unit: Unit, ctx: CombatContext): boolean {
-    const isImmune = unit.registry.modifiers.includes(this.id)
+    const isImmune = unit.registry.modifiers.includes(this.rid)
     const isActive = unit.flags.isActive
     return isActive && !isImmune
   }

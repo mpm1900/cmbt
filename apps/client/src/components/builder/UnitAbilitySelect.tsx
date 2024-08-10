@@ -38,7 +38,7 @@ export function UnitAbilitySelect(props: UnitAbilitySelectProps) {
               <SelectItem value={ability.id}>{ability.name}</SelectItem>
             </HoverCardTrigger>
             <HoverCardPortal>
-              <HoverCardContent side="left">
+              <HoverCardContent side="left" className="w-[360px]">
                 <div className="text-muted-foreground">
                   {renderer?.description()}
                 </div>

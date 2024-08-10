@@ -12,6 +12,7 @@ import {
   CreateSandstormOnUnitEnterId,
   SetIsInspectedAllId,
   DamageNewUnitsOnUnitEnterId,
+  SandstormOnTurnEndId,
 } from '@repo/game/data'
 import { ReactNode } from 'react'
 import { GiBiceps, GiBatteryPackAlt } from 'react-icons/gi'
@@ -38,7 +39,7 @@ export const MODIFIER_NAMES: Record<string, string> = {
   [PowerUpParentId]: 'Power Up',
 
   [CreateSandstormOnUnitEnterId]: 'Sand Stream',
-  [DamageAllOnTurnEndId]: 'Sandstorm',
+  [SandstormOnTurnEndId]: 'Sandstorm',
   [DamageNewUnitsOnUnitEnterId]: 'Spikes',
   [PowerDownAllOtherOnUnitEnterId]: 'Intimidate',
 }
@@ -67,7 +68,7 @@ export const MODIFIER_BASE_ICONS: Record<
     'fill-red-400',
     undefined,
   ],
-  [DamageAllOnTurnEndId]: [GiSandstorm, undefined, 'fill-amber-100', undefined],
+  [SandstormOnTurnEndId]: [GiSandstorm, undefined, 'fill-amber-100', undefined],
 }
 
 export const ModifierRenderers: Record<string, ModifierRenderer> = {
@@ -118,8 +119,8 @@ export const ModifierRenderers: Record<string, ModifierRenderer> = {
   [CreateSandstormOnUnitEnterId]: {
     name: MODIFIER_NAMES[CreateSandstormOnUnitEnterId],
   },
-  [DamageAllOnTurnEndId]: {
-    name: MODIFIER_NAMES[DamageAllOnTurnEndId],
+  [SandstormOnTurnEndId]: {
+    name: MODIFIER_NAMES[SandstormOnTurnEndId],
   },
   [DamageNewUnitsOnUnitEnterId]: {
     name: MODIFIER_NAMES[DamageNewUnitsOnUnitEnterId],

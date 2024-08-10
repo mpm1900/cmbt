@@ -1,3 +1,4 @@
+export * from './AddModifierRegistry'
 export * from './DamageAll'
 export * from './DamageParent'
 export * from './DamageTeam'

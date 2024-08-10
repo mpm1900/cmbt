@@ -1,6 +1,7 @@
 import { nanoid } from 'nanoid'
 import { Augment, Modifier, Mutation, Unit } from '../../types'
-import { CreateSandstormOnUnitEnter } from '../Triggers'
+import { CreateSandstormOnUnitEnter, SandstormOnTurnEndId } from '../Triggers'
+import { AddModifierRegistry } from '../Mutations'
 
 export const SandStreamId = nanoid()
 
@@ -13,10 +14,17 @@ export class SandStream extends Augment {
       new CreateSandstormOnUnitEnter({
         duration: 0,
         sourceId: unit.id,
+        parentId: unit.id,
       }),
     ]
   }
   mutations(unit: Unit): Mutation[] {
-    return []
+    return [
+      new AddModifierRegistry({
+        sourceId: unit.id,
+        parentId: unit.id,
+        modifierId: SandstormOnTurnEndId,
+      }),
+    ]
   }
 }

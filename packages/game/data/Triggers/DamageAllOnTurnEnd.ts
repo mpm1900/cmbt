@@ -14,7 +14,7 @@ export class DamageAllOnTurnEnd extends Trigger {
   private damage: number
 
   get key() {
-    return this.id
+    return this.rid
   }
 
   constructor(props: TriggerProps<{ damage: number }>) {

@@ -10,8 +10,9 @@ export function validateModifiers(
     if (
       current.maxInstances === undefined ||
       matches.length < current.maxInstances
-    )
+    ) {
       return _modifiers.concat(current)
+    }
     return _modifiers
   }, [])
 }

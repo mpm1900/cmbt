@@ -1,14 +1,11 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { motion } from 'framer-motion'
 import { Builder } from '@/domain'
-import { routeTransitionProps } from '@/constants'
+import { RouteTransition } from '@shared/RouteTransition'
 
 export const Route = createFileRoute('/')({
   component: () => (
-    <div className="flex-1 bg-slate-950">
-      <motion.div className="flex-1" {...routeTransitionProps}>
-        <Builder />
-      </motion.div>
-    </div>
+    <RouteTransition>
+      <Builder />
+    </RouteTransition>
   ),
 })

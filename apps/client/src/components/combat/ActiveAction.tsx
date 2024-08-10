@@ -22,6 +22,8 @@ export function ActiveAction(props: ActiveActionProps) {
   const baseAccuracy = action.threshold(source)
   const modified = applyModifiers(source, ctx)
   const accuracy = action.threshold(modified.unit)
+  const critChance = action.criticalThreshold(modified.unit) ?? 0
+  const critFactor = action.criticalFactor(modified.unit)
 
   return (
     <Card className="dark:bg-muted/40 space-y-2">
@@ -63,6 +65,22 @@ export function ActiveAction(props: ActiveActionProps) {
               </span>
 
               <span className="pl-1">Accuracy</span>
+            </Badge>
+          )}
+          {critChance > 0 && (
+            <Badge
+              variant="outline"
+              className="bg-slate-950 text-muted-foreground mb-4"
+            >
+              {critChance}% Crit
+            </Badge>
+          )}
+          {critFactor && (
+            <Badge
+              variant="outline"
+              className="bg-slate-950 text-muted-foreground mb-4"
+            >
+              {critFactor * 100}% Crit Damage
             </Badge>
           )}
           {action.priority !== 0 && (

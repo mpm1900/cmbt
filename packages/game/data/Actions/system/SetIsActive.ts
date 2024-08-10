@@ -30,7 +30,7 @@ export class SetIsActive extends Action {
   }
 
   threshold = (source: Unit): number | undefined => undefined
-  critical = (source: Unit): number | undefined => undefined
+  criticalThreshold = (source: Unit): number | undefined => undefined
 
   getAi = (targets: Unit[], ctx: CombatContext): ActionAi => {
     const modified = targets.map((target) => applyModifiers(target, ctx).unit)

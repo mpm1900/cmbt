@@ -16,7 +16,8 @@ export type ActionAccuracyResult = {
   roll: number
   success: boolean
   threshold: number | undefined
-  critical: number | undefined
+  criticalThreshold: number | undefined
+  criticalFactor: number | undefined
   criticalSuccess: boolean
 }
 
@@ -78,7 +79,8 @@ export abstract class Action {
   readonly targets: Query<Unit[]>
   damage?: Damage
   abstract threshold: (source: Unit) => number | undefined
-  abstract critical: (source: Unit) => number | undefined
+  abstract criticalThreshold: (source: Unit) => number | undefined
+  abstract criticalFactor: (source: Unit) => number | undefined
   abstract resolve(
     source: Unit,
     targets: Unit[],

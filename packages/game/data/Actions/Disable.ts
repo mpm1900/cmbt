@@ -30,7 +30,8 @@ export class Disable extends Action {
   }
 
   threshold = (source: Unit): number | undefined => undefined
-  critical = (source: Unit): number | undefined => undefined
+  criticalThreshold = (source: Unit): number | undefined => undefined
+  criticalFactor = (source: Unit): number | undefined => undefined
 
   resolve = (
     source: Unit,

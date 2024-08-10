@@ -46,7 +46,8 @@ export class Explosion extends Action {
   }
 
   threshold = (source: Unit): number | undefined => undefined
-  critical = (source: Unit): number | undefined => undefined
+  criticalThreshold = (source: Unit): number | undefined => undefined
+  criticalFactor = (source: Unit): number | undefined => undefined
 
   getAi(targets: Unit[], ctx: CombatContext): ActionAi {
     return getDamageAi(this, targets, ctx)

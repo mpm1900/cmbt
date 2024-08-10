@@ -17,6 +17,7 @@ import { LogCritical, LogHeader } from '@/components/ui/log'
 import { handleCleanup } from '@/utils/handleCleanup'
 import { logMiss } from '@/utils'
 import { SetDeadAsInactive } from '@repo/game/data'
+import { logCritical } from '@/utils/logCritical'
 
 export type CommitResultOptions = {
   enableLog?: boolean
@@ -72,6 +73,9 @@ export function useCombatActions() {
     if (modifiers?.length) {
       if (options?.enableLog) logModifiers(modifiers, context)
       context.modifiers = combat.add(modifiers)
+    }
+    if (options?.enableLog) {
+      logCritical(result, context)
     }
     if (updateModifiers) {
       context.modifiers = combat.updateModifiers(updateModifiers)

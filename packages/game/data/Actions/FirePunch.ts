@@ -51,7 +51,8 @@ export class FirePunch extends Action {
   threshold = (source: Unit): number | undefined => {
     return 95 + source.stats.accuracy
   }
-  critical = (source: Unit): number | undefined => undefined
+  criticalThreshold = (source: Unit): number | undefined => undefined
+  criticalFactor = (source: Unit): number | undefined => undefined
   getAi(targets: Unit[], ctx: CombatContext): ActionAi {
     return getDamageAi(this, targets, ctx)
   }

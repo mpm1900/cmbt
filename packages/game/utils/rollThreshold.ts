@@ -6,15 +6,18 @@ export function rollThreshold(
   action: Action
 ): ActionAccuracyResult {
   const threshold = action.threshold(source)
-  const critical = action.critical(source)
+  const criticalThreshold = action.criticalThreshold(source)
+  const criticalFactor = action.criticalFactor(source)
   const roll = random.int(0, 100)
   const success = (threshold === undefined ? 100 : threshold) >= roll
-  const criticalSuccess = (critical === undefined ? 100 : critical) >= roll
+  const criticalSuccess =
+    (criticalThreshold === undefined ? 0 : criticalThreshold) >= roll
   return {
     roll,
     success,
     threshold,
-    critical,
+    criticalFactor,
+    criticalThreshold,
     criticalSuccess,
   }
 }

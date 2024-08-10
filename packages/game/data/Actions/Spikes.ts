@@ -31,7 +31,8 @@ export class Spikes extends Action {
   }
 
   threshold = (source: Unit): number | undefined => undefined
-  critical = (source: Unit): number | undefined => undefined
+  criticalThreshold = (source: Unit): number | undefined => undefined
+  criticalFactor = (source: Unit): number | undefined => undefined
   getAi(targets: Unit[], ctx: CombatContext): ActionAi {
     return { action: this, weight: 0, targetIds: [] }
   }

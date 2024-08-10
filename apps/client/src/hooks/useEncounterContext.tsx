@@ -19,7 +19,7 @@ export function useEncounterContext(): EncounterContext {
   return {
     activeNode: store.getActiveNode() as EncounterNode,
     encounter: store.encounter,
-    back: () => nav({ to: '/' }),
+    back: () => nav({ to: '/world' }),
     initializeCombat,
     updateEncounter: store.updateEncounter,
   }

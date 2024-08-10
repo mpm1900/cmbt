@@ -52,6 +52,7 @@ const ShopWaresNode: EncounterNode = {
       },
     },
   ],
+  renderChoice: (choice) => <div>{choice.label}</div>,
 }
 
 export const ShopEncounterId = nanoid()

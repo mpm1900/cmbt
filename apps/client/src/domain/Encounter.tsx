@@ -9,7 +9,6 @@ import { useState } from 'react'
 
 export function Encounter() {
   const ctx = useEncounterContext()
-  const [activeChoice, setActiveChoice] = useState<EncounterChoice>()
 
   return (
     <div className="flex min-h-screen w-full flex-col bg-slate-900 overflow-auto">
@@ -22,23 +21,19 @@ export function Encounter() {
             </CardHeader>
             <CardContent className="space-y-3">
               <div>{ctx.activeNode.description}</div>
-              <div className="space-x-2">
-                {ctx.activeNode.choices.map((choice) => (
-                  <ChoiceButton
-                    key={choice.id}
-                    choice={choice}
-                    isActive={choice.id === activeChoice?.id}
-                    setActiveChoice={setActiveChoice}
-                  />
-                ))}
-              </div>
-              {activeChoice && (
-                <div>
-                  {activeChoice.options.map((option) => (
-                    <Button key={option.id} onClick={() => option.resolve(ctx)}>
-                      {option.label}
-                    </Button>
-                  ))}
+              {ctx.activeNode.renderChoices ? (
+                ctx.activeNode.renderChoices(ctx)
+              ) : (
+                <div className="space-x-2">
+                  {ctx.activeNode
+                    .choices(ctx)
+                    .map((choice, index) =>
+                      ctx.activeNode.renderChoice ? (
+                        ctx.activeNode.renderChoice(choice, index, ctx)
+                      ) : (
+                        <ChoiceButton key={choice.id} choice={choice} />
+                      )
+                    )}
                 </div>
               )}
             </CardContent>

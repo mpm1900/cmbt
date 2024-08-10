@@ -21,13 +21,14 @@ export function ActionButton(props: ActionButtonProps) {
   const baseAccuracy = action.threshold(source)
   const accuracy = action.threshold(modified.unit)
   const costCheck = checkActionCost(action, source)
+  const isDisabled = modified.unit.registry.actions.includes(action.id)
   const baseDamage = renderer?.baseDamage(action)
 
   return (
     <Button
       variant={isActive ? 'default' : 'secondary'}
       className="items-start h-full flex-col"
-      disabled={!costCheck}
+      disabled={!costCheck || isDisabled}
       onClick={onClick}
     >
       <span

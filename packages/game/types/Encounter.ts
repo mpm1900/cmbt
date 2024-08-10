@@ -18,14 +18,19 @@ export type EncounterNode = {
   id: Id
   title: React.ReactNode
   description: React.ReactNode
-  choices: EncounterChoice[]
+  choices: (ctx: EncounterContext) => EncounterChoice[]
+  renderChoice?: (
+    choice: EncounterChoice,
+    index: number,
+    ctx: EncounterContext
+  ) => React.ReactNode
+  renderChoices?: (ctx: EncounterContext) => React.ReactNode
 }
 
 export type EncounterChoice = {
   id: Id
   label: React.ReactNode
-  resolve?: (ctx: EncounterContext) => void
-  options: EncounterChoiceOption[]
+  resolve: (ctx: EncounterContext) => void
 }
 
 export type EncounterChoiceOption = {

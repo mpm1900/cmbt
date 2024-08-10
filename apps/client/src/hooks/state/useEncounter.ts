@@ -1,4 +1,4 @@
-import { ShopEncounter } from '@repo/game/data'
+import { ShopEncounter } from '@/components/encounter/encounters'
 import { Encounter, EncounterNode } from '@repo/game/types'
 import { create } from 'zustand'
 

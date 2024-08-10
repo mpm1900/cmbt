@@ -3,6 +3,7 @@ import { UnitSelectButton } from '@/components/builder/UnitSelectButton'
 import { Button } from '@/components/ui/button'
 import { Tabs, TabsList } from '@/components/ui/tabs'
 import { MAX_UNITS_PER_TEAM } from '@/constants'
+import { useEncounterContext } from '@/hooks'
 import { useGame } from '@/hooks/state'
 import { useBuilderUi } from '@/hooks/state/useBuilderUi'
 import { useUnitBuilders } from '@/hooks/state/useUnitBuilders'
@@ -18,6 +19,7 @@ export function Builder() {
   const store = useUnitBuilders()
   const ui = useBuilderUi()
   const _builders = Array.from({ length: MAX_UNITS_PER_TEAM })
+  const ctx = useEncounterContext()
 
   function initialize() {
     const team = { id: nanoid(), items: [] }
@@ -62,6 +64,15 @@ export function Builder() {
             }}
           >
             Start!
+          </Button>
+          <Button
+            disabled={store.builders.length < 2}
+            onClick={() => {
+              initialize()
+              ctx.initializeCombat()
+            }}
+          >
+            Jump to Combat
           </Button>
         </div>
       </div>

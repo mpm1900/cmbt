@@ -3,24 +3,17 @@ import { Button } from '../ui/button'
 import { useEncounterContext } from '@/hooks'
 
 export type ChoiceButtonProps = {
-  isActive: boolean
   choice: EncounterChoice
-  setActiveChoice: (choice: EncounterChoice | undefined) => void
 }
 
 export function ChoiceButton(props: ChoiceButtonProps) {
-  const { isActive, choice, setActiveChoice } = props
+  const { choice } = props
   const ctx = useEncounterContext()
   return (
     <Button
-      variant={isActive ? 'default' : 'secondary'}
+      variant={'secondary'}
       onClick={() => {
-        if (choice.resolve) {
-          choice.resolve(ctx)
-          setActiveChoice(undefined)
-        } else {
-          setActiveChoice(choice)
-        }
+        choice.resolve(ctx)
       }}
     >
       {choice.label}

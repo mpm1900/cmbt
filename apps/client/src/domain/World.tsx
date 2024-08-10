@@ -2,6 +2,7 @@ import { Button } from '@/components/ui/button'
 import { useGame } from '@/hooks/state'
 import { useEncounter } from '@/hooks/state/useEncounter'
 import { Navbar } from '@shared/Navbar'
+import { Sidebar } from '@shared/Sidebar'
 import { useNavigate } from '@tanstack/react-router'
 
 export function World() {
@@ -30,6 +31,7 @@ export function World() {
             ))}
           </div>
         )}
+        <Sidebar />
       </div>
     </div>
   )

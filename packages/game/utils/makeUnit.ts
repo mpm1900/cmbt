@@ -45,7 +45,7 @@ export function makeUnit(teamId: string, name?: string, isActive?: boolean) {
         ...ZERO_UNIT.stats,
         speed: random.int(70, 140),
         physical: random.int(70, 140),
-        magic: random.int(70, 140),
+        magic: 100, // random.int(70, 140),
         defense: random.int(50, 100),
         health: random.int(250, 440),
         focus: random.int(0, 100),

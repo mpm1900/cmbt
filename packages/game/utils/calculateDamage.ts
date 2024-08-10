@@ -24,7 +24,8 @@ export function calculateBaseDamage(
 export function getDamageNegation(type: DamageType | undefined, target: Unit) {
   if (!type) return 1
   const typeNegation = target.stats[`${type}Negation`]
-  return 1 - typeNegation / 100
+  console.log(typeNegation)
+  return 1 - typeNegation
 }
 
 export function getDamageExpansion(type: DamageType | undefined, target: Unit) {
@@ -61,7 +62,7 @@ export function calculateDamage(
   )
   const negation = getDamageNegation(damage.damageType, target)
   const expansion = getDamageExpansion(damage.damageType, target)
-  if (negation != 1) console.log(damage, negation, target)
+  if (negation != 1) console.log(damage.value, negation)
 
   const criticalFactor = config.criticalSuccess
     ? (config.critical ?? 1) + target.stats.criticalDamage

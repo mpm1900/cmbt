@@ -1,3 +1,4 @@
+import random from 'random'
 import { GLOBAL_ACTIONS, UnitId, ZERO_UNIT } from '../data'
 import { Id, Modifier, Mutation, Unit, UnitBuilder } from '../types'
 import { applyMutations } from './applyModifiers'

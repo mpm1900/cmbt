@@ -34,7 +34,13 @@ export function SwitchUnits(props: SwitchUnitsProps) {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Select a Unit to switch in...</CardTitle>
+        <CardTitle>
+          Select{' '}
+          {action.maxTargetCount === 1
+            ? 'a unit'
+            : `${action.maxTargetCount} units`}
+          ...
+        </CardTitle>
       </CardHeader>
       <CardContent>
         <div className="grid grid-cols-2 gap-2">

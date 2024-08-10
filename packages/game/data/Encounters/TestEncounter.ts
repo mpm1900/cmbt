@@ -3,6 +3,7 @@ import { Encounter, EncounterNode } from '../../types'
 
 const TestNode1: EncounterNode = {
   id: nanoid(),
+  title: '',
   description: 'Begin Combat?',
   choices: [
     {
@@ -33,6 +34,7 @@ const TestNode1: EncounterNode = {
 
 const TestNode2: EncounterNode = {
   id: nanoid(),
+  title: '',
   description: 'Are you sure??',
   choices: [
     {

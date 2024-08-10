@@ -4,16 +4,15 @@ import { RequireTurnStatus } from '@/components/combat/RequireTurnStatus'
 import { RunningTurn } from '@/components/combat/RunningTurn'
 import { Sidebar } from '@/components/combat/Sidebar'
 import { Team } from '@/components/combat/Team'
-import { Button } from '@/components/ui/button'
 import {
   useAiActions,
   useInputController,
   useTurnController,
 } from '@/hooks/controllers'
 import { useCleanupController } from '@/hooks/controllers/useCleanupController'
-import { useCombat, useCombatSettings } from '@/hooks/state'
+import { useCombat } from '@/hooks/state'
 import { useCombatSetup } from '@/hooks/useCombatSetup'
-import { Link } from '@tanstack/react-router'
+import { Navbar } from '@shared/Navbar'
 
 export function Combat() {
   const combat = useCombat()
@@ -27,16 +26,10 @@ export function Combat() {
   const userTeam = combat.teams.find((t) => t.id === combat.user)
   const aiTeam = combat.teams.find((t) => t.id !== combat.user)
 
-  const debug = useCombatSettings()
-
   return (
     <div className="flex min-h-screen w-full flex-col bg-slate-900 overflow-auto">
       <div className="flex flex-1 flex-row">
-        <div className="w-[64px] h-screen bg-slate-950 py-2 flex justify-center">
-          <Link to="/">
-            <Button className="p-1">Restart</Button>
-          </Link>
-        </div>
+        <Navbar />
         <div className="flex flex-1 flex-col justify-center overflow-auto">
           <div className="flex flex-1 flex-col p-2 justify-between">
             <Team teamId={aiTeam?.id} />

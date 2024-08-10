@@ -22,6 +22,11 @@ export function CleanupSwitchUnits(props: CleanupSwitchUnitsProps) {
 
   return (
     <div className="w-[580px]">
+      {ctx.turn.count === 0 && (
+        <div className="p-5">
+          <div className="text-center text-7xl font-black">Combat Start!</div>
+        </div>
+      )}
       {team && (
         <SwitchUnits
           action={new SetIsActive('', team.id, selectCount)}

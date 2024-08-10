@@ -2,6 +2,7 @@ import { Unit } from '@repo/game/types'
 import { HealthBar } from '../HealthBar'
 import { cn } from '@/lib/utils'
 import { Progress } from '../../ui/progress'
+import { Bar } from '@shared/Bar'
 
 function getRatios(x: number, y: number, z: number): [number, number, number] {
   const sum = x + y + z
@@ -37,7 +38,7 @@ export function UnitBars(props: UnitBarsProps) {
         <>
           <div className="flex space-x-1">
             {unit.stats.focus > 0 && (
-              <Progress
+              <Bar
                 value={
                   (Math.max(unit.values.focus, 0) / unit.stats.focus) * 100
                 }
@@ -47,7 +48,7 @@ export function UnitBars(props: UnitBarsProps) {
               />
             )}
             {unit.stats.stamina > 0 && (
-              <Progress
+              <Bar
                 value={
                   (Math.max(unit.values.stamina, 0) / unit.stats.stamina) * 100
                 }
@@ -60,7 +61,7 @@ export function UnitBars(props: UnitBarsProps) {
               />
             )}
             {unit.stats.devotion > 0 && (
-              <Progress
+              <Bar
                 value={
                   (Math.max(unit.values.devotion, 0) / unit.stats.devotion) *
                   100

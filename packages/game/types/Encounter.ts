@@ -3,6 +3,7 @@ import { Id } from '.'
 export type EncounterContext = {
   encounter: Encounter
   activeNode: EncounterNode
+  back: () => void
   initializeCombat: () => void
   updateEncounter: (fn: (e: Encounter) => Partial<Encounter>) => void
 }
@@ -15,19 +16,20 @@ export type Encounter = {
 
 export type EncounterNode = {
   id: Id
-  description: string
+  title: React.ReactNode
+  description: React.ReactNode
   choices: EncounterChoice[]
 }
 
 export type EncounterChoice = {
   id: Id
-  label: string
+  label: React.ReactNode
   resolve?: (ctx: EncounterContext) => void
   options: EncounterChoiceOption[]
 }
 
 export type EncounterChoiceOption = {
   id: Id
-  label: string
+  label: React.ReactNode
   resolve: (ctx: EncounterContext) => void
 }

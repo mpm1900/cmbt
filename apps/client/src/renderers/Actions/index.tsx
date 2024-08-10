@@ -165,8 +165,8 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
       return (
         <>
           Deals {crunch.damage.value} base damage to target enemy unit. 20%
-          chance to apply <span className="font-bold">Defense Down</span> to
-          target.
+          chance to apply{' '}
+          <span className="font-bold text-white">Defense Down</span> to target.
         </>
       )
     },
@@ -177,8 +177,8 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
     cost: '',
     description: (action) => (
       <>
-        Applies <span className="font-bold">Disabled</span> to target enemy unit
-        for 2 turns.
+        Applies <span className="font-bold text-white">Disabled</span> to target
+        enemy unit for 2 turns.
       </>
     ),
     help: () => <div>(The unit cannot use their last used action.)</div>,
@@ -279,8 +279,7 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
     description: (action) => (
       <>
         Deals base force damage equal to this unit's magic stat to target enemy
-        unit. Applies{' '}
-        <span className="font-bold text-muted-foreground">Stun</span> to this
+        unit. Applies <span className="font-bold text-white">Stun</span> to this
         unit for 1 turn.
       </>
     ),
@@ -292,8 +291,8 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
     cost: '',
     description: (action) => (
       <>
-        Applies <span className="font-bold">Speed Down</span> to target enemy
-        unit.
+        Applies <span className="font-bold text-white">Speed Down</span> to
+        target enemy unit.
         {action.priority !== 0 && <> Priority {action.priority}.</>}
       </>
     ),
@@ -339,8 +338,8 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
     cost: '',
     description: (action) => (
       <>
-        Applies <span className="font-bold">Protected</span> to this unit for 1
-        turn. Cannot be used twice in a row.
+        Applies <span className="font-bold text-white">Protected</span> to this
+        unit for 1 turn. Cannot be used twice in a row.
       </>
     ),
     failureLog: (result) => <>Protect failed.</>,
@@ -362,8 +361,8 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
     cost: '',
     description: (action) => (
       <>
-        Applies <span className="font-bold">Sandstorm</span> to all units for 5
-        turns.
+        Applies <span className="font-bold text-white">Sandstorm</span> to all
+        units for 5 turns.
       </>
     ),
     help: () => <>(At the end of each turn, the unit takes 10 damage.)</>,
@@ -374,7 +373,8 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
     cost: '',
     description: (action) => (
       <>
-        Applies <span className="font-bold">Spikes</span> to all units.
+        Applies <span className="font-bold text-white">Spikes</span> to all
+        units.
       </>
     ),
     help: () => (
@@ -394,9 +394,8 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
     cost: '30 FP',
     description: (action) => (
       <>
-        Applies{' '}
-        <span className="font-bold text-muted-foreground">Power Up</span> to
-        this unit.
+        Applies <span className="font-bold text-white">Power Up</span> to this
+        unit.
       </>
     ),
     help: () => (
@@ -411,7 +410,8 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
     cost: '',
     description: (action) => (
       <>
-        Applies <span className="font-bold">Trick Room</span> to all units.
+        Applies <span className="font-bold text-white">Trick Room</span> to all
+        units.
       </>
     ),
     help: () => <>(The unit's speed stat is multiplied by -1.)</>,

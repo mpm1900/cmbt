@@ -1,4 +1,4 @@
-import { TestEncounter } from '@repo/game/data'
+import { ShopEncounter } from '@repo/game/data'
 import { Encounter, EncounterNode } from '@repo/game/types'
 import { create } from 'zustand'
 
@@ -12,7 +12,7 @@ export type EncounterStore = EncounterState & {
 }
 
 export const useEncounter = create<EncounterStore>((set, get) => ({
-  encounter: TestEncounter,
+  encounter: ShopEncounter,
   getActiveNode: () => {
     const state = get()
     return state.encounter.nodes.find(

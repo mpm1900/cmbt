@@ -6,6 +6,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from '../ui/select'
+import { AugmentRenderers } from '@/renderers'
+import { HoverCard, HoverCardContent, HoverCardTrigger } from '../ui/hover-card'
+import { HoverCardPortal } from '@radix-ui/react-hover-card'
 
 export type UnitAbilitySelectProps = {
   options: Augment[]
@@ -15,6 +18,7 @@ export type UnitAbilitySelectProps = {
 
 export function UnitAbilitySelect(props: UnitAbilitySelectProps) {
   const { options, value, onChnage } = props
+  const renderer = AugmentRenderers[value?.id ?? '']
 
   return (
     <Select
@@ -29,9 +33,18 @@ export function UnitAbilitySelect(props: UnitAbilitySelectProps) {
       </SelectTrigger>
       <SelectContent>
         {options.map((ability) => (
-          <SelectItem key={ability.id} value={ability.id}>
-            {ability.name}
-          </SelectItem>
+          <HoverCard key={ability.id} openDelay={0} closeDelay={0}>
+            <HoverCardTrigger asChild>
+              <SelectItem value={ability.id}>{ability.name}</SelectItem>
+            </HoverCardTrigger>
+            <HoverCardPortal>
+              <HoverCardContent side="left">
+                <div className="text-muted-foreground">
+                  {renderer?.description()}
+                </div>
+              </HoverCardContent>
+            </HoverCardPortal>
+          </HoverCard>
         ))}
       </SelectContent>
     </Select>

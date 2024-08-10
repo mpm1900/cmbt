@@ -111,7 +111,9 @@ export function ActionsTable(props: ActionsTablePrpos) {
               </HoverCardTrigger>
               <HoverCardPortal>
                 <HoverCardContent side="right">
-                  {renderer.description(action)}
+                  <div className="text-muted-foreground">
+                    {renderer.description(action)}
+                  </div>
                 </HoverCardContent>
               </HoverCardPortal>
             </HoverCard>

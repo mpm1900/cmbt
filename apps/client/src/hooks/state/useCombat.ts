@@ -145,7 +145,9 @@ export const useCombat = create<CombatStore>((set, get) => {
           t.id === teamId
             ? {
                 ...t,
-                items: t.items.map((i) => (fn(i) ? i.decrementCount() : i)),
+                items: t.items.map((i) =>
+                  fn(i) ? { ...i, count: i.count - 1 } : i
+                ),
               }
             : t
         ),

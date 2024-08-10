@@ -11,9 +11,8 @@ import { DamageParent } from '../Mutations'
 import { GetUnits } from '../Queries'
 
 export const PotionActionId = ActionId()
-
 export class PotionAction extends Action {
-  constructor(props: ActionProps) {
+  constructor(props: Omit<ActionProps, 'targets'>) {
     super(PotionActionId, {
       ...props,
       targets: new GetUnits({

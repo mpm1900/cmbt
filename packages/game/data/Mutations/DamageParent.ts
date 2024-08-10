@@ -13,7 +13,7 @@ export class DamageParent extends Mutation {
   resolve = (unit: Unit): Partial<Unit> => {
     return {
       values: Mutation.setValues(unit, (values) => ({
-        damage: values.damage + this.damage,
+        damage: Math.max(values.damage + this.damage, 0),
       })),
     }
   }

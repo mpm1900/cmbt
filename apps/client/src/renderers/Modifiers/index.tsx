@@ -13,6 +13,8 @@ import {
   SetIsInspectedAllId,
   DamageNewUnitsOnUnitEnterId,
   SandstormOnTurnEndId,
+  DefenseDownParentId,
+  SetIsProtectedParentId,
 } from '@repo/game/data'
 import { ReactNode } from 'react'
 import { GiBiceps, GiBatteryPackAlt } from 'react-icons/gi'
@@ -21,6 +23,8 @@ import { HiFire } from 'react-icons/hi2'
 import { IconType } from 'react-icons/lib'
 import { GiSandstorm } from 'react-icons/gi'
 import { BiSearch } from 'react-icons/bi'
+import { GiShoulderArmor } from 'react-icons/gi'
+import { GiVibratingShield } from 'react-icons/gi'
 
 export type ModifierRenderer = {
   name: ReactNode
@@ -31,12 +35,13 @@ export const MODIFIER_NAMES: Record<string, string> = {
   [SetIsInspectedAllId]: 'Inspected',
   [BurnDamageOnTurnEndId]: 'Burn:Damage',
   [BurnedPowerDownId]: 'Burn:Power-Down',
-  [DamageParentOnTurnEndId]: 'Damage OTE',
+  [DefenseDownParentId]: 'Defense Down',
   [DefenseUpAllId]: 'Defense Buff',
   [SetIsStunnedParentId]: 'Recharging',
   [InvertSpeedAllId]: 'Invert Speed',
   [PowerDownParentId]: 'Power Down',
   [PowerUpParentId]: 'Power Up',
+  [SetIsProtectedParentId]: 'Protected',
 
   [CreateSandstormOnUnitEnterId]: 'Sand Stream',
   [SandstormOnTurnEndId]: 'Sandstorm',
@@ -56,11 +61,23 @@ export const MODIFIER_BASE_ICONS: Record<
     'fill-orange-300',
     'fill-red-500',
   ],
+  [DefenseDownParentId]: [
+    GiShoulderArmor,
+    AiFillCaretDown,
+    'fill-white',
+    'fill-red-500',
+  ],
   [PowerDownParentId]: [
     GiBiceps,
     AiFillCaretDown,
     'fill-white',
     'fill-red-500',
+  ],
+  [SetIsProtectedParentId]: [
+    GiVibratingShield,
+    undefined,
+    'fill-white',
+    undefined,
   ],
   [SetIsStunnedParentId]: [
     GiBatteryPackAlt,
@@ -113,6 +130,9 @@ export const ModifierRenderers: Record<string, ModifierRenderer> = {
   },
   [PowerUpParentId]: {
     name: MODIFIER_NAMES[PowerUpParentId],
+  },
+  [SetIsProtectedParentId]: {
+    name: MODIFIER_NAMES[SetIsProtectedParentId],
   },
 
   // Triggers

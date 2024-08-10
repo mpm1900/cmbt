@@ -78,9 +78,9 @@ export abstract class Action {
   readonly cost: Mutation
   readonly targets: Query<Unit[]>
   damage?: Damage
-  abstract threshold: (source: Unit) => number | undefined
-  abstract criticalThreshold: (source: Unit) => number | undefined
-  abstract criticalFactor: (source: Unit) => number | undefined
+  threshold = (source: Unit): number | undefined => undefined
+  criticalThreshold = (source: Unit): number | undefined => undefined
+  criticalFactor = (source: Unit): number | undefined => undefined
   abstract resolve(
     source: Unit,
     targets: Unit[],

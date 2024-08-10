@@ -2,7 +2,6 @@ import { LogSecondary } from '@/components/ui/log'
 import { ActionResult, CombatContext } from '@repo/game/types'
 
 export function logCritical(result: ActionResult, ctx: CombatContext) {
-  console.log(result)
   if (
     result.data &&
     result.data.accuracyRoll.success &&
@@ -10,9 +9,11 @@ export function logCritical(result: ActionResult, ctx: CombatContext) {
   ) {
     ctx.log(
       <LogSecondary>
-        Critical Hit! (x{result.data.accuracyRoll.criticalFactor},{' '}
-        {result.data.accuracyRoll.roll}, needed{' '}
-        {result.data.accuracyRoll.criticalThreshold})
+        Critical Hit! (x{result.data.accuracyRoll.criticalFactor}{' '}
+        <span className="text-sm text-muted-foreground/50">
+          {result.data.accuracyRoll.roll}, needed{' '}
+          {result.data.accuracyRoll.criticalThreshold})
+        </span>
       </LogSecondary>
     )
   }

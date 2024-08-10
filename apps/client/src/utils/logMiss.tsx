@@ -5,8 +5,11 @@ export function logMiss(result: ActionResult, ctx: CombatContext) {
   if (result.data && !result.data.accuracyRoll.success) {
     ctx.log(
       <LogSecondary>
-        Miss! ({result.data.accuracyRoll.roll}, needed{' '}
-        {result.data.accuracyRoll.threshold})
+        Miss!{' '}
+        <span className="text-sm text-muted-foreground/50">
+          ({result.data.accuracyRoll.roll}, needed{' '}
+          {result.data.accuracyRoll.threshold} or lower)
+        </span>
       </LogSecondary>
     )
   }

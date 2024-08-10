@@ -19,8 +19,8 @@ export function ModifierIcon(props: ModifierIconProps) {
       <Icon size="28px" className={iconClass} />
       {Overlay && (
         <Overlay
-          size="28px"
-          className={cn('absolute top-2 left-1', overlayClass)}
+          size="24px"
+          className={cn('absolute top-2.5 left-2', overlayClass)}
         />
       )}
     </div>

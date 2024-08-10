@@ -4,6 +4,7 @@ import { RequireTurnStatus } from '@/components/combat/RequireTurnStatus'
 import { RunningTurn } from '@/components/combat/RunningTurn'
 import { Sidebar } from '@/components/combat/Sidebar'
 import { Team } from '@/components/combat/Team'
+import { Button } from '@/components/ui/button'
 import {
   useAiActions,
   useInputController,
@@ -13,6 +14,7 @@ import { useCleanupController } from '@/hooks/controllers/useCleanupController'
 import { useCombat } from '@/hooks/state'
 import { useCombatSetup } from '@/hooks/useCombatSetup'
 import { Navbar } from '@shared/Navbar'
+import { Link, useNavigate } from '@tanstack/react-router'
 
 export function Combat() {
   const combat = useCombat()
@@ -22,8 +24,6 @@ export function Combat() {
   useAiActions()
   useCleanupController()
   useCombatSetup()
-
-  console.log(combat.units.map((u) => u.registry.modifiers))
 
   const userTeam = combat.teams.find((t) => t.id === combat.user)
   const aiTeam = combat.teams.find((t) => t.id !== combat.user)
@@ -37,7 +37,12 @@ export function Combat() {
             <Team teamId={aiTeam?.id} />
             <div className="flex flex-1 items-center justify-center">
               <RequireTurnStatus status="done">
-                <div className="text-lg">battle over!</div>
+                <div>
+                  <div className="text-xxl">battle over!</div>
+                  <Link to="/world">
+                    <Button>Back to World</Button>
+                  </Link>
+                </div>
               </RequireTurnStatus>
               <RequireTurnStatus status="running">
                 <RunningTurn />

@@ -34,7 +34,7 @@ export function Team(props: TeamProps) {
       />
       <div
         className={cn('flex flex-1 items-start justify-end', {
-          'justify-start': reverse,
+          'justify-start items-end': reverse,
         })}
       >
         {units.map((unit) => (

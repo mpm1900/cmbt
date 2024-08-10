@@ -8,6 +8,7 @@ import { useGame } from '@/hooks/state'
 import { useBuilderUi } from '@/hooks/state/useBuilderUi'
 import { useUnitBuilders } from '@/hooks/state/useUnitBuilders'
 import { makeBuilder } from '@/utils/makeUnitBuilder'
+import { makeWorld } from '@/utils/makeWorld'
 import { Identity, PotionAction } from '@repo/game/data'
 import { Unit } from '@repo/game/types'
 import { resolveUnitBuilder } from '@repo/game/utils'
@@ -40,9 +41,11 @@ export function Builder() {
         },
       ],
     }
+    const world = makeWorld()
     game.initialize({
       team,
       units: store.builders.map((b) => resolveUnitBuilder(b, team.id)),
+      world,
     })
   }
 
@@ -77,7 +80,7 @@ export function Builder() {
             disabled={store.builders.length < 2}
             onClick={() => {
               initialize()
-              nav({ to: '/encounter' })
+              nav({ to: '/world' })
             }}
           >
             Start!

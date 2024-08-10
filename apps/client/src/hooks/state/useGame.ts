@@ -20,12 +20,13 @@ export type GameWorld = {
 export type GameState = {
   team: Team | undefined
   units: Unit[]
-  world: GameWorld
+  world: GameWorld | undefined
 }
 
 type InitializeProps = {
   team: Team
   units: Unit[]
+  world: GameWorld
 }
 
 export type GameStore = GameState & {
@@ -34,26 +35,14 @@ export type GameStore = GameState & {
 }
 
 export const useGame = create<GameStore>((set) => ({
-  world: {
-    size: {
-      x: 1,
-      y: 1,
-    },
-    tiles: [
-      {
-        id: nanoid(),
-        location: { x: 0, y: 0 },
-        size: { x: 1, y: 1 },
-        encounter: ShopEncounter,
-      },
-    ],
-  },
+  world: undefined,
   team: undefined,
   units: [],
   initialize: (props) =>
     set({
       team: props.team,
       units: props.units,
+      world: props.world,
     }),
   updateTeam: (fn) => {
     set((s) => ({

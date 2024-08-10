@@ -17,7 +17,7 @@ import {
   SwitchUnitId,
   PowerWordKillId,
   SetIsActiveId,
-  PotionId,
+  PotionActionId,
   QuickAttack,
   CrunchId,
   Crunch,
@@ -82,7 +82,7 @@ export const ACTION_NAMES: Record<string, string> = {
   [TrickRoomId]: 'Trick Room',
   [WillOWispId]: 'Will-o-wisp',
 
-  [PotionId]: 'Potion',
+  [PotionActionId]: 'Potion',
 }
 
 export const ActionRenderers: Record<string, ActionRenderer> = {
@@ -440,15 +440,15 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
       </div>
     ),
   },
-  [PotionId]: {
-    name: ACTION_NAMES[PotionId],
+  [PotionActionId]: {
+    name: ACTION_NAMES[PotionActionId],
     baseDamage: () => '',
     cost: '',
     description: () => 'Heals 20 damage from target friendly unit.',
     log: (action, source, [target], ctx) => (
       <span>
-        <span className="text-purple-300">{ACTION_NAMES[PotionId]}</span> was
-        used on{' '}
+        <span className="text-purple-300">{ACTION_NAMES[PotionActionId]}</span>{' '}
+        was used on{' '}
         <LogUnit teamId={target.teamId} user={ctx.user}>
           {target.name}
         </LogUnit>

@@ -9,6 +9,7 @@ import {
 } from '@/components/ui/table'
 import { Encounter, EncounterNode } from '@repo/game/types'
 import { nanoid } from 'nanoid'
+import { Fragment } from 'react/jsx-runtime'
 
 const ShopIntroductionNode: EncounterNode = {
   id: nanoid(),
@@ -49,15 +50,31 @@ const ShopWaresNode: EncounterNode = {
   id: nanoid(),
   title: 'Test Shop - View Wares',
   description: 'We have a number of things you might like!',
-  choices: () => [],
+  choices: () => [
+    {
+      id: nanoid(),
+      label: 'Potion',
+      resolve: () => {},
+    },
+    {
+      id: nanoid(),
+      label: 'Adrenaline',
+      resolve: () => {},
+    },
+  ],
   renderChoice: (choice, index, ctx) => (
-    <TableRow
-      onClick={() => {
-        if (choice.resolve) choice.resolve(ctx)
-      }}
-    >
-      <TableCell>
-        {index + 1}) {choice.label}
+    <TableRow>
+      <TableCell>{choice.label}</TableCell>
+      <TableCell className="flex justify-end">
+        <Button
+          variant="outline"
+          className="py-1 h-full"
+          onClick={() => {
+            if (choice.resolve) choice.resolve(ctx)
+          }}
+        >
+          Buy 1000g
+        </Button>
       </TableCell>
     </TableRow>
   ),
@@ -65,10 +82,14 @@ const ShopWaresNode: EncounterNode = {
     const render = ctx.activeNode.renderChoice
     const choices = ctx.activeNode.choices(ctx)
     return (
-      <div>
+      <div className="space-y-2">
         <Table>
           {render && (
-            <TableBody>{choices.map((c, i) => render(c, i, ctx))}</TableBody>
+            <TableBody>
+              {choices.map((c, i) => (
+                <Fragment key={c.id}>{render(c, i, ctx)}</Fragment>
+              ))}
+            </TableBody>
           )}
         </Table>
         <div className="flex justify-end">

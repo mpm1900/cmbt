@@ -1,13 +1,20 @@
-import { ActionResult, ActionAi, CombatContext, Unit } from '../../types'
-import { Item, ItemId, ItemProps } from '../../types/Item'
+import {
+  ActionResult,
+  ActionAi,
+  CombatContext,
+  Unit,
+  Action,
+  ActionProps,
+} from '../../types'
+import { ActionId } from '../Ids'
 import { DamageParent } from '../Mutations'
 import { GetUnits } from '../Queries'
 
-export const PotionId = ItemId()
+export const PotionActionId = ActionId()
 
-export class Potion extends Item {
-  constructor(props: Omit<ItemProps, 'targets'>) {
-    super(PotionId, {
+export class PotionAction extends Action {
+  constructor(props: ActionProps) {
+    super(PotionActionId, {
       ...props,
       targets: new GetUnits({
         teamId: props.teamId,

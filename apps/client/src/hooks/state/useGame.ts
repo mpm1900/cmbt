@@ -13,6 +13,7 @@ type InitializeProps = {
 
 export type GameStore = GameState & {
   initialize: (props: InitializeProps) => void
+  updateTeam: (fn: (team: Team) => Partial<Team>) => void
 }
 
 export const useGame = create<GameStore>((set) => ({
@@ -23,4 +24,9 @@ export const useGame = create<GameStore>((set) => ({
       team: props.team,
       units: props.units,
     }),
+  updateTeam: (fn) => {
+    set((s) => ({
+      team: s.team ? { ...s.team, ...fn(s.team) } : s.team,
+    }))
+  },
 }))

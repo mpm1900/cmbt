@@ -46,7 +46,11 @@ export function Team(props: TeamProps) {
             exit={{ opacity: 0 }}
             transition={{ delay: 0.1 }}
           >
-            <UnitCard unit={unit} hideStats={teamId !== ctx.user} />
+            <UnitCard
+              unit={unit}
+              hideStats={teamId !== ctx.user}
+              reverse={reverse}
+            />
           </motion.div>
         ))}
       </div>

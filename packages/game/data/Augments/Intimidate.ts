@@ -12,6 +12,7 @@ export class Intimidate extends Augment {
     return [
       new PowerDownAllOtherOnUnitEnter({
         sourceId: unit.id,
+        parentId: unit.id,
         coef: 1.5,
         duration: 0,
       }),

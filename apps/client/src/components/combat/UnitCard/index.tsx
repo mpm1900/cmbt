@@ -16,12 +16,14 @@ import { SwitchUnitId } from '@repo/game/data'
 import { Badge } from '@/components/ui/badge'
 import { motion } from 'framer-motion'
 
-export type UnitDebugProps = {
+export type UnitCardProps = {
   unit: Unit
   hideStats: boolean
+  reverse?: boolean
 }
 
-export function UnitCard(props: UnitDebugProps) {
+export function UnitCard(props: UnitCardProps) {
+  const { reverse, hideStats } = props
   const ctx = useCombatContext()
   const status = ctx.turn.status
   const result = ctx.turn.results[ctx.turn.results.length - 1]
@@ -43,13 +45,19 @@ export function UnitCard(props: UnitDebugProps) {
     status === 'waiting-for-input' && !unit.flags.isStunned && !stagedItem
 
   return (
-    <motion.div layout>
+    <motion.div
+      layout
+      className={cn('flex flex-col', { 'flex-col-reverse': reverse })}
+    >
       <div
-        className={cn('w-[400px] rounded transition-colors ease-in-out', {
-          'bg-slate-200': isActive,
-          'bg-red-500/40': isTargeted && !isActive,
-          'cursor-pointer': isSelectable,
-        })}
+        className={cn(
+          'w-[400px] rounded transition-colors ease-in-out bg-slate-950 border',
+          {
+            'bg-slate-200': isActive,
+            'bg-red-500/40': isTargeted && !isActive,
+            'cursor-pointer': isSelectable,
+          }
+        )}
         onClick={() => {
           if (isSelectable) {
             setActiveUnit(props.unit)
@@ -110,14 +118,13 @@ export function UnitCard(props: UnitDebugProps) {
           </div>
         </div>
         <CardContent className="p-2 pt-0">
-          <UnitBars
-            unit={unit}
-            isActive={isActive}
-            hideStats={props.hideStats}
-          />
+          <UnitBars unit={unit} isActive={isActive} hideStats={hideStats} />
         </CardContent>
       </div>
-      <UnitModifiers unit={props.unit} />
+      <UnitModifiers
+        unit={props.unit}
+        className={cn({ 'mt-2': !reverse, 'mb-2': reverse })}
+      />
     </motion.div>
   )
 }

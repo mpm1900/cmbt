@@ -19,10 +19,10 @@ export const AugmentRenderers: Record<Id, AugmentRenderer> = {
   [SandStreamId]: {
     description: () => (
       <>
-        When this unit enters, create a{' '}
-        <span className="font-bold text-white">Sandstorm</span> for 5 turns.
         This unit gains immunity from{' '}
-        <span className="font-bold text-white">Sandstorm</span> triggers.
+        <span className="font-bold text-white">Sandstorm</span> triggers. When
+        this unit enters, create a{' '}
+        <span className="font-bold text-white">Sandstorm</span> for 5 turns.
       </>
     ),
   },

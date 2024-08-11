@@ -103,7 +103,7 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
             </LogUnit>
           </Fragment>
         ))}{' '}
-        join{targets.length > 0 ? '' : 's'} the battle!
+        join{targets.length > 1 ? '' : 's'} the battle!
       </span>
     ),
   },

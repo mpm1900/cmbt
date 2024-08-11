@@ -17,6 +17,7 @@ export function ActionTargets(props: UnitActionTargetsProps) {
 
   useEffect(() => {
     if (
+      action.maxTargetCount > 0 &&
       targets.length === Math.min(action.maxTargetCount, possibleTargets.length)
     ) {
       onConfirmClick()

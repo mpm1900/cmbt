@@ -35,7 +35,7 @@ import {
 } from '@repo/game/data'
 import { Action, ActionResult, CombatContext, Unit } from '@repo/game/types'
 import { Fragment, ReactNode } from 'react'
-import { BurnId } from '../Details'
+import { BurnId, InspectedId } from '../Details'
 import { DetailsInline } from '@shared/DetailsInline'
 
 export type ActionRenderer = {
@@ -130,7 +130,11 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
     name: ACTION_NAMES[InspectAllId],
     baseDamage: () => '',
     cost: '',
-    description: () => <>Allows you to view enemy units stats.</>,
+    description: () => (
+      <>
+        Applies <DetailsInline detailsId={InspectedId} /> to all enemy units.
+      </>
+    ),
   },
 
   /// OTHER ACTIONS

@@ -14,7 +14,7 @@ export function DetailsInline(props: DetailsInlineProps) {
   return (
     <HoverCard openDelay={0} closeDelay={200}>
       <HoverCardTrigger asChild>
-        <span className="hover:underline">{renderer.name}</span>
+        <span className="hover:underline cursor-pointer">{renderer.name}</span>
       </HoverCardTrigger>
       <HoverCardPortal>
         <HoverCardContent side={side} className="w-[320px]">

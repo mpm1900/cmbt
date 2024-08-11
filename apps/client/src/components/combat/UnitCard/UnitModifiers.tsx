@@ -17,7 +17,9 @@ export function UnitModifiers(props: PropsWithClassname<UnitModifiersProps>) {
     ctx
   )
   return (
-    <div className={cn('px-3 space-x-2 flex flex-row', props.className)}>
+    <div
+      className={cn('px-3 space-x-2 flex flex-row h-[28px]', props.className)}
+    >
       {[...appliedModifiers, ...registeredTriggers].map((m) => {
         const r = ModifierRenderers[m.rid]
         return (

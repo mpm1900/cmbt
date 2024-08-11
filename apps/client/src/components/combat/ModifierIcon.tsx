@@ -2,6 +2,7 @@ import { cn } from '@/lib/utils'
 import { MODIFIER_BASE_ICONS } from '@/renderers'
 import { Modifier } from '@repo/game/types'
 import { ReactNode } from 'react'
+import { motion } from 'framer-motion'
 
 export type ModifierIconProps = {
   modifier: Modifier
@@ -15,7 +16,12 @@ export function ModifierIcon(props: ModifierIconProps) {
   const [Icon, Overlay, iconClass, overlayClass] = icons
 
   return (
-    <div className="relative" style={{ height: 28, width: 28 }}>
+    <motion.div
+      layout
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      className="relative h-[28px] w-[28px]"
+    >
       <Icon size="28px" className={iconClass} />
       {Overlay && (
         <Overlay
@@ -23,6 +29,6 @@ export function ModifierIcon(props: ModifierIconProps) {
           className={cn('absolute top-2.5 left-2', overlayClass)}
         />
       )}
-    </div>
+    </motion.div>
   )
 }

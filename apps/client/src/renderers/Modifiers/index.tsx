@@ -110,6 +110,9 @@ export const ModifierRenderers: Record<string, ModifierRenderer> = {
   [DamageParentOnTurnEndId]: {
     name: MODIFIER_NAMES[BurnDamageOnTurnEndId],
   },
+  [DefenseDownParentId]: {
+    name: MODIFIER_NAMES[DefenseDownParentId],
+  },
   [DefenseUpAllId]: {
     name: MODIFIER_NAMES[DefenseUpAllId],
   },

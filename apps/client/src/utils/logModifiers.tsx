@@ -5,7 +5,7 @@ import { validateModifiers } from '@repo/game/utils'
 
 export function logModifiers(modifiers: Modifier[], ctx: CombatContext) {
   const units = ctx.units.filter((u) => modifiers.some((m) => m.filter(u, ctx)))
-  units.forEach((unit, i) => {
+  units.forEach((unit, index) => {
     const unitModifiers = validateModifiers(
       modifiers.filter((m) => m.filter(unit, ctx)),
       ctx.modifiers
@@ -24,7 +24,7 @@ export function logModifiers(modifiers: Modifier[], ctx: CombatContext) {
             `${i === renderers.length - 1 && renderers.length > 1 ? ' and ' : i !== 0 ? ', ' : ''}${r?.name}`
         )}
       </LogSecondary>,
-      i * 0.1
+      (index + 1) * 0.1
     )
   })
 }

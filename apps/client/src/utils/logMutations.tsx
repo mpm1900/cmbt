@@ -37,7 +37,7 @@ export function logMutationDiffs(
         </span>{' '}
         of their health.
       </LogSecondary>,
-      index * 0.1
+      (index + 1) * 0.1
     )
   }
   if (diffs.values.physicalArmor !== 0) {
@@ -49,7 +49,7 @@ export function logMutationDiffs(
         {diffs.values.physicalArmor > 0 ? 'gained' : 'lost'}{' '}
         {Math.abs(diffs.values.physicalArmor)} physical armor.
       </LogSecondary>,
-      index * 0.1
+      (index + 1) * 0.1
     )
   }
   if (diffs.values.magicArmor !== 0) {
@@ -61,7 +61,7 @@ export function logMutationDiffs(
         {diffs.values.magicArmor > 0 ? 'gained' : 'lost'}{' '}
         {Math.abs(diffs.values.magicArmor)} magic armor.
       </LogSecondary>,
-      index * 0.1
+      (index + 1) * 0.1
     )
   }
 }

@@ -3,20 +3,17 @@ import { Sidebar } from '@/components/_shared/Sidebar'
 import { useEncounterContext } from '@/hooks'
 import { useGame } from '@/hooks/state'
 import { Navbar } from '@shared/Navbar'
+import { PageLayout } from '@shared/PageLayout'
 
 export function Encounter() {
   const ctx = useEncounterContext()
   const game = useGame()
 
   return (
-    <div className="flex min-h-screen w-full flex-col bg-slate-900 overflow-auto">
-      <div className="flex flex-1 flex-row">
-        <Navbar />
-        <div className="flex flex-1 items-center justify-center">
-          <NodeRenderer node={ctx.activeNode} />
-        </div>
-        <Sidebar />
+    <PageLayout navbar={<Navbar />} aside={<Sidebar />}>
+      <div className="flex flex-1 items-center justify-center">
+        <NodeRenderer node={ctx.activeNode} />
       </div>
-    </div>
+    </PageLayout>
   )
 }

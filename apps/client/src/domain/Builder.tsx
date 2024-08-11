@@ -12,6 +12,8 @@ import { makeWorld } from '@/utils/makeWorld'
 import { Identity, PotionAction } from '@repo/game/data'
 import { Unit } from '@repo/game/types'
 import { resolveUnitBuilder } from '@repo/game/utils'
+import { Navbar } from '@shared/Navbar'
+import { PageLayout } from '@shared/PageLayout'
 import { useNavigate } from '@tanstack/react-router'
 import { nanoid } from 'nanoid/non-secure'
 import { useEffect } from 'react'
@@ -54,7 +56,12 @@ export function Builder() {
   }, [])
 
   return (
-    <div className="flex min-h-screen w-full flex-col bg-slate-900 overflow-auto">
+    <PageLayout
+      navbar={<Navbar />}
+      aside={
+        <div className="w-[420px] bg-slate-950 h-screen flex overflow-hidden" />
+      }
+    >
       <div className="flex flex-col items-center">
         <div className="flex flex-1 p-4 space-x-4">
           <Tabs defaultValue="account w-full">
@@ -88,6 +95,6 @@ export function Builder() {
         </div>
       </div>
       {ui.activeBuilderId && <ActiveUnit />}
-    </div>
+    </PageLayout>
   )
 }

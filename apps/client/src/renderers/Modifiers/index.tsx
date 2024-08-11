@@ -166,15 +166,15 @@ export const ModifierRenderers: Record<string, ModifierRenderer> = {
       </span>
     ),
     description: (modifier: Modifier) => (
-      <div className="space-y-1">
+      <div className="space-y-2">
         <span className="text-white">
           {MODIFIER_NAMES[SandstormOnTurnEndId]}
         </span>
-        <div className="text-muted-foreground">
+        <div className="text-muted-foreground leading-normal">
           <span className="opacity-50 uppercase text-sm font-bold">
-            On turn end:
-          </span>{' '}
-          all units take {(modifier as unknown as DamageAllOnTurnEnd).damage}{' '}
+            On turn end:{' '}
+          </span>
+          All units take {(modifier as unknown as DamageAllOnTurnEnd).damage}{' '}
           damage.
         </div>
       </div>

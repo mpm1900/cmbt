@@ -12,7 +12,7 @@ export function DetailsInline(props: DetailsInlineProps) {
   const { detailsId, side } = props
   const renderer = DetailsRenderer[detailsId]
   return (
-    <HoverCard openDelay={0} closeDelay={200}>
+    <HoverCard openDelay={200} closeDelay={200}>
       <HoverCardTrigger asChild>
         <span className="hover:underline cursor-pointer">{renderer.name}</span>
       </HoverCardTrigger>

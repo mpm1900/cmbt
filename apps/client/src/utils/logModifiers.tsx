@@ -1,5 +1,5 @@
 import { LogSecondary, LogUnit } from '@/components/ui/log'
-import { ModifierRenderers } from '@/renderers'
+import { MODIFIER_NAMES } from '@/renderers'
 import { CombatContext, Modifier } from '@repo/game/types'
 import { validateModifiers } from '@repo/game/utils'
 
@@ -10,8 +10,8 @@ export function logModifiers(modifiers: Modifier[], ctx: CombatContext) {
       modifiers.filter((m) => m.filter(unit, ctx)),
       ctx.modifiers
     )
-    const renderers = unitModifiers.map((m) => ModifierRenderers[m.rid])
-    if (renderers.length === 0) return
+    const names = unitModifiers.map((m) => MODIFIER_NAMES[m.rid])
+    if (names.length === 0) return
 
     ctx.log(
       <LogSecondary className="italic">
@@ -19,9 +19,9 @@ export function logModifiers(modifiers: Modifier[], ctx: CombatContext) {
           {unit.name}
         </LogUnit>{' '}
         gained{' '}
-        {renderers.map(
-          (r, i) =>
-            `${i === renderers.length - 1 && renderers.length > 1 ? ' and ' : i !== 0 ? ', ' : ''}${r?.name}`
+        {names.map(
+          (name, i) =>
+            `${i === names.length - 1 && names.length > 1 ? ' and ' : i !== 0 ? ', ' : ''}${name}`
         )}
       </LogSecondary>,
       (index + 1) * 0.1

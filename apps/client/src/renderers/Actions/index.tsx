@@ -35,10 +35,11 @@ import {
   Sandstorm,
   DamageAllOnTurnEnd,
   SandstormOnTurnEndId,
+  SetIsInspectedAll,
 } from '@repo/game/data'
 import { Action, ActionResult, CombatContext, Unit } from '@repo/game/types'
 import { Fragment, ReactNode } from 'react'
-import { BurnId, InspectedId } from '../Details'
+import { BurnId } from '../Details'
 import { DetailsInline } from '@shared/DetailsInline'
 import { ModifierInline } from '@shared/ModifierInline'
 
@@ -139,8 +140,8 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
     cost: '',
     description: (action, props) => (
       <>
-        Applies <DetailsInline detailsId={InspectedId} side={props?.side} /> to
-        all enemy units.
+        Applies <ModifierInline modifier={new SetIsInspectedAll({})} /> to all
+        enemy units.
       </>
     ),
   },

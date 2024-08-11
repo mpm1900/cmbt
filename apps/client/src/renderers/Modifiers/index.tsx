@@ -14,7 +14,6 @@ import {
   SandstormOnTurnEndId,
   DefenseDownParentId,
   SetIsProtectedParentId,
-  Sandstorm,
   DamageAllOnTurnEnd,
 } from '@repo/game/data'
 import { ReactNode } from 'react'
@@ -27,6 +26,7 @@ import { BiSearch } from 'react-icons/bi'
 import { GiShoulderArmor } from 'react-icons/gi'
 import { GiVibratingShield } from 'react-icons/gi'
 import { Modifier } from '@repo/game/types'
+import { Separator } from '@/components/ui/separator'
 
 export type ModifierRenderer = {
   name: ReactNode
@@ -93,7 +93,21 @@ export const MODIFIER_BASE_ICONS: Record<
 
 export const ModifierRenderers: Record<string, ModifierRenderer> = {
   [SetIsInspectedAllId]: {
-    name: MODIFIER_NAMES[SetIsInspectedAllId],
+    name: (
+      <span className="text-white font-bold">
+        {MODIFIER_NAMES[SetIsInspectedAllId]}
+      </span>
+    ),
+    description: () => (
+      <div className="space-y-1">
+        <span className="text-white font-bold">
+          {MODIFIER_NAMES[SetIsInspectedAllId]}
+        </span>
+        <div className="text-muted-foreground">
+          An inspected unit's stats are visible.
+        </div>
+      </div>
+    ),
   },
   [BurnDamageOnTurnEndId]: {
     name: MODIFIER_NAMES[BurnDamageOnTurnEndId],
@@ -157,8 +171,11 @@ export const ModifierRenderers: Record<string, ModifierRenderer> = {
           {MODIFIER_NAMES[SandstormOnTurnEndId]}
         </span>
         <div className="text-muted-foreground">
-          On turn end, all units take{' '}
-          {(modifier as unknown as DamageAllOnTurnEnd).damage} damage.
+          <span className="opacity-50 uppercase text-sm font-bold">
+            On turn end:
+          </span>{' '}
+          all units take {(modifier as unknown as DamageAllOnTurnEnd).damage}{' '}
+          damage.
         </div>
       </div>
     ),

@@ -1,6 +1,6 @@
 import { faker } from '@faker-js/faker'
 import { TeamId } from '@repo/game/data'
-import { Team, Unit } from '@repo/game/types'
+import { Modifier, Mutation, Team, Unit } from '@repo/game/types'
 import { makeUnit } from '@repo/game/utils'
 import { useActions, useCleanup, useCombat } from './state'
 import { useNavigate } from '@tanstack/react-router'
@@ -11,7 +11,12 @@ export function useInitializeCombat() {
   const combat = useCombat()
   const navigate = useNavigate()
 
-  return (userTeam: Team, userUnits: Unit[]) => {
+  return (
+    userTeam: Team,
+    userUnits: Unit[],
+    modifiers: Modifier[],
+    mutations: Mutation[]
+  ) => {
     const aiTeam: Team = { id: TeamId(), items: [] }
     const teams: Team[] = [userTeam, aiTeam]
     const units = [

@@ -16,7 +16,7 @@ export function World() {
       <div className="flex flex-1 flex-row">
         <Navbar />
         {game.world && (
-          <div className="flex flex-col flex-1 items-center justify-center">
+          <div className="flex flex-col flex-1 items-center justify-center space-y-3">
             <div>Encounters</div>
             {game.world?.tiles.map((tile) => (
               <Button

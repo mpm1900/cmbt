@@ -7,7 +7,7 @@ type Point = { x: number; y: number }
 
 export type GameWorldTile = {
   id: Id
-  location: Point
+  position: Point
   size: Point
   encounter: Encounter
 }

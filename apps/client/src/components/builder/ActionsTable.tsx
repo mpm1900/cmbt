@@ -34,14 +34,13 @@ export function ActionsTable(props: ActionsTablePrpos) {
   return (
     <Table>
       <TableHeader>
-        <TableRow>
-          <TableHead></TableHead>
-          <TableHead>Name</TableHead>
-          <TableHead>Type</TableHead>
-          <TableHead>Accuracy</TableHead>
-          <TableHead>Base Damage</TableHead>
-          <TableHead>Cost</TableHead>
-        </TableRow>
+        <TableHead></TableHead>
+        <TableHead>Name</TableHead>
+        <TableHead>Type</TableHead>
+        <TableHead>Accuracy</TableHead>
+        <TableHead>Base Damage</TableHead>
+        <TableHead>Cost</TableHead>
+        <TableHead>Critical</TableHead>
       </TableHeader>
       <TableBody>
         {list.map((maker) => {
@@ -107,6 +106,14 @@ export function ActionsTable(props: ActionsTablePrpos) {
                   </TableCell>
                   <TableCell>{renderer.baseDamage(action) || '—'}</TableCell>
                   <TableCell>{renderer.cost || '—'}</TableCell>
+                  {action.criticalFactor(ZERO_UNIT) ? (
+                    <TableCell>
+                      {action.criticalThreshold(ZERO_UNIT)}% x
+                      {action.criticalFactor(ZERO_UNIT)}
+                    </TableCell>
+                  ) : (
+                    <TableCell>—</TableCell>
+                  )}
                 </TableRow>
               </HoverCardTrigger>
               <HoverCardPortal>

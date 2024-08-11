@@ -1,4 +1,8 @@
-import { EncounterContext, EncounterNode } from '@repo/game/types'
+import {
+  EncounterContext,
+  EncounterNode,
+  InitializeCombatProps,
+} from '@repo/game/types'
 import { useGame } from './state'
 import { useInitializeCombat } from './useInitializeCombat'
 import { useEncounter } from './state/useEncounter'
@@ -10,9 +14,9 @@ export function useEncounterContext(): EncounterContext {
   const init = useInitializeCombat()
   const nav = useNavigate()
 
-  function initializeCombat() {
+  function initializeCombat(props: InitializeCombatProps = {}) {
     if (game.team) {
-      init(game.team, game.units)
+      init(game.team, game.units, [], [])
     }
   }
 

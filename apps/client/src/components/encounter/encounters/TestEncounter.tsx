@@ -1,11 +1,11 @@
+import { Encounter, EncounterContext, EncounterNode } from '@repo/game/types'
 import { nanoid } from 'nanoid'
-import { Encounter, EncounterNode } from '../../types'
 
 const TestNode1: EncounterNode = {
   id: nanoid(),
   title: '',
   description: 'Begin Combat?',
-  choices: [
+  choices: () => [
     {
       id: nanoid(),
       label: 'Yes',
@@ -16,7 +16,7 @@ const TestNode1: EncounterNode = {
         {
           id: nanoid(),
           label: 'Begin',
-          resolve: (ctx) => {
+          resolve: (ctx: EncounterContext) => {
             ctx.initializeCombat()
           },
         },
@@ -36,7 +36,7 @@ const TestNode2: EncounterNode = {
   id: nanoid(),
   title: '',
   description: 'Are you sure??',
-  choices: [
+  choices: () => [
     {
       id: nanoid(),
       label: 'No',

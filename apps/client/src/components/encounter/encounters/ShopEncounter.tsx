@@ -84,6 +84,10 @@ const ShopWaresNode: EncounterNode = {
     return (
       <div className="space-y-2">
         <Table>
+          <TableHeader>
+            <TableHead>name</TableHead>
+            <TableHead className="flex justify-end">cost</TableHead>
+          </TableHeader>
           {render && (
             <TableBody>
               {choices.map((c, i) => (

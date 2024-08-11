@@ -84,7 +84,7 @@ export function ActiveUnit() {
         </div>
       )}
       {builder && (
-        <div className="w-[600px]">
+        <div className="w-[680px]">
           <Card>
             <CardHeader>
               <CardTitle>Actions ({builder.config.actionsCount})</CardTitle>

@@ -85,15 +85,6 @@ export function Builder() {
           >
             Start!
           </Button>
-          <Button
-            disabled={store.builders.length < 2}
-            onClick={() => {
-              initialize()
-              ctx.initializeCombat()
-            }}
-          >
-            Jump to Combat
-          </Button>
         </div>
       </div>
       {ui.activeBuilderId && <ActiveUnit />}

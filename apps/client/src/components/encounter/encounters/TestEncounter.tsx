@@ -3,7 +3,7 @@ import { nanoid } from 'nanoid'
 
 const TestNode1: EncounterNode = {
   id: nanoid(),
-  title: '',
+  title: 'Test Encounter 001',
   description: 'Begin Combat?',
   choices: () => [
     {

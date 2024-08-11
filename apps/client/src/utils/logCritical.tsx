@@ -9,10 +9,13 @@ export function logCritical(result: ActionResult, ctx: CombatContext) {
   ) {
     ctx.log(
       <LogSecondary>
-        Critical Hit! x{result.data.accuracyRoll.criticalFactor}{' '}
+        <span className="text-yellow-300">Critical Hit!</span>{' '}
+        <span className="text-green-300/80">
+          x{result.data.accuracyRoll.criticalFactor}
+        </span>{' '}
         <span className="text-sm text-muted-foreground/50">
           ({result.data.accuracyRoll.roll}, needed{' '}
-          {result.data.accuracyRoll.criticalThreshold})
+          {result.data.accuracyRoll.criticalThreshold} or lower)
         </span>
       </LogSecondary>
     )

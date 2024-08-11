@@ -12,10 +12,10 @@ export function logActionIntent(
   if (targets) {
     const baseLog = (
       <span className="">
-        <LogUnit teamId={source?.teamId} user={ctx.user} className="font-bold">
+        <LogUnit teamId={source?.teamId} user={ctx.user}>
           {source?.name}
         </LogUnit>{' '}
-        uses <LogActionName action={action} />
+        used <LogActionName action={action} />
       </span>
     )
     ctx.log(

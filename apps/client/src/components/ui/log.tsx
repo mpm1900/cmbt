@@ -57,7 +57,7 @@ export function LogUnit(
 ) {
   return (
     <span
-      className={cn(props.className, {
+      className={cn('font-normal', props.className, {
         'text-muted-foreground font-bold': !props.teamId,
         'text-orange-300': props.teamId && props.teamId !== props.user,
         'text-cyan-300': props.teamId === props.user,

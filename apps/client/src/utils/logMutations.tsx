@@ -24,15 +24,18 @@ export function logMutationDiffs(
   ctx: CombatContext
 ) {
   const name = parent.name
+  const ratio = (diffs.values.damage / parent.stats.health) * 100
   if (diffs.values.damage !== 0) {
     ctx.log(
       <LogSecondary className="italic">
         <LogUnit teamId={parent?.teamId} user={ctx.user} className="opacity-70">
           {name}
         </LogUnit>{' '}
-        {diffs.values.damage > 0 ? 'take' : 'heal'}
-        {!!parent && 's'}{' '}
-        {diffs.values.damage * (diffs.values.damage > 0 ? 1 : -1)} damage.
+        {diffs.values.damage > 0 ? 'lost' : 'healed'}{' '}
+        <span className="tracking-wide">
+          {(ratio * (ratio > 0 ? 1 : -1)).toFixed(0)}%
+        </span>{' '}
+        of their health.
       </LogSecondary>,
       index * 0.1
     )

@@ -17,7 +17,10 @@ export function World() {
         <Navbar />
         {game.world && (
           <div className="flex flex-col flex-1 items-center justify-center space-y-3">
-            <div>Encounters</div>
+            <div>
+              Encounters (Imagine like a world map where you click where you
+              want to go)
+            </div>
             {game.world?.tiles.map((tile) => (
               <Button
                 key={tile.id}

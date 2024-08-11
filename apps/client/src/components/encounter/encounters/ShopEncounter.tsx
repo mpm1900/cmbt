@@ -86,7 +86,9 @@ const ShopWaresNode: EncounterNode = {
         <Table>
           <TableHeader>
             <TableHead>name</TableHead>
-            <TableHead className="flex justify-end">cost</TableHead>
+            <TableHead className="flex justify-end items-center">
+              cost
+            </TableHead>
           </TableHeader>
           {render && (
             <TableBody>

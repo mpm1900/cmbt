@@ -18,7 +18,7 @@ export function Bar(props: BarProps) {
         'bg-white/20 w-full h-3 relative overflow-hidden',
         className
       )}
-      style={{ borderRadius: '8px', ...style }}
+      style={{ borderRadius: '4px', ...style }}
     >
       <motion.div
         className="absolute top-0 left-0 h-3 bg-white/70"

@@ -35,6 +35,8 @@ import {
 } from '@repo/game/data'
 import { Action, ActionResult, CombatContext, Unit } from '@repo/game/types'
 import { Fragment, ReactNode } from 'react'
+import { BurnId } from '../Details'
+import { DetailsInline } from '@shared/DetailsInline'
 
 export type ActionRenderer = {
   name: string
@@ -226,16 +228,9 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
     description: (action) => (
       <>
         Deals {action.damage?.value} base fire damage to target enemy unit. 10%
-        chance to apply{' '}
-        <span className="font-bold text-modifiers-burned">Burn</span> to target
-        for 5 turns.
+        chance to apply <DetailsInline detailsId={BurnId} /> to target for 5
+        turns.
       </>
-    ),
-    help: () => (
-      <div className="text-modifiers-burned/50">
-        (The unit's physical stat is halved. At the end of each turn, the unit
-        takes 10 damage.)
-      </div>
     ),
   },
   [FirePunchId]: {
@@ -245,16 +240,9 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
     description: (action) => (
       <>
         Deals {action.damage?.value} base fire damage to target enemy unit. 10%
-        chance to apply{' '}
-        <span className="font-bold text-modifiers-burned">Burn</span> to target
-        for 5 turns.
+        chance to apply <DetailsInline detailsId={BurnId} /> to target for 5
+        turns.
       </>
-    ),
-    help: () => (
-      <div className="text-modifiers-burned/50">
-        (The unit's physical stat is halved. At the end of each turn, the unit
-        takes 10 damage.)
-      </div>
     ),
   },
   [FurySwipesId]: {
@@ -429,15 +417,9 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
     ),
     description: (action) => (
       <>
-        Applies <span className="font-bold text-modifiers-burned">Burn</span> to
-        target enemy unit for 5 turns.
+        Applies <DetailsInline detailsId={BurnId} /> to target enemy unit for 5
+        turns.
       </>
-    ),
-    help: () => (
-      <div className="text-modifiers-burned/50">
-        (The unit's physical stat is halved. At the end of each turn, the unit
-        takes 10 damage.)
-      </div>
     ),
   },
   [PotionActionId]: {

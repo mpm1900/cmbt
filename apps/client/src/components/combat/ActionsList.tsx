@@ -44,12 +44,6 @@ export function ActionsList(props: ActionsListProps) {
     }
   }
 
-  useEffect(() => {
-    if (selectedTargets.length === selectedAction?.maxTargetCount) {
-      handleConfirm()
-    }
-  }, [selectedTargets.length])
-
   const pages = Math.ceil(unit.actions.length / 4)
   useEffect(() => {
     carousel.setCount(pages)

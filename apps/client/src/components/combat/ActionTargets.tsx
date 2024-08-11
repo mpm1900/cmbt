@@ -1,6 +1,7 @@
 import { Action, Unit } from '@repo/game/types'
 import { useCombatContext } from '../../hooks'
 import { Button } from '../ui/button'
+import { useEffect } from 'react'
 
 export type UnitActionTargetsProps = {
   action: Action
@@ -13,6 +14,14 @@ export function ActionTargets(props: UnitActionTargetsProps) {
   const { action, targets, onConfirmClick, onTargetClick } = props
   const ctx = useCombatContext()
   const possibleTargets = action.targets.resolve(ctx)
+
+  useEffect(() => {
+    if (
+      targets.length === Math.min(action.maxTargetCount, possibleTargets.length)
+    ) {
+      onConfirmClick()
+    }
+  }, [targets.length])
 
   return (
     <div>
@@ -45,7 +54,9 @@ export function ActionTargets(props: UnitActionTargetsProps) {
               key={target.id}
               className="h-full px-8 mb-2"
               variant={isSelected ? 'default' : 'outline'}
-              onClick={() => onTargetClick(target, isSelected)}
+              onClick={() => {
+                onTargetClick(target, isSelected)
+              }}
             >
               {target.name}
             </Button>

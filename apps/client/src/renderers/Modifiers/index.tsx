@@ -8,7 +8,6 @@ import {
   PowerDownParentId,
   PowerUpParentId,
   PowerDownAllOtherOnUnitEnterId,
-  DamageAllOnTurnEndId,
   CreateSandstormOnUnitEnterId,
   SetIsInspectedAllId,
   DamageNewUnitsOnUnitEnterId,

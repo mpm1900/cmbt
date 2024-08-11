@@ -45,7 +45,10 @@ export function LogSecondary(
 ) {
   return (
     <span
-      className={cn('pl-4 text-muted-foreground font-thin', props.className)}
+      className={cn(
+        'pl-4 text-muted-foreground font-thin opacity-65',
+        props.className
+      )}
     >
       {props.children}
     </span>

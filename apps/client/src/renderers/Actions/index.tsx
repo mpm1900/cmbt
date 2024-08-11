@@ -42,6 +42,7 @@ import { Fragment, ReactNode } from 'react'
 import { BurnId } from '../Details'
 import { DetailsInline } from '@shared/DetailsInline'
 import { ModifierInline } from '@shared/ModifierInline'
+import { DamageInline } from '@shared/DamageInline'
 
 export type ActionRenderer = {
   name: string
@@ -164,9 +165,10 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
       const bodyslam = action as BodySlam
       return (
         <>
-          Deals {bodyslam.damage.value} base damage to target enemey unit. If
-          this attack misses, deals {bodyslam.missDamage.value} base damage to
-          this unit instead.
+          Deals <DamageInline damage={bodyslam.damage} /> to target enemey unit.
+          If this attack misses, deals{' '}
+          <DamageInline damage={bodyslam.missDamage} /> base damage to this unit
+          instead.
         </>
       )
     },
@@ -179,8 +181,8 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
       const crunch = action as Crunch
       return (
         <>
-          Deals {crunch.damage.value} base damage to target enemy unit. 20%
-          chance to apply{' '}
+          Deals <DamageInline damage={crunch.damage} /> to target enemy unit.
+          20% chance to apply{' '}
           <span className="font-bold text-white">Defense Down</span> to target.
         </>
       )
@@ -203,7 +205,9 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
     baseDamage: (action) => `${action.damage?.value}`,
     cost: '',
     description: (action) => (
-      <>Deals {action.damage?.value} base damage to all other units.</>
+      <>
+        Deals <DamageInline damage={action.damage} /> to all other units.
+      </>
     ),
   },
   [ExplosionId]: {
@@ -220,16 +224,18 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
 
   [FireballId]: {
     name: ACTION_NAMES[FireballId],
-    baseDamage: (action) =>
-      `${action.damage?.value} (${Math.round((action.damage?.value ?? 0) / 3)})`,
+    baseDamage: (action) => {
+      const fireball = action as Fireball
+      return `${fireball.damage.value} (${fireball.splashDamage.value})`
+    },
     cost: '',
     description: (action) => {
       const fireball = action as Fireball
       return (
         <>
-          Deals {fireball.damage?.value} base fire damage to target enemy unit.
-          Deals {Math.round(fireball.damage.value / 3)} base fire damage to all
-          other active enemy units.
+          Deals <DamageInline damage={fireball.damage} /> to target enemy unit.
+          Deals <DamageInline damage={fireball.splashDamage} /> to all other
+          active enemy units.
         </>
       )
     },
@@ -240,7 +246,7 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
     cost: '',
     description: (action, props) => (
       <>
-        Deals {action.damage?.value} base fire damage to target enemy unit. 10%
+        Deals <DamageInline damage={action.damage} /> to target enemy unit. 10%
         chance to apply <DetailsInline detailsId={BurnId} side={props?.side} />{' '}
         to target for 5 turns.
       </>
@@ -252,7 +258,7 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
     cost: '',
     description: (action) => (
       <>
-        Deals {action.damage?.value} base fire damage to target enemy unit. 10%
+        Deals <DamageInline damage={action.damage} /> to target enemy unit. 10%
         chance to apply <DetailsInline detailsId={BurnId} /> to target for 5
         turns.
       </>
@@ -266,8 +272,8 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
       const furySwipes = action as any as FurySwipes
       return (
         <>
-          Deals {furySwipes.damage?.value} damage to target enemy unit. Repeats
-          4-6 times.
+          Deals <DamageInline damage={furySwipes.damage} /> to target enemy
+          unit. Repeats 4-6 times.
         </>
       )
     },
@@ -305,8 +311,8 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
     cost: '',
     description: (action) => (
       <>
-        Deals {action.damage?.value} damage to 2 target enemy units. This action
-        cannot miss.
+        Deals <DamageInline damage={action.damage} /> to 2 target enemy units.
+        This action cannot miss.
       </>
     ),
   },
@@ -316,7 +322,12 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
     cost: '',
     description: (action) => {
       const quickAttack = action as QuickAttack
-      return <>Deals {quickAttack.damage?.value} damage to target enemy unit.</>
+      return (
+        <>
+          Deals <DamageInline damage={quickAttack.damage} /> to target enemy
+          unit.
+        </>
+      )
     },
   },
   [PowerWordKillId]: {

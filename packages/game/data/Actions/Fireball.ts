@@ -23,6 +23,7 @@ import { GetUnits } from '../Queries'
 export const FireballId = ActionId()
 export class Fireball extends Action {
   damage: Damage
+  splashDamage: Damage
 
   constructor(sourceId: Id, teamId: Id) {
     const attackType = 'magic'
@@ -40,6 +41,11 @@ export class Fireball extends Action {
 
     this.damage = {
       value: 70,
+      attackType: 'magic',
+      damageType: 'fire',
+    }
+    this.splashDamage = {
+      value: Math.round(this.damage.value / 3),
       attackType: 'magic',
       damageType: 'fire',
     }
@@ -80,10 +86,7 @@ export class Fireball extends Action {
           mutations: modifiedTargets.flatMap((target) => {
             const isTarget = !!targets.find((t) => t.id === target.id)
             const damage = calculateDamage(
-              {
-                ...this.damage,
-                value: this.damage.value * (isTarget ? 1 : 0.3),
-              },
+              isTarget ? this.damage : this.splashDamage,
               data.source,
               target,
               data.accuracyRoll

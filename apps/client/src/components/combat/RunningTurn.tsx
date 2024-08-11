@@ -10,7 +10,7 @@ export function RunningTurn() {
   return (
     <div>
       {active && active.data?.source && (
-        <span className="text-lg">
+        <span className="text-3xl">
           {active.data?.source.name} uses {renderer?.name}
         </span>
       )}

@@ -44,8 +44,10 @@ export class Earthquake extends Action {
   }
 
   threshold = (source: Unit): number | undefined => 95 + source.stats.accuracy
-  criticalThreshold = (source: Unit): number | undefined => 5
-  criticalFactor = (source: Unit): number | undefined => undefined
+  criticalThreshold = (source: Unit): number | undefined =>
+    5 + source.stats.criticalChance
+  criticalFactor = (source: Unit): number | undefined =>
+    1.2 + source.stats.criticalDamage
 
   getAi(targets: Unit[], ctx: CombatContext): ActionAi {
     return getDamageAi(this, targets, ctx)

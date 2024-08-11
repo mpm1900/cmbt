@@ -23,7 +23,7 @@ export function useAiActions() {
 
   useEffect(() => {
     if (debug.isDebugMode) return
-    if (ctx.turn.status === 'waiting-for-input' && queue.length === 0) {
+    if (ctx.turn.status === 'main' && queue.length === 0) {
       const units = ctx.units.map((u) => applyModifiers(u, ctx).unit)
       const aiUnits = getActionableUnits(units).filter((u) => u.teamId !== user)
       const aiActions = aiUnits.map((unit) => {

@@ -15,9 +15,9 @@ export function useTurnController() {
   let queue = useActions()
 
   useEffect(() => {
-    if (turn.status === 'running') {
+    if (turn.status === 'combat') {
       handleNextAction(
-        'running',
+        'combat',
         queue,
         ctx,
         fns.commitResult,
@@ -40,7 +40,7 @@ export function useTurnController() {
   }
 
   useEffect(() => {
-    if (turn.status === 'running') {
+    if (turn.status === 'combat') {
       if (active) {
         setTimeout(() => {
           ctx = fns.commitResult(active, ctx, { enableLog: true })

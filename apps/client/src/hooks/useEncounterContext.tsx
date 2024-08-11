@@ -14,9 +14,9 @@ export function useEncounterContext(): EncounterContext {
   const init = useInitializeCombat()
   const nav = useNavigate()
 
-  function initializeCombat(props: InitializeCombatProps = {}) {
+  function initializeCombat(props: InitializeCombatProps) {
     if (game.team) {
-      init(game.team, game.units, [], [])
+      init(game.team, game.units, [], [], props.enemyUnitCount)
     }
   }
 

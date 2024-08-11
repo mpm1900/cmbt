@@ -1,12 +1,14 @@
 import { Id } from '.'
 
-export type InitializeCombatProps = {}
+export type InitializeCombatProps = {
+  enemyUnitCount: number
+}
 
 export type EncounterContext = {
   encounter: Encounter
   activeNode: EncounterNode
   back: () => void
-  initializeCombat: (props?: InitializeCombatProps) => void
+  initializeCombat: (props: InitializeCombatProps) => void
   updateEncounter: (fn: (e: Encounter) => Partial<Encounter>) => void
 }
 

@@ -31,7 +31,7 @@ const ShopIntroductionNode: EncounterNode = {
       id: nanoid(),
       label: 'Attack the shopkeep',
       resolve: (ctx) => {
-        ctx.initializeCombat()
+        ctx.initializeCombat({ enemyUnitCount: 6 })
       },
       options: [],
     },

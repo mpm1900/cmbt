@@ -1,5 +1,6 @@
 import { ActiveUnit } from '@/components/combat/ActiveUnit'
 import { CleanupSwitchUnits } from '@/components/combat/CleanupSwitchUnits'
+import { CombatHeader } from '@/components/combat/CombatHeader'
 import { RequireTurnStatus } from '@/components/combat/RequireTurnStatus'
 import { RunningTurn } from '@/components/combat/RunningTurn'
 import { Sidebar } from '@/components/combat/Sidebar'
@@ -29,9 +30,10 @@ export function Combat() {
   const aiTeam = combat.teams.find((t) => t.id !== combat.user)
 
   return (
-    <div className="flex min-h-screen w-full flex-col bg-slate-900 overflow-auto">
-      <div className="flex flex-1 flex-row">
-        <Navbar />
+    <div className="flex min-h-screen w-full flex-row bg-slate-900 overflow-auto">
+      <Navbar />
+      <div className="flex flex-1 flex-col">
+        <CombatHeader />
         <div className="flex flex-1 flex-col justify-center overflow-auto">
           <div className="flex flex-1 flex-col p-2 justify-between">
             <Team teamId={aiTeam?.id} />
@@ -44,10 +46,10 @@ export function Combat() {
                   </Link>
                 </div>
               </RequireTurnStatus>
-              <RequireTurnStatus status="running">
+              <RequireTurnStatus status="combat">
                 <RunningTurn />
               </RequireTurnStatus>
-              <RequireTurnStatus status="waiting-for-input">
+              <RequireTurnStatus status="main">
                 <ActiveUnit />
               </RequireTurnStatus>
               <RequireTurnStatus status="cleanup">
@@ -57,8 +59,8 @@ export function Combat() {
             <Team teamId={userTeam?.id} reverse />
           </div>
         </div>
-        <Sidebar />
       </div>
+      <Sidebar />
     </div>
   )
 }

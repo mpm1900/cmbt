@@ -231,7 +231,7 @@ export function UnitStats(props: UnitStatsProps) {
             .filter((u) => stagedItem.targetIds.includes(u.id))
             .map((u) => u.name)
             .join(',')}]`}
-          <RequireTurnStatus status="waiting-for-input">
+          <RequireTurnStatus status="main">
             <a onClick={onClearClick}>[ Clear ]</a>
           </RequireTurnStatus>
         </span>

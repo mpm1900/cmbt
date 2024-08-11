@@ -16,9 +16,11 @@ import { ReactNode } from 'react'
 import { create } from 'zustand'
 
 export type InitializeProps = {
-  teams: Team[]
   units: Unit[]
-  user: string
+  user: Team
+  enemy: Team
+  mutations?: Mutation[]
+  modifiers?: Modifier[]
 }
 
 export type CombatLog = { id: Id; delay: number; node: ReactNode }
@@ -57,14 +59,18 @@ export type CombatStore = CombatState & {
 export const useCombat = create<CombatStore>((set, get) => {
   return {
     initialize: (props) => {
-      const modifiers = props.units
-        .filter((u) => u.flags.isActive)
-        .flatMap((u) => u.modifiers())
+      const { units, user, enemy, modifiers = [], mutations = [] } = props
+      const initialModifiers = [
+        ...props.units
+          .filter((u) => u.flags.isActive)
+          .flatMap((u) => u.modifiers()),
+        ...modifiers,
+      ]
       set({
-        units: props.units,
-        teams: props.teams,
-        user: props.user,
-        modifiers: validateModifiers(modifiers, []),
+        units: units,
+        teams: [user, enemy],
+        user: user.id,
+        modifiers: validateModifiers(initialModifiers, []),
         turn: {
           count: 0,
           status: 'cleanup',
@@ -155,7 +161,7 @@ export const useCombat = create<CombatStore>((set, get) => {
 
     turn: {
       count: 0,
-      status: 'init',
+      status: 'upkeep',
       results: [],
       hasRanOnTurnEndTriggers: false,
     },

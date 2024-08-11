@@ -15,22 +15,17 @@ export function useInitializeCombat() {
     userTeam: Team,
     userUnits: Unit[],
     modifiers: Modifier[],
-    mutations: Mutation[]
+    mutations: Mutation[],
+    enemyUnitCount: number
   ) => {
     const aiTeam: Team = { id: TeamId(), items: [] }
-    const teams: Team[] = [userTeam, aiTeam]
-    const units = [
-      ...userUnits,
-      makeUnit(aiTeam.id, faker.person.fullName(), false),
-      makeUnit(aiTeam.id, faker.person.fullName(), false),
-      makeUnit(aiTeam.id, faker.person.fullName(), false),
-      makeUnit(aiTeam.id, faker.person.fullName(), false),
-      makeUnit(aiTeam.id, faker.person.fullName(), false),
-      makeUnit(aiTeam.id, faker.person.fullName(), false),
-    ]
+    const enemyUnits = Array.from({ length: enemyUnitCount }).map(() =>
+      makeUnit(aiTeam.id, faker.person.fullName(), false)
+    )
+    const units = [...userUnits, ...enemyUnits]
     actions.setQueue(() => [])
     cleanup.setQueue(() => [])
-    combat.initialize({ teams, units, user: userTeam.id })
+    combat.initialize({ units, user: userTeam, enemy: aiTeam })
 
     navigate({
       to: '/combat',

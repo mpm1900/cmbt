@@ -33,16 +33,15 @@ export function UnitCard(props: UnitCardProps) {
   const stagedItem = queue.find((i) => i.action.sourceId === unit.id)
 
   const isTargeted =
-    status === 'running' && !!result?.targets?.find((t) => t.id === unit.id)
+    status === 'combat' && !!result?.targets?.find((t) => t.id === unit.id)
 
   const isActive =
-    (status === 'running'
+    (status === 'combat'
       ? result?.action?.sourceId === unit.id
-      : status === 'waiting-for-input' && activeUnit?.id === unit.id) ||
+      : status === 'main' && activeUnit?.id === unit.id) ||
     (isTargeted && result?.action?.id === SwitchUnitId)
 
-  const isSelectable =
-    status === 'waiting-for-input' && !unit.flags.isStunned && !stagedItem
+  const isSelectable = status === 'main' && !unit.flags.isStunned && !stagedItem
 
   return (
     <motion.div

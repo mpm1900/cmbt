@@ -10,7 +10,13 @@ import {
   isUnitAliveCtx,
   validateModifiers,
 } from '@repo/game/utils'
-import { useActions, useCombatUi, useCleanup, useCombat } from './state'
+import {
+  useActions,
+  useCombatUi,
+  useCleanup,
+  useCombat,
+  useCombatSettings,
+} from './state'
 import { logActionResults, logModifiers, logMutations } from '@/utils'
 import { logTriggers } from '@/utils/logTriggers'
 import { LogCritical, LogHeader } from '@/components/ui/log'
@@ -34,6 +40,7 @@ export function useCombatActions() {
   const activeUnit = useCombatUi()
   const actionsStore = useActions()
   const cleanupStore = useCleanup()
+  const settings = useCombatSettings()
 
   const cleanupResult = (context: CombatContext): CombatContext => {
     // round cleanup
@@ -130,12 +137,18 @@ export function useCombatActions() {
       context.turn = combat.setTurn((t) => ({ hasRanOnTurnEndTriggers: true }))
       cleanup(false, context)
     } else {
+      combat.setStatus('upkeep')
       combat.next()
       context.log(<LogHeader>turn {combat.turn.count + 1}</LogHeader>)
       activeUnit.setActiveUnit(
         context.units.find((u) => u.flags.isActive && u.teamId === context.user)
       )
-      combat.setStatus('waiting-for-input')
+      setTimeout(
+        () => {
+          combat.setStatus('main')
+        },
+        context.turn.count === 0 ? 0 : settings.gameSpeed
+      )
     }
   }
 

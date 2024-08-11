@@ -10,14 +10,14 @@ const TestNode1: EncounterNode = {
       id: nanoid(),
       label: 'Yes',
       resolve: (ctx) => {
-        ctx.initializeCombat()
+        ctx.initializeCombat({ enemyUnitCount: 2 })
       },
       options: [
         {
           id: nanoid(),
           label: 'Begin',
           resolve: (ctx: EncounterContext) => {
-            ctx.initializeCombat()
+            ctx.initializeCombat({ enemyUnitCount: 2 })
           },
         },
       ],

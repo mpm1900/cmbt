@@ -12,13 +12,13 @@ export function useInputController() {
   let ctx = useCombatContext()
 
   function startTurn() {
-    combat.setStatus('running')
+    combat.setStatus('combat')
     ctx = fns.runTriggers('on Turn Start', ctx)
     sort(ctx)
   }
 
   useEffect(() => {
-    if (ctx.turn.status === 'waiting-for-input') {
+    if (ctx.turn.status === 'main') {
       const actionableUnits = getActionableUnitsCtx(ctx)
 
       const checkLength = debug.isDebugMode ? 1 : actionableUnits.length

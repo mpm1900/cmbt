@@ -31,7 +31,7 @@ export const AugmentRenderers: Record<Id, AugmentRenderer> = {
             new DamageAllOnTurnEnd({ rid: SandstormOnTurnEndId, damage: 30 })
           }
         />{' '}
-        triggers. When this unit enters, create a{' '}
+        triggers. When this unit enters, all units gain{' '}
         <ModifierInline
           modifier={
             new DamageAllOnTurnEnd({ rid: SandstormOnTurnEndId, damage: 30 })

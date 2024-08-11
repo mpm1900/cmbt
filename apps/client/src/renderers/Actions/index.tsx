@@ -32,7 +32,6 @@ import {
   FirePunchId,
   BodySlamId,
   BodySlam,
-  Sandstorm,
   DamageAllOnTurnEnd,
   SandstormOnTurnEndId,
   SetIsInspectedAll,
@@ -43,6 +42,9 @@ import { BurnId } from '../Details'
 import { DetailsInline } from '@shared/DetailsInline'
 import { ModifierInline } from '@shared/ModifierInline'
 import { DamageInline } from '@shared/DamageInline'
+import { ACTION_NAMES } from './_names'
+
+export * from './_names'
 
 export type ActionRenderer = {
   name: string
@@ -63,37 +65,6 @@ export type ActionRenderer = {
   ) => ReactNode
   successLog?: (result: ActionResult) => ReactNode
   failureLog?: (result: ActionResult) => ReactNode
-}
-
-export const ACTION_NAMES: Record<string, string> = {
-  [SetIsActiveId]: 'Set IsActive',
-  [SwitchUnitId]: 'Switch Units',
-  [InspectAllId]: 'Inspect',
-
-  [ArmorUpId]: 'Armor Up',
-  [BodySlamId]: 'Body Slam',
-  [CrunchId]: 'Crunch',
-  [DisableId]: 'Disable',
-  [EarthquakeId]: 'Earthquake',
-  [ExplosionId]: 'Explosion',
-  [FireballId]: 'Fireball',
-  [FireBlastId]: 'Fire Blast',
-  [FirePunchId]: 'Fire Punch',
-  [FurySwipesId]: 'Fury Swipes',
-  [HyperBeamId]: 'Hyper Beam',
-  [IcyWindId]: 'Icy Wind',
-  [MagicMissileId]: 'Magic Missile',
-  [PowerWordKillId]: 'Power Word Kill',
-  [ProtectId]: 'Protect',
-  [QuickAttackId]: 'Quick Attack',
-  [RestId]: 'Rest',
-  [SandstormId]: 'Sandstorm',
-  [SpikesId]: 'Spikes',
-  [SwordsDanceId]: 'Swords Dance',
-  [TrickRoomId]: 'Trick Room',
-  [WillOWispId]: 'Will-o-wisp',
-
-  [PotionActionId]: 'Potion',
 }
 
 export const ActionRenderers: Record<string, ActionRenderer> = {
@@ -141,8 +112,12 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
     cost: '',
     description: (action, props) => (
       <>
-        Applies <ModifierInline modifier={new SetIsInspectedAll({})} /> to all
-        enemy units.
+        Applies{' '}
+        <ModifierInline
+          modifier={new SetIsInspectedAll({})}
+          side={props?.side}
+        />{' '}
+        to all enemy units.
       </>
     ),
   },

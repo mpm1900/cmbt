@@ -15,7 +15,7 @@ export const DetailsRenderer: Record<Id, DetailsRenderer> = {
     name: <span className="font-bold text-modifiers-burned">Burn</span>,
     description: (
       <div className="space-y-1">
-        <span className="font-bold text-modifiers-burned">Burn</span>
+        <span className="text-modifiers-burned">Burn</span>
         <div className="text-muted-foreground">
           A burned unit's physical stat is halved. At the end of each turn, a
           burned unit takes 10 damage.
@@ -24,7 +24,7 @@ export const DetailsRenderer: Record<Id, DetailsRenderer> = {
     ),
   },
   [InspectedId]: {
-    name: <span className="font-bold text-white">Inspected</span>,
+    name: <span className="text-white">Inspected</span>,
     description: (
       <div className="space-y-1">
         <span className="font-bold text-white">Inspected</span>

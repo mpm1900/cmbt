@@ -15,7 +15,7 @@ import {
 import { ActionId } from '../Ids'
 import { Identity } from '../Mutations'
 import { EmptyArray } from '../Queries/EmptyArray'
-import { DamageAllOnTurnEnd } from '../Triggers'
+import { DamageAllOnTurnEnd, SandstormOnTurnEndId } from '../Triggers'
 
 export const SandstormId = ActionId()
 
@@ -50,6 +50,7 @@ export class Sandstorm extends Action {
       onSuccess: {
         addedModifiers: [
           new DamageAllOnTurnEnd({
+            rid: SandstormOnTurnEndId,
             sourceId: source.id,
             damage: 10,
             duration: 5,

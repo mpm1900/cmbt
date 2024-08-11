@@ -1,5 +1,11 @@
-import { IntimidateId, SandStreamId } from '@repo/game/data'
+import {
+  DamageAllOnTurnEnd,
+  IntimidateId,
+  SandstormOnTurnEndId,
+  SandStreamId,
+} from '@repo/game/data'
 import { Id } from '@repo/game/types'
+import { ModifierInline } from '@shared/ModifierInline'
 import { ReactNode } from 'react'
 
 export type AugmentRenderer = {
@@ -20,9 +26,18 @@ export const AugmentRenderers: Record<Id, AugmentRenderer> = {
     description: () => (
       <>
         This unit gains immunity from{' '}
-        <span className="font-bold text-white">Sandstorm</span> triggers. When
-        this unit enters, create a{' '}
-        <span className="font-bold text-white">Sandstorm</span> for 5 turns.
+        <ModifierInline
+          modifier={
+            new DamageAllOnTurnEnd({ rid: SandstormOnTurnEndId, damage: 30 })
+          }
+        />{' '}
+        triggers. When this unit enters, create a{' '}
+        <ModifierInline
+          modifier={
+            new DamageAllOnTurnEnd({ rid: SandstormOnTurnEndId, damage: 30 })
+          }
+        />{' '}
+        for 5 turns.
       </>
     ),
   },

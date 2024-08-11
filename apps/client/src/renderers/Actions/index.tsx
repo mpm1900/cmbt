@@ -32,18 +32,25 @@ import {
   FirePunchId,
   BodySlamId,
   BodySlam,
+  Sandstorm,
+  DamageAllOnTurnEnd,
+  SandstormOnTurnEndId,
 } from '@repo/game/data'
 import { Action, ActionResult, CombatContext, Unit } from '@repo/game/types'
 import { Fragment, ReactNode } from 'react'
 import { BurnId, InspectedId } from '../Details'
 import { DetailsInline } from '@shared/DetailsInline'
+import { ModifierInline } from '@shared/ModifierInline'
 
 export type ActionRenderer = {
   name: string
   baseDamage: (action: Action) => string
   cost: string
   costAlt?: ReactNode
-  description: (action: Action) => ReactNode
+  description: (
+    action: Action,
+    props?: { side: 'top' | 'right' | 'bottom' | 'left' }
+  ) => ReactNode
   help?: (action: Action) => ReactNode
   lore?: (action: Action) => ReactNode
   log?: (
@@ -130,9 +137,10 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
     name: ACTION_NAMES[InspectAllId],
     baseDamage: () => '',
     cost: '',
-    description: () => (
+    description: (action, props) => (
       <>
-        Applies <DetailsInline detailsId={InspectedId} /> to all enemy units.
+        Applies <DetailsInline detailsId={InspectedId} side={props?.side} /> to
+        all enemy units.
       </>
     ),
   },
@@ -229,11 +237,11 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
     name: ACTION_NAMES[FireBlastId],
     baseDamage: (action) => `${action.damage?.value}`,
     cost: '',
-    description: (action) => (
+    description: (action, props) => (
       <>
         Deals {action.damage?.value} base fire damage to target enemy unit. 10%
-        chance to apply <DetailsInline detailsId={BurnId} /> to target for 5
-        turns.
+        chance to apply <DetailsInline detailsId={BurnId} side={props?.side} />{' '}
+        to target for 5 turns.
       </>
     ),
   },
@@ -353,8 +361,13 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
     cost: '',
     description: (action) => (
       <>
-        Applies <span className="font-bold text-white">Sandstorm</span> to all
-        units for 5 turns.
+        Applies{' '}
+        <ModifierInline
+          modifier={
+            new DamageAllOnTurnEnd({ rid: SandstormOnTurnEndId, damage: 30 })
+          }
+        />{' '}
+        to all units for 5 turns.
       </>
     ),
     help: () => <>(At the end of each turn, the unit takes 10 damage.)</>,

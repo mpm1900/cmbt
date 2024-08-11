@@ -11,7 +11,7 @@ export const DamageAllOnTurnEndId = TriggerId()
 export const BurnDamageOnTurnEndId = TriggerId()
 
 export class DamageAllOnTurnEnd extends Trigger {
-  private damage: number
+  damage: number
 
   get key() {
     return this.rid

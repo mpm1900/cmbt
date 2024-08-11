@@ -93,7 +93,7 @@ export function ActiveAction(props: ActiveActionProps) {
           )}
         </div>
         <div className="space-y-1">
-          <div>{renderer?.description(action)}</div>
+          <div>{renderer?.description(action, { side: 'left' })}</div>
           {renderer?.help && (
             <div className="text-sm text-muted-foreground/80 italic">
               {renderer?.help(action)}

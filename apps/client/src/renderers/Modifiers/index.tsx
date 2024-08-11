@@ -14,6 +14,8 @@ import {
   SandstormOnTurnEndId,
   DefenseDownParentId,
   SetIsProtectedParentId,
+  Sandstorm,
+  DamageAllOnTurnEnd,
 } from '@repo/game/data'
 import { ReactNode } from 'react'
 import { GiBiceps, GiBatteryPackAlt } from 'react-icons/gi'
@@ -24,9 +26,11 @@ import { GiSandstorm } from 'react-icons/gi'
 import { BiSearch } from 'react-icons/bi'
 import { GiShoulderArmor } from 'react-icons/gi'
 import { GiVibratingShield } from 'react-icons/gi'
+import { Modifier } from '@repo/game/types'
 
 export type ModifierRenderer = {
   name: ReactNode
+  description?: (modifier: Modifier) => ReactNode
   Inline?: () => ReactNode
 }
 
@@ -142,7 +146,22 @@ export const ModifierRenderers: Record<string, ModifierRenderer> = {
     name: MODIFIER_NAMES[CreateSandstormOnUnitEnterId],
   },
   [SandstormOnTurnEndId]: {
-    name: MODIFIER_NAMES[SandstormOnTurnEndId],
+    name: (
+      <span className="font-bold text-white">
+        {MODIFIER_NAMES[SandstormOnTurnEndId]}
+      </span>
+    ),
+    description: (modifier: Modifier) => (
+      <div className="space-y-1">
+        <span className="text-white">
+          {MODIFIER_NAMES[SandstormOnTurnEndId]}
+        </span>
+        <div className="text-muted-foreground">
+          On turn end, all units take{' '}
+          {(modifier as unknown as DamageAllOnTurnEnd).damage} damage.
+        </div>
+      </div>
+    ),
   },
   [DamageNewUnitsOnUnitEnterId]: {
     name: MODIFIER_NAMES[DamageNewUnitsOnUnitEnterId],

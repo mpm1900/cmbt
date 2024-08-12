@@ -34,7 +34,7 @@ const TestNode1: EncounterNode = {
 
 const TestNode2: EncounterNode = {
   id: nanoid(),
-  title: '',
+  title: 'Test Encounter 001',
   description: 'Are you sure??',
   choices: () => [
     {

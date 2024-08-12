@@ -16,15 +16,23 @@ export function useEncounterContext(): EncounterContext {
 
   function initializeCombat(props: InitializeCombatProps) {
     if (game.team) {
-      init(game.team, game.units, [], [], props.enemyUnitCount)
+      init({
+        userTeam: game.team,
+        userUnits: game.units,
+        modifiers: [],
+        mutations: [],
+        enemyUnitCount: props.enemyUnitCount,
+      })
     }
   }
 
   return {
     activeNode: store.getActiveNode() as EncounterNode,
     encounter: store.encounter,
+    team: game.team,
     back: () => nav({ to: '/world' }),
     initializeCombat,
     updateEncounter: store.updateEncounter,
+    updateTeam: game.updateTeam,
   }
 }

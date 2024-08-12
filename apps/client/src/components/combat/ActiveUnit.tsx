@@ -20,6 +20,7 @@ export function ActiveUnit() {
   const switchAction = new SwitchUnit(unit?.id ?? '', unit?.teamId ?? '')
 
   function commitAction(action: Action, targetIds: Id[]) {
+    console.log('action', action)
     if (action) {
       pushAction({
         id: nanoid(),

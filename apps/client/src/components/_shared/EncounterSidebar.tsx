@@ -2,10 +2,10 @@ import { useGame } from '@/hooks/state'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../ui/tabs'
 import { SidebarUnit } from './SidebarUnit'
 
-export function Sidebar() {
+export function EncounterSidebar() {
   const game = useGame()
   return (
-    <div className="w-[420px] bg-slate-950 h-screen flex overflow-hidden">
+    <div className="w-[420px] bg-slate-950 border-l h-screen flex overflow-hidden">
       <Tabs
         defaultValue="team"
         className="flex flex-1 flex-col overflow-hidden"

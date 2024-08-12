@@ -4,7 +4,7 @@ import { CombatSettings } from './CombatSettings'
 
 export function Sidebar() {
   return (
-    <div className="w-[420px] bg-slate-950 h-screen flex overflow-hidden">
+    <div className="w-[420px] bg-slate-950 h-screen flex overflow-hidden border-l">
       <Tabs defaultValue="log" className="flex flex-1 overflow-hidden">
         <div className="flex flex-col w-full">
           <div className="p-2">

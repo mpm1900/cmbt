@@ -12,7 +12,7 @@ export function NodeRenderer(props: NodeRendererProps) {
   const ctx = useEncounterContext()
 
   return (
-    <Card className="max-w-[640px]">
+    <Card className="w-[640px]">
       <CardHeader>
         <CardTitle>{node.title}</CardTitle>
       </CardHeader>

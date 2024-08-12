@@ -1,3 +1,4 @@
+import { nanoid } from 'nanoid'
 import {
   ActionResult,
   ActionAi,
@@ -7,7 +8,7 @@ import {
   ActionProps,
 } from '../../types'
 import { ActionId } from '../Ids'
-import { DamageParent } from '../Mutations'
+import { DamageParent, Identity } from '../Mutations'
 import { GetUnits } from '../Queries'
 
 export const PotionActionId = ActionId()
@@ -49,3 +50,16 @@ export class PotionAction extends Action {
     }
   }
 }
+
+export const Potion = () => ({
+  id: nanoid(),
+  count: 1,
+  action: (u: Unit) =>
+    new PotionAction({
+      sourceId: u.id,
+      teamId: u.teamId,
+      maxTargetCount: 1,
+      cost: new Identity({}),
+    }),
+  cost: 1000,
+})

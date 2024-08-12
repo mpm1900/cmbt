@@ -24,6 +24,7 @@ import {
   SwitchUnitId,
   SwordsDanceId,
   TrickRoomId,
+  WardId,
   WillOWispId,
 } from '@repo/game/data'
 
@@ -53,6 +54,7 @@ export const ACTION_NAMES: Record<string, string> = {
   [SpikesId]: 'Spikes',
   [SwordsDanceId]: 'Swords Dance',
   [TrickRoomId]: 'Trick Room',
+  [WardId]: 'Ward',
   [WillOWispId]: 'Will-o-wisp',
 
   [PotionActionId]: 'Potion',

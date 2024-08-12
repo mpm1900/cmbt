@@ -35,6 +35,7 @@ import {
   DamageAllOnTurnEnd,
   SandstormOnTurnEndId,
   SetIsInspectedAll,
+  WardId,
 } from '@repo/game/data'
 import { Action, ActionResult, CombatContext, Unit } from '@repo/game/types'
 import { Fragment, ReactNode } from 'react'
@@ -43,6 +44,8 @@ import { DetailsInline } from '@shared/DetailsInline'
 import { ModifierInline } from '@shared/ModifierInline'
 import { DamageInline } from '@shared/DamageInline'
 import { ACTION_NAMES } from './_names'
+import { PhysicalArmor } from '@shared/PhysicalArmor'
+import { MagicArmor } from '@shared/MagicArmor'
 
 export * from './_names'
 
@@ -129,7 +132,11 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
     cost: '',
     description: (action) => {
       const armorup = action as ArmorUp
-      return <>This unit gains {armorup.amount * -1} physical armor.</>
+      return (
+        <>
+          This unit gains <PhysicalArmor>{armorup.amount * -1}</PhysicalArmor>
+        </>
+      )
     },
   },
   [BodySlamId]: {
@@ -407,6 +414,19 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
       </>
     ),
     help: () => <>(The unit's speed stat is multiplied by -1.)</>,
+  },
+  [WardId]: {
+    name: ACTION_NAMES[WardId],
+    baseDamage: () => '',
+    cost: '',
+    description: (action) => {
+      const ward = action as ArmorUp
+      return (
+        <>
+          This unit gains <MagicArmor>{ward.amount * -1}</MagicArmor>
+        </>
+      )
+    },
   },
   [WillOWispId]: {
     name: 'Will-O-Wisp',

@@ -25,6 +25,7 @@ export * from './Spikes'
 export * from './SwordsDance'
 export * from './system/SwitchUnits'
 export * from './TrickRoom'
+export * from './Ward'
 export * from './WillOWisp'
 
 export const GLOBAL_ACTIONS: ActionMaker[] = [

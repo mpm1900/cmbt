@@ -55,15 +55,6 @@ export function ItemsList(props: ItemsListProps) {
     updateActiveItem(undefined)
   }, [unit?.id])
 
-  useEffect(() => {
-    if (activeItem && unit) {
-      const action = activeItem.action(unit)
-      if (targets.length === action.maxTargetCount) {
-        handleConfirm()
-      }
-    }
-  }, [targets.length])
-
   return (
     <Card>
       <CardHeader>

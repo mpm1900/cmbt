@@ -15,7 +15,7 @@ const StatusBadge = (props: BadgeProps & { isActive: boolean }) => (
 export function CombatHeader() {
   const turn = useCombat((s) => s.turn)
   return (
-    <div className="bg-slate-950 p-3">
+    <div className="bg-slate-950 p-2 border-b">
       <div className="flex flex-row space-x-4 h-full justify-center items-center">
         <StatusBadge isActive={turn.count === 0 && turn.status === 'cleanup'}>
           Pre-Game

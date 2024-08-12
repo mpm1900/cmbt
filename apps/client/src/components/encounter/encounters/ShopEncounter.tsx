@@ -7,6 +7,8 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
+import { ActionRenderers } from '@/renderers'
+import { Potion, ZERO_UNIT } from '@repo/game/data'
 import { Encounter, EncounterNode } from '@repo/game/types'
 import { nanoid } from 'nanoid'
 import { Fragment } from 'react/jsx-runtime'
@@ -50,18 +52,14 @@ const ShopWaresNode: EncounterNode = {
   id: nanoid(),
   title: 'Test Shop - View Wares',
   description: 'We have a number of things you might like!',
-  choices: () => [
-    {
+  choices: (ctx) =>
+    [].map(() => ({
       id: nanoid(),
       label: 'Potion',
-      resolve: () => {},
-    },
-    {
-      id: nanoid(),
-      label: 'Adrenaline',
-      resolve: () => {},
-    },
-  ],
+      resolve: (ctx) => {
+        ctx.updateTeam((t) => t)
+      },
+    })),
   renderChoice: (choice, index, ctx) => (
     <TableRow>
       <TableCell>{choice.label}</TableCell>
@@ -82,7 +80,7 @@ const ShopWaresNode: EncounterNode = {
     const render = ctx.activeNode.renderChoice
     const choices = ctx.activeNode.choices(ctx)
     return (
-      <div className="space-y-2">
+      <div className="space-y-4">
         <Table>
           <TableHeader>
             <TableHead>name</TableHead>
@@ -90,13 +88,30 @@ const ShopWaresNode: EncounterNode = {
               cost
             </TableHead>
           </TableHeader>
-          {render && (
-            <TableBody>
-              {choices.map((c, i) => (
-                <Fragment key={c.id}>{render(c, i, ctx)}</Fragment>
-              ))}
-            </TableBody>
-          )}
+          {[Potion()].map((item) => (
+            <TableRow>
+              <TableCell>
+                {ActionRenderers[item.action(ZERO_UNIT).id].name}
+              </TableCell>
+              <TableCell className="flex justify-end items-center">
+                <Button
+                  disabled={(ctx.team?.resources.credits ?? 0) < item.cost}
+                  variant="outline"
+                  onClick={() => {
+                    ctx.updateTeam((t) => ({
+                      items: [...t.items, item],
+                      resources: {
+                        ...t.resources,
+                        credits: t.resources.credits - item.cost,
+                      },
+                    }))
+                  }}
+                >
+                  {item.cost}g
+                </Button>
+              </TableCell>
+            </TableRow>
+          ))}
         </Table>
         <div className="flex justify-end">
           <Button

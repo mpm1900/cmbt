@@ -51,5 +51,5 @@ export const GengarConfig: UnitBaseConfig = {
     },
   ],
   defaultAbilityId: undefined,
-  defaultActionIds: [MagicMissileId, PowerWordKillId, WillOWispId],
+  defaultActionIds: [DisableId, MagicMissileId, PowerWordKillId, WillOWispId],
 }

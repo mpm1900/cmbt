@@ -1,16 +1,21 @@
 import { NodeRenderer } from '@/components/encounter/NodeRenderer'
-import { Sidebar } from '@/components/_shared/Sidebar'
+import { EncounterSidebar } from '@/components/_shared/EncounterSidebar'
 import { useEncounterContext } from '@/hooks'
 import { useGame } from '@/hooks/state'
 import { Navbar } from '@shared/Navbar'
 import { PageLayout } from '@shared/PageLayout'
+import { TeamHeader } from '@shared/TeamHeader'
 
 export function Encounter() {
   const ctx = useEncounterContext()
   const game = useGame()
 
   return (
-    <PageLayout navbar={<Navbar />} aside={<Sidebar />}>
+    <PageLayout
+      navbar={<Navbar />}
+      aside={<EncounterSidebar />}
+      header={<TeamHeader team={game.team} />}
+    >
       <div className="flex flex-1 items-center justify-center">
         <NodeRenderer node={ctx.activeNode} />
       </div>

@@ -15,6 +15,8 @@ import { UnitBars } from './UnitBars'
 import { SwitchUnitId } from '@repo/game/data'
 import { Badge } from '@/components/ui/badge'
 import { motion } from 'framer-motion'
+import { PhysicalArmor } from '@shared/PhysicalArmor'
+import { MagicArmor } from '@shared/MagicArmor'
 
 export type UnitCardProps = {
   unit: Unit
@@ -75,22 +77,10 @@ export function UnitCard(props: UnitCardProps) {
           </div>
           <div className="flex items-center space-x-2">
             {unit.values.physicalArmor > 0 && (
-              <Badge
-                variant="outline"
-                className="space-x-1 bg-green-600 text-white"
-              >
-                <FaShieldHalved />
-                <span>{unit.values.physicalArmor}</span>
-              </Badge>
+              <PhysicalArmor>{unit.values.physicalArmor}</PhysicalArmor>
             )}
             {unit.values.magicArmor > 0 && (
-              <Badge
-                variant="outline"
-                className="space-x-1 bg-blue-600 text-white"
-              >
-                <FaShieldHalved />
-                <span>{unit.values.magicArmor}</span>
-              </Badge>
+              <MagicArmor>{unit.values.magicArmor}</MagicArmor>
             )}
             {(unit.teamId === ctx.user || unit.flags.isInspected) && (
               <Popover>

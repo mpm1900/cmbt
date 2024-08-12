@@ -13,16 +13,15 @@ import {
   buildActionResult,
 } from '../../utils'
 import { ActionId } from '../Ids'
-import { Identity } from '../Mutations'
-import { RemovePhysicalArmorParent } from '../Mutations'
+import { Identity, RemoveMagicArmorParent } from '../Mutations'
 import { EmptyArray } from '../Queries'
 
-export const ArmorUpId = ActionId()
+export const WardId = ActionId()
 
-export class ArmorUp extends Action {
+export class Ward extends Action {
   amount: number
   constructor(sourceId: Id, teamId: Id) {
-    super(ArmorUpId, {
+    super(WardId, {
       sourceId,
       teamId,
       cost: new Identity({ sourceId }),
@@ -54,7 +53,7 @@ export class ArmorUp extends Action {
       (modifiedTargets) => ({
         onSuccess: {
           mutations: [
-            new RemovePhysicalArmorParent({
+            new RemoveMagicArmorParent({
               sourceId: source.id,
               parentId: source.id,
               amount: this.amount,

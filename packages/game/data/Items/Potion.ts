@@ -51,8 +51,9 @@ export class PotionAction extends Action {
   }
 }
 
+export const PotionId = nanoid()
 export const Potion = () => ({
-  id: nanoid(),
+  id: PotionId,
   count: 1,
   action: (u: Unit) =>
     new PotionAction({

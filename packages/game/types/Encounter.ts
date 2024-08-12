@@ -1,4 +1,4 @@
-import { Id, Team } from '.'
+import { Id, Item, Team } from '.'
 
 export type InitializeCombatProps = {
   enemyUnitCount: number
@@ -12,6 +12,7 @@ export type EncounterContext = {
   initializeCombat: (props: InitializeCombatProps) => void
   updateEncounter: (fn: (e: Encounter) => Partial<Encounter>) => void
   updateTeam: (fn: (e: Team) => Partial<Team>) => void
+  addItem: (item: Item) => void
 }
 
 export type Encounter = {

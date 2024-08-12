@@ -98,13 +98,7 @@ const ShopWaresNode: EncounterNode = {
                   disabled={(ctx.team?.resources.credits ?? 0) < item.cost}
                   variant="outline"
                   onClick={() => {
-                    ctx.updateTeam((t) => ({
-                      items: [...t.items, item],
-                      resources: {
-                        ...t.resources,
-                        credits: t.resources.credits - item.cost,
-                      },
-                    }))
+                    ctx.addItem(item)
                   }}
                 >
                   {item.cost}g

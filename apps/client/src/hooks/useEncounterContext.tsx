@@ -34,5 +34,6 @@ export function useEncounterContext(): EncounterContext {
     initializeCombat,
     updateEncounter: store.updateEncounter,
     updateTeam: game.updateTeam,
+    addItem: game.addItem,
   }
 }

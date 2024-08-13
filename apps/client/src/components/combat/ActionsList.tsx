@@ -1,9 +1,7 @@
-import { useCombatUi } from '@/hooks/state'
-import { ActionButton } from './ActionButton'
-import { ActiveAction } from './ActiveAction'
-import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
-import { useEffect, useState } from 'react'
+import { cn } from '@/lib/utils'
 import { Action, Id, Unit } from '@repo/game/types'
+import { useEffect, useState } from 'react'
+import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
 import {
   Carousel,
   CarouselContent,
@@ -12,7 +10,8 @@ import {
   CarouselPrevious,
   useCarouselApi,
 } from '../ui/carousel'
-import { cn } from '@/lib/utils'
+import { ActionButton } from './ActionButton'
+import { ActiveAction } from './ActiveAction'
 
 export type ActionsListProps = {
   unit: Unit

@@ -1,5 +1,5 @@
-import { Modifier } from '@repo/game/types'
 import { ModifierRenderers } from '@/renderers'
+import { Modifier } from '@repo/game/types'
 import { ModifierHover } from './ModifierHover'
 
 export type ModifierInlineProps = {

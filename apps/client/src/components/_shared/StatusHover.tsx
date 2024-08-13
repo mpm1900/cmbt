@@ -1,10 +1,10 @@
+import { StatusRenderers } from '@/renderers'
+import { HoverCardPortal } from '@radix-ui/react-hover-card'
+import { ZERO_UNIT } from '@repo/game/data'
 import { Status } from '@repo/game/types'
 import { PropsWithChildren } from 'react'
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '../ui/hover-card'
-import { HoverCardPortal } from '@radix-ui/react-hover-card'
 import { ModifierDescription } from './ModifierDescription'
-import { StatusRenderers } from '@/renderers'
-import { ZERO_UNIT } from '@repo/game/data'
 
 export type StatusHoverProps = PropsWithChildren<{
   status: Status

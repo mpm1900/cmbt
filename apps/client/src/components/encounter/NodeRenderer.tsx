@@ -1,7 +1,7 @@
+import { useEncounterContext } from '@/hooks'
 import { EncounterNode } from '@repo/game/types'
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
 import { ChoiceButton } from './ChoiceButton'
-import { useEncounterContext } from '@/hooks'
 
 export type NodeRendererProps = {
   node: EncounterNode

@@ -1,9 +1,9 @@
-import { useCombatActions, useCombatContext } from '../../hooks'
-import { nanoid } from 'nanoid/non-secure'
-import { GetUnits, SetIsActive } from '@repo/game/data'
-import { SwitchUnits } from './SwitchUnits'
 import { MAX_ACTIVE_UNITS_COUNT } from '@/constants'
 import { getTeamsWithSelectionRequired } from '@/utils'
+import { GetUnits, SetIsActive } from '@repo/game/data'
+import { nanoid } from 'nanoid/non-secure'
+import { useCombatActions, useCombatContext } from '../../hooks'
+import { SwitchUnits } from './SwitchUnits'
 
 export type CleanupSwitchUnitsProps = {}
 

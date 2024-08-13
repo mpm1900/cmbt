@@ -1,3 +1,9 @@
+import { LogCritical, LogHeader } from '@/components/ui/log'
+import { logActionResults, logMiss, logModifiers, logMutations } from '@/utils'
+import { handleCleanup } from '@/utils/handleCleanup'
+import { logCritical } from '@/utils/logCritical'
+import { logTriggers } from '@/utils/logTriggers'
+import { SetDeadAsInactive } from '@repo/game/data'
 import {
   ActionResult,
   ActionsQueueItem,
@@ -12,18 +18,11 @@ import {
 } from '@repo/game/utils'
 import {
   useActions,
-  useCombatUi,
   useCleanup,
   useCombat,
   useCombatSettings,
+  useCombatUi,
 } from './state'
-import { logActionResults, logModifiers, logMutations } from '@/utils'
-import { logTriggers } from '@/utils/logTriggers'
-import { LogCritical, LogHeader } from '@/components/ui/log'
-import { handleCleanup } from '@/utils/handleCleanup'
-import { logMiss } from '@/utils'
-import { SetDeadAsInactive } from '@repo/game/data'
-import { logCritical } from '@/utils/logCritical'
 
 export type CommitResultOptions = {
   enableLog?: boolean

@@ -16,7 +16,7 @@ import { useCombat } from '@/hooks/state'
 import { useCombatSetup } from '@/hooks/useCombatSetup'
 import { Navbar } from '@shared/Navbar'
 import { PageLayout } from '@shared/PageLayout'
-import { Link, useNavigate } from '@tanstack/react-router'
+import { Link } from '@tanstack/react-router'
 
 export function Combat() {
   const combat = useCombat()

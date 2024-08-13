@@ -1,6 +1,6 @@
-import { motion } from 'framer-motion'
 import { cn } from '@/lib/utils'
 import { PropsWithClassname } from '@/types'
+import { motion } from 'framer-motion'
 import { CSSProperties } from 'react'
 
 export type BarProps = PropsWithClassname<{

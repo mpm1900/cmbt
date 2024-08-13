@@ -1,10 +1,11 @@
-import { useCombatContext } from '../../hooks'
-import { Button } from '../ui/button'
-import { Badge } from '../ui/badge'
-import { applyModifiers } from '@repo/game/utils'
-import { Action, Unit } from '@repo/game/types'
 import { useActions } from '@/hooks/state'
 import { SwitchUnitId } from '@repo/game/data'
+import { Action, Unit } from '@repo/game/types'
+import { applyModifiers } from '@repo/game/utils'
+import { useState } from 'react'
+import { useCombatContext } from '../../hooks'
+import { Badge } from '../ui/badge'
+import { Button } from '../ui/button'
 import {
   Card,
   CardContent,
@@ -12,7 +13,6 @@ import {
   CardHeader,
   CardTitle,
 } from '../ui/card'
-import { useState } from 'react'
 
 export type SwitchUnitsProps = {
   action: Action

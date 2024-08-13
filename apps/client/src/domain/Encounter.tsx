@@ -10,8 +10,6 @@ export function Encounter() {
   const ctx = useEncounterContext()
   const game = useGame()
 
-  console.log(ctx)
-
   return (
     <PageLayout
       navbar={<Navbar />}

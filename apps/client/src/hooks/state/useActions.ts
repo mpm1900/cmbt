@@ -1,4 +1,4 @@
-import { ActionsQueueItem, CombatContext, Unit } from '@repo/game/types'
+import { ActionsQueueItem, CombatContext } from '@repo/game/types'
 import { applyModifiers } from '@repo/game/utils'
 import { create } from 'zustand'
 

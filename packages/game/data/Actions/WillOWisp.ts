@@ -1,13 +1,13 @@
 import {
   Action,
+  ActionAi,
   ActionResolveOptions,
   ActionResult,
-  ActionAi,
   CombatContext,
   Id,
   Unit,
 } from '../../types'
-import { getActionData, buildActionResult } from '../../utils'
+import { buildActionResult, getActionData } from '../../utils'
 import { modifyRenderContext } from '../../utils/modifyRenderContext'
 import { ActionId } from '../Ids'
 import { ReduceFocusParent } from '../Mutations'

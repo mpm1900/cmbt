@@ -1,6 +1,6 @@
-import { Status } from '@repo/game/types'
 import { StatusRenderers } from '@/renderers/Status'
 import { ZERO_UNIT } from '@repo/game/data'
+import { Status } from '@repo/game/types'
 import { StatusHover } from './StatusHover'
 
 export type StatusInlineProps = {

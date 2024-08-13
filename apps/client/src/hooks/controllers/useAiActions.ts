@@ -1,17 +1,17 @@
-import { useEffect } from 'react'
-import { useCombatContext } from '../useCombatContext'
+import { MAX_ACTIVE_UNITS_COUNT } from '@/constants'
+import { getTeamsWithSelectionRequired } from '@/utils'
+import { GetUnits, SetIsActive } from '@repo/game/data'
 import {
   applyModifiers,
   checkActionCost,
   getActionableUnits,
   getBestAiAction,
 } from '@repo/game/utils'
-import { useCombatActions } from '../useCombatActions'
 import { nanoid } from 'nanoid/non-secure'
+import { useEffect } from 'react'
 import { useActions, useCleanup, useCombat, useCombatSettings } from '../state'
-import { GetUnits, SetIsActive } from '@repo/game/data'
-import { getTeamsWithSelectionRequired } from '@/utils'
-import { MAX_ACTIVE_UNITS_COUNT } from '@/constants'
+import { useCombatActions } from '../useCombatActions'
+import { useCombatContext } from '../useCombatContext'
 
 export function useAiActions() {
   const ctx = useCombatContext()

@@ -1,11 +1,11 @@
 import { nanoid } from 'nanoid'
 import {
-  ActionResult,
+  Action,
   ActionAi,
+  ActionProps,
+  ActionResult,
   CombatContext,
   Unit,
-  Action,
-  ActionProps,
 } from '../../types'
 import { ActionId } from '../Ids'
 import { DamageParent, Identity } from '../Mutations'

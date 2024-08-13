@@ -1,43 +1,62 @@
-import { Button } from '@/components/ui/button'
+import { GraphResetButton } from '@/components/world/GraphResetButton'
 import { useGame } from '@/hooks/state'
 import { useEncounter } from '@/hooks/state/useEncounter'
+import {
+  SigmaContainer,
+  useLoadGraph,
+  useRegisterEvents,
+  useSigma,
+} from '@react-sigma/core'
+import { useLayoutNoverlap } from '@react-sigma/layout-noverlap'
+import { EncounterSidebar } from '@shared/EncounterSidebar'
 import { Navbar } from '@shared/Navbar'
 import { PageLayout } from '@shared/PageLayout'
-import { EncounterSidebar } from '@shared/EncounterSidebar'
-import { useNavigate } from '@tanstack/react-router'
 import { TeamHeader } from '@shared/TeamHeader'
-import { useEffect } from 'react'
-import { SigmaContainer, useLoadGraph, useSigma } from '@react-sigma/core'
-import Graph from 'graphology'
-import { GraphResetButton } from '@/components/world/GraphResetButton'
+import { createNodeImageProgram } from '@sigma/node-image'
+import { useNavigate } from '@tanstack/react-router'
+import { MultiDirectedGraph } from 'graphology'
+import { useEffect, useMemo } from 'react'
+import { Settings } from 'sigma/settings'
 
 function LoadGraph() {
   const loadGraph = useLoadGraph()
   const game = useGame()
   const encounter = useEncounter()
   const sigma = useSigma()
+  const registerEvents = useRegisterEvents()
+  const { assign } = useLayoutNoverlap()
   const nav = useNavigate()
   const activeNode = game.world?.nodes.find(
     (n) => n.id === game.world?.activeNodeId
   )
 
   function makeGraph() {
-    const graph = new Graph()
+    const graph = new MultiDirectedGraph()
     if (game.world) {
       for (let node of game.world.nodes) {
         const isActive = activeNode?.id === node.id
         const isEdgeNode = activeNode?.edges.includes(node.id)
         graph.addNode(node.id, {
-          x: node.position.x,
-          y: node.position.y,
+          label: isActive ? `${node.x},${node.y}` : '?',
+          x: node.x,
+          y: node.y,
           size: node.size,
           color: isActive ? 'yellow' : isEdgeNode ? 'blue' : 'grey',
+          forceLabel: true,
+          highlighted: true,
         })
       }
 
       for (let node of game.world.nodes) {
+        const isActive = activeNode?.id === node.id
+
         for (let edge of node.edges) {
-          graph.addDirectedEdge(node.id, edge, { size: 2, color: 'white' })
+          if (edge !== activeNode?.id) {
+            graph.addDirectedEdge(node.id, edge, {
+              size: 2,
+              color: isActive ? 'white' : '#333',
+            })
+          }
         }
       }
     }
@@ -45,29 +64,53 @@ function LoadGraph() {
   }
 
   useEffect(() => {
+    sigma.clear()
     const graph = makeGraph()
     loadGraph(graph)
-  }, [loadGraph])
+    assign()
+  }, [loadGraph, makeGraph])
 
   useEffect(() => {
-    sigma.addListener('clickNode', (payload) => {
-      const node = game.world?.nodes.find((n) => n.id === payload.node)
-      if (node && node.isInteractable) {
-        game.setActiveNodeId(node.id)
-        encounter.updateEncounter(() => node.encounter)
-        nav({ to: '/encounter' })
-      }
+    registerEvents({
+      clickNode: (payload) => {
+        const isEdgeNode = activeNode?.edges.includes(payload.node)
+        const isActive = activeNode?.id === payload.node
+        if (isEdgeNode || isActive) {
+          const node = game.world?.nodes.find((n) => n.id === payload.node)
+          if (node && node.isInteractable) {
+            game.setActiveNodeId(node.id)
+            encounter.updateEncounter(() => node.encounter)
+            nav({ to: '/encounter' })
+          }
+        }
+      },
     })
-  }, [sigma])
+  }, [])
 
   return null
 }
 
 export function World() {
   const game = useGame()
-  const encounter = useEncounter()
   const nav = useNavigate()
-  if (!game.world) nav({ to: '/' })
+
+  const sigmaSettings: Partial<Settings> = useMemo(
+    () => ({
+      allowInvalidContainer: true,
+      nodeProgramClasses: {
+        image: createNodeImageProgram({
+          size: { mode: 'force', value: 256 },
+        }),
+      },
+      defaultNodeType: 'image',
+      defaultEdgeType: 'arrow',
+      labelDensity: 0.07,
+      labelGridCellSize: 60,
+      labelRenderedSizeThreshold: 15,
+      zIndex: true,
+    }),
+    []
+  )
 
   return (
     <PageLayout
@@ -81,6 +124,7 @@ export function World() {
     >
       {game.world && (
         <SigmaContainer
+          settings={sigmaSettings}
           style={{ background: 'transparent', overflow: 'hidden' }}
         >
           <LoadGraph />

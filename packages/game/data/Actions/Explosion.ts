@@ -1,21 +1,21 @@
 import {
-  ActionResult,
   ActionAi,
+  ActionResolveOptions,
+  ActionResult,
+  AttackTypes,
   CombatContext,
   Id,
   Unit,
-  AttackTypes,
-  ActionResolveOptions,
 } from '../../types'
 import { Action } from '../../types/Action'
 import {
-  calculateDamage,
   applyMutation,
+  buildActionResult,
+  calculateDamage,
   getActionData,
   getDamageAi,
-  modifyRenderContext,
-  buildActionResult,
   getMutationsFromDamageResult,
+  modifyRenderContext,
 } from '../../utils'
 import { ActionId } from '../Ids'
 import { DamageParent, Identity } from '../Mutations'

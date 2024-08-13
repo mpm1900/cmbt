@@ -7,9 +7,9 @@ import {
   Unit,
 } from '../../types'
 import {
+  buildActionResult,
   getActionData,
   modifyRenderContext,
-  buildActionResult,
 } from '../../utils'
 import { ActionId } from '../Ids'
 import { AddActionToRegistryParent } from '../Modifiers'

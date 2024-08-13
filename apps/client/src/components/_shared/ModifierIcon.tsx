@@ -1,8 +1,8 @@
 import { cn } from '@/lib/utils'
 import { MODIFIER_BASE_ICONS } from '@/renderers'
 import { Modifier } from '@repo/game/types'
-import { ReactNode } from 'react'
 import { motion } from 'framer-motion'
+import { ReactNode } from 'react'
 import { ModifierHover } from './ModifierHover'
 
 export type ModifierIconProps = {

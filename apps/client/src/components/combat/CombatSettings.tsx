@@ -1,7 +1,7 @@
 import { useActions, useCombatSettings } from '@/hooks/state'
-import { Switch } from '../ui/switch'
 import { Label } from '../ui/label'
 import { Slider } from '../ui/slider'
+import { Switch } from '../ui/switch'
 
 export function CombatSettings() {
   const settings = useCombatSettings()

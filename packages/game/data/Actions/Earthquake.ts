@@ -1,19 +1,19 @@
 import {
   Action,
+  ActionAi,
   ActionResolveOptions,
   ActionResult,
-  ActionAi,
   CombatContext,
+  Damage,
   Id,
   Unit,
-  Damage,
 } from '../../types'
 import {
+  applyModifiers,
+  buildActionResult,
   calculateDamage,
   getActionData,
-  buildActionResult,
   getMutationsFromDamageResult,
-  applyModifiers,
 } from '../../utils'
 import { getDamageAi } from '../../utils/getDamageAiAction'
 import { modifyRenderContext } from '../../utils/modifyRenderContext'

@@ -1,7 +1,7 @@
+import { ActionMaker, Augment, Id } from '.'
 import { Action } from './Action'
 import { DamageType } from './Damage'
 import { Modifier } from './Modifier'
-import { ActionMaker, Augment, Id } from '.'
 
 export type AttackTypes = 'physical' | 'magic'
 

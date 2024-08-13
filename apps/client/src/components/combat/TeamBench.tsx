@@ -1,8 +1,8 @@
 import { useCombatContext } from '@/hooks'
-import { Id } from '@repo/game/types'
-import { Badge } from '../ui/badge'
-import { applyModifiers, isUnitAlive } from '@repo/game/utils'
 import { cn } from '@/lib/utils'
+import { Id } from '@repo/game/types'
+import { applyModifiers, isUnitAlive } from '@repo/game/utils'
+import { Badge } from '../ui/badge'
 
 export type TeamBenchProps = {
   className?: string

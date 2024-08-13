@@ -1,16 +1,16 @@
 import {
   Action,
-  ActionResult,
   ActionAi,
+  ActionResolveOptions,
+  ActionResult,
   CombatContext,
   Id,
   Unit,
-  ActionResolveOptions,
 } from '../../types'
 import {
+  buildActionResult,
   getActionData,
   modifyRenderContext,
-  buildActionResult,
 } from '../../utils'
 import { ActionId } from '../Ids'
 import { Identity } from '../Mutations'

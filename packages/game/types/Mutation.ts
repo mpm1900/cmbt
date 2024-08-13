@@ -1,8 +1,7 @@
 import { nanoid } from 'nanoid'
+import { Id } from '.'
 import { CombatContext } from './CombatContext'
 import { Flags, Stats, Unit, Values } from './Unit'
-import { Id } from '.'
-import { SandstormOnTurnEndId } from '../data'
 
 export type MutationProps<T = {}> = T & {
   id?: Id

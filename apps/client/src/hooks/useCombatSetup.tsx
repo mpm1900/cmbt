@@ -1,6 +1,6 @@
+import { useNavigate } from '@tanstack/react-router'
 import { useEffect } from 'react'
 import { useCombatContext } from './useCombatContext'
-import { useNavigate } from '@tanstack/react-router'
 
 export function useCombatSetup() {
   const ctx = useCombatContext()

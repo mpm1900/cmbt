@@ -5,7 +5,8 @@ type Point = { x: number; y: number }
 
 export type GameWorldNode = {
   id: Id
-  position: Point
+  x: number
+  y: number
   size: number
   encounter: Encounter
   edges: Id[]
@@ -18,9 +19,9 @@ export type GameWorld = {
 }
 
 export type GameState = {
-  team: Team | undefined
+  team: Team
   units: Unit[]
-  world: GameWorld | undefined
+  world: GameWorld
 }
 
 type InitializeProps = {
@@ -37,8 +38,17 @@ export type GameStore = GameState & {
 }
 
 export const useGame = create<GameStore>((set) => ({
-  world: undefined,
-  team: undefined,
+  world: {
+    activeNodeId: '',
+    nodes: [],
+  },
+  team: {
+    id: '',
+    items: [],
+    resources: {
+      credits: 0,
+    },
+  },
   units: [],
   initialize: (props) =>
     set({
@@ -48,12 +58,10 @@ export const useGame = create<GameStore>((set) => ({
     }),
   setActiveNodeId: (nodeId) => {
     set((s) => ({
-      world: s.world
-        ? {
-            ...s.world,
-            activeNodeId: nodeId,
-          }
-        : s.world,
+      world: {
+        ...s.world,
+        activeNodeId: nodeId,
+      },
     }))
   },
   updateTeam: (fn) => {
@@ -65,31 +73,27 @@ export const useGame = create<GameStore>((set) => ({
     set((s) => {
       if (s.team?.items.find((i) => i.id === item.id)) {
         return {
-          team: s.team
-            ? {
-                ...s.team,
-                resources: {
-                  ...s.team.resources,
-                  credits: s.team.resources.credits - item.cost,
-                },
-                items: s.team.items.map((i) =>
-                  i.id === item.id ? { ...i, count: i.count + item.count } : i
-                ),
-              }
-            : s.team,
+          team: {
+            ...s.team,
+            resources: {
+              ...s.team.resources,
+              credits: s.team.resources.credits - item.cost,
+            },
+            items: s.team.items.map((i) =>
+              i.id === item.id ? { ...i, count: i.count + item.count } : i
+            ),
+          },
         }
       } else {
         return {
-          team: s.team
-            ? {
-                ...s.team,
-                resources: {
-                  ...s.team.resources,
-                  credits: s.team.resources.credits - item.cost,
-                },
-                items: [...s.team.items, item],
-              }
-            : s.team,
+          team: {
+            ...s.team,
+            resources: {
+              ...s.team.resources,
+              credits: s.team.resources.credits - item.cost,
+            },
+            items: [...s.team.items, item],
+          },
         }
       }
     })

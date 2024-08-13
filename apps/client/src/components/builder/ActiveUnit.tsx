@@ -1,13 +1,13 @@
 import { useBuilderUi } from '@/hooks/state/useBuilderUi'
-import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
 import { useUnitBuilders } from '@/hooks/state/useUnitBuilders'
+import { BASE_CONFIGS } from '@repo/game/data'
+import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
 import { Input } from '../ui/input'
 import { Label } from '../ui/label'
-import { UnitBaseSelect } from './UnitBaseSelect'
-import { UnitBaseStats } from './UnitBaseStats'
-import { BASE_CONFIGS, ZERO_UNIT } from '@repo/game/data'
 import { ActionsTable } from './ActionsTable'
 import { UnitAbilitySelect } from './UnitAbilitySelect'
+import { UnitBaseSelect } from './UnitBaseSelect'
+import { UnitBaseStats } from './UnitBaseStats'
 
 export function ActiveUnit() {
   const ui = useBuilderUi()

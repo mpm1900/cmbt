@@ -1,5 +1,5 @@
 import { Unit } from '@repo/game/types'
-import { applyModifiers, applyMutations } from '@repo/game/utils'
+import { applyMutations } from '@repo/game/utils'
 
 export type SidebarUnitProps = {
   unit: Unit

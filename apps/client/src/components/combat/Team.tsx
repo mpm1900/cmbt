@@ -1,11 +1,11 @@
-import { PropsWithClassname } from '@/types'
-import { TeamBench } from './TeamBench'
 import { useCombatContext } from '@/hooks'
-import { UnitCard } from './UnitCard'
-import { Id } from '@repo/game/types'
 import { cn } from '@/lib/utils'
+import { PropsWithClassname } from '@/types'
 import { GetUnits } from '@repo/game/data'
+import { Id } from '@repo/game/types'
 import { motion } from 'framer-motion'
+import { TeamBench } from './TeamBench'
+import { UnitCard } from './UnitCard'
 
 export type TeamProps = PropsWithClassname<{
   teamId: Id | undefined

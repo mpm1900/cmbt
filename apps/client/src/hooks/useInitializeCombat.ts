@@ -2,8 +2,8 @@ import { faker } from '@faker-js/faker'
 import { TeamId } from '@repo/game/data'
 import { Modifier, Mutation, Team, Unit } from '@repo/game/types'
 import { makeUnit } from '@repo/game/utils'
-import { useActions, useCleanup, useCombat } from './state'
 import { useNavigate } from '@tanstack/react-router'
+import { useActions, useCleanup, useCombat } from './state'
 
 export type InitializeFunctionProps = {
   userTeam: Team

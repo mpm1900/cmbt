@@ -10,7 +10,8 @@ export function makeWorld(): GameWorld {
     nodes: [
       {
         id: StartId,
-        position: { x: -1.1, y: -1 },
+        x: -1.1,
+        y: -1,
         size: 10,
         encounter: {
           id: nanoid(),
@@ -22,15 +23,26 @@ export function makeWorld(): GameWorld {
       },
       {
         id: ShopEncounter.id + '0',
-        position: { x: -1, y: -1 },
+        x: -1,
+        y: -1,
         size: 10,
         encounter: ShopEncounter,
-        edges: [TestEncounter.id + '0'],
+        edges: [TestEncounter.id + '0', TestEncounter.id + '1'],
         isInteractable: true,
       },
       {
         id: TestEncounter.id + '0',
-        position: { x: 0, y: 1 },
+        x: 0,
+        y: 1,
+        size: 10,
+        encounter: TestEncounter,
+        edges: [ShopEncounter.id + '0'],
+        isInteractable: true,
+      },
+      {
+        id: TestEncounter.id + '1',
+        x: 1,
+        y: 1,
         size: 10,
         encounter: TestEncounter,
         edges: [ShopEncounter.id + '0'],

@@ -1,5 +1,11 @@
+import { useUnitBuilders } from '@/hooks/state/useUnitBuilders'
+import { cn } from '@/lib/utils'
+import { ActionRenderers } from '@/renderers'
 import { ZERO_UNIT } from '@repo/game/data'
 import { UnitBuilder } from '@repo/game/types'
+import { ActionHover } from '@shared/ActionHover'
+import { Badge } from '../ui/badge'
+import { Checkbox } from '../ui/checkbox'
 import {
   Table,
   TableBody,
@@ -8,12 +14,6 @@ import {
   TableHeader,
   TableRow,
 } from '../ui/table'
-import { ActionRenderers } from '@/renderers'
-import { Checkbox } from '../ui/checkbox'
-import { useUnitBuilders } from '@/hooks/state/useUnitBuilders'
-import { cn } from '@/lib/utils'
-import { Badge } from '../ui/badge'
-import { ActionHover } from '@shared/ActionHover'
 
 export type ActionsTablePrpos = {
   builder: UnitBuilder

@@ -1,10 +1,10 @@
-import { useEffect, useState } from 'react'
-import { useCleanup } from '../state'
-import { useCombatContext } from '../useCombatContext'
-import { useCombatActions } from '../useCombatActions'
 import { getTeamsWithSelectionRequired, handleNextAction } from '@/utils'
-import { nanoid } from 'nanoid/non-secure'
 import { SetIsActive } from '@repo/game/data'
+import { nanoid } from 'nanoid/non-secure'
+import { useEffect } from 'react'
+import { useCleanup } from '../state'
+import { useCombatActions } from '../useCombatActions'
+import { useCombatContext } from '../useCombatContext'
 
 export function useCleanupController() {
   const fns = useCombatActions()

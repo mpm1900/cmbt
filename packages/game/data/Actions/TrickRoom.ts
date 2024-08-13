@@ -1,21 +1,20 @@
 import {
   Action,
-  ActionResult,
   ActionAi,
+  ActionResolveOptions,
+  ActionResult,
   CombatContext,
   Id,
   Unit,
-  ActionResolveOptions,
 } from '../../types'
 import {
+  buildActionResult,
   getActionData,
   modifyRenderContext,
-  buildActionResult,
 } from '../../utils'
 import { ActionId } from '../Ids'
 import { InvertSpeedAll } from '../Modifiers'
 import { Identity } from '../Mutations'
-import { SetLastUsedAction } from '../Mutations/system'
 import { EmptyArray } from '../Queries/EmptyArray'
 
 export const TrickRoomId = ActionId()

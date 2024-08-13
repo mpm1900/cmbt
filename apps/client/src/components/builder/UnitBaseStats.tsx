@@ -1,6 +1,6 @@
 import { UnitBase } from '@repo/game/types'
-import { StatBar } from './StatBar'
 import { Label } from '../ui/label'
+import { StatBar } from './StatBar'
 
 export type UnitBaseStatsProps = {
   base: UnitBase

@@ -1,10 +1,10 @@
 import { nanoid } from 'nanoid'
 import { Damage, Id } from './'
 import { CombatContext } from './CombatContext'
-import { Query } from './Query'
-import { AttackTypes, Unit } from './Unit'
 import { Modifier } from './Modifier'
 import { Mutation } from './Mutation'
+import { Query } from './Query'
+import { AttackTypes, Unit } from './Unit'
 
 export type ActionAi = {
   action: Action

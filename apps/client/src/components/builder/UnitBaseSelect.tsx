@@ -1,4 +1,5 @@
 import { ALL_BASES } from '@repo/game/data'
+import { UnitBase } from '@repo/game/types'
 import {
   Select,
   SelectContent,
@@ -6,7 +7,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from '../ui/select'
-import { UnitBase } from '@repo/game/types'
 
 export type UnitBaseSelectProps = {
   value: UnitBase

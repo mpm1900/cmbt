@@ -1,11 +1,10 @@
-import { Button } from '../../ui/button'
-import { StatDebug } from '../StatDebug'
-import { ActionsQueueItem, Unit } from '@repo/game/types'
-import { RequireTurnStatus } from '../RequireTurnStatus'
-import { applyModifiers } from '@repo/game/utils'
+import { Separator } from '@/components/ui/separator'
 import { useCombatContext } from '@/hooks'
 import { ActionRenderers } from '@/renderers'
-import { Separator } from '@/components/ui/separator'
+import { ActionsQueueItem, Unit } from '@repo/game/types'
+import { applyModifiers } from '@repo/game/utils'
+import { RequireTurnStatus } from '../RequireTurnStatus'
+import { StatDebug } from '../StatDebug'
 
 export type UnitStatsProps = {
   unit: Unit

@@ -1,10 +1,10 @@
-import { ModifierRenderers } from '@/renderers'
-import { ModifierIcon } from '../../_shared/ModifierIcon'
-import { applyModifiers } from '@repo/game/utils'
 import { useCombatContext } from '@/hooks'
-import { Unit } from '@repo/game/types'
-import { PropsWithClassname } from '@/types'
 import { cn } from '@/lib/utils'
+import { ModifierRenderers } from '@/renderers'
+import { PropsWithClassname } from '@/types'
+import { Unit } from '@repo/game/types'
+import { applyModifiers } from '@repo/game/utils'
+import { ModifierIcon } from '../../_shared/ModifierIcon'
 
 export type UnitModifiersProps = {
   unit: Unit

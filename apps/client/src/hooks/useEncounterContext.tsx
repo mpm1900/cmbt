@@ -3,10 +3,10 @@ import {
   EncounterNode,
   InitializeCombatProps,
 } from '@repo/game/types'
-import { useGame } from './state'
-import { useInitializeCombat } from './useInitializeCombat'
-import { useEncounter } from './state/useEncounter'
 import { useNavigate } from '@tanstack/react-router'
+import { useGame } from './state'
+import { useEncounter } from './state/useEncounter'
+import { useInitializeCombat } from './useInitializeCombat'
 
 export function useEncounterContext(): EncounterContext {
   const game = useGame()

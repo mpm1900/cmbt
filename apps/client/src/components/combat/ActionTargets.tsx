@@ -1,7 +1,7 @@
 import { Action, Unit } from '@repo/game/types'
+import { useEffect } from 'react'
 import { useCombatContext } from '../../hooks'
 import { Button } from '../ui/button'
-import { useEffect } from 'react'
 
 export type UnitActionTargetsProps = {
   action: Action

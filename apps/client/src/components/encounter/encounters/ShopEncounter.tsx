@@ -1,7 +1,6 @@
 import { Button } from '@/components/ui/button'
 import {
   Table,
-  TableBody,
   TableCell,
   TableHead,
   TableHeader,
@@ -11,7 +10,6 @@ import { ActionRenderers } from '@/renderers'
 import { Potion, ZERO_UNIT } from '@repo/game/data'
 import { Encounter, EncounterNode } from '@repo/game/types'
 import { nanoid } from 'nanoid'
-import { Fragment } from 'react/jsx-runtime'
 
 const ShopIntroductionNode: EncounterNode = {
   id: nanoid(),

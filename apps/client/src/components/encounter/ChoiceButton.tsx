@@ -1,6 +1,6 @@
+import { useEncounterContext } from '@/hooks'
 import { EncounterChoice } from '@repo/game/types'
 import { Button } from '../ui/button'
-import { useEncounterContext } from '@/hooks'
 
 export type ChoiceButtonProps = {
   choice: EncounterChoice

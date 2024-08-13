@@ -1,8 +1,7 @@
 import { useCombat } from '@/hooks/state'
+import { cn } from '@/lib/utils'
 import { Badge, BadgeProps } from '../ui/badge'
 import { Separator } from '../ui/separator'
-import { Turn, TurnStatus } from '@repo/game/types'
-import { cn } from '@/lib/utils'
 
 const StatusBadge = (props: BadgeProps & { isActive: boolean }) => (
   <Badge

@@ -1,6 +1,6 @@
+import { useBuilderUi } from '@/hooks/state/useBuilderUi'
 import { UnitBuilder } from '@repo/game/types'
 import { Button } from '../ui/button'
-import { useBuilderUi } from '@/hooks/state/useBuilderUi'
 
 export type UnitSelectButtonProps = {
   builder: UnitBuilder | undefined

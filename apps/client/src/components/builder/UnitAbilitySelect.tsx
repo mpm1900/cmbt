@@ -1,4 +1,6 @@
+import { AugmentRenderers } from '@/renderers'
 import { Augment } from '@repo/game/types'
+import { AugmentHover } from '@shared/AugmentHover'
 import {
   Select,
   SelectContent,
@@ -6,8 +8,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from '../ui/select'
-import { AugmentRenderers } from '@/renderers'
-import { AugmentHover } from '@shared/AugmentHover'
 
 export type UnitAbilitySelectProps = {
   options: Augment[]

@@ -1,6 +1,6 @@
-import { PropsWithChildren } from 'react'
-import { motion } from 'framer-motion'
 import { routeTransitionProps } from '@/constants'
+import { motion } from 'framer-motion'
+import { PropsWithChildren } from 'react'
 
 export function RouteTransition(props: PropsWithChildren) {
   return (

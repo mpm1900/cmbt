@@ -1,10 +1,9 @@
-import { Action, Unit } from '@repo/game/types'
-import { Button } from '../ui/button'
-import { ActionRenderers } from '@/renderers'
 import { useCombatContext } from '@/hooks'
-import { applyModifiers, checkActionCost } from '@repo/game/utils'
-import { Badge } from '../ui/badge'
 import { cn } from '@/lib/utils'
+import { ActionRenderers } from '@/renderers'
+import { Action, Unit } from '@repo/game/types'
+import { applyModifiers, checkActionCost } from '@repo/game/utils'
+import { Button } from '../ui/button'
 
 export type ActionButtonProps = {
   source: Unit

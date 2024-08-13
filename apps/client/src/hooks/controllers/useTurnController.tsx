@@ -1,9 +1,9 @@
+import { handleNextAction } from '@/utils'
+import { isUnitAliveCtx } from '@repo/game/utils'
 import { useEffect } from 'react'
 import { useActions, useCombat, useCombatSettings } from '../state'
 import { useCombatActions } from '../useCombatActions'
 import { useCombatContext } from '../useCombatContext'
-import { handleNextAction } from '@/utils'
-import { isUnitAliveCtx } from '@repo/game/utils'
 
 export function useTurnController() {
   const { turn, pushResult } = useCombat()

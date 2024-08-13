@@ -1,17 +1,17 @@
 import {
   Action,
+  ActionAi,
   ActionResolveOptions,
   ActionResult,
-  ActionAi,
+  AttackTypes,
   CombatContext,
   Id,
   Unit,
-  AttackTypes,
 } from '../../types'
 import {
+  buildActionResult,
   calculateDamage,
   getActionData,
-  buildActionResult,
   getMutationsFromDamageResult,
 } from '../../utils'
 import { getDamageAi } from '../../utils/getDamageAiAction'

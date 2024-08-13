@@ -1,21 +1,21 @@
 import {
   Action,
-  ActionResult,
   ActionAi,
+  ActionResolveOptions,
+  ActionResult,
   CombatContext,
   Id,
   Unit,
-  ActionResolveOptions,
 } from '../../types'
 import {
+  buildActionResult,
   getActionData,
   modifyRenderContext,
-  buildActionResult,
 } from '../../utils'
 import { ActionId } from '../Ids'
 import { Identity } from '../Mutations'
 import { EmptyArray } from '../Queries/EmptyArray'
-import { DamageAllOnTurnEnd, DamageNewUnitsOnUnitEnter } from '../Triggers'
+import { DamageNewUnitsOnUnitEnter } from '../Triggers'
 
 export const SpikesId = ActionId()
 

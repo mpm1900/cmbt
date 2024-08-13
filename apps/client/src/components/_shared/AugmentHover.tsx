@@ -1,3 +1,4 @@
+import { AugmentRenderers } from '@/renderers'
 import {
   HoverCard,
   HoverCardPortal,
@@ -6,7 +7,6 @@ import {
 import { Augment } from '@repo/game/types'
 import { PropsWithChildren } from 'react'
 import { HoverCardContent } from '../ui/hover-card'
-import { AugmentRenderers } from '@/renderers'
 
 export type AugmentHoverProps = PropsWithChildren<{
   augment: Augment

@@ -1,8 +1,7 @@
-import { Unit } from '@repo/game/types'
-import { HealthBar } from '../HealthBar'
 import { cn } from '@/lib/utils'
-import { Progress } from '../../ui/progress'
+import { Unit } from '@repo/game/types'
 import { Bar } from '@shared/Bar'
+import { HealthBar } from '../HealthBar'
 
 function getRatios(x: number, y: number, z: number): [number, number, number] {
   const sum = x + y + z

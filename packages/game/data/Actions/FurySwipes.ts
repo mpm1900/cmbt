@@ -1,25 +1,25 @@
 import random from 'random'
 import {
   Action,
-  ActionResult,
-  CombatContext,
-  Id,
-  Unit,
   ActionAi,
   ActionResolveOptions,
+  ActionResult,
+  CombatContext,
   Damage,
+  Id,
+  Unit,
 } from '../../types'
 import {
+  buildActionResult,
   calculateDamage,
   getActionData,
-  modifyRenderContext,
-  buildActionResult,
   getMutationsFromDamageResult,
+  modifyRenderContext,
 } from '../../utils'
-import { Identity } from '../Mutations'
-import { GetUnits } from '../Queries'
 import { getDamageAi } from '../../utils/getDamageAiAction'
 import { ActionId } from '../Ids'
+import { Identity } from '../Mutations'
+import { GetUnits } from '../Queries'
 
 export const FurySwipesId = ActionId()
 export class FurySwipes extends Action {

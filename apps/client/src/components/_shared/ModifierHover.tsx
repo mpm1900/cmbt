@@ -1,9 +1,9 @@
 import { ModifierRenderers } from '@/renderers'
-import { Modifier } from '@repo/game/types'
-import { HoverCard, HoverCardContent, HoverCardTrigger } from '../ui/hover-card'
 import { HoverCardPortal } from '@radix-ui/react-hover-card'
-import { ModifierDescription } from './ModifierDescription'
+import { Modifier } from '@repo/game/types'
 import { PropsWithChildren } from 'react'
+import { HoverCard, HoverCardContent, HoverCardTrigger } from '../ui/hover-card'
+import { ModifierDescription } from './ModifierDescription'
 
 export type ModifierHoverProps = PropsWithChildren<{
   modifier: Modifier

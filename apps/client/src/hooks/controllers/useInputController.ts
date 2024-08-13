@@ -1,8 +1,8 @@
-import { useEffect } from 'react'
 import { getActionableUnitsCtx } from '@repo/game/utils'
+import { useEffect } from 'react'
 import { useActions, useCombat, useCombatSettings } from '../state'
-import { useCombatContext } from '../useCombatContext'
 import { useCombatActions } from '../useCombatActions'
+import { useCombatContext } from '../useCombatContext'
 
 export function useInputController() {
   const combat = useCombat()

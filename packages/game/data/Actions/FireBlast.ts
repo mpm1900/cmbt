@@ -1,19 +1,19 @@
 import random from 'random'
 import {
   Action,
+  ActionAi,
   ActionResolveOptions,
   ActionResult,
-  ActionAi,
   CombatContext,
+  Damage,
   Id,
   Unit,
-  Damage,
 } from '../../types'
 import {
+  buildActionResult,
   calculateDamage,
   getActionData,
   getDamageAi,
-  buildActionResult,
   getMutationsFromDamageResult,
 } from '../../utils'
 import { modifyRenderContext } from '../../utils/modifyRenderContext'

@@ -3,11 +3,10 @@ import { Augment, Modifier, Mutation, Unit } from '../../types'
 import { PowerDownAllOtherOnUnitEnter } from '../Triggers'
 
 export const IntimidateId = nanoid()
+export const Intimidate: Augment = {
+  id: IntimidateId,
+  name: 'Intimidate',
 
-export class Intimidate extends Augment {
-  constructor() {
-    super(IntimidateId, 'Intimidate')
-  }
   modifiers(unit: Unit): Modifier[] {
     return [
       new PowerDownAllOtherOnUnitEnter({
@@ -17,8 +16,8 @@ export class Intimidate extends Augment {
         duration: 0,
       }),
     ]
-  }
+  },
   mutations(unit: Unit): Mutation[] {
     return []
-  }
+  },
 }

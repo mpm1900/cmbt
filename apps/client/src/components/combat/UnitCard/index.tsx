@@ -9,11 +9,9 @@ import { UnitStats } from './UnitStats'
 import { Popover, PopoverContent, PopoverTrigger } from '../../ui/popover'
 import { Button } from '../../ui/button'
 import { FaSearch } from 'react-icons/fa'
-import { FaShieldHalved } from 'react-icons/fa6'
 import { UnitModifiers } from './UnitModifiers'
 import { UnitBars } from './UnitBars'
 import { SwitchUnitId } from '@repo/game/data'
-import { Badge } from '@/components/ui/badge'
 import { motion } from 'framer-motion'
 import { PhysicalArmor } from '@shared/PhysicalArmor'
 import { MagicArmor } from '@shared/MagicArmor'
@@ -113,6 +111,7 @@ export function UnitCard(props: UnitCardProps) {
       </div>
       <UnitModifiers
         unit={props.unit}
+        side={reverse ? 'top' : 'bottom'}
         className={cn({ 'mt-2': !reverse, 'mb-2': reverse })}
       />
     </motion.div>

@@ -6,7 +6,7 @@ import {
   Unit,
 } from '../../types'
 import { TriggerId } from '../Ids'
-import { PowerDownParent } from '../Modifiers'
+import { PhysicalAttackDownParent } from '../Modifiers'
 
 export const PowerDownAllOtherOnUnitEnterId = TriggerId()
 
@@ -22,7 +22,7 @@ export class PowerDownAllOtherOnUnitEnter extends Trigger {
           .filter((u) => this.filter(u, ctx) && u.id !== props.sourceId)
           .map(
             (u) =>
-              new PowerDownParent({
+              new PhysicalAttackDownParent({
                 sourceId: props.sourceId,
                 parentId: u.id,
                 coef: 1.5,

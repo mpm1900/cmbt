@@ -10,7 +10,7 @@ import {
 import { getActionData, buildActionResult } from '../../utils'
 import { modifyRenderContext } from '../../utils/modifyRenderContext'
 import { ActionId } from '../Ids'
-import { PowerUpParent } from '../Modifiers'
+import { PhysicalAttackUpParent } from '../Modifiers'
 import { ReduceFocusParent } from '../Mutations'
 import { EmptyArray } from '../Queries/EmptyArray'
 
@@ -57,7 +57,7 @@ export class SwordsDance extends Action {
       (modifiedTargets) => ({
         onSuccess: {
           addedModifiers: [
-            new PowerUpParent({
+            new PhysicalAttackUpParent({
               sourceId: source.id,
               parentId: source.id,
               coef: 1.5,

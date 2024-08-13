@@ -36,7 +36,7 @@ export const Tyranitar: UnitBase = {
 }
 
 export const TyranitarConfig: UnitBaseConfig = {
-  abilities: [new SandStream()],
+  abilities: [SandStream],
   actionsCount: 4,
   actions: [
     {

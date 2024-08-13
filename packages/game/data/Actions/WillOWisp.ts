@@ -10,10 +10,9 @@ import {
 import { getActionData, buildActionResult } from '../../utils'
 import { modifyRenderContext } from '../../utils/modifyRenderContext'
 import { ActionId } from '../Ids'
-import { PowerDownParent, BurnedPowerDownId } from '../Modifiers'
 import { ReduceFocusParent } from '../Mutations'
 import { GetUnits } from '../Queries'
-import { BurnDamageOnTurnEndId, DamageParentOnTurnEnd } from '../Triggers'
+import { BurnStatus } from '../Statuses/BurnStatus'
 
 export const WillOWispId = ActionId()
 
@@ -61,24 +60,9 @@ export class WillOWisp extends Action {
       ctx,
       (modifiedTargets) => ({
         onSuccess: {
-          addedModifiers: modifiedTargets.flatMap((target) => [
-            new PowerDownParent({
-              sourceId: source.id,
-              parentId: target.id,
-              coef: 2,
-              duration: 5,
-              maxInstances: 1,
-              rid: BurnedPowerDownId,
-            }),
-            new DamageParentOnTurnEnd({
-              sourceId: source.id,
-              parentId: target.id,
-              damage: 10,
-              duration: 5,
-              maxInstances: 1,
-              rid: BurnDamageOnTurnEndId,
-            }),
-          ]),
+          addedModifiers: modifiedTargets.flatMap((target) =>
+            BurnStatus.modifiers(source, target)
+          ),
         },
       })
     )

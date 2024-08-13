@@ -1,8 +1,8 @@
 import { CombatContext, Modifier, ModifierProps, Unit } from '../../types'
 import { ModifierId } from '../Ids'
 
-export const PowerUpParentId = ModifierId()
-export class PowerUpParent extends Modifier {
+export const PhysicalAttackDownAllId = ModifierId()
+export class PhysicalAttackDownAll extends Modifier {
   private coef: number
 
   get key(): string {
@@ -10,19 +10,19 @@ export class PowerUpParent extends Modifier {
   }
 
   constructor(props: ModifierProps<{ coef: number }>) {
-    super(PowerUpParentId, props)
+    super(PhysicalAttackDownAllId, props)
     this.coef = props.coef
   }
 
   resolve = (unit: Unit): Partial<Unit> => {
     return {
       stats: Modifier.setStats(unit, (stats) => ({
-        physical: stats.physical * this.coef,
+        physical: stats.physical / this.coef,
       })),
     }
   }
 
   filter = (unit: Unit, ctx: CombatContext): boolean => {
-    return super.filter(unit, ctx) && unit.id === this.parentId
+    return super.filter(unit, ctx)
   }
 }

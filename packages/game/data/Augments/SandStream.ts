@@ -5,10 +5,9 @@ import { AddModifierRegistry } from '../Mutations'
 
 export const SandStreamId = nanoid()
 
-export class SandStream extends Augment {
-  constructor() {
-    super(SandStreamId, 'Sand Stream')
-  }
+export const SandStream: Augment = {
+  id: SandStreamId,
+  name: 'Sand Stream',
   modifiers(unit: Unit): Modifier[] {
     return [
       new CreateSandstormOnUnitEnter({
@@ -17,7 +16,7 @@ export class SandStream extends Augment {
         parentId: unit.id,
       }),
     ]
-  }
+  },
   mutations(unit: Unit): Mutation[] {
     return [
       new AddModifierRegistry({
@@ -26,5 +25,5 @@ export class SandStream extends Augment {
         modifierId: SandstormOnTurnEndId,
       }),
     ]
-  }
+  },
 }

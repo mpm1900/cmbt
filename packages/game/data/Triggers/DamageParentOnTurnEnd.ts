@@ -10,7 +10,7 @@ import { TriggerId } from '../Ids'
 export const DamageParentOnTurnEndId = TriggerId()
 
 export class DamageParentOnTurnEnd extends Trigger {
-  private damage: number
+  damage: number
 
   constructor(props: TriggerProps<{ damage: number }>) {
     super(DamageParentOnTurnEndId, {

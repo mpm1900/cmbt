@@ -1,6 +1,4 @@
-import { ShopEncounter } from '@/components/encounter/encounters'
 import { Encounter, Id, Item, Team, Unit } from '@repo/game/types'
-import { nanoid } from 'nanoid/non-secure'
 import { create } from 'zustand'
 
 type Point = { x: number; y: number }
@@ -62,7 +60,7 @@ export const useGame = create<GameStore>((set) => ({
                   credits: s.team.resources.credits - item.cost,
                 },
                 items: s.team.items.map((i) =>
-                  i.id === item.id ? { ...i, count: i.count + 1 } : i
+                  i.id === item.id ? { ...i, count: i.count + item.count } : i
                 ),
               }
             : s.team,

@@ -1,5 +1,5 @@
 import { ModifierRenderers } from '@/renderers'
-import { ModifierIcon } from '../ModifierIcon'
+import { ModifierIcon } from '../../_shared/ModifierIcon'
 import { applyModifiers } from '@repo/game/utils'
 import { useCombatContext } from '@/hooks'
 import { Unit } from '@repo/game/types'
@@ -8,6 +8,7 @@ import { cn } from '@/lib/utils'
 
 export type UnitModifiersProps = {
   unit: Unit
+  side?: 'top' | 'right' | 'bottom' | 'left'
 }
 
 export function UnitModifiers(props: PropsWithClassname<UnitModifiersProps>) {
@@ -26,9 +27,10 @@ export function UnitModifiers(props: PropsWithClassname<UnitModifiersProps>) {
           <ModifierIcon
             key={m.rtid}
             modifier={m}
+            side={props.side}
             fallback={
               <span key={m.rtid} className="font-bold">
-                {r?.Inline ? <r.Inline /> : `${r?.name ?? m.id}`}
+                {`${r?.name ?? m.id}`}
               </span>
             }
           />

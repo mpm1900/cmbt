@@ -13,8 +13,7 @@ import { Checkbox } from '../ui/checkbox'
 import { useUnitBuilders } from '@/hooks/state/useUnitBuilders'
 import { cn } from '@/lib/utils'
 import { Badge } from '../ui/badge'
-import { HoverCard, HoverCardContent, HoverCardTrigger } from '../ui/hover-card'
-import { HoverCardPortal } from '@radix-ui/react-hover-card'
+import { ActionHover } from '@shared/ActionHover'
 
 export type ActionsTablePrpos = {
   builder: UnitBuilder
@@ -65,65 +64,56 @@ export function ActionsTable(props: ActionsTablePrpos) {
             }
           }
           return (
-            <HoverCard key={maker.id} openDelay={0} closeDelay={0}>
-              <HoverCardTrigger asChild>
-                <TableRow
-                  className={cn({
-                    'bg-muted': isSelected,
-                    'cursor-pointer': !isDisbled,
-                  })}
-                  onClick={() => {
-                    handleChange(!isSelected)
-                  }}
-                >
-                  <TableCell className="flex items-center">
-                    <Checkbox
-                      checked={isSelected}
-                      disabled={isDisbled}
-                      onCheckedChange={(e) => handleChange(!e)}
-                    />
-                  </TableCell>
-                  <TableCell>{renderer.name}</TableCell>
-                  <TableCell>
-                    {action.attackType ? (
-                      <Badge
-                        className={cn('border-none hover:text-white', {
-                          'bg-blue-600 text-blue-200':
-                            action.attackType === 'magic',
-                          'bg-green-600 text-green-100':
-                            action.attackType === 'physical',
-                        })}
-                        variant="outline"
-                      >
-                        {action.attackType}
-                      </Badge>
-                    ) : (
-                      '—'
-                    )}
-                  </TableCell>
-                  <TableCell>
-                    {accuracy !== undefined ? `${accuracy}%` : '—'}
-                  </TableCell>
-                  <TableCell>{renderer.baseDamage(action) || '—'}</TableCell>
-                  <TableCell>{renderer.cost || '—'}</TableCell>
-                  {action.criticalFactor(ZERO_UNIT) ? (
-                    <TableCell>
-                      {action.criticalThreshold(ZERO_UNIT)}% x
-                      {action.criticalFactor(ZERO_UNIT)}
-                    </TableCell>
+            <ActionHover key={action.id} action={action} side="right">
+              <TableRow
+                className={cn({
+                  'bg-muted': isSelected,
+                  'cursor-pointer': !isDisbled,
+                })}
+                onClick={() => {
+                  handleChange(!isSelected)
+                }}
+              >
+                <TableCell className="flex items-center">
+                  <Checkbox
+                    checked={isSelected}
+                    disabled={isDisbled}
+                    onCheckedChange={(e) => handleChange(!e)}
+                  />
+                </TableCell>
+                <TableCell>{renderer.name}</TableCell>
+                <TableCell>
+                  {action.attackType ? (
+                    <Badge
+                      className={cn('border-none hover:text-white', {
+                        'bg-blue-600 text-blue-200':
+                          action.attackType === 'magic',
+                        'bg-green-600 text-green-100':
+                          action.attackType === 'physical',
+                      })}
+                      variant="outline"
+                    >
+                      {action.attackType}
+                    </Badge>
                   ) : (
-                    <TableCell>—</TableCell>
+                    '—'
                   )}
-                </TableRow>
-              </HoverCardTrigger>
-              <HoverCardPortal>
-                <HoverCardContent side="right">
-                  <div className="text-muted-foreground">
-                    {renderer.description(action)}
-                  </div>
-                </HoverCardContent>
-              </HoverCardPortal>
-            </HoverCard>
+                </TableCell>
+                <TableCell>
+                  {accuracy !== undefined ? `${accuracy}%` : '—'}
+                </TableCell>
+                <TableCell>{renderer.baseDamage(action) || '—'}</TableCell>
+                <TableCell>{renderer.cost || '—'}</TableCell>
+                {action.criticalFactor(ZERO_UNIT) ? (
+                  <TableCell>
+                    {action.criticalThreshold(ZERO_UNIT)}% x
+                    {action.criticalFactor(ZERO_UNIT)}
+                  </TableCell>
+                ) : (
+                  <TableCell>—</TableCell>
+                )}
+              </TableRow>
+            </ActionHover>
           )
         })}
       </TableBody>

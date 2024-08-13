@@ -29,7 +29,7 @@ export const Salamence: UnitBase = {
 }
 
 export const SalamenceConfig: UnitBaseConfig = {
-  abilities: [new Intimidate()],
+  abilities: [Intimidate],
   actionsCount: 5,
   actions: [
     {

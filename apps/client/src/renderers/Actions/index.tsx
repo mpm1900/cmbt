@@ -36,16 +36,16 @@ import {
   SandstormOnTurnEndId,
   SetIsInspectedAll,
   WardId,
+  BurnStatus,
 } from '@repo/game/data'
 import { Action, ActionResult, CombatContext, Unit } from '@repo/game/types'
 import { Fragment, ReactNode } from 'react'
-import { BurnId } from '../Details'
-import { DetailsInline } from '@shared/DetailsInline'
 import { ModifierInline } from '@shared/ModifierInline'
 import { DamageInline } from '@shared/DamageInline'
 import { ACTION_NAMES } from './_names'
 import { PhysicalArmor } from '@shared/PhysicalArmor'
 import { MagicArmor } from '@shared/MagicArmor'
+import { StatusInline } from '@shared/StatusInline'
 
 export * from './_names'
 
@@ -229,7 +229,7 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
     description: (action, props) => (
       <>
         Deals <DamageInline damage={action.damage} /> to target enemy unit. 10%
-        chance to apply <DetailsInline detailsId={BurnId} side={props?.side} />{' '}
+        chance to apply <StatusInline status={BurnStatus} side={props?.side} />{' '}
         to target for 5 turns.
       </>
     ),
@@ -238,11 +238,11 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
     name: ACTION_NAMES[FirePunchId],
     baseDamage: (action) => `${action.damage?.value}`,
     cost: '',
-    description: (action) => (
+    description: (action, props) => (
       <>
         Deals <DamageInline damage={action.damage} /> to target enemy unit. 10%
-        chance to apply <DetailsInline detailsId={BurnId} /> to target for 5
-        turns.
+        chance to apply <StatusInline status={BurnStatus} side={props?.side} />{' '}
+        to target for 5 turns.
       </>
     ),
   },
@@ -318,8 +318,8 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
     cost: '',
     description: () => (
       <>
-        Deals damage to target enemy unit equal to that unit's health. Ignores
-        all damage negation.
+        Deals <span className="text-white">∞ damage</span> to target enemy unit.
+        Ignores all damage negation.
       </>
     ),
     lore: () => (
@@ -439,10 +439,10 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
         harbor the power of death.
       </>
     ),
-    description: (action) => (
+    description: (action, props) => (
       <>
-        Applies <DetailsInline detailsId={BurnId} /> to target enemy unit for 5
-        turns.
+        Applies <StatusInline status={BurnStatus} side={props?.side} /> to
+        target enemy unit for 5 turns.
       </>
     ),
   },

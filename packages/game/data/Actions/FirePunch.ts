@@ -20,8 +20,7 @@ import { modifyRenderContext } from '../../utils/modifyRenderContext'
 import { ActionId } from '../Ids'
 import { Identity } from '../Mutations'
 import { GetUnits } from '../Queries'
-import { BurnedPowerDownId, PowerDownParent } from '../Modifiers'
-import { BurnDamageOnTurnEndId, DamageParentOnTurnEnd } from '../Triggers'
+import { BurnStatus } from '../Statuses/BurnStatus'
 
 export const FirePunchId = ActionId()
 export class FirePunch extends Action {
@@ -66,7 +65,7 @@ export class FirePunch extends Action {
     ctx = modifyRenderContext(options, ctx)
     const data = getActionData(source, this, ctx)
     const applyModifierRoll = random.int(0, 100)
-    const applyDefenseDown = applyModifierRoll <= 10
+    const applyBurn = applyModifierRoll <= 10
 
     return buildActionResult(
       this,
@@ -85,25 +84,10 @@ export class FirePunch extends Action {
             )
             return getMutationsFromDamageResult(source, target, damage)
           }),
-          addedModifiers: applyDefenseDown
-            ? modifiedTargets.flatMap((target) => [
-                new PowerDownParent({
-                  sourceId: source.id,
-                  parentId: target.id,
-                  coef: 2,
-                  duration: 5,
-                  maxInstances: 1,
-                  rid: BurnedPowerDownId,
-                }),
-                new DamageParentOnTurnEnd({
-                  sourceId: source.id,
-                  parentId: target.id,
-                  damage: 10,
-                  duration: 5,
-                  maxInstances: 1,
-                  rid: BurnDamageOnTurnEndId,
-                }),
-              ])
+          addedModifiers: applyBurn
+            ? modifiedTargets.flatMap((target) =>
+                BurnStatus.modifiers(source, target)
+              )
             : [],
         },
       })

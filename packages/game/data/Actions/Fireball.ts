@@ -14,6 +14,7 @@ import {
   getDamageAi,
   buildActionResult,
   getMutationsFromDamageResult,
+  applyModifiers,
 } from '../../utils'
 import { modifyRenderContext } from '../../utils/modifyRenderContext'
 import { ActionId } from '../Ids'
@@ -53,9 +54,9 @@ export class Fireball extends Action {
 
   mapTargets = (targets: Unit[], ctx: CombatContext): Unit[] => {
     const teamIds = targets.map((t) => t.teamId)
-    return ctx.units.filter(
-      (u) => u.flags.isActive && teamIds.includes(u.teamId)
-    )
+    return ctx.units
+      .map((u) => applyModifiers(u, ctx).unit)
+      .filter((u) => u.flags.isActive && teamIds.includes(u.teamId))
   }
 
   threshold = (source: Unit): number | undefined => {
@@ -81,20 +82,22 @@ export class Fireball extends Action {
       source,
       targets,
       ctx,
-      (modifiedTargets) => ({
-        onSuccess: {
-          mutations: modifiedTargets.flatMap((target) => {
-            const isTarget = !!targets.find((t) => t.id === target.id)
-            const damage = calculateDamage(
-              isTarget ? this.damage : this.splashDamage,
-              data.source,
-              target,
-              data.accuracyRoll
-            )
-            return getMutationsFromDamageResult(source, target, damage)
-          }),
-        },
-      })
+      (modifiedTargets) => {
+        return {
+          onSuccess: {
+            mutations: modifiedTargets.flatMap((target) => {
+              const isTarget = !!targets.find((t) => t.id === target.id)
+              const damage = calculateDamage(
+                isTarget ? this.damage : this.splashDamage,
+                data.source,
+                target,
+                data.accuracyRoll
+              )
+              return getMutationsFromDamageResult(source, target, damage)
+            }),
+          },
+        }
+      }
     )
   }
 }

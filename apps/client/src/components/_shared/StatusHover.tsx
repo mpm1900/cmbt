@@ -26,7 +26,7 @@ export function StatusHover(props: StatusHoverProps) {
             {renderer.name}
             <div>
               {modifiers.map((modifier) => (
-                <ModifierDescription modifier={modifier} />
+                <ModifierDescription key={modifier.id} modifier={modifier} />
               ))}
             </div>
           </div>

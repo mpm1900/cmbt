@@ -1,5 +1,5 @@
-import { ShopEncounter } from '@/components/encounter/encounters'
 import { Encounter, EncounterNode } from '@repo/game/types'
+import { nanoid } from 'nanoid/non-secure'
 import { create } from 'zustand'
 
 export type EncounterState = {
@@ -12,18 +12,20 @@ export type EncounterStore = EncounterState & {
 }
 
 export const useEncounter = create<EncounterStore>((set, get) => ({
-  encounter: ShopEncounter,
+  encounter: { id: nanoid(), nodes: [], activeNodeId: '' },
   getActiveNode: () => {
     const state = get()
-    return state.encounter.nodes.find(
-      (n) => n.id === state.encounter.activeNodeId
+    return state.encounter?.nodes.find(
+      (n) => n.id === state.encounter?.activeNodeId
     )
   },
   updateEncounter: (fn) =>
-    set((s) => ({
-      encounter: {
-        ...s.encounter,
-        ...fn(s.encounter),
-      },
-    })),
+    set((s) => {
+      return {
+        encounter: {
+          ...s.encounter,
+          ...fn(s.encounter),
+        },
+      }
+    }),
 }))

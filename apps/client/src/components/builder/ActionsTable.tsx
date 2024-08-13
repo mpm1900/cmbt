@@ -33,13 +33,15 @@ export function ActionsTable(props: ActionsTablePrpos) {
   return (
     <Table>
       <TableHeader>
-        <TableHead></TableHead>
-        <TableHead>Name</TableHead>
-        <TableHead>Type</TableHead>
-        <TableHead>Accuracy</TableHead>
-        <TableHead>Base Damage</TableHead>
-        <TableHead>Cost</TableHead>
-        <TableHead>Critical</TableHead>
+        <TableRow>
+          <TableHead></TableHead>
+          <TableHead>Name</TableHead>
+          <TableHead>Type</TableHead>
+          <TableHead>Accuracy</TableHead>
+          <TableHead>Base Damage</TableHead>
+          <TableHead>Cost</TableHead>
+          <TableHead>Critical</TableHead>
+        </TableRow>
       </TableHeader>
       <TableBody>
         {list.map((maker) => {

@@ -3,24 +3,38 @@ import { TestEncounter } from '@/components/encounter/encounters/TestEncounter'
 import { GameWorld } from '@/hooks/state'
 import { nanoid } from 'nanoid'
 
+export const StartId = nanoid()
 export function makeWorld(): GameWorld {
   return {
-    size: {
-      x: 2,
-      y: 2,
-    },
-    tiles: [
+    activeNodeId: StartId,
+    nodes: [
       {
-        id: nanoid(),
-        position: { x: 0, y: 0 },
-        size: { x: 1, y: 1 },
-        encounter: ShopEncounter,
+        id: StartId,
+        position: { x: -1.1, y: -1 },
+        size: 10,
+        encounter: {
+          id: nanoid(),
+          nodes: [],
+          activeNodeId: '',
+        },
+        edges: [ShopEncounter.id + '0'],
+        isInteractable: false,
       },
       {
-        id: nanoid(),
+        id: ShopEncounter.id + '0',
+        position: { x: -1, y: -1 },
+        size: 10,
+        encounter: ShopEncounter,
+        edges: [TestEncounter.id + '0'],
+        isInteractable: true,
+      },
+      {
+        id: TestEncounter.id + '0',
         position: { x: 0, y: 1 },
-        size: { x: 1, y: 1 },
+        size: 10,
         encounter: TestEncounter,
+        edges: [ShopEncounter.id + '0'],
+        isInteractable: true,
       },
     ],
   }

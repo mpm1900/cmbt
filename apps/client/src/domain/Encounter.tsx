@@ -10,6 +10,8 @@ export function Encounter() {
   const ctx = useEncounterContext()
   const game = useGame()
 
+  console.log(ctx)
+
   return (
     <PageLayout
       navbar={<Navbar />}
@@ -17,7 +19,7 @@ export function Encounter() {
       header={<TeamHeader team={game.team} />}
     >
       <div className="flex flex-1 items-center justify-center">
-        <NodeRenderer node={ctx.activeNode} />
+        {ctx.activeNode && <NodeRenderer node={ctx.activeNode} />}
       </div>
     </PageLayout>
   )

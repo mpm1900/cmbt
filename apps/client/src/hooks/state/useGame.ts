@@ -3,16 +3,18 @@ import { create } from 'zustand'
 
 type Point = { x: number; y: number }
 
-export type GameWorldTile = {
+export type GameWorldNode = {
   id: Id
   position: Point
-  size: Point
+  size: number
   encounter: Encounter
+  edges: Id[]
+  isInteractable: boolean
 }
 
 export type GameWorld = {
-  size: Point
-  tiles: GameWorldTile[]
+  activeNodeId: Id
+  nodes: GameWorldNode[]
 }
 
 export type GameState = {
@@ -29,6 +31,7 @@ type InitializeProps = {
 
 export type GameStore = GameState & {
   initialize: (props: InitializeProps) => void
+  setActiveNodeId: (nodeId: Id) => void
   updateTeam: (fn: (team: Team) => Partial<Team>) => void
   addItem: (item: Item) => void
 }
@@ -43,6 +46,16 @@ export const useGame = create<GameStore>((set) => ({
       units: props.units,
       world: props.world,
     }),
+  setActiveNodeId: (nodeId) => {
+    set((s) => ({
+      world: s.world
+        ? {
+            ...s.world,
+            activeNodeId: nodeId,
+          }
+        : s.world,
+    }))
+  },
   updateTeam: (fn) => {
     set((s) => ({
       team: s.team ? { ...s.team, ...fn(s.team) } : s.team,

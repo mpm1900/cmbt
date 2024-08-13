@@ -18,6 +18,7 @@ import {
   DamageParentOnTurnEnd,
   PhysicalAttackDownParent,
   CreateSandstormOnUnitEnter,
+  DefenseDownParent,
 } from '@repo/game/data'
 import { ReactNode } from 'react'
 import { Modifier } from '@repo/game/types'
@@ -39,7 +40,7 @@ export const ModifierRenderers: Record<string, ModifierRenderer> = {
     ),
     description: () => (
       <div className="text-muted-foreground">
-        An inspected unit's stats are visible.
+        Inspected units' stats are visible.
       </div>
     ),
   },
@@ -52,7 +53,7 @@ export const ModifierRenderers: Record<string, ModifierRenderer> = {
           <span className="opacity-50 uppercase text-sm font-bold">
             On turn end:{' '}
           </span>
-          Afflicted unit takes {modifier.damage} damage.
+          Afflicted units take {modifier.damage} damage.
         </div>
       )
     },
@@ -63,22 +64,31 @@ export const ModifierRenderers: Record<string, ModifierRenderer> = {
       const modifier = mod as PhysicalAttackDownParent
       return (
         <div>
-          Afflicted unit's physical attack stat is divided by {modifier.coef}.
+          Afflicted units' physical attack stats are divided by {modifier.coef}
         </div>
       )
     },
   },
   [DamageParentOnTurnEndId]: {
-    name: MODIFIER_NAMES[BurnDamageOnTurnEndId],
+    name: (
+      <span className="text-white">
+        {MODIFIER_NAMES[BurnDamageOnTurnEndId]}
+      </span>
+    ),
   },
   [DefenseDownParentId]: {
-    name: MODIFIER_NAMES[DefenseDownParentId],
+    name: (
+      <span className="text-white">{MODIFIER_NAMES[DefenseDownParentId]}</span>
+    ),
+    description: (mod) => {
+      const modifier = mod as DefenseDownParent
+      return (
+        <div>Afflicted units' defense stats are divided by {modifier.coef}</div>
+      )
+    },
   },
   [DefenseUpAllId]: {
     name: MODIFIER_NAMES[DefenseUpAllId],
-  },
-  [SetIsStunnedParentId]: {
-    name: MODIFIER_NAMES[SetIsStunnedParentId],
   },
   [InvertSpeedAllId]: {
     name: MODIFIER_NAMES[InvertSpeedAllId],
@@ -93,7 +103,7 @@ export const ModifierRenderers: Record<string, ModifierRenderer> = {
       const modifier = mod as PhysicalAttackDownParent
       return (
         <div>
-          Afflicted unit's physical attack stat is divided by {modifier.coef}.
+          Afflicted units' physical attack stats are divided by {modifier.coef}.
         </div>
       )
     },
@@ -108,14 +118,29 @@ export const ModifierRenderers: Record<string, ModifierRenderer> = {
       const modifier = mod as PhysicalAttackDownParent
       return (
         <div>
-          Afflicted unit's physical attack stat is multiplied by {modifier.coef}
-          .
+          Afflicted units' physical attack stats are multiplied by{' '}
+          {modifier.coef}.
         </div>
       )
     },
   },
   [SetIsProtectedParentId]: {
-    name: MODIFIER_NAMES[SetIsProtectedParentId],
+    name: (
+      <span className="text-white">
+        {MODIFIER_NAMES[SetIsProtectedParentId]}
+      </span>
+    ),
+    description: (mod) => {
+      return <div>Protected units are protected from actions.</div>
+    },
+  },
+  [SetIsStunnedParentId]: {
+    name: (
+      <span className="text-white">{MODIFIER_NAMES[SetIsStunnedParentId]}</span>
+    ),
+    description: (mod) => {
+      return <div>Stunned units cannot act.</div>
+    },
   },
 
   // Triggers
@@ -124,7 +149,7 @@ export const ModifierRenderers: Record<string, ModifierRenderer> = {
     description: (mod) => {
       const modifier = mod as CreateSandstormOnUnitEnter
       return (
-        <div className="text-muted-foreground leading-normal">
+        <div className="text-muted-foreground">
           <span className="opacity-50 uppercase text-sm font-bold">
             On self enter:{' '}
           </span>
@@ -155,7 +180,7 @@ export const ModifierRenderers: Record<string, ModifierRenderer> = {
         <span className="opacity-50 uppercase text-sm font-bold">
           On turn end:{' '}
         </span>
-        Afflicted unit takes{' '}
+        Afflicted units take{' '}
         {(modifier as unknown as DamageAllOnTurnEnd).damage} damage.
       </div>
     ),

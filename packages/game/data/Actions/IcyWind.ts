@@ -13,7 +13,7 @@ import {
   buildActionResult,
 } from '../../utils'
 import { ActionId } from '../Ids'
-import { SpeedOffsetParent } from '../Modifiers'
+import { SpeedUpParent } from '../Modifiers'
 import { Identity } from '../Mutations'
 import { GetUnits } from '../Queries'
 
@@ -59,7 +59,7 @@ export class IcyWind extends Action {
         onSuccess: {
           addedModifiers: modifiedTargets.map(
             (target) =>
-              new SpeedOffsetParent({
+              new SpeedUpParent({
                 sourceId: source.id,
                 parentId: target.id,
                 offset: -10,

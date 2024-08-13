@@ -12,7 +12,6 @@ import {
 import { AiFillCaretDown, AiFillCaretUp } from 'react-icons/ai'
 import { BiSearch } from 'react-icons/bi'
 import {
-  GiBatteryPackAlt,
   GiBiceps,
   GiSandstorm,
   GiShoulderArmor,
@@ -20,6 +19,7 @@ import {
 } from 'react-icons/gi'
 import { HiFire } from 'react-icons/hi2'
 import { IconType } from 'react-icons/lib'
+import { TiSpiral } from 'react-icons/ti'
 
 export const MODIFIER_BASE_ICONS: Record<
   string,
@@ -57,11 +57,6 @@ export const MODIFIER_BASE_ICONS: Record<
     'fill-white',
     undefined,
   ],
-  [SetIsStunnedParentId]: [
-    GiBatteryPackAlt,
-    undefined,
-    'fill-red-400',
-    undefined,
-  ],
+  [SetIsStunnedParentId]: [TiSpiral, undefined, 'fill-red-200', undefined],
   [SandstormOnTurnEndId]: [GiSandstorm, undefined, 'fill-amber-100', undefined],
 }

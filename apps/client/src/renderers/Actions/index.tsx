@@ -37,6 +37,9 @@ import {
   SetIsInspectedAll,
   WardId,
   BurnStatus,
+  SetIsStunnedParent,
+  DefenseDownParent,
+  SetIsProtectedParent,
 } from '@repo/game/data'
 import { Action, ActionResult, CombatContext, Unit } from '@repo/game/types'
 import { Fragment, ReactNode } from 'react'
@@ -159,13 +162,17 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
     name: ACTION_NAMES[CrunchId],
     baseDamage: (action) => `${action.damage?.value}`,
     cost: '',
-    description: (action) => {
+    description: (action, props) => {
       const crunch = action as Crunch
       return (
         <>
           Deals <DamageInline damage={crunch.damage} /> to target enemy unit.
           20% chance to apply{' '}
-          <span className="font-bold text-white">Defense Down</span> to target.
+          <ModifierInline
+            side={props?.side}
+            modifier={new DefenseDownParent({ coef: 1.5 })}
+          />{' '}
+          to target.
         </>
       )
     },
@@ -265,14 +272,17 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
     baseDamage: () => 'ƒ(x)',
     cost: '30 FP',
     costAlt: <span className="text-blue-300">30 FP</span>,
-    description: (action) => (
+    description: (action, props) => (
       <>
         Deals base force damage equal to this unit's magic stat to target enemy
-        unit. Applies <span className="font-bold text-white">Stun</span> to this
-        unit for 1 turn.
+        unit. Applies{' '}
+        <ModifierInline
+          side={props?.side}
+          modifier={new SetIsStunnedParent({})}
+        />{' '}
+        to this unit for 1 turn.
       </>
     ),
-    help: () => <>(The unit cannot act while Stunned.)</>,
   },
   [IcyWindId]: {
     name: 'Icy Wind',
@@ -330,10 +340,14 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
     name: ACTION_NAMES[ProtectId],
     baseDamage: () => '',
     cost: '',
-    description: (action) => (
+    description: (action, props) => (
       <>
-        Applies <span className="font-bold text-white">Protected</span> to this
-        unit for 1 turn. Cannot be used twice in a row.
+        Applies{' '}
+        <ModifierInline
+          side={props?.side}
+          modifier={new SetIsProtectedParent({})}
+        />{' '}
+        to this unit for 1 turn. Cannot be used twice in a row.
       </>
     ),
     failureLog: (result) => <>Protect failed.</>,

@@ -19,6 +19,7 @@ import {
   PhysicalAttackDownParent,
   CreateSandstormOnUnitEnter,
   DefenseDownParent,
+  DamageNewUnitsOnUnitEnter,
 } from '@repo/game/data'
 import { ReactNode } from 'react'
 import { Modifier } from '@repo/game/types'
@@ -176,7 +177,7 @@ export const ModifierRenderers: Record<string, ModifierRenderer> = {
       <span className="text-white">{MODIFIER_NAMES[SandstormOnTurnEndId]}</span>
     ),
     description: (modifier: Modifier) => (
-      <div className="text-muted-foreground leading-normal">
+      <div className="text-muted-foreground">
         <span className="opacity-50 uppercase text-sm font-bold">
           On turn end:{' '}
         </span>
@@ -190,6 +191,15 @@ export const ModifierRenderers: Record<string, ModifierRenderer> = {
       <span className="text-white">
         {MODIFIER_NAMES[DamageNewUnitsOnUnitEnterId]}
       </span>
+    ),
+    description: (modifier: Modifier) => (
+      <div className="text-muted-foreground">
+        <span className="opacity-50 uppercase text-sm font-bold">
+          On unit enter:{' '}
+        </span>
+        That unit takes{' '}
+        {(modifier as unknown as DamageNewUnitsOnUnitEnter).damage} damage.
+      </div>
     ),
   },
   [PowerDownAllOtherOnUnitEnterId]: {

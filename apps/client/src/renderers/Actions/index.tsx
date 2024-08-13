@@ -40,6 +40,7 @@ import {
   SetIsStunnedParent,
   DefenseDownParent,
   SetIsProtectedParent,
+  DamageNewUnitsOnUnitEnter,
 } from '@repo/game/data'
 import { Action, ActionResult, CombatContext, Unit } from '@repo/game/types'
 import { Fragment, ReactNode } from 'react'
@@ -384,10 +385,14 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
     name: ACTION_NAMES[SpikesId],
     baseDamage: () => '',
     cost: '',
-    description: (action) => (
+    description: (action, props) => (
       <>
-        Applies <span className="font-bold text-white">Spikes</span> to all
-        units.
+        Applies{' '}
+        <ModifierInline
+          side={props?.side}
+          modifier={new DamageNewUnitsOnUnitEnter({ damage: 20 })}
+        />{' '}
+        to all units.
       </>
     ),
     help: () => (

@@ -5,6 +5,7 @@ import { useLoadGraph, useRegisterEvents, useSigma } from '@react-sigma/core'
 import { useLayoutNoverlap } from '@react-sigma/layout-noverlap'
 import { useLayoutRandom } from '@react-sigma/layout-random'
 import { useNavigate } from '@tanstack/react-router'
+import chroma from 'chroma-js'
 import { MultiDirectedGraph } from 'graphology'
 import { useEffect } from 'react'
 
@@ -47,8 +48,8 @@ export function WorldGraph() {
           if (edge !== activeNode?.id) {
             graph.addDirectedEdge(node.id, edge, {
               size: 5,
-              type: 'arrow',
-              color: isActive ? '#ffffff' : 'grey',
+              type: 'curved',
+              color: isActive ? '#ffffff' : 'rgba(255,255,255,0.5)',
             })
           }
         }
@@ -61,6 +62,12 @@ export function WorldGraph() {
     const graph = makeGraph()
     loadGraph(graph, true)
     nolap.assign()
+    sigma.updateSetting('edgeReducer', () => (edge, attr) => {
+      if (graph.source(edge) !== game.world.activeNodeId) {
+        attr.color = chroma('#334155').alpha(0.01).hex()
+      }
+      return attr
+    })
   }, [loadGraph])
 
   useEffect(() => {

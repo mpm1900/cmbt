@@ -78,7 +78,7 @@ export function Builder() {
             disabled={store.builders.length < 2}
             onClick={() => {
               initialize()
-              nav({ to: '/world' })
+              nav({ to: '/world2' })
             }}
           >
             Start!

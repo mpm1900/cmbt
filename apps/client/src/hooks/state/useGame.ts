@@ -1,16 +1,17 @@
 import { Encounter, Id, Item, Team, Unit } from '@repo/game/types'
 import { create } from 'zustand'
 
-type Point = { x: number; y: number }
+export type GameWorldNodeIconKey = 'combat' | 'shop' | 'start'
 
 export type GameWorldNode = {
   id: Id
   x: number
   y: number
   size: number
-  encounter: Encounter
   edges: Id[]
   isInteractable: boolean
+  icon: GameWorldNodeIconKey
+  encounter: Encounter
 }
 
 export type GameWorld = {

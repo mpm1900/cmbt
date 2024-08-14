@@ -1,10 +1,10 @@
-import { GraphResetButton } from '@/components/world/GraphResetButton'
-import { WorldGraph } from '@/components/world/WorldGraph'
+import { WorldGraph } from '@/components/world/WorldGraphSigma'
 import { useGame } from '@/hooks/state'
 import { SigmaContainer } from '@react-sigma/core'
 import { Navbar } from '@shared/Navbar'
 import { PageLayout } from '@shared/PageLayout'
 import { TeamHeader } from '@shared/TeamHeader'
+import EdgeCurveProgram from '@sigma/edge-curve'
 import { createNodeImageProgram } from '@sigma/node-image'
 import { useNavigate } from '@tanstack/react-router'
 import { useMemo } from 'react'
@@ -31,25 +31,21 @@ export function World() {
       NodeCircleProgram,
       NodePictogramCustomProgram,
     ])
+
     return {
       allowInvalidContainer: true,
       nodeProgramClasses: {
         pictogram: NodeProgram,
       },
+      edgeProgramClasses: {
+        curved: EdgeCurveProgram,
+      },
       defaultNodeType: 'pictogram',
       labelDensity: 0.07,
       labelGridCellSize: 60,
       labelRenderedSizeThreshold: 15,
+      enableEdgeEvents: true,
       zIndex: true,
-      /*
-      edgeReducer: (_, attr) => {
-        console.log('pre', attr.color)
-        attr.color = chroma(attr.color).alpha(0.25).hex()
-
-        console.log('post', attr.color)
-        return attr
-      },
-      */
     }
   }, [])
 
@@ -57,11 +53,7 @@ export function World() {
     <PageLayout
       navbar={<Navbar />}
       //aside={<EncounterSidebar />}
-      header={
-        <div>
-          <TeamHeader team={game.team} />
-        </div>
-      }
+      header={<TeamHeader team={game.team} />}
     >
       {game.world && (
         <SigmaContainer
@@ -69,9 +61,6 @@ export function World() {
           style={{ background: 'transparent', overflow: 'hidden' }}
         >
           <WorldGraph />
-          <div style={{ position: 'absolute', top: 8, right: 8 }}>
-            <GraphResetButton />
-          </div>
         </SigmaContainer>
       )}
     </PageLayout>

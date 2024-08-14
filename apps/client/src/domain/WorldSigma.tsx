@@ -11,7 +11,7 @@ import { useMemo } from 'react'
 import { NodeCircleProgram, createNodeCompoundProgram } from 'sigma/rendering'
 import { Settings } from 'sigma/settings'
 
-export function World() {
+export function WorldSigma() {
   const game = useGame()
   const nav = useNavigate()
 

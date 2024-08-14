@@ -3,11 +3,14 @@ import { cn } from '@/lib/utils'
 import { Badge, BadgeProps } from '../ui/badge'
 import { Separator } from '../ui/separator'
 
-const StatusBadge = (props: BadgeProps & { isActive: boolean }) => (
+const StatusBadge = ({
+  isActive,
+  ...props
+}: BadgeProps & { isActive: boolean }) => (
   <Badge
     {...props}
-    variant={props.isActive ? 'default' : 'secondary'}
-    className={cn({ 'bg-white/75 hover:bg-white/75': props.isActive })}
+    variant={isActive ? 'default' : 'secondary'}
+    className={cn({ 'bg-white/75 hover:bg-white/75': isActive })}
   />
 )
 

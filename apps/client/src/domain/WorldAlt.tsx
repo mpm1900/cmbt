@@ -2,6 +2,7 @@ import { Button } from '@/components/ui/button'
 import { GameWorldNode, useGame } from '@/hooks/state'
 import { useEncounter } from '@/hooks/state/useEncounter'
 import { getNodeIcon } from '@/utils/getNodeIcon'
+import { EncounterSidebar } from '@shared/EncounterSidebar'
 import { Navbar } from '@shared/Navbar'
 import { PageLayout } from '@shared/PageLayout'
 import { TeamHeader } from '@shared/TeamHeader'
@@ -31,6 +32,37 @@ export function WorldAlt() {
   const nav = useNavigate()
   const [cy, set] = useState<Core>()
   const [hoverNode, setHoverNode] = useState<NodeSingular>()
+
+  function renderLayers() {
+    if (!cy) return
+    // @ts-ignore
+    const layers = cy.layers()
+    layers.destroy()
+    layers.renderPerNode(
+      layers.append('html'),
+      (elem: HTMLDivElement, node: NodeSingular) => {
+        const isHover = node.id() === hoverNode?.id()
+        const isActive = node.id() === game.world.activeNodeId
+        const neighbors = node
+          .incomers()
+          .filter((e: NodeSingular) => e.isNode())
+          .map((neighbor: NodeSingular) => neighbor.id())
+        const isActiveNeightbor = neighbors.includes(game.world.activeNodeId)
+        const data: GameWorldNode = node.data()
+
+        elem.innerHTML = getNodeIcon(data.icon)
+        elem.style.display = 'flex'
+        elem.style.width = isHover ? '26px' : '22px'
+        elem.style.height = isHover ? '26px' : '22px'
+        elem.style.justifyContent = 'center'
+        elem.style.alignItems = 'center'
+        elem.style.opacity =
+          isActive || (isActiveNeightbor && isHover) ? '1' : '0.5'
+        elem.style.cursor =
+          isActive || isActiveNeightbor ? 'pointer' : 'default'
+      }
+    )
+  }
 
   useEffect(() => {
     if (cy) {
@@ -63,27 +95,6 @@ export function WorldAlt() {
       cy.on('mouseout', 'node', function (event) {
         setHoverNode(undefined)
       })
-
-      // @ts-ignore
-      const layers = cy.layers()
-      layers.renderPerNode(
-        layers.append('html'),
-        (elem: HTMLDivElement, node: NodeSingular) => {
-          const isActive = node.id() === game.world.activeNodeId
-          const neighbors = node
-            .incomers()
-            .filter((e: NodeSingular) => e.isNode())
-            .map((neighbor: NodeSingular) => neighbor.id())
-          const isActiveNeightbor = neighbors.includes(game.world.activeNodeId)
-          const data: GameWorldNode = node.data()
-
-          elem.innerHTML = getNodeIcon(data.icon)
-          elem.style.padding = '5px'
-          elem.style.opacity = isActive ? '1' : '0.5'
-          elem.style.cursor =
-            isActive || isActiveNeightbor ? 'pointer' : 'default'
-        }
-      )
     }
 
     return () => {
@@ -91,10 +102,14 @@ export function WorldAlt() {
     }
   }, [cy])
 
+  useEffect(() => {
+    renderLayers()
+  }, [hoverNode])
+
   return (
     <PageLayout
       navbar={<Navbar />}
-      //aside={<EncounterSidebar />}
+      aside={<EncounterSidebar />}
       header={<TeamHeader team={game.team} />}
     >
       {cy && (
@@ -110,10 +125,14 @@ export function WorldAlt() {
           Center
         </Button>
       )}
+      {/* @ts-ignore */}
       <CytoscapeComponent
         cy={(cy) => {
-          console.log(cy)
           set(cy)
+          cy.animate({
+            duration: 0,
+            complete: renderLayers,
+          })
         }}
         autoungrabify={true}
         style={{ height: '100%', overflow: 'hidden' }}
@@ -157,6 +176,9 @@ export function WorldAlt() {
                     ? 'royalblue'
                     : 'white'
               },
+              'outline-width': function (node: NodeSingular) {
+                return node.id() === hoverNode?.id() ? 2 : 0
+              },
               opacity: function (node: NodeSingular) {
                 const activeIncomers = node.incomers(
                   `#${game.world.activeNodeId}`
@@ -191,11 +213,12 @@ export function WorldAlt() {
                   source.id() === game.world.activeNodeId
                 return !isActive && isRoot ? 0 : isActiveNeightbor ? 0.8 : 0.1
               },
-              width: 1,
-              'curve-style': 'bezier',
-              'taxi-direction': 'horizontal',
-              'target-arrow-shape': 'vee',
+              // @ts-ignore
+              'curve-style': 'round-segments',
+              width: 3,
+              'target-arrow-shape': 'triangle',
               'arrow-scale': 0.5,
+
               'target-arrow-color': function (edge) {
                 const isActive = edge.source().id() === game.world.activeNodeId
                 return isActive ? 'limegreen' : 'white'
@@ -206,6 +229,7 @@ export function WorldAlt() {
         layout={
           {
             name: 'cola',
+            animate: false,
             //condense: true,
             padding: 64,
           } as LayoutOptions

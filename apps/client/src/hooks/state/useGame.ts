@@ -7,9 +7,10 @@ export type GameWorldNode = {
   id: Id
   size: number
   edges: Id[]
-  isInteractable: boolean
   icon: GameWorldNodeIconKey
   encounter: Encounter
+  isInteractable: boolean
+  repeats: boolean
 }
 
 export type GameWorld = {
@@ -32,7 +33,7 @@ type InitializeProps = {
 
 export type GameStore = GameState & {
   initialize: (props: InitializeProps) => void
-  setActiveNodeId: (nodeId: Id) => void
+  setActiveNodeId: (node: GameWorldNode) => void
   updateTeam: (fn: (team: Team) => Partial<Team>) => void
   addItem: (item: Item) => void
 }
@@ -57,14 +58,14 @@ export const useGame = create<GameStore>((set) => ({
       units: props.units,
       world: props.world,
     }),
-  setActiveNodeId: (nodeId) => {
+  setActiveNodeId: (node) => {
     set((s) => ({
       world: {
         ...s.world,
-        activeNodeId: nodeId,
-        visitiedNodeIds: Array.from(
-          new Set([...s.world.visitiedNodeIds, nodeId])
-        ),
+        activeNodeId: node.id,
+        visitiedNodeIds: node.repeats
+          ? s.world.visitiedNodeIds
+          : Array.from(new Set([...s.world.visitiedNodeIds, node.id])),
       },
     }))
   },

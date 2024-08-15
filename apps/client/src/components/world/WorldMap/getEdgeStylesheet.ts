@@ -10,16 +10,32 @@ export type GetEdgeStylesheetOptions = {
 export function getEdgeStylesheet(
   options: GetEdgeStylesheetOptions
 ): Stylesheet {
-  const { activeNode, hoverNode } = options
+  const { activeNode, hoverNode, visitedNodeIds } = options
   const isActiveNode = (node: NodeSingular) =>
     (activeNode && node.same(activeNode)) || false
 
+  const visitedNodes = activeNode
+    ?.cy()
+    .nodes()
+    .filter((n) => visitedNodeIds.includes(n.id()))
+  const isActiveNeightbor = (node: NodeSingular) =>
+    !!visitedNodes?.outgoers().has(node) || activeNode?.outgoers().has(node)
+
   const result = hoverNode
-    ? activeNode?.cy().elements().aStar({
-        root: activeNode,
-        goal: hoverNode,
-        directed: true,
-      })
+    ? activeNode
+        ?.cy()
+        .elements()
+        .filter(
+          (e) =>
+            e.isEdge() ||
+            isActiveNeightbor(e) ||
+            visitedNodeIds.includes(e.id())
+        )
+        .aStar({
+          root: activeNode,
+          goal: hoverNode,
+          directed: true,
+        })
     : undefined
 
   return {

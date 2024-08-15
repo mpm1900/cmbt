@@ -29,7 +29,7 @@ export function useWorldMapEvents(cy: Core | undefined) {
         const data: GameWorldNode = event.target.data()
         const { isSelectable } = getNodeState(node, options)
         if (data && data.isInteractable && data.encounter && isSelectable) {
-          game.setActiveNodeId(node.id())
+          game.setActiveNodeId(node.data())
           encounter.updateEncounter(() => data.encounter)
           nav({ to: '/encounter' })
         }

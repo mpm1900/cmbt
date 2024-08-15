@@ -20,6 +20,7 @@ export function makeWorld(): GameWorld {
         },
         edges: [ShopEncounter.id + '0'],
         isInteractable: false,
+        repeats: false,
       },
       {
         id: ShopEncounter.id + '0',
@@ -28,6 +29,7 @@ export function makeWorld(): GameWorld {
         encounter: ShopEncounter,
         edges: [TestEncounter.id + '0', TestEncounter.id + '1'],
         isInteractable: true,
+        repeats: false,
       },
       {
         id: TestEncounter.id + '0',
@@ -36,6 +38,7 @@ export function makeWorld(): GameWorld {
         encounter: TestEncounter,
         edges: [ShopEncounter.id + '0'],
         isInteractable: true,
+        repeats: false,
       },
       {
         id: TestEncounter.id + '1',
@@ -44,6 +47,7 @@ export function makeWorld(): GameWorld {
         encounter: TestEncounter,
         edges: [TestEncounter.id + '2', TestEncounter.id + '4'],
         isInteractable: true,
+        repeats: true,
       },
       {
         id: TestEncounter.id + '4',
@@ -52,6 +56,7 @@ export function makeWorld(): GameWorld {
         encounter: TestEncounter,
         edges: [],
         isInteractable: true,
+        repeats: false,
       },
       {
         id: TestEncounter.id + '2',
@@ -64,6 +69,7 @@ export function makeWorld(): GameWorld {
           ShopEncounter.id + '1',
         ],
         isInteractable: true,
+        repeats: false,
       },
       {
         id: ShopEncounter.id + '1',
@@ -72,6 +78,7 @@ export function makeWorld(): GameWorld {
         encounter: ShopEncounter,
         edges: [TestEncounter.id + '0', TestEncounter.id + '3'],
         isInteractable: true,
+        repeats: false,
       },
       {
         id: TestEncounter.id + '3',
@@ -80,6 +87,7 @@ export function makeWorld(): GameWorld {
         encounter: TestEncounter,
         edges: [],
         isInteractable: true,
+        repeats: false,
       },
     ],
   }

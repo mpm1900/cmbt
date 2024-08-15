@@ -4,6 +4,7 @@ import { useNavigate } from '@tanstack/react-router'
 import { Core, NodeSingular } from 'cytoscape'
 import { useEffect, useState } from 'react'
 import { getNodeState } from './getNodeState'
+import { isPathable } from './isPathable'
 
 export type UseWorldMapEventsProps = {
   cy?: Core
@@ -27,8 +28,8 @@ export function useWorldMapEvents(cy: Core | undefined) {
       cy.on('tap', 'node', function (event) {
         const node = event.target as NodeSingular
         const data: GameWorldNode = event.target.data()
-        const { isSelectable } = getNodeState(node, options)
-        if (data && data.isInteractable && data.encounter && isSelectable) {
+        const isClickable = isPathable(node, options)
+        if (data && data.isInteractable && data.encounter && isClickable) {
           game.setActiveNodeId(node.data())
           encounter.updateEncounter(() => data.encounter)
           nav({ to: '/encounter' })

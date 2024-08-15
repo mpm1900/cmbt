@@ -7,11 +7,10 @@ export const StartId = nanoid()
 export function makeWorld(): GameWorld {
   return {
     activeNodeId: StartId,
+    visitiedNodeIds: [],
     nodes: [
       {
         id: StartId,
-        x: -1.1,
-        y: -1,
         size: 20,
         icon: 'start',
         encounter: {
@@ -24,8 +23,6 @@ export function makeWorld(): GameWorld {
       },
       {
         id: ShopEncounter.id + '0',
-        x: -1,
-        y: -1,
         size: 20,
         icon: 'shop',
         encounter: ShopEncounter,
@@ -34,8 +31,6 @@ export function makeWorld(): GameWorld {
       },
       {
         id: TestEncounter.id + '0',
-        x: 0,
-        y: 1,
         size: 20,
         icon: 'combat',
         encounter: TestEncounter,
@@ -44,8 +39,6 @@ export function makeWorld(): GameWorld {
       },
       {
         id: TestEncounter.id + '1',
-        x: 1,
-        y: 1,
         size: 20,
         icon: 'combat',
         encounter: TestEncounter,
@@ -54,8 +47,6 @@ export function makeWorld(): GameWorld {
       },
       {
         id: TestEncounter.id + '4',
-        x: 1,
-        y: 1,
         size: 20,
         icon: 'combat',
         encounter: TestEncounter,
@@ -64,8 +55,6 @@ export function makeWorld(): GameWorld {
       },
       {
         id: TestEncounter.id + '2',
-        x: 1,
-        y: 1,
         size: 20,
         icon: 'combat',
         encounter: TestEncounter,
@@ -76,11 +65,8 @@ export function makeWorld(): GameWorld {
         ],
         isInteractable: true,
       },
-
       {
         id: ShopEncounter.id + '1',
-        x: -1,
-        y: -1,
         size: 20,
         icon: 'shop',
         encounter: ShopEncounter,
@@ -89,8 +75,6 @@ export function makeWorld(): GameWorld {
       },
       {
         id: TestEncounter.id + '3',
-        x: 1,
-        y: 1,
         size: 20,
         icon: 'combat',
         encounter: TestEncounter,

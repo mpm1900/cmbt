@@ -1,23 +1,16 @@
+import { Id } from '@repo/game/types'
 import { NodeSingular, Stylesheet } from 'cytoscape'
+import { getNodeState } from './getNodeState'
 
 export type GetNodeStylesheetOptions = {
   activeNode: NodeSingular | undefined
   hoverNode: NodeSingular | undefined
+  visitedNodeIds: Id[]
 }
 
 export function getNodeStylesheet(
   options: GetNodeStylesheetOptions
 ): Stylesheet {
-  const { activeNode, hoverNode } = options
-  const isActiveNode = (node: NodeSingular) =>
-    (activeNode && node.same(activeNode)) || false
-  const isActiveNeightborNode = (node: NodeSingular) => {
-    const activeIncomers = node.incomers(`#${activeNode?.id()}`)
-    return !activeIncomers.empty()
-  }
-  const isHoverNode = (node: NodeSingular) =>
-    (hoverNode && node.same(hoverNode)) || false
-
   return {
     selector: 'node',
     style: {
@@ -32,34 +25,24 @@ export function getNodeStylesheet(
         return size
       },
       backgroundColor: function (node) {
-        const isActive = isActiveNode(node)
-        const isActiveNeightbor = isActiveNeightborNode(node)
+        const { isActive, isActiveNeightbor, isVisited } = getNodeState(
+          node,
+          options
+        )
 
         return isActive
           ? 'limegreen'
-          : isActiveNeightbor
+          : isActiveNeightbor && !isVisited
             ? 'royalblue'
             : 'white'
       },
-      // @ts-ignore
-      /*
-      'outline-width': function (node: NodeSingular) {
-        const isActive = isActiveNode(node)
-        const isActiveNeightbor = isActiveNeightborNode(node)
-        return (isActive || isActiveNeightbor) && node.id() === hoverNode?.id()
-          ? 2
-          : 0
-      },
-      */
       'border-color': 'white',
       'border-opacity': 1,
 
       opacity: function (node: NodeSingular) {
-        const isActive = isActiveNode(node)
-        const isActiveNeightbor = isActiveNeightborNode(node)
-        const isHover = isHoverNode(node)
-        if (isHover && (isActive || isActiveNeightbor)) return 1
-        return isActive || isActiveNeightbor ? 0.75 : 0.4
+        const { isHover, isSelectable } = getNodeState(node, options)
+        if (isHover && isSelectable) return 1
+        return isSelectable ? 0.75 : 0.2
       },
 
       shape: 'round-rectangle',

@@ -19,23 +19,33 @@ export function World() {
       header={<TeamHeader team={game.team} />}
     >
       {cy && (
-        <Button
-          style={{ position: 'absolute', bottom: 8, right: 8, zIndex: 123 }}
-          variant="ghost"
-          onClick={() => {
-            const active = cy.nodes(`#${game.world.activeNodeId}`).first()
-            cy.fit()
-            cy.center(active)
-          }}
-        >
-          Center
-        </Button>
+        <div style={{ position: 'absolute', bottom: 8, right: 8, zIndex: 2 }}>
+          <Button
+            variant="ghost"
+            onClick={() => {
+              cy.fit(undefined, 64)
+            }}
+          >
+            Reset
+          </Button>
+          <Button
+            variant="ghost"
+            onClick={() => {
+              const active = cy.nodes(`#${game.world.activeNodeId}`).first()
+              cy.fit()
+              cy.center(active)
+            }}
+          >
+            Center
+          </Button>
+        </div>
       )}
 
       <Graph
         cy={(cy) => set(cy)}
         nodes={game.world.nodes}
         activeNodeId={game.world.activeNodeId}
+        visitedNodeIds={game.world.visitiedNodeIds}
       />
     </PageLayout>
   )

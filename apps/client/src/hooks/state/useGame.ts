@@ -5,8 +5,6 @@ export type GameWorldNodeIconKey = 'combat' | 'shop' | 'start'
 
 export type GameWorldNode = {
   id: Id
-  x: number
-  y: number
   size: number
   edges: Id[]
   isInteractable: boolean
@@ -15,8 +13,9 @@ export type GameWorldNode = {
 }
 
 export type GameWorld = {
-  activeNodeId: Id
   nodes: GameWorldNode[]
+  activeNodeId: Id
+  visitiedNodeIds: Id[]
 }
 
 export type GameState = {
@@ -42,6 +41,7 @@ export const useGame = create<GameStore>((set) => ({
   world: {
     activeNodeId: '',
     nodes: [],
+    visitiedNodeIds: [],
   },
   team: {
     id: '',
@@ -62,6 +62,9 @@ export const useGame = create<GameStore>((set) => ({
       world: {
         ...s.world,
         activeNodeId: nodeId,
+        visitiedNodeIds: Array.from(
+          new Set([...s.world.visitiedNodeIds, nodeId])
+        ),
       },
     }))
   },

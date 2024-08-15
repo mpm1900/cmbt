@@ -11,18 +11,12 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
-import { Route as World2Import } from './routes/world2'
 import { Route as WorldImport } from './routes/world'
 import { Route as EncounterImport } from './routes/encounter'
 import { Route as CombatImport } from './routes/combat'
 import { Route as IndexImport } from './routes/index'
 
 // Create/Update Routes
-
-const World2Route = World2Import.update({
-  path: '/world2',
-  getParentRoute: () => rootRoute,
-} as any)
 
 const WorldRoute = WorldImport.update({
   path: '/world',
@@ -76,13 +70,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof WorldImport
       parentRoute: typeof rootRoute
     }
-    '/world2': {
-      id: '/world2'
-      path: '/world2'
-      fullPath: '/world2'
-      preLoaderRoute: typeof World2Import
-      parentRoute: typeof rootRoute
-    }
   }
 }
 
@@ -93,7 +80,6 @@ export const routeTree = rootRoute.addChildren({
   CombatRoute,
   EncounterRoute,
   WorldRoute,
-  World2Route,
 })
 
 /* prettier-ignore-end */
@@ -107,8 +93,7 @@ export const routeTree = rootRoute.addChildren({
         "/",
         "/combat",
         "/encounter",
-        "/world",
-        "/world2"
+        "/world"
       ]
     },
     "/": {
@@ -122,9 +107,6 @@ export const routeTree = rootRoute.addChildren({
     },
     "/world": {
       "filePath": "world.tsx"
-    },
-    "/world2": {
-      "filePath": "world2.tsx"
     }
   }
 }

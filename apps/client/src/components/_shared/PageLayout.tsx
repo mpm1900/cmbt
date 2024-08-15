@@ -13,7 +13,9 @@ export function PageLayout(props: PageLayoutProps) {
       {navbar}
       <div className="flex flex-1 flex-col">
         {header}
-        <div className="flex flex-1 flex-col overflow-hidden">{children}</div>
+        <div className="flex flex-1 flex-col overflow-hidden relative">
+          {children}
+        </div>
       </div>
       {aside}
     </div>

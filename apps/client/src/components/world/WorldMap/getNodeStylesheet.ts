@@ -30,10 +30,11 @@ export function getNodeStylesheet(
           node,
           options
         )
+        const isInteractable = isPathable(node, options)
 
         return isActive
           ? 'limegreen'
-          : isActiveNeightbor && !isVisited
+          : isActiveNeightbor && !isVisited && isInteractable
             ? 'royalblue'
             : 'white'
       },

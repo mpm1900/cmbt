@@ -7,7 +7,7 @@ export const StartId = nanoid()
 export function makeWorld(): GameWorld {
   return {
     activeNodeId: StartId,
-    visitiedNodeIds: [],
+    visitiedNodeIds: [StartId],
     nodes: [
       {
         id: StartId,

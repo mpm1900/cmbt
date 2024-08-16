@@ -13,6 +13,7 @@ export type GameWorldNode = {
   edges: GameWorldEdge[]
   icon: GameWorldNodeIconKey
   encounter: Encounter
+  backtrackable: boolean
   completed: boolean
   repeatable: boolean
   onEnter?: (ctx: EncounterContext) => void

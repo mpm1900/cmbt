@@ -26,6 +26,7 @@ const StartNode: GameWorldNode = {
   edges: [edge(shop('0'))],
   completed: true,
   repeatable: false,
+  backtrackable: false,
 }
 
 type NodeMaker = (
@@ -34,7 +35,7 @@ type NodeMaker = (
   overries?: Partial<GameWorldNode>
 ) => GameWorldNode
 
-const ShopNode: NodeMaker = (id, edges, overries) => ({
+const ShopNode: NodeMaker = (id, edges, overrides) => ({
   id: shop(id),
   size: 20,
   icon: 'shop',
@@ -42,10 +43,11 @@ const ShopNode: NodeMaker = (id, edges, overries) => ({
   edges,
   completed: false,
   repeatable: true,
-  ...overries,
+  backtrackable: true,
+  ...overrides,
 })
 
-const TestNode: NodeMaker = (id, edges, overries) => ({
+const TestNode: NodeMaker = (id, edges, overrides) => ({
   id: test(id),
   size: 20,
   icon: 'combat',
@@ -53,7 +55,8 @@ const TestNode: NodeMaker = (id, edges, overries) => ({
   edges,
   completed: false,
   repeatable: false,
-  ...overries,
+  backtrackable: true,
+  ...overrides,
 })
 
 export function makeWorld(): GameWorld {
@@ -63,7 +66,7 @@ export function makeWorld(): GameWorld {
     nodes: [
       StartNode,
       ShopNode('0', [edge(test('1'))]),
-      TestNode('0', [edge(shop('0'))]),
+      TestNode('0', [edge(shop('0'))], { backtrackable: false }),
       TestNode('1', [edge(test('2')), edge(test('4'))]),
       TestNode('4', [edge(shop('2'))]),
       TestNode('2', [edge(shop('0')), edge(test('1')), edge(shop('1'))]),

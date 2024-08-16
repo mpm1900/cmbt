@@ -21,6 +21,7 @@ export function getPath(
     ?.cy()
     .nodes()
     .filter((n) => n.data('completed'))
+
   const isActiveNeightbor = (node: NodeSingular | EdgeCollection) =>
     !!getOutgoers(completedNodes)?.has(node) || false
 
@@ -29,7 +30,8 @@ export function getPath(
     .filter((e) => {
       const valid =
         (e.isEdge() &&
-          (e.source().same(activeNode) || completedNodes.has(e.source()))) ||
+          ((e.source().same(activeNode) && e.source().data('backtrackable')) ||
+            completedNodes.has(e.source()))) ||
         completedNodes.has(e) ||
         isActiveNeightbor(e)
 

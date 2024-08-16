@@ -19,15 +19,16 @@ export function getNodeState(node: NodeSingular, options: GetNodeStateOptions) {
     getOutgoers(activeNode)?.has(node)
   const isHover = !!hoverNode?.same(node)
   const isCompleted = !!completedNodes?.has(node)
+  const isRepeatable = !!node.data('repeatable')
   const isSelectable =
-    isActive || isActiveNeightbor || (isCompleted && node.data('repeatable'))
+    isActive || isActiveNeightbor || (isCompleted && isRepeatable)
 
   return {
     isActive,
     isActiveNeightbor,
     isCompleted,
     isHover,
-    isRepeatable: !!node.data('repeatable'),
+    isRepeatable,
     isSelectable,
   }
 }

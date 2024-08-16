@@ -12,7 +12,7 @@ export function getNodeStylesheet(
   return {
     selector: 'node',
     style: {
-      //label: (node: NodeSingular) => node.data('completed'),
+      //label: (node: NodeSingular) => node.data('backtrackable'),
       'font-size': 12,
       color: 'white',
       height: function (node) {

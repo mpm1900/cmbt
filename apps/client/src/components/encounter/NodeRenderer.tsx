@@ -21,14 +21,18 @@ export function NodeRenderer(props: NodeRendererProps) {
         {node.renderChoices ? (
           node.renderChoices(ctx)
         ) : (
-          <div className="space-x-2 flex justify-center">
+          <div className="flex flex-col">
             {node
               .choices(ctx)
               .map((choice, index) =>
                 ctx.activeNode.renderChoice ? (
                   ctx.activeNode.renderChoice(choice, index, ctx)
                 ) : (
-                  <ChoiceButton key={choice.id} choice={choice} />
+                  <ChoiceButton
+                    key={choice.id}
+                    choice={choice}
+                    index={index + 1}
+                  />
                 )
               )}
           </div>

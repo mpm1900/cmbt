@@ -4,19 +4,21 @@ import { Button } from '../ui/button'
 
 export type ChoiceButtonProps = {
   choice: EncounterChoice
+  index: number
 }
 
 export function ChoiceButton(props: ChoiceButtonProps) {
-  const { choice } = props
+  const { choice, index } = props
   const ctx = useEncounterContext()
   return (
     <Button
-      variant={'secondary'}
+      className="justify-start items-start"
+      variant={'ghost'}
       onClick={() => {
         choice.resolve(ctx)
       }}
     >
-      {choice.label}
+      {index}. {choice.label}
     </Button>
   )
 }

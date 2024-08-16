@@ -9,22 +9,23 @@ export function isPathableNode(
   const state = getNodeState(node, options)
   const finder = getPath(options)
   const distance = finder?.distanceTo(node)
-  const value =
+  const isPathable =
     state.isActive || (state.isSelectable && distance && distance !== Infinity)
-  return value
+  return {
+    ...state,
+    isPathable,
+  }
 }
 
 export function isPathableEdge(
   edge: EdgeSingular,
   options: GetPathOptions & GetNodeStateOptions
 ) {
-  const targetState = getNodeState(edge.target(), options)
-  const isSourcePathable = isPathableNode(edge.source(), options)
-  const isTargetPathable = isPathableNode(edge.target(), options)
-  return (
+  const sourceState = isPathableNode(edge.source(), options)
+  const targetState = isPathableNode(edge.target(), options)
+  const isPathable =
+    (sourceState.isActive || sourceState.isPathable) &&
     !targetState.isActive &&
-    isSourcePathable &&
-    isTargetPathable &&
-    edge.source().data('completed')
-  )
+    targetState.isPathable
+  return isPathable
 }

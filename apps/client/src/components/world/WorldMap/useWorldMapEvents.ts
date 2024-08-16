@@ -28,11 +28,10 @@ export function useWorldMapEvents(cy: Core | undefined) {
       cy.on('tap', 'node', function (event) {
         const node = event.target as NodeSingular
         const data: GameWorldNode = event.target.data()
-        const isPathable = isPathableNode(node, options)
-        const isInteractable = !data.completed || data.repeatable
-        console.log(isInteractable, data)
+        const state = isPathableNode(node, options)
+        const isInteractable = !state.isCompleted || state.isRepeatable
 
-        if (isInteractable && data.encounter && isPathable) {
+        if (isInteractable && data.encounter && state.isPathable) {
           game.setActiveNodeId(node.data())
           encounter.updateEncounter(() => data.encounter)
           nav({ to: '/encounter' })

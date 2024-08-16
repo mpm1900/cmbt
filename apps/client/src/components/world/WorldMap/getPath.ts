@@ -28,7 +28,8 @@ export function getPath(
     .elements()
     .filter((e) => {
       const valid =
-        (e.isEdge() && completedNodes.has(e.source())) ||
+        (e.isEdge() &&
+          (e.source().same(activeNode) || completedNodes.has(e.source()))) ||
         completedNodes.has(e) ||
         isActiveNeightbor(e)
 

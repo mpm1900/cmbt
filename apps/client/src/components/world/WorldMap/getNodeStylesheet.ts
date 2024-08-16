@@ -1,6 +1,5 @@
 import { Id } from '@repo/game/types'
 import { NodeSingular, Stylesheet } from 'cytoscape'
-import { getNodeState } from './getNodeState'
 import { isPathableNode } from './isPathable'
 
 export type GetNodeStylesheetOptions = {
@@ -27,19 +26,15 @@ export function getNodeStylesheet(
         return size
       },
       backgroundColor: function (node) {
-        const { isActive, isActiveNeightbor, isCompleted } = getNodeState(
-          node,
-          options
-        )
-        const isInteractable = isPathableNode(node, options)
-        if (isActive) return 'limegreen'
-        if (isActiveNeightbor && !isCompleted && isInteractable)
+        const state = isPathableNode(node, options)
+        if (state.isActive) return 'limegreen'
+        if (state.isActiveNeightbor && !state.isCompleted && state.isPathable)
           return 'royalblue'
 
-        return isActiveNeightbor &&
-          isCompleted &&
-          isInteractable &&
-          node.data('repeatable')
+        return state.isActiveNeightbor &&
+          state.isCompleted &&
+          state.isPathable &&
+          state.isRepeatable
           ? 'lightblue'
           : 'white'
       },
@@ -47,10 +42,9 @@ export function getNodeStylesheet(
       'border-opacity': 1,
 
       opacity: function (node: NodeSingular) {
-        const { isHover } = getNodeState(node, options)
-        const isInteractable = isPathableNode(node, options)
-        if (isHover && isInteractable) return 1
-        return isInteractable ? 0.75 : 0.2
+        const state = isPathableNode(node, options)
+        if (state.isHover && state.isPathable) return 1
+        return state.isPathable ? 0.75 : 0.2
       },
 
       shape: 'round-rectangle',

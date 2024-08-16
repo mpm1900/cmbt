@@ -14,8 +14,7 @@ import { nanoid } from 'nanoid'
 const ShopIntroductionNode: EncounterNode = {
   id: nanoid(),
   title: 'Test Shop',
-  description:
-    'Welcome to the testy test, test shop. What would you like to do?',
+  text: 'Welcome to the testy test, test shop. What would you like to do?',
   choices: () => [
     {
       id: nanoid(),
@@ -31,7 +30,15 @@ const ShopIntroductionNode: EncounterNode = {
       id: nanoid(),
       label: 'Attack the shopkeep',
       resolve: (ctx) => {
-        ctx.initializeCombat({ enemyUnitCount: 6 })
+        ctx.initializeCombat({
+          enemyUnitCount: 6,
+          onSuccess: () => {
+            ctx.updateActiveWorldNode((n) => ({
+              completed: true,
+            }))
+          },
+          onFailure: () => {},
+        })
       },
       options: [],
     },
@@ -52,7 +59,7 @@ const ShopIntroductionNode: EncounterNode = {
 const ShopWaresNode: EncounterNode = {
   id: nanoid(),
   title: 'Test Shop - View Wares',
-  description: 'We have a number of things you might like!',
+  text: 'We have a number of things you might like!',
   choices: (ctx) =>
     [].map(() => ({
       id: nanoid(),

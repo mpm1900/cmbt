@@ -43,7 +43,7 @@ export function Combat() {
             <div>
               <div className="text-xxl">battle over!</div>
               <Link to="/world">
-                <Button>Back to World</Button>
+                <Button onClick={combat.onSuccess}>Back to World</Button>
               </Link>
             </div>
           </RequireTurnStatus>

@@ -21,6 +21,8 @@ export type InitializeProps = {
   enemy: Team
   mutations?: Mutation[]
   modifiers?: Modifier[]
+  onSuccess: () => void
+  onFailure: () => void
 }
 
 export type CombatLog = { id: Id; delay: number; node: ReactNode }
@@ -54,12 +56,24 @@ export type CombatStore = CombatState & {
   setStatus: (status: TurnStatus) => void
   setTurn: (fn: (turn: Turn) => Partial<Turn>) => Turn
   pushResult: (result: ActionResult | undefined) => void
+
+  // encounter link back
+  onSuccess: () => void
+  onFailure: () => void
 }
 
 export const useCombat = create<CombatStore>((set, get) => {
   return {
     initialize: (props) => {
-      const { units, user, enemy, modifiers = [], mutations = [] } = props
+      const {
+        units,
+        user,
+        enemy,
+        modifiers = [],
+        mutations = [],
+        onSuccess,
+        onFailure,
+      } = props
       const initialModifiers = [
         ...props.units
           .filter((u) => u.flags.isActive)
@@ -78,6 +92,8 @@ export const useCombat = create<CombatStore>((set, get) => {
           hasRanOnTurnEndTriggers: false,
         },
         logs: [],
+        onSuccess,
+        onFailure,
       })
       return get()
     },
@@ -210,5 +226,8 @@ export const useCombat = create<CombatStore>((set, get) => {
       set((s) => ({
         logs: s.logs.map((l) => (l.id === id ? { ...l, ...fn(l) } : l)),
       })),
+
+    onSuccess: () => {},
+    onFailure: () => {},
   }
 })

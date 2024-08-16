@@ -2,12 +2,17 @@ import { useGame } from '@/hooks/state'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../ui/tabs'
 import { SidebarUnit } from './SidebarUnit'
 
-export function EncounterSidebar() {
+export type EncounterSidebarProps = {
+  defaultValue?: string
+}
+
+export function EncounterSidebar(props: EncounterSidebarProps) {
+  const { defaultValue = 'team' } = props
   const game = useGame()
   return (
     <div className="w-[420px] bg-slate-950 border-l h-screen flex overflow-hidden">
       <Tabs
-        defaultValue="team"
+        defaultValue={defaultValue}
         className="flex flex-1 flex-col overflow-hidden"
       >
         <div className="p-2">

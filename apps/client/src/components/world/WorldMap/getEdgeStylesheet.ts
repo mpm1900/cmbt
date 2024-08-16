@@ -34,7 +34,7 @@ export function getEdgeStylesheet(
         return isPathable ? 'solid' : 'dashed'
       },
       'line-dash-pattern': [12, 4],
-      'curve-style': 'bezier',
+      'curve-style': 'bezier' as any,
       'target-arrow-shape': 'chevron',
       'arrow-scale': 1,
       'target-arrow-color': function (edge) {

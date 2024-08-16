@@ -4,7 +4,7 @@ import { nanoid } from 'nanoid'
 const LockedNode1: EncounterNode = {
   id: nanoid(),
   title: 'This encounter is locked',
-  description: 'Unlock?',
+  text: 'Unlock?',
   choices: () => [
     {
       id: nanoid(),

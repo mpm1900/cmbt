@@ -22,6 +22,8 @@ export function useEncounterContext(): EncounterContext {
         modifiers: [],
         mutations: [],
         enemyUnitCount: props.enemyUnitCount,
+        onFailure: props.onFailure,
+        onSuccess: props.onSuccess,
       })
     }
   }
@@ -31,6 +33,7 @@ export function useEncounterContext(): EncounterContext {
     encounter: store.encounter,
     team: game.team,
     back: () => nav({ to: '/world' }),
+    log: store.log,
     initializeCombat,
     updateActiveWorldNode: (fn) =>
       game.updateWorldNode(game.world.activeNodeId, fn),

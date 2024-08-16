@@ -11,6 +11,8 @@ export type InitializeFunctionProps = {
   modifiers: Modifier[]
   mutations: Mutation[]
   enemyUnitCount: number
+  onSuccess: () => void
+  onFailure: () => void
 }
 
 export function useInitializeCombat() {
@@ -26,6 +28,8 @@ export function useInitializeCombat() {
       enemyUnitCount,
       mutations = [],
       modifiers = [],
+      onSuccess,
+      onFailure,
     } = props
     const aiTeam: Team = { id: TeamId(), items: [], resources: { credits: 0 } }
     const enemyUnits = Array.from({ length: enemyUnitCount }).map(() =>
@@ -34,7 +38,13 @@ export function useInitializeCombat() {
     const units = [...userUnits, ...enemyUnits]
     actions.setQueue(() => [])
     cleanup.setQueue(() => [])
-    combat.initialize({ units, user: userTeam, enemy: aiTeam })
+    combat.initialize({
+      units,
+      user: userTeam,
+      enemy: aiTeam,
+      onFailure,
+      onSuccess,
+    })
 
     navigate({
       to: '/combat',

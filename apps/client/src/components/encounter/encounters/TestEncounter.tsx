@@ -1,26 +1,26 @@
-import { Encounter, EncounterContext, EncounterNode } from '@repo/game/types'
+import { Encounter, EncounterNode } from '@repo/game/types'
 import { nanoid } from 'nanoid'
 
 const TestNode1: EncounterNode = {
   id: nanoid(),
   title: 'Test Encounter 001',
-  description: 'Begin Combat?',
+  text: 'Begin Combat?',
   choices: () => [
     {
       id: nanoid(),
       label: 'Yes',
       resolve: (ctx) => {
-        ctx.initializeCombat({ enemyUnitCount: 2 })
-      },
-      options: [
-        {
-          id: nanoid(),
-          label: 'Begin',
-          resolve: (ctx: EncounterContext) => {
-            ctx.initializeCombat({ enemyUnitCount: 2 })
+        ctx.initializeCombat({
+          enemyUnitCount: 2,
+          onSuccess: () => {
+            ctx.updateActiveWorldNode((n) => ({
+              completed: true,
+            }))
           },
-        },
-      ],
+          onFailure: () => {},
+        })
+      },
+      options: [],
     },
     {
       id: nanoid(),
@@ -51,7 +51,7 @@ const TestNode1: EncounterNode = {
 const TestNode2: EncounterNode = {
   id: nanoid(),
   title: 'Test Encounter 001',
-  description: 'Are you sure??',
+  text: 'Are you sure??',
   choices: () => [
     {
       id: nanoid(),

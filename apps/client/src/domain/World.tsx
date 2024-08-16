@@ -6,6 +6,7 @@ import { EncounterSidebar } from '@shared/EncounterSidebar'
 import { Navbar } from '@shared/Navbar'
 import { PageLayout } from '@shared/PageLayout'
 import { TeamHeader } from '@shared/TeamHeader'
+import { useNavigate } from '@tanstack/react-router'
 import { Core } from 'cytoscape'
 import { useState } from 'react'
 
@@ -13,6 +14,9 @@ export function World() {
   const game = useGame()
   const ctx = useEncounterContext()
   const [cy, set] = useState<Core>()
+  const nav = useNavigate()
+
+  if (!game.team.id) nav({ to: '/' })
 
   return (
     <PageLayout

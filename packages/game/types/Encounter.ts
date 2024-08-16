@@ -2,6 +2,8 @@ import { GameWorldNode, Id, Item, Team } from '.'
 
 export type InitializeCombatProps = {
   enemyUnitCount: number
+  onSuccess: () => void
+  onFailure: () => void
 }
 
 export type EncounterContext = {
@@ -9,6 +11,7 @@ export type EncounterContext = {
   encounter: Encounter
   activeNode: EncounterNode
   back: () => void
+  log: (item: React.ReactNode, delay?: number) => void
   initializeCombat: (props: InitializeCombatProps) => void
   updateActiveWorldNode: (
     fn: (n: GameWorldNode) => Partial<GameWorldNode>
@@ -27,7 +30,7 @@ export type Encounter = {
 export type EncounterNode = {
   id: Id
   title: React.ReactNode
-  description: React.ReactNode
+  text: React.ReactNode
   choices: (ctx: EncounterContext) => EncounterChoice[]
   renderChoice?: (
     choice: EncounterChoice,

@@ -17,7 +17,7 @@ export function NodeRenderer(props: NodeRendererProps) {
         <CardTitle>{node.title}</CardTitle>
       </CardHeader>
       <CardContent className="space-y-3">
-        <div>{node.description}</div>
+        <div>{node.text}</div>
         {node.renderChoices ? (
           node.renderChoices(ctx)
         ) : (

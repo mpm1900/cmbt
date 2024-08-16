@@ -1,18 +1,24 @@
-import { Encounter, EncounterNode } from '@repo/game/types'
+import { Encounter, EncounterNode, Id } from '@repo/game/types'
+import { ReactNode } from '@tanstack/react-router'
 import { nanoid } from 'nanoid/non-secure'
 import { create } from 'zustand'
 
+export type EncounterLog = { id: Id; delay: number; node: ReactNode }
 export type EncounterState = {
   encounter: Encounter
+  logs: EncounterLog[]
 }
 
 export type EncounterStore = EncounterState & {
+  log: (item: React.ReactNode, delay?: number) => void
   getActiveNode: () => EncounterNode | undefined
   updateEncounter: (fn: (e: Encounter) => Partial<Encounter>) => void
 }
 
 export const useEncounter = create<EncounterStore>((set, get) => ({
   encounter: { id: nanoid(), nodes: [], activeNodeId: '' },
+  logs: [],
+  log: (item, delay) => {},
   getActiveNode: () => {
     const state = get()
     return state.encounter?.nodes.find(

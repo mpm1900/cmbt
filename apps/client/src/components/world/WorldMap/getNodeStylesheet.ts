@@ -33,7 +33,7 @@ export function getNodeStylesheet(
           state.isCompleted &&
           state.isPathable &&
           state.isRepeatable
-          ? 'lightblue'
+          ? 'royalblue'
           : 'white'
       },
       'border-color': 'white',

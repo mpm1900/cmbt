@@ -36,7 +36,10 @@ export function useWorldMapLayers(cy: Core | undefined) {
         elem.style.cursor = state.isPathable ? 'pointer' : 'default'
         const child = elem.firstChild as SVGElement
         child.style.fill =
-          state.isPathable && state.isCompleted && !state.isActive
+          state.isPathable &&
+          state.isCompleted &&
+          !state.isRepeatable &&
+          !state.isActive
             ? 'black'
             : 'white'
       }

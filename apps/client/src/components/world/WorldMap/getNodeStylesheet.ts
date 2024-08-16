@@ -15,7 +15,8 @@ export function getNodeStylesheet(
   return {
     selector: 'node',
     style: {
-      'font-size': 3,
+      // label: (node: NodeSingular) => node.id(),
+      'font-size': 12,
       color: 'white',
       height: function (node) {
         const size = node.data('size')

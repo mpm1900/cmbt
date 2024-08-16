@@ -1,16 +1,30 @@
-import { Encounter, Id, Item, Team, Unit } from '@repo/game/types'
+import {
+  Encounter,
+  EncounterContext,
+  Id,
+  Item,
+  Team,
+  Unit,
+} from '@repo/game/types'
 import { create } from 'zustand'
 
 export type GameWorldNodeIconKey = 'combat' | 'shop' | 'start'
 
+export type GameWorldEdge = {
+  id: Id
+  target: Id
+  enabled: boolean
+}
+
 export type GameWorldNode = {
   id: Id
   size: number
-  edges: Id[]
+  edges: GameWorldEdge[]
   icon: GameWorldNodeIconKey
   encounter: Encounter
-  isInteractable: boolean
+  interactable: boolean
   repeats: boolean
+  onEnter?: (ctx: EncounterContext) => void
 }
 
 export type GameWorld = {
@@ -34,6 +48,7 @@ type InitializeProps = {
 export type GameStore = GameState & {
   initialize: (props: InitializeProps) => void
   setActiveNodeId: (node: GameWorldNode) => void
+  setEdgeEnabled: (edgeId: Id, enabled: boolean) => void
   updateTeam: (fn: (team: Team) => Partial<Team>) => void
   addItem: (item: Item) => void
 }
@@ -66,6 +81,29 @@ export const useGame = create<GameStore>((set) => ({
         visitiedNodeIds: node.repeats
           ? s.world.visitiedNodeIds
           : Array.from(new Set([...s.world.visitiedNodeIds, node.id])),
+      },
+    }))
+  },
+  setEdgeEnabled: (edgeId, enabled) => {
+    set((s) => ({
+      world: {
+        ...s.world,
+        nodes: s.world.nodes.map((node) => {
+          if (node.edges.find((e) => e.id === edgeId)) {
+            return {
+              ...node,
+              edges: node.edges.map((e) =>
+                e.id === edgeId
+                  ? {
+                      ...e,
+                      enabled,
+                    }
+                  : e
+              ),
+            }
+          }
+          return node
+        }),
       },
     }))
   },

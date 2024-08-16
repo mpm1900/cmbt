@@ -1,5 +1,10 @@
 import { Id } from '@repo/game/types'
-import { EdgeCollection, NodeSingular, SearchDijkstraResult } from 'cytoscape'
+import {
+  CollectionReturnValue,
+  EdgeCollection,
+  NodeSingular,
+  SearchDijkstraResult,
+} from 'cytoscape'
 
 export type GetPathOptions = {
   activeNode: NodeSingular | undefined
@@ -15,13 +20,15 @@ export function gePath(
   const cy = activeNode.cy()
   const visitedNodes = cy.nodes().filter((n) => visitedNodeIds.includes(n.id()))
   const isActiveNeightbor = (node: NodeSingular | EdgeCollection) =>
-    !!visitedNodes?.outgoers().has(node) || activeNode?.outgoers().has(node)
+    !!getOutgoers(visitedNodes)?.has(node) || getOutgoers(activeNode)?.has(node)
 
   const result = cy
     .elements()
     .filter((e) => {
       return (
-        (e.isEdge() && visitedNodeIds.includes(e.source().id())) ||
+        (e.isEdge() &&
+          e.data('enabled') &&
+          visitedNodeIds.includes(e.source().id())) ||
         visitedNodeIds.includes(e.id()) ||
         isActiveNeightbor(e)
       )
@@ -32,4 +39,12 @@ export function gePath(
     })
 
   return result
+}
+
+export function getOutgoers(
+  node: CollectionReturnValue | NodeSingular | undefined
+) {
+  return node
+    ?.outgoers()
+    .filter((e) => e.isNode() || (e.isEdge() && e.data('enabled')))
 }

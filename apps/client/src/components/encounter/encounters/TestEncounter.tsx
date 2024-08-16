@@ -29,6 +29,12 @@ const TestNode1: EncounterNode = {
         ctx.updateEncounter((e) => ({ activeNodeId: TestNode2.id })),
       options: [],
     },
+    {
+      id: nanoid(),
+      label: 'Leave',
+      resolve: (ctx) => ctx.back(),
+      options: [],
+    },
   ],
 }
 

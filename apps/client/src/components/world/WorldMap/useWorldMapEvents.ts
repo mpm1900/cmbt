@@ -29,7 +29,7 @@ export function useWorldMapEvents(cy: Core | undefined) {
         const node = event.target as NodeSingular
         const data: GameWorldNode = event.target.data()
         const isClickable = isPathable(node, options)
-        if (data && data.isInteractable && data.encounter && isClickable) {
+        if (data && data.interactable && data.encounter && isClickable) {
           game.setActiveNodeId(node.data())
           encounter.updateEncounter(() => data.encounter)
           nav({ to: '/encounter' })

@@ -32,6 +32,7 @@ export function useEncounterContext(): EncounterContext {
     team: game.team,
     back: () => nav({ to: '/world' }),
     initializeCombat,
+    setEdgeEnabled: game.setEdgeEnabled,
     updateEncounter: store.updateEncounter,
     updateTeam: game.updateTeam,
     addItem: game.addItem,

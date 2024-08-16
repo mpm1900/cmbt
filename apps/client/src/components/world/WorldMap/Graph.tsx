@@ -30,7 +30,7 @@ export function Graph(props: GraphProps) {
   const renderLayers = useWorldMapLayers(cy)
 
   useEffect(() => {
-    const result = renderLayers({ activeNode, visitedNodeIds })
+    const result = renderLayers({ activeNode, hoverNode, visitedNodeIds })
   }, [cy])
 
   return (
@@ -45,10 +45,16 @@ export function Graph(props: GraphProps) {
       elements={CytoscapeComponent.normalizeElements({
         nodes: nodes.map((node) => ({
           data: node,
+          label: node.id,
         })),
         edges: nodes.flatMap((node) =>
           node.edges.map<EdgeDefinition>((edge) => ({
-            data: { id: `${node.id}--${edge}`, source: node.id, target: edge },
+            data: {
+              id: `${node.id}--${edge.target}`,
+              source: node.id,
+              target: edge.target,
+              enabled: edge.enabled,
+            },
           }))
         ),
       })}

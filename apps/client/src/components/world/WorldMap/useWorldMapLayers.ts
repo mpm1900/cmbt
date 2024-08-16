@@ -5,10 +5,11 @@ import { Core, NodeSingular } from 'cytoscape'
 import { IHTMLLayer, LayersPlugin } from 'cytoscape-layers'
 import { useRef } from 'react'
 import { getNodeState } from './getNodeState'
-import { gePath } from './getPath'
+import { isPathable } from './isPathable'
 
 export type RenderLayersOptions = {
-  activeNode?: NodeSingular
+  activeNode: NodeSingular | undefined
+  hoverNode: NodeSingular | undefined
   visitedNodeIds: Id[]
 }
 
@@ -23,31 +24,20 @@ export function useWorldMapLayers(cy: Core | undefined) {
       htmlLayer.current.updateOnRender = true
     }
 
-    const { activeNode, visitedNodeIds } = options
-    const activeData = activeNode?.data()
     const result = layers.renderPerNode(
       htmlLayer.current,
       (elem, node, box) => {
         const data: GameWorldNode = node.data()
-        const { isSelectable, isVisited, isActive, isActiveNeightbor } =
-          getNodeState(node, {
-            activeNode,
-            hoverNode: undefined,
-            visitedNodeIds,
-          })
-        const distance = gePath({ activeNode, visitedNodeIds })?.distanceTo(
-          node
-        )
-        const isInteractable =
-          isActive || (isSelectable && distance && distance !== Infinity)
+        const { isVisited, isActive } = getNodeState(node, options)
+        const isInteractable = isPathable(node, options)
         elem.innerHTML = getNodeIcon(data.icon)
-        elem.style.display = 'flex'
         elem.style.width = '22px'
         elem.style.height = '22px'
+        elem.style.display = 'flex'
         elem.style.justifyContent = 'center'
         elem.style.alignItems = 'center'
-        elem.style.opacity = isSelectable ? '1' : '0.4'
-        elem.style.cursor = isSelectable ? 'pointer' : 'default'
+        elem.style.opacity = isInteractable ? '1' : '0.4'
+        elem.style.cursor = isInteractable ? 'pointer' : 'default'
         const child = elem.firstChild as SVGElement
         child.style.fill =
           isInteractable && isVisited && !isActive ? 'black' : 'white'

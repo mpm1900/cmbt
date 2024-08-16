@@ -1,16 +1,27 @@
 import { Button } from '@/components/ui/button'
 import { Graph } from '@/components/world/WorldMap/Graph'
+import { useEncounterContext } from '@/hooks'
 import { useGame } from '@/hooks/state'
 import { EncounterSidebar } from '@shared/EncounterSidebar'
 import { Navbar } from '@shared/Navbar'
 import { PageLayout } from '@shared/PageLayout'
 import { TeamHeader } from '@shared/TeamHeader'
 import { Core } from 'cytoscape'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 export function World() {
   const game = useGame()
+  const ctx = useEncounterContext()
   const [cy, set] = useState<Core>()
+
+  useEffect(() => {
+    const activeNode = game.world.nodes.find(
+      (n) => n.id === game.world.activeNodeId
+    )
+    if (activeNode?.onEnter) {
+      activeNode.onEnter(ctx)
+    }
+  }, [game.world.activeNodeId])
 
   return (
     <PageLayout

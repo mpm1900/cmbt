@@ -1,5 +1,6 @@
 import { Id } from '@repo/game/types'
 import { NodeSingular } from 'cytoscape'
+import { getOutgoers } from './getPath'
 
 export type GetNodeStateOptions = {
   activeNode: NodeSingular | undefined
@@ -16,7 +17,7 @@ export function getNodeState(node: NodeSingular, options: GetNodeStateOptions) {
     .filter((n) => visitedNodeIds.includes(n.id()))
   const isActive = !!activeNode?.same(node)
   const isActiveNeightbor =
-    !!visitedNodes?.outgoers().has(node) || activeNode?.outgoers().has(node)
+    !!getOutgoers(visitedNodes)?.has(node) || getOutgoers(activeNode)?.has(node)
   const isHover = !!hoverNode?.same(node)
   const isVisited = visitedNodes?.has(node)
   const isSelectable = isActive || isActiveNeightbor || isVisited

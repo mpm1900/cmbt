@@ -30,6 +30,7 @@ export function useWorldMapEvents(cy: Core | undefined) {
         const data: GameWorldNode = event.target.data()
         const isPathable = isPathableNode(node, options)
         const isInteractable = !data.completed || data.repeatable
+        console.log(isInteractable, data)
 
         if (isInteractable && data.encounter && isPathable) {
           game.setActiveNodeId(node.data())

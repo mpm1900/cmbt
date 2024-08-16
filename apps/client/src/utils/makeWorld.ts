@@ -64,7 +64,7 @@ export function makeWorld(): GameWorld {
       StartNode,
       ShopNode('0', [edge(test('1'))]),
       TestNode('0', [edge(shop('0'))]),
-      TestNode('1', [edge(test('2')), edge(test('4'))], { repeatable: true }),
+      TestNode('1', [edge(test('2')), edge(test('4'))]),
       TestNode('4', [edge(shop('2'))]),
       TestNode('2', [edge(shop('0')), edge(test('1')), edge(shop('1'))]),
       ShopNode('1', [edge(test('0')), edge(test('3'))]),

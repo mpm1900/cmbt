@@ -21,5 +21,10 @@ export function isPathableEdge(
   const targetState = getNodeState(edge.target(), options)
   const isSourcePathable = isPathableNode(edge.source(), options)
   const isTargetPathable = isPathableNode(edge.target(), options)
-  return !targetState.isActive && isSourcePathable && isTargetPathable
+  return (
+    !targetState.isActive &&
+    isSourcePathable &&
+    isTargetPathable &&
+    edge.source().data('completed')
+  )
 }

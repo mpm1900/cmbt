@@ -15,7 +15,7 @@ export function getNodeStylesheet(
   return {
     selector: 'node',
     style: {
-      label: (node: NodeSingular) => node.data('completed'),
+      //label: (node: NodeSingular) => node.data('completed'),
       'font-size': 12,
       color: 'white',
       height: function (node) {
@@ -32,12 +32,16 @@ export function getNodeStylesheet(
           options
         )
         const isInteractable = isPathableNode(node, options)
+        if (isActive) return 'limegreen'
+        if (isActiveNeightbor && !isCompleted && isInteractable)
+          return 'royalblue'
 
-        return isActive
-          ? 'limegreen'
-          : isActiveNeightbor && !isCompleted && isInteractable
-            ? 'royalblue'
-            : 'white'
+        return isActiveNeightbor &&
+          isCompleted &&
+          isInteractable &&
+          node.data('repeatable')
+          ? 'lightblue'
+          : 'white'
       },
       'border-color': 'white',
       'border-opacity': 1,

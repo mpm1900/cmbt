@@ -31,7 +31,7 @@ export function getEdgeStylesheet(
         const isPathable = isPathableEdge(edge, options)
         return isPathable ? 'solid' : 'dashed'
       },
-      'line-dash-pattern': [12, 3],
+      'line-dash-pattern': [12, 4],
       'curve-style': 'bezier',
       'target-arrow-shape': 'chevron',
       'arrow-scale': 1,

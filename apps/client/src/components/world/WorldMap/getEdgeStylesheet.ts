@@ -1,4 +1,3 @@
-import { Id } from '@repo/game/types'
 import { NodeSingular, Stylesheet } from 'cytoscape'
 import { getEdgeState } from './getEdgeState'
 import { isPathableEdge } from './isPathable'
@@ -6,7 +5,6 @@ import { isPathableEdge } from './isPathable'
 export type GetEdgeStylesheetOptions = {
   activeNode: NodeSingular | undefined
   hoverNode: NodeSingular | undefined
-  visitedNodeIds: Id[]
 }
 
 export function getEdgeStylesheet(

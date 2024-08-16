@@ -1,15 +1,13 @@
-import { Id } from '@repo/game/types'
 import { EdgeSingular, NodeSingular } from 'cytoscape'
 import { getOutgoers, getPath } from './getPath'
 
 export type GetEdgeStateOptions = {
   activeNode: NodeSingular | undefined
   hoverNode: NodeSingular | undefined
-  visitedNodeIds: Id[]
 }
 
 export function getEdgeState(edge: EdgeSingular, options: GetEdgeStateOptions) {
-  const { activeNode, hoverNode, visitedNodeIds } = options
+  const { activeNode, hoverNode } = options
   const completedNodes = activeNode
     ?.cy()
     .nodes()

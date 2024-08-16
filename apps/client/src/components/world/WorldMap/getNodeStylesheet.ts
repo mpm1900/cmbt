@@ -1,11 +1,9 @@
-import { Id } from '@repo/game/types'
 import { NodeSingular, Stylesheet } from 'cytoscape'
 import { isPathableNode } from './isPathable'
 
 export type GetNodeStylesheetOptions = {
   activeNode: NodeSingular | undefined
   hoverNode: NodeSingular | undefined
-  visitedNodeIds: Id[]
 }
 
 export function getNodeStylesheet(

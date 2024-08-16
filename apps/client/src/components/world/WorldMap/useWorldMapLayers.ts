@@ -1,5 +1,5 @@
 import { getNodeIcon } from '@/utils/getNodeIcon'
-import { GameWorldNode, Id } from '@repo/game/types'
+import { GameWorldNode } from '@repo/game/types'
 import { Core, NodeSingular } from 'cytoscape'
 import { IHTMLLayer, LayersPlugin } from 'cytoscape-layers'
 import { useRef } from 'react'
@@ -8,7 +8,6 @@ import { isPathableNode } from './isPathable'
 export type RenderLayersOptions = {
   activeNode: NodeSingular | undefined
   hoverNode: NodeSingular | undefined
-  visitedNodeIds: Id[]
 }
 
 export function useWorldMapLayers(cy: Core | undefined) {

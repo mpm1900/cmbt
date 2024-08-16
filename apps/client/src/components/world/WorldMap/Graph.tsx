@@ -17,19 +17,18 @@ cytoscape.use(Layers)
 export type GraphProps = {
   activeNodeId: Id
   nodes: GameWorldNode[]
-  visitedNodeIds: Id[]
   cy?: (cy: Core) => void
 }
 
 export function Graph(props: GraphProps) {
-  const { activeNodeId, nodes, visitedNodeIds } = props
+  const { activeNodeId, nodes } = props
   const [cy, setCy] = useState<Core>()
   const activeNode = cy?.nodes(`#${activeNodeId}`).first()
   const { hoverNode } = useWorldMapEvents(cy)
   const renderLayers = useWorldMapLayers(cy)
 
   useEffect(() => {
-    const result = renderLayers({ activeNode, hoverNode, visitedNodeIds })
+    const result = renderLayers({ activeNode, hoverNode })
   }, [cy])
 
   return (
@@ -60,12 +59,10 @@ export function Graph(props: GraphProps) {
         getNodeStylesheet({
           activeNode,
           hoverNode,
-          visitedNodeIds,
         }),
         getEdgeStylesheet({
           activeNode,
           hoverNode,
-          visitedNodeIds,
         }),
       ]}
       layout={

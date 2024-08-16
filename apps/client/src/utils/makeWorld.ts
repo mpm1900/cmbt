@@ -1,4 +1,7 @@
-import { ShopEncounter } from '@/components/encounter/encounters'
+import {
+  LockedEncounter,
+  ShopEncounter,
+} from '@/components/encounter/encounters'
 import { TestEncounter } from '@/components/encounter/encounters/TestEncounter'
 import { GameWorld, GameWorldEdge, GameWorldNode, Id } from '@repo/game/types'
 import { nanoid } from 'nanoid'
@@ -12,6 +15,7 @@ function edge(target: Id) {
 
 const shop = (app: Id) => 'Shop' + app
 const test = (app: Id) => 'Test' + app
+const lock = (app: Id) => 'Locked' + app
 
 export const StartId = nanoid()
 const StartNode: GameWorldNode = {
@@ -27,6 +31,7 @@ const StartNode: GameWorldNode = {
   completed: true,
   repeatable: false,
   backtrackable: false,
+  locked: false,
 }
 
 type NodeMaker = (
@@ -44,6 +49,7 @@ const ShopNode: NodeMaker = (id, edges, overrides) => ({
   completed: false,
   repeatable: true,
   backtrackable: true,
+  locked: false,
   ...overrides,
 })
 
@@ -56,6 +62,20 @@ const TestNode: NodeMaker = (id, edges, overrides) => ({
   completed: false,
   repeatable: false,
   backtrackable: true,
+  locked: false,
+  ...overrides,
+})
+
+const LockedNode: NodeMaker = (id, edges, overrides) => ({
+  id: lock(id),
+  size: 20,
+  icon: 'locked',
+  encounter: LockedEncounter,
+  edges,
+  completed: false,
+  repeatable: false,
+  backtrackable: true,
+  locked: true,
   ...overrides,
 })
 
@@ -68,11 +88,11 @@ export function makeWorld(): GameWorld {
       ShopNode('0', [edge(test('1'))]),
       TestNode('0', [edge(shop('0'))], { backtrackable: false }),
       TestNode('1', [edge(test('2')), edge(test('4'))]),
-      TestNode('4', [edge(shop('2'))]),
+      TestNode('4', [edge(lock('0'))]),
       TestNode('2', [edge(shop('0')), edge(test('1')), edge(shop('1'))]),
       ShopNode('1', [edge(test('0')), edge(test('3'))]),
-      TestNode('3', [edge(shop('2'))]),
-      ShopNode('2', [edge(test('5')), edge(test('1'))]),
+      TestNode('3', [edge(lock('0'))]),
+      LockedNode('0', [edge(test('5')), edge(test('1'))]),
       TestNode('5', []),
     ],
   }

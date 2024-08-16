@@ -1,6 +1,6 @@
-export * from './handleNextAction'
 export * from './getResultFromActionItem'
 export * from './getTeamsWithSelectionRequired'
+export * from './handleNextAction'
 export * from './logActionIntent'
 export * from './logActionResults'
 export * from './logMiss'

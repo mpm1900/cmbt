@@ -1,6 +1,11 @@
-import { Encounter, EncounterContext, Id } from '.'
+import { Encounter, Id } from '.'
 
-export type GameWorldNodeIconKey = 'combat' | 'shop' | 'start'
+export type GameWorldNodeIconKey =
+  | 'combat'
+  | 'shop'
+  | 'start'
+  | 'locked'
+  | 'unlocked'
 
 export type GameWorldEdge = {
   id: Id
@@ -12,11 +17,12 @@ export type GameWorldNode = {
   size: number
   edges: GameWorldEdge[]
   icon: GameWorldNodeIconKey
+
   encounter: Encounter
   backtrackable: boolean
   completed: boolean
   repeatable: boolean
-  onEnter?: (ctx: EncounterContext) => void
+  locked: boolean
 }
 
 export type GameWorld = {

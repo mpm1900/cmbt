@@ -1,4 +1,4 @@
-import { getNodeIcon } from '@/utils/getNodeIcon'
+import { getNodeIconRaw } from '@/utils/getNodeIconRaw'
 import { GameWorldNode } from '@repo/game/types'
 import { Core, NodeSingular } from 'cytoscape'
 import { IHTMLLayer, LayersPlugin } from 'cytoscape-layers'
@@ -26,7 +26,7 @@ export function useWorldMapLayers(cy: Core | undefined) {
       (elem, node, box) => {
         const data: GameWorldNode = node.data()
         const state = isPathableNode(node, options)
-        elem.innerHTML = getNodeIcon(data.icon)
+        elem.innerHTML = getNodeIconRaw(data.icon)
         elem.style.width = '22px'
         elem.style.height = '22px'
         elem.style.display = 'flex'

@@ -1,5 +1,6 @@
 import { NodeSingular, Stylesheet } from 'cytoscape'
 import { getEdgeState } from './getEdgeState'
+import { getNodeState } from './getNodeState'
 import { isPathableEdge } from './isPathable'
 
 export type GetEdgeStylesheetOptions = {
@@ -19,6 +20,9 @@ export function getEdgeStylesheet(
       },
       'line-opacity': function (edge) {
         const state = getEdgeState(edge, options)
+        const sourceState = getNodeState(edge.source(), options)
+        const targetState = getNodeState(edge.target(), options)
+        if (sourceState.isLocked && !targetState.isCompleted) return 0
         if (state.isInHoverPath) return 0.8
         const isPathable = isPathableEdge(edge, options)
         return isPathable ? 0.3 : 0.1

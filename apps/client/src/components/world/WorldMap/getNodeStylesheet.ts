@@ -1,6 +1,33 @@
 import { NodeSingular, Stylesheet } from 'cytoscape'
 import { isPathableNode } from './isPathable'
 
+function getNodeBackgroundColor(
+  node: NodeSingular,
+  options: GetNodeStylesheetOptions
+) {
+  const state = isPathableNode(node, options)
+  if (state.isActive) return 'limegreen'
+  if (
+    state.isActiveNeightbor &&
+    !state.isCompleted &&
+    state.isPathable &&
+    state.isLocked
+  )
+    return 'purple'
+  if (state.isActiveNeightbor && !state.isCompleted && state.isPathable)
+    return 'royalblue'
+  if (
+    state.isActiveNeightbor &&
+    state.isCompleted &&
+    state.isPathable &&
+    state.isRepeatable
+  ) {
+    return 'royalblue'
+  }
+
+  return 'white'
+}
+
 export type GetNodeStylesheetOptions = {
   activeNode: NodeSingular | undefined
   hoverNode: NodeSingular | undefined
@@ -12,7 +39,7 @@ export function getNodeStylesheet(
   return {
     selector: 'node',
     style: {
-      //label: (node: NodeSingular) => node.data('backtrackable'),
+      //label: (node: NodeSingular) => node.data('locked'),
       'font-size': 12,
       color: 'white',
       height: function (node) {
@@ -26,6 +53,13 @@ export function getNodeStylesheet(
       backgroundColor: function (node) {
         const state = isPathableNode(node, options)
         if (state.isActive) return 'limegreen'
+        if (
+          state.isActiveNeightbor &&
+          !state.isCompleted &&
+          state.isPathable &&
+          state.isLocked
+        )
+          return 'plum'
         if (state.isActiveNeightbor && !state.isCompleted && state.isPathable)
           return 'royalblue'
 

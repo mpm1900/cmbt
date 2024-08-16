@@ -22,7 +22,7 @@ export function useWorldMapEvents(cy: Core | undefined) {
       const options = {
         activeNode,
         hoverNode,
-        visitedNodeIds: game.world.visitiedNodeIds,
+        visitedNodeIds: game.world.visitedNodeIds,
       }
 
       cy.on('tap', 'node', function (event) {

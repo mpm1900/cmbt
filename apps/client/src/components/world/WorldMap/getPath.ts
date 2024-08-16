@@ -11,7 +11,7 @@ export type GetPathOptions = {
   visitedNodeIds: Id[]
 }
 
-export function gePath(
+export function getPath(
   options: GetPathOptions
 ): SearchDijkstraResult | undefined {
   const { activeNode, visitedNodeIds } = options
@@ -20,18 +20,19 @@ export function gePath(
   const cy = activeNode.cy()
   const visitedNodes = cy.nodes().filter((n) => visitedNodeIds.includes(n.id()))
   const isActiveNeightbor = (node: NodeSingular | EdgeCollection) =>
-    !!getOutgoers(visitedNodes)?.has(node) || getOutgoers(activeNode)?.has(node)
+    !!getOutgoers(visitedNodes)?.has(node) ||
+    getOutgoers(activeNode)?.has(node) ||
+    false
 
   const result = cy
     .elements()
     .filter((e) => {
-      return (
-        (e.isEdge() &&
-          e.data('enabled') &&
-          visitedNodeIds.includes(e.source().id())) ||
+      const valid =
+        (e.isEdge() && visitedNodeIds.includes(e.source().id())) ||
         visitedNodeIds.includes(e.id()) ||
         isActiveNeightbor(e)
-      )
+
+      return valid
     })
     .dijkstra({
       root: activeNode,
@@ -44,7 +45,5 @@ export function gePath(
 export function getOutgoers(
   node: CollectionReturnValue | NodeSingular | undefined
 ) {
-  return node
-    ?.outgoers()
-    .filter((e) => e.isNode() || (e.isEdge() && e.data('enabled')))
+  return node?.outgoers().filter((e) => e.isNode() || e.isEdge())
 }

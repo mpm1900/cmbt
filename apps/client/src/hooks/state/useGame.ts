@@ -13,7 +13,6 @@ export type GameWorldNodeIconKey = 'combat' | 'shop' | 'start'
 export type GameWorldEdge = {
   id: Id
   target: Id
-  enabled: boolean
 }
 
 export type GameWorldNode = {
@@ -29,8 +28,9 @@ export type GameWorldNode = {
 
 export type GameWorld = {
   nodes: GameWorldNode[]
+  startingNodeId: Id
   activeNodeId: Id
-  visitiedNodeIds: Id[]
+  visitedNodeIds: Id[]
 }
 
 export type GameState = {
@@ -48,7 +48,6 @@ type InitializeProps = {
 export type GameStore = GameState & {
   initialize: (props: InitializeProps) => void
   setActiveNodeId: (node: GameWorldNode) => void
-  setEdgeEnabled: (edgeId: Id, enabled: boolean) => void
   updateTeam: (fn: (team: Team) => Partial<Team>) => void
   addItem: (item: Item) => void
 }
@@ -56,8 +55,9 @@ export type GameStore = GameState & {
 export const useGame = create<GameStore>((set) => ({
   world: {
     activeNodeId: '',
+    startingNodeId: '',
     nodes: [],
-    visitiedNodeIds: [],
+    visitedNodeIds: [],
   },
   team: {
     id: '',
@@ -78,32 +78,9 @@ export const useGame = create<GameStore>((set) => ({
       world: {
         ...s.world,
         activeNodeId: node.id,
-        visitiedNodeIds: node.repeats
-          ? s.world.visitiedNodeIds
-          : Array.from(new Set([...s.world.visitiedNodeIds, node.id])),
-      },
-    }))
-  },
-  setEdgeEnabled: (edgeId, enabled) => {
-    set((s) => ({
-      world: {
-        ...s.world,
-        nodes: s.world.nodes.map((node) => {
-          if (node.edges.find((e) => e.id === edgeId)) {
-            return {
-              ...node,
-              edges: node.edges.map((e) =>
-                e.id === edgeId
-                  ? {
-                      ...e,
-                      enabled,
-                    }
-                  : e
-              ),
-            }
-          }
-          return node
-        }),
+        visitedNodeIds: node.repeats
+          ? s.world.visitedNodeIds
+          : Array.from(new Set([...s.world.visitedNodeIds, node.id])),
       },
     }))
   },

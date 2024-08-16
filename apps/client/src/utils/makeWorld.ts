@@ -4,16 +4,10 @@ import { GameWorld, GameWorldEdge, GameWorldNode } from '@/hooks/state'
 import { Id } from '@repo/game/types'
 import { nanoid } from 'nanoid'
 
-function makeNode(make: (config: { id: Id }) => GameWorldNode) {
-  const id = nanoid()
-  return make({ id })
-}
-
-function edge(target: Id, enabled = true) {
+function edge(target: Id) {
   return {
     id: nanoid(),
     target,
-    enabled,
   }
 }
 
@@ -64,13 +58,13 @@ const TestNode: NodeMaker = (id, edges, overries) => ({
 })
 
 export function makeWorld(): GameWorld {
-  const disabledEdge = edge(test('0'), false)
   return {
+    startingNodeId: StartId,
     activeNodeId: StartId,
-    visitiedNodeIds: [StartId],
+    visitedNodeIds: [StartId],
     nodes: [
       StartNode,
-      ShopNode('0', [edge(test('0')), edge(test('1'))]),
+      ShopNode('0', [edge(test('1'))]),
       TestNode('0', [edge(shop('0'))]),
       TestNode('1', [edge(test('2')), edge(test('4'))], { repeats: true }),
       TestNode('4', [edge(shop('2'))]),

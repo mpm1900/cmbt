@@ -11,7 +11,6 @@ export type EncounterContext = {
   back: () => void
   initializeCombat: (props: InitializeCombatProps) => void
   updateEncounter: (fn: (e: Encounter) => Partial<Encounter>) => void
-  setEdgeEnabled: (edgeId: Id, enabled: boolean) => void
   updateTeam: (fn: (e: Team) => Partial<Team>) => void
   addItem: (item: Item) => void
 }

@@ -1,6 +1,7 @@
 import { Id } from '@repo/game/types'
 import { NodeSingular, Stylesheet } from 'cytoscape'
 import { getEdgeState } from './getEdgeState'
+import { isPathableEdge } from './isPathable'
 
 export type GetEdgeStylesheetOptions = {
   activeNode: NodeSingular | undefined
@@ -16,28 +17,25 @@ export function getEdgeStylesheet(
     style: {
       width: 3,
       'line-color': function (edge) {
-        const enabled = edge.data('enabled')
-        if (!enabled) return 'red'
         return 'white'
       },
       'line-opacity': function (edge) {
         const state = getEdgeState(edge, options)
-        const enabled = edge.data('enabled')
-        if (!enabled) return 0.1
-        return state.isInHoverPath ? 0.8 : 0.1
+        if (state.isInHoverPath) return 0.8
+        const isPathable = isPathableEdge(edge, options)
+        return isPathable ? 0.3 : 0.1
       },
       'line-style': (edge) => {
         const state = getEdgeState(edge, options)
         if (state.isIsland) return 'dotted'
-        return state.isActiveNeightbor ? 'solid' : 'dashed'
+        const isPathable = isPathableEdge(edge, options)
+        return isPathable ? 'solid' : 'dashed'
       },
       'line-dash-pattern': [12, 3],
       'curve-style': 'bezier',
       'target-arrow-shape': 'chevron',
       'arrow-scale': 1,
       'target-arrow-color': function (edge) {
-        const enabled = edge.data('enabled')
-        if (!enabled) return 'red'
         return 'white'
       },
     },

@@ -1,6 +1,6 @@
 import { Id } from '@repo/game/types'
 import { EdgeSingular, NodeSingular } from 'cytoscape'
-import { gePath, getOutgoers } from './getPath'
+import { getOutgoers, getPath } from './getPath'
 
 export type GetEdgeStateOptions = {
   activeNode: NodeSingular | undefined
@@ -16,9 +16,10 @@ export function getEdgeState(edge: EdgeSingular, options: GetEdgeStateOptions) {
     .filter((n) => visitedNodeIds.includes(n.id()))
 
   const isActive = !!activeNode?.same(edge.source())
+  const isVisited = visitedNodes?.incomers().has(edge)
   const isActiveNeightbor =
     !!getOutgoers(visitedNodes)?.has(edge) || getOutgoers(activeNode)?.has(edge)
-  const finder = gePath(options)
+  const finder = getPath(options)
   const isInHoverPath = hoverNode && finder?.pathTo(hoverNode).has(edge)
   const isIsland =
     edge.source().indegree(false) === 0 || edge.target().outdegree(false) === 0
@@ -28,5 +29,6 @@ export function getEdgeState(edge: EdgeSingular, options: GetEdgeStateOptions) {
     isActiveNeightbor,
     isInHoverPath,
     isIsland,
+    isVisited,
   }
 }

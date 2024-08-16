@@ -56,7 +56,7 @@ export function World() {
         cy={(cy) => set(cy)}
         nodes={game.world.nodes}
         activeNodeId={game.world.activeNodeId}
-        visitedNodeIds={game.world.visitiedNodeIds}
+        visitedNodeIds={game.world.visitedNodeIds}
       />
     </PageLayout>
   )

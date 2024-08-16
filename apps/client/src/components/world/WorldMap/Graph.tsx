@@ -53,7 +53,6 @@ export function Graph(props: GraphProps) {
               id: `${node.id}--${edge.target}`,
               source: node.id,
               target: edge.target,
-              enabled: edge.enabled,
             },
           }))
         ),

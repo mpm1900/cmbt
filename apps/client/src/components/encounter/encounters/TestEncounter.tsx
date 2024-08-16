@@ -35,6 +35,16 @@ const TestNode1: EncounterNode = {
       resolve: (ctx) => ctx.back(),
       options: [],
     },
+    {
+      id: nanoid(),
+      label: 'Complete',
+      resolve: (ctx) => {
+        ctx.updateActiveWorldNode((n) => ({
+          completed: true,
+        }))
+        ctx.back()
+      },
+    },
   ],
 }
 

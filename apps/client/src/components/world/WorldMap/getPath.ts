@@ -1,4 +1,3 @@
-import { Id } from '@repo/game/types'
 import {
   CollectionReturnValue,
   EdgeCollection,
@@ -8,28 +7,29 @@ import {
 
 export type GetPathOptions = {
   activeNode: NodeSingular | undefined
-  visitedNodeIds: Id[]
 }
 
 export function getPath(
   options: GetPathOptions
 ): SearchDijkstraResult | undefined {
-  const { activeNode, visitedNodeIds } = options
+  const { activeNode } = options
   if (!activeNode) return undefined
 
   const cy = activeNode.cy()
-  const visitedNodes = cy.nodes().filter((n) => visitedNodeIds.includes(n.id()))
+
+  const completedNodes = activeNode
+    ?.cy()
+    .nodes()
+    .filter((n) => n.data('completed'))
   const isActiveNeightbor = (node: NodeSingular | EdgeCollection) =>
-    !!getOutgoers(visitedNodes)?.has(node) ||
-    getOutgoers(activeNode)?.has(node) ||
-    false
+    !!getOutgoers(completedNodes)?.has(node) || false
 
   const result = cy
     .elements()
     .filter((e) => {
       const valid =
-        (e.isEdge() && visitedNodeIds.includes(e.source().id())) ||
-        visitedNodeIds.includes(e.id()) ||
+        (e.isEdge() && completedNodes.has(e.source())) ||
+        completedNodes.has(e) ||
         isActiveNeightbor(e)
 
       return valid

@@ -1,11 +1,10 @@
-import { GameWorldNode } from '@/hooks/state'
 import { getNodeIcon } from '@/utils/getNodeIcon'
-import { Id } from '@repo/game/types'
+import { GameWorldNode, Id } from '@repo/game/types'
 import { Core, NodeSingular } from 'cytoscape'
 import { IHTMLLayer, LayersPlugin } from 'cytoscape-layers'
 import { useRef } from 'react'
 import { getNodeState } from './getNodeState'
-import { isPathable } from './isPathable'
+import { isPathableNode } from './isPathable'
 
 export type RenderLayersOptions = {
   activeNode: NodeSingular | undefined
@@ -28,8 +27,8 @@ export function useWorldMapLayers(cy: Core | undefined) {
       htmlLayer.current,
       (elem, node, box) => {
         const data: GameWorldNode = node.data()
-        const { isVisited, isActive } = getNodeState(node, options)
-        const isInteractable = isPathable(node, options)
+        const { isCompleted, isActive } = getNodeState(node, options)
+        const isInteractable = isPathableNode(node, options)
         elem.innerHTML = getNodeIcon(data.icon)
         elem.style.width = '22px'
         elem.style.height = '22px'
@@ -40,7 +39,7 @@ export function useWorldMapLayers(cy: Core | undefined) {
         elem.style.cursor = isInteractable ? 'pointer' : 'default'
         const child = elem.firstChild as SVGElement
         child.style.fill =
-          isInteractable && isVisited && !isActive ? 'black' : 'white'
+          isInteractable && isCompleted && !isActive ? 'black' : 'white'
       }
     )
 

@@ -1,7 +1,6 @@
 import { ShopEncounter } from '@/components/encounter/encounters'
 import { TestEncounter } from '@/components/encounter/encounters/TestEncounter'
-import { GameWorld, GameWorldEdge, GameWorldNode } from '@/hooks/state'
-import { Id } from '@repo/game/types'
+import { GameWorld, GameWorldEdge, GameWorldNode, Id } from '@repo/game/types'
 import { nanoid } from 'nanoid'
 
 function edge(target: Id) {
@@ -25,8 +24,8 @@ const StartNode: GameWorldNode = {
     activeNodeId: '',
   },
   edges: [edge(shop('0'))],
-  interactable: false,
-  repeats: false,
+  completed: true,
+  repeatable: false,
 }
 
 type NodeMaker = (
@@ -41,8 +40,8 @@ const ShopNode: NodeMaker = (id, edges, overries) => ({
   icon: 'shop',
   encounter: ShopEncounter,
   edges,
-  interactable: true,
-  repeats: false,
+  completed: false,
+  repeatable: true,
   ...overries,
 })
 
@@ -52,8 +51,8 @@ const TestNode: NodeMaker = (id, edges, overries) => ({
   icon: 'combat',
   encounter: TestEncounter,
   edges,
-  interactable: true,
-  repeats: false,
+  completed: false,
+  repeatable: false,
   ...overries,
 })
 
@@ -61,12 +60,11 @@ export function makeWorld(): GameWorld {
   return {
     startingNodeId: StartId,
     activeNodeId: StartId,
-    visitedNodeIds: [StartId],
     nodes: [
       StartNode,
       ShopNode('0', [edge(test('1'))]),
       TestNode('0', [edge(shop('0'))]),
-      TestNode('1', [edge(test('2')), edge(test('4'))], { repeats: true }),
+      TestNode('1', [edge(test('2')), edge(test('4'))], { repeatable: true }),
       TestNode('4', [edge(shop('2'))]),
       TestNode('2', [edge(shop('0')), edge(test('1')), edge(shop('1'))]),
       ShopNode('1', [edge(test('0')), edge(test('3'))]),

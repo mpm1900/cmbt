@@ -1,5 +1,4 @@
-import { GameWorldNode } from '@/hooks/state'
-import { Id } from '@repo/game/types'
+import { GameWorldNode, Id } from '@repo/game/types'
 import cytoscape, { Core, EdgeDefinition, LayoutOptions } from 'cytoscape'
 import cola from 'cytoscape-cola'
 import COSE from 'cytoscape-cose-bilkent'

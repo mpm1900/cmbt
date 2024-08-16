@@ -1,32 +1,32 @@
-import { Id } from '@repo/game/types'
 import { NodeSingular } from 'cytoscape'
 import { getOutgoers } from './getPath'
 
 export type GetNodeStateOptions = {
   activeNode: NodeSingular | undefined
   hoverNode: NodeSingular | undefined
-  visitedNodeIds: Id[]
 }
 
 export function getNodeState(node: NodeSingular, options: GetNodeStateOptions) {
-  const { activeNode, hoverNode, visitedNodeIds } = options
+  const { activeNode, hoverNode } = options
 
-  const visitedNodes = activeNode
+  const completedNodes = activeNode
     ?.cy()
     .nodes()
-    .filter((n) => visitedNodeIds.includes(n.id()))
+    .filter((n) => n.data('completed'))
   const isActive = !!activeNode?.same(node)
   const isActiveNeightbor =
-    !!getOutgoers(visitedNodes)?.has(node) || getOutgoers(activeNode)?.has(node)
+    !!getOutgoers(completedNodes)?.has(node) ||
+    getOutgoers(activeNode)?.has(node)
   const isHover = !!hoverNode?.same(node)
-  const isVisited = visitedNodes?.has(node)
-  const isSelectable = isActive || isActiveNeightbor || isVisited
+  const isCompleted = completedNodes?.has(node)
+  const isSelectable =
+    isActive || isActiveNeightbor || (isCompleted && node.data('repeatable'))
 
   return {
     isActive,
     isActiveNeightbor,
     isHover,
-    isVisited,
+    isCompleted,
     isSelectable,
   }
 }

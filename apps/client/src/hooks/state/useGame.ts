@@ -1,6 +1,6 @@
 import {
-  Encounter,
-  EncounterContext,
+  GameWorld,
+  GameWorldNode,
   Id,
   Item,
   Team,
@@ -8,46 +8,25 @@ import {
 } from '@repo/game/types'
 import { create } from 'zustand'
 
-export type GameWorldNodeIconKey = 'combat' | 'shop' | 'start'
-
-export type GameWorldEdge = {
-  id: Id
-  target: Id
-}
-
-export type GameWorldNode = {
-  id: Id
-  size: number
-  edges: GameWorldEdge[]
-  icon: GameWorldNodeIconKey
-  encounter: Encounter
-  interactable: boolean
-  repeats: boolean
-  onEnter?: (ctx: EncounterContext) => void
-}
-
-export type GameWorld = {
-  nodes: GameWorldNode[]
-  startingNodeId: Id
-  activeNodeId: Id
-  visitedNodeIds: Id[]
-}
-
 export type GameState = {
   team: Team
   units: Unit[]
   world: GameWorld
 }
 
-type InitializeProps = {
+export type InitializeWorldProps = {
   team: Team
   units: Unit[]
   world: GameWorld
 }
 
 export type GameStore = GameState & {
-  initialize: (props: InitializeProps) => void
+  initialize: (props: InitializeWorldProps) => void
   setActiveNodeId: (node: GameWorldNode) => void
+  updateWorldNode: (
+    nodeId: Id,
+    fn: (n: GameWorldNode) => Partial<GameWorldNode>
+  ) => void
   updateTeam: (fn: (team: Team) => Partial<Team>) => void
   addItem: (item: Item) => void
 }
@@ -78,9 +57,21 @@ export const useGame = create<GameStore>((set) => ({
       world: {
         ...s.world,
         activeNodeId: node.id,
-        visitedNodeIds: node.repeats
-          ? s.world.visitedNodeIds
-          : Array.from(new Set([...s.world.visitedNodeIds, node.id])),
+      },
+    }))
+  },
+  updateWorldNode: (nodeId, fn) => {
+    set((s) => ({
+      world: {
+        ...s.world,
+        nodes: s.world.nodes.map((n) =>
+          n.id === nodeId
+            ? {
+                ...n,
+                ...fn(n),
+              }
+            : n
+        ),
       },
     }))
   },

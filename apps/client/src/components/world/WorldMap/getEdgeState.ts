@@ -10,15 +10,16 @@ export type GetEdgeStateOptions = {
 
 export function getEdgeState(edge: EdgeSingular, options: GetEdgeStateOptions) {
   const { activeNode, hoverNode, visitedNodeIds } = options
-  const visitedNodes = activeNode
+  const completedNodes = activeNode
     ?.cy()
     .nodes()
-    .filter((n) => visitedNodeIds.includes(n.id()))
+    .filter((n) => n.data('completed'))
 
   const isActive = !!activeNode?.same(edge.source())
-  const isVisited = visitedNodes?.incomers().has(edge)
+  const isCompleted = completedNodes?.incomers().has(edge)
   const isActiveNeightbor =
-    !!getOutgoers(visitedNodes)?.has(edge) || getOutgoers(activeNode)?.has(edge)
+    !!getOutgoers(completedNodes)?.has(edge) ||
+    getOutgoers(activeNode)?.has(edge)
   const finder = getPath(options)
   const isInHoverPath = hoverNode && finder?.pathTo(hoverNode).has(edge)
   const isIsland =
@@ -29,6 +30,6 @@ export function getEdgeState(edge: EdgeSingular, options: GetEdgeStateOptions) {
     isActiveNeightbor,
     isInHoverPath,
     isIsland,
-    isVisited,
+    isCompleted,
   }
 }

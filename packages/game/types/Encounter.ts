@@ -1,4 +1,4 @@
-import { Id, Item, Team } from '.'
+import { GameWorldNode, Id, Item, Team } from '.'
 
 export type InitializeCombatProps = {
   enemyUnitCount: number
@@ -10,6 +10,9 @@ export type EncounterContext = {
   activeNode: EncounterNode
   back: () => void
   initializeCombat: (props: InitializeCombatProps) => void
+  updateActiveWorldNode: (
+    fn: (n: GameWorldNode) => Partial<GameWorldNode>
+  ) => void
   updateEncounter: (fn: (e: Encounter) => Partial<Encounter>) => void
   updateTeam: (fn: (e: Team) => Partial<Team>) => void
   addItem: (item: Item) => void

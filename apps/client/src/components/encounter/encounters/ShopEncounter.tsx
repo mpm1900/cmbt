@@ -39,6 +39,9 @@ const ShopIntroductionNode: EncounterNode = {
       id: nanoid(),
       label: 'Leave',
       resolve: (ctx) => {
+        ctx.updateActiveWorldNode((n) => ({
+          completed: true,
+        }))
         ctx.back()
       },
       options: [],

@@ -8,12 +8,12 @@ import { motion } from 'framer-motion'
 import { CgDetailsMore } from 'react-icons/cg'
 import { useCombatContext } from '../../../hooks'
 import { useActions, useCombatUi } from '../../../hooks/state'
+import { UnitStats } from '../../_shared/UnitStats'
 import { Button } from '../../ui/button'
 import { CardContent } from '../../ui/card'
 import { Popover, PopoverContent, PopoverTrigger } from '../../ui/popover'
 import { UnitBars } from './UnitBars'
 import { UnitModifiers } from './UnitModifiers'
-import { UnitStats } from './UnitStats'
 
 export type UnitCardProps = {
   unit: Unit

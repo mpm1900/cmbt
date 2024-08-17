@@ -2,7 +2,7 @@ import { Separator } from '@/components/ui/separator'
 import { useCombatContext } from '@/hooks'
 import { Unit } from '@repo/game/types'
 import { applyModifiers } from '@repo/game/utils'
-import { StatDebug } from '../StatDebug'
+import { StatDebug } from './StatDebug'
 
 export type UnitStatsProps = {
   unit: Unit

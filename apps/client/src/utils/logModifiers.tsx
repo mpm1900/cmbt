@@ -24,6 +24,7 @@ export function logModifiers(modifiers: Modifier[], ctx: CombatContext) {
           <ModifierInline
             key={mod.rtid}
             modifier={mod}
+            side="left"
             className="font-normal"
           />
         ))}

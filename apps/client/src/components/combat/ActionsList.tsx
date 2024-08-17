@@ -1,4 +1,5 @@
 import { cn } from '@/lib/utils'
+import { GLOBAL_ACTIONS } from '@repo/game/data'
 import { Action, Id, Unit } from '@repo/game/types'
 import { useEffect, useState } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
@@ -24,6 +25,8 @@ export function ActionsList(props: ActionsListProps) {
   const [selectedTargets, setSelectedTargets] = useState<Unit[]>([])
   const carousel = useCarouselApi()
 
+  const actions = [...unit.actions, ...GLOBAL_ACTIONS.map((m) => m.make(unit))]
+
   function updateActiveAction(action: Action | undefined) {
     setSelectedAction(action)
     setSelectedTargets([])
@@ -43,7 +46,7 @@ export function ActionsList(props: ActionsListProps) {
     }
   }
 
-  const pages = Math.ceil(unit.actions.length / 4)
+  const pages = Math.ceil(actions.length / 4)
   useEffect(() => {
     carousel.setCount(pages)
   }, [unit.id])
@@ -75,7 +78,7 @@ export function ActionsList(props: ActionsListProps) {
               {Array.from({ length: pages }).map((_, i) => (
                 <CarouselItem key={i}>
                   <div className="grid grid-cols-2 gap-2">
-                    {unit.actions
+                    {actions
                       //
                       .slice(4 * i, 4 * i + 4)
                       .map((action) => (

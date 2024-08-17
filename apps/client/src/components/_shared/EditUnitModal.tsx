@@ -1,4 +1,3 @@
-import { GLOBAL_ACTIONS, ZERO_UNIT } from '@repo/game/data'
 import { Unit } from '@repo/game/types'
 import { getUnitBase } from '@repo/game/utils'
 import { PropsWithChildren } from 'react'
@@ -14,16 +13,13 @@ import { ActionListTable } from './ActionListTable'
 
 export type EditUnitModalProps = PropsWithChildren<{
   unit: Unit
+  onChange: (changes: Partial<Unit>) => void
 }>
 
-const GLOBAL_ACTION_IDS = GLOBAL_ACTIONS.map((m) => m.make(ZERO_UNIT).id)
-
 export function EditUnitModal(props: EditUnitModalProps) {
-  const { children, unit } = props
+  const { children, unit, onChange } = props
   const { base, config } = getUnitBase(unit.baseId)
-  const selectedActionIds = unit.actions
-    .filter((a) => !GLOBAL_ACTION_IDS.includes(a.id))
-    .map((a) => a.id)
+  const selectedActionIds = props.unit.actions.map((a) => a.id)
 
   return (
     <Dialog>
@@ -42,6 +38,17 @@ export function EditUnitModal(props: EditUnitModalProps) {
             selectedActionIds={selectedActionIds}
             onSelect={(maker, isSelected) => {
               console.log('select')
+              if (isSelected) {
+                onChange({
+                  actions: [...props.unit.actions, maker.make(props.unit)],
+                })
+              } else {
+                onChange({
+                  actions: props.unit.actions.filter(
+                    (a) => a.id !== maker.make(props.unit).id
+                  ),
+                })
+              }
             }}
           />
         </div>

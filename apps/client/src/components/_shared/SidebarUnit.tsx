@@ -1,3 +1,4 @@
+import { useGame } from '@/hooks/state'
 import { Unit } from '@repo/game/types'
 import { applyMutations } from '@repo/game/utils'
 import { Button } from '../ui/button'
@@ -9,6 +10,7 @@ export type SidebarUnitProps = {
 
 export function SidebarUnit(props: SidebarUnitProps) {
   const {} = props
+  const game = useGame()
   const unit = applyMutations(props.unit, props.unit.modifiers())
 
   return (
@@ -19,7 +21,12 @@ export function SidebarUnit(props: SidebarUnitProps) {
           HP ({unit.stats.health - unit.values.damage}/{unit.stats.health})
         </div>
       </div>
-      <EditUnitModal unit={props.unit}>
+      <EditUnitModal
+        unit={props.unit}
+        onChange={(changes) =>
+          game.updateUnits((u) => (u.id === unit.id ? changes : u))
+        }
+      >
         <Button>Edit</Button>
       </EditUnitModal>
     </div>

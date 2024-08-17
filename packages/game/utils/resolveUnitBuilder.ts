@@ -1,4 +1,4 @@
-import { GLOBAL_ACTIONS, UnitId, ZERO_UNIT } from '../data'
+import { UnitId, ZERO_UNIT } from '../data'
 import { Id, Modifier, Mutation, Unit, UnitBuilder } from '../types'
 import { applyMutations } from './applyModifiers'
 
@@ -38,10 +38,7 @@ export function resolveUnitBuilder(builder: UnitBuilder, teamId: Id): Unit {
     devotion: unit.stats.devotion,
   }
 
-  unit.actions = [
-    ...builder.actions.map((a) => a.make(unit)),
-    ...GLOBAL_ACTIONS.map((a) => a.make(unit)),
-  ]
+  unit.actions = [...builder.actions.map((a) => a.make(unit))]
 
   const mutations = getMutationsFromBuilder(builder, unit)
   const modifiers = getModifiersFromBuilder(builder, unit)

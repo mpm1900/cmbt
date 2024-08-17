@@ -1,6 +1,5 @@
 import { Encounter, EncounterNode, Id } from '@repo/game/types'
 import { ReactNode } from '@tanstack/react-router'
-import { nanoid } from 'nanoid/non-secure'
 import { create } from 'zustand'
 
 export type EncounterLog = { id: Id; delay: number; node: ReactNode }
@@ -16,7 +15,7 @@ export type EncounterStore = EncounterState & {
 }
 
 export const useEncounter = create<EncounterStore>((set, get) => ({
-  encounter: { id: nanoid(), nodes: [], activeNodeId: '' },
+  encounter: { id: '', nodes: [], activeNodeId: '' },
   logs: [],
   log: (item, delay) => {},
   getActiveNode: () => {

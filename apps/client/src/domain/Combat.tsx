@@ -22,11 +22,11 @@ import { Link } from '@tanstack/react-router'
 export function Combat() {
   const combat = useCombat()
 
+  useCombatSetup()
   useTurnController()
   useInputController()
   useAiActions()
   useCleanupController()
-  useCombatSetup()
 
   const userTeam = combat.teams.find((t) => t.id === combat.user)
   const aiTeam = combat.teams.find((t) => t.id !== combat.user)

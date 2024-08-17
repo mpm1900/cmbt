@@ -5,7 +5,7 @@ import { applyModifiers } from '@repo/game/utils'
 import { MagicArmor } from '@shared/MagicArmor'
 import { PhysicalArmor } from '@shared/PhysicalArmor'
 import { motion } from 'framer-motion'
-import { FaSearch } from 'react-icons/fa'
+import { CgDetailsMore } from 'react-icons/cg'
 import { useCombatContext } from '../../../hooks'
 import { useActions, useCombatUi } from '../../../hooks/state'
 import { Button } from '../../ui/button'
@@ -88,17 +88,11 @@ export function UnitCard(props: UnitCardProps) {
                     })}
                     variant="ghost"
                   >
-                    <FaSearch />
+                    <CgDetailsMore />
                   </Button>
                 </PopoverTrigger>
                 <PopoverContent className="w-full text-center">
-                  <UnitStats
-                    unit={props.unit}
-                    stagedItem={stagedItem}
-                    onClearClick={() =>
-                      removeWhere((i) => i.action.sourceId === unit.id)
-                    }
-                  />
+                  <UnitStats unit={props.unit} />
                 </PopoverContent>
               </Popover>
             )}

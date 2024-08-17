@@ -16,7 +16,7 @@ export function ActionHover(props: ActionHoverProps) {
     <HoverCard openDelay={100} closeDelay={0}>
       <HoverCardTrigger asChild>{children}</HoverCardTrigger>
       <HoverCardPortal>
-        <HoverCardContent side={side}>
+        <HoverCardContent side={side} className="w-[320px]">
           <div className="space-y-2">
             <div>{renderer.name}</div>
             <div className="text-muted-foreground">

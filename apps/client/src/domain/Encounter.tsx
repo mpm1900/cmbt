@@ -14,7 +14,7 @@ export function Encounter() {
   return (
     <PageLayout
       navbar={<Navbar />}
-      aside={<EncounterSidebar defaultValue="log" />}
+      aside={<EncounterSidebar defaultValue="team" />}
       header={<TeamHeader team={game.team} />}
     >
       <div className="flex flex-1 items-center justify-center">

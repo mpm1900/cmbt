@@ -9,6 +9,7 @@ export type CombatLogItemProps = {
 
 export function CombatLogItem(props: CombatLogItemProps) {
   const { node, delay, onAnimationComplete } = props
+
   return (
     <motion.div
       className="px-2 py-0.5 overflow-hidden"

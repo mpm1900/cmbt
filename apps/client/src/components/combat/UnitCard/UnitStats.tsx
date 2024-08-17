@@ -1,19 +1,14 @@
 import { Separator } from '@/components/ui/separator'
 import { useCombatContext } from '@/hooks'
-import { ActionRenderers } from '@/renderers'
-import { ActionsQueueItem, Unit } from '@repo/game/types'
+import { Unit } from '@repo/game/types'
 import { applyModifiers } from '@repo/game/utils'
-import { RequireTurnStatus } from '../RequireTurnStatus'
 import { StatDebug } from '../StatDebug'
 
 export type UnitStatsProps = {
   unit: Unit
-  stagedItem: ActionsQueueItem | undefined
-  onClearClick: () => void
 }
 
 export function UnitStats(props: UnitStatsProps) {
-  const { stagedItem, onClearClick } = props
   const ctx = useCombatContext()
   const { unit } = applyModifiers(props.unit, ctx)
   const remainingHealth = Math.max(unit.stats.health - unit.values.damage, 0)
@@ -224,17 +219,6 @@ export function UnitStats(props: UnitStatsProps) {
           </div>
         </div>
       </div>
-      {stagedItem && (
-        <span>
-          {`${ActionRenderers[stagedItem.action.id ?? '']?.name} => [${ctx.units
-            .filter((u) => stagedItem.targetIds.includes(u.id))
-            .map((u) => u.name)
-            .join(',')}]`}
-          <RequireTurnStatus status="main">
-            <a onClick={onClearClick}>[ Clear ]</a>
-          </RequireTurnStatus>
-        </span>
-      )}
     </div>
   )
 }

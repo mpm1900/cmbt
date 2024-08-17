@@ -1,6 +1,6 @@
 import { LogUnit } from '@/components/ui/log'
-import { ModifierRenderers } from '@/renderers'
 import { CombatContext, Trigger, TriggerEvent } from '@repo/game/types'
+import { ModifierInline } from '@shared/ModifierInline'
 
 export function logTriggers(
   triggers: Trigger[],
@@ -16,7 +16,6 @@ export function logTriggers(
 
     triggers.forEach((trigger) => {
       const parent = ctx.units.find((u) => u.id === trigger.parentId)
-      const renderer = ModifierRenderers[trigger.rid]
       ctx.log(
         <div className="text-muted-foreground">
           {parent && (
@@ -28,7 +27,12 @@ export function logTriggers(
               {parent.name}'s{' '}
             </LogUnit>
           )}
-          <span className="text-white">{renderer?.name}</span> Trigger
+          <ModifierInline
+            side="left"
+            className="font-normal text-white"
+            modifier={trigger}
+          />{' '}
+          Trigger
         </div>
       )
     })

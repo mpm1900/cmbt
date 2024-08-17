@@ -1,21 +1,23 @@
 import { cn } from '@/lib/utils'
 import { ActionRenderers } from '@/renderers'
-import { Separator } from '@radix-ui/react-separator'
 import { Action, Id } from '@repo/game/types'
+import { ActionHover } from '@shared/ActionHover'
 import { PropsWithChildren } from 'react'
 
 export function LogActionName(props: { action: Action }) {
   const { action } = props
   const renderer = ActionRenderers[action.id]
   return (
-    <span
-      className={cn({
-        'text-blue-300': action.attackType === 'magic',
-        'text-green-300': action.attackType === 'physical',
-      })}
-    >
-      {renderer?.name ?? action.id}
-    </span>
+    <ActionHover action={action} side="left">
+      <span
+        className={cn('hover:underline', {
+          'text-blue-300': action.attackType === 'magic',
+          'text-green-300': action.attackType === 'physical',
+        })}
+      >
+        {renderer?.name ?? action.id}
+      </span>
+    </ActionHover>
   )
 }
 

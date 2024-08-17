@@ -19,6 +19,7 @@ export type GameWorldNode = {
 
   encounter: Encounter
   icon: GameWorldNodeIconKey
+  completedIcon: GameWorldNodeIconKey
 
   completed: boolean
   retreatable: boolean

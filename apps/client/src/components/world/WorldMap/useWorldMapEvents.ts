@@ -29,10 +29,11 @@ export function useWorldMapEvents(cy: Core | undefined) {
         const node = event.target as NodeSingular
         const data: GameWorldNode = event.target.data()
         const state = isPathableNode(node, options)
-        const isInteractable = !state.isCompleted || state.isRepeatable
+        const isInteractable =
+          (!state.isCompleted || state.isRepeatable) && state.isPathable
 
-        if (isInteractable && data.encounter && state.isPathable) {
-          game.setActiveNodeId(node.data())
+        if (isInteractable) {
+          game.setActiveNodeId(data)
           encounter.updateEncounter(() => data.encounter)
           nav({ to: '/encounter' })
         }

@@ -13,7 +13,7 @@ export function ActionHover(props: ActionHoverProps) {
   const { action, children, side } = props
   const renderer = ActionRenderers[action.id]
   return (
-    <HoverCard openDelay={0} closeDelay={0}>
+    <HoverCard openDelay={100} closeDelay={0}>
       <HoverCardTrigger asChild>{children}</HoverCardTrigger>
       <HoverCardPortal>
         <HoverCardContent side={side}>

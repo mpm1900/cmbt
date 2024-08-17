@@ -13,7 +13,6 @@ const LockedNode1: EncounterNode = {
         ctx.updateActiveWorldNode((n) => ({
           locked: false,
           completed: true,
-          icon: 'unlocked',
         }))
         ctx.back()
       },

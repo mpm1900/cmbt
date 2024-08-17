@@ -58,6 +58,7 @@ export type UnitBaseConfig = {
 export type Unit = {
   readonly id: Id
   readonly teamId: Id
+  baseId: Id
   name: string
   stats: Stats
   values: Values

@@ -2,8 +2,9 @@ import { Unit } from '../../../types'
 
 export const ZERO_UNIT: Unit = {
   id: '',
-  name: '',
   teamId: '',
+  baseId: '',
+  name: '',
   stats: {
     health: 0,
     defense: 0,

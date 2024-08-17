@@ -1,4 +1,3 @@
-import random from 'random'
 import { GLOBAL_ACTIONS, UnitId, ZERO_UNIT } from '../data'
 import { Id, Modifier, Mutation, Unit, UnitBuilder } from '../types'
 import { applyMutations } from './applyModifiers'
@@ -17,6 +16,7 @@ export function resolveUnitBuilder(builder: UnitBuilder, teamId: Id): Unit {
   let unit: Unit = {
     id: UnitId(),
     teamId,
+    baseId: builder.base.id,
     name: builder.name,
     stats: builder.base.stats,
     values: ZERO_UNIT.values,

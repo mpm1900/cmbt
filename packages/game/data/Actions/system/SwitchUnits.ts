@@ -1,7 +1,7 @@
 import {
   Action,
-  ActionResult,
   ActionAi,
+  ActionResult,
   CombatContext,
   Id,
   Unit,
@@ -62,7 +62,7 @@ export class SwitchUnit extends Action {
           sourceId: source.id,
           parentId: source.id,
           modifiers: ctx.modifiers.filter(
-            (m) => m.parentId === source.id && m.persist
+            (m) => m.parentId === source.id && m.persistOnSwitch
           ),
         }),
       ],

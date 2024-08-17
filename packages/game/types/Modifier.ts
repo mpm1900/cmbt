@@ -3,17 +3,19 @@ import { Mutation, MutationProps } from './Mutation'
 import { Unit } from './Unit'
 
 export type ModifierProps<T = {}> = MutationProps<T> & {
-  maxInstances?: number
   duration?: number
+  maxInstances?: number
   priority?: number
-  persist?: boolean
+  persistOnSwitch?: boolean
+  persistOnCombatEnd?: boolean
 }
 
 export abstract class Modifier extends Mutation {
   maxInstances: number | undefined
   duration: number | undefined
   priority: number
-  persist: boolean
+  persistOnSwitch: boolean
+  persistOnCombatEnd: boolean
 
   abstract resolve(unit: Unit): Partial<Unit>
   get key(): string {
@@ -25,7 +27,26 @@ export abstract class Modifier extends Mutation {
     this.priority = props.priority ?? 0
     this.duration = props.duration
     this.maxInstances = props.maxInstances
-    this.persist = props.persist || false
+    this.persistOnSwitch = props.persistOnSwitch || false
+    this.persistOnCombatEnd = props.persistOnCombatEnd || false
+  }
+
+  getProps(): ModifierProps {
+    return {
+      duration: this.duration,
+      maxInstances: this.maxInstances,
+      priority: this.priority,
+      persistOnSwitch: this.persistOnSwitch,
+      persistOnCombatEnd: this.persistOnCombatEnd,
+    }
+  }
+
+  clone(props: Partial<ModifierProps>) {
+    const { constructor } = Object.getPrototypeOf(this)
+    return new constructor(this.id, {
+      ...this.getProps(),
+      ...props,
+    }) as typeof this
   }
 
   decrementDuration() {

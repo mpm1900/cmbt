@@ -30,7 +30,7 @@ const StartNode: GameWorldNode = {
   edges: [edge(shop('0'))],
   completed: true,
   repeatable: false,
-  backtrackable: false,
+  retreatable: false,
   locked: false,
 }
 
@@ -48,7 +48,7 @@ const ShopNode: NodeMaker = (id, edges, overrides) => ({
   edges,
   completed: false,
   repeatable: true,
-  backtrackable: true,
+  retreatable: true,
   locked: false,
   ...overrides,
 })
@@ -61,7 +61,7 @@ const TestNode: NodeMaker = (id, edges, overrides) => ({
   edges,
   completed: false,
   repeatable: false,
-  backtrackable: true,
+  retreatable: true,
   locked: false,
   ...overrides,
 })
@@ -74,7 +74,7 @@ const LockedNode: NodeMaker = (id, edges, overrides) => ({
   edges,
   completed: false,
   repeatable: false,
-  backtrackable: true,
+  retreatable: true,
   locked: true,
   ...overrides,
 })
@@ -86,14 +86,14 @@ export function makeWorld(): GameWorld {
     nodes: [
       StartNode,
       ShopNode('0', [edge(test('1'))]),
-      TestNode('0', [edge(shop('0'))], { backtrackable: false }),
+      TestNode('0', [edge(shop('0'))], { retreatable: false }),
       TestNode('1', [edge(test('2')), edge(test('4'))]),
       TestNode('4', [edge(lock('0'))]),
       TestNode('2', [edge(shop('0')), edge(test('1')), edge(shop('1'))]),
       ShopNode('1', [edge(test('0')), edge(test('3'))]),
       TestNode('3', [edge(lock('0'))]),
       LockedNode('0', [edge(test('5')), edge(test('1'))]),
-      TestNode('5', []),
+      TestNode('5', [], { size: 30 }),
     ],
   }
 }

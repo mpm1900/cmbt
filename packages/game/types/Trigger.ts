@@ -1,6 +1,6 @@
+import { Id } from '.'
 import { CombatContext } from './CombatContext'
 import { Modifier, ModifierProps } from './Modifier'
-import { Id } from '.'
 
 export type TriggerEvent = 'on Turn Start' | 'on Turn End' | 'on Unit Enter'
 export const AllTriggerEvents: TriggerEvent[] = ['on Turn Start', 'on Turn End']
@@ -18,5 +18,13 @@ export abstract class Trigger extends Modifier {
 
     this.modifiers = props.modifiers
     this.events = props.events ?? []
+  }
+
+  getProps(): TriggerProps & { events: TriggerEvent[] } {
+    return {
+      ...super.getProps(),
+      events: this.events,
+      modifiers: this.modifiers,
+    }
   }
 }

@@ -16,11 +16,12 @@ export type GameWorldNode = {
   id: Id
   size: number
   edges: GameWorldEdge[]
-  icon: GameWorldNodeIconKey
 
   encounter: Encounter
-  backtrackable: boolean
+  icon: GameWorldNodeIconKey
+
   completed: boolean
+  retreatable: boolean
   repeatable: boolean
   locked: boolean
 }

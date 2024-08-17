@@ -14,6 +14,7 @@ import {
 import { useCleanupController } from '@/hooks/controllers/useCleanupController'
 import { useCombat } from '@/hooks/state'
 import { useCombatSetup } from '@/hooks/useCombatSetup'
+import { useCombatToWorldState } from '@/hooks/useCombatToWorldState'
 import { Navbar } from '@shared/Navbar'
 import { PageLayout } from '@shared/PageLayout'
 import { Link } from '@tanstack/react-router'
@@ -30,6 +31,8 @@ export function Combat() {
   const userTeam = combat.teams.find((t) => t.id === combat.user)
   const aiTeam = combat.teams.find((t) => t.id !== combat.user)
 
+  const commit = useCombatToWorldState()
+
   return (
     <PageLayout
       navbar={<Navbar />}
@@ -43,7 +46,14 @@ export function Combat() {
             <div>
               <div className="text-xxl">battle over!</div>
               <Link to="/world">
-                <Button onClick={combat.onSuccess}>Back to World</Button>
+                <Button
+                  onClick={() => {
+                    commit()
+                    combat.onSuccess()
+                  }}
+                >
+                  Back to World
+                </Button>
               </Link>
             </div>
           </RequireTurnStatus>

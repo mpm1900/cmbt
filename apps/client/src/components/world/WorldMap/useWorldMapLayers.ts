@@ -27,8 +27,8 @@ export function useWorldMapLayers(cy: Core | undefined) {
         const data: GameWorldNode = node.data()
         const state = isPathableNode(node, options)
         elem.innerHTML = getNodeIconRaw(data.icon)
-        elem.style.width = '22px'
-        elem.style.height = '22px'
+        elem.style.width = `${node.data('size') + 2}px`
+        elem.style.height = `${node.data('size') + 2}px`
         elem.style.display = 'flex'
         elem.style.justifyContent = 'center'
         elem.style.alignItems = 'center'

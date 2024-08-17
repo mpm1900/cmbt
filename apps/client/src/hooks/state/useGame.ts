@@ -28,6 +28,7 @@ export type GameStore = GameState & {
     fn: (n: GameWorldNode) => Partial<GameWorldNode>
   ) => void
   updateTeam: (fn: (team: Team) => Partial<Team>) => void
+  updateUnits: (fn: (unit: Unit) => Partial<Unit>) => void
   addItem: (item: Item) => void
 }
 
@@ -78,6 +79,14 @@ export const useGame = create<GameStore>((set) => ({
   updateTeam: (fn) => {
     set((s) => ({
       team: s.team ? { ...s.team, ...fn(s.team) } : s.team,
+    }))
+  },
+  updateUnits: (fn) => {
+    set((s) => ({
+      units: s.units.map((u) => ({
+        ...u,
+        ...fn(u),
+      })),
     }))
   },
   addItem: (item) => {

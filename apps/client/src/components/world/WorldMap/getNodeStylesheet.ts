@@ -39,7 +39,7 @@ export function getNodeStylesheet(
   return {
     selector: 'node',
     style: {
-      //label: (node: NodeSingular) => node.data('locked'),
+      label: (node: NodeSingular) => node.data('retreatable'),
       'font-size': 12,
       color: 'white',
       height: function (node) {

@@ -30,7 +30,7 @@ export function getPath(
     .filter((e) => {
       const valid =
         (e.isEdge() &&
-          ((e.source().same(activeNode) && e.source().data('backtrackable')) ||
+          ((e.source().same(activeNode) && e.source().data('retreatable')) ||
             completedNodes.has(e.source()))) ||
         completedNodes.has(e) ||
         isActiveNeightbor(e)

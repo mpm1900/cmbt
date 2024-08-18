@@ -20,13 +20,17 @@ export function logModifiers(modifiers: Modifier[], ctx: CombatContext) {
           {unit.name}
         </LogUnit>{' '}
         gained{' '}
-        {unitModifiers.map((mod) => (
-          <ModifierInline
-            key={mod.rtid}
-            modifier={mod}
-            side="left"
-            className="font-normal"
-          />
+        {unitModifiers.map((mod, i, a) => (
+          <>
+            {a.length > 1 && i === a.length - 1 && ' and '}
+            <ModifierInline
+              key={mod.rtid}
+              modifier={mod}
+              side="left"
+              className="font-normal"
+            />
+            {a.length > 2 && i !== a.length - 1 && ', '}
+          </>
         ))}
       </LogSecondary>,
       (index + 1) * 0.1

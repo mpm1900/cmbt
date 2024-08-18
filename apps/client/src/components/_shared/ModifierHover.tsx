@@ -17,7 +17,11 @@ export function ModifierHover(props: ModifierHoverProps) {
     <HoverCard openDelay={200} closeDelay={200}>
       <HoverCardTrigger asChild>{children}</HoverCardTrigger>
       <HoverCardPortal>
-        <HoverCardContent side={side} className="w-[320px]">
+        <HoverCardContent
+          side={side}
+          collisionPadding={16}
+          className="w-[320px]"
+        >
           <div className="space-y-2">
             <div>{renderer.name}</div>
             <ModifierDescription modifier={modifier} />

@@ -7,7 +7,7 @@ export class DamageParent extends Mutation {
   evasionSuccess: boolean
 
   constructor(
-    props: MutationProps<{ damage: number; evasionSuccess: boolean }>
+    props: MutationProps<{ damage: number; evasionSuccess?: boolean }>
   ) {
     super(DamageParentId, props)
     this.damage = props.damage

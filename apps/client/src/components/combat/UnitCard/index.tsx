@@ -92,7 +92,10 @@ export function UnitCard(props: UnitCardProps) {
                     <CgDetailsMore />
                   </Button>
                 </PopoverTrigger>
-                <PopoverContent className="w-full text-center">
+                <PopoverContent
+                  className="w-full text-center"
+                  onOpenAutoFocus={(e) => e.preventDefault()}
+                >
                   <UnitStats unit={props.unit} />
                 </PopoverContent>
               </Popover>

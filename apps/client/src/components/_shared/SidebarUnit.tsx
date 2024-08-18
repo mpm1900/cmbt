@@ -13,7 +13,6 @@ export type SidebarUnitProps = {
 }
 
 export function SidebarUnit(props: SidebarUnitProps) {
-  const {} = props
   const game = useGame()
   const unit = applyMutations(props.unit, props.unit.modifiers())
 

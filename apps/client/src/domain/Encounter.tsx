@@ -1,4 +1,4 @@
-import { EncounterSidebar } from '@/components/_shared/EncounterSidebar'
+import { EncounterSidebar } from '@/components/encounter/EncounterSidebar'
 import { NodeRenderer } from '@/components/encounter/NodeRenderer'
 import { useEncounterContext, useEncounterSetup } from '@/hooks'
 import { useGame } from '@/hooks/state'

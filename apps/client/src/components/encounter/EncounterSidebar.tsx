@@ -1,12 +1,12 @@
 import { useGame } from '@/hooks/state'
+import { SidebarUnit } from '../_shared/SidebarUnit'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../ui/tabs'
-import { SidebarUnit } from './SidebarUnit'
 
-export type WorldSidebarProps = {
+export type EncounterSidebarProps = {
   defaultValue?: string
 }
 
-export function WorldSidebar(props: WorldSidebarProps) {
+export function EncounterSidebar(props: EncounterSidebarProps) {
   const { defaultValue = 'team' } = props
   const game = useGame()
   return (
@@ -18,7 +18,7 @@ export function WorldSidebar(props: WorldSidebarProps) {
         <div className="p-2">
           <TabsList className="grid w-full grid-cols-2">
             <TabsTrigger value="team">Team</TabsTrigger>
-            <TabsTrigger value="items">Items</TabsTrigger>
+            <TabsTrigger value="log">Encounter Log</TabsTrigger>
           </TabsList>
         </div>
         <div className="flex-1 overflow-auto w-full">
@@ -27,7 +27,7 @@ export function WorldSidebar(props: WorldSidebarProps) {
               <SidebarUnit key={unit.id} unit={unit} />
             ))}
           </TabsContent>
-          <TabsContent value="items">items</TabsContent>
+          <TabsContent value="log">log</TabsContent>
         </div>
       </Tabs>
     </div>

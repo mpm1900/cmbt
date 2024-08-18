@@ -15,7 +15,7 @@ export function BuilderSidebar(props: BuilderSidebarProps) {
 
   return (
     <div className="w-[420px] bg-slate-950 border-l h-screen flex flex-col overflow-hidden">
-      <div className="flex p-2">
+      <div className="flex px-8 py-4">
         <StartButton />
       </div>
       <Tabs

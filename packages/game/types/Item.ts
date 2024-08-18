@@ -4,5 +4,5 @@ export type Item = {
   id: Id
   count: number
   cost: number
-  action: (unit: Unit) => Action
+  action?: (unit: Unit) => Action
 }

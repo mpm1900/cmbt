@@ -32,7 +32,8 @@ export function UnitCard(props: UnitCardProps) {
   const stagedItem = queue.find((i) => i.action.sourceId === unit.id)
 
   const isTargeted =
-    status === 'combat' && !!result?.targets?.find((t) => t.id === unit.id)
+    status === 'combat' &&
+    !!result?.expandedTargets?.find((t) => t.id === unit.id)
 
   const isActive =
     (status === 'combat'

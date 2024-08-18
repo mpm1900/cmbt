@@ -19,13 +19,14 @@ export function ItemsList(props: ItemsListProps) {
   const team = ctx.teams.find((t) => t.id === unit?.teamId)
   const items = team?.items ?? []
   const [activeItem, setActiveItem] = useState<Item>()
-  const activeAction = unit ? activeItem?.action(unit) : undefined
+  const activeAction =
+    unit && activeItem?.action ? activeItem?.action(unit) : undefined
   const renderer = ActionRenderers[activeAction?.id ?? '']
   const [targets, setTargets] = useState<Unit[]>([])
 
   function updateActiveItem(item: Item | undefined) {
     setActiveItem(item)
-    if (item && unit) {
+    if (item && unit && item.action) {
       const action = item.action(unit)
       const possibleTargets = action.targets.resolve(ctx)
       if (possibleTargets.length <= action.maxTargetCount) {
@@ -39,7 +40,7 @@ export function ItemsList(props: ItemsListProps) {
   }
 
   function handleConfirm() {
-    if (activeItem && unit) {
+    if (activeItem && unit && activeItem.action) {
       const action = activeItem.action(unit)
       combat.decrementWhere(ctx.user, (i) => i.id === activeItem.id)
       onConfirm(
@@ -63,32 +64,35 @@ export function ItemsList(props: ItemsListProps) {
       <CardContent className="space-y-4">
         {unit && (
           <div className="grid grid-cols-2 gap-2">
-            {items.map((item) => {
-              const action = item.action(unit)
-              const renderer = ActionRenderers[action.id]
-              return (
-                <Button
-                  key={action.id}
-                  className="items-start h-full flex-col"
-                  disabled={item.count <= 0}
-                  variant={
-                    action.id === activeAction?.id ? 'default' : 'secondary'
-                  }
-                  onClick={() =>
-                    updateActiveItem(
-                      item.id === activeItem?.id ? undefined : item
-                    )
-                  }
-                >
-                  <span className="text-lg text-ellipsis w-full overflow-hidden text-left">
-                    {renderer?.name ?? action.id}
-                  </span>
-                  <span className="text-xs text-muted-foreground space-x-2">
-                    {item.count}
-                  </span>
-                </Button>
-              )
-            })}
+            {items
+              .filter((i) => !!i.action)
+              .map((item) => {
+                if (!item.action) return null
+                const action = item.action(unit)
+                const renderer = ActionRenderers[action.id]
+                return (
+                  <Button
+                    key={action.id}
+                    className="items-start h-full flex-col"
+                    disabled={item.count <= 0}
+                    variant={
+                      action.id === activeAction?.id ? 'default' : 'secondary'
+                    }
+                    onClick={() =>
+                      updateActiveItem(
+                        item.id === activeItem?.id ? undefined : item
+                      )
+                    }
+                  >
+                    <span className="text-lg text-ellipsis w-full overflow-hidden text-left">
+                      {renderer?.name ?? action.id}
+                    </span>
+                    <span className="text-xs text-muted-foreground space-x-2">
+                      {item.count}
+                    </span>
+                  </Button>
+                )
+              })}
           </div>
         )}
         {items.length === 0 && (

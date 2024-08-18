@@ -28,15 +28,16 @@ export function buildActionResult(
   const modifiedTargets = targets.map(
     (target) => applyModifiers(target, ctx).unit
   )
+  const expandedTargets = action
+    .mapTargets(modifiedTargets, ctx)
+    .filter((target) => !target.flags.isProtected)
+
   const {
     forceFailure,
     onSuccess = {},
     onFailure = {},
-  } = config(
-    action
-      .mapTargets(modifiedTargets, ctx)
-      .filter((target) => !target.flags.isProtected)
-  )
+  } = config(expandedTargets)
+
   if (accuracyRoll.success && !forceFailure) {
     const { mutations = [] } = onSuccess
     return {
@@ -46,6 +47,7 @@ export function buildActionResult(
       data,
       source,
       targets,
+      expandedTargets,
       mutations: [setLastUsed, ...mutations],
     }
   }
@@ -58,6 +60,7 @@ export function buildActionResult(
       data,
       source,
       targets,
+      expandedTargets,
       mutations: [setLastUsed, ...mutations],
     }
   }

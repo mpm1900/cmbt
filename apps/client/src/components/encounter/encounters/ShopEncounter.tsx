@@ -6,8 +6,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
-import { ActionRenderers } from '@/renderers'
-import { Potion, ZERO_UNIT } from '@repo/game/data'
+import { Key01, Potion } from '@repo/game/data'
 import { Encounter, EncounterNode } from '@repo/game/types'
 import { nanoid } from 'nanoid'
 
@@ -85,8 +84,6 @@ const ShopWaresNode: EncounterNode = {
     </TableRow>
   ),
   renderChoices: (ctx) => {
-    const render = ctx.activeNode.renderChoice
-    const choices = ctx.activeNode.choices(ctx)
     return (
       <div className="space-y-4">
         <Table>
@@ -96,11 +93,9 @@ const ShopWaresNode: EncounterNode = {
               cost
             </TableHead>
           </TableHeader>
-          {[Potion()].map((item) => (
+          {[Potion(), Key01()].map((item) => (
             <TableRow>
-              <TableCell>
-                {ActionRenderers[item.action(ZERO_UNIT).id].name}
-              </TableCell>
+              <TableCell>{item.name}</TableCell>
               <TableCell className="flex justify-end items-center">
                 <Button
                   disabled={(ctx.team?.resources.credits ?? 0) < item.cost}

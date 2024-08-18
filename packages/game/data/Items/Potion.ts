@@ -5,6 +5,7 @@ import {
   ActionProps,
   ActionResult,
   CombatContext,
+  Item,
   Unit,
 } from '../../types'
 import { ActionId } from '../Ids'
@@ -52,8 +53,9 @@ export class PotionAction extends Action {
 }
 
 export const PotionId = nanoid()
-export const Potion = () => ({
+export const Potion = (): Item => ({
   id: PotionId,
+  name: 'Potion',
   count: 1,
   action: (u: Unit) =>
     new PotionAction({

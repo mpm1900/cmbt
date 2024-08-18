@@ -1,7 +1,7 @@
 import { cn } from '@/lib/utils'
 import { Unit } from '@repo/game/types'
 import { Bar } from '@shared/Bar'
-import { HealthBar } from '../../_shared/HealthBar'
+import { HealthBar } from './HealthBar'
 
 function getRatios(x: number, y: number, z: number): [number, number, number] {
   const sum = x + y + z
@@ -16,10 +16,11 @@ export type UnitBarsProps = {
   unit: Unit
   isActive: boolean
   hideStats: boolean
+  initial?: number
 }
 
 export function UnitBars(props: UnitBarsProps) {
-  const { unit, isActive, hideStats } = props
+  const { hideStats, initial, isActive, unit } = props
   const ratios = getRatios(
     unit.stats.focus,
     unit.stats.stamina,
@@ -32,6 +33,7 @@ export function UnitBars(props: UnitBarsProps) {
         className={cn({
           'bg-black/20': isActive,
         })}
+        initial={initial}
       />
       {!hideStats && (
         <>
@@ -44,6 +46,7 @@ export function UnitBars(props: UnitBarsProps) {
                 className="h-1"
                 variant="bg-blue-400"
                 style={{ width: `${ratios[0]}%` }}
+                initial={initial}
               />
             )}
             {unit.stats.stamina > 0 && (
@@ -57,6 +60,7 @@ export function UnitBars(props: UnitBarsProps) {
                   'bg-green-600': isActive,
                 })}
                 style={{ width: `${ratios[1]}%` }}
+                initial={initial}
               />
             )}
             {unit.stats.devotion > 0 && (
@@ -71,6 +75,7 @@ export function UnitBars(props: UnitBarsProps) {
                   'bg-slate-950': isActive,
                 })}
                 style={{ width: `${ratios[2]}%` }}
+                initial={initial}
               />
             )}
           </div>

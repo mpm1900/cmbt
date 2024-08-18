@@ -1,11 +1,11 @@
 import { useGame } from '@/hooks/state'
 import { Unit } from '@repo/game/types'
 import { applyMutations } from '@repo/game/utils'
-import { BiCog } from 'react-icons/bi'
+import { CgDetailsMore } from 'react-icons/cg'
 import { Button } from '../ui/button'
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '../ui/hover-card'
 import { EditUnitModal } from './EditUnitModal'
-import { HealthBar } from './HealthBar'
+import { UnitBars } from './UnitBars'
 import { UnitStats } from './UnitStats'
 
 export type SidebarUnitProps = {
@@ -20,10 +20,15 @@ export function SidebarUnit(props: SidebarUnitProps) {
     <div className="rounded hover:bg-slate-800 flex flex-row space-x-2 items-center">
       <HoverCard openDelay={300} closeDelay={0}>
         <HoverCardTrigger asChild>
-          <div className="p-2 flex-1">
-            <div className="flex-1">
+          <div className="p-4 pr-0 flex-1">
+            <div className="flex-1 space-y-2">
               <div>{unit.name}</div>
-              <HealthBar unit={unit} initial={100} />
+              <UnitBars
+                unit={unit}
+                isActive={false}
+                hideStats={false}
+                initial={100}
+              />
             </div>
           </div>
         </HoverCardTrigger>
@@ -47,7 +52,7 @@ export function SidebarUnit(props: SidebarUnitProps) {
             variant="ghost"
             className="h-full opacity-40 hover:opacity-100 p-2"
           >
-            <BiCog size={28} />
+            <CgDetailsMore size={28} />
           </Button>
         </EditUnitModal>
       </div>

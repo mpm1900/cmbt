@@ -23,7 +23,7 @@ export function SidebarUnit(props: SidebarUnitProps) {
           <div className="p-2 flex-1">
             <div className="flex-1">
               <div>{unit.name}</div>
-              <HealthBar unit={unit} />
+              <HealthBar unit={unit} initial={100} />
             </div>
           </div>
         </HoverCardTrigger>

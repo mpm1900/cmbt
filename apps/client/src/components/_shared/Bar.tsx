@@ -5,12 +5,13 @@ import { CSSProperties } from 'react'
 
 export type BarProps = PropsWithClassname<{
   value: number
+  initial?: number
   variant: string
   style?: CSSProperties
 }>
 
 export function Bar(props: BarProps) {
-  const { className, style = {}, value, variant } = props
+  const { className, style = {}, value, initial = 0, variant } = props
 
   return (
     <div
@@ -22,6 +23,7 @@ export function Bar(props: BarProps) {
     >
       <motion.div
         className="absolute top-0 left-0 h-3 bg-white/70"
+        initial={{ width: `${initial}%` }}
         animate={{ width: `${value}%` }}
         transition={{
           type: 'spring',
@@ -33,6 +35,7 @@ export function Bar(props: BarProps) {
       <motion.div
         className={cn('absolute top-0 left-0 h-3', variant)}
         animate={{ width: `${value}%` }}
+        initial={{ width: `${initial}%` }}
       />
     </div>
   )

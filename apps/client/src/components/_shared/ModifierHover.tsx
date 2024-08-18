@@ -19,7 +19,7 @@ export function ModifierHover(props: ModifierHoverProps) {
       <HoverCardPortal>
         <HoverCardContent side={side} className="w-[320px]">
           <div className="space-y-2">
-            {renderer.name}
+            <div>{renderer.name}</div>
             <ModifierDescription modifier={modifier} />
           </div>
         </HoverCardContent>

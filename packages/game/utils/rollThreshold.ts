@@ -12,6 +12,7 @@ export function rollThreshold(
   const success = (threshold === undefined ? 100 : threshold) >= roll
   const criticalSuccess =
     (criticalThreshold === undefined ? 0 : criticalThreshold) >= roll
+
   return {
     roll,
     success,

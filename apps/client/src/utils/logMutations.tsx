@@ -1,5 +1,5 @@
 import { LogSecondary, LogUnit } from '@/components/ui/log'
-import { SetLastUsedActionId, ZERO_UNIT } from '@repo/game/data'
+import { DamageParent, SetLastUsedActionId, ZERO_UNIT } from '@repo/game/data'
 import { CombatContext, Mutation, Unit } from '@repo/game/types'
 import { applyMutations } from '@repo/game/utils'
 
@@ -12,7 +12,7 @@ export function logMutations(mutations: Mutation[], ctx: CombatContext) {
     const unitMutations = logMutations.filter((m) => m.filter(unit, ctx))
     if (unitMutations.length > 0) {
       const diffs = applyMutations(ZERO_UNIT, unitMutations)
-      logMutationDiffs(unit, diffs, i, ctx)
+      logMutationDiffs(unit, diffs, unitMutations, i, ctx)
     }
   })
 }
@@ -20,6 +20,7 @@ export function logMutations(mutations: Mutation[], ctx: CombatContext) {
 export function logMutationDiffs(
   parent: Unit,
   diffs: Unit,
+  mutations: Mutation[],
   index: number,
   ctx: CombatContext
 ) {
@@ -60,6 +61,17 @@ export function logMutationDiffs(
         </LogUnit>{' '}
         {diffs.values.magicArmor > 0 ? 'gained' : 'lost'}{' '}
         {Math.abs(diffs.values.magicArmor)} magic armor.
+      </LogSecondary>,
+      (index + 1) * 0.1
+    )
+  }
+  if (mutations.some((m) => (m as DamageParent).evasionSuccess)) {
+    ctx.log(
+      <LogSecondary className="italic">
+        <LogUnit teamId={parent?.teamId} user={ctx.user} className="opacity-70">
+          {name}
+        </LogUnit>{' '}
+        evaded the attack!
       </LogSecondary>,
       (index + 1) * 0.1
     )

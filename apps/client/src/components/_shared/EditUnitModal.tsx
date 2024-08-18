@@ -36,8 +36,8 @@ export function EditUnitModal(props: EditUnitModalProps) {
         </DialogHeader>
         <div>
           <ActionListTable
-            actions={config.actions}
-            maxActionCount={config.actionsCount}
+            actions={config?.actions}
+            maxActionCount={config?.actionsCount}
             selectedActionIds={selectedActionIds}
             onSelect={(maker, isSelected) => {
               console.log('select')

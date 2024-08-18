@@ -11,8 +11,6 @@ export const StatRenderers: Record<StatKey, StatRenderer | undefined> = {
   accuracy: undefined,
   arcaneExpansion: undefined,
   arcaneNegation: undefined,
-  bluntExpansion: undefined,
-  bluntNegation: undefined,
   criticalChance: undefined,
   criticalDamage: undefined,
   defense: {
@@ -20,6 +18,7 @@ export const StatRenderers: Record<StatKey, StatRenderer | undefined> = {
     icon: <GiShoulderArmor />,
   },
   devotion: undefined,
+  evasion: undefined,
   fireExpansion: undefined,
   fireNegation: undefined,
   focus: undefined,
@@ -36,13 +35,9 @@ export const StatRenderers: Record<StatKey, StatRenderer | undefined> = {
   },
   shockExpansion: undefined,
   shockNegation: undefined,
-  slashExpansion: undefined,
-  slashNegation: undefined,
   speed: {
     name: <>Speed</>,
     icon: <GiSprint />,
   },
   stamina: undefined,
-  thrustExpansion: undefined,
-  thrustNegation: undefined,
 }

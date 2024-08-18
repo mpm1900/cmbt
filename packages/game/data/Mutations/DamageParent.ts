@@ -3,11 +3,15 @@ import { MutationId } from '../Ids'
 
 export const DamageParentId = MutationId()
 export class DamageParent extends Mutation {
-  private damage: number
+  damage: number
+  evasionSuccess: boolean
 
-  constructor(props: MutationProps<{ damage: number }>) {
+  constructor(
+    props: MutationProps<{ damage: number; evasionSuccess: boolean }>
+  ) {
     super(DamageParentId, props)
     this.damage = props.damage
+    this.evasionSuccess = props.evasionSuccess ?? false
   }
 
   resolve = (unit: Unit): Partial<Unit> => {

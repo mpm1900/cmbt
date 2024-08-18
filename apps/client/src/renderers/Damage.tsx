@@ -1,5 +1,8 @@
 import { DamageType } from '@repo/game/types'
 import { ReactNode } from 'react'
+import { BsLightningChargeFill } from 'react-icons/bs'
+import { GiFist } from 'react-icons/gi'
+import { ImFire } from 'react-icons/im'
 import { PiPentagramFill } from 'react-icons/pi'
 
 export type DamageRenderer = {
@@ -12,10 +15,16 @@ export const DamageRenderers: Record<DamageType, DamageRenderer | undefined> = {
     name: <>Arcane</>,
     icon: <PiPentagramFill />,
   },
-  blunt: undefined,
-  fire: undefined,
-  force: undefined,
-  shock: undefined,
-  slash: undefined,
-  thrust: undefined,
+  fire: {
+    name: <>Fire</>,
+    icon: <ImFire />,
+  },
+  force: {
+    name: <>Force</>,
+    icon: <GiFist />,
+  },
+  shock: {
+    name: <>Shock</>,
+    icon: <BsLightningChargeFill />,
+  },
 }

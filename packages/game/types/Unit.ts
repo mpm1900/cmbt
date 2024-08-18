@@ -6,15 +6,16 @@ import { Modifier } from './Modifier'
 export type AttackTypes = 'physical' | 'magic'
 
 export type StatKey =
-  | 'speed'
   | 'accuracy'
   | 'criticalChance'
   | 'criticalDamage'
   | 'defense'
-  | 'health'
-  | 'focus'
-  | 'stamina'
   | 'devotion'
+  | 'evasion'
+  | 'focus'
+  | 'health'
+  | 'speed'
+  | 'stamina'
   | AttackTypes
   | `${DamageType}Negation`
   | `${DamageType}Expansion`
@@ -22,9 +23,9 @@ export type StatKey =
 export type Stats = Record<StatKey, number>
 export type ValueKey =
   | 'damage'
+  | 'devotion'
   | 'focus'
   | 'stamina'
-  | 'devotion'
   | `${AttackTypes}Armor`
 export type Values = Record<ValueKey, number>
 

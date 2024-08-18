@@ -92,19 +92,6 @@ export function UnitStats(props: UnitStatsProps) {
             </div>
             <StatDebug stat="speed" unit={unit} comp={props.unit} />
           </div>
-          <Separator className="my-2" />
-          <div className="flex justify-between space-x-2">
-            <strong>Accuracy Δ</strong>
-            <StatDebug stat="accuracy" unit={unit} comp={props.unit} />
-          </div>
-          <div className="flex justify-between space-x-2">
-            <strong>Crit % Δ</strong>
-            <StatDebug stat="criticalChance" unit={unit} comp={props.unit} />
-          </div>
-          <div className="flex justify-between space-x-2">
-            <strong>Crit Dmg Δ</strong>
-            <StatDebug stat="criticalDamage" unit={unit} comp={props.unit} />
-          </div>
         </div>
         <div className="w-[1px] bg-border" />
         <div className="flex flex-col text-left flex-1">
@@ -124,16 +111,10 @@ export function UnitStats(props: UnitStatsProps) {
             />
           </div>
           <div className="flex space-x-4 justify-between">
-            <strong className="text-muted-foreground">Blunt</strong>
-            <StatDebug
-              stat="bluntExpansion"
-              unit={unit}
-              comp={props.unit}
-              map={(v) => (v + 1) * 100}
-            />
-          </div>
-          <div className="flex space-x-4 justify-between">
-            <strong className="text-muted-foreground">Fire</strong>
+            <div className="flex items-center space-x-1">
+              {DamageRenderers.fire?.icon}
+              <strong className="text-muted-foreground">Fire</strong>
+            </div>
             <StatDebug
               stat="fireExpansion"
               unit={unit}
@@ -142,7 +123,10 @@ export function UnitStats(props: UnitStatsProps) {
             />
           </div>
           <div className="flex space-x-4 justify-between">
-            <strong className="text-muted-foreground">Force</strong>
+            <div className="flex items-center space-x-1">
+              {DamageRenderers.force?.icon}
+              <strong className="text-muted-foreground">Force</strong>
+            </div>
             <StatDebug
               stat="forceExpansion"
               unit={unit}
@@ -151,7 +135,10 @@ export function UnitStats(props: UnitStatsProps) {
             />
           </div>
           <div className="flex space-x-4 justify-between">
-            <strong className="text-muted-foreground">Shock</strong>
+            <div className="flex items-center space-x-1">
+              {DamageRenderers.shock?.icon}
+              <strong className="text-muted-foreground">Shock</strong>
+            </div>
             <StatDebug
               stat="shockExpansion"
               unit={unit}
@@ -159,23 +146,18 @@ export function UnitStats(props: UnitStatsProps) {
               map={(v) => (v + 1) * 100}
             />
           </div>
-          <div className="flex space-x-4 justify-between">
-            <strong className="text-muted-foreground">Slash</strong>
-            <StatDebug
-              stat="slashExpansion"
-              unit={unit}
-              comp={props.unit}
-              map={(v) => (v + 1) * 100}
-            />
+          <Separator className="my-2" />
+          <div className="flex justify-between space-x-2">
+            <strong>Accuracy Δ</strong>
+            <StatDebug stat="accuracy" unit={unit} comp={props.unit} />
           </div>
-          <div className="flex space-x-4 justify-between">
-            <strong className="text-muted-foreground">Thrust</strong>
-            <StatDebug
-              stat="thrustExpansion"
-              unit={unit}
-              comp={props.unit}
-              map={(v) => (v + 1) * 100}
-            />
+          <div className="flex justify-between space-x-2">
+            <strong>Crit % Δ</strong>
+            <StatDebug stat="criticalChance" unit={unit} comp={props.unit} />
+          </div>
+          <div className="flex justify-between space-x-2">
+            <strong>Crit Dmg Δ</strong>
+            <StatDebug stat="criticalDamage" unit={unit} comp={props.unit} />
           </div>
         </div>
         <div className="w-[1px] bg-border" />
@@ -184,7 +166,10 @@ export function UnitStats(props: UnitStatsProps) {
             Negation
           </div>
           <div className="flex space-x-4 justify-between">
-            <strong className="text-muted-foreground">Arcane</strong>
+            <div className="flex items-center space-x-1">
+              {DamageRenderers.arcane?.icon}
+              <strong className="text-muted-foreground">Arcane</strong>
+            </div>
             <StatDebug
               stat="arcaneExpansion"
               unit={unit}
@@ -193,16 +178,10 @@ export function UnitStats(props: UnitStatsProps) {
             />
           </div>
           <div className="flex space-x-4 justify-between">
-            <strong className="text-muted-foreground">Blunt</strong>
-            <StatDebug
-              stat="bluntNegation"
-              unit={unit}
-              comp={props.unit}
-              map={(v) => v * 100}
-            />
-          </div>
-          <div className="flex space-x-4 justify-between">
-            <strong className="text-muted-foreground">Fire</strong>
+            <div className="flex items-center space-x-1">
+              {DamageRenderers.fire?.icon}
+              <strong className="text-muted-foreground">Fire</strong>
+            </div>
             <StatDebug
               stat="fireNegation"
               unit={unit}
@@ -211,7 +190,10 @@ export function UnitStats(props: UnitStatsProps) {
             />
           </div>
           <div className="flex space-x-4 justify-between">
-            <strong className="text-muted-foreground">Force</strong>
+            <div className="flex items-center space-x-1">
+              {DamageRenderers.force?.icon}
+              <strong className="text-muted-foreground">Force</strong>
+            </div>
             <StatDebug
               stat="forceNegation"
               unit={unit}
@@ -220,7 +202,10 @@ export function UnitStats(props: UnitStatsProps) {
             />
           </div>
           <div className="flex space-x-4 justify-between">
-            <strong className="text-muted-foreground">Shock</strong>
+            <div className="flex items-center space-x-1">
+              {DamageRenderers.shock?.icon}
+              <strong className="text-muted-foreground">Shock</strong>
+            </div>
             <StatDebug
               stat="shockNegation"
               unit={unit}
@@ -228,23 +213,12 @@ export function UnitStats(props: UnitStatsProps) {
               map={(v) => v * 100}
             />
           </div>
-          <div className="flex space-x-4 justify-between">
-            <strong className="text-muted-foreground">Slash</strong>
-            <StatDebug
-              stat="slashNegation"
-              unit={unit}
-              comp={props.unit}
-              map={(v) => v * 100}
-            />
-          </div>
-          <div className="flex space-x-4 justify-between">
-            <strong className="text-muted-foreground">Thrust</strong>
-            <StatDebug
-              stat="thrustNegation"
-              unit={unit}
-              comp={props.unit}
-              map={(v) => v * 100}
-            />
+          <Separator className="my-2" />
+          <div className="flex justify-between space-x-2">
+            <strong>Evasion</strong>
+            <span>
+              <StatDebug stat="evasion" unit={unit} comp={props.unit} />%
+            </span>
           </div>
         </div>
       </div>

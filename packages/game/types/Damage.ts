@@ -1,13 +1,6 @@
 import { AttackTypes } from './Unit'
 
-export type DamageType =
-  | 'arcane'
-  | 'blunt'
-  | 'fire'
-  | 'force'
-  | 'shock'
-  | 'slash'
-  | 'thrust'
+export type DamageType = 'arcane' | 'fire' | 'force' | 'shock'
 
 export type Damage = {
   attackType: AttackTypes

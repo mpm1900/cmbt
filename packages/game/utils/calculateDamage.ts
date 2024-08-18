@@ -1,8 +1,9 @@
+import random from 'random'
 import {
+  ActionAccuracyResult,
   AttackTypes,
   Damage,
   DamageType,
-  ActionAccuracyResult,
   Unit,
 } from '../types'
 
@@ -39,6 +40,7 @@ export type CalculateDamageConfig = ActionAccuracyResult & {
 
 export type CalculateDamageResult = {
   damage: number
+  evasionSuccess: boolean
   physicalArmor: number
   magicArmor: number
 }
@@ -55,6 +57,8 @@ export function calculateDamage(
     source,
     target
   )
+  const evasionRoll = random.int(0, 100)
+  const evasionSuccess = target.stats.evasion >= evasionRoll
   const negation = getDamageNegation(damage.damageType, target)
   const expansion = getDamageExpansion(damage.damageType, target)
   if (negation != 1) console.log(damage.value, negation)
@@ -70,17 +74,18 @@ export function calculateDamage(
     base * negation * expansion * criticalFactor * randomFactor
   )
   const physicalArmor =
-    damage.attackType === 'physical'
+    damage.attackType === 'physical' && !evasionSuccess
       ? Math.max(Math.min(target.values.physicalArmor, damageAmount), 0)
       : 0
 
   const magicArmor =
-    damage.attackType === 'magic'
+    damage.attackType === 'magic' && !evasionSuccess
       ? Math.max(Math.min(target.values.magicArmor, damageAmount), 0)
       : 0
 
   return {
-    damage: damageAmount - physicalArmor - magicArmor,
+    damage: evasionSuccess ? 0 : damageAmount - physicalArmor - magicArmor,
+    evasionSuccess,
     physicalArmor,
     magicArmor,
   }

@@ -9,7 +9,7 @@ export function getMutationsFromDamageResult(
   target: Unit,
   result: CalculateDamageResult
 ): Mutation[] {
-  const { damage, physicalArmor, magicArmor } = result
+  const { damage, evasionSuccess, physicalArmor, magicArmor } = result
 
   return [
     new RemoveMagicArmorParent({
@@ -26,6 +26,7 @@ export function getMutationsFromDamageResult(
       sourceId: source.id,
       parentId: target.id,
       damage,
+      evasionSuccess,
     }),
   ]
 }

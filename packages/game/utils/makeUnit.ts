@@ -1,4 +1,4 @@
-import { Unit } from '../types'
+import random from 'random'
 import {
   Crunch,
   Fireball,
@@ -14,10 +14,10 @@ import {
   UnitId,
   WillOWisp,
 } from '../data'
-import random from 'random'
-import { Explosion } from '../data/Actions/Explosion'
 import { Disable } from '../data/Actions/Disable'
+import { Explosion } from '../data/Actions/Explosion'
 import { ZERO_UNIT } from '../data/Units'
+import { Unit } from '../types'
 
 export function unitMaker(
   partial: Partial<Unit>,

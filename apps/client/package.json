@@ -37,6 +37,7 @@
     "cytoscape-cose-bilkent": "^4.1.0",
     "cytoscape-layers": "^2.4.5",
     "embla-carousel-react": "^8.1.7",
+    "focus-trap-react": "^10.2.3",
     "framer-motion": "^11.3.24",
     "lucide-react": "^0.414.0",
     "nanoid": "^5.0.7",

@@ -24,7 +24,10 @@ export function EditUnitModal(props: EditUnitModalProps) {
   return (
     <Dialog>
       <DialogTrigger asChild>{children}</DialogTrigger>
-      <DialogContent className="min-w-[600px]">
+      <DialogContent
+        className="min-w-[600px]"
+        onOpenAutoFocus={(e) => e.preventDefault()}
+      >
         <DialogHeader>
           <DialogTitle>{unit.name}</DialogTitle>
           <DialogDescription>

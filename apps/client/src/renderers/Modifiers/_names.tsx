@@ -21,7 +21,7 @@ export const MODIFIER_NAMES: Record<string, string> = {
   [BurnedPowerDownId]: 'Burn:Power-Down',
   [DefenseDownParentId]: 'Defense Down',
   [DefenseUpAllId]: 'Defense Buff',
-  [SetIsStunnedParentId]: 'Stunned',
+  [SetIsStunnedParentId]: 'Stun',
   [InvertSpeedAllId]: 'Invert Speed',
   [PhysicalAttackDownParentId]: 'Physical Attack Down',
   [PhysicalAttackUpParentId]: 'Physical Attack Up',

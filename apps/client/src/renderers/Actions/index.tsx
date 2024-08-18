@@ -1,55 +1,55 @@
 import { LogUnit } from '@/components/ui/log'
 import {
-  SwordsDanceId,
+  ArmorUp,
+  ArmorUpId,
+  BodySlam,
+  BodySlamId,
+  BurnStatus,
+  Crunch,
+  CrunchId,
+  DamageAllOnTurnEnd,
+  DamageNewUnitsOnUnitEnter,
+  DefenseDownParent,
+  DisableId,
+  EarthquakeId,
+  ExplosionId,
   Fireball,
+  FireballId,
+  FireBlastId,
+  FirePunchId,
+  FurySwipes,
   FurySwipesId,
   HyperBeamId,
-  WillOWispId,
   IcyWindId,
-  ExplosionId,
-  SandstormId,
-  MagicMissileId,
-  QuickAttackId,
-  DisableId,
-  TrickRoomId,
-  FireballId,
-  FurySwipes,
-  SwitchUnitId,
-  PowerWordKillId,
-  SetIsActiveId,
-  PotionActionId,
-  QuickAttack,
-  CrunchId,
-  Crunch,
-  EarthquakeId,
-  ProtectId,
-  FireBlastId,
   InspectAllId,
-  SpikesId,
-  ArmorUpId,
-  ArmorUp,
+  MagicMissileId,
+  PotionActionId,
+  PowerWordKillId,
+  ProtectId,
+  QuickAttack,
+  QuickAttackId,
   RestId,
-  FirePunchId,
-  BodySlamId,
-  BodySlam,
-  DamageAllOnTurnEnd,
+  SandstormId,
   SandstormOnTurnEndId,
+  SetIsActiveId,
   SetIsInspectedAll,
-  WardId,
-  BurnStatus,
-  SetIsStunnedParent,
-  DefenseDownParent,
   SetIsProtectedParent,
-  DamageNewUnitsOnUnitEnter,
+  SetIsStunnedParent,
+  SpikesId,
+  SwitchUnitId,
+  SwordsDanceId,
+  TrickRoomId,
+  WardId,
+  WillOWispId,
 } from '@repo/game/data'
 import { Action, ActionResult, CombatContext, Unit } from '@repo/game/types'
-import { Fragment, ReactNode } from 'react'
-import { ModifierInline } from '@shared/ModifierInline'
 import { DamageInline } from '@shared/DamageInline'
-import { ACTION_NAMES } from './_names'
-import { PhysicalArmor } from '@shared/PhysicalArmor'
 import { MagicArmor } from '@shared/MagicArmor'
+import { ModifierInline } from '@shared/ModifierInline'
+import { PhysicalArmor } from '@shared/PhysicalArmor'
 import { StatusInline } from '@shared/StatusInline'
+import { Fragment, ReactNode } from 'react'
+import { ACTION_NAMES } from './_names'
 
 export * from './_names'
 
@@ -357,10 +357,14 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
     name: ACTION_NAMES[RestId],
     baseDamage: () => '',
     cost: '',
-    description: () => (
+    description: (action, props) => (
       <>
         Removes all damage from this unit. Applies{' '}
-        <span className="font-bold">Stun</span> to this unit for 2 turns.
+        <ModifierInline
+          side={props?.side}
+          modifier={new SetIsStunnedParent({})}
+        />{' '}
+        to this unit for 2 turns.
       </>
     ),
   },

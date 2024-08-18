@@ -11,7 +11,7 @@ export const Blissy: UnitBase = {
     health: 620,
     physical: 10,
     defense: 10,
-    magic: 80,
+    magic: 100,
     speed: 55,
 
     focus: 40,

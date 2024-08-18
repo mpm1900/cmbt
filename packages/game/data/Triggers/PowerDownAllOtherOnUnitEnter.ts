@@ -17,9 +17,10 @@ export class PowerDownAllOtherOnUnitEnter extends Trigger {
     super(PowerDownAllOtherOnUnitEnterId, {
       ...props,
       events: ['on Unit Enter'],
+      maxInstances: 1,
       modifiers: (ctx) =>
         ctx.units
-          .filter((u) => this.filter(u, ctx) && u.id !== props.sourceId)
+          .filter((u) => super.filter(u, ctx) && u.id !== props.sourceId)
           .map(
             (u) =>
               new PhysicalAttackDownParent({
@@ -41,6 +42,6 @@ export class PowerDownAllOtherOnUnitEnter extends Trigger {
   }
 
   filter = (unit: Unit, ctx: CombatContext): boolean => {
-    return super.filter(unit, ctx)
+    return super.filter(unit, ctx) && unit.id === this.sourceId
   }
 }

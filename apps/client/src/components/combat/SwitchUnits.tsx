@@ -1,7 +1,7 @@
 import { useActions } from '@/hooks/state'
 import { SwitchUnitId } from '@repo/game/data'
 import { Action, Unit } from '@repo/game/types'
-import { applyModifiers } from '@repo/game/utils'
+import { applyModifiers, getUnitBase } from '@repo/game/utils'
 import { useState } from 'react'
 import { useCombatContext } from '../../hooks'
 import { Badge } from '../ui/badge'
@@ -101,9 +101,14 @@ export function SwitchUnits(props: SwitchUnitsProps) {
                       </Badge>
                     )}
                   </div>
-                  <span className="text-xs text-muted-foreground">
-                    HP ({remainingHealth}/{unit.stats.health})
-                  </span>
+                  <div className="flex justify-between w-full">
+                    <span className="text-xs text-muted-foreground">
+                      HP ({remainingHealth}/{unit.stats.health})
+                    </span>
+                    <span className="text-xs text-muted-foreground/40">
+                      {getUnitBase(unit.baseId).base?.name}
+                    </span>
+                  </div>
                 </Button>
               )
             })}

@@ -1,10 +1,10 @@
 import { faker } from '@faker-js/faker'
-import { ALL_BASES, BASE_CONFIGS, Intimidate } from '@repo/game/data'
+import { ALL_BASES, BASE_CONFIGS } from '@repo/game/data'
 import { UnitBuilder } from '@repo/game/types'
 import { nanoid } from 'nanoid'
 
-export const makeBuilder = (): UnitBuilder => {
-  const base = ALL_BASES[0]
+export const makeBuilder = (i: number = 0): UnitBuilder => {
+  const base = ALL_BASES[i % ALL_BASES.length]
   const config = BASE_CONFIGS[base.id]
   return {
     id: nanoid(),

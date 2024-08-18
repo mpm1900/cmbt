@@ -11,11 +11,13 @@ export function renderNodeIcon(
 ) {
   const data: GameWorldNode = node.data()
   const state = isPathableNode(node, options)
-  element.innerHTML = getNodeIconRaw(
-    data.completed ? data.completedIcon : data.icon
-  )
   element.style.width = `${node.data('size') + 2}px`
   element.style.height = `${node.data('size') + 2}px`
+  element.innerHTML = getNodeIconRaw(
+    data.completed ? data.completedIcon : data.icon,
+    { size: node.data('size') - 8 }
+  )
+
   element.style.display = 'flex'
   element.style.justifyContent = 'center'
   element.style.alignItems = 'center'

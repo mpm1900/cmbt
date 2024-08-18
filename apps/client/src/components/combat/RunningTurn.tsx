@@ -15,21 +15,30 @@ export function RunningTurn() {
     <div>
       {active && active.data?.source ? (
         <div>
-          <div className="text-3xl">
-            {active.data?.source.name} uses {renderer?.name}
+          <div className="text-3xl text-muted-foreground">
+            <LogUnit
+              user={user}
+              teamId={active.data.source.teamId}
+              className="font-thin opacity-60"
+            >
+              {active.data.source.name}
+            </LogUnit>{' '}
+            uses <span className="font-black text-white">{renderer?.name}</span>
           </div>
-          <div className="text-muted-foreground text-sm">
-            on{' '}
-            {active?.expandedTargets?.map((t, i, a) => (
-              <>
-                {a.length > 1 && i === a.length - 1 && ' and '}
-                <LogUnit teamId={t.teamId} user={user}>
-                  {t.name}
-                </LogUnit>
-                {a.length > 1 && i !== a.length - 1 && ', '}
-              </>
-            ))}
-          </div>
+          {(active.expandedTargets?.length ?? 0) > 0 && (
+            <div className="text-muted-foreground text-sm">
+              on{' '}
+              {active?.expandedTargets?.map((t, i, a) => (
+                <>
+                  {a.length > 1 && i === a.length - 1 && ' and '}
+                  <LogUnit teamId={t.teamId} user={user}>
+                    {t.name}
+                  </LogUnit>
+                  {a.length > 1 && i !== a.length - 1 && ', '}
+                </>
+              ))}
+            </div>
+          )}
         </div>
       ) : (
         <span className="text-3xl">

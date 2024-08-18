@@ -2,6 +2,7 @@ import { cn } from '@/lib/utils'
 import { ActionRenderers } from '@/renderers'
 import { ZERO_UNIT } from '@repo/game/data'
 import { ActionMaker, Id } from '@repo/game/types'
+import { useState } from 'react'
 import { Badge } from '../ui/badge'
 import { Checkbox } from '../ui/checkbox'
 import {
@@ -23,6 +24,7 @@ export type ActionListTableProps = {
 
 export function ActionListTable(props: ActionListTableProps) {
   const { actions, selectedActionIds, maxActionCount, onSelect } = props
+  const [hoverRow, setHoverRow] = useState<Id>()
   const list = [
     ...actions.filter((m) => selectedActionIds.includes(m.make(ZERO_UNIT).id)),
     ...actions.filter((m) => !selectedActionIds.includes(m.make(ZERO_UNIT).id)),
@@ -53,6 +55,9 @@ export function ActionListTable(props: ActionListTableProps) {
               maker={maker}
               isSelected={isSelected}
               isDisabled={isDisabled}
+              open={maker.id === hoverRow}
+              onMouseEnter={() => setHoverRow(maker.id)}
+              onMouseLeave={() => setHoverRow(undefined)}
               onSelect={onSelect}
             />
           )
@@ -66,16 +71,27 @@ type ActionListRowProps = {
   maker: ActionMaker
   isSelected: boolean
   isDisabled: boolean
+  open: boolean
+  onMouseEnter: React.MouseEventHandler<HTMLTableRowElement>
+  onMouseLeave: React.MouseEventHandler<HTMLTableRowElement>
   onSelect: (maker: ActionMaker, isSelected: boolean) => void
 }
 function ActionListRow(props: ActionListRowProps) {
-  const { maker, isDisabled, isSelected, onSelect } = props
+  const {
+    maker,
+    isDisabled,
+    isSelected,
+    open,
+    onMouseEnter,
+    onMouseLeave,
+    onSelect,
+  } = props
   const action = maker.make(ZERO_UNIT)
   const renderer = ActionRenderers[action.id]
   const accuracy = action.threshold(ZERO_UNIT)
 
   return (
-    <ActionHover action={action} side="right">
+    <ActionHover action={action} side="right" open={open}>
       <TableRow
         className={cn({
           'bg-muted': isSelected,
@@ -87,6 +103,8 @@ function ActionListRow(props: ActionListRowProps) {
             onSelect(maker, !isSelected)
           }
         }}
+        onMouseEnter={onMouseEnter}
+        onMouseLeave={onMouseLeave}
       >
         <TableCell className="flex items-center">
           <Checkbox

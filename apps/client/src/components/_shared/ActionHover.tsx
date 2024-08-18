@@ -6,14 +6,15 @@ import { HoverCard, HoverCardContent } from '../ui/hover-card'
 
 export type ActionHoverProps = PropsWithChildren<{
   action: Action
+  open?: boolean
   side?: 'top' | 'right' | 'bottom' | 'left'
 }>
 
 export function ActionHover(props: ActionHoverProps) {
-  const { action, children, side } = props
+  const { action, children, open, side } = props
   const renderer = ActionRenderers[action.id]
   return (
-    <HoverCard openDelay={100} closeDelay={0}>
+    <HoverCard openDelay={100} closeDelay={0} open={open}>
       <HoverCardTrigger asChild>{children}</HoverCardTrigger>
       <HoverCardPortal>
         <HoverCardContent side={side} className="w-[320px]">

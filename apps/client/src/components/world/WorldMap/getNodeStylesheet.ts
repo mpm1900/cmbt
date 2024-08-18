@@ -13,7 +13,7 @@ function getNodeBackgroundColor(
     state.isPathable &&
     state.isLocked
   )
-    return 'purple'
+    return 'plum'
   if (state.isActiveNeightbor && !state.isCompleted && state.isPathable)
     return 'royalblue'
   if (
@@ -39,7 +39,7 @@ export function getNodeStylesheet(
   return {
     selector: 'node',
     style: {
-      label: (node: NodeSingular) => node.data('retreatable'),
+      // label: (node: NodeSingular) => node.data('retreatable'),
       'font-size': 12,
       color: 'white',
       height: function (node) {
@@ -51,24 +51,7 @@ export function getNodeStylesheet(
         return size
       },
       backgroundColor: function (node) {
-        const state = isPathableNode(node, options)
-        if (state.isActive) return 'limegreen'
-        if (
-          state.isActiveNeightbor &&
-          !state.isCompleted &&
-          state.isPathable &&
-          state.isLocked
-        )
-          return 'plum'
-        if (state.isActiveNeightbor && !state.isCompleted && state.isPathable)
-          return 'royalblue'
-
-        return state.isActiveNeightbor &&
-          state.isCompleted &&
-          state.isPathable &&
-          state.isRepeatable
-          ? 'royalblue'
-          : 'white'
+        return getNodeBackgroundColor(node, options)
       },
       'border-color': 'white',
       'border-opacity': 1,

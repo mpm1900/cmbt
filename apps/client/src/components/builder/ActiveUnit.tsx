@@ -20,7 +20,7 @@ export function ActiveUnit() {
         <div>
           <Card className="w-[320px]">
             <CardHeader>
-              <CardTitle>Unit</CardTitle>
+              <CardTitle>{builder.name}</CardTitle>
             </CardHeader>
 
             <CardContent>

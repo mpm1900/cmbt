@@ -22,7 +22,7 @@ function getNodeBackgroundColor(
     state.isPathable &&
     state.isRepeatable
   ) {
-    return 'royalblue'
+    return 'mediumturquoise'
   }
 
   return 'white'

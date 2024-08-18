@@ -55,7 +55,7 @@ export function ActionListTable(props: ActionListTableProps) {
               maker={maker}
               isSelected={isSelected}
               isDisabled={isDisabled}
-              open={maker.id === hoverRow}
+              // open={maker.id === hoverRow}
               onMouseEnter={() => setHoverRow(maker.id)}
               onMouseLeave={() => setHoverRow(undefined)}
               onSelect={onSelect}
@@ -71,7 +71,7 @@ type ActionListRowProps = {
   maker: ActionMaker
   isSelected: boolean
   isDisabled: boolean
-  open: boolean
+  open?: boolean
   onMouseEnter: React.MouseEventHandler<HTMLTableRowElement>
   onMouseLeave: React.MouseEventHandler<HTMLTableRowElement>
   onSelect: (maker: ActionMaker, isSelected: boolean) => void

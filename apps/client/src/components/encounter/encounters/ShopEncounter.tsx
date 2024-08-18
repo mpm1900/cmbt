@@ -117,6 +117,7 @@ const ShopWaresNode: EncounterNode = {
         </Table>
         <div className="flex justify-end">
           <Button
+            variant="secondary"
             onClick={() => {
               ctx.updateEncounter((s) => ({
                 activeNodeId: ShopIntroductionNode.id,

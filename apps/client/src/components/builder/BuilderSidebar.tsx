@@ -2,7 +2,6 @@ import { useUnitBuilders } from '@/hooks/state'
 import { useBuilderUi } from '@/hooks/state/useBuilderUi'
 import { Button } from '../ui/button'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../ui/tabs'
-import { StartButton } from './StartButton'
 
 export type BuilderSidebarProps = {
   defaultValue?: string
@@ -15,9 +14,6 @@ export function BuilderSidebar(props: BuilderSidebarProps) {
 
   return (
     <div className="w-[420px] bg-slate-950 border-l h-screen flex flex-col overflow-hidden">
-      <div className="flex px-8 py-4">
-        <StartButton />
-      </div>
       <Tabs
         defaultValue={defaultValue}
         className="flex flex-1 flex-col overflow-hidden"
@@ -30,7 +26,7 @@ export function BuilderSidebar(props: BuilderSidebarProps) {
         <div className="flex-1 overflow-auto w-full">
           <TabsContent
             value="team"
-            className="px-2 my-0 space-y-2 flex flex-col"
+            className="px-4 my-0 space-y-2 flex flex-col"
           >
             {store.builders.map((builder) => (
               <Button

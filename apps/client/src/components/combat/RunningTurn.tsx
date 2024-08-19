@@ -1,5 +1,6 @@
 import { useCombat } from '@/hooks/state'
 import { ActionRenderers } from '@/renderers'
+import { TextList } from '@shared/TextList'
 import { LogUnit } from '../ui/log'
 
 export function RunningTurn() {
@@ -9,7 +10,6 @@ export function RunningTurn() {
     user: s.user,
   }))
   const renderer = ActionRenderers[active?.action?.id ?? '']
-  console.log(active?.expandedTargets)
 
   return (
     <div>
@@ -28,15 +28,13 @@ export function RunningTurn() {
           {(active.expandedTargets?.length ?? 0) > 0 && (
             <div className="text-muted-foreground text-sm">
               on{' '}
-              {active?.expandedTargets?.map((t, i, a) => (
-                <>
-                  {a.length > 1 && i === a.length - 1 && ' and '}
-                  <LogUnit teamId={t.teamId} user={user}>
+              <TextList>
+                {active?.expandedTargets?.map((t) => (
+                  <LogUnit key={t.id} teamId={t.teamId} user={user}>
                     {t.name}
                   </LogUnit>
-                  {a.length > 1 && i !== a.length - 1 && ', '}
-                </>
-              ))}
+                ))}
+              </TextList>
             </div>
           )}
         </div>

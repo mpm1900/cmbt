@@ -98,7 +98,6 @@ function ActionListRow(props: ActionListRowProps) {
           'cursor-pointer': !isDisabled,
         })}
         onClick={() => {
-          console.log(isSelected, isDisabled)
           if (isSelected || !isDisabled) {
             onSelect(maker, !isSelected)
           }

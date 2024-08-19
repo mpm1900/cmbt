@@ -8,6 +8,7 @@ export type ModifierProps<T = {}> = MutationProps<T> & {
   priority?: number
   persistOnSwitch?: boolean
   persistOnCombatEnd?: boolean
+  statusId?: Id
 }
 
 export abstract class Modifier extends Mutation {
@@ -16,6 +17,7 @@ export abstract class Modifier extends Mutation {
   priority: number
   persistOnSwitch: boolean
   persistOnCombatEnd: boolean
+  statusId: Id | undefined
 
   abstract resolve(unit: Unit): Partial<Unit>
   get key(): string {
@@ -29,6 +31,7 @@ export abstract class Modifier extends Mutation {
     this.maxInstances = props.maxInstances
     this.persistOnSwitch = props.persistOnSwitch || false
     this.persistOnCombatEnd = props.persistOnCombatEnd || false
+    this.statusId = props.statusId
   }
 
   getProps(): ModifierProps {

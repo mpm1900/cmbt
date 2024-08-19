@@ -40,7 +40,6 @@ export function EditUnitModal(props: EditUnitModalProps) {
             maxActionCount={config?.actionsCount}
             selectedActionIds={selectedActionIds}
             onSelect={(maker, isSelected) => {
-              console.log('select')
               if (isSelected) {
                 onChange({
                   actions: [...props.unit.actions, maker.make(props.unit)],

@@ -14,7 +14,6 @@ export function useCleanupController() {
   useEffect(() => {
     if (ctx.turn.status === 'cleanup') {
       const teams = getTeamsWithSelectionRequired(ctx)
-      console.log('teams', teams)
       if (queue.queue.length === teams.length && teams.length > 0) {
         queue = queue.setQueue((items) => [
           {

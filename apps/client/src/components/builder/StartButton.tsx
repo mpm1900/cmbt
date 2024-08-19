@@ -31,10 +31,13 @@ export function StartButton(props: PropsWithClassname) {
     })
   }
 
+  const unitsHaveActions = store.builders.every((b) => b.actions.length > 0)
+
   return (
     <Button
       variant="destructive"
       className={cn('w-full', className)}
+      disabled={!unitsHaveActions}
       onClick={() => {
         initialize()
         nav({ to: '/world' })

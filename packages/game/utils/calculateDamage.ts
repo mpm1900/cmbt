@@ -61,7 +61,6 @@ export function calculateDamage(
   const evasionSuccess = target.stats.evasion >= evasionRoll
   const negation = getDamageNegation(damage.damageType, target)
   const expansion = getDamageExpansion(damage.damageType, target)
-  if (negation != 1) console.log(damage.value, negation)
 
   const criticalFactor = config.criticalSuccess
     ? (config.criticalFactor ?? 1)

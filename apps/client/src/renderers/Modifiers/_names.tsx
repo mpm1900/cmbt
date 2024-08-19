@@ -17,8 +17,8 @@ import {
 
 export const MODIFIER_NAMES: Record<string, string> = {
   [SetIsInspectedAllId]: 'Inspected',
-  [BurnDamageOnTurnEndId]: 'Burn:Damage',
-  [BurnedPowerDownId]: 'Burn:Power-Down',
+  [BurnDamageOnTurnEndId]: 'Burn: Damage',
+  [BurnedPowerDownId]: 'Burn: Physical Attack Down',
   [DefenseDownParentId]: 'Defense Down',
   [DefenseUpAllId]: 'Defense Buff',
   [SetIsStunnedParentId]: 'Stun',

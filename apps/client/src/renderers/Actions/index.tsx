@@ -48,7 +48,8 @@ import { MagicArmor } from '@shared/MagicArmor'
 import { ModifierInline } from '@shared/ModifierInline'
 import { PhysicalArmor } from '@shared/PhysicalArmor'
 import { StatusInline } from '@shared/StatusInline'
-import { Fragment, ReactNode } from 'react'
+import { TextList } from '@shared/TextList'
+import { ReactNode } from 'react'
 import { ACTION_NAMES } from './_names'
 
 export * from './_names'
@@ -83,15 +84,13 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
     description: () => <></>,
     log: (_, __, targets, ctx) => (
       <span>
-        {targets.map((target, i) => (
-          <Fragment key={target.id}>
-            {i > 0 && i !== targets.length - 1 ? ',' : ''}
-            {targets.length > 1 && i === targets.length - 1 ? ' and ' : ' '}
-            <LogUnit teamId={target.teamId} user={ctx.user}>
+        <TextList>
+          {targets.map((target, i) => (
+            <LogUnit key={target.id} teamId={target.teamId} user={ctx.user}>
               {target.name}
             </LogUnit>
-          </Fragment>
-        ))}{' '}
+          ))}
+        </TextList>{' '}
         joined the battle!
       </span>
     ),

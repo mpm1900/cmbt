@@ -4,12 +4,12 @@ import {
   ArmorUp,
   ArmorUpId,
   Protect,
-  ProtectId,
   Spikes,
   SpikesId,
   Ward,
   WardId,
 } from '../Actions'
+import { ProtectId } from '../Ids'
 import { ZERO_UNIT } from '../Units'
 
 export const Blissy: UnitBase = {
@@ -17,7 +17,7 @@ export const Blissy: UnitBase = {
   name: 'Blissy',
   stats: {
     ...ZERO_UNIT.stats,
-    health: 620,
+    health: 255,
     physical: 10,
     defense: 10,
     magic: 100,

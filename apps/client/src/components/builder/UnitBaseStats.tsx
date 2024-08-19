@@ -12,7 +12,7 @@ export function UnitBaseStats(props: UnitBaseStatsProps) {
     <div className="space-y-1">
       <div className="flex items-center">
         <Label className="w-[120px]">Health</Label>
-        <StatBar ratio={base.stats.health / 620} />
+        <StatBar ratio={base.stats.health / 255} />
       </div>
       <div className="flex items-center">
         <Label className="w-[120px]">Physical</Label>

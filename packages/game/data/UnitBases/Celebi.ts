@@ -1,13 +1,16 @@
 import { nanoid } from 'nanoid'
 import { UnitBase, UnitBaseConfig } from '../../types'
+import { Protect } from '../Actions'
+import { ProtectId } from '../Ids'
 import { ZERO_UNIT } from '../Units'
 
+export const CelebiId = nanoid()
 export const Celebi: UnitBase = {
-  id: nanoid(),
+  id: CelebiId,
   name: 'Celebi',
   stats: {
     ...ZERO_UNIT.stats,
-    health: 310,
+    health: 100,
     physical: 100,
     defense: 100,
     magic: 100,
@@ -22,7 +25,12 @@ export const Celebi: UnitBase = {
 export const CelebiConfig: UnitBaseConfig = {
   abilities: [],
   actionsCount: 5,
-  actions: [],
+  actions: [
+    {
+      id: ProtectId,
+      make: (u) => new Protect(u.id, u.teamId),
+    },
+  ],
   defaultAbilityId: undefined,
-  defaultActionIds: [],
+  defaultActionIds: [ProtectId],
 }

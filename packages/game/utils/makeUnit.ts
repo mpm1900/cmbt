@@ -16,8 +16,10 @@ import {
 } from '../data'
 import { Disable } from '../data/Actions/Disable'
 import { Explosion } from '../data/Actions/Explosion'
+import { CelebiId } from '../data/UnitBases/Celebi'
 import { ZERO_UNIT } from '../data/Units'
 import { Unit } from '../types'
+import { rebuildUnit } from './rebuildUnit'
 
 export function unitMaker(
   partial: Partial<Unit>,
@@ -34,13 +36,19 @@ export function unitMaker(
   }
 }
 
-export function makeUnit(teamId: string, name?: string, isActive?: boolean) {
+export function makeUnit(
+  teamId: string,
+  name?: string,
+  isActive?: boolean
+): Unit {
   const id = UnitId()
-  return unitMaker(
+  const unit = unitMaker(
     {
       id,
       name: name ?? id,
       teamId,
+      level: 15,
+      baseId: CelebiId,
       stats: {
         ...ZERO_UNIT.stats,
         speed: random.int(70, 140),
@@ -55,6 +63,7 @@ export function makeUnit(teamId: string, name?: string, isActive?: boolean) {
       flags: {
         ...ZERO_UNIT.flags,
         isActive: isActive ?? false,
+        isInspected: true,
       },
     },
     (unit) => ({
@@ -84,4 +93,5 @@ export function makeUnit(teamId: string, name?: string, isActive?: boolean) {
       modifiers: () => [],
     })
   )
+  return rebuildUnit(unit)
 }

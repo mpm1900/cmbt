@@ -1,6 +1,5 @@
 import { nanoid } from 'nanoid'
 import { UnitBase, UnitBaseConfig } from '../../types'
-import { ZERO_UNIT } from '../Units'
 import {
   Disable,
   DisableId,
@@ -11,13 +10,14 @@ import {
   WillOWisp,
   WillOWispId,
 } from '../Actions'
+import { ZERO_UNIT } from '../Units'
 
 export const Gengar: UnitBase = {
   id: nanoid(),
   name: 'Gengar',
   stats: {
     ...ZERO_UNIT.stats,
-    health: 220,
+    health: 60,
     physical: 55,
     defense: 55,
     magic: 135,

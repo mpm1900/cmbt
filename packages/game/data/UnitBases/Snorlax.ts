@@ -1,6 +1,5 @@
 import { nanoid } from 'nanoid'
 import { UnitBase, UnitBaseConfig } from '../../types'
-import { ZERO_UNIT } from '../Units'
 import {
   BodySlam,
   BodySlamId,
@@ -11,13 +10,14 @@ import {
   Rest,
   RestId,
 } from '../Actions'
+import { ZERO_UNIT } from '../Units'
 
 export const Snorlax: UnitBase = {
   id: nanoid(),
   name: 'Snorlax',
   stats: {
     ...ZERO_UNIT.stats,
-    health: 430,
+    health: 160,
     physical: 110,
     defense: 65,
     magic: 85,

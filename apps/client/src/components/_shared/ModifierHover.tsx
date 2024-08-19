@@ -25,6 +25,13 @@ export function ModifierHover(props: ModifierHoverProps) {
           <div className="space-y-2">
             <div>{renderer.name}</div>
             <ModifierDescription modifier={modifier} />
+            <div className="text-xs font-bold text-muted-foreground/60 text-right space-x-4">
+              {modifier.duration && <span>Duration: {modifier.duration}</span>}
+              {modifier.persistOnSwitch && <span>Persists on Switch</span>}
+              {modifier.persistOnCombatEnd && (
+                <span>Persists on Combat End</span>
+              )}
+            </div>
           </div>
         </HoverCardContent>
       </HoverCardPortal>

@@ -9,12 +9,11 @@ import {
 } from '../../types'
 import { buildActionResult, getActionData } from '../../utils'
 import { modifyRenderContext } from '../../utils/modifyRenderContext'
-import { ActionId } from '../Ids'
+import { ProtectId } from '../Ids'
 import { SetIsProtectedParent } from '../Modifiers'
 import { Identity } from '../Mutations'
 import { EmptyArray } from '../Queries/EmptyArray'
 
-export const ProtectId = ActionId()
 export class Protect extends Action {
   constructor(sourceId: Id, teamId: Id) {
     super(ProtectId, {

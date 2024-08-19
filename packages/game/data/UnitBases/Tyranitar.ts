@@ -1,6 +1,5 @@
 import { nanoid } from 'nanoid'
 import { UnitBase, UnitBaseConfig } from '../../types'
-import { ZERO_UNIT } from '../Units'
 import {
   Crunch,
   CrunchId,
@@ -11,19 +10,20 @@ import {
   FireBlast,
   FireBlastId,
   Protect,
-  ProtectId,
   Sandstorm,
   SandstormId,
 } from '../Actions'
-import { Intimidate, SandStream, SandStreamId } from '../Augments'
 import { Spikes, SpikesId } from '../Actions/Spikes'
+import { SandStream, SandStreamId } from '../Augments'
+import { ProtectId } from '../Ids'
+import { ZERO_UNIT } from '../Units'
 
 export const Tyranitar: UnitBase = {
   id: nanoid(),
   name: 'Tyranitar',
   stats: {
     ...ZERO_UNIT.stats,
-    health: 310,
+    health: 100,
     physical: 134,
     defense: 110,
     magic: 95,

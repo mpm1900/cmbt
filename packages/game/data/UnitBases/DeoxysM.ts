@@ -7,7 +7,7 @@ export const DeoxysM: UnitBase = {
   name: 'Deoxys-M',
   stats: {
     ...ZERO_UNIT.stats,
-    health: 210,
+    health: 50,
     physical: 50,
     defense: 50,
     magic: 150,

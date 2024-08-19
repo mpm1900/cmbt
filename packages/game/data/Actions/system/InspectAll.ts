@@ -1,22 +1,21 @@
 import {
   Action,
-  ActionResult,
   ActionAi,
+  ActionResolveOptions,
+  ActionResult,
   CombatContext,
   Id,
   Unit,
-  ActionResolveOptions,
 } from '../../../types'
 import {
+  buildActionResult,
   getActionData,
   modifyRenderContext,
-  buildActionResult,
 } from '../../../utils'
 import { ActionId } from '../../Ids'
 import { SetIsInspectedAll } from '../../Modifiers'
 import { Identity } from '../../Mutations'
 import { EmptyArray } from '../../Queries/EmptyArray'
-import { DamageAllOnTurnEnd } from '../../Triggers'
 
 export const InspectAllId = ActionId()
 

@@ -1,5 +1,5 @@
 import { LogSecondary, LogUnit } from '@/components/ui/log'
-import { DamageParent, SetLastUsedActionId, ZERO_UNIT } from '@repo/game/data'
+import { DamageParent, SetLastUsedActionId } from '@repo/game/data'
 import { CombatContext, Mutation, Unit } from '@repo/game/types'
 import { applyMutations } from '@repo/game/utils'
 
@@ -11,7 +11,7 @@ export function logMutations(mutations: Mutation[], ctx: CombatContext) {
   units.forEach((unit, i) => {
     const unitMutations = logMutations.filter((m) => m.filter(unit, ctx))
     if (unitMutations.length > 0) {
-      const diffs = applyMutations(ZERO_UNIT, unitMutations)
+      const diffs = applyMutations(unit, unitMutations)
       logMutationDiffs(unit, diffs, unitMutations, i, ctx)
     }
   })
@@ -25,14 +25,17 @@ export function logMutationDiffs(
   ctx: CombatContext
 ) {
   const name = parent.name
-  const ratio = (diffs.values.damage / parent.stats.health) * 100
-  if (diffs.values.damage !== 0) {
+  const damageDiff = diffs.values.damage - parent.values.damage
+  const pArmorDiff = diffs.values.physicalArmor - parent.values.physicalArmor
+  const mArmorDiff = diffs.values.magicArmor - parent.values.magicArmor
+  const ratio = (damageDiff / parent.stats.health) * 100
+  if (damageDiff !== 0) {
     ctx.log(
       <LogSecondary className="italic">
         <LogUnit teamId={parent?.teamId} user={ctx.user} className="opacity-70">
           {name}
         </LogUnit>{' '}
-        {diffs.values.damage > 0 ? 'lost' : 'healed'}{' '}
+        {damageDiff > 0 ? 'lost' : 'healed'}{' '}
         <span className="tracking-wide">
           {(ratio * (ratio > 0 ? 1 : -1)).toFixed(0)}%
         </span>{' '}
@@ -41,26 +44,25 @@ export function logMutationDiffs(
       (index + 1) * 0.1
     )
   }
-  if (diffs.values.physicalArmor !== 0) {
+  if (pArmorDiff !== 0) {
     ctx.log(
       <LogSecondary className="italic">
         <LogUnit teamId={parent?.teamId} user={ctx.user} className="opacity-70">
           {name}
         </LogUnit>{' '}
-        {diffs.values.physicalArmor > 0 ? 'gained' : 'lost'}{' '}
-        {Math.abs(diffs.values.physicalArmor)} physical armor.
+        {pArmorDiff > 0 ? 'gained' : 'lost'} {Math.abs(pArmorDiff)} physical
+        armor.
       </LogSecondary>,
       (index + 1) * 0.1
     )
   }
-  if (diffs.values.magicArmor !== 0) {
+  if (mArmorDiff !== 0) {
     ctx.log(
       <LogSecondary className="italic">
         <LogUnit teamId={parent?.teamId} user={ctx.user} className="opacity-70">
           {name}
         </LogUnit>{' '}
-        {diffs.values.magicArmor > 0 ? 'gained' : 'lost'}{' '}
-        {Math.abs(diffs.values.magicArmor)} magic armor.
+        {mArmorDiff > 0 ? 'gained' : 'lost'} {Math.abs(mArmorDiff)} magic armor.
       </LogSecondary>,
       (index + 1) * 0.1
     )

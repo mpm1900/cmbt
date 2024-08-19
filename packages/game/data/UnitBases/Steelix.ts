@@ -7,7 +7,7 @@ export const Steelix: UnitBase = {
   name: 'Steelix',
   stats: {
     ...ZERO_UNIT.stats,
-    health: 260,
+    health: 75,
     physical: 85,
     defense: 230,
     magic: 55,

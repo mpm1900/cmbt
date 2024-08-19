@@ -13,13 +13,15 @@ export function calculateBaseDamage(
   source: Unit,
   target: Unit
 ): number {
+  let base = power
   if (attackType === 'physical')
-    return power * (source.stats.physical / target.stats.defense)
+    base = power * (source.stats.physical / target.stats.defense)
 
   if (attackType === 'magic')
-    return power * (source.stats.magic / target.stats.magic)
+    base = power * (source.stats.magic / target.stats.magic)
 
-  return power
+  const levelMod = (source.level * 2) / 5
+  return (base * levelMod) / 50
 }
 
 export function getDamageNegation(type: DamageType | undefined, target: Unit) {

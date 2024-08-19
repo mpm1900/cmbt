@@ -1,6 +1,6 @@
 import { CombatContext, Trigger, TriggerProps, Unit } from '../../types'
 import { TriggerId } from '../Ids'
-import { DamageAllOnTurnEnd } from './DamageAllOnTurnEnd'
+import { DamagePercentAllOnTurnEnd } from './DamagePercentAllOnTurnEnd'
 
 export const CreateSandstormOnUnitEnterId = TriggerId()
 export const SandstormOnTurnEndId = TriggerId()
@@ -16,9 +16,9 @@ export class CreateSandstormOnUnitEnter extends Trigger {
       events: ['on Unit Enter'],
       maxInstances: 1,
       modifiers: (ctx) => [
-        new DamageAllOnTurnEnd({
+        new DamagePercentAllOnTurnEnd({
           rid: SandstormOnTurnEndId,
-          damage: 30,
+          coef: 0.1,
           duration: 5,
           maxInstances: 1,
         }),

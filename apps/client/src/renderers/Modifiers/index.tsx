@@ -1,29 +1,29 @@
 import {
   BurnDamageOnTurnEndId,
   BurnedPowerDownId,
+  CreateSandstormOnUnitEnter,
+  CreateSandstormOnUnitEnterId,
+  DamageNewUnitsOnUnitEnter,
+  DamageNewUnitsOnUnitEnterId,
+  DamageParentOnTurnEnd,
   DamageParentOnTurnEndId,
+  DamagePercentAllOnTurnEnd,
+  DefenseDownParent,
+  DefenseDownParentId,
   DefenseUpAllId,
-  SetIsStunnedParentId,
   InvertSpeedAllId,
+  PhysicalAttackDownParent,
   PhysicalAttackDownParentId,
   PhysicalAttackUpParentId,
   PowerDownAllOtherOnUnitEnterId,
-  CreateSandstormOnUnitEnterId,
-  SetIsInspectedAllId,
-  DamageNewUnitsOnUnitEnterId,
   SandstormOnTurnEndId,
-  DefenseDownParentId,
+  SetIsInspectedAllId,
   SetIsProtectedParentId,
-  DamageAllOnTurnEnd,
-  DamageParentOnTurnEnd,
-  PhysicalAttackDownParent,
-  CreateSandstormOnUnitEnter,
-  DefenseDownParent,
-  DamageNewUnitsOnUnitEnter,
+  SetIsStunnedParentId,
 } from '@repo/game/data'
-import { ReactNode } from 'react'
 import { Modifier } from '@repo/game/types'
 import { ModifierInline } from '@shared/ModifierInline'
+import { ReactNode } from 'react'
 import { MODIFIER_NAMES } from './_names'
 
 export * from './_icons'
@@ -158,9 +158,9 @@ export const ModifierRenderers: Record<string, ModifierRenderer> = {
             Applies{' '}
             <ModifierInline
               modifier={
-                new DamageAllOnTurnEnd({
+                new DamagePercentAllOnTurnEnd({
                   rid: SandstormOnTurnEndId,
-                  damage: 30,
+                  coef: 0.1,
                   duration: 5,
                   maxInstances: 1,
                 })
@@ -182,7 +182,7 @@ export const ModifierRenderers: Record<string, ModifierRenderer> = {
           On turn end:{' '}
         </span>
         Afflicted units take{' '}
-        {(modifier as unknown as DamageAllOnTurnEnd).damage} damage.
+        {(modifier as unknown as DamagePercentAllOnTurnEnd).coef * 100}% damage.
       </div>
     ),
   },

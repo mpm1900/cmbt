@@ -1,7 +1,7 @@
 import {
   Action,
-  ActionResult,
   ActionAi,
+  ActionResult,
   CombatContext,
   Id,
   Unit,

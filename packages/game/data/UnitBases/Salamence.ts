@@ -1,6 +1,5 @@
 import { nanoid } from 'nanoid'
 import { UnitBase, UnitBaseConfig } from '../../types'
-import { ZERO_UNIT } from '../Units'
 import {
   Fireball,
   FireballId,
@@ -10,13 +9,14 @@ import {
   HyperBeamId,
 } from '../Actions'
 import { Intimidate, IntimidateId } from '../Augments'
+import { ZERO_UNIT } from '../Units'
 
 export const Salamence: UnitBase = {
   id: nanoid(),
   name: 'Salamence',
   stats: {
     ...ZERO_UNIT.stats,
-    health: 300,
+    health: 95,
     physical: 95,
     defense: 80,
     magic: 110,

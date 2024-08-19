@@ -1,17 +1,16 @@
 import {
   CreateSandstormOnUnitEnter,
-  DamageAllOnTurnEnd,
+  DamagePercentAllOnTurnEnd,
   IntimidateId,
   PowerDownAllOtherOnUnitEnter,
   SandstormOnTurnEndId,
   SandStreamId,
-  ZERO_UNIT,
 } from '@repo/game/data'
 import { Id } from '@repo/game/types'
+import { ModifierDescription } from '@shared/ModifierDescription'
 import { ModifierInline } from '@shared/ModifierInline'
 import { ReactNode } from 'react'
 import { AUGMENT_NAMES } from './_names'
-import { ModifierDescription } from '@shared/ModifierDescription'
 
 export * from './_names'
 
@@ -43,7 +42,10 @@ export const AugmentRenderers: Record<Id, AugmentRenderer> = {
         This unit gains immunity from{' '}
         <ModifierInline
           modifier={
-            new DamageAllOnTurnEnd({ rid: SandstormOnTurnEndId, damage: 30 })
+            new DamagePercentAllOnTurnEnd({
+              rid: SandstormOnTurnEndId,
+              coef: 0.1,
+            })
           }
         />{' '}
         <ModifierDescription modifier={new CreateSandstormOnUnitEnter({})} />

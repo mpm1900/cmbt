@@ -26,7 +26,7 @@ export function ModifierHover(props: ModifierHoverProps) {
             <div>{renderer.name}</div>
             <ModifierDescription modifier={modifier} />
             <div className="text-xs font-bold text-muted-foreground/60 text-right space-x-4">
-              {modifier.duration && (
+              {!!modifier.duration && (
                 <span>Duration: {modifier.duration} turns</span>
               )}
               {modifier.persistOnSwitch && <span>Persists on switch</span>}

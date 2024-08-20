@@ -12,13 +12,13 @@ export function ChoiceButton(props: ChoiceButtonProps) {
   const ctx = useEncounterContext()
   return (
     <Button
-      className="justify-start items-start"
+      className="justify-start flex items-center space-x-2"
       variant={'ghost'}
       onClick={() => {
         choice.resolve(ctx)
       }}
     >
-      {index}. {choice.label}
+      <span>{index}.</span> {choice.label}
     </Button>
   )
 }

@@ -1,6 +1,15 @@
 import { StatKey } from '@repo/game/types'
 import { ReactNode } from 'react'
-import { GiBiceps, GiPortal, GiShoulderArmor, GiSprint } from 'react-icons/gi'
+import {
+  GiArrowScope,
+  GiBiceps,
+  GiDiceTarget,
+  GiDodging,
+  GiPortal,
+  GiShoulderArmor,
+  GiSprint,
+} from 'react-icons/gi'
+import { PiTargetFill } from 'react-icons/pi'
 
 export type StatRenderer = {
   name: ReactNode
@@ -8,17 +17,29 @@ export type StatRenderer = {
 }
 
 export const StatRenderers: Record<StatKey, StatRenderer | undefined> = {
-  accuracy: undefined,
+  accuracy: {
+    name: <>Accuracy</>,
+    icon: <GiDiceTarget />,
+  },
   arcaneExpansion: undefined,
   arcaneNegation: undefined,
-  criticalChance: undefined,
-  criticalDamage: undefined,
+  criticalChance: {
+    name: <>Crit % Δ</>,
+    icon: <PiTargetFill />,
+  },
+  criticalDamage: {
+    name: <>Crit Damage Δ</>,
+    icon: <GiArrowScope />,
+  },
   defense: {
     name: <>Defense</>,
     icon: <GiShoulderArmor />,
   },
   devotion: undefined,
-  evasion: undefined,
+  evasion: {
+    name: <>Evasion</>,
+    icon: <GiDodging />,
+  },
   fireExpansion: undefined,
   fireNegation: undefined,
   focus: undefined,
@@ -33,6 +54,8 @@ export const StatRenderers: Record<StatKey, StatRenderer | undefined> = {
     name: <>Physical</>,
     icon: <GiBiceps />,
   },
+  psychicExpansion: undefined,
+  psychicNegation: undefined,
   shockExpansion: undefined,
   shockNegation: undefined,
   speed: {

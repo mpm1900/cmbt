@@ -3,7 +3,7 @@ import { ReactNode } from 'react'
 import { BsLightningChargeFill } from 'react-icons/bs'
 import { GiFist } from 'react-icons/gi'
 import { ImFire } from 'react-icons/im'
-import { PiPentagramFill } from 'react-icons/pi'
+import { PiHandEyeFill, PiPentagramFill } from 'react-icons/pi'
 
 export type DamageRenderer = {
   name: ReactNode
@@ -22,6 +22,10 @@ export const DamageRenderers: Record<DamageType, DamageRenderer | undefined> = {
   force: {
     name: <>Force</>,
     icon: <GiFist />,
+  },
+  psychic: {
+    name: <>Psychic</>,
+    icon: <PiHandEyeFill />,
   },
   shock: {
     name: <>Shock</>,

@@ -1,14 +1,30 @@
 import { Encounter, EncounterNode } from '@repo/game/types'
 import { nanoid } from 'nanoid'
+import { IoMdReturnLeft, IoMdReturnRight } from 'react-icons/io'
+import { Narration } from '../Narration'
 
 const TestNode1: EncounterNode = {
   id: nanoid(),
   title: 'Test Encounter 001',
-  text: 'Begin Combat?',
+  text: (
+    <div className="space-y-2">
+      <Narration>
+        Ahead of you stands a group of enemies. They don't seem to have noticed
+        you yet.
+      </Narration>
+
+      <div>What will you do?</div>
+    </div>
+  ),
   choices: () => [
     {
       id: nanoid(),
-      label: 'Yes',
+      label: (
+        <div className="flex space-x-2 items-center">
+          <span>Ambush the enemies</span>
+          <IoMdReturnRight />
+        </div>
+      ),
       resolve: (ctx) => {
         ctx.initializeCombat({
           enemyUnitCount: 2,
@@ -24,20 +40,30 @@ const TestNode1: EncounterNode = {
     },
     {
       id: nanoid(),
-      label: 'No',
+      label: <div>Get the enemies' attention</div>,
       resolve: (ctx) =>
         ctx.updateEncounter((e) => ({ activeNodeId: TestNode2.id })),
       options: [],
     },
     {
       id: nanoid(),
-      label: 'Leave',
+      label: (
+        <div className="flex space-x-2 items-center">
+          <IoMdReturnLeft />
+          <span>Leave</span>
+        </div>
+      ),
       resolve: (ctx) => ctx.back(),
       options: [],
     },
     {
       id: nanoid(),
-      label: 'Complete',
+      label: (
+        <div className="flex space-x-2 items-center">
+          <IoMdReturnLeft />
+          <span>Complete encounter</span>
+        </div>
+      ),
       resolve: (ctx) => {
         ctx.updateActiveWorldNode((n) => ({
           completed: true,
@@ -51,13 +77,33 @@ const TestNode1: EncounterNode = {
 const TestNode2: EncounterNode = {
   id: nanoid(),
   title: 'Test Encounter 001',
-  text: 'Are you sure??',
+  text: (
+    <div className="space-y-2">
+      <div>
+        "Well look who it is, if it isn't some fresh meet for the grinder.
+        You've wondered into the wrong neighborhood travelers."
+      </div>
+      <div>
+        <Narration>You see the group ready their weapons.</Narration>
+      </div>
+    </div>
+  ),
   choices: () => [
     {
       id: nanoid(),
-      label: 'No',
-      resolve: (ctx) =>
-        ctx.updateEncounter((e) => ({ activeNodeId: TestNode1.id })),
+      label: 'Begin combat >>',
+      resolve: (ctx) => {
+        // TODO: but make it harder
+        ctx.initializeCombat({
+          enemyUnitCount: 2,
+          onSuccess: () => {
+            ctx.updateActiveWorldNode((n) => ({
+              completed: true,
+            }))
+          },
+          onFailure: () => {},
+        })
+      },
       options: [],
     },
   ],

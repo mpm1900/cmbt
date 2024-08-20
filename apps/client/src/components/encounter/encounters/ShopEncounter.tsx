@@ -10,15 +10,28 @@ import { cn } from '@/lib/utils'
 import { Key01, Key01Id, Potion, PotionId } from '@repo/game/data'
 import { Encounter, EncounterNode } from '@repo/game/types'
 import { nanoid } from 'nanoid'
+import { IoMdReturnLeft, IoMdReturnRight } from 'react-icons/io'
+import { Narration } from '../Narration'
 
 const ShopIntroductionNode: EncounterNode = {
   id: nanoid(),
   title: 'Test Shop',
-  text: 'Welcome to the testy test, test shop. What would you like to do?',
+  text: (
+    <div className="space-y-2">
+      <Narration>
+        You look around a dusty old shop and see small shopkeep just barely
+        visable behind the counter.
+      </Narration>
+      <div>
+        "Welcome to the testy test, test shop. How can I help you?"{' '}
+        <Narration>You hear the shopkeep say.</Narration>
+      </div>
+    </div>
+  ),
   choices: () => [
     {
       id: nanoid(),
-      label: 'View Wares',
+      label: <div>View Wares</div>,
       resolve: (ctx) => {
         ctx.updateEncounter((s) => ({
           activeNodeId: ShopWaresNode.id,
@@ -28,7 +41,12 @@ const ShopIntroductionNode: EncounterNode = {
     },
     {
       id: nanoid(),
-      label: 'Attack the shopkeep',
+      label: (
+        <div className="flex space-x-2 items-center">
+          <span>Attack the shopkeep.</span>
+          <IoMdReturnRight />
+        </div>
+      ),
       resolve: (ctx) => {
         ctx.initializeCombat({
           enemyUnitCount: 6,
@@ -44,7 +62,12 @@ const ShopIntroductionNode: EncounterNode = {
     },
     {
       id: nanoid(),
-      label: 'Leave',
+      label: (
+        <div className="flex space-x-2 items-center">
+          <IoMdReturnLeft />
+          <span>Leave</span>
+        </div>
+      ),
       resolve: (ctx) => {
         ctx.updateActiveWorldNode((n) => ({
           completed: true,
@@ -60,24 +83,14 @@ const ShopIntroductionNode: EncounterNode = {
 const ShopWaresNode: EncounterNode = {
   id: nanoid(),
   title: 'Test Shop - View Wares',
-  text: 'We have a number of things you might like!',
-  choices: (ctx) => [],
-  renderChoice: (choice, index, ctx) => (
-    <TableRow>
-      <TableCell>{choice.label}</TableCell>
-      <TableCell className="flex justify-end">
-        <Button
-          variant="outline"
-          className="py-1 h-full"
-          onClick={() => {
-            if (choice.resolve) choice.resolve(ctx)
-          }}
-        >
-          Buy 1000g
-        </Button>
-      </TableCell>
-    </TableRow>
+  text: (
+    <div>
+      <div>"We have a number of things you might like!"</div>
+      <Narration>The shopkeep gestures toward the shelf behind them.</Narration>
+    </div>
   ),
+  choices: (ctx) => [],
+  renderChoice: (choice, index, ctx) => null,
   renderChoices: (ctx) => {
     return (
       <div className="space-y-4">
@@ -122,7 +135,7 @@ const ShopWaresNode: EncounterNode = {
                     ctx.addItem(item)
                   }}
                 >
-                  {item.cost}g
+                  Buy {item.cost}g
                 </Button>
               </TableCell>
             </TableRow>

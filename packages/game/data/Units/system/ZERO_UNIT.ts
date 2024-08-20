@@ -25,11 +25,13 @@ export const ZERO_UNIT: Unit = {
     arcaneNegation: 0,
     fireNegation: 0,
     forceNegation: 0,
+    psychicNegation: 0,
     shockNegation: 0,
 
     arcaneExpansion: 0,
     fireExpansion: 0,
     forceExpansion: 0,
+    psychicExpansion: 0,
     shockExpansion: 0,
   },
   values: {

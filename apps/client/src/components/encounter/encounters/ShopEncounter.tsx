@@ -6,7 +6,8 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
-import { Key01, Potion } from '@repo/game/data'
+import { cn } from '@/lib/utils'
+import { Key01, Key01Id, Potion, PotionId } from '@repo/game/data'
 import { Encounter, EncounterNode } from '@repo/game/types'
 import { nanoid } from 'nanoid'
 
@@ -47,6 +48,7 @@ const ShopIntroductionNode: EncounterNode = {
       resolve: (ctx) => {
         ctx.updateActiveWorldNode((n) => ({
           completed: true,
+          encounter: ctx.encounter,
         }))
         ctx.back()
       },
@@ -59,14 +61,7 @@ const ShopWaresNode: EncounterNode = {
   id: nanoid(),
   title: 'Test Shop - View Wares',
   text: 'We have a number of things you might like!',
-  choices: (ctx) =>
-    [].map(() => ({
-      id: nanoid(),
-      label: 'Potion',
-      resolve: (ctx) => {
-        ctx.updateTeam((t) => t)
-      },
-    })),
+  choices: (ctx) => [],
   renderChoice: (choice, index, ctx) => (
     <TableRow>
       <TableCell>{choice.label}</TableCell>
@@ -88,19 +83,42 @@ const ShopWaresNode: EncounterNode = {
       <div className="space-y-4">
         <Table>
           <TableHeader>
+            <TableHead>#</TableHead>
             <TableHead>name</TableHead>
+
             <TableHead className="flex justify-end items-center">
               cost
             </TableHead>
           </TableHeader>
           {[Potion(), Key01()].map((item) => (
             <TableRow>
+              <TableCell
+                width={32}
+                className={cn({
+                  'text-red-400': ctx.encounter.values[item.id] <= 0,
+                })}
+              >
+                x{ctx.encounter.values[item.id]}
+              </TableCell>
               <TableCell>{item.name}</TableCell>
               <TableCell className="flex justify-end items-center">
                 <Button
-                  disabled={(ctx.team?.resources.credits ?? 0) < item.cost}
+                  disabled={
+                    (ctx.team?.resources.credits ?? 0) < item.cost ||
+                    ctx.encounter.values[item.id] <= 0
+                  }
                   variant="outline"
+                  className={cn({
+                    'text-red-400':
+                      (ctx.team?.resources.credits ?? 0) < item.cost,
+                  })}
                   onClick={() => {
+                    ctx.updateEncounter((e) => ({
+                      values: {
+                        ...e.values,
+                        [item.id]: e.values[item.id] - 1,
+                      },
+                    }))
                     ctx.addItem(item)
                   }}
                 >
@@ -132,4 +150,8 @@ export const ShopEncounter: Encounter = {
   id: nanoid(),
   activeNodeId: ShopIntroductionNode.id,
   nodes: [ShopIntroductionNode, ShopWaresNode],
+  values: {
+    [PotionId]: 5,
+    [Key01Id]: 1,
+  },
 }

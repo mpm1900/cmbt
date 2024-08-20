@@ -65,7 +65,8 @@ export const ModifierRenderers: Record<string, ModifierRenderer> = {
       const modifier = mod as PhysicalAttackDownParent
       return (
         <div>
-          Afflicted units' physical attack stats are divided by {modifier.coef}
+          Afflicted units' physical attack stats are divided by{' '}
+          {modifier.factor}
         </div>
       )
     },
@@ -84,7 +85,9 @@ export const ModifierRenderers: Record<string, ModifierRenderer> = {
     description: (mod) => {
       const modifier = mod as DefenseDownParent
       return (
-        <div>Afflicted units' defense stats are divided by {modifier.coef}</div>
+        <div>
+          Afflicted units' defense stats are divided by {modifier.factor}
+        </div>
       )
     },
   },
@@ -104,7 +107,8 @@ export const ModifierRenderers: Record<string, ModifierRenderer> = {
       const modifier = mod as PhysicalAttackDownParent
       return (
         <div>
-          Afflicted units' physical attack stats are divided by {modifier.coef}.
+          Afflicted units' physical attack stats are divided by{' '}
+          {modifier.factor}.
         </div>
       )
     },
@@ -120,7 +124,7 @@ export const ModifierRenderers: Record<string, ModifierRenderer> = {
       return (
         <div>
           Afflicted units' physical attack stats are multiplied by{' '}
-          {modifier.coef}.
+          {modifier.factor}.
         </div>
       )
     },
@@ -160,7 +164,7 @@ export const ModifierRenderers: Record<string, ModifierRenderer> = {
               modifier={
                 new DamagePercentAllOnTurnEnd({
                   rid: SandstormOnTurnEndId,
-                  coef: 0.1,
+                  factor: 0.1,
                   duration: 5,
                   maxInstances: 1,
                 })
@@ -182,7 +186,8 @@ export const ModifierRenderers: Record<string, ModifierRenderer> = {
           On turn end:{' '}
         </span>
         Afflicted units take{' '}
-        {(modifier as unknown as DamagePercentAllOnTurnEnd).coef * 100}% damage.
+        {(modifier as unknown as DamagePercentAllOnTurnEnd).factor * 100}%
+        damage.
       </div>
     ),
   },
@@ -214,7 +219,7 @@ export const ModifierRenderers: Record<string, ModifierRenderer> = {
           <ModifierInline
             modifier={
               new PhysicalAttackDownParent({
-                coef: 1.5,
+                factor: 1.5,
               })
             }
           />{' '}

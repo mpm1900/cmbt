@@ -25,6 +25,9 @@ export type Encounter = {
   id: Id
   nodes: EncounterNode[]
   activeNodeId: Id
+  values: {
+    [key: string]: number
+  }
 }
 
 export type EncounterNode = {

@@ -10,25 +10,25 @@ import { TriggerId } from '../Ids'
 export const DamagePercentAllOnTurnEndId = TriggerId()
 
 export class DamagePercentAllOnTurnEnd extends Trigger {
-  coef: number
+  factor: number
 
   get key() {
     return this.rid
   }
 
-  constructor(props: TriggerProps<{ coef: number }>) {
+  constructor(props: TriggerProps<{ factor: number }>) {
     super(DamagePercentAllOnTurnEndId, {
       ...props,
       events: ['on Turn End'],
       maxInstances: 1,
     })
-    this.coef = props.coef
+    this.factor = props.factor
   }
 
   resolve = (unit: Unit): Partial<Unit> => {
     return {
       values: Modifier.setValues(unit, (values) => ({
-        damage: values.damage + unit.stats.health * this.coef,
+        damage: Math.round(values.damage + unit.stats.health * this.factor),
       })),
     }
   }

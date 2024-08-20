@@ -68,4 +68,5 @@ export const TestEncounter: Encounter = {
   id: TestEncounterId,
   nodes: [TestNode1, TestNode2],
   activeNodeId: TestNode1.id,
+  values: {},
 }

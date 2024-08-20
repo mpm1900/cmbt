@@ -44,4 +44,5 @@ export const LockedEncounter: Encounter = {
   id: LockedEncounterId,
   nodes: [LockedNode1()],
   activeNodeId: LockedNodeId,
+  values: {},
 }

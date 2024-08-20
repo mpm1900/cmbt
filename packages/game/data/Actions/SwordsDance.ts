@@ -60,7 +60,7 @@ export class SwordsDance extends Action {
             new PhysicalAttackUpParent({
               sourceId: source.id,
               parentId: source.id,
-              coef: 1.5,
+              factor: 1.5,
               maxInstances: 6,
             }),
           ],

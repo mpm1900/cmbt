@@ -12,7 +12,7 @@ export const Intimidate: Augment = {
       new PowerDownAllOtherOnUnitEnter({
         sourceId: unit.id,
         parentId: unit.id,
-        coef: 1.5,
+        factor: 1.5,
         duration: 0,
       }),
     ]

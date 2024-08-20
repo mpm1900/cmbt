@@ -3,21 +3,21 @@ import { ModifierId } from '../Ids'
 
 export const SpeedDownAllOtherId = ModifierId()
 export class SpeedDownAllOther extends Modifier {
-  private coef: number
+  factor: number
 
   get key(): string {
-    return `${this.id}.${this.parentId ?? this.sourceId}@${this.coef}`
+    return `${this.id}.${this.parentId ?? this.sourceId}@${this.factor}`
   }
 
-  constructor(props: ModifierProps<{ coef: number }>) {
+  constructor(props: ModifierProps<{ factor: number }>) {
     super(SpeedDownAllOtherId, props)
-    this.coef = props.coef
+    this.factor = props.factor
   }
 
   resolve = (unit: Unit): Partial<Unit> => {
     return {
       stats: Modifier.setStats(unit, (stats) => ({
-        speed: stats.speed / this.coef,
+        speed: stats.speed / this.factor,
       })),
     }
   }

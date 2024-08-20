@@ -13,7 +13,7 @@ export const BurnStatus: Status = {
       parentId: parent.id,
       rid: BurnedPowerDownId,
       statusId: BurnStatusId,
-      coef: 2,
+      factor: 2,
       duration: 5,
       maxInstances: 1,
     }),

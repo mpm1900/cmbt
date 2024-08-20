@@ -27,7 +27,7 @@ export const AugmentRenderers: Record<Id, AugmentRenderer> = {
         <ModifierDescription
           modifier={
             new PowerDownAllOtherOnUnitEnter({
-              coef: 1.5,
+              factor: 1.5,
               duration: 0,
             })
           }
@@ -44,7 +44,7 @@ export const AugmentRenderers: Record<Id, AugmentRenderer> = {
           modifier={
             new DamagePercentAllOnTurnEnd({
               rid: SandstormOnTurnEndId,
-              coef: 0.1,
+              factor: 0.1,
             })
           }
         />{' '}

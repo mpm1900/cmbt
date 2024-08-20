@@ -1,20 +1,20 @@
 import { CombatContext, Mutation, MutationProps, Unit } from '../../types'
 import { MutationId } from '../Ids'
 
-export const DamageTeamId = MutationId()
+export const DamagePercentTeamId = MutationId()
 
-export class DamageTeam extends Mutation {
-  damage: number
+export class DamagePercentTeam extends Mutation {
+  factor: number
 
-  constructor(props: MutationProps & { damage: number }) {
-    super(DamageTeamId, props)
-    this.damage = props.damage
+  constructor(props: MutationProps & { factor: number }) {
+    super(DamagePercentTeamId, props)
+    this.factor = props.factor
   }
 
   resolve = (unit: Unit): Partial<Unit> => {
     return {
       values: Mutation.setValues(unit, (values) => ({
-        damage: values.damage + this.damage,
+        damage: Math.round(values.damage + unit.stats.health * this.factor),
       })),
     }
   }

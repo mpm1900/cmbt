@@ -11,9 +11,9 @@ import { PhysicalAttackDownParent } from '../Modifiers'
 export const PowerDownAllOtherOnUnitEnterId = TriggerId()
 
 export class PowerDownAllOtherOnUnitEnter extends Trigger {
-  private coef: number
+  private factor: number
 
-  constructor(props: TriggerProps<{ coef: number }>) {
+  constructor(props: TriggerProps<{ factor: number }>) {
     super(PowerDownAllOtherOnUnitEnterId, {
       ...props,
       events: ['on Unit Enter'],
@@ -26,17 +26,17 @@ export class PowerDownAllOtherOnUnitEnter extends Trigger {
               new PhysicalAttackDownParent({
                 sourceId: props.sourceId,
                 parentId: u.id,
-                coef: 1.5,
+                factor: 1.5,
               })
           ),
     })
-    this.coef = props.coef
+    this.factor = props.factor
   }
 
   resolve = (unit: Unit): Partial<Unit> => {
     return {
       stats: Modifier.setStats(unit, (stats) => ({
-        physical: stats.physical / this.coef,
+        physical: stats.physical / this.factor,
       })),
     }
   }

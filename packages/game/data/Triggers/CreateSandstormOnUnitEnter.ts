@@ -18,7 +18,7 @@ export class CreateSandstormOnUnitEnter extends Trigger {
       modifiers: (ctx) => [
         new DamagePercentAllOnTurnEnd({
           rid: SandstormOnTurnEndId,
-          coef: 0.1,
+          factor: 0.1,
           duration: 5,
           maxInstances: 1,
         }),

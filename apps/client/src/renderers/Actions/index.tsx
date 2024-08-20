@@ -170,7 +170,7 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
           20% chance to apply{' '}
           <ModifierInline
             side={props?.side}
-            modifier={new DefenseDownParent({ coef: 1.5 })}
+            modifier={new DefenseDownParent({ factor: 1.5 })}
           />{' '}
           to target.
         </>

@@ -4,23 +4,23 @@ import { ModifierId } from '../Ids'
 export const DefenseDownParentId = ModifierId()
 
 export class DefenseDownParent extends Modifier {
-  coef: number
+  factor: number
   offset: number
 
   get key(): string {
-    return `${this.id}.${this.parentId ?? this.sourceId}@${this.coef}`
+    return `${this.id}.${this.parentId ?? this.sourceId}@${this.factor}`
   }
 
-  constructor(props: ModifierProps<{ coef?: number; offset?: number }>) {
+  constructor(props: ModifierProps<{ factor?: number; offset?: number }>) {
     super(DefenseDownParentId, props)
-    this.coef = props.coef !== undefined ? props.coef : 1
+    this.factor = props.factor !== undefined ? props.factor : 1
     this.offset = props.offset ?? 0
   }
 
   resolve = (unit: Unit): Partial<Unit> => {
     return {
       stats: Modifier.setStats(unit, (stats) => ({
-        defense: stats.defense / this.coef - this.offset,
+        defense: stats.defense / this.factor - this.offset,
       })),
     }
   }

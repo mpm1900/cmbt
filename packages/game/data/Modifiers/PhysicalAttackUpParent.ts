@@ -3,23 +3,23 @@ import { ModifierId } from '../Ids'
 
 export const PhysicalAttackUpParentId = ModifierId()
 export class PhysicalAttackUpParent extends Modifier {
-  coef: number
+  factor: number
   offset: number
 
   get key(): string {
-    return `${this.id}.${this.parentId ?? this.sourceId}@${this.coef}`
+    return `${this.id}.${this.parentId ?? this.sourceId}@${this.factor}`
   }
 
-  constructor(props: ModifierProps<{ coef?: number; offset?: number }>) {
+  constructor(props: ModifierProps<{ factor?: number; offset?: number }>) {
     super(PhysicalAttackUpParentId, props)
-    this.coef = props.coef !== undefined ? props.coef : 1
+    this.factor = props.factor !== undefined ? props.factor : 1
     this.offset = props.offset ?? 0
   }
 
   resolve = (unit: Unit): Partial<Unit> => {
     return {
       stats: Modifier.setStats(unit, (stats) => ({
-        physical: stats.physical * this.coef + this.offset,
+        physical: stats.physical * this.factor + this.offset,
       })),
     }
   }

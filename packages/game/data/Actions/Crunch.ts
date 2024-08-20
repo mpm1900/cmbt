@@ -96,7 +96,7 @@ export class Crunch extends Action {
                   new DefenseDownParent({
                     sourceId: source.id,
                     parentId: target.id,
-                    coef: 1.5,
+                    factor: 1.5,
                   })
               )
             : [],

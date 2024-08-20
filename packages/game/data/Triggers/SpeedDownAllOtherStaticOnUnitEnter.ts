@@ -5,9 +5,9 @@ import { SpeedDownAllOther } from '../Modifiers/SpeedDownAllOther'
 export const SpeedDownAllOtherStaticOnUnitEnterId = TriggerId()
 
 export class SpeedDownAllOtherStaticOnUnitEnter extends Trigger {
-  private coef: number
+  factor: number
 
-  constructor(props: TriggerProps<{ coef: number }>) {
+  constructor(props: TriggerProps<{ factor: number }>) {
     super(SpeedDownAllOtherStaticOnUnitEnterId, {
       ...props,
       events: ['on Unit Enter'],
@@ -15,11 +15,11 @@ export class SpeedDownAllOtherStaticOnUnitEnter extends Trigger {
         new SpeedDownAllOther({
           sourceId: props.sourceId,
           parentId: props.sourceId,
-          coef: 1.5,
+          factor: 1.5,
         }),
       ],
     })
-    this.coef = props.coef
+    this.factor = props.factor
   }
 
   resolve = (unit: Unit): Partial<Unit> => unit

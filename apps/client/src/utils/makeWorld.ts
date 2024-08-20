@@ -24,9 +24,10 @@ const StartNode: GameWorldNode = {
   icon: 'start',
   completedIcon: 'start',
   encounter: {
-    id: nanoid(),
+    id: '',
     nodes: [],
     activeNodeId: '',
+    values: {},
   },
   edges: [edge(shop('0'))],
   completed: true,

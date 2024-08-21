@@ -1,5 +1,6 @@
-import { GAME_SPEED } from '@/constants'
 import { create } from 'zustand'
+
+import { GAME_SPEED } from '@/constants'
 
 export type CombatSettingsStore = {
   isDebugMode: boolean
@@ -9,7 +10,7 @@ export type CombatSettingsStore = {
 }
 
 export const useCombatSettings = create<CombatSettingsStore>((set) => ({
-  isDebugMode: false,
+  isDebugMode: true,
   setIsDebugMode: (isDebugMode) => set({ isDebugMode }),
   gameSpeed: GAME_SPEED,
   setGameSpeed: (gameSpeed) => set({ gameSpeed }),

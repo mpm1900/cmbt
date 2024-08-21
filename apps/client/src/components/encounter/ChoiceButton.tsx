@@ -12,7 +12,7 @@ export function ChoiceButton(props: ChoiceButtonProps) {
   const ctx = useEncounterContext()
   return (
     <Button
-      className="justify-start flex items-center space-x-2"
+      className="justify-start flex items-center space-x-2 text-muted-foreground hover:text-white"
       variant={'ghost'}
       onClick={() => {
         choice.resolve(ctx)

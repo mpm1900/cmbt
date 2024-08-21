@@ -29,6 +29,7 @@
     "@radix-ui/react-tooltip": "^1.1.2",
     "@repo/game": "*",
     "@tanstack/react-router": "^1.46.4",
+    "@uidotdev/usehooks": "^2.4.1",
     "chroma-js": "^2.6.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",

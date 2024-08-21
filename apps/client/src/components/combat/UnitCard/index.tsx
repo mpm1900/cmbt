@@ -66,12 +66,15 @@ export function UnitCard(props: UnitCardProps) {
       >
         <div className="p-2 pb-1 flex flex-row items-end justify-between">
           <div
-            className={cn('font-semibold', {
+            className={cn('font-semibold space-x-2', {
               'text-slate-900': isActive,
             })}
           >
-            {unit.name}
-            {stagedItem && '*'}
+            <span>{unit.level}</span>
+            <span>
+              {unit.name}
+              {stagedItem && '*'}
+            </span>
           </div>
           <div className="flex items-center space-x-2">
             {unit.values.physicalArmor > 0 && (
@@ -96,7 +99,7 @@ export function UnitCard(props: UnitCardProps) {
                   className="w-full text-center"
                   onOpenAutoFocus={(e) => e.preventDefault()}
                 >
-                  <UnitStats unit={props.unit} />
+                  <UnitStats unit={unit} comp={props.unit} />
                 </PopoverContent>
               </Popover>
             )}

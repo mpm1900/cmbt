@@ -1,6 +1,8 @@
 import {
   CreateSandstormOnUnitEnter,
   DamagePercentAllOnTurnEnd,
+  FireNegationUpParent,
+  FlameShieldId,
   InspectAllOnUnitEnter,
   IntimidateId,
   PowerDownAllOtherOnUnitEnter,
@@ -22,6 +24,20 @@ export type AugmentRenderer = {
 }
 
 export const AugmentRenderers: Record<Id, AugmentRenderer> = {
+  [FlameShieldId]: {
+    name: <div className="text-white">{AUGMENT_NAMES[FlameShieldId]}</div>,
+    description: () => (
+      <div>
+        <ModifierDescription
+          modifier={
+            new FireNegationUpParent({
+              offset: 0.5,
+            })
+          }
+        />
+      </div>
+    ),
+  },
   [IntimidateId]: {
     name: <div className="text-white">{AUGMENT_NAMES[IntimidateId]}</div>,
     description: () => (

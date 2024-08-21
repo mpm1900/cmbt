@@ -58,7 +58,7 @@ const ShopIntroductionNode: EncounterNode = {
         ctx.initializeCombat({
           enemyTeam,
           enemyUnits: Array.from({ length: 4 }).map(() =>
-            makeEnemyUnit(faker.person.fullName(), enemyTeam.id, 15)
+            makeEnemyUnit(faker.person.fullName(), enemyTeam.id, 20)
           ),
           onSuccess: () => {
             ctx.updateActiveWorldNode((n) => ({

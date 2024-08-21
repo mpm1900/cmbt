@@ -60,6 +60,8 @@ export function resolveUnitBuilder(builder: UnitBuilder, teamId: Id): Unit {
 
   const mutations = getMutationsFromBuilder(builder, unit)
   const modifiers = getModifiersFromBuilder(builder, unit)
-  unit.modifiers = () => modifiers
-  return applyMutations(unit, mutations)
+  const oldMods = unit.modifiers()
+  unit.modifiers = () => [...oldMods, ...modifiers]
+  const ret = applyMutations(unit, mutations)
+  return ret
 }

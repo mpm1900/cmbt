@@ -3,7 +3,6 @@ import { useCombatContext } from '@/hooks'
 import { DamageRenderers } from '@/renderers/Damage'
 import { StatRenderers } from '@/renderers/Stats'
 import { DamageType, StatKey, Unit } from '@repo/game/types'
-import { applyModifiers } from '@repo/game/utils'
 import { ReactNode } from '@tanstack/react-router'
 import { MagicArmor } from './MagicArmor'
 import { PhysicalArmor } from './PhysicalArmor'
@@ -63,11 +62,12 @@ function UnitDamageStat(props: UnitDamageStatProps) {
 
 export type UnitStatsProps = {
   unit: Unit
+  comp: Unit
 }
 
 export function UnitStats(props: UnitStatsProps) {
+  const { unit, comp } = props
   const ctx = useCombatContext()
-  const { unit } = applyModifiers(props.unit, ctx)
   const remainingHealth = Math.max(unit.stats.health - unit.values.damage, 0)
 
   return (
@@ -79,10 +79,10 @@ export function UnitStats(props: UnitStatsProps) {
               Stats
             </div>
             <Separator className="my-1" />
-            <UnitStat unit={unit} comp={props.unit} stat="physical" />
-            <UnitStat unit={unit} comp={props.unit} stat="defense" />
-            <UnitStat unit={unit} comp={props.unit} stat="magic" />
-            <UnitStat unit={unit} comp={props.unit} stat="speed" />
+            <UnitStat unit={unit} comp={comp} stat="physical" />
+            <UnitStat unit={unit} comp={comp} stat="defense" />
+            <UnitStat unit={unit} comp={comp} stat="magic" />
+            <UnitStat unit={unit} comp={comp} stat="speed" />
 
             <Separator className="my-2" />
             <div className="space-y-2">
@@ -134,7 +134,7 @@ export function UnitStats(props: UnitStatsProps) {
           <UnitDamageStat
             stat="arcaneExpansion"
             unit={unit}
-            comp={props.unit}
+            comp={comp}
             damageType="arcane"
             map={(v) => (v + 1) * 100}
             after="%"
@@ -142,7 +142,7 @@ export function UnitStats(props: UnitStatsProps) {
           <UnitDamageStat
             stat="fireExpansion"
             unit={unit}
-            comp={props.unit}
+            comp={comp}
             damageType="fire"
             map={(v) => (v + 1) * 100}
             after="%"
@@ -150,7 +150,7 @@ export function UnitStats(props: UnitStatsProps) {
           <UnitDamageStat
             stat="forceExpansion"
             unit={unit}
-            comp={props.unit}
+            comp={comp}
             damageType="force"
             map={(v) => (v + 1) * 100}
             after="%"
@@ -158,7 +158,7 @@ export function UnitStats(props: UnitStatsProps) {
           <UnitDamageStat
             stat="psychicExpansion"
             unit={unit}
-            comp={props.unit}
+            comp={comp}
             damageType="psychic"
             map={(v) => (v + 1) * 100}
             after="%"
@@ -166,7 +166,7 @@ export function UnitStats(props: UnitStatsProps) {
           <UnitDamageStat
             stat="shockExpansion"
             unit={unit}
-            comp={props.unit}
+            comp={comp}
             damageType="shock"
             map={(v) => (v + 1) * 100}
             after="%"
@@ -175,23 +175,18 @@ export function UnitStats(props: UnitStatsProps) {
           <UnitStat
             stat="accuracy"
             unit={unit}
-            comp={props.unit}
+            comp={comp}
             before="+"
             after="%"
           />
           <UnitStat
             stat="criticalChance"
             unit={unit}
-            comp={props.unit}
+            comp={comp}
             before="+"
             after="%"
           />
-          <UnitStat
-            stat="criticalDamage"
-            unit={unit}
-            comp={props.unit}
-            before="+"
-          />
+          <UnitStat stat="criticalDamage" unit={unit} comp={comp} before="+" />
         </div>
         <div className="w-[1px] bg-border" />
         <div className="flex flex-col text-left flex-1">
@@ -202,7 +197,7 @@ export function UnitStats(props: UnitStatsProps) {
           <UnitDamageStat
             stat="arcaneNegation"
             unit={unit}
-            comp={props.unit}
+            comp={comp}
             damageType="arcane"
             map={(v) => v * 100}
             after="%"
@@ -210,7 +205,7 @@ export function UnitStats(props: UnitStatsProps) {
           <UnitDamageStat
             stat="fireNegation"
             unit={unit}
-            comp={props.unit}
+            comp={comp}
             damageType="fire"
             map={(v) => v * 100}
             after="%"
@@ -218,7 +213,7 @@ export function UnitStats(props: UnitStatsProps) {
           <UnitDamageStat
             stat="forceNegation"
             unit={unit}
-            comp={props.unit}
+            comp={comp}
             damageType="force"
             map={(v) => v * 100}
             after="%"
@@ -226,7 +221,7 @@ export function UnitStats(props: UnitStatsProps) {
           <UnitDamageStat
             stat="psychicNegation"
             unit={unit}
-            comp={props.unit}
+            comp={comp}
             damageType="psychic"
             map={(v) => v * 100}
             after="%"
@@ -234,13 +229,13 @@ export function UnitStats(props: UnitStatsProps) {
           <UnitDamageStat
             stat="shockNegation"
             unit={unit}
-            comp={props.unit}
+            comp={comp}
             damageType="shock"
             map={(v) => v * 100}
             after="%"
           />
           <Separator className="my-2" />
-          <UnitStat unit={unit} comp={props.unit} stat="evasion" after="%" />
+          <UnitStat unit={unit} comp={comp} stat="evasion" after="%" />
         </div>
       </div>
     </div>

@@ -11,6 +11,8 @@ import {
   DefenseDownParent,
   DefenseDownParentId,
   DefenseUpAllId,
+  FireNegationUpParent,
+  FireNegationUpParentId,
   InspectAllOnUnitEnterId,
   InvertSpeedAllId,
   PhysicalAttackDownParent,
@@ -92,6 +94,18 @@ export const ModifierRenderers: Record<string, ModifierRenderer> = {
   },
   [DefenseUpAllId]: {
     name: MODIFIER_NAMES[DefenseUpAllId],
+  },
+  [FireNegationUpParentId]: {
+    name: MODIFIER_NAMES[FireNegationUpParentId],
+    description: (mod) => {
+      const modifier = mod as FireNegationUpParent
+      return (
+        <div>
+          {modifier.offset > 0 ? '+' : '-'}
+          {modifier.offset * 100}% Fire damage negation.
+        </div>
+      )
+    },
   },
   [InvertSpeedAllId]: {
     name: MODIFIER_NAMES[InvertSpeedAllId],

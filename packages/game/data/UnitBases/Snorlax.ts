@@ -1,7 +1,14 @@
 import { nanoid } from 'nanoid'
 import { UnitBase, UnitBaseConfig } from '../../types'
 import { BodySlam, Crunch, FirePunch, Rest } from '../Actions'
-import { BodySlamId, CrunchId, FirePunchId, RestId } from '../Ids'
+import { FlameShield } from '../Augments'
+import {
+  BodySlamId,
+  CrunchId,
+  FirePunchId,
+  FlameShieldId,
+  RestId,
+} from '../Ids'
 import { ZERO_UNIT } from '../Units'
 
 export const Snorlax: UnitBase = {
@@ -22,7 +29,7 @@ export const Snorlax: UnitBase = {
 }
 
 export const SnorlaxConfig: UnitBaseConfig = {
-  abilities: [],
+  abilities: [FlameShield],
   actionsCount: 5,
   actions: [
     {
@@ -42,6 +49,6 @@ export const SnorlaxConfig: UnitBaseConfig = {
       make: (u) => new Rest(u.id, u.teamId),
     },
   ],
-  defaultAbilityId: undefined,
+  defaultAbilityId: FlameShieldId,
   defaultActionIds: [BodySlamId, CrunchId, FirePunchId, RestId],
 }

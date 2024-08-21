@@ -38,7 +38,7 @@ export function SidebarUnit(props: SidebarUnitProps) {
           collisionPadding={32}
           sideOffset={16}
         >
-          <UnitStats unit={props.unit} />
+          <UnitStats unit={unit} comp={props.unit} />
         </HoverCardContent>
       </HoverCard>
       <div className="p-2">

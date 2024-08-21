@@ -5,11 +5,13 @@ import {
   PowerDownAllOtherOnUnitEnter,
   SandstormOnTurnEndId,
   SandStreamId,
+  SizeUpId,
 } from '@repo/game/data'
 import { Id } from '@repo/game/types'
 import { ModifierDescription } from '@shared/ModifierDescription'
 import { ModifierInline } from '@shared/ModifierInline'
 import { ReactNode } from 'react'
+import { InspectAllOnUnitEnter } from '../../../../../packages/game/data/Triggers/InspectAllOnUnitEnter'
 import { AUGMENT_NAMES } from './_names'
 
 export * from './_names'
@@ -49,6 +51,14 @@ export const AugmentRenderers: Record<Id, AugmentRenderer> = {
           }
         />{' '}
         <ModifierDescription modifier={new CreateSandstormOnUnitEnter({})} />
+      </div>
+    ),
+  },
+  [SizeUpId]: {
+    name: <div className="text-white">{AUGMENT_NAMES[SizeUpId]}</div>,
+    description: () => (
+      <div>
+        <ModifierDescription modifier={new InspectAllOnUnitEnter({})} />
       </div>
     ),
   },

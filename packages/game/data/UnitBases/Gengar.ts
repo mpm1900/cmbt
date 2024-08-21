@@ -10,6 +10,7 @@ import {
   WillOWisp,
   WillOWispId,
 } from '../Actions'
+import { SizeUp, SizeUpId } from '../Augments'
 import { ZERO_UNIT } from '../Units'
 
 export const Gengar: UnitBase = {
@@ -30,7 +31,7 @@ export const Gengar: UnitBase = {
 }
 
 export const GengarConfig: UnitBaseConfig = {
-  abilities: [],
+  abilities: [SizeUp],
   actionsCount: 4,
   actions: [
     {
@@ -50,6 +51,6 @@ export const GengarConfig: UnitBaseConfig = {
       make: (u) => new WillOWisp(u.id, u.teamId),
     },
   ],
-  defaultAbilityId: undefined,
+  defaultAbilityId: SizeUpId,
   defaultActionIds: [DisableId, MagicMissileId, PowerWordKillId, WillOWispId],
 }

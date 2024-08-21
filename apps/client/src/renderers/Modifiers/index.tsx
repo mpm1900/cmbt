@@ -11,12 +11,14 @@ import {
   DefenseDownParent,
   DefenseDownParentId,
   DefenseUpAllId,
+  InspectAllOnUnitEnterId,
   InvertSpeedAllId,
   PhysicalAttackDownParent,
   PhysicalAttackDownParentId,
   PhysicalAttackUpParentId,
   PowerDownAllOtherOnUnitEnterId,
   SandstormOnTurnEndId,
+  SetIsInspectedAll,
   SetIsInspectedAllId,
   SetIsProtectedParentId,
   SetIsStunnedParentId,
@@ -204,6 +206,20 @@ export const ModifierRenderers: Record<string, ModifierRenderer> = {
         </span>
         That unit takes{' '}
         {(modifier as unknown as DamageNewUnitsOnUnitEnter).damage} damage.
+      </div>
+    ),
+  },
+  [InspectAllOnUnitEnterId]: {
+    name: MODIFIER_NAMES[InspectAllOnUnitEnterId],
+    description: (modifier: Modifier) => (
+      <div>
+        <span className="opacity-50 uppercase text-sm font-bold">
+          On self enter:{' '}
+        </span>
+        <span>
+          Applies <ModifierInline modifier={new SetIsInspectedAll({})} /> to all
+          units.
+        </span>
       </div>
     ),
   },

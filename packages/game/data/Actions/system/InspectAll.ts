@@ -20,10 +20,10 @@ import { EmptyArray } from '../../Queries/EmptyArray'
 export const InspectAllId = ActionId()
 
 export class InspectAll extends Action {
-  constructor(sourceId: Id, teamId: Id) {
+  constructor(sourceId: Id, teamId?: Id) {
     super(InspectAllId, {
       sourceId,
-      teamId,
+      teamId: teamId ?? '',
       cost: new Identity({ sourceId }),
       targets: new EmptyArray(),
       maxTargetCount: 0,

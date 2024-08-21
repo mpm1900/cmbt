@@ -5,6 +5,7 @@ import {
   DamageNewUnitsOnUnitEnterId,
   DefenseDownParentId,
   DefenseUpAllId,
+  InspectAllOnUnitEnterId,
   InvertSpeedAllId,
   PhysicalAttackDownParentId,
   PhysicalAttackUpParentId,
@@ -31,4 +32,5 @@ export const MODIFIER_NAMES: Record<string, string> = {
   [SandstormOnTurnEndId]: 'Sandstorm',
   [DamageNewUnitsOnUnitEnterId]: 'Spikes',
   [PowerDownAllOtherOnUnitEnterId]: 'Intimidate',
+  [InspectAllOnUnitEnterId]: 'Size Up',
 }

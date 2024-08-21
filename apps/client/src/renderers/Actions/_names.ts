@@ -1,7 +1,6 @@
 import {
   ArmorUpId,
   BodySlamId,
-  CrunchId,
   DisableId,
   EarthquakeId,
   ExplosionId,
@@ -13,6 +12,7 @@ import {
   IcyWindId,
   InspectAllId,
   MagicMissileId,
+  PiercingStrikeId,
   PotionActionId,
   PowerWordKillId,
   ProtectId,
@@ -35,7 +35,7 @@ export const ACTION_NAMES: Record<string, string> = {
 
   [ArmorUpId]: 'Armor Up',
   [BodySlamId]: 'Body Slam',
-  [CrunchId]: 'Crunch',
+  [PiercingStrikeId]: 'Piercing Strike',
   [DisableId]: 'Disable',
   [EarthquakeId]: 'Earthquake',
   [ExplosionId]: 'Explosion',

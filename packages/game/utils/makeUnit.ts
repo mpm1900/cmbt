@@ -1,11 +1,11 @@
 import random from 'random'
 import {
-  Crunch,
   Fireball,
   FurySwipes,
   HyperBeam,
   IcyWind,
   MagicMissile,
+  PiercingStrike,
   PowerWordKill,
   QuickAttack,
   Sandstorm,
@@ -69,7 +69,7 @@ export function makeEnemyUnit(name: string, teamId: Id, level: number): Unit {
         devotion: unit.stats.devotion,
       },
       actions: [
-        new Crunch(unit.id, unit.teamId),
+        new PiercingStrike(unit.id, unit.teamId),
         new Explosion(unit.id, unit.teamId),
         new PowerWordKill(unit.id, unit.teamId),
         new QuickAttack(unit.id, unit.teamId),

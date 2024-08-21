@@ -7,13 +7,13 @@ import { ZERO_UNIT } from '../Units'
 
 export const Salamence: UnitBase = {
   id: nanoid(),
-  name: 'Salamence',
+  name: 'Battlemage',
   stats: {
     ...ZERO_UNIT.stats,
     health: 95,
-    physical: 95,
-    defense: 80,
-    magic: 110,
+    physical: 115,
+    defense: 70,
+    magic: 115,
     speed: 100,
 
     focus: 40,

@@ -17,18 +17,18 @@ import {
   getMutationsFromDamageResult,
   modifyRenderContext,
 } from '../../utils'
-import { CrunchId } from '../Ids'
+import { PiercingStrikeId } from '../Ids'
 import { DefenseDownParent } from '../Modifiers'
 import { Identity } from '../Mutations'
 import { GetUnits } from '../Queries'
 
-export class Crunch extends Action {
+export class PiercingStrike extends Action {
   damage: Damage
 
   constructor(sourceId: Id, teamId: Id) {
     const attackType = 'physical'
 
-    super(CrunchId, {
+    super(PiercingStrikeId, {
       sourceId,
       teamId,
       cost: new Identity({ sourceId }),

@@ -1,20 +1,20 @@
 import { nanoid } from 'nanoid'
 import { UnitBase, UnitBaseConfig } from '../../types'
 import {
-  Crunch,
   Earthquake,
   Fireball,
   FireBlast,
+  PiercingStrike,
   Protect,
   Sandstorm,
 } from '../Actions'
 import { Spikes } from '../Actions/Spikes'
 import { SandStream } from '../Augments'
 import {
-  CrunchId,
   EarthquakeId,
   FireballId,
   FireBlastId,
+  PiercingStrikeId,
   ProtectId,
   SandstormId,
   SandStreamId,
@@ -24,13 +24,13 @@ import { ZERO_UNIT } from '../Units'
 
 export const Tyranitar: UnitBase = {
   id: nanoid(),
-  name: 'Tyranitar',
+  name: 'Flamestorm Knight',
   stats: {
     ...ZERO_UNIT.stats,
     health: 100,
     physical: 134,
     defense: 110,
-    magic: 95,
+    magic: 90,
     speed: 61,
 
     focus: 40,
@@ -44,10 +44,6 @@ export const TyranitarConfig: UnitBaseConfig = {
   actionsCount: 4,
   actions: [
     {
-      id: CrunchId,
-      make: (unit) => new Crunch(unit.id, unit.teamId),
-    },
-    {
       id: EarthquakeId,
       make: (unit) => new Earthquake(unit.id, unit.teamId),
     },
@@ -58,6 +54,10 @@ export const TyranitarConfig: UnitBaseConfig = {
     {
       id: FireBlastId,
       make: (unit) => new FireBlast(unit.id, unit.teamId),
+    },
+    {
+      id: PiercingStrikeId,
+      make: (unit) => new PiercingStrike(unit.id, unit.teamId),
     },
     {
       id: ProtectId,
@@ -73,5 +73,5 @@ export const TyranitarConfig: UnitBaseConfig = {
     },
   ],
   defaultAbilityId: SandStreamId,
-  defaultActionIds: [CrunchId, EarthquakeId, FireBlastId, ProtectId],
+  defaultActionIds: [PiercingStrikeId, EarthquakeId, FireBlastId, ProtectId],
 }

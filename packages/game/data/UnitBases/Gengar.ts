@@ -1,25 +1,25 @@
 import { nanoid } from 'nanoid'
 import { UnitBase, UnitBaseConfig } from '../../types'
 import { Disable, MagicMissile, PowerWordKill, WillOWisp } from '../Actions'
-import { SizeUp } from '../Augments'
+import { Scholar } from '../Augments'
 import {
   DisableId,
   MagicMissileId,
   PowerWordKillId,
-  SizeUpId,
+  ScholarId,
   WillOWispId,
 } from '../Ids'
 import { ZERO_UNIT } from '../Units'
 
 export const Gengar: UnitBase = {
   id: nanoid(),
-  name: 'Gengar',
+  name: 'Wizard',
   stats: {
     ...ZERO_UNIT.stats,
     health: 60,
     physical: 55,
     defense: 55,
-    magic: 135,
+    magic: 140,
     speed: 135,
 
     focus: 40,
@@ -29,7 +29,7 @@ export const Gengar: UnitBase = {
 }
 
 export const GengarConfig: UnitBaseConfig = {
-  abilities: [SizeUp],
+  abilities: [Scholar],
   actionsCount: 4,
   actions: [
     {
@@ -49,6 +49,6 @@ export const GengarConfig: UnitBaseConfig = {
       make: (u) => new WillOWisp(u.id, u.teamId),
     },
   ],
-  defaultAbilityId: SizeUpId,
+  defaultAbilityId: ScholarId,
   defaultActionIds: [DisableId, MagicMissileId, PowerWordKillId, WillOWispId],
 }

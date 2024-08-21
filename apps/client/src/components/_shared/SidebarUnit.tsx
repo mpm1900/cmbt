@@ -36,7 +36,10 @@ export function SidebarUnit(props: SidebarUnitProps) {
         <HoverCardTrigger asChild>
           <div className="p-4 pr-0 flex-1">
             <div className="flex-1 space-y-2">
-              <div>{unit.name}</div>
+              <div className="space-x-2">
+                <span className="font-black">{unit.level}</span>
+                <span>{unit.name}</span>
+              </div>
               <UnitBars
                 unit={unit}
                 isActive={false}

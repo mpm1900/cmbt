@@ -5,8 +5,6 @@ import {
   BodySlam,
   BodySlamId,
   BurnStatus,
-  Crunch,
-  CrunchId,
   DamageAllOnTurnEnd,
   DamageNewUnitsOnUnitEnter,
   DefenseDownParent,
@@ -23,6 +21,8 @@ import {
   IcyWindId,
   InspectAllId,
   MagicMissileId,
+  PiercingStrike,
+  PiercingStrikeId,
   PotionActionId,
   PowerWordKillId,
   ProtectId,
@@ -158,12 +158,12 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
       )
     },
   },
-  [CrunchId]: {
-    name: ACTION_NAMES[CrunchId],
+  [PiercingStrikeId]: {
+    name: ACTION_NAMES[PiercingStrikeId],
     baseDamage: (action) => `${action.damage?.value}`,
     cost: '',
     description: (action, props) => {
-      const crunch = action as Crunch
+      const crunch = action as PiercingStrike
       return (
         <>
           Deals <DamageInline damage={crunch.damage} /> to target enemy unit.
@@ -274,8 +274,8 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
     costAlt: <span className="text-blue-300">30 FP</span>,
     description: (action, props) => (
       <>
-        Deals base force damage equal to this unit's magic stat to target enemy
-        unit. Applies{' '}
+        Deals base force damage equal to twice this unit's magic stat to target
+        enemy unit. Applies{' '}
         <ModifierInline
           side={props?.side}
           modifier={new SetIsStunnedParent({})}

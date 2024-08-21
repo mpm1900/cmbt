@@ -30,6 +30,15 @@ export function UnitBaseStats(props: UnitBaseStatsProps) {
         <Label className="w-[120px]">Speed</Label>
         <StatBar ratio={base.stats.speed / 255} />
       </div>
+      <div className="flex items-center">
+        <div className="text-left">
+          {base.stats.health +
+            base.stats.physical +
+            base.stats.defense +
+            base.stats.magic +
+            base.stats.speed}
+        </div>
+      </div>
     </div>
   )
 }

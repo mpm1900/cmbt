@@ -1,10 +1,10 @@
 import { Augment, Modifier, Mutation, Unit } from '../../types'
-import { SizeUpId } from '../Ids'
+import { ScholarId } from '../Ids'
 import { InspectAllOnUnitEnter } from '../Triggers'
 
-export const SizeUp: Augment = {
-  id: SizeUpId,
-  name: 'Size Up',
+export const Scholar: Augment = {
+  id: ScholarId,
+  name: 'Scholar',
 
   modifiers(unit: Unit): Modifier[] {
     return [

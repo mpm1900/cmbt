@@ -12,23 +12,26 @@ import {
   getActionData,
   modifyRenderContext,
 } from '../../utils'
-import { TrickRoomId } from '../Ids'
-import { InvertSpeedAll } from '../Modifiers'
+import { IcyWindId } from '../Ids'
+import { SetIsStunnedParent } from '../Modifiers'
 import { Identity } from '../Mutations'
-import { EmptyArray } from '../Queries/EmptyArray'
+import { GetUnits } from '../Queries'
 
-export class TrickRoom extends Action {
+export class HoldPerson extends Action {
   constructor(sourceId: Id, teamId: Id) {
-    super(TrickRoomId, {
+    super(IcyWindId, {
       sourceId,
       teamId,
       cost: new Identity({ sourceId }),
-      targets: new EmptyArray(),
-      maxTargetCount: 0,
+      targets: new GetUnits({
+        notTeamId: teamId,
+        isActive: true,
+      }),
+      maxTargetCount: 1,
     })
   }
 
-  threshold = (source: Unit): number | undefined => undefined
+  threshold = (source: Unit): number | undefined => 95 + source.stats.accuracy
   criticalThreshold = (source: Unit): number | undefined => undefined
   criticalFactor = (source: Unit): number | undefined => undefined
   getAi(targets: Unit[], ctx: CombatContext): ActionAi {
@@ -52,9 +55,14 @@ export class TrickRoom extends Action {
       ctx,
       (modifiedTargets) => ({
         onSuccess: {
-          addedModifiers: [
-            new InvertSpeedAll({ sourceId: source.id, duration: 5 }),
-          ],
+          addedModifiers: modifiedTargets.map(
+            (target) =>
+              new SetIsStunnedParent({
+                sourceId: source.id,
+                parentId: target.id,
+                duration: 2,
+              })
+          ),
         },
       })
     )

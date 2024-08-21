@@ -8,7 +8,7 @@ import {
   PowerDownAllOtherOnUnitEnter,
   SandstormOnTurnEndId,
   SandStreamId,
-  SizeUpId,
+  ScholarId,
 } from '@repo/game/data'
 import { Id } from '@repo/game/types'
 import { ModifierDescription } from '@shared/ModifierDescription'
@@ -70,8 +70,8 @@ export const AugmentRenderers: Record<Id, AugmentRenderer> = {
       </div>
     ),
   },
-  [SizeUpId]: {
-    name: <div className="text-white">{AUGMENT_NAMES[SizeUpId]}</div>,
+  [ScholarId]: {
+    name: <div className="text-white">{AUGMENT_NAMES[ScholarId]}</div>,
     description: () => (
       <div>
         <ModifierDescription modifier={new InspectAllOnUnitEnter({})} />

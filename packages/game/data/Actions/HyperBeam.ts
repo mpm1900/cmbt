@@ -42,7 +42,7 @@ export class HyperBeam extends Action {
 
   threshold = (source: Unit): number | undefined => 95 + source.stats.accuracy
   criticalThreshold = (source: Unit): number | undefined => 5
-  criticalFactor = (source: Unit): number | undefined => undefined
+  criticalFactor = (source: Unit): number | undefined => 1.25
   getAi(targets: Unit[], ctx: CombatContext): ActionAi {
     return getDamageAi(this, targets, ctx)
   }
@@ -67,7 +67,7 @@ export class HyperBeam extends Action {
           mutations: modifiedTargets.flatMap((target) => {
             const damage = calculateDamage(
               {
-                value: data.source.stats.magic,
+                value: data.source.stats.magic * 2,
                 attackType: this.attackType as AttackTypes,
                 damageType: 'force',
               },

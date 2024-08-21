@@ -64,6 +64,7 @@ export function ActiveUnit() {
                   />
                 </div>
                 <UnitBaseStats base={builder.base} />
+
                 <div className="flex items-center space-x-2">
                   <Label htmlFor="name" className="min-w-[72px]">
                     Ability

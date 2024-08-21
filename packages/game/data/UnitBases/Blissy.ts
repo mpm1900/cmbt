@@ -6,14 +6,14 @@ import { ZERO_UNIT } from '../Units'
 
 export const Blissy: UnitBase = {
   id: nanoid(),
-  name: 'Blissy',
+  name: 'Apothecary',
   stats: {
     ...ZERO_UNIT.stats,
-    health: 255,
-    physical: 10,
-    defense: 10,
-    magic: 100,
-    speed: 55,
+    health: 250,
+    physical: 7,
+    defense: 7,
+    magic: 105,
+    speed: 50,
 
     focus: 40,
     stamina: 30,

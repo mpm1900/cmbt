@@ -1,25 +1,25 @@
 import { nanoid } from 'nanoid'
 import { UnitBase, UnitBaseConfig } from '../../types'
-import { BodySlam, Crunch, FirePunch, Rest } from '../Actions'
+import { BodySlam, FirePunch, PiercingStrike, Rest } from '../Actions'
 import { FlameShield } from '../Augments'
 import {
   BodySlamId,
-  CrunchId,
   FirePunchId,
   FlameShieldId,
+  PiercingStrikeId,
   RestId,
 } from '../Ids'
 import { ZERO_UNIT } from '../Units'
 
 export const Snorlax: UnitBase = {
   id: nanoid(),
-  name: 'Snorlax',
+  name: 'Tavern Master',
   stats: {
     ...ZERO_UNIT.stats,
     health: 160,
     physical: 110,
-    defense: 65,
-    magic: 85,
+    defense: 84,
+    magic: 80,
     speed: 61,
 
     focus: 40,
@@ -37,8 +37,8 @@ export const SnorlaxConfig: UnitBaseConfig = {
       make: (u) => new BodySlam(u.id, u.teamId),
     },
     {
-      id: CrunchId,
-      make: (u) => new Crunch(u.id, u.teamId),
+      id: PiercingStrikeId,
+      make: (u) => new PiercingStrike(u.id, u.teamId),
     },
     {
       id: FirePunchId,
@@ -50,5 +50,5 @@ export const SnorlaxConfig: UnitBaseConfig = {
     },
   ],
   defaultAbilityId: FlameShieldId,
-  defaultActionIds: [BodySlamId, CrunchId, FirePunchId, RestId],
+  defaultActionIds: [BodySlamId, FirePunchId, PiercingStrikeId, RestId],
 }

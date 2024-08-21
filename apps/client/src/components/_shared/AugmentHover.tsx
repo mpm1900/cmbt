@@ -1,12 +1,8 @@
 import { AugmentRenderers } from '@/renderers'
-import {
-  HoverCard,
-  HoverCardPortal,
-  HoverCardTrigger,
-} from '@radix-ui/react-hover-card'
+import { HoverCardPortal } from '@radix-ui/react-hover-card'
 import { Augment } from '@repo/game/types'
 import { PropsWithChildren } from 'react'
-import { HoverCardContent } from '../ui/hover-card'
+import { HoverCard, HoverCardContent, HoverCardTrigger } from '../ui/hover-card'
 
 export type AugmentHoverProps = PropsWithChildren<{
   augment: Augment

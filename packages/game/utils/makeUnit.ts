@@ -11,14 +11,14 @@ import {
   Sandstorm,
   SwordsDance,
   TrickRoom,
-  UnitId,
   WillOWisp,
 } from '../data'
 import { Disable } from '../data/Actions/Disable'
 import { Explosion } from '../data/Actions/Explosion'
+import { UnitId } from '../data/Ids/_base'
 import { CelebiId } from '../data/UnitBases/Celebi'
 import { ZERO_UNIT } from '../data/Units'
-import { Unit } from '../types'
+import { Id, Unit } from '../types'
 import { rebuildUnit } from './rebuildUnit'
 
 export function unitMaker(
@@ -36,13 +36,13 @@ export function unitMaker(
   }
 }
 
-export function makeEnemyUnit(name: string, level: number): Unit {
+export function makeEnemyUnit(name: string, teamId: Id, level: number): Unit {
   const id = UnitId()
   const unit = unitMaker(
     {
       id,
       name,
-      teamId: '',
+      teamId,
       level,
       baseId: CelebiId,
       stats: {
@@ -59,7 +59,6 @@ export function makeEnemyUnit(name: string, level: number): Unit {
       flags: {
         ...ZERO_UNIT.flags,
         isActive: false,
-        isInspected: true,
       },
     },
     (unit) => ({

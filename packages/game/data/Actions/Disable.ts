@@ -11,12 +11,11 @@ import {
   getActionData,
   modifyRenderContext,
 } from '../../utils'
-import { ActionId } from '../Ids'
+import { DisableId } from '../Ids'
 import { AddActionToRegistryParent } from '../Modifiers'
 import { Identity } from '../Mutations'
 import { GetUnits } from '../Queries'
 
-export const DisableId = ActionId()
 export class Disable extends Action {
   constructor(sourceId: Id, teamId: Id) {
     super(DisableId, {

@@ -3,6 +3,7 @@ import { GameWorldNode, Id, Item, Modifier, Mutation, Team, Unit } from '.'
 export type InitializeCombatOptions = {
   userTeam?: Team
   userUnits?: Unit[]
+  enemyTeam: Team
   enemyUnits: Unit[]
   modifiers?: Modifier[]
   mutations?: Mutation[]

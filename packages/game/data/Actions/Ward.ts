@@ -12,11 +12,9 @@ import {
   getActionData,
   modifyRenderContext,
 } from '../../utils'
-import { ActionId } from '../Ids'
+import { WardId } from '../Ids'
 import { Identity, RemoveMagicArmorParent } from '../Mutations'
 import { EmptyArray } from '../Queries'
-
-export const WardId = ActionId()
 
 export class Ward extends Action {
   amount: number

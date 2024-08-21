@@ -17,11 +17,10 @@ import {
   modifyRenderContext,
 } from '../../utils'
 import { getDamageAi } from '../../utils/getDamageAiAction'
-import { ActionId } from '../Ids'
+import { FurySwipesId } from '../Ids'
 import { Identity } from '../Mutations'
 import { GetUnits } from '../Queries'
 
-export const FurySwipesId = ActionId()
 export class FurySwipes extends Action {
   damage: Damage
 

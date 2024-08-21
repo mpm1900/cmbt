@@ -1,7 +1,6 @@
 import { CombatContext, Modifier, ModifierProps, Unit } from '../../types'
-import { ModifierId } from '../Ids'
+import { PhysicalAttackDownAllId } from '../Ids'
 
-export const PhysicalAttackDownAllId = ModifierId()
 export class PhysicalAttackDownAll extends Modifier {
   factor: number
   offset: number

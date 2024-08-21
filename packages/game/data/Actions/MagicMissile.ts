@@ -16,11 +16,10 @@ import {
   getMutationsFromDamageResult,
   modifyRenderContext,
 } from '../../utils'
-import { ActionId } from '../Ids'
+import { MagicMissileId } from '../Ids'
 import { Identity } from '../Mutations'
 import { GetUnits } from '../Queries'
 
-export const MagicMissileId = ActionId()
 export class MagicMissile extends Action {
   damage: Damage
 

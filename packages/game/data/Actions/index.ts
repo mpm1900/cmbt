@@ -1,5 +1,6 @@
 import { ActionMaker, Unit } from '../../types'
-import { InspectAll, InspectAllId } from './system'
+import { InspectAllId } from '../Ids'
+import { InspectAll } from './system'
 
 export * from './system'
 

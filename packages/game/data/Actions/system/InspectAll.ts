@@ -12,12 +12,10 @@ import {
   getActionData,
   modifyRenderContext,
 } from '../../../utils'
-import { ActionId } from '../../Ids'
+import { InspectAllId } from '../../Ids'
 import { SetIsInspectedAll } from '../../Modifiers'
 import { Identity } from '../../Mutations'
 import { EmptyArray } from '../../Queries/EmptyArray'
-
-export const InspectAllId = ActionId()
 
 export class InspectAll extends Action {
   constructor(sourceId: Id, teamId?: Id) {

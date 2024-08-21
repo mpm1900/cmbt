@@ -12,11 +12,9 @@ import {
   getActionData,
   modifyRenderContext,
 } from '../../utils'
-import { ActionId } from '../Ids'
+import { ArmorUpId } from '../Ids'
 import { Identity, RemovePhysicalArmorParent } from '../Mutations'
 import { EmptyArray } from '../Queries'
-
-export const ArmorUpId = ActionId()
 
 export class ArmorUp extends Action {
   amount: number

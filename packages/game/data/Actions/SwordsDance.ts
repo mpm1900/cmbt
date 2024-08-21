@@ -9,12 +9,11 @@ import {
 } from '../../types'
 import { buildActionResult, getActionData } from '../../utils'
 import { modifyRenderContext } from '../../utils/modifyRenderContext'
-import { ActionId } from '../Ids'
+import { SwordsDanceId } from '../Ids'
 import { PhysicalAttackUpParent } from '../Modifiers'
 import { ReduceFocusParent } from '../Mutations'
 import { EmptyArray } from '../Queries/EmptyArray'
 
-export const SwordsDanceId = ActionId()
 export class SwordsDance extends Action {
   constructor(sourceId: Id, teamId: Id) {
     super(SwordsDanceId, {

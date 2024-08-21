@@ -1,7 +1,5 @@
 import { CombatContext, Mutation, MutationProps, Unit } from '../../types'
-import { MutationId } from '../Ids'
-
-export const IdentityId = MutationId()
+import { IdentityId } from '../Ids'
 
 export class Identity extends Mutation {
   constructor(props: MutationProps = {}) {

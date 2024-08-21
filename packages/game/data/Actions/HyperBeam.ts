@@ -16,12 +16,11 @@ import {
 } from '../../utils'
 import { getDamageAi } from '../../utils/getDamageAiAction'
 import { modifyRenderContext } from '../../utils/modifyRenderContext'
-import { ActionId } from '../Ids'
+import { HyperBeamId } from '../Ids'
 import { SetIsStunnedParent } from '../Modifiers'
 import { ReduceFocusParent } from '../Mutations'
 import { GetUnits } from '../Queries'
 
-export const HyperBeamId = ActionId()
 export class HyperBeam extends Action {
   constructor(sourceId: Id, teamId: Id) {
     super(HyperBeamId, {

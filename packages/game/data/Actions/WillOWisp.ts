@@ -9,12 +9,10 @@ import {
 } from '../../types'
 import { buildActionResult, getActionData } from '../../utils'
 import { modifyRenderContext } from '../../utils/modifyRenderContext'
-import { ActionId } from '../Ids'
+import { WillOWispId } from '../Ids'
 import { ReduceFocusParent } from '../Mutations'
 import { GetUnits } from '../Queries'
 import { BurnStatus } from '../Statuses/BurnStatus'
-
-export const WillOWispId = ActionId()
 
 export class WillOWisp extends Action {
   constructor(sourceId: Id, teamId: Id) {

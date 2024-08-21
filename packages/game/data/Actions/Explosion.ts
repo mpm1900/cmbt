@@ -17,12 +17,10 @@ import {
   getMutationsFromDamageResult,
   modifyRenderContext,
 } from '../../utils'
-import { ActionId } from '../Ids'
+import { ExplosionId } from '../Ids'
 import { DamageParent, Identity } from '../Mutations'
 import { EmptyArray } from '../Queries'
 import { ZERO_UNIT } from '../Units'
-
-export const ExplosionId = ActionId()
 
 export class Explosion extends Action {
   constructor(sourceId: Id, teamId: Id) {

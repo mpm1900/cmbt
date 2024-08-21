@@ -1,8 +1,8 @@
 import { ActionRenderers } from '@/renderers'
-import { HoverCardPortal, HoverCardTrigger } from '@radix-ui/react-hover-card'
+import { HoverCardPortal } from '@radix-ui/react-hover-card'
 import { Action } from '@repo/game/types'
 import { PropsWithChildren } from 'react'
-import { HoverCard, HoverCardContent } from '../ui/hover-card'
+import { HoverCard, HoverCardContent, HoverCardTrigger } from '../ui/hover-card'
 
 export type ActionHoverProps = PropsWithChildren<{
   action: Action

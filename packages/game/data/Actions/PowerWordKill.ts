@@ -9,11 +9,10 @@ import {
 } from '../../types'
 import { buildActionResult, getActionData, getDamageAi } from '../../utils'
 import { modifyRenderContext } from '../../utils/modifyRenderContext'
-import { ActionId } from '../Ids'
+import { PowerWordKillId } from '../Ids'
 import { DamageParent, Identity } from '../Mutations'
 import { GetUnits } from '../Queries'
 
-export const PowerWordKillId = ActionId()
 export class PowerWordKill extends Action {
   constructor(sourceId: Id, teamId: Id) {
     super(PowerWordKillId, {

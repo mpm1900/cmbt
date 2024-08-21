@@ -1,6 +1,7 @@
 import {
   CreateSandstormOnUnitEnter,
   DamagePercentAllOnTurnEnd,
+  InspectAllOnUnitEnter,
   IntimidateId,
   PowerDownAllOtherOnUnitEnter,
   SandstormOnTurnEndId,
@@ -11,7 +12,6 @@ import { Id } from '@repo/game/types'
 import { ModifierDescription } from '@shared/ModifierDescription'
 import { ModifierInline } from '@shared/ModifierInline'
 import { ReactNode } from 'react'
-import { InspectAllOnUnitEnter } from '../../../../../packages/game/data/Triggers/InspectAllOnUnitEnter'
 import { AUGMENT_NAMES } from './_names'
 
 export * from './_names'

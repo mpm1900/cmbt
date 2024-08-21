@@ -1,15 +1,7 @@
 import { nanoid } from 'nanoid'
 import { UnitBase, UnitBaseConfig } from '../../types'
-import {
-  ArmorUp,
-  ArmorUpId,
-  Protect,
-  Spikes,
-  SpikesId,
-  Ward,
-  WardId,
-} from '../Actions'
-import { ProtectId } from '../Ids'
+import { ArmorUp, Protect, Spikes, Ward } from '../Actions'
+import { ArmorUpId, ProtectId, SpikesId, WardId } from '../Ids'
 import { ZERO_UNIT } from '../Units'
 
 export const Blissy: UnitBase = {

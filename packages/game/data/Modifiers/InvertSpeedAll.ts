@@ -1,7 +1,5 @@
 import { CombatContext, Modifier, ModifierProps, Unit } from '../../types'
-import { ModifierId } from '../Ids'
-
-export const InvertSpeedAllId = ModifierId()
+import { InvertSpeedAllId } from '../Ids'
 
 export class InvertSpeedAll extends Modifier {
   get key(): string {

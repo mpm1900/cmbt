@@ -12,12 +12,10 @@ import {
   getActionData,
   modifyRenderContext,
 } from '../../utils'
-import { ActionId } from '../Ids'
+import { RestId } from '../Ids'
 import { SetIsStunnedParent } from '../Modifiers'
 import { Identity, RemoveAllDamageParent } from '../Mutations'
 import { EmptyArray } from '../Queries'
-
-export const RestId = ActionId()
 
 export class Rest extends Action {
   constructor(sourceId: Id, teamId: Id) {

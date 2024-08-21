@@ -1,7 +1,5 @@
 import { CombatContext, Mutation, MutationProps, Unit } from '../../../types'
-import { MutationId } from '../../Ids'
-
-export const IncrementActiveTurnsId = MutationId()
+import { IncrementActiveTurnsId } from '../../Ids'
 
 export class IncrementActiveTurns extends Mutation {
   constructor(props: MutationProps<{ isActive: boolean }>) {

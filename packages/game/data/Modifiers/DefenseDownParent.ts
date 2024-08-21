@@ -1,7 +1,5 @@
 import { CombatContext, Modifier, ModifierProps, Unit } from '../../types'
-import { ModifierId } from '../Ids'
-
-export const DefenseDownParentId = ModifierId()
+import { DefenseDownParentId } from '../Ids'
 
 export class DefenseDownParent extends Modifier {
   factor: number

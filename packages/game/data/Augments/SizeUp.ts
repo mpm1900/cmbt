@@ -1,8 +1,7 @@
-import { nanoid } from 'nanoid'
 import { Augment, Modifier, Mutation, Unit } from '../../types'
-import { InspectAllOnUnitEnter } from '../Triggers/InspectAllOnUnitEnter'
+import { SizeUpId } from '../Ids'
+import { InspectAllOnUnitEnter } from '../Triggers'
 
-export const SizeUpId = nanoid()
 export const SizeUp: Augment = {
   id: SizeUpId,
   name: 'Size Up',

@@ -1,7 +1,6 @@
 import { CombatContext, Mutation, MutationProps, Unit } from '../../types'
-import { MutationId } from '../Ids'
+import { RemovePhysicalArmorParentId } from '../Ids'
 
-export const RemovePhysicalArmorParentId = MutationId()
 export class RemovePhysicalArmorParent extends Mutation {
   private amount: number
 

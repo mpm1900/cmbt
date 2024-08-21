@@ -1,8 +1,6 @@
 import { CombatContext, Mutation, MutationProps, Unit } from '../../../types'
 import { isUnitAliveCtx } from '../../../utils'
-import { MutationId } from '../../Ids'
-
-export const SetDeadAsInactiveId = MutationId()
+import { SetDeadAsInactiveId } from '../../Ids'
 
 export class SetDeadAsInactive extends Mutation {
   constructor(props: MutationProps = {}) {

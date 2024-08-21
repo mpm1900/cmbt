@@ -1,7 +1,6 @@
 import { CombatContext, Id, Mutation, MutationProps, Unit } from '../../types'
-import { MutationId } from '../Ids'
+import { AddModifierRegistryId } from '../Ids'
 
-export const AddModifierRegistryId = MutationId()
 export class AddModifierRegistry extends Mutation {
   private modifierId: Id
 

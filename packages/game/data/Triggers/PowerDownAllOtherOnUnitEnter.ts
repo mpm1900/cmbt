@@ -5,10 +5,8 @@ import {
   TriggerProps,
   Unit,
 } from '../../types'
-import { TriggerId } from '../Ids'
+import { PowerDownAllOtherOnUnitEnterId } from '../Ids'
 import { PhysicalAttackDownParent } from '../Modifiers'
-
-export const PowerDownAllOtherOnUnitEnterId = TriggerId()
 
 export class PowerDownAllOtherOnUnitEnter extends Trigger {
   private factor: number

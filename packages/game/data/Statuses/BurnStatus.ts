@@ -1,10 +1,8 @@
 import { Status } from '../../types'
-import { ModifierId, StatusId } from '../Ids'
+import { BurnDamageOnTurnEndId, BurnedPowerDownId, BurnStatusId } from '../Ids'
 import { PhysicalAttackDownParent } from '../Modifiers'
-import { BurnDamageOnTurnEndId, DamageParentOnTurnEnd } from '../Triggers'
+import { DamageParentOnTurnEnd } from '../Triggers'
 
-export const BurnedPowerDownId = ModifierId()
-export const BurnStatusId = StatusId()
 export const BurnStatus: Status = {
   id: BurnStatusId,
   modifiers: (source, parent) => [

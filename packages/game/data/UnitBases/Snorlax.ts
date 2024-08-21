@@ -1,15 +1,7 @@
 import { nanoid } from 'nanoid'
 import { UnitBase, UnitBaseConfig } from '../../types'
-import {
-  BodySlam,
-  BodySlamId,
-  Crunch,
-  CrunchId,
-  FirePunch,
-  FirePunchId,
-  Rest,
-  RestId,
-} from '../Actions'
+import { BodySlam, Crunch, FirePunch, Rest } from '../Actions'
+import { BodySlamId, CrunchId, FirePunchId, RestId } from '../Ids'
 import { ZERO_UNIT } from '../Units'
 
 export const Snorlax: UnitBase = {

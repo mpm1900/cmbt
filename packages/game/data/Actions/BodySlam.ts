@@ -16,11 +16,9 @@ import {
   getMutationsFromDamageResult,
   modifyRenderContext,
 } from '../../utils'
-import { ActionId } from '../Ids'
+import { BodySlamId } from '../Ids'
 import { Identity } from '../Mutations'
 import { GetUnits } from '../Queries'
-
-export const BodySlamId = ActionId()
 
 export class BodySlam extends Action {
   damage: Damage

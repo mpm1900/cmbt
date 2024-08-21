@@ -17,12 +17,10 @@ import {
   getMutationsFromDamageResult,
   modifyRenderContext,
 } from '../../utils'
-import { ActionId } from '../Ids'
+import { CrunchId } from '../Ids'
 import { DefenseDownParent } from '../Modifiers'
 import { Identity } from '../Mutations'
 import { GetUnits } from '../Queries'
-
-export const CrunchId = ActionId()
 
 export class Crunch extends Action {
   damage: Damage

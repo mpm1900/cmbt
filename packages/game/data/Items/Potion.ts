@@ -8,11 +8,10 @@ import {
   Item,
   Unit,
 } from '../../types'
-import { ActionId } from '../Ids'
+import { PotionActionId } from '../Ids'
 import { DamageParent, Identity } from '../Mutations'
 import { GetUnits } from '../Queries'
 
-export const PotionActionId = ActionId()
 export class PotionAction extends Action {
   constructor(props: Omit<ActionProps, 'targets'>) {
     super(PotionActionId, {

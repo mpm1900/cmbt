@@ -1,5 +1,6 @@
 import { faker } from '@faker-js/faker'
-import { Encounter, EncounterNode } from '@repo/game/types'
+import { TeamId } from '@repo/game/data'
+import { Encounter, EncounterNode, Team } from '@repo/game/types'
 import { makeEnemyUnit } from '@repo/game/utils'
 import { nanoid } from 'nanoid'
 import { IoMdReturnLeft, IoMdReturnRight } from 'react-icons/io'
@@ -9,7 +10,7 @@ const TestNode1: EncounterNode = {
   id: nanoid(),
   title: 'Test Encounter 001',
   text: (
-    <div className="space-y-2">
+    <div className="space-y-4">
       <Narration>
         Ahead of you stands a group of enemies. They don't seem to have noticed
         you yet.
@@ -28,9 +29,15 @@ const TestNode1: EncounterNode = {
         </div>
       ),
       resolve: (ctx) => {
+        const enemyTeam: Team = {
+          id: TeamId(),
+          resources: { credits: 0 },
+          items: [],
+        }
         ctx.initializeCombat({
+          enemyTeam,
           enemyUnits: Array.from({ length: 3 }).map(() =>
-            makeEnemyUnit(faker.person.fullName(), 15)
+            makeEnemyUnit(faker.person.fullName(), enemyTeam.id, 15)
           ),
           onSuccess: () => {
             ctx.updateActiveWorldNode((n) => ({
@@ -82,7 +89,7 @@ const TestNode2: EncounterNode = {
   id: nanoid(),
   title: 'Test Encounter 001',
   text: (
-    <div className="space-y-2">
+    <div className="space-y-4">
       <div>
         "Well look who it is, if it isn't some fresh meet for the grinder.
         You've wondered into the wrong neighborhood travelers."
@@ -103,9 +110,15 @@ const TestNode2: EncounterNode = {
       ),
       resolve: (ctx) => {
         // TODO: but make it harder
+        const enemyTeam: Team = {
+          id: TeamId(),
+          resources: { credits: 0 },
+          items: [],
+        }
         ctx.initializeCombat({
+          enemyTeam,
           enemyUnits: Array.from({ length: 3 }).map(() =>
-            makeEnemyUnit(faker.person.fullName(), 15)
+            makeEnemyUnit(faker.person.fullName(), enemyTeam.id, 15)
           ),
           onSuccess: () => {
             ctx.updateActiveWorldNode((n) => ({

@@ -1,14 +1,8 @@
 import { nanoid } from 'nanoid'
 import { UnitBase, UnitBaseConfig } from '../../types'
-import {
-  Fireball,
-  FireballId,
-  FireBlast,
-  FireBlastId,
-  HyperBeam,
-  HyperBeamId,
-} from '../Actions'
-import { Intimidate, IntimidateId } from '../Augments'
+import { Fireball, FireBlast, HyperBeam } from '../Actions'
+import { Intimidate } from '../Augments'
+import { FireballId, FireBlastId, HyperBeamId, IntimidateId } from '../Ids'
 import { ZERO_UNIT } from '../Units'
 
 export const Salamence: UnitBase = {

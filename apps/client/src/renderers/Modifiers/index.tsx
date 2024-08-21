@@ -56,7 +56,7 @@ export const ModifierRenderers: Record<string, ModifierRenderer> = {
           <span className="opacity-50 uppercase text-sm font-bold">
             On turn end:{' '}
           </span>
-          Afflicted units take {modifier.damage} damage.
+          Afflicted unit takes {modifier.damage} damage.
         </div>
       )
     },
@@ -67,8 +67,7 @@ export const ModifierRenderers: Record<string, ModifierRenderer> = {
       const modifier = mod as PhysicalAttackDownParent
       return (
         <div>
-          Afflicted units' physical attack stats are divided by{' '}
-          {modifier.factor}
+          Afflicted unit's physical attack stat is divided by {modifier.factor}
         </div>
       )
     },
@@ -87,9 +86,7 @@ export const ModifierRenderers: Record<string, ModifierRenderer> = {
     description: (mod) => {
       const modifier = mod as DefenseDownParent
       return (
-        <div>
-          Afflicted units' defense stats are divided by {modifier.factor}
-        </div>
+        <div>Afflicted unit's defense stat is divided by {modifier.factor}</div>
       )
     },
   },
@@ -109,8 +106,7 @@ export const ModifierRenderers: Record<string, ModifierRenderer> = {
       const modifier = mod as PhysicalAttackDownParent
       return (
         <div>
-          Afflicted units' physical attack stats are divided by{' '}
-          {modifier.factor}.
+          Afflicted unit's physical attack stat is divided by {modifier.factor}.
         </div>
       )
     },
@@ -125,7 +121,7 @@ export const ModifierRenderers: Record<string, ModifierRenderer> = {
       const modifier = mod as PhysicalAttackDownParent
       return (
         <div>
-          Afflicted units' physical attack stats are multiplied by{' '}
+          Afflicted unit's physical attack stat is multiplied by{' '}
           {modifier.factor}.
         </div>
       )

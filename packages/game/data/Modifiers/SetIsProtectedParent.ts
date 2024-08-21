@@ -1,7 +1,5 @@
 import { CombatContext, Modifier, ModifierProps, Unit } from '../../types'
-import { ModifierId } from '../Ids'
-
-export const SetIsProtectedParentId = ModifierId()
+import { SetIsProtectedParentId } from '../Ids'
 
 export class SetIsProtectedParent extends Modifier {
   constructor(props: ModifierProps) {

@@ -21,6 +21,7 @@ export function useEncounterContext(): EncounterContext {
         userUnits: game.units,
         modifiers: [],
         mutations: [],
+        enemyTeam: props.enemyTeam,
         enemyUnits: props.enemyUnits,
         onFailure: props.onFailure,
         onSuccess: props.onSuccess,

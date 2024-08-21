@@ -12,12 +12,10 @@ import {
   getActionData,
   modifyRenderContext,
 } from '../../utils'
-import { ActionId } from '../Ids'
+import { TrickRoomId } from '../Ids'
 import { InvertSpeedAll } from '../Modifiers'
 import { Identity } from '../Mutations'
 import { EmptyArray } from '../Queries/EmptyArray'
-
-export const TrickRoomId = ActionId()
 
 export class TrickRoom extends Action {
   constructor(sourceId: Id, teamId: Id) {

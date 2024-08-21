@@ -7,12 +7,11 @@ import {
   Unit,
 } from '../../../types'
 import { applyModifiers, getModifiersFromUnit } from '../../../utils'
-import { ActionId } from '../../Ids'
+import { SetIsActiveId } from '../../Ids'
 import { Identity } from '../../Mutations'
 import { SetIsActiveParent } from '../../Mutations/system'
 import { GetUnits } from '../../Queries'
 
-export const SetIsActiveId = ActionId()
 export class SetIsActive extends Action {
   constructor(sourceId: Id, teamId: Id, maxTargetCount = 1) {
     super(SetIsActiveId, {

@@ -1,5 +1,4 @@
-import { TeamId } from '@repo/game/data'
-import { InitializeCombatOptions, Team } from '@repo/game/types'
+import { InitializeCombatOptions } from '@repo/game/types'
 import { useNavigate } from '@tanstack/react-router'
 import { useActions, useCleanup, useCombat } from './state'
 
@@ -13,23 +12,21 @@ export function useInitializeCombat() {
     const {
       userTeam,
       userUnits,
+      enemyTeam,
       enemyUnits,
       mutations = [],
       modifiers = [],
       onSuccess,
       onFailure,
     } = props
-    const aiTeam: Team = { id: TeamId(), items: [], resources: { credits: 0 } }
-    const units = [
-      ...userUnits,
-      ...enemyUnits.map((u) => ({ ...u, teamId: aiTeam.id })),
-    ]
+
+    const units = [...userUnits, ...enemyUnits]
     actions.setQueue(() => [])
     cleanup.setQueue(() => [])
     combat.initialize({
       units,
       user: userTeam,
-      enemy: aiTeam,
+      enemy: enemyTeam,
       onFailure,
       onSuccess,
     })

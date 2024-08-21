@@ -1,7 +1,5 @@
 import { CombatContext, Modifier, ModifierProps, Unit } from '../../types'
-import { ModifierId } from '../Ids'
-
-export const SpeedUpParentId = ModifierId()
+import { SpeedUpParentId } from '../Ids'
 
 export class SpeedUpParent extends Modifier {
   factor: number

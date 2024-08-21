@@ -1,7 +1,6 @@
 import { CombatContext, Modifier, ModifierProps, Unit } from '../../types'
-import { ModifierId } from '../Ids'
+import { SetIsInspectedParentId } from '../Ids'
 
-export const SetIsInspectedParentId = ModifierId()
 export class SetIsInspectedParent extends Modifier {
   private isInspected?: boolean
 

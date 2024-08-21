@@ -9,7 +9,7 @@ export type CombatSettingsStore = {
 }
 
 export const useCombatSettings = create<CombatSettingsStore>((set) => ({
-  isDebugMode: true,
+  isDebugMode: false,
   setIsDebugMode: (isDebugMode) => set({ isDebugMode }),
   gameSpeed: GAME_SPEED,
   setGameSpeed: (gameSpeed) => set({ gameSpeed }),

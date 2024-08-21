@@ -1,7 +1,6 @@
 import { CombatContext, Mutation, MutationProps, Unit } from '../../types'
-import { MutationId } from '../Ids'
+import { RemoveAllDamageParentId } from '../Ids'
 
-export const RemoveAllDamageParentId = MutationId()
 export class RemoveAllDamageParent extends Mutation {
   constructor(props: MutationProps) {
     super(RemoveAllDamageParentId, props)

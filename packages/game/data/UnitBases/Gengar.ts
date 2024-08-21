@@ -1,16 +1,14 @@
 import { nanoid } from 'nanoid'
 import { UnitBase, UnitBaseConfig } from '../../types'
+import { Disable, MagicMissile, PowerWordKill, WillOWisp } from '../Actions'
+import { SizeUp } from '../Augments'
 import {
-  Disable,
   DisableId,
-  MagicMissile,
   MagicMissileId,
-  PowerWordKill,
   PowerWordKillId,
-  WillOWisp,
+  SizeUpId,
   WillOWispId,
-} from '../Actions'
-import { SizeUp, SizeUpId } from '../Augments'
+} from '../Ids'
 import { ZERO_UNIT } from '../Units'
 
 export const Gengar: UnitBase = {

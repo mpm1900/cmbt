@@ -1,7 +1,5 @@
 import { CombatContext, Modifier, ModifierProps, Unit } from '../../types'
-import { ModifierId } from '../Ids'
-
-export const AddActionToRegistryParentId = ModifierId()
+import { AddActionToRegistryParentId } from '../Ids'
 
 export class AddActionToRegistryParent extends Modifier {
   readonly actionId: string | undefined

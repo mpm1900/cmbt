@@ -1,4 +1,5 @@
-import { UnitId, ZERO_UNIT } from '../data'
+import { ZERO_UNIT } from '../data'
+import { UnitId } from '../data/Ids/_base'
 import { Id, Modifier, Mutation, Unit, UnitBuilder } from '../types'
 import { applyMutations } from './applyModifiers'
 import { mapBaseStat } from './mapBaseStat'

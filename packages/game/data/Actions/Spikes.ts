@@ -12,12 +12,10 @@ import {
   getActionData,
   modifyRenderContext,
 } from '../../utils'
-import { ActionId } from '../Ids'
+import { SpikesId } from '../Ids'
 import { Identity } from '../Mutations'
 import { EmptyArray } from '../Queries/EmptyArray'
 import { DamageNewUnitsOnUnitEnter } from '../Triggers'
-
-export const SpikesId = ActionId()
 
 export class Spikes extends Action {
   constructor(sourceId: Id, teamId: Id) {

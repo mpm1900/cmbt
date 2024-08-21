@@ -1,7 +1,5 @@
 import { CombatContext, Modifier, ModifierProps, Unit } from '../../types'
-import { ModifierId } from '../Ids'
-
-export const AccuracyDownParentId = ModifierId()
+import { AccuracyDownParentId } from '../Ids'
 
 export class AccuracyDownParent extends Modifier {
   private offset: number

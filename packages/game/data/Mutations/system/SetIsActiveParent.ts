@@ -1,7 +1,5 @@
 import { CombatContext, Mutation, MutationProps, Unit } from '../../../types'
-import { MutationId } from '../../Ids'
-
-export const SetIsActiveParentId = MutationId()
+import { SetIsActiveParentId } from '../../Ids'
 
 export class SetIsActiveParent extends Mutation {
   readonly isActive: boolean

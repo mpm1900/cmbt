@@ -18,7 +18,7 @@ export function SidebarUnit(props: SidebarUnitProps) {
 
   return (
     <div className="rounded hover:bg-slate-800 flex flex-row space-x-2 items-center">
-      <HoverCard openDelay={300} closeDelay={0}>
+      <HoverCard openDelay={300} closeDelay={100}>
         <HoverCardTrigger asChild>
           <div className="p-4 pr-0 flex-1">
             <div className="flex-1 space-y-2">

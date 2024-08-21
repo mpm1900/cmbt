@@ -49,7 +49,7 @@ export class Protect extends Action {
           new SetIsProtectedParent({
             sourceId: source.id,
             parentId: source.id,
-            duration: 2,
+            duration: 1,
           }),
         ],
       },

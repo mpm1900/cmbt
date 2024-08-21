@@ -12,12 +12,11 @@ import {
   getActionData,
   modifyRenderContext,
 } from '../../utils'
-import { ActionId } from '../Ids'
+import { IcyWindId } from '../Ids'
 import { SpeedUpParent } from '../Modifiers'
 import { Identity } from '../Mutations'
 import { GetUnits } from '../Queries'
 
-export const IcyWindId = ActionId()
 export class IcyWind extends Action {
   constructor(sourceId: Id, teamId: Id) {
     super(IcyWindId, {

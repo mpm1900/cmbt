@@ -1,7 +1,5 @@
 import { CombatContext, Modifier, ModifierProps, Unit } from '../../types'
-import { ModifierId } from '../Ids'
-
-export const DefenseUpAllId = ModifierId()
+import { DefenseUpAllId } from '../Ids'
 
 export class DefenseUpAll extends Modifier {
   constructor(props: ModifierProps) {

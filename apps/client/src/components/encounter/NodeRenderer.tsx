@@ -17,7 +17,7 @@ export function NodeRenderer(props: NodeRendererProps) {
       <CardHeader>
         <CardTitle>{node.title}</CardTitle>
       </CardHeader>
-      <CardContent className="space-y-3">
+      <CardContent className="space-y-4">
         <div>{node.text}</div>
         <Separator />
         {node.renderChoices ? (

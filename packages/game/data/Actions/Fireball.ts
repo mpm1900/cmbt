@@ -17,11 +17,10 @@ import {
   getMutationsFromDamageResult,
 } from '../../utils'
 import { modifyRenderContext } from '../../utils/modifyRenderContext'
-import { ActionId } from '../Ids'
+import { FireballId } from '../Ids'
 import { Identity } from '../Mutations'
 import { GetUnits } from '../Queries'
 
-export const FireballId = ActionId()
 export class Fireball extends Action {
   damage: Damage
   splashDamage: Damage

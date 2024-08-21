@@ -7,12 +7,11 @@ import {
   Unit,
 } from '../../../types'
 import { getModifiersFromUnit } from '../../../utils'
-import { ActionId } from '../../Ids'
+import { SwitchUnitId } from '../../Ids'
 import { Identity } from '../../Mutations'
 import { AddModifiersToParent, SetIsActiveParent } from '../../Mutations/system'
 import { GetUnits } from '../../Queries'
 
-export const SwitchUnitId = ActionId()
 export class SwitchUnit extends Action {
   constructor(sourceId: Id, teamId: Id) {
     super(SwitchUnitId, {

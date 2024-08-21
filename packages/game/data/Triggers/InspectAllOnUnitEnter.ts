@@ -1,8 +1,6 @@
 import { CombatContext, Trigger, TriggerProps, Unit } from '../../types'
-import { TriggerId } from '../Ids'
+import { InspectAllOnUnitEnterId } from '../Ids'
 import { SetIsInspectedAll } from '../Modifiers'
-
-export const InspectAllOnUnitEnterId = TriggerId()
 
 export class InspectAllOnUnitEnter extends Trigger {
   get key() {

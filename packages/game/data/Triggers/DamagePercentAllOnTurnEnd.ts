@@ -5,9 +5,7 @@ import {
   TriggerProps,
   Unit,
 } from '../../types'
-import { TriggerId } from '../Ids'
-
-export const DamagePercentAllOnTurnEndId = TriggerId()
+import { DamagePercentAllOnTurnEndId } from '../Ids'
 
 export class DamagePercentAllOnTurnEnd extends Trigger {
   factor: number

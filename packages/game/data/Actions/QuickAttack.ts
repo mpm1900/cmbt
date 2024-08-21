@@ -16,11 +16,9 @@ import {
   getMutationsFromDamageResult,
   modifyRenderContext,
 } from '../../utils'
-import { ActionId } from '../Ids'
+import { QuickAttackId } from '../Ids'
 import { Identity } from '../Mutations'
 import { GetUnits } from '../Queries'
-
-export const QuickAttackId = ActionId()
 
 export class QuickAttack extends Action {
   damage: Damage

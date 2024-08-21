@@ -2,20 +2,24 @@ import { nanoid } from 'nanoid'
 import { UnitBase, UnitBaseConfig } from '../../types'
 import {
   Crunch,
-  CrunchId,
   Earthquake,
-  EarthquakeId,
   Fireball,
-  FireballId,
   FireBlast,
-  FireBlastId,
   Protect,
   Sandstorm,
-  SandstormId,
 } from '../Actions'
-import { Spikes, SpikesId } from '../Actions/Spikes'
-import { SandStream, SandStreamId } from '../Augments'
-import { ProtectId } from '../Ids'
+import { Spikes } from '../Actions/Spikes'
+import { SandStream } from '../Augments'
+import {
+  CrunchId,
+  EarthquakeId,
+  FireballId,
+  FireBlastId,
+  ProtectId,
+  SandstormId,
+  SandStreamId,
+  SpikesId,
+} from '../Ids'
 import { ZERO_UNIT } from '../Units'
 
 export const Tyranitar: UnitBase = {

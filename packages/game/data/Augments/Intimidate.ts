@@ -1,8 +1,7 @@
-import { nanoid } from 'nanoid'
 import { Augment, Modifier, Mutation, Unit } from '../../types'
+import { IntimidateId } from '../Ids'
 import { PowerDownAllOtherOnUnitEnter } from '../Triggers'
 
-export const IntimidateId = nanoid()
 export const Intimidate: Augment = {
   id: IntimidateId,
   name: 'Intimidate',

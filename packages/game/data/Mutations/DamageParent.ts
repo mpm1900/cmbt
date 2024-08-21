@@ -1,7 +1,6 @@
 import { CombatContext, Mutation, MutationProps, Unit } from '../../types'
-import { MutationId } from '../Ids'
+import { DamageParentId } from '../Ids'
 
-export const DamageParentId = MutationId()
 export class DamageParent extends Mutation {
   damage: number
   evasionSuccess: boolean

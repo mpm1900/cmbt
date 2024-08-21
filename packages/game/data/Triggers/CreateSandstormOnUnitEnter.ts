@@ -1,9 +1,6 @@
 import { CombatContext, Trigger, TriggerProps, Unit } from '../../types'
-import { TriggerId } from '../Ids'
+import { CreateSandstormOnUnitEnterId, SandstormOnTurnEndId } from '../Ids'
 import { DamagePercentAllOnTurnEnd } from './DamagePercentAllOnTurnEnd'
-
-export const CreateSandstormOnUnitEnterId = TriggerId()
-export const SandstormOnTurnEndId = TriggerId()
 
 export class CreateSandstormOnUnitEnter extends Trigger {
   get key() {

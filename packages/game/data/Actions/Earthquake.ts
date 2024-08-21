@@ -17,11 +17,10 @@ import {
 } from '../../utils'
 import { getDamageAi } from '../../utils/getDamageAiAction'
 import { modifyRenderContext } from '../../utils/modifyRenderContext'
-import { ActionId } from '../Ids'
+import { EarthquakeId } from '../Ids'
 import { Identity } from '../Mutations'
 import { EmptyArray } from '../Queries'
 
-export const EarthquakeId = ActionId()
 export class Earthquake extends Action {
   damage: Damage
 

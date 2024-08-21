@@ -9,7 +9,7 @@ export const makeBuilder = (i: number = 0): UnitBuilder => {
   return {
     id: nanoid(),
     name: faker.person.fullName(),
-    level: 15,
+    level: 20,
     base,
     config,
     ability: config.abilities.find((a) => a.id === config.defaultAbilityId),

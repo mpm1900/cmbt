@@ -1,9 +1,7 @@
-import { nanoid } from 'nanoid'
 import { Augment, Modifier, Mutation, Unit } from '../../types'
+import { SandstormOnTurnEndId, SandStreamId } from '../Ids'
 import { AddModifierRegistry } from '../Mutations'
-import { CreateSandstormOnUnitEnter, SandstormOnTurnEndId } from '../Triggers'
-
-export const SandStreamId = nanoid()
+import { CreateSandstormOnUnitEnter } from '../Triggers'
 
 export const SandStream: Augment = {
   id: SandStreamId,

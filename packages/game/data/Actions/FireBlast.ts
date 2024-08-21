@@ -17,12 +17,11 @@ import {
   getMutationsFromDamageResult,
 } from '../../utils'
 import { modifyRenderContext } from '../../utils/modifyRenderContext'
-import { ActionId } from '../Ids'
+import { FireBlastId } from '../Ids'
 import { Identity } from '../Mutations'
 import { GetUnits } from '../Queries'
 import { BurnStatus } from '../Statuses/BurnStatus'
 
-export const FireBlastId = ActionId()
 export class FireBlast extends Action {
   damage: Damage
 

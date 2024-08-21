@@ -12,12 +12,10 @@ import {
   getActionData,
   modifyRenderContext,
 } from '../../utils'
-import { ActionId } from '../Ids'
+import { SandstormId, SandstormOnTurnEndId } from '../Ids'
 import { Identity } from '../Mutations'
 import { EmptyArray } from '../Queries/EmptyArray'
-import { DamageAllOnTurnEnd, SandstormOnTurnEndId } from '../Triggers'
-
-export const SandstormId = ActionId()
+import { DamageAllOnTurnEnd } from '../Triggers'
 
 export class Sandstorm extends Action {
   constructor(sourceId: Id, teamId: Id) {

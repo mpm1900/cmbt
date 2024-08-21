@@ -5,9 +5,7 @@ import {
   MutationProps,
   Unit,
 } from '../../types'
-import { MutationId } from '../Ids'
-
-export const ReduceFocusParentId = MutationId()
+import { ReduceFocusParentId } from '../Ids'
 
 export class ReduceFocusParent extends Mutation {
   offset: number

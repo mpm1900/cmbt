@@ -1,19 +1,7 @@
-import { faker } from '@faker-js/faker'
 import { TeamId } from '@repo/game/data'
-import { Modifier, Mutation, Team, Unit } from '@repo/game/types'
-import { makeUnit } from '@repo/game/utils'
+import { InitializeCombatOptions, Team } from '@repo/game/types'
 import { useNavigate } from '@tanstack/react-router'
 import { useActions, useCleanup, useCombat } from './state'
-
-export type InitializeFunctionProps = {
-  userTeam: Team
-  userUnits: Unit[]
-  modifiers: Modifier[]
-  mutations: Mutation[]
-  enemyUnitCount: number
-  onSuccess: () => void
-  onFailure: () => void
-}
 
 export function useInitializeCombat() {
   const actions = useActions()
@@ -21,21 +9,21 @@ export function useInitializeCombat() {
   const combat = useCombat()
   const navigate = useNavigate()
 
-  return (props: InitializeFunctionProps) => {
+  return (props: Required<InitializeCombatOptions>) => {
     const {
       userTeam,
       userUnits,
-      enemyUnitCount,
+      enemyUnits,
       mutations = [],
       modifiers = [],
       onSuccess,
       onFailure,
     } = props
     const aiTeam: Team = { id: TeamId(), items: [], resources: { credits: 0 } }
-    const enemyUnits = Array.from({ length: enemyUnitCount }).map(() =>
-      makeUnit(aiTeam.id, faker.person.fullName(), false)
-    )
-    const units = [...userUnits, ...enemyUnits]
+    const units = [
+      ...userUnits,
+      ...enemyUnits.map((u) => ({ ...u, teamId: aiTeam.id })),
+    ]
     actions.setQueue(() => [])
     cleanup.setQueue(() => [])
     combat.initialize({

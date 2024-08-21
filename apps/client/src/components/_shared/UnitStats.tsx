@@ -2,11 +2,64 @@ import { Separator } from '@/components/ui/separator'
 import { useCombatContext } from '@/hooks'
 import { DamageRenderers } from '@/renderers/Damage'
 import { StatRenderers } from '@/renderers/Stats'
-import { Unit } from '@repo/game/types'
+import { DamageType, StatKey, Unit } from '@repo/game/types'
 import { applyModifiers } from '@repo/game/utils'
+import { ReactNode } from '@tanstack/react-router'
 import { MagicArmor } from './MagicArmor'
 import { PhysicalArmor } from './PhysicalArmor'
 import { StatDebug } from './StatDebug'
+
+type UnitStatProps = {
+  unit: Unit
+  comp: Unit
+  stat: StatKey
+  before?: ReactNode
+  after?: ReactNode
+  map?: (value: number) => number
+}
+
+function UnitStat(props: UnitStatProps) {
+  const { unit, comp, stat, before, after, map } = props
+  return (
+    <div className="flex justify-between space-x-2">
+      <div className="flex items-center space-x-1">
+        {StatRenderers[stat]?.icon}
+        <span className="text-muted-foreground font-bold whitespace-nowrap">
+          {StatRenderers[stat]?.name ?? stat}
+        </span>
+      </div>
+      <span>
+        {before}
+        <StatDebug stat={stat} unit={unit} comp={comp} map={map} />
+        {after}
+      </span>
+    </div>
+  )
+}
+
+type UnitDamageStatProps = UnitStatProps & { damageType: DamageType }
+function UnitDamageStat(props: UnitDamageStatProps) {
+  return (
+    <div className="flex space-x-4 justify-between">
+      <div className="flex items-center space-x-1">
+        {DamageRenderers[props.damageType]?.icon}
+        <strong className="text-muted-foreground">
+          {DamageRenderers[props.damageType]?.name}
+        </strong>
+      </div>
+      <span>
+        {props.before}
+        <StatDebug
+          stat={props.stat}
+          unit={props.unit}
+          comp={props.comp}
+          map={props.map}
+        />
+        {props.after}
+      </span>
+    </div>
+  )
+}
 
 export type UnitStatsProps = {
   unit: Unit
@@ -26,59 +79,35 @@ export function UnitStats(props: UnitStatsProps) {
               Stats
             </div>
             <Separator className="my-1" />
-            <div className="flex justify-between space-x-2">
-              <div className="flex items-center space-x-1">
-                {StatRenderers.physical?.icon}
-                <strong className="text-muted-foreground">Physical</strong>
-              </div>
-              <StatDebug stat="physical" unit={unit} comp={props.unit} />
-            </div>
-            <div className="flex justify-between space-x-2">
-              <div className="flex items-center space-x-1">
-                {StatRenderers.defense?.icon}
-                <strong className="text-muted-foreground">Defense</strong>
-              </div>
-              <StatDebug stat="defense" unit={unit} comp={props.unit} />
-            </div>
-            <div className="flex justify-between space-x-2">
-              <div className="flex items-center space-x-1">
-                {StatRenderers.magic?.icon}
-                <strong className="text-muted-foreground">Magic</strong>
-              </div>
-              <StatDebug stat="magic" unit={unit} comp={props.unit} />
-            </div>
-            <div className="flex justify-between space-x-2">
-              <div className="flex items-center space-x-1">
-                {StatRenderers.speed?.icon}
-                <strong className="text-muted-foreground">Speed</strong>
-              </div>
-              <StatDebug stat="speed" unit={unit} comp={props.unit} />
-            </div>
+            <UnitStat unit={unit} comp={props.unit} stat="physical" />
+            <UnitStat unit={unit} comp={props.unit} stat="defense" />
+            <UnitStat unit={unit} comp={props.unit} stat="magic" />
+            <UnitStat unit={unit} comp={props.unit} stat="speed" />
 
             <Separator className="my-2" />
             <div className="space-y-2">
               <div>
                 <div className="flex justify-between space-x-2">
                   <strong className="text-muted-foreground">HP</strong>
-                  <span>
+                  <span className="font-mono">
                     ({remainingHealth}/{unit.stats.health})
                   </span>
                 </div>
                 <div className="flex justify-between space-x-2">
                   <strong className="text-muted-foreground">FP</strong>
-                  <span>
+                  <span className="font-mono">
                     ({Math.max(unit.values.focus, 0)}/{unit.stats.focus})
                   </span>
                 </div>
                 <div className="flex justify-between space-x-2">
                   <strong className="text-muted-foreground">SP</strong>
-                  <span>
+                  <span className="font-mono">
                     ({Math.max(unit.values.stamina, 0)}/{unit.stats.stamina})
                   </span>
                 </div>
                 <div className="flex justify-between space-x-2">
                   <strong className="text-muted-foreground">DV</strong>
-                  <span>
+                  <span className="font-mono">
                     ({Math.max(unit.values.devotion, 0)}/{unit.stats.devotion})
                   </span>
                 </div>
@@ -102,107 +131,67 @@ export function UnitStats(props: UnitStatsProps) {
             Damage
           </div>
           <Separator className="my-1" />
-          <div className="flex space-x-4 justify-between">
-            <div className="flex items-center space-x-1">
-              {DamageRenderers.arcane?.icon}
-              <strong className="text-muted-foreground">Arcane</strong>
-            </div>
-            <span>
-              <StatDebug
-                stat="arcaneExpansion"
-                unit={unit}
-                comp={props.unit}
-                map={(v) => (v + 1) * 100}
-              />
-              %
-            </span>
-          </div>
-          <div className="flex space-x-4 justify-between">
-            <div className="flex items-center space-x-1">
-              {DamageRenderers.fire?.icon}
-              <strong className="text-muted-foreground">Fire</strong>
-            </div>
-            <span>
-              <StatDebug
-                stat="fireExpansion"
-                unit={unit}
-                comp={props.unit}
-                map={(v) => (v + 1) * 100}
-              />
-              %
-            </span>
-          </div>
-          <div className="flex space-x-4 justify-between">
-            <div className="flex items-center space-x-1">
-              {DamageRenderers.force?.icon}
-              <strong className="text-muted-foreground">Force</strong>
-            </div>
-            <span>
-              <StatDebug
-                stat="forceExpansion"
-                unit={unit}
-                comp={props.unit}
-                map={(v) => (v + 1) * 100}
-              />
-              %
-            </span>
-          </div>
-          <div className="flex space-x-4 justify-between">
-            <div className="flex items-center space-x-1">
-              {DamageRenderers.psychic?.icon}
-              <strong className="text-muted-foreground">Psychic</strong>
-            </div>
-            <span>
-              <StatDebug
-                stat="psychicExpansion"
-                unit={unit}
-                comp={props.unit}
-                map={(v) => (v + 1) * 100}
-              />
-              %
-            </span>
-          </div>
-          <div className="flex space-x-4 justify-between">
-            <div className="flex items-center space-x-1">
-              {DamageRenderers.shock?.icon}
-              <strong className="text-muted-foreground">Shock</strong>
-            </div>
-            <span>
-              <StatDebug
-                stat="shockExpansion"
-                unit={unit}
-                comp={props.unit}
-                map={(v) => (v + 1) * 100}
-              />
-              %
-            </span>
-          </div>
+          <UnitDamageStat
+            stat="arcaneExpansion"
+            unit={unit}
+            comp={props.unit}
+            damageType="arcane"
+            map={(v) => (v + 1) * 100}
+            after="%"
+          />
+          <UnitDamageStat
+            stat="fireExpansion"
+            unit={unit}
+            comp={props.unit}
+            damageType="fire"
+            map={(v) => (v + 1) * 100}
+            after="%"
+          />
+          <UnitDamageStat
+            stat="forceExpansion"
+            unit={unit}
+            comp={props.unit}
+            damageType="force"
+            map={(v) => (v + 1) * 100}
+            after="%"
+          />
+          <UnitDamageStat
+            stat="psychicExpansion"
+            unit={unit}
+            comp={props.unit}
+            damageType="psychic"
+            map={(v) => (v + 1) * 100}
+            after="%"
+          />
+          <UnitDamageStat
+            stat="shockExpansion"
+            unit={unit}
+            comp={props.unit}
+            damageType="shock"
+            map={(v) => (v + 1) * 100}
+            after="%"
+          />
           <Separator className="my-2" />
-          <div className="flex justify-between space-x-2">
-            <div className="flex items-center space-x-1">
-              {StatRenderers.accuracy?.icon}
-              <strong className="text-muted-foreground">Accuracy</strong>
-            </div>
-            <span>
-              <StatDebug stat="accuracy" unit={unit} comp={props.unit} />%
-            </span>
-          </div>
-          <div className="flex justify-between space-x-2">
-            <div className="flex items-center space-x-1">
-              {StatRenderers.criticalChance?.icon}
-              <strong className="text-muted-foreground">Crit % Δ</strong>
-            </div>
-            <span>
-              <StatDebug stat="criticalChance" unit={unit} comp={props.unit} />%
-            </span>
-          </div>
-          <div className="flex justify-between space-x-2">
-            <div className="flex items-center space-x-1">
-              {StatRenderers.criticalDamage?.icon}
-              <strong className="text-muted-foreground">Crit Dmg Δ</strong>
-            </div>
-            <StatDebug stat="criticalDamage" unit={unit} comp={props.unit} />
-          </div>
+          <UnitStat
+            stat="accuracy"
+            unit={unit}
+            comp={props.unit}
+            before="+"
+            after="%"
+          />
+          <UnitStat
+            stat="criticalChance"
+            unit={unit}
+            comp={props.unit}
+            before="+"
+            after="%"
+          />
+          <UnitStat
+            stat="criticalDamage"
+            unit={unit}
+            comp={props.unit}
+            before="+"
+          />
         </div>
         <div className="w-[1px] bg-border" />
         <div className="flex flex-col text-left flex-1">
@@ -210,91 +199,48 @@ export function UnitStats(props: UnitStatsProps) {
             Negation
           </div>
           <Separator className="my-1" />
-          <div className="flex space-x-4 justify-between">
-            <div className="flex items-center space-x-1">
-              {DamageRenderers.arcane?.icon}
-              <strong className="text-muted-foreground">Arcane</strong>
-            </div>
-            <span>
-              <StatDebug
-                stat="arcaneExpansion"
-                unit={unit}
-                comp={props.unit}
-                map={(v) => v * 100}
-              />
-              %
-            </span>
-          </div>
-          <div className="flex space-x-4 justify-between">
-            <div className="flex items-center space-x-1">
-              {DamageRenderers.fire?.icon}
-              <strong className="text-muted-foreground">Fire</strong>
-            </div>
-            <span>
-              <StatDebug
-                stat="fireNegation"
-                unit={unit}
-                comp={props.unit}
-                map={(v) => v * 100}
-              />
-              %
-            </span>
-          </div>
-          <div className="flex space-x-4 justify-between">
-            <div className="flex items-center space-x-1">
-              {DamageRenderers.force?.icon}
-              <strong className="text-muted-foreground">Force</strong>
-            </div>
-            <span>
-              <StatDebug
-                stat="forceNegation"
-                unit={unit}
-                comp={props.unit}
-                map={(v) => v * 100}
-              />
-              %
-            </span>
-          </div>
-          <div className="flex space-x-4 justify-between">
-            <div className="flex items-center space-x-1">
-              {DamageRenderers.psychic?.icon}
-              <strong className="text-muted-foreground">Psychic</strong>
-            </div>
-            <span>
-              <StatDebug
-                stat="psychicNegation"
-                unit={unit}
-                comp={props.unit}
-                map={(v) => v * 100}
-              />
-              %
-            </span>
-          </div>
-          <div className="flex space-x-4 justify-between">
-            <div className="flex items-center space-x-1">
-              {DamageRenderers.shock?.icon}
-              <strong className="text-muted-foreground">Shock</strong>
-            </div>
-            <span>
-              <StatDebug
-                stat="shockNegation"
-                unit={unit}
-                comp={props.unit}
-                map={(v) => v * 100}
-              />
-              %
-            </span>
-          </div>
+          <UnitDamageStat
+            stat="arcaneNegation"
+            unit={unit}
+            comp={props.unit}
+            damageType="arcane"
+            map={(v) => v * 100}
+            after="%"
+          />
+          <UnitDamageStat
+            stat="fireNegation"
+            unit={unit}
+            comp={props.unit}
+            damageType="fire"
+            map={(v) => v * 100}
+            after="%"
+          />
+          <UnitDamageStat
+            stat="forceNegation"
+            unit={unit}
+            comp={props.unit}
+            damageType="force"
+            map={(v) => v * 100}
+            after="%"
+          />
+          <UnitDamageStat
+            stat="psychicNegation"
+            unit={unit}
+            comp={props.unit}
+            damageType="psychic"
+            map={(v) => v * 100}
+            after="%"
+          />
+          <UnitDamageStat
+            stat="shockNegation"
+            unit={unit}
+            comp={props.unit}
+            damageType="shock"
+            map={(v) => v * 100}
+            after="%"
+          />
           <Separator className="my-2" />
-          <div className="flex justify-between space-x-2">
-            <div className="flex items-center space-x-1">
-              {StatRenderers.evasion?.icon}
-              <strong className="text-muted-foreground">Evasion</strong>
-            </div>
-            <span>
-              <StatDebug stat="evasion" unit={unit} comp={props.unit} />%
-            </span>
-          </div>
+          <UnitStat unit={unit} comp={props.unit} stat="evasion" after="%" />
         </div>
       </div>
     </div>

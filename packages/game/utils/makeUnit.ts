@@ -36,18 +36,14 @@ export function unitMaker(
   }
 }
 
-export function makeUnit(
-  teamId: string,
-  name?: string,
-  isActive?: boolean
-): Unit {
+export function makeEnemyUnit(name: string, level: number): Unit {
   const id = UnitId()
   const unit = unitMaker(
     {
       id,
-      name: name ?? id,
-      teamId,
-      level: 15,
+      name,
+      teamId: '',
+      level,
       baseId: CelebiId,
       stats: {
         ...ZERO_UNIT.stats,
@@ -62,7 +58,7 @@ export function makeUnit(
       },
       flags: {
         ...ZERO_UNIT.flags,
-        isActive: isActive ?? false,
+        isActive: false,
         isInspected: true,
       },
     },
@@ -93,5 +89,6 @@ export function makeUnit(
       modifiers: () => [],
     })
   )
+
   return rebuildUnit(unit)
 }

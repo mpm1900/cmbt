@@ -1,4 +1,6 @@
+import { faker } from '@faker-js/faker'
 import { Encounter, EncounterNode } from '@repo/game/types'
+import { makeEnemyUnit } from '@repo/game/utils'
 import { nanoid } from 'nanoid'
 import { IoMdReturnLeft, IoMdReturnRight } from 'react-icons/io'
 import { Narration } from '../Narration'
@@ -27,7 +29,9 @@ const TestNode1: EncounterNode = {
       ),
       resolve: (ctx) => {
         ctx.initializeCombat({
-          enemyUnitCount: 2,
+          enemyUnits: Array.from({ length: 3 }).map(() =>
+            makeEnemyUnit(faker.person.fullName(), 15)
+          ),
           onSuccess: () => {
             ctx.updateActiveWorldNode((n) => ({
               completed: true,
@@ -95,7 +99,9 @@ const TestNode2: EncounterNode = {
       resolve: (ctx) => {
         // TODO: but make it harder
         ctx.initializeCombat({
-          enemyUnitCount: 2,
+          enemyUnits: Array.from({ length: 3 }).map(() =>
+            makeEnemyUnit(faker.person.fullName(), 15)
+          ),
           onSuccess: () => {
             ctx.updateActiveWorldNode((n) => ({
               completed: true,

@@ -7,8 +7,10 @@ import {
   TableRow,
 } from '@/components/ui/table'
 import { cn } from '@/lib/utils'
+import { faker } from '@faker-js/faker'
 import { Key01, Key01Id, Potion, PotionId } from '@repo/game/data'
 import { Encounter, EncounterNode } from '@repo/game/types'
+import { makeEnemyUnit } from '@repo/game/utils'
 import { nanoid } from 'nanoid'
 import { IoMdReturnLeft, IoMdReturnRight } from 'react-icons/io'
 import { Narration } from '../Narration'
@@ -49,7 +51,9 @@ const ShopIntroductionNode: EncounterNode = {
       ),
       resolve: (ctx) => {
         ctx.initializeCombat({
-          enemyUnitCount: 6,
+          enemyUnits: Array.from({ length: 4 }).map(() =>
+            makeEnemyUnit(faker.person.fullName(), 15)
+          ),
           onSuccess: () => {
             ctx.updateActiveWorldNode((n) => ({
               completed: true,

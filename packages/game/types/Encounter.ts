@@ -1,7 +1,11 @@
-import { GameWorldNode, Id, Item, Team } from '.'
+import { GameWorldNode, Id, Item, Modifier, Mutation, Team, Unit } from '.'
 
-export type InitializeCombatProps = {
-  enemyUnitCount: number
+export type InitializeCombatOptions = {
+  userTeam?: Team
+  userUnits?: Unit[]
+  enemyUnits: Unit[]
+  modifiers?: Modifier[]
+  mutations?: Mutation[]
   onSuccess: () => void
   onFailure: () => void
 }
@@ -12,7 +16,7 @@ export type EncounterContext = {
   activeNode: EncounterNode
   back: () => void
   log: (item: React.ReactNode, delay?: number) => void
-  initializeCombat: (props: InitializeCombatProps) => void
+  initializeCombat: (props: InitializeCombatOptions) => void
   updateActiveWorldNode: (
     fn: (n: GameWorldNode) => Partial<GameWorldNode>
   ) => void

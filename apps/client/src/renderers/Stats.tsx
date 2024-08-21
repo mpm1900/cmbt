@@ -24,11 +24,11 @@ export const StatRenderers: Record<StatKey, StatRenderer | undefined> = {
   arcaneExpansion: undefined,
   arcaneNegation: undefined,
   criticalChance: {
-    name: <>Crit % Δ</>,
+    name: <>Crit Chance</>,
     icon: <PiTargetFill />,
   },
   criticalDamage: {
-    name: <>Crit Damage Δ</>,
+    name: <>Crit Damage</>,
     icon: <GiArrowScope />,
   },
   defense: {

@@ -19,7 +19,7 @@ export function StatDebug(props: StatDebugProps) {
         : 'inherit'
 
   return (
-    <span style={{ color }}>
+    <span style={{ color }} className="font-mono">
       {parseFloat((map ? map(value) : value).toFixed(1))}
     </span>
   )

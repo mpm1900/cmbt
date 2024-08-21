@@ -60,7 +60,7 @@ export function calculateDamage(
     target
   )
   const evasionRoll = random.int(0, 100)
-  const evasionSuccess = target.stats.evasion >= evasionRoll
+  const evasionSuccess = target.stats.evasion > evasionRoll
   const negation = getDamageNegation(damage.damageType, target)
   const expansion = getDamageExpansion(damage.damageType, target)
 

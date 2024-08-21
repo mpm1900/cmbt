@@ -1,4 +1,4 @@
-import { ALL_BASES } from '@repo/game/data'
+import { PLAYER_BASES } from '@repo/game/data'
 import { UnitBase } from '@repo/game/types'
 import {
   Select,
@@ -20,14 +20,14 @@ export function UnitBaseSelect(props: UnitBaseSelectProps) {
     <Select
       value={value.id}
       onValueChange={(id) =>
-        onChange(ALL_BASES.find((base) => base.id === id) as UnitBase)
+        onChange(PLAYER_BASES.find((base) => base.id === id) as UnitBase)
       }
     >
       <SelectTrigger>
         <SelectValue placeholder="Select a base" />
       </SelectTrigger>
       <SelectContent>
-        {ALL_BASES.map((base) => (
+        {PLAYER_BASES.map((base) => (
           <SelectItem key={base.id} value={base.id}>
             {base.name}
           </SelectItem>

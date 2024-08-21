@@ -9,6 +9,19 @@ import { Snorlax, SnorlaxConfig } from './Snorlax'
 import { Steelix, SteelixConfig } from './Steelix'
 import { Tyranitar, TyranitarConfig } from './Tyranitar'
 
+export const PLAYER_BASES: UnitBase[] = [
+  Tyranitar,
+  Blissy,
+  //DeoxysP,
+  //DeoxysM,
+  //DeoxysS,
+  Gengar,
+  Salamence,
+  Snorlax,
+  // Steelix,,
+  //Celebi,
+]
+
 export const ALL_BASES: UnitBase[] = [
   Tyranitar,
   Blissy,

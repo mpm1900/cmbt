@@ -100,12 +100,14 @@ const ShopWaresNode: EncounterNode = {
       <div className="space-y-4">
         <Table>
           <TableHeader>
-            <TableHead>#</TableHead>
-            <TableHead>name</TableHead>
+            <TableRow>
+              <TableHead>#</TableHead>
+              <TableHead>name</TableHead>
 
-            <TableHead className="flex justify-end items-center">
-              cost
-            </TableHead>
+              <TableHead className="flex justify-end items-center">
+                cost
+              </TableHead>
+            </TableRow>
           </TableHeader>
           {[Potion(), Key01()].map((item) => (
             <TableRow>

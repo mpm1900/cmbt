@@ -95,7 +95,12 @@ const TestNode2: EncounterNode = {
   choices: () => [
     {
       id: nanoid(),
-      label: 'Begin combat >>',
+      label: (
+        <div className="flex space-x-2 items-center">
+          <span>Begin combat</span>
+          <IoMdReturnRight />
+        </div>
+      ),
       resolve: (ctx) => {
         // TODO: but make it harder
         ctx.initializeCombat({

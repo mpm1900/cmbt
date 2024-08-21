@@ -1,6 +1,7 @@
 import { useEncounterContext } from '@/hooks'
 import { EncounterNode } from '@repo/game/types'
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
+import { Separator } from '../ui/separator'
 import { ChoiceButton } from './ChoiceButton'
 
 export type NodeRendererProps = {
@@ -18,6 +19,7 @@ export function NodeRenderer(props: NodeRendererProps) {
       </CardHeader>
       <CardContent className="space-y-3">
         <div>{node.text}</div>
+        <Separator />
         {node.renderChoices ? (
           node.renderChoices(ctx)
         ) : (

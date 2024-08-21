@@ -27,11 +27,14 @@ function UnitStat(props: UnitStatProps) {
           {StatRenderers[stat]?.name ?? stat}
         </span>
       </div>
-      <span>
-        {before}
-        <StatDebug stat={stat} unit={unit} comp={comp} map={map} />
-        {after}
-      </span>
+      <StatDebug
+        stat={stat}
+        unit={unit}
+        comp={comp}
+        before={before}
+        after={after}
+        map={map}
+      />
     </div>
   )
 }
@@ -47,14 +50,14 @@ function UnitDamageStat(props: UnitDamageStatProps) {
         </strong>
       </div>
       <span>
-        {props.before}
         <StatDebug
           stat={props.stat}
           unit={props.unit}
           comp={props.comp}
+          before={props.before}
+          after={props.after}
           map={props.map}
         />
-        {props.after}
       </span>
     </div>
   )

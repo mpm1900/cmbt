@@ -1,6 +1,7 @@
+import { useCombatContext } from '@/hooks'
 import { useGame } from '@/hooks/state'
-import { Unit } from '@repo/game/types'
-import { applyMutations } from '@repo/game/utils'
+import { Trigger, Unit } from '@repo/game/types'
+import { applyMutations, validateModifiers } from '@repo/game/utils'
 import { CgDetailsMore } from 'react-icons/cg'
 import { Button } from '../ui/button'
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '../ui/hover-card'
@@ -14,7 +15,20 @@ export type SidebarUnitProps = {
 
 export function SidebarUnit(props: SidebarUnitProps) {
   const game = useGame()
-  const unit = applyMutations(props.unit, props.unit.modifiers())
+  const ctx = useCombatContext()
+  const mock: Unit = {
+    ...props.unit,
+    flags: { ...props.unit.flags, isActive: true },
+  }
+  const unit = applyMutations(
+    props.unit,
+    validateModifiers(
+      props.unit
+        .modifiers()
+        .filter((m) => !(m instanceof Trigger) && m.filter(mock, ctx)),
+      []
+    )
+  )
 
   return (
     <div className="rounded hover:bg-slate-800 flex flex-row space-x-2 items-center">

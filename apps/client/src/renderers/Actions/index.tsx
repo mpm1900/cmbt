@@ -26,8 +26,8 @@ import {
   PhysicalAttackUpParent,
   PiercingStrike,
   PiercingStrikeId,
-  PoisonedStatus,
   PoisonSprayId,
+  PoisonStatus,
   PotionActionId,
   PowerWordKillId,
   ProtectId,
@@ -356,7 +356,7 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
         <>
           Deals <DamageInline damage={poisionSpray.damage} /> to target enemy
           unit and applies{' '}
-          <StatusInline side={props?.side} status={PoisonedStatus} />.
+          <StatusInline side={props?.side} status={PoisonStatus} />.
         </>
       )
     },

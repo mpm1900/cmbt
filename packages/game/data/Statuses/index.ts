@@ -1,7 +1,7 @@
 import { BurnStatus } from './BurnStatus'
-import { PoisonedStatus } from './PoisonedStatus'
+import { PoisonStatus } from './PoisonStatus'
 
 export * from './BurnStatus'
-export * from './PoisonedStatus'
+export * from './PoisonStatus'
 
-export const ALL_STATUSES = [BurnStatus, PoisonedStatus]
+export const ALL_STATUSES = [BurnStatus, PoisonStatus]

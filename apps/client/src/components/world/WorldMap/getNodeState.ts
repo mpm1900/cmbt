@@ -17,7 +17,7 @@ export function getNodeState(node: NodeSingular, options: GetNodeStateOptions) {
   const data: GameWorldNode = node.data()
   const isActive = !!activeNode?.same(node)
   const isActiveNeightbor =
-    !!getOutgoers(completedNodes)?.has(node) ||
+    (!isActive && !!getOutgoers(completedNodes)?.has(node)) ||
     getOutgoers(activeNode)?.has(node)
   const isHover = !!hoverNode?.same(node)
   const isCompleted = !!completedNodes?.has(node)

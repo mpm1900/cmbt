@@ -6,8 +6,10 @@ function getNodeBackgroundColor(
   options: GetNodeStylesheetOptions
 ) {
   const state = isPathableNode(node, options)
-  if (state.isCompleted && state.isActive ? state.isRepeatable : state.isActive)
-    return 'limegreen'
+  const isActiveable =
+    state.isCompleted && state.isActive ? state.isRepeatable : state.isActive
+  if (isActiveable) return 'limegreen'
+  if (state.isActive) return '#cce3cc'
   if (
     state.isActiveNeightbor &&
     !state.isCompleted &&
@@ -40,8 +42,14 @@ export function getNodeStylesheet(
   return {
     selector: 'node',
     style: {
-      // label: (node: NodeSingular) => node.data('visited'),
-      'font-size': 12,
+      label: (node: NodeSingular) => {
+        const { activeNode } = options
+        if (activeNode?.same(node)) {
+          return '*'
+        }
+        return ''
+      },
+      'font-size': 10,
       color: 'white',
       height: function (node) {
         const size = node.data('size')
@@ -59,7 +67,13 @@ export function getNodeStylesheet(
 
       opacity: function (node: NodeSingular) {
         const state = isPathableNode(node, options)
-        if (state.isHover && state.isPathable) return 1
+        const isInteractable =
+          (state.isPathable && state.isActiveNeightbor) ||
+          (state.isCompleted
+            ? state.isRepeatable && state.isActive
+            : state.isActive)
+
+        if (state.isHover && isInteractable) return 1
         return state.isPathable ? 0.75 : 0.2
       },
 

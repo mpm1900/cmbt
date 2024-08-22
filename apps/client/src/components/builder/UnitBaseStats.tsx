@@ -10,7 +10,7 @@ export type UnitBaseStatsProps = {
 export function UnitBaseStats(props: UnitBaseStatsProps) {
   const { base } = props
   return (
-    <div className="space-y-2">
+    <div className="space-y-1">
       <div className="flex items-center space-x-2">
         <div>{StatRenderers.health?.icon}</div>
         <Label className="w-[100px]">Health</Label>

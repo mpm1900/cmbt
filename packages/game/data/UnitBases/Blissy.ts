@@ -19,6 +19,9 @@ export const Blissy: UnitBase = {
     stamina: 30,
     devotion: 20,
   },
+  affinities: [],
+  resistances: [],
+  weaknesses: [],
 }
 
 export const BlissyConfig: UnitBaseConfig = {

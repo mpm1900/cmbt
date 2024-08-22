@@ -26,6 +26,9 @@ export const Snorlax: UnitBase = {
     stamina: 30,
     devotion: 20,
   },
+  affinities: [],
+  resistances: [],
+  weaknesses: [],
 }
 
 export const SnorlaxConfig: UnitBaseConfig = {

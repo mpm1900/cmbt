@@ -26,6 +26,9 @@ export const Salamence: UnitBase = {
     stamina: 30,
     devotion: 20,
   },
+  affinities: [],
+  resistances: [],
+  weaknesses: [],
 }
 
 export const SalamenceConfig: UnitBaseConfig = {

@@ -30,10 +30,10 @@ export function getDamageNegation(type: DamageType | undefined, target: Unit) {
   return 1 - typeNegation
 }
 
-export function getDamageExpansion(type: DamageType | undefined, target: Unit) {
+export function getDamageExpansion(type: DamageType | undefined, source: Unit) {
   if (!type) return 1
-  const typeExpansion = target.stats[`${type}Expansion`]
-  return 1 + typeExpansion / 100
+  const typeExpansion = source.stats[`${type}Expansion`]
+  return 1 + typeExpansion
 }
 
 export type CalculateDamageConfig = ActionAccuracyResult & {
@@ -62,7 +62,7 @@ export function calculateDamage(
   const evasionRoll = random.int(0, 100)
   const evasionSuccess = target.stats.evasion > evasionRoll
   const negation = getDamageNegation(damage.damageType, target)
-  const expansion = getDamageExpansion(damage.damageType, target)
+  const expansion = getDamageExpansion(damage.damageType, source)
 
   const criticalFactor = config.criticalSuccess
     ? (config.criticalFactor ?? 1)

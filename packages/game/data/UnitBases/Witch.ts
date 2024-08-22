@@ -26,6 +26,9 @@ export const Witch: UnitBase = {
     stamina: 30,
     devotion: 20,
   },
+  affinities: [],
+  resistances: [],
+  weaknesses: [],
 }
 
 export const WitchConfig: UnitBaseConfig = {

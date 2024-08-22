@@ -42,10 +42,18 @@ export type UnitMetadata = {
   activeTurns: number
 }
 
+export type UnitBaseAffinity = {
+  type: DamageType
+  factor: number
+}
+
 export type UnitBase = {
   id: Id
   name: string
   stats: Stats
+  affinities: UnitBaseAffinity[]
+  resistances: UnitBaseAffinity[]
+  weaknesses: UnitBaseAffinity[]
 }
 
 export type UnitBaseConfig = {

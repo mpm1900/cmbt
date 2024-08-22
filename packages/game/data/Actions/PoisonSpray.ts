@@ -34,7 +34,6 @@ export class PoisonSpray extends Action {
         notTeamId: teamId,
         isActive: true,
       }),
-      priority: 1,
       attackType,
       maxTargetCount: 1,
     })

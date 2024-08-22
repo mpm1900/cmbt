@@ -10,13 +10,24 @@ export function WorldMap() {
   const [cy, set] = useState<Core>()
 
   function fitAll(_cy: Core) {
-    _cy.fit(undefined, 64)
+    _cy.animate({
+      duration: 200,
+      fit: {
+        eles: _cy.nodes(),
+        padding: 64,
+      },
+    })
   }
 
   function centerActive(_cy: Core) {
     const active = _cy.nodes(`#${game.world.activeNodeId}`).first()
-    _cy.fit()
-    _cy.center(active)
+    _cy.animate({
+      duration: 200,
+      center: {
+        eles: active,
+      },
+      zoom: 3,
+    })
   }
 
   function fitVisitied(_cy: Core) {

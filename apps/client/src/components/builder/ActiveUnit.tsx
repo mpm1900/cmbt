@@ -1,6 +1,7 @@
 import { useBuilderUi } from '@/hooks/state/useBuilderUi'
 import { useUnitBuilders } from '@/hooks/state/useUnitBuilders'
 import { BASE_CONFIGS } from '@repo/game/data'
+import { DamageIcon } from '@shared/DamageIcon'
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
 import { Input } from '../ui/input'
 import { Label } from '../ui/label'
@@ -64,6 +65,39 @@ export function ActiveUnit() {
                   />
                 </div>
                 <UnitBaseStats base={builder.base} />
+                {builder.base.affinities.length > 0 && (
+                  <div className="flex space-x-2">
+                    <div className="flex-1">Affinities</div>
+                    {builder.base.affinities.map((affinity) => (
+                      <div className="flex flex-1 space-x-1">
+                        <DamageIcon damageType={affinity.type} />
+                        <div>{affinity.factor * 100}%</div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+                {builder.base.resistances.length > 0 && (
+                  <div className="flex space-x-2">
+                    <div className="flex-1">Resistances</div>
+                    {builder.base.resistances.map((affinity) => (
+                      <div className="flex flex-1 space-x-1">
+                        <DamageIcon damageType={affinity.type} />
+                        <div>{affinity.factor * 100}%</div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+                {builder.base.weaknesses.length > 0 && (
+                  <div className="flex space-x-2">
+                    <div className="flex-1">Weaknesses</div>
+                    {builder.base.weaknesses.map((affinity) => (
+                      <div className="flex flex-1 space-x-1">
+                        <DamageIcon damageType={affinity.type} />
+                        <div>{affinity.factor * 100}%</div>
+                      </div>
+                    ))}
+                  </div>
+                )}
 
                 <div className="flex items-center space-x-2">
                   <Label htmlFor="name" className="min-w-[86px]">

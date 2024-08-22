@@ -26,7 +26,7 @@ export function BuilderSidebar(props: BuilderSidebarProps) {
         <div className="flex-1 overflow-auto w-full">
           <TabsContent
             value="team"
-            className="px-4 my-0 space-y-2 flex flex-col"
+            className="p-4 my-0 space-y-2 flex flex-col"
           >
             {store.builders.map((builder) => (
               <Button

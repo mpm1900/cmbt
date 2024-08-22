@@ -19,7 +19,13 @@ export function Builder() {
     <PageLayout
       navbar={<Navbar />}
       aside={<BuilderSidebar />}
-      header={<div className="h-[42px] bg-slate-950 border-b" />}
+      header={
+        <div className="h-[42px] bg-slate-950 border-b items-start justify-start">
+          <div className="w-[64px] bg-black p-2 text-center font-mono text-muted-foreground border-r">
+            cmbt
+          </div>
+        </div>
+      }
     >
       <div className="flex flex-col flex-1 items-center p-8">
         <div>

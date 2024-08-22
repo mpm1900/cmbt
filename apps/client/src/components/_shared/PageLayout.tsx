@@ -9,15 +9,15 @@ export type PageLayoutProps = PropsWithChildren<{
 export function PageLayout(props: PageLayoutProps) {
   const { children, header, navbar, aside } = props
   return (
-    <div className="flex min-h-screen w-full flex-row bg-slate-900">
-      {navbar}
-      <div className="flex flex-1 flex-col">
-        {header}
+    <div className="flex min-h-screen w-full flex-col bg-slate-900">
+      {header}
+      <div className="flex flex-1 flex-row">
+        {navbar}
         <div className="flex flex-1 flex-col overflow-hidden relative">
           {children}
         </div>
+        {aside}
       </div>
-      {aside}
     </div>
   )
 }

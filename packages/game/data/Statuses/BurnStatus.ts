@@ -5,6 +5,7 @@ import { DamagePercentParentOnTurnEnd } from '../Triggers/DamagePercentParentOnT
 
 export const BurnStatus: Status = {
   id: BurnStatusId,
+  duration: 5,
   modifiers: (source, parent) => [
     new PhysicalAttackDownParent({
       sourceId: source.id,

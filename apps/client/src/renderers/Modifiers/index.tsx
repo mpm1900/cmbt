@@ -188,7 +188,7 @@ export const ModifierRenderers: Record<string, ModifierRenderer> = {
                 })
               }
             />{' '}
-            to all units.
+            to all units for 5 turns.
           </span>
         </div>
       )

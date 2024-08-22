@@ -152,13 +152,13 @@ const ShopWaresNode: EncounterNode = {
                   x{ctx.encounter.values[item.id]}
                 </TableCell>
                 <TableCell>{item.name}</TableCell>
-                <TableCell className="flex justify-end items-center">
+                <TableCell className="flex justify-end items-center p-0">
                   <Button
                     disabled={
                       (ctx.team?.resources.credits ?? 0) < item.cost ||
                       ctx.encounter.values[item.id] <= 0
                     }
-                    variant="outline"
+                    variant="ghost"
                     className={cn({
                       'text-red-400':
                         (ctx.team?.resources.credits ?? 0) < item.cost,

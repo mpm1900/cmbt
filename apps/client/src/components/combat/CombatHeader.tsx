@@ -17,8 +17,11 @@ const StatusBadge = ({
 export function CombatHeader() {
   const turn = useCombat((s) => s.turn)
   return (
-    <div className="bg-slate-950 p-2 border-b">
-      <div className="flex flex-row space-x-4 h-full justify-center items-center">
+    <div className="bg-slate-950 border-b flex">
+      <div className="w-[64px] bg-black p-2 text-center font-mono text-muted-foreground border-r">
+        cmbt
+      </div>
+      <div className="flex flex-1 flex-row p-2 space-x-4 h-full justify-center items-center">
         <StatusBadge isActive={turn.count === 0 && turn.status === 'cleanup'}>
           Pre-Game
         </StatusBadge>

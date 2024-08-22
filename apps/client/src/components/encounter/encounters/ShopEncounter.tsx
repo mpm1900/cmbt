@@ -10,7 +10,7 @@ import {
 import { cn } from '@/lib/utils'
 import { faker } from '@faker-js/faker'
 import { Key01, Key01Id, Potion, PotionId, TeamId } from '@repo/game/data'
-import { Encounter, EncounterNode, Team } from '@repo/game/types'
+import { Encounter, EncounterNode, Item, Team } from '@repo/game/types'
 import { makeEnemyUnit } from '@repo/game/utils'
 import { nanoid } from 'nanoid'
 import { IoMdReturnLeft, IoMdReturnRight } from 'react-icons/io'
@@ -107,6 +107,26 @@ const ShopWaresNode: EncounterNode = {
   choices: (ctx) => [],
   renderChoice: (choice, index, ctx) => null,
   renderChoices: (ctx) => {
+    const reset = () => {}
+    const buyItem = (item: Item) => {
+      ctx.updateEncounter((e) => ({
+        values: {
+          ...e.values,
+          [item.id]: e.values[item.id] - 1,
+        },
+      }))
+      ctx.addItem(item)
+    }
+    const end = () => {
+      const encounter = ctx.updateEncounter((s) => ({
+        activeNodeId: ShopIntroductionNode.id,
+      }))
+      ctx.updateActiveWorldNode((n) => ({
+        completed: true,
+        encounter,
+      }))
+      ctx.back()
+    }
     return (
       <div className="space-y-4">
         <Table>
@@ -144,13 +164,7 @@ const ShopWaresNode: EncounterNode = {
                         (ctx.team?.resources.credits ?? 0) < item.cost,
                     })}
                     onClick={() => {
-                      ctx.updateEncounter((e) => ({
-                        values: {
-                          ...e.values,
-                          [item.id]: e.values[item.id] - 1,
-                        },
-                      }))
-                      ctx.addItem(item)
+                      buyItem(item)
                     }}
                   >
                     Buy {item.cost}g
@@ -160,16 +174,22 @@ const ShopWaresNode: EncounterNode = {
             ))}
           </TableBody>
         </Table>
-        <div className="flex justify-end">
+        <div className="flex justify-end space-x-4">
           <Button
             variant="secondary"
             onClick={() => {
-              ctx.updateEncounter((s) => ({
-                activeNodeId: ShopIntroductionNode.id,
-              }))
+              reset()
             }}
           >
             Back
+          </Button>
+          <Button
+            variant="secondary"
+            onClick={() => {
+              end()
+            }}
+          >
+            Leave
           </Button>
         </div>
       </div>

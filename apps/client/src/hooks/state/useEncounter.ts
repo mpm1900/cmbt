@@ -11,7 +11,7 @@ export type EncounterState = {
 export type EncounterStore = EncounterState & {
   log: (item: React.ReactNode, delay?: number) => void
   getActiveNode: () => EncounterNode | undefined
-  updateEncounter: (fn: (e: Encounter) => Partial<Encounter>) => void
+  updateEncounter: (fn: (e: Encounter) => Partial<Encounter>) => Encounter
 }
 
 export const useEncounter = create<EncounterStore>((set, get) => ({
@@ -24,7 +24,7 @@ export const useEncounter = create<EncounterStore>((set, get) => ({
       (n) => n.id === state.encounter?.activeNodeId
     )
   },
-  updateEncounter: (fn) =>
+  updateEncounter: (fn) => {
     set((s) => {
       return {
         encounter: {
@@ -32,5 +32,7 @@ export const useEncounter = create<EncounterStore>((set, get) => ({
           ...fn(s.encounter),
         },
       }
-    }),
+    })
+    return get().encounter
+  },
 }))

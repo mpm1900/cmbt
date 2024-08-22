@@ -21,7 +21,7 @@ export type EncounterContext = {
   updateActiveWorldNode: (
     fn: (n: GameWorldNode) => Partial<GameWorldNode>
   ) => void
-  updateEncounter: (fn: (e: Encounter) => Partial<Encounter>) => void
+  updateEncounter: (fn: (e: Encounter) => Partial<Encounter>) => Encounter
   updateTeam: (fn: (e: Team) => Partial<Team>) => void
   addItem: (item: Item) => void
 }

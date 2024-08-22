@@ -7,6 +7,7 @@ import {
   DamageNewUnitsOnUnitEnterId,
   DamageParentOnTurnEndId,
   DamagePercentAllOnTurnEnd,
+  DamagePercentParentOnTurnEnd,
   DefenseDownParent,
   DefenseDownParentId,
   DefenseUpAllId,
@@ -28,7 +29,6 @@ import {
 import { Modifier } from '@repo/game/types'
 import { ModifierInline } from '@shared/ModifierInline'
 import { ReactNode } from 'react'
-import { DamagePercentParentOnTurnEnd } from '../../../../../packages/game/data/Triggers/DamagePercentParentOnTurnEnd'
 import { MODIFIER_NAMES } from './_names'
 
 export * from './_icons'

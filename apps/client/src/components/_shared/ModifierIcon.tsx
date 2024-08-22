@@ -1,5 +1,4 @@
-import { cn } from '@/lib/utils'
-import { MODIFIER_BASE_ICONS } from '@/renderers'
+import { MODIFIER_ICONS } from '@/renderers'
 import { Modifier } from '@repo/game/types'
 import { motion } from 'framer-motion'
 import { ReactNode } from 'react'
@@ -13,17 +12,8 @@ export type ModifierIconProps = {
 
 export function ModifierIcon(props: ModifierIconProps) {
   const { modifier, fallback, side } = props
-  const icons = MODIFIER_BASE_ICONS[modifier.rid]
-  if (!icons) return fallback
-  const [
-    Icon,
-    Overlay,
-    iconClass,
-    overlayClass,
-    overlaySize,
-    overlayOffset = [],
-  ] = icons
-
+  const ModIcon = MODIFIER_ICONS[modifier.rid]
+  if (!ModIcon) return fallback
   return (
     <ModifierHover side={side} modifier={modifier}>
       <motion.div
@@ -32,19 +22,7 @@ export function ModifierIcon(props: ModifierIconProps) {
         animate={{ opacity: 1 }}
         className="relative h-[28px] w-[28px] cursor-pointer"
       >
-        <Icon size="28px" className={iconClass} />
-        {Overlay && (
-          <Overlay
-            size={overlaySize || '24px'}
-            className={cn(`absolute`, overlayClass, {
-              'top-2.5 left-2': overlayOffset.length === 0,
-            })}
-            style={{
-              right: overlayOffset[0] + 'px',
-              bottom: overlayOffset[1] + 'px',
-            }}
-          />
-        )}
+        {ModIcon}
       </motion.div>
     </ModifierHover>
   )

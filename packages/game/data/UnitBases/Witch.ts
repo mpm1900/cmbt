@@ -1,8 +1,14 @@
 import { nanoid } from 'nanoid'
 import { UnitBase, UnitBaseConfig } from '../../types'
-import { Disable, Protect, TrickRoom } from '../Actions'
+import { Disable, PoisonSpray, Protect, TrickRoom } from '../Actions'
 import { HoldPerson } from '../Actions/HoldPerson'
-import { DisableId, HoldPersonId, ProtectId, TrickRoomId } from '../Ids'
+import {
+  DisableId,
+  HoldPersonId,
+  PoisonSprayId,
+  ProtectId,
+  TrickRoomId,
+} from '../Ids'
 import { ZERO_UNIT } from '../Units'
 
 export const Witch: UnitBase = {
@@ -35,6 +41,10 @@ export const WitchConfig: UnitBaseConfig = {
       make: (u) => new HoldPerson(u.id, u.teamId),
     },
     {
+      id: PoisonSprayId,
+      make: (u) => new PoisonSpray(u.id, u.teamId),
+    },
+    {
       id: ProtectId,
       make: (u) => new Protect(u.id, u.teamId),
     },
@@ -44,5 +54,11 @@ export const WitchConfig: UnitBaseConfig = {
     },
   ],
   defaultAbilityId: undefined,
-  defaultActionIds: [DisableId, HoldPersonId, ProtectId, TrickRoomId],
+  defaultActionIds: [
+    DisableId,
+    HoldPersonId,
+    PoisonSprayId,
+    ProtectId,
+    TrickRoomId,
+  ],
 }

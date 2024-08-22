@@ -5,7 +5,6 @@ import {
   CreateSandstormOnUnitEnterId,
   DamageNewUnitsOnUnitEnter,
   DamageNewUnitsOnUnitEnterId,
-  DamageParentOnTurnEnd,
   DamageParentOnTurnEndId,
   DamagePercentAllOnTurnEnd,
   DefenseDownParent,
@@ -18,6 +17,7 @@ import {
   PhysicalAttackDownParent,
   PhysicalAttackDownParentId,
   PhysicalAttackUpParentId,
+  PoisonedDamageOnTurnEndId,
   PowerDownAllOtherOnUnitEnterId,
   SandstormOnTurnEndId,
   SetIsInspectedAll,
@@ -28,6 +28,7 @@ import {
 import { Modifier } from '@repo/game/types'
 import { ModifierInline } from '@shared/ModifierInline'
 import { ReactNode } from 'react'
+import { DamagePercentParentOnTurnEnd } from '../../../../../packages/game/data/Triggers/DamagePercentParentOnTurnEnd'
 import { MODIFIER_NAMES } from './_names'
 
 export * from './_icons'
@@ -52,13 +53,13 @@ export const ModifierRenderers: Record<string, ModifierRenderer> = {
   [BurnDamageOnTurnEndId]: {
     name: MODIFIER_NAMES[BurnDamageOnTurnEndId],
     description: (mod) => {
-      const modifier = mod as DamageParentOnTurnEnd
+      const modifier = mod as DamagePercentParentOnTurnEnd
       return (
         <div>
           <span className="opacity-50 uppercase text-sm font-bold">
             On turn end:{' '}
           </span>
-          Afflicted unit takes {modifier.damage} damage.
+          Afflicted unit takes {(modifier.factor * 100).toFixed(1)}% damage.
         </div>
       )
     },
@@ -192,6 +193,23 @@ export const ModifierRenderers: Record<string, ModifierRenderer> = {
         </div>
       )
     },
+  },
+  [PoisonedDamageOnTurnEndId]: {
+    name: (
+      <span className="text-white">
+        {MODIFIER_NAMES[PoisonedDamageOnTurnEndId]}
+      </span>
+    ),
+    description: (modifier: Modifier) => (
+      <div className="text-muted-foreground">
+        <span className="opacity-50 uppercase text-sm font-bold">
+          On turn end:{' '}
+        </span>
+        Afflicted units take{' '}
+        {(modifier as unknown as DamagePercentAllOnTurnEnd).factor * 100}%
+        damage.
+      </div>
+    ),
   },
   [SandstormOnTurnEndId]: {
     name: (

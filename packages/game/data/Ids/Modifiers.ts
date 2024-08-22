@@ -17,3 +17,4 @@ export const SpeedDownAllOtherId = ModifierId()
 export const SpeedUpParentId = ModifierId()
 
 export const BurnedPowerDownId = ModifierId()
+export const PoisonedDamageOnTurnEndId = ModifierId()

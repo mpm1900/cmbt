@@ -1,7 +1,7 @@
 import { nanoid } from 'nanoid'
 import { UnitBase, UnitBaseConfig } from '../../types'
-import { ArmorUp, Protect, Spikes, Ward } from '../Actions'
-import { ArmorUpId, ProtectId, SpikesId, WardId } from '../Ids'
+import { ArmorUp, PoisonSpray, Protect, Spikes, Ward } from '../Actions'
+import { ArmorUpId, PoisonSprayId, ProtectId, SpikesId, WardId } from '../Ids'
 import { ZERO_UNIT } from '../Units'
 
 export const Blissy: UnitBase = {
@@ -30,6 +30,10 @@ export const BlissyConfig: UnitBaseConfig = {
       make: (u) => new ArmorUp(u.id, u.teamId),
     },
     {
+      id: PoisonSprayId,
+      make: (u) => new PoisonSpray(u.id, u.teamId),
+    },
+    {
       id: ProtectId,
       make: (u) => new Protect(u.id, u.teamId),
     },
@@ -43,5 +47,5 @@ export const BlissyConfig: UnitBaseConfig = {
     },
   ],
   defaultAbilityId: undefined,
-  defaultActionIds: [ArmorUpId, ProtectId, SpikesId, WardId],
+  defaultActionIds: [ArmorUpId, PoisonSprayId, ProtectId, SpikesId, WardId],
 }

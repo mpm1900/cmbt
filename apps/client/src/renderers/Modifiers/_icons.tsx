@@ -5,6 +5,7 @@ import {
   FireNegationUpParentId,
   PhysicalAttackDownParentId,
   PhysicalAttackUpParentId,
+  PoisonedDamageOnTurnEndId,
   SandstormOnTurnEndId,
   SetIsInspectedAllId,
   SetIsProtectedParentId,
@@ -15,6 +16,7 @@ import { BiSearch } from 'react-icons/bi'
 import { BsShieldFillPlus } from 'react-icons/bs'
 import {
   GiBiceps,
+  GiPoisonGas,
   GiSandstorm,
   GiShoulderArmor,
   GiVibratingShield,
@@ -66,6 +68,14 @@ export const MODIFIER_BASE_ICONS: Record<
     'fill-green-500',
     16,
     [-1, -2],
+  ],
+  [PoisonedDamageOnTurnEndId]: [
+    GiPoisonGas,
+    undefined,
+    'fill-modifiers-poison',
+    undefined,
+    undefined,
+    undefined,
   ],
   [PhysicalAttackDownParentId]: [
     GiBiceps,

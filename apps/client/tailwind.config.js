@@ -52,7 +52,8 @@ module.exports = {
           foreground: 'hsl(var(--card-foreground))',
         },
         modifiers: {
-          burned: 'orange',
+          burn: 'orange',
+          poison: 'plum',
         },
         log: {
           enemy: 'orange',

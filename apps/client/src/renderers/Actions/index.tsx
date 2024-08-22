@@ -26,6 +26,8 @@ import {
   PhysicalAttackUpParent,
   PiercingStrike,
   PiercingStrikeId,
+  PoisonedStatus,
+  PoisonSprayId,
   PotionActionId,
   PowerWordKillId,
   ProtectId,
@@ -340,6 +342,21 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
         <>
           Deals <DamageInline damage={quickAttack.damage} /> to target enemy
           unit.
+        </>
+      )
+    },
+  },
+  [PoisonSprayId]: {
+    name: ACTION_NAMES[PoisonSprayId],
+    baseDamage: (a) => `${a.damage?.value}`,
+    cost: '',
+    description: (action, props) => {
+      const poisionSpray = action as QuickAttack
+      return (
+        <>
+          Deals <DamageInline damage={poisionSpray.damage} /> to target enemy
+          unit and applies{' '}
+          <StatusInline side={props?.side} status={PoisonedStatus} />.
         </>
       )
     },

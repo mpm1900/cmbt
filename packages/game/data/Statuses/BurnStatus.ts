@@ -1,7 +1,7 @@
 import { Status } from '../../types'
 import { BurnDamageOnTurnEndId, BurnedPowerDownId, BurnStatusId } from '../Ids'
 import { PhysicalAttackDownParent } from '../Modifiers'
-import { DamageParentOnTurnEnd } from '../Triggers'
+import { DamagePercentParentOnTurnEnd } from '../Triggers/DamagePercentParentOnTurnEnd'
 
 export const BurnStatus: Status = {
   id: BurnStatusId,
@@ -15,12 +15,12 @@ export const BurnStatus: Status = {
       duration: 5,
       maxInstances: 1,
     }),
-    new DamageParentOnTurnEnd({
+    new DamagePercentParentOnTurnEnd({
       sourceId: source.id,
       parentId: parent.id,
       rid: BurnDamageOnTurnEndId,
       statusId: BurnStatusId,
-      damage: 10,
+      factor: 0.08,
       duration: 5,
       maxInstances: 1,
     }),

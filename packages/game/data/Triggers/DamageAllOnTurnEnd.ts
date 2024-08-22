@@ -18,7 +18,6 @@ export class DamageAllOnTurnEnd extends Trigger {
     super(DamageAllOnTurnEndId, {
       ...props,
       events: ['on Turn End'],
-      maxInstances: 1,
     })
     this.damage = props.damage
   }

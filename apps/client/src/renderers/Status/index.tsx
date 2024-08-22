@@ -12,12 +12,12 @@ export type StatusRenderer = {
 export const StatusRenderers: Record<Id, StatusRenderer> = {
   [BurnStatusId]: {
     name: (
-      <span className="text-modifiers-burn">{STATUS_NAMES[BurnStatusId]}</span>
+      <span className="text-status-burn">{STATUS_NAMES[BurnStatusId]}</span>
     ),
   },
   [PoisonedStatusId]: {
     name: (
-      <span className="text-modifiers-poison">
+      <span className="text-status-poison">
         {STATUS_NAMES[PoisonedStatusId]}
       </span>
     ),

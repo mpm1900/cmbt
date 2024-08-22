@@ -41,14 +41,14 @@ export const MODIFIER_BASE_ICONS: Record<
   [BurnDamageOnTurnEndId]: [
     HiFire,
     undefined,
-    'fill-orange-300',
+    'fill-status-burn',
     undefined,
     undefined,
   ],
   [BurnedPowerDownId]: [
     GiBiceps,
     AiFillCaretDown,
-    'fill-orange-300',
+    'fill-status-burn',
     'fill-red-500',
     undefined,
     undefined,
@@ -72,7 +72,7 @@ export const MODIFIER_BASE_ICONS: Record<
   [PoisonedDamageOnTurnEndId]: [
     GiPoisonGas,
     undefined,
-    'fill-modifiers-poison',
+    'fill-status-poison',
     undefined,
     undefined,
     undefined,

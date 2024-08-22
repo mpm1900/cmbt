@@ -67,13 +67,19 @@ export function getNodeStylesheet(
 
       opacity: function (node: NodeSingular) {
         const state = isPathableNode(node, options)
-        const isInteractable =
-          (state.isPathable && state.isActiveNeightbor) ||
-          (state.isCompleted
-            ? state.isRepeatable && state.isActive
-            : state.isActive)
+        const isActiveable =
+          state.isCompleted && state.isPathable
+            ? state.isRepeatable
+            : state.isActive
 
-        if (state.isHover && isInteractable) return 1
+        if (isActiveable && state.isHover) return 1
+        if (
+          state.isActiveNeightbor &&
+          !state.isCompleted &&
+          state.isPathable &&
+          state.isHover
+        )
+          return 1
         return state.isPathable ? 0.75 : 0.2
       },
 

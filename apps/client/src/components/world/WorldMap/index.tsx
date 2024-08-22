@@ -9,18 +9,14 @@ export function WorldMap() {
   const game = useGame()
   const [cy, set] = useState<Core>()
 
-  function fitAll() {
-    if (cy) {
-      cy.fit(undefined, 64)
-    }
+  function fitAll(_cy: Core) {
+    _cy.fit(undefined, 64)
   }
 
-  function centerActive() {
-    if (cy) {
-      const active = cy.nodes(`#${game.world.activeNodeId}`).first()
-      cy.fit()
-      cy.center(active)
-    }
+  function centerActive(_cy: Core) {
+    const active = _cy.nodes(`#${game.world.activeNodeId}`).first()
+    _cy.fit()
+    _cy.center(active)
   }
 
   function fitVisitied(_cy: Core) {
@@ -40,15 +36,15 @@ export function WorldMap() {
     <>
       {cy && (
         <div style={{ position: 'absolute', bottom: 8, right: 8, zIndex: 2 }}>
-          <Button variant="ghost" onClick={fitAll}>
+          <Button variant="ghost" onClick={() => fitAll(cy)}>
             Fit All
           </Button>
-          <Button variant="ghost" onClick={centerActive}>
+          <Button variant="ghost" onClick={() => centerActive(cy)}>
             Center
           </Button>
-          <Button variant="ghost" onClick={() => fitVisitied(cy)}>
+          {/*<Button variant="ghost" onClick={() => fitVisitied(cy)}>
             Reset
-          </Button>
+          </Button>*/}
         </div>
       )}
 
@@ -56,7 +52,7 @@ export function WorldMap() {
         cy={(_cy) => {
           set(_cy)
           if (!cy) {
-            fitVisitied(_cy)
+            centerActive(_cy)
           }
         }}
         nodes={game.world.nodes}

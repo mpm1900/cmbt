@@ -1,7 +1,7 @@
 import { nanoid } from 'nanoid'
 import { UnitBase, UnitBaseConfig } from '../../types'
-import { PiercingStrike } from '../Actions'
-import { PiercingStrikeId } from '../Ids'
+import { PiercingStrike, QuickAttack, Slash, SwordsDance } from '../Actions'
+import { PiercingStrikeId, QuickAttackId, SlashId, SwordsDanceId } from '../Ids'
 import { ZERO_UNIT } from '../Units'
 
 export const TempestKnight: UnitBase = {
@@ -29,7 +29,19 @@ export const TempestKnightConfig: UnitBaseConfig = {
       id: PiercingStrikeId,
       make: (unit) => new PiercingStrike(unit.id, unit.teamId),
     },
+    {
+      id: QuickAttackId,
+      make: (unit) => new QuickAttack(unit.id, unit.teamId),
+    },
+    {
+      id: SlashId,
+      make: (unit) => new Slash(unit.id, unit.teamId),
+    },
+    {
+      id: SwordsDanceId,
+      make: (unit) => new SwordsDance(unit.id, unit.teamId),
+    },
   ],
   defaultAbilityId: undefined,
-  defaultActionIds: [PiercingStrikeId],
+  defaultActionIds: [PiercingStrikeId, SlashId, SwordsDanceId],
 }

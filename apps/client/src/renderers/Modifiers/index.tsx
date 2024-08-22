@@ -108,7 +108,12 @@ export const ModifierRenderers: Record<string, ModifierRenderer> = {
     },
   },
   [InvertSpeedAllId]: {
-    name: MODIFIER_NAMES[InvertSpeedAllId],
+    name: (
+      <span className="text-white">{MODIFIER_NAMES[InvertSpeedAllId]}</span>
+    ),
+    description: (mod) => (
+      <div>Afflicted units' speed stats are multiplied by -1.</div>
+    ),
   },
   [PhysicalAttackDownParentId]: {
     name: (

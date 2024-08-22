@@ -41,6 +41,7 @@ export class QuickAttack extends Action {
     this.damage = {
       value: 40,
       attackType,
+      damageType: 'force',
     }
   }
 

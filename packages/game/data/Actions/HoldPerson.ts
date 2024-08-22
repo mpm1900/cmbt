@@ -12,14 +12,14 @@ import {
   getActionData,
   modifyRenderContext,
 } from '../../utils'
-import { IcyWindId } from '../Ids'
+import { HoldPersonId } from '../Ids'
 import { SetIsStunnedParent } from '../Modifiers'
 import { Identity } from '../Mutations'
 import { GetUnits } from '../Queries'
 
 export class HoldPerson extends Action {
   constructor(sourceId: Id, teamId: Id) {
-    super(IcyWindId, {
+    super(HoldPersonId, {
       sourceId,
       teamId,
       cost: new Identity({ sourceId }),
@@ -31,7 +31,7 @@ export class HoldPerson extends Action {
     })
   }
 
-  threshold = (source: Unit): number | undefined => 95 + source.stats.accuracy
+  threshold = (source: Unit): number | undefined => 85 + source.stats.accuracy
   criticalThreshold = (source: Unit): number | undefined => undefined
   criticalFactor = (source: Unit): number | undefined => undefined
   getAi(targets: Unit[], ctx: CombatContext): ActionAi {
@@ -60,7 +60,7 @@ export class HoldPerson extends Action {
               new SetIsStunnedParent({
                 sourceId: source.id,
                 parentId: target.id,
-                duration: 2,
+                duration: 3,
               })
           ),
         },

@@ -1,4 +1,3 @@
-import random from 'random'
 import {
   Action,
   ActionAi,
@@ -17,18 +16,16 @@ import {
   getMutationsFromDamageResult,
   modifyRenderContext,
 } from '../../utils'
-import { PiercingStrikeId } from '../Ids'
-import { DefenseDownParent } from '../Modifiers'
+import { SlashId } from '../Ids'
 import { Identity } from '../Mutations'
 import { GetUnits } from '../Queries'
 
-export class PiercingStrike extends Action {
+export class Slash extends Action {
   damage: Damage
 
   constructor(sourceId: Id, teamId: Id) {
     const attackType = 'physical'
-
-    super(PiercingStrikeId, {
+    super(SlashId, {
       sourceId,
       teamId,
       cost: new Identity({ sourceId }),
@@ -41,17 +38,17 @@ export class PiercingStrike extends Action {
     })
 
     this.damage = {
-      value: 80,
+      value: 75,
       attackType,
       damageType: 'force',
     }
   }
 
   threshold = (source: Unit): number | undefined => {
-    return 90 + source.stats.accuracy
+    return 95 + source.stats.accuracy
   }
   criticalThreshold = (source: Unit): number | undefined => {
-    return 5 + source.stats.criticalChance
+    return 20 + source.stats.criticalChance
   }
   criticalFactor = (source: Unit): number | undefined =>
     1.5 + source.stats.criticalDamage
@@ -68,8 +65,6 @@ export class PiercingStrike extends Action {
   ): ActionResult => {
     ctx = modifyRenderContext(options, ctx)
     const data = getActionData(source, this, ctx)
-    const applyModifierRoll = random.int(0, 100)
-    const applyDefenseDown = applyModifierRoll <= 20
 
     return buildActionResult(
       this,
@@ -86,19 +81,8 @@ export class PiercingStrike extends Action {
               target,
               data.accuracyRoll
             )
-
             return getMutationsFromDamageResult(source, target, damage)
           }),
-          addedModifiers: applyDefenseDown
-            ? modifiedTargets.map(
-                (target) =>
-                  new DefenseDownParent({
-                    sourceId: source.id,
-                    parentId: target.id,
-                    factor: 1.5,
-                  })
-              )
-            : [],
         },
       })
     )

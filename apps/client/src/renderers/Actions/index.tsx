@@ -17,10 +17,13 @@ import {
   FirePunchId,
   FurySwipes,
   FurySwipesId,
+  HoldPersonId,
   HyperBeamId,
   IcyWindId,
   InspectAllId,
+  InvertSpeedAll,
   MagicMissileId,
+  PhysicalAttackUpParent,
   PiercingStrike,
   PiercingStrikeId,
   PotionActionId,
@@ -35,6 +38,8 @@ import {
   SetIsInspectedAll,
   SetIsProtectedParent,
   SetIsStunnedParent,
+  Slash,
+  SlashId,
   SpikesId,
   SwitchUnitId,
   SwordsDanceId,
@@ -267,6 +272,23 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
       )
     },
   },
+  [HoldPersonId]: {
+    name: ACTION_NAMES[HoldPersonId],
+    baseDamage: () => '',
+    cost: '',
+    description: (action, props) => {
+      return (
+        <>
+          Applies{' '}
+          <ModifierInline
+            side={props?.side}
+            modifier={new SetIsStunnedParent({})}
+          />{' '}
+          to target enemy unit for 2 turns.
+        </>
+      )
+    },
+  },
   [HyperBeamId]: {
     name: ACTION_NAMES[HyperBeamId],
     baseDamage: () => 'ƒ(x)',
@@ -368,7 +390,7 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
     ),
   },
   [SandstormId]: {
-    name: 'Sandstorm',
+    name: ACTION_NAMES[SandstormId],
     baseDamage: () => '',
     cost: '',
     description: (action) => (
@@ -382,7 +404,20 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
         to all units for 5 turns.
       </>
     ),
-    help: () => <>(At the end of each turn, the unit takes 10 damage.)</>,
+  },
+  [SlashId]: {
+    name: ACTION_NAMES[SlashId],
+    baseDamage: (a) => `${a.damage?.value}`,
+    cost: '',
+    description: (action, props) => {
+      const slash = action as Slash
+      return (
+        <>
+          Deals <DamageInline damage={slash.damage} /> to target enemy unit.
+          High critical chance.
+        </>
+      )
+    },
   },
   [SpikesId]: {
     name: ACTION_NAMES[SpikesId],
@@ -413,29 +448,28 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
     name: 'Swords Dance',
     baseDamage: () => '',
     cost: '30 FP',
-    description: (action) => (
+    description: (action, props) => (
       <>
-        Applies <span className="font-bold text-white">Power Up</span> to this
-        unit.
+        Applies{' '}
+        <ModifierInline
+          side={props?.side}
+          modifier={new PhysicalAttackUpParent({ factor: 1.5 })}
+        />{' '}
+        to this unit.
       </>
-    ),
-    help: () => (
-      <div className="text-muted-foreground">
-        (The unit's physical stat is multiplied by 1.5)
-      </div>
     ),
   },
   [TrickRoomId]: {
     name: 'Trick Room',
     baseDamage: () => '',
     cost: '',
-    description: (action) => (
+    description: (action, props) => (
       <>
-        Applies <span className="font-bold text-white">Trick Room</span> to all
-        units.
+        Applies{' '}
+        <ModifierInline side={props?.side} modifier={new InvertSpeedAll({})} />{' '}
+        to all units.
       </>
     ),
-    help: () => <>(The unit's speed stat is multiplied by -1.)</>,
   },
   [WardId]: {
     name: ACTION_NAMES[WardId],

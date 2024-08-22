@@ -7,6 +7,7 @@ import {
   PiercingStrike,
   Protect,
   Sandstorm,
+  Slash,
 } from '../Actions'
 import { Spikes } from '../Actions/Spikes'
 import { SandStream } from '../Augments'
@@ -18,6 +19,7 @@ import {
   ProtectId,
   SandstormId,
   SandStreamId,
+  SlashId,
   SpikesId,
 } from '../Ids'
 import { ZERO_UNIT } from '../Units'
@@ -66,6 +68,10 @@ export const TyranitarConfig: UnitBaseConfig = {
     {
       id: SandstormId,
       make: (unit) => new Sandstorm(unit.id, unit.teamId),
+    },
+    {
+      id: SlashId,
+      make: (unit) => new Slash(unit.id, unit.teamId),
     },
     {
       id: SpikesId,

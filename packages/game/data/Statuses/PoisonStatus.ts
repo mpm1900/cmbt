@@ -12,6 +12,8 @@ export const PoisonStatus: Status = {
       rid: PoisonedDamageOnTurnEndId,
       factor: 1 / 8,
       maxInstances: 1,
+      persistOnSwitch: true,
+      persistOnCombatEnd: true,
     }),
   ],
   mutations: () => [],

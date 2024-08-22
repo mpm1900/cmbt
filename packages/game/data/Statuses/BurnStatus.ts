@@ -14,6 +14,8 @@ export const BurnStatus: Status = {
       factor: 2,
       duration: 5,
       maxInstances: 1,
+      persistOnCombatEnd: true,
+      persistOnSwitch: true,
     }),
     new DamagePercentParentOnTurnEnd({
       sourceId: source.id,
@@ -23,6 +25,8 @@ export const BurnStatus: Status = {
       factor: 0.08,
       duration: 5,
       maxInstances: 1,
+      persistOnCombatEnd: true,
+      persistOnSwitch: true,
     }),
   ],
   mutations: () => [],

@@ -3,7 +3,7 @@ import { UnitBuilder } from '@repo/game/types'
 import { Button } from '../ui/button'
 
 export type UnitSelectButtonProps = {
-  builder: UnitBuilder | undefined
+  builder: UnitBuilder
   onAddClick: () => void
   onUnitClick: () => void
 }
@@ -31,7 +31,7 @@ export function UnitSelectButton(props: UnitSelectButtonProps) {
       }
       onClick={handleClick}
     >
-      {builder?.name ?? 'Add'}
+      {builder.name}
     </Button>
   )
 }

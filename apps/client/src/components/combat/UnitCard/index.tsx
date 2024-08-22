@@ -70,7 +70,7 @@ export function UnitCard(props: UnitCardProps) {
               'text-slate-900': isActive,
             })}
           >
-            <span>{unit.level}</span>
+            <span className="font-black">{unit.level}</span>
             <span>
               {unit.name}
               {stagedItem && '*'}

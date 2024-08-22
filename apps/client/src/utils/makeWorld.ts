@@ -34,6 +34,7 @@ const StartNode: GameWorldNode = {
   repeatable: false,
   retreatable: false,
   locked: false,
+  visited: true,
 }
 
 type NodeMaker = (
@@ -53,6 +54,7 @@ const ShopNode: NodeMaker = (id, edges, overrides) => ({
   repeatable: true,
   retreatable: true,
   locked: false,
+  visited: false,
   ...overrides,
 })
 
@@ -67,6 +69,7 @@ const TestNode: NodeMaker = (id, edges, overrides) => ({
   repeatable: false,
   retreatable: true,
   locked: false,
+  visited: false,
   ...overrides,
 })
 
@@ -81,6 +84,7 @@ const LockedNode: NodeMaker = (id, edges, overrides) => ({
   repeatable: false,
   retreatable: true,
   locked: true,
+  visited: false,
   ...overrides,
 })
 

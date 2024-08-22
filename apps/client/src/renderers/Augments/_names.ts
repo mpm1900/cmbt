@@ -10,5 +10,5 @@ export const AUGMENT_NAMES: Record<Id, string> = {
   [FlameShieldId]: 'Flame Shield',
   [IntimidateId]: 'Intimidate',
   [SandStreamId]: 'Sand Stream',
-  [ScholarId]: 'Size Up',
+  [ScholarId]: 'Scholar',
 }

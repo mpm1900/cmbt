@@ -23,6 +23,7 @@ export function getEdgeStylesheet(
         const sourceState = getNodeState(edge.source(), options)
         const targetState = getNodeState(edge.target(), options)
         if (sourceState.isLocked && !targetState.isCompleted) return 0
+        if (!sourceState.isVisited && !sourceState.isActive) return 0
         if (state.isInHoverPath) return 0.8
         const isPathable = isPathableEdge(edge, options)
         return isPathable ? 0.3 : 0.1

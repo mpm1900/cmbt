@@ -8,8 +8,8 @@ export function DamageInline(props: DamageInlineProps) {
   const { damage } = props
 
   return (
-    <span className="text-white">
-      {damage?.value} base {damage?.damageType} damage
+    <span className="text-white inline-flex">
+      {damage?.value} {damage?.damageType} damage
     </span>
   )
 }

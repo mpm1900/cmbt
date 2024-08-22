@@ -34,6 +34,9 @@ export function useWorldMapEvents(cy: Core | undefined) {
 
         if (isInteractable) {
           game.setActiveNodeId(data)
+          game.updateWorldNode(data.id, (n) => ({
+            visited: true,
+          }))
           encounter.updateEncounter(() => data.encounter)
           nav({ to: '/encounter' })
         }

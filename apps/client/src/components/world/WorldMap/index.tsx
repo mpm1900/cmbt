@@ -3,6 +3,7 @@ import { useGame } from '@/hooks/state'
 import { Core } from 'cytoscape'
 import { useState } from 'react'
 import { Graph } from './Graph'
+import { getNodeState } from './getNodeState'
 
 export function WorldMap() {
   const game = useGame()
@@ -33,7 +34,23 @@ export function WorldMap() {
       )}
 
       <Graph
-        cy={(cy) => set(cy)}
+        cy={(_cy) => {
+          set(_cy)
+          if (!cy) {
+            const activeNode = _cy.nodes(`#${game.world.activeNodeId}`).first()
+            const nodes = _cy.nodes().filter((n) => {
+              const state = getNodeState(n, {
+                activeNode,
+                hoverNode: undefined,
+              })
+              return state.isVisited || !!state.isActiveNeightbor
+            })
+            _cy.fit(
+              nodes,
+              nodes.size() == 2 ? 256 : nodes.size() === 3 ? 128 : 64
+            )
+          }
+        }}
         nodes={game.world.nodes}
         activeNodeId={game.world.activeNodeId}
       />

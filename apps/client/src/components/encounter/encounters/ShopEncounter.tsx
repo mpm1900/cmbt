@@ -1,6 +1,7 @@
 import { Button } from '@/components/ui/button'
 import {
   Table,
+  TableBody,
   TableCell,
   TableHead,
   TableHeader,
@@ -119,43 +120,45 @@ const ShopWaresNode: EncounterNode = {
               </TableHead>
             </TableRow>
           </TableHeader>
-          {[Potion(), Key01()].map((item) => (
-            <TableRow>
-              <TableCell
-                width={32}
-                className={cn({
-                  'text-red-400': ctx.encounter.values[item.id] <= 0,
-                })}
-              >
-                x{ctx.encounter.values[item.id]}
-              </TableCell>
-              <TableCell>{item.name}</TableCell>
-              <TableCell className="flex justify-end items-center">
-                <Button
-                  disabled={
-                    (ctx.team?.resources.credits ?? 0) < item.cost ||
-                    ctx.encounter.values[item.id] <= 0
-                  }
-                  variant="outline"
+          <TableBody>
+            {[Potion(), Key01()].map((item) => (
+              <TableRow key={item.id}>
+                <TableCell
+                  width={32}
                   className={cn({
-                    'text-red-400':
-                      (ctx.team?.resources.credits ?? 0) < item.cost,
+                    'text-red-400': ctx.encounter.values[item.id] <= 0,
                   })}
-                  onClick={() => {
-                    ctx.updateEncounter((e) => ({
-                      values: {
-                        ...e.values,
-                        [item.id]: e.values[item.id] - 1,
-                      },
-                    }))
-                    ctx.addItem(item)
-                  }}
                 >
-                  Buy {item.cost}g
-                </Button>
-              </TableCell>
-            </TableRow>
-          ))}
+                  x{ctx.encounter.values[item.id]}
+                </TableCell>
+                <TableCell>{item.name}</TableCell>
+                <TableCell className="flex justify-end items-center">
+                  <Button
+                    disabled={
+                      (ctx.team?.resources.credits ?? 0) < item.cost ||
+                      ctx.encounter.values[item.id] <= 0
+                    }
+                    variant="outline"
+                    className={cn({
+                      'text-red-400':
+                        (ctx.team?.resources.credits ?? 0) < item.cost,
+                    })}
+                    onClick={() => {
+                      ctx.updateEncounter((e) => ({
+                        values: {
+                          ...e.values,
+                          [item.id]: e.values[item.id] - 1,
+                        },
+                      }))
+                      ctx.addItem(item)
+                    }}
+                  >
+                    Buy {item.cost}g
+                  </Button>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
         </Table>
         <div className="flex justify-end">
           <Button

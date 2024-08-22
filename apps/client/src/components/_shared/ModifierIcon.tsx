@@ -20,6 +20,7 @@ export function ModifierIcon(props: ModifierIconProps) {
         layout
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
         className="relative h-[28px] w-[28px] cursor-pointer"
       >
         {ModIcon}

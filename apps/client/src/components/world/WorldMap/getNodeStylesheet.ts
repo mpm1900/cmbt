@@ -6,7 +6,8 @@ function getNodeBackgroundColor(
   options: GetNodeStylesheetOptions
 ) {
   const state = isPathableNode(node, options)
-  if (state.isActive) return 'limegreen'
+  if (state.isCompleted && state.isActive ? state.isRepeatable : state.isActive)
+    return 'limegreen'
   if (
     state.isActiveNeightbor &&
     !state.isCompleted &&
@@ -39,7 +40,7 @@ export function getNodeStylesheet(
   return {
     selector: 'node',
     style: {
-      // label: (node: NodeSingular) => node.data('retreatable'),
+      // label: (node: NodeSingular) => node.data('visited'),
       'font-size': 12,
       color: 'white',
       height: function (node) {

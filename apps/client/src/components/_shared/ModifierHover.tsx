@@ -2,6 +2,8 @@ import { ModifierRenderers } from '@/renderers'
 import { HoverCardPortal } from '@radix-ui/react-hover-card'
 import { Modifier } from '@repo/game/types'
 import { PropsWithChildren } from 'react'
+import { IoTimerSharp } from 'react-icons/io5'
+import { SiPersistent } from 'react-icons/si'
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '../ui/hover-card'
 import { ModifierDescription } from './ModifierDescription'
 
@@ -25,13 +27,17 @@ export function ModifierHover(props: ModifierHoverProps) {
           <div className="space-y-2">
             <div>{renderer.name}</div>
             <ModifierDescription modifier={modifier} />
-            <div className="text-xs font-bold text-muted-foreground/60 text-right space-x-4">
-              {!!modifier.duration && (
-                <span>Duration: {modifier.duration} turns</span>
+            <div className="text-xs font-bold text-muted-foreground/60 text-right space-x-4 flex flex-row justify-end items-center">
+              {modifier.persistOnSwitch && modifier.persistOnCombatEnd && (
+                <SiPersistent />
               )}
-              {modifier.persistOnSwitch && <span>Persists on switch</span>}
-              {modifier.persistOnCombatEnd && (
-                <span>Persists after combat</span>
+              {!!modifier.duration && (
+                <div className="flex items-center space-x-1">
+                  <IoTimerSharp />{' '}
+                  <span>
+                    {modifier.duration} turn{modifier.duration > 1 && 's'}
+                  </span>
+                </div>
               )}
             </div>
           </div>

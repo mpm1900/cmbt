@@ -272,7 +272,7 @@ export const ModifierRenderers: Record<string, ModifierRenderer> = {
               })
             }
           />{' '}
-          to all other units.
+          to all other active units.
         </span>
       </div>
     ),

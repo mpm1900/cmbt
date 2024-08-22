@@ -20,7 +20,7 @@ export type ActionListTableProps = {
   actions: ActionMaker[]
   selectedActionIds: Id[]
   maxActionCount: number
-  onSelect: (maker: ActionMaker, isSelected: boolean) => void
+  onSelect?: (maker: ActionMaker, isSelected: boolean) => void
 }
 
 export function ActionListTable(props: ActionListTableProps) {
@@ -35,7 +35,7 @@ export function ActionListTable(props: ActionListTableProps) {
     <Table>
       <TableHeader>
         <TableRow>
-          <TableHead></TableHead>
+          {onSelect && <TableHead></TableHead>}
           <TableHead>Name</TableHead>
           <TableHead>Type</TableHead>
           <TableHead>Accuracy</TableHead>
@@ -75,7 +75,7 @@ type ActionListRowProps = {
   open?: boolean
   onMouseEnter: React.MouseEventHandler<HTMLTableRowElement>
   onMouseLeave: React.MouseEventHandler<HTMLTableRowElement>
-  onSelect: (maker: ActionMaker, isSelected: boolean) => void
+  onSelect?: (maker: ActionMaker, isSelected: boolean) => void
 }
 function ActionListRow(props: ActionListRowProps) {
   const {
@@ -99,24 +99,26 @@ function ActionListRow(props: ActionListRowProps) {
           'cursor-pointer': !isDisabled,
         })}
         onClick={() => {
-          if (isSelected || !isDisabled) {
+          if (onSelect && (isSelected || !isDisabled)) {
             onSelect(maker, !isSelected)
           }
         }}
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseLeave}
       >
-        <TableCell className="flex items-center">
-          <Checkbox
-            checked={isSelected}
-            disabled={isDisabled}
-            onCheckedChange={(e) => {
-              if (!e || !isDisabled) {
-                onSelect(maker, !e)
-              }
-            }}
-          />
-        </TableCell>
+        {onSelect && (
+          <TableCell className="flex items-center">
+            <Checkbox
+              checked={isSelected}
+              disabled={isDisabled}
+              onCheckedChange={(e) => {
+                if (!e || !isDisabled) {
+                  onSelect(maker, !e)
+                }
+              }}
+            />
+          </TableCell>
+        )}
         <TableCell>{renderer.name}</TableCell>
         <TableCell>
           {action.attackType ? (

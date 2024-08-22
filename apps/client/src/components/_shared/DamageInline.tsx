@@ -1,5 +1,6 @@
 import { DamageRenderers } from '@/renderers/Damage'
 import { Damage } from '@repo/game/types'
+import { DamageIcon } from './DamageIcon'
 
 export type DamageInlineProps = {
   damage: Damage | undefined
@@ -7,14 +8,19 @@ export type DamageInlineProps = {
 
 export function DamageInline(props: DamageInlineProps) {
   const { damage } = props
-  const icon = damage?.damageType
-    ? DamageRenderers[damage.damageType]?.icon
+  const renderer = damage?.damageType
+    ? DamageRenderers[damage.damageType]
     : undefined
+  const icon = renderer?.icon
 
   return (
     <span className="text-white inline-flex items-center space-x-1">
       <span className="font-black">{damage?.value}</span>{' '}
-      <span>{icon ? icon : damage?.damageType}</span> <span>damage</span>
+      <DamageIcon
+        damageType={damage?.damageType}
+        className="h-[18px] w-[18px]"
+      />{' '}
+      <span>damage</span>
     </span>
   )
 }

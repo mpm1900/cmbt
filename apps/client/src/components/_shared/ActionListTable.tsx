@@ -1,6 +1,5 @@
 import { cn } from '@/lib/utils'
 import { ActionRenderers } from '@/renderers'
-import { DamageRenderers } from '@/renderers/Damage'
 import { ZERO_UNIT } from '@repo/game/data'
 import { ActionMaker, Id } from '@repo/game/types'
 import { useState } from 'react'
@@ -15,6 +14,7 @@ import {
   TableRow,
 } from '../ui/table'
 import { ActionHover } from './ActionHover'
+import { DamageIcon } from './DamageIcon'
 
 export type ActionListTableProps = {
   actions: ActionMaker[]
@@ -139,10 +139,7 @@ function ActionListRow(props: ActionListRowProps) {
         <TableCell>
           {renderer.baseDamage(action) ? (
             <span className="inline-flex items-center space-x-1">
-              <span>
-                {action.damage?.damageType &&
-                  DamageRenderers[action.damage?.damageType]?.icon}
-              </span>
+              <DamageIcon damageType={action.damage?.damageType} />
               <span>{renderer.baseDamage(action)}</span>
             </span>
           ) : (

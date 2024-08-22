@@ -64,40 +64,6 @@ export function ActiveUnit() {
                     }}
                   />
                 </div>
-                <UnitBaseStats base={builder.base} />
-                {builder.base.affinities.length > 0 && (
-                  <div className="flex space-x-2">
-                    <div className="flex-1">Affinities</div>
-                    {builder.base.affinities.map((affinity) => (
-                      <div className="flex flex-1 space-x-1">
-                        <DamageIcon damageType={affinity.type} />
-                        <div>{affinity.factor * 100}%</div>
-                      </div>
-                    ))}
-                  </div>
-                )}
-                {builder.base.resistances.length > 0 && (
-                  <div className="flex space-x-2">
-                    <div className="flex-1">Resistances</div>
-                    {builder.base.resistances.map((affinity) => (
-                      <div className="flex flex-1 space-x-1">
-                        <DamageIcon damageType={affinity.type} />
-                        <div>{affinity.factor * 100}%</div>
-                      </div>
-                    ))}
-                  </div>
-                )}
-                {builder.base.weaknesses.length > 0 && (
-                  <div className="flex space-x-2">
-                    <div className="flex-1">Weaknesses</div>
-                    {builder.base.weaknesses.map((affinity) => (
-                      <div className="flex flex-1 space-x-1">
-                        <DamageIcon damageType={affinity.type} />
-                        <div>{affinity.factor * 100}%</div>
-                      </div>
-                    ))}
-                  </div>
-                )}
 
                 <div className="flex items-center space-x-2">
                   <Label htmlFor="name" className="min-w-[86px]">
@@ -113,6 +79,46 @@ export function ActiveUnit() {
                     }
                   />
                 </div>
+                <UnitBaseStats base={builder.base} />
+                {builder.base.affinities.length > 0 && (
+                  <div className="flex space-x-2 justify-between">
+                    <div>Affinities</div>
+                    {builder.base.affinities.map((affinity) => (
+                      <div className="flex space-x-1">
+                        <DamageIcon damageType={affinity.type} />
+                        <div className="text-green-200">
+                          {affinity.factor * 100}%
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+                {builder.base.resistances.length > 0 && (
+                  <div className="flex space-x-2 justify-between">
+                    <div>Resistances</div>
+                    {builder.base.resistances.map((affinity) => (
+                      <div className="flex space-x-1">
+                        <DamageIcon damageType={affinity.type} />
+                        <div className="text-green-200">
+                          {affinity.factor * 100}%
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+                {builder.base.weaknesses.length > 0 && (
+                  <div className="flex space-x-2 justify-between">
+                    <div>Weaknesses</div>
+                    {builder.base.weaknesses.map((affinity) => (
+                      <div className="flex space-x-1">
+                        <DamageIcon damageType={affinity.type} />
+                        <div className="text-red-200">
+                          {affinity.factor * 100}%
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
             </CardContent>
           </Card>

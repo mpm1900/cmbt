@@ -9,9 +9,9 @@ export function StatBar(props: StatBarProps) {
   const { ratio, className } = props
 
   return (
-    <div className={cn('h-[24px] w-full', className)}>
+    <div className={cn('h-[24px] w-full bg-white/10', className)}>
       <div
-        className="h-full bg-white/30 transition-all ease-in-out"
+        className="h-full bg-slate-500/60 transition-all ease-in-out"
         style={{ width: `${ratio * 100}%` }}
       />
     </div>

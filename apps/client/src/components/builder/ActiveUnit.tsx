@@ -5,6 +5,7 @@ import { DamageIcon } from '@shared/DamageIcon'
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
 import { Input } from '../ui/input'
 import { Label } from '../ui/label'
+import { Separator } from '../ui/separator'
 import { ActionsTable } from './ActionsTable'
 import { UnitAbilitySelect } from './UnitAbilitySelect'
 import { UnitBaseSelect } from './UnitBaseSelect'
@@ -79,46 +80,50 @@ export function ActiveUnit() {
                     }
                   />
                 </div>
+                <Separator />
                 <UnitBaseStats base={builder.base} />
-                {builder.base.affinities.length > 0 && (
-                  <div className="flex space-x-2 justify-between">
-                    <div>Affinities</div>
-                    {builder.base.affinities.map((affinity) => (
-                      <div className="flex space-x-1">
-                        <DamageIcon damageType={affinity.type} />
-                        <div className="text-green-200">
-                          {affinity.factor * 100}%
+                <Separator />
+                <div>
+                  {builder.base.affinities.length > 0 && (
+                    <div className="flex space-x-2 justify-between">
+                      <div className="text-muted-foreground">Affinities</div>
+                      {builder.base.affinities.map((affinity) => (
+                        <div className="flex space-x-1">
+                          <DamageIcon damageType={affinity.type} />
+                          <div className="text-green-200">
+                            {affinity.factor * 100}%
+                          </div>
                         </div>
-                      </div>
-                    ))}
-                  </div>
-                )}
-                {builder.base.resistances.length > 0 && (
-                  <div className="flex space-x-2 justify-between">
-                    <div>Resistances</div>
-                    {builder.base.resistances.map((affinity) => (
-                      <div className="flex space-x-1">
-                        <DamageIcon damageType={affinity.type} />
-                        <div className="text-green-200">
-                          {affinity.factor * 100}%
+                      ))}
+                    </div>
+                  )}
+                  {builder.base.resistances.length > 0 && (
+                    <div className="flex space-x-2 justify-between">
+                      <div className="text-muted-foreground">Resistances</div>
+                      {builder.base.resistances.map((affinity) => (
+                        <div className="flex space-x-1">
+                          <DamageIcon damageType={affinity.type} />
+                          <div className="text-green-200">
+                            {affinity.factor * 100}%
+                          </div>
                         </div>
-                      </div>
-                    ))}
-                  </div>
-                )}
-                {builder.base.weaknesses.length > 0 && (
-                  <div className="flex space-x-2 justify-between">
-                    <div>Weaknesses</div>
-                    {builder.base.weaknesses.map((affinity) => (
-                      <div className="flex space-x-1">
-                        <DamageIcon damageType={affinity.type} />
-                        <div className="text-red-200">
-                          {affinity.factor * 100}%
+                      ))}
+                    </div>
+                  )}
+                  {builder.base.weaknesses.length > 0 && (
+                    <div className="flex space-x-2 justify-between">
+                      <div className="text-muted-foreground"> Weaknesses</div>
+                      {builder.base.weaknesses.map((affinity) => (
+                        <div className="flex space-x-1">
+                          <DamageIcon damageType={affinity.type} />
+                          <div className="text-red-200">
+                            {affinity.factor * 100}%
+                          </div>
                         </div>
-                      </div>
-                    ))}
-                  </div>
-                )}
+                      ))}
+                    </div>
+                  )}
+                </div>
               </div>
             </CardContent>
           </Card>

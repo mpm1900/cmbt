@@ -30,17 +30,23 @@ export function WorldMap() {
     })
   }
 
-  function fitVisitied(_cy: Core) {
+  function fitActiveNeighbors(_cy: Core) {
     const activeNode = _cy.nodes(`#${game.world.activeNodeId}`).first()
     const nodes = _cy.nodes().filter((n) => {
       const state = getNodeState(n, {
         activeNode,
         hoverNode: undefined,
       })
-      return state.isVisited || !!state.isActiveNeightbor
+      return state.isActive || !!state.isActiveNeightbor
     })
     const nodesRadio = 1 / (nodes.size() / _cy.nodes().size())
-    _cy.fit(nodes, nodesRadio * 32)
+    _cy.animate({
+      duration: 200,
+      fit: {
+        eles: nodes,
+        padding: nodesRadio * 32,
+      },
+    })
   }
 
   return (
@@ -53,9 +59,9 @@ export function WorldMap() {
           <Button variant="ghost" onClick={() => centerActive(cy)}>
             Center
           </Button>
-          {/*<Button variant="ghost" onClick={() => fitVisitied(cy)}>
+          <Button variant="ghost" onClick={() => fitActiveNeighbors(cy)}>
             Reset
-          </Button>*/}
+          </Button>
         </div>
       )}
 
@@ -63,7 +69,7 @@ export function WorldMap() {
         cy={(_cy) => {
           set(_cy)
           if (!cy) {
-            centerActive(_cy)
+            fitActiveNeighbors(_cy)
           }
         }}
         nodes={game.world.nodes}

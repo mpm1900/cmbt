@@ -1,3 +1,4 @@
+import { StatRenderers } from '@/renderers/Stats'
 import { UnitBase } from '@repo/game/types'
 import { Label } from '../ui/label'
 import { StatBar } from './StatBar'
@@ -9,25 +10,30 @@ export type UnitBaseStatsProps = {
 export function UnitBaseStats(props: UnitBaseStatsProps) {
   const { base } = props
   return (
-    <div className="space-y-1">
-      <div className="flex items-center">
-        <Label className="w-[120px]">Health</Label>
+    <div className="space-y-2">
+      <div className="flex items-center space-x-2">
+        <div>{StatRenderers.health?.icon}</div>
+        <Label className="w-[100px]">Health</Label>
         <StatBar ratio={base.stats.health / 255} />
       </div>
-      <div className="flex items-center">
-        <Label className="w-[120px]">Physical</Label>
+      <div className="flex items-center space-x-2">
+        <div>{StatRenderers.physical?.icon} </div>
+        <Label className="w-[100px]">Physical</Label>
         <StatBar ratio={base.stats.physical / 255} />
       </div>
-      <div className="flex items-center">
-        <Label className="w-[120px]">Defense</Label>
+      <div className="flex items-center space-x-2">
+        <div>{StatRenderers.defense?.icon}</div>
+        <Label className="w-[100px]">Defense</Label>
         <StatBar ratio={base.stats.defense / 255} />
       </div>
-      <div className="flex items-center">
-        <Label className="w-[120px]">Magic</Label>
+      <div className="flex items-center space-x-2">
+        <div>{StatRenderers.magic?.icon}</div>
+        <Label className="w-[100px]">Magic</Label>
         <StatBar ratio={base.stats.magic / 255} />
       </div>
-      <div className="flex items-center">
-        <Label className="w-[120px]">Speed</Label>
+      <div className="flex items-center space-x-2">
+        <div>{StatRenderers.speed?.icon}</div>
+        <Label className="w-[100px]">Speed</Label>
         <StatBar ratio={base.stats.speed / 255} />
       </div>
       {/*<div className="flex items-center">

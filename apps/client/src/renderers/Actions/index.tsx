@@ -5,8 +5,8 @@ import {
   BodySlam,
   BodySlamId,
   BurnStatus,
-  DamageAllOnTurnEnd,
   DamageNewUnitsOnUnitEnter,
+  DamagePercentAllOnTurnEnd,
   DefenseDownParent,
   DisableId,
   EarthquakeId,
@@ -415,7 +415,10 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
         Applies{' '}
         <ModifierInline
           modifier={
-            new DamageAllOnTurnEnd({ rid: SandstormOnTurnEndId, damage: 30 })
+            new DamagePercentAllOnTurnEnd({
+              rid: SandstormOnTurnEndId,
+              factor: 0.1,
+            })
           }
         />{' '}
         to all units for 5 turns.
@@ -449,11 +452,6 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
         />{' '}
         to all units.
       </>
-    ),
-    help: () => (
-      <div className="text-muted-foreground">
-        (On unit enter, that unit takes 30 damage.)
-      </div>
     ),
     successLog: () => (
       <span className="text-muted-foreground">

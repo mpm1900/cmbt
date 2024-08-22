@@ -1,5 +1,6 @@
 import { StatKey } from '@repo/game/types'
 import { ReactNode } from 'react'
+import { FaHeartbeat } from 'react-icons/fa'
 import {
   GiArrowScope,
   GiBiceps,
@@ -45,7 +46,10 @@ export const StatRenderers: Record<StatKey, StatRenderer | undefined> = {
   focus: undefined,
   forceExpansion: undefined,
   forceNegation: undefined,
-  health: undefined,
+  health: {
+    name: <>Health</>,
+    icon: <FaHeartbeat />,
+  },
   magic: {
     name: <>Magic</>,
     icon: <GiPortal />,

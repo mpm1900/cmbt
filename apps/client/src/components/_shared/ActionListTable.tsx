@@ -1,5 +1,6 @@
 import { cn } from '@/lib/utils'
 import { ActionRenderers } from '@/renderers'
+import { DamageRenderers } from '@/renderers/Damage'
 import { ZERO_UNIT } from '@repo/game/data'
 import { ActionMaker, Id } from '@repo/game/types'
 import { useState } from 'react'
@@ -133,7 +134,19 @@ function ActionListRow(props: ActionListRowProps) {
           )}
         </TableCell>
         <TableCell>{accuracy !== undefined ? `${accuracy}%` : '—'}</TableCell>
-        <TableCell>{renderer.baseDamage(action) || '—'}</TableCell>
+        <TableCell>
+          {renderer.baseDamage(action) ? (
+            <span className="inline-flex items-center space-x-1">
+              <span>
+                {action.damage?.damageType &&
+                  DamageRenderers[action.damage?.damageType]?.icon}
+              </span>
+              <span>{renderer.baseDamage(action)}</span>
+            </span>
+          ) : (
+            '—'
+          )}
+        </TableCell>
         <TableCell>{renderer.cost || '—'}</TableCell>
         {action.criticalFactor(ZERO_UNIT) ? (
           <TableCell>

@@ -26,7 +26,7 @@ export function ActiveUnit() {
             <CardContent>
               <div className="space-y-2">
                 <div className="flex items-center space-x-2">
-                  <Label htmlFor="name" className="min-w-[72px]">
+                  <Label htmlFor="name" className="min-w-[86px]">
                     Name
                   </Label>
                   <Input
@@ -43,7 +43,7 @@ export function ActiveUnit() {
                 </div>
 
                 <div className="flex items-center space-x-2">
-                  <Label htmlFor="base" className="min-w-[72px]">
+                  <Label htmlFor="base" className="min-w-[86px]">
                     Class
                   </Label>
                   <UnitBaseSelect
@@ -66,7 +66,7 @@ export function ActiveUnit() {
                 <UnitBaseStats base={builder.base} />
 
                 <div className="flex items-center space-x-2">
-                  <Label htmlFor="name" className="min-w-[72px]">
+                  <Label htmlFor="name" className="min-w-[86px]">
                     Ability
                   </Label>
                   <UnitAbilitySelect

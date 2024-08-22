@@ -298,8 +298,8 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
     costAlt: <span className="text-blue-300">30 FP</span>,
     description: (action, props) => (
       <>
-        Deals base force damage equal to twice this unit's magic stat to target
-        enemy unit. Applies{' '}
+        Deals base force damage equal to twice this unit's base magic stat to
+        target enemy unit. Applies{' '}
         <ModifierInline
           side={props?.side}
           modifier={new SetIsStunnedParent({})}

@@ -13,6 +13,7 @@ import {
   calculateDamage,
   getActionData,
   getMutationsFromDamageResult,
+  getUnitBase,
 } from '../../utils'
 import { getDamageAi } from '../../utils/getDamageAiAction'
 import { modifyRenderContext } from '../../utils/modifyRenderContext'
@@ -65,9 +66,10 @@ export class HyperBeam extends Action {
       (modifiedTargets) => ({
         onSuccess: {
           mutations: modifiedTargets.flatMap((target) => {
+            const { base } = getUnitBase(source.baseId)
             const damage = calculateDamage(
               {
-                value: data.source.stats.magic * 2,
+                value: (base?.stats.magic ?? 0) * 2,
                 attackType: this.attackType as AttackTypes,
                 damageType: 'force',
               },

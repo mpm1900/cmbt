@@ -25,18 +25,6 @@ export function EditUnitModal(props: EditUnitModalProps) {
   const { base, config } = getUnitBase(unit.baseId)
   const selectedActionIds = props.unit.actions.map((a) => a.id)
   const sum = unit.augments.reduce<number>((sum, a) => sum + (a.cost ?? 0), 0)
-  const extraSelect = () => (
-    <AugmentItemSelect
-      value={undefined}
-      onChange={(augment) => {
-        if (augment) {
-          onChange({
-            augments: [...unit.augments, augment],
-          })
-        }
-      }}
-    />
-  )
 
   return (
     <Dialog>
@@ -75,6 +63,7 @@ export function EditUnitModal(props: EditUnitModalProps) {
                 {unit.augments.map((a, index) => (
                   <div key={a?.itemRtid} className="flex space-x-1">
                     <AugmentItemSelect
+                      unit={unit}
                       value={a}
                       onChange={(augment) => {
                         if (augment) {
@@ -99,7 +88,19 @@ export function EditUnitModal(props: EditUnitModalProps) {
                     </Button>
                   </div>
                 ))}
-                {sum < base.augmentSlots && extraSelect()}
+                {sum < base.augmentSlots && (
+                  <AugmentItemSelect
+                    unit={unit}
+                    value={undefined}
+                    onChange={(augment) => {
+                      if (augment) {
+                        onChange({
+                          augments: [...unit.augments, augment],
+                        })
+                      }
+                    }}
+                  />
+                )}
               </div>
             </div>
           )}

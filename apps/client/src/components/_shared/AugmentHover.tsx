@@ -3,6 +3,7 @@ import { HoverCardPortal } from '@radix-ui/react-hover-card'
 import { Augment } from '@repo/game/types'
 import { PropsWithChildren } from 'react'
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '../ui/hover-card'
+import { AugmentDescription } from './AugmentDescription'
 
 export type AugmentHoverProps = PropsWithChildren<{
   augment: Augment
@@ -20,9 +21,7 @@ export function AugmentHover(props: AugmentHoverProps) {
         <HoverCardContent side="left" className="w-[360px]">
           <div className="space-y-2">
             {renderer?.name}
-            <div className="text-muted-foreground">
-              {renderer?.description()}
-            </div>
+            <AugmentDescription augment={augment} />
           </div>
         </HoverCardContent>
       </HoverCardPortal>

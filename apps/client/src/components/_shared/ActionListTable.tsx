@@ -56,7 +56,6 @@ export function ActionListTable(props: ActionListTableProps) {
               maker={maker}
               isSelected={isSelected}
               isDisabled={isDisabled}
-              // open={maker.id === hoverRow}
               onMouseEnter={() => setHoverRow(maker.id)}
               onMouseLeave={() => setHoverRow(undefined)}
               onSelect={onSelect}
@@ -72,7 +71,6 @@ type ActionListRowProps = {
   maker: ActionMaker
   isSelected: boolean
   isDisabled: boolean
-  open?: boolean
   onMouseEnter: React.MouseEventHandler<HTMLTableRowElement>
   onMouseLeave: React.MouseEventHandler<HTMLTableRowElement>
   onSelect?: (maker: ActionMaker, isSelected: boolean) => void
@@ -82,7 +80,6 @@ function ActionListRow(props: ActionListRowProps) {
     maker,
     isDisabled,
     isSelected,
-    open,
     onMouseEnter,
     onMouseLeave,
     onSelect,
@@ -92,7 +89,7 @@ function ActionListRow(props: ActionListRowProps) {
   const accuracy = action.threshold(ZERO_UNIT)
 
   return (
-    <ActionHover action={action} side="right" open={open}>
+    <ActionHover action={action} side="right">
       <TableRow
         className={cn({
           'bg-muted': isSelected,

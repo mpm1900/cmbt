@@ -1,5 +1,5 @@
 import { useGame } from '@/hooks/state'
-import { Augment } from '@repo/game/types'
+import { Augment, Unit } from '@repo/game/types'
 import { nanoid } from 'nanoid/non-secure'
 import {
   Select,
@@ -11,12 +11,13 @@ import {
 import { AugmentHover } from './AugmentHover'
 
 export type AugmentItemSelectProps = {
+  unit: Unit
   value: Augment | undefined
   onChange: (augment: Augment | undefined) => void
 }
 
 export function AugmentItemSelect(props: AugmentItemSelectProps) {
-  const { value, onChange } = props
+  const { value, unit, onChange } = props
   const game = useGame()
   const equippedAugmentIds = game.units.flatMap((u) =>
     u.augments.map((a) => a.itemRtid)
@@ -25,11 +26,12 @@ export function AugmentItemSelect(props: AugmentItemSelectProps) {
   const availableItems = augmentItems.filter(
     (i) => !equippedAugmentIds.includes(i.rtid)
   )
+  const disabled = availableItems.length === 0 && !value
 
   return (
     <Select
       key={value?.itemRtid || nanoid()}
-      disabled={availableItems.length === 0 && !value}
+      disabled={disabled}
       value={value?.itemRtid}
       onValueChange={(rtid) => {
         console.log('onchange', rtid)
@@ -41,7 +43,8 @@ export function AugmentItemSelect(props: AugmentItemSelectProps) {
       }}
     >
       <SelectTrigger>
-        <SelectValue placeholder="Select an item" />
+        {!disabled && <SelectValue placeholder="Select an item" />}
+        {disabled && <SelectValue placeholder="No available items" />}
       </SelectTrigger>
       <SelectContent>
         {augmentItems.map((item) => (

@@ -9,6 +9,7 @@ import {
   Ruby,
   RubyId,
   TeamId,
+  ZERO_UNIT,
 } from '@repo/game/data'
 import {
   Encounter,
@@ -147,6 +148,7 @@ const ShopWaresNode: EncounterNode = {
       <div className="space-y-4">
         {ctx.team && (
           <ItemListTable
+            unit={ZERO_UNIT}
             items={[Potion(), Key01(), Ruby()] as GroupedItem[]}
             resources={ctx.team.resources}
             quantities={ctx.encounter.values}

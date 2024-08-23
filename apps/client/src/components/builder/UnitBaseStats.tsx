@@ -12,27 +12,27 @@ export function UnitBaseStats(props: UnitBaseStatsProps) {
   return (
     <div className="space-y-1">
       <div className="flex items-center space-x-2">
-        <div>{StatRenderers.health?.icon}</div>
+        <div className="h-[20px] w-[20px]">{StatRenderers.health?.icon}</div>
         <Label className="w-[100px]">Health</Label>
         <StatBar ratio={base.stats.health / 255} />
       </div>
       <div className="flex items-center space-x-2">
-        <div>{StatRenderers.physical?.icon} </div>
+        <div className="h-[20px] w-[20px]">{StatRenderers.physical?.icon} </div>
         <Label className="w-[100px]">Physical</Label>
         <StatBar ratio={base.stats.physical / 255} />
       </div>
       <div className="flex items-center space-x-2">
-        <div>{StatRenderers.defense?.icon}</div>
+        <div className="h-[20px] w-[20px]">{StatRenderers.defense?.icon}</div>
         <Label className="w-[100px]">Defense</Label>
         <StatBar ratio={base.stats.defense / 255} />
       </div>
       <div className="flex items-center space-x-2">
-        <div>{StatRenderers.magic?.icon}</div>
+        <div className="h-[20px] w-[20px]">{StatRenderers.magic?.icon}</div>
         <Label className="w-[100px]">Magic</Label>
         <StatBar ratio={base.stats.magic / 255} />
       </div>
       <div className="flex items-center space-x-2">
-        <div>{StatRenderers.speed?.icon}</div>
+        <div className="h-[20px] w-[20px]">{StatRenderers.speed?.icon}</div>
         <Label className="w-[100px]">Speed</Label>
         <StatBar ratio={base.stats.speed / 255} />
       </div>

@@ -1,5 +1,6 @@
 import { useGame } from '@/hooks/state'
 import { groupItemsById } from '@/utils'
+import { ZERO_UNIT } from '@repo/game/data'
 import { ItemListTable } from '@shared/ItemListTable'
 import { SidebarUnit } from '../_shared/SidebarUnit'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../ui/tabs'
@@ -34,6 +35,7 @@ export function WorldSidebar(props: WorldSidebarProps) {
           <TabsContent value="items">
             <div className="p-2">
               <ItemListTable
+                unit={ZERO_UNIT}
                 items={groupedItems}
                 quantities={Object.fromEntries(
                   groupedItems.map((i) => [i.id, i.count])

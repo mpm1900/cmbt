@@ -18,7 +18,7 @@ export function StartButton(props: PropsWithClassname) {
   function initialize() {
     const team: Team = {
       id: nanoid(),
-      items: [Potion(), { id: nanoid(), name: 'null', count: 1, cost: 0 }],
+      items: [Potion()],
       resources: {
         credits: 1500,
       },

@@ -1,4 +1,5 @@
 import { useGame } from '@/hooks/state'
+import { ItemListTable } from '@shared/ItemListTable'
 import { SidebarUnit } from '../_shared/SidebarUnit'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../ui/tabs'
 
@@ -27,7 +28,17 @@ export function WorldSidebar(props: WorldSidebarProps) {
               <SidebarUnit key={unit.id} unit={unit} />
             ))}
           </TabsContent>
-          <TabsContent value="items">items</TabsContent>
+          <TabsContent value="items">
+            <div className="p-2">
+              <ItemListTable
+                items={game.team.items}
+                quantities={Object.fromEntries(
+                  game.team.items.map((i) => [i.id, i.count])
+                )}
+                resources={{ credits: 0 }}
+              />
+            </div>
+          </TabsContent>
         </div>
       </Tabs>
     </div>

@@ -1,17 +1,9 @@
 import { Button } from '@/components/ui/button'
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@/components/ui/table'
-import { cn } from '@/lib/utils'
 import { faker } from '@faker-js/faker'
 import { Key01, Key01Id, Potion, PotionId, TeamId } from '@repo/game/data'
 import { Encounter, EncounterNode, Item, Team } from '@repo/game/types'
 import { makeEnemyUnit } from '@repo/game/utils'
+import { ItemListTable } from '@shared/ItemListTable'
 import { nanoid } from 'nanoid'
 import { GiCreditsCurrency, GiCrossedSwords } from 'react-icons/gi'
 import { IoMdReturnLeft, IoMdReturnRight } from 'react-icons/io'
@@ -138,51 +130,17 @@ const ShopWaresNode: EncounterNode = {
     }
     return (
       <div className="space-y-4">
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead>#</TableHead>
-              <TableHead>name</TableHead>
+        {ctx.team && (
+          <ItemListTable
+            items={[Potion(), Key01()]}
+            resources={ctx.team.resources}
+            quantities={ctx.encounter.values}
+            onClick={(item) => {
+              buyItem(item)
+            }}
+          />
+        )}
 
-              <TableHead className="flex justify-end items-center">
-                cost
-              </TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {[Potion(), Key01()].map((item) => (
-              <TableRow key={item.id}>
-                <TableCell
-                  width={32}
-                  className={cn({
-                    'text-red-400': ctx.encounter.values[item.id] <= 0,
-                  })}
-                >
-                  x{ctx.encounter.values[item.id]}
-                </TableCell>
-                <TableCell>{item.name}</TableCell>
-                <TableCell className="flex justify-end items-center p-0">
-                  <Button
-                    disabled={
-                      (ctx.team?.resources.credits ?? 0) < item.cost ||
-                      ctx.encounter.values[item.id] <= 0
-                    }
-                    variant="ghost"
-                    className={cn({
-                      'text-red-400':
-                        (ctx.team?.resources.credits ?? 0) < item.cost,
-                    })}
-                    onClick={() => {
-                      buyItem(item)
-                    }}
-                  >
-                    Buy {item.cost}g
-                  </Button>
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
         <div className="flex justify-end space-x-4">
           <Button
             variant="secondary"

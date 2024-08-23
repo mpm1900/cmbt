@@ -2,7 +2,13 @@ import { useBuilderUi } from '@/hooks/state/useBuilderUi'
 import { useUnitBuilders } from '@/hooks/state/useUnitBuilders'
 import { BASE_CONFIGS } from '@repo/game/data'
 import { DamageIcon } from '@shared/DamageIcon'
-import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '../ui/card'
 import { Input } from '../ui/input'
 import { Label } from '../ui/label'
 import { Separator } from '../ui/separator'
@@ -133,7 +139,10 @@ export function ActiveUnit() {
         <div className="w-[680px]">
           <Card>
             <CardHeader>
-              <CardTitle>Actions ({builder.config.actionsCount})</CardTitle>
+              <CardTitle>Actions</CardTitle>
+              <CardDescription>
+                Select between 1 and {builder.config.actionsCount} actions.
+              </CardDescription>
             </CardHeader>
             <CardContent>
               <ActionsTable builder={builder} />

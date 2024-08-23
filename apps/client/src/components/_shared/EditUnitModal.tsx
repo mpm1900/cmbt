@@ -1,7 +1,7 @@
 import { Unit } from '@repo/game/types'
 import { getUnitBase } from '@repo/game/utils'
 import { PropsWithChildren } from 'react'
-import { FaGem, FaRegGem } from 'react-icons/fa6'
+import { FaRegSquareFull, FaSquare } from 'react-icons/fa6'
 import { TiTrash } from 'react-icons/ti'
 import { Button } from '../ui/button'
 import {
@@ -12,6 +12,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '../ui/dialog'
+import { Separator } from '../ui/separator'
 import { ActionListTable } from './ActionListTable'
 import { AugmentItemSelect } from './AugmentItemSelect'
 
@@ -48,9 +49,12 @@ export function EditUnitModal(props: EditUnitModalProps) {
                   <div className="flex space-x-1 justify-center">
                     {Array.from({ length: base.augmentSlots }).map((_, i) =>
                       sum >= i + 1 ? (
-                        <FaGem key={i} className="fill-muted-foreground" />
+                        <FaSquare key={i} className="fill-muted-foreground" />
                       ) : (
-                        <FaRegGem key={i} className="fill-muted-foreground" />
+                        <FaRegSquareFull
+                          key={i}
+                          className="fill-muted-foreground"
+                        />
                       )
                     )}
                   </div>
@@ -104,25 +108,48 @@ export function EditUnitModal(props: EditUnitModalProps) {
               </div>
             </div>
           )}
+          <Separator orientation="vertical" />
           {config && (
-            <ActionListTable
-              actions={config.actions}
-              maxActionCount={config.actionsCount}
-              selectedActionIds={selectedActionIds}
-              onSelect={(maker, isSelected) => {
-                if (isSelected) {
-                  onChange({
-                    actions: [...props.unit.actions, maker.make(props.unit)],
-                  })
-                } else {
-                  onChange({
-                    actions: props.unit.actions.filter(
-                      (a) => a.id !== maker.make(props.unit).id
-                    ),
-                  })
-                }
-              }}
-            />
+            <div className="space-y-3">
+              <div>
+                <div className="flex justify-between items-center">
+                  <div className="font-bold">Actions</div>
+                  <div className="flex space-x-1 justify-center">
+                    {Array.from({ length: config.actionsCount }).map((_, i) =>
+                      unit.actions.length >= i + 1 ? (
+                        <FaSquare key={i} className="fill-muted-foreground" />
+                      ) : (
+                        <FaRegSquareFull
+                          key={i}
+                          className="fill-muted-foreground"
+                        />
+                      )
+                    )}
+                  </div>
+                </div>
+                <div className="text-muted-foreground text-xs">
+                  Select up to {config.actionsCount} actions.
+                </div>
+              </div>
+              <ActionListTable
+                actions={config.actions}
+                maxActionCount={config.actionsCount}
+                selectedActionIds={selectedActionIds}
+                onSelect={(maker, isSelected) => {
+                  if (isSelected) {
+                    onChange({
+                      actions: [...props.unit.actions, maker.make(props.unit)],
+                    })
+                  } else {
+                    onChange({
+                      actions: props.unit.actions.filter(
+                        (a) => a.id !== maker.make(props.unit).id
+                      ),
+                    })
+                  }
+                }}
+              />
+            </div>
           )}
         </div>
       </DialogContent>

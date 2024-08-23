@@ -1,4 +1,5 @@
 import { useGame } from '@/hooks/state'
+import { groupItemsById } from '@/utils'
 import { ItemListTable } from '@shared/ItemListTable'
 import { SidebarUnit } from '../_shared/SidebarUnit'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../ui/tabs'
@@ -10,6 +11,8 @@ export type WorldSidebarProps = {
 export function WorldSidebar(props: WorldSidebarProps) {
   const { defaultValue = 'team' } = props
   const game = useGame()
+  const groupedItems = groupItemsById(game.team.items)
+
   return (
     <div className="w-[420px] bg-slate-950 border-l h-screen flex overflow-hidden">
       <Tabs
@@ -31,9 +34,9 @@ export function WorldSidebar(props: WorldSidebarProps) {
           <TabsContent value="items">
             <div className="p-2">
               <ItemListTable
-                items={game.team.items}
+                items={groupedItems}
                 quantities={Object.fromEntries(
-                  game.team.items.map((i) => [i.id, i.count])
+                  groupedItems.map((i) => [i.id, i.count])
                 )}
                 resources={{ credits: 0 }}
               />

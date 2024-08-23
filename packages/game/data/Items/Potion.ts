@@ -54,8 +54,8 @@ export class PotionAction extends Action {
 export const PotionId = nanoid()
 export const Potion = (): Item => ({
   id: PotionId,
+  rtid: nanoid(),
   name: 'Potion',
-  count: 1,
   action: (u: Unit) =>
     new PotionAction({
       sourceId: u.id,

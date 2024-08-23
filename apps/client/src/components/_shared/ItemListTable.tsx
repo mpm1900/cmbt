@@ -1,5 +1,5 @@
 import { cn } from '@/lib/utils'
-import { Id, Item, TeamResources } from '@repo/game/types'
+import { GroupedItem, Id, Item, TeamResources } from '@repo/game/types'
 import { Button } from '../ui/button'
 import {
   Table,
@@ -11,7 +11,7 @@ import {
 } from '../ui/table'
 
 export type ItemListTableProps = {
-  items: Item[]
+  items: GroupedItem[]
   quantities: Record<Id, number>
   resources: TeamResources
   onClick?: (item: Item) => void
@@ -19,7 +19,6 @@ export type ItemListTableProps = {
 
 export function ItemListTable(props: ItemListTableProps) {
   const { items, quantities, resources, onClick } = props
-  console.log(items)
 
   return (
     <Table>

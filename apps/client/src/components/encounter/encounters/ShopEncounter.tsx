@@ -1,7 +1,13 @@
 import { Button } from '@/components/ui/button'
 import { faker } from '@faker-js/faker'
 import { Key01, Key01Id, Potion, PotionId, TeamId } from '@repo/game/data'
-import { Encounter, EncounterNode, Item, Team } from '@repo/game/types'
+import {
+  Encounter,
+  EncounterNode,
+  GroupedItem,
+  Item,
+  Team,
+} from '@repo/game/types'
 import { makeEnemyUnit } from '@repo/game/utils'
 import { ItemListTable } from '@shared/ItemListTable'
 import { nanoid } from 'nanoid'
@@ -132,7 +138,7 @@ const ShopWaresNode: EncounterNode = {
       <div className="space-y-4">
         {ctx.team && (
           <ItemListTable
-            items={[Potion(), Key01()]}
+            items={[Potion(), Key01()] as GroupedItem[]}
             resources={ctx.team.resources}
             quantities={ctx.encounter.values}
             onClick={(item) => {

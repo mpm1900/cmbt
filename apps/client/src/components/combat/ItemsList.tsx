@@ -1,6 +1,7 @@
 import { useCombatContext } from '@/hooks'
 import { useCombat, useCombatUi } from '@/hooks/state'
 import { ActionRenderers } from '@/renderers'
+import { groupItemsById } from '@/utils'
 import { Action, Id, Item, Unit } from '@repo/game/types'
 import { useEffect, useState } from 'react'
 import { Button } from '../ui/button'
@@ -17,7 +18,7 @@ export function ItemsList(props: ItemsListProps) {
   const combat = useCombat()
   const ctx = useCombatContext()
   const team = ctx.teams.find((t) => t.id === unit?.teamId)
-  const items = team?.items ?? []
+  const items = groupItemsById(team?.items ?? [])
   const [activeItem, setActiveItem] = useState<Item>()
   const activeAction =
     unit && activeItem?.action ? activeItem?.action(unit) : undefined
@@ -42,7 +43,7 @@ export function ItemsList(props: ItemsListProps) {
   function handleConfirm() {
     if (activeItem && unit && activeItem.action) {
       const action = activeItem.action(unit)
-      combat.decrementWhere(ctx.user, (i) => i.id === activeItem.id)
+      combat.removeItemsWhwere(ctx.user, (i) => i.rtid === activeItem.rtid)
       onConfirm(
         action,
         targets.map((t) => t.id)
@@ -64,35 +65,33 @@ export function ItemsList(props: ItemsListProps) {
       <CardContent className="space-y-4">
         {unit && (
           <div className="grid grid-cols-2 gap-2">
-            {items
-              .filter((i) => !!i.action)
-              .map((item) => {
-                if (!item.action) return null
-                const action = item.action(unit)
-                const renderer = ActionRenderers[action.id]
-                return (
-                  <Button
-                    key={action.id}
-                    className="items-start h-full flex-col"
-                    disabled={item.count <= 0}
-                    variant={
-                      action.id === activeAction?.id ? 'default' : 'secondary'
-                    }
-                    onClick={() =>
-                      updateActiveItem(
-                        item.id === activeItem?.id ? undefined : item
-                      )
-                    }
-                  >
-                    <span className="text-lg text-ellipsis w-full overflow-hidden text-left">
-                      {renderer?.name ?? action.id}
-                    </span>
-                    <span className="text-xs text-muted-foreground space-x-2">
-                      {item.count}
-                    </span>
-                  </Button>
-                )
-              })}
+            {items.map((item) => {
+              if (!item.action) return null
+              const action = item.action(unit)
+              const renderer = ActionRenderers[action.id]
+              return (
+                <Button
+                  key={action.id}
+                  className="items-start h-full flex-col"
+                  disabled={item.count <= 0}
+                  variant={
+                    action.id === activeAction?.id ? 'default' : 'secondary'
+                  }
+                  onClick={() =>
+                    updateActiveItem(
+                      item.id === activeItem?.id ? undefined : item
+                    )
+                  }
+                >
+                  <span className="text-lg text-ellipsis w-full overflow-hidden text-left">
+                    {renderer?.name ?? action.id}
+                  </span>
+                  <span className="text-xs text-muted-foreground space-x-2">
+                    {item.count}
+                  </span>
+                </Button>
+              )
+            })}
           </div>
         )}
         {items.length === 0 && (

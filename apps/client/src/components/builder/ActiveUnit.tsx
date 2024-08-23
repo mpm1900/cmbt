@@ -93,8 +93,8 @@ export function ActiveUnit() {
                   {builder.base.affinities.length > 0 && (
                     <div className="flex space-x-2 justify-between">
                       <div className="text-muted-foreground">Affinities</div>
-                      {builder.base.affinities.map((affinity) => (
-                        <div className="flex space-x-1">
+                      {builder.base.affinities.map((affinity, i) => (
+                        <div key={i} className="flex space-x-1">
                           <DamageIcon damageType={affinity.type} />
                           <div className="text-green-200">
                             {affinity.factor * 100}%
@@ -106,8 +106,8 @@ export function ActiveUnit() {
                   {builder.base.resistances.length > 0 && (
                     <div className="flex space-x-2 justify-between">
                       <div className="text-muted-foreground">Resistances</div>
-                      {builder.base.resistances.map((affinity) => (
-                        <div className="flex space-x-1">
+                      {builder.base.resistances.map((affinity, i) => (
+                        <div key={i} className="flex space-x-1">
                           <DamageIcon damageType={affinity.type} />
                           <div className="text-green-200">
                             {affinity.factor * 100}%
@@ -119,8 +119,8 @@ export function ActiveUnit() {
                   {builder.base.weaknesses.length > 0 && (
                     <div className="flex space-x-2 justify-between">
                       <div className="text-muted-foreground"> Weaknesses</div>
-                      {builder.base.weaknesses.map((affinity) => (
-                        <div className="flex space-x-1">
+                      {builder.base.weaknesses.map((affinity, i) => (
+                        <div key={i} className="flex space-x-1">
                           <DamageIcon damageType={affinity.type} />
                           <div className="text-red-200">
                             {affinity.factor * 100}%

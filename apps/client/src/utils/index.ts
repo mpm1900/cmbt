@@ -1,5 +1,6 @@
 export * from './getResultFromActionItem'
 export * from './getTeamsWithSelectionRequired'
+export * from './groupItemsById'
 export * from './handleNextAction'
 export * from './logActionIntent'
 export * from './logActionResults'

@@ -49,7 +49,7 @@ export type CombatStore = CombatState & {
   setUser: (id: Id) => void
   getRandomTeamId: () => string
   addItems: (teamId: Id, ...items: Item[]) => void
-  decrementWhere: (teamId: Id, fn: (item: Item) => boolean) => void
+  removeItemsWhwere: (teamId: Id, fn: (item: Item) => boolean) => void
 
   // turn
   next: () => void
@@ -161,23 +161,22 @@ export const useCombat = create<CombatStore>((set, get) => {
           t.id === teamId ? { ...t, items: t.items.concat(...items) } : t
         ),
       })),
-    decrementWhere: (teamId, fn) =>
+    removeItemsWhwere: (teamId, fn) => {
       set((s) => ({
         teams: s.teams.map((t) =>
           t.id === teamId
             ? {
                 ...t,
-                items: t.items.map((i) =>
-                  fn(i) ? { ...i, count: i.count - 1 } : i
-                ),
+                items: t.items.filter((i) => !fn(i)),
               }
             : t
         ),
-      })),
+      }))
+    },
 
     turn: {
       count: 0,
-      status: 'upkeep',
+      status: 'upkeep' as TurnStatus,
       results: [],
       hasRanOnTurnEndTriggers: false,
     },

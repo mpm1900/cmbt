@@ -17,6 +17,7 @@ export const DeoxysS: UnitBase = {
     stamina: 30,
     devotion: 20,
   },
+  augmentSlots: 5,
   affinities: [],
   resistances: [],
   weaknesses: [],

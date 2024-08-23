@@ -1,6 +1,15 @@
 import { Button } from '@/components/ui/button'
+import { rebaseItem } from '@/utils'
 import { faker } from '@faker-js/faker'
-import { Key01, Key01Id, Potion, PotionId, TeamId } from '@repo/game/data'
+import {
+  Key01,
+  Key01Id,
+  Potion,
+  PotionId,
+  Ruby,
+  RubyId,
+  TeamId,
+} from '@repo/game/data'
 import {
   Encounter,
   EncounterNode,
@@ -138,11 +147,11 @@ const ShopWaresNode: EncounterNode = {
       <div className="space-y-4">
         {ctx.team && (
           <ItemListTable
-            items={[Potion(), Key01()] as GroupedItem[]}
+            items={[Potion(), Key01(), Ruby()] as GroupedItem[]}
             resources={ctx.team.resources}
             quantities={ctx.encounter.values}
             onClick={(item) => {
-              buyItem(item)
+              buyItem(rebaseItem(item))
             }}
           />
         )}
@@ -178,5 +187,6 @@ export const ShopEncounter: Encounter = {
   values: {
     [PotionId]: 5,
     [Key01Id]: 1,
+    [RubyId]: 1,
   },
 }

@@ -522,14 +522,5 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
     baseDamage: () => '',
     cost: '',
     description: () => 'Heals 20 damage from target friendly unit.',
-    log: (action, source, [target], ctx) => (
-      <span>
-        <span className="text-purple-300">{ACTION_NAMES[PotionActionId]}</span>{' '}
-        was used on{' '}
-        <LogUnit teamId={target.teamId} user={ctx.user}>
-          {target.name}
-        </LogUnit>
-      </span>
-    ),
   },
 }

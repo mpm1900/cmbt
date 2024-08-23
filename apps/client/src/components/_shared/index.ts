@@ -1,6 +1,7 @@
 export * from './ActionHover'
 export * from './ActionListTable'
 export * from './AugmentHover'
+export * from './AugmentItemSelect'
 export * from './Bar'
 export * from './DamageInline'
 export * from './EditUnitModal'

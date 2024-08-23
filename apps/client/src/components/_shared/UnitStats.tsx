@@ -22,7 +22,7 @@ function UnitStat(props: UnitStatProps) {
   return (
     <div className="flex justify-between space-x-2">
       <div className="flex items-center space-x-1">
-        {StatRenderers[stat]?.icon}
+        <div className="h-[20px] w-[20px]">{StatRenderers[stat]?.icon}</div>
         <span className="text-muted-foreground font-bold whitespace-nowrap">
           {StatRenderers[stat]?.name ?? stat}
         </span>
@@ -44,7 +44,9 @@ function UnitDamageStat(props: UnitDamageStatProps) {
   return (
     <div className="flex space-x-4 justify-between">
       <div className="flex items-center space-x-1">
-        {DamageRenderers[props.damageType]?.icon}
+        <div className="h-[20px] w-[20px]">
+          {DamageRenderers[props.damageType]?.icon}
+        </div>
         <strong className="text-muted-foreground">
           {DamageRenderers[props.damageType]?.name}
         </strong>

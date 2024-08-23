@@ -8,6 +8,7 @@ import {
   IntimidateId,
   PowerDownAllOtherOnUnitEnter,
   RegenerationId,
+  RubyAugmentId,
   SandstormOnTurnEndId,
   SandStreamId,
   ScholarId,
@@ -68,6 +69,10 @@ export const AugmentRenderers: Record<Id, AugmentRenderer> = {
         />
       </div>
     ),
+  },
+  [RubyAugmentId]: {
+    name: <div className="text-white">{AUGMENT_NAMES[RubyAugmentId]}</div>,
+    description: () => <div></div>,
   },
   [SandStreamId]: {
     name: <div className="text-white">{AUGMENT_NAMES[SandStreamId]}</div>,

@@ -20,26 +20,26 @@ export type StatRenderer = {
 export const StatRenderers: Record<StatKey, StatRenderer | undefined> = {
   accuracy: {
     name: <>Accuracy</>,
-    icon: <GiDiceTarget />,
+    icon: <GiDiceTarget className="h-full w-full" />,
   },
   arcaneExpansion: undefined,
   arcaneNegation: undefined,
   criticalChance: {
     name: <>Crit Chance</>,
-    icon: <PiTargetFill />,
+    icon: <PiTargetFill className="h-full w-full" />,
   },
   criticalDamage: {
     name: <>Crit Damage</>,
-    icon: <GiArrowScope />,
+    icon: <GiArrowScope className="h-full w-full" />,
   },
   defense: {
     name: <>Defense</>,
-    icon: <GiShoulderArmor />,
+    icon: <GiShoulderArmor className="h-full w-full" />,
   },
   devotion: undefined,
   evasion: {
     name: <>Evasion</>,
-    icon: <GiDodging />,
+    icon: <GiDodging className="h-full w-full" />,
   },
   fireExpansion: undefined,
   fireNegation: undefined,
@@ -48,15 +48,15 @@ export const StatRenderers: Record<StatKey, StatRenderer | undefined> = {
   forceNegation: undefined,
   health: {
     name: <>Health</>,
-    icon: <FaHeartbeat />,
+    icon: <FaHeartbeat className="h-full w-full" />,
   },
   magic: {
     name: <>Magic</>,
-    icon: <GiPortal />,
+    icon: <GiPortal className="h-full w-full" />,
   },
   physical: {
     name: <>Physical</>,
-    icon: <GiBiceps />,
+    icon: <GiBiceps className="h-full w-full" />,
   },
   psychicExpansion: undefined,
   psychicNegation: undefined,
@@ -64,7 +64,7 @@ export const StatRenderers: Record<StatKey, StatRenderer | undefined> = {
   shockNegation: undefined,
   speed: {
     name: <>Speed</>,
-    icon: <GiSprint />,
+    icon: <GiSprint className="h-full w-full" />,
   },
   stamina: undefined,
 }

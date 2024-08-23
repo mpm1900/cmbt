@@ -39,6 +39,7 @@ export class PotionAction extends Action {
       action: this,
       source,
       targets,
+      expandedTargets: targets,
       mutations: [
         new HealParent({
           sourceId: source.id,
@@ -63,5 +64,5 @@ export const Potion = (): Item => ({
       maxTargetCount: 1,
       cost: new Identity({}),
     }),
-  cost: 1000,
+  cost: 150,
 })

@@ -32,8 +32,8 @@ export type Values = Record<ValueKey, number>
 export type FlagKey = 'isActive' | 'isInspected' | 'isProtected' | 'isStunned'
 export type Flags = Record<FlagKey, boolean>
 
-export type RegistryKey = 'modifiers' | 'actions'
-export type Registry = Record<RegistryKey, string[]>
+export type UnitRegistryKey = 'modifiers' | 'actions'
+export type UnitRegistry = Record<UnitRegistryKey, string[]>
 
 export type UnitMetadata = {
   lastUsedActionId: string | undefined
@@ -51,6 +51,7 @@ export type UnitBase = {
   id: Id
   name: string
   stats: Stats
+  augmentSlots: number
   affinities: UnitBaseAffinity[]
   resistances: UnitBaseAffinity[]
   weaknesses: UnitBaseAffinity[]
@@ -73,7 +74,8 @@ export type Unit = {
   stats: Stats
   values: Values
   flags: Flags
-  registry: Registry
+  registry: UnitRegistry
+  augments: Augment[]
   modifiers(): Modifier[]
   actions: Action[]
   metadata: UnitMetadata

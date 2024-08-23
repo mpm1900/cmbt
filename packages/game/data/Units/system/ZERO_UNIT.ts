@@ -52,6 +52,7 @@ export const ZERO_UNIT: Unit = {
     actions: [],
     modifiers: [],
   },
+  augments: [],
   modifiers: () => [],
   actions: [],
   metadata: {

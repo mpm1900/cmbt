@@ -74,6 +74,7 @@ export function resolveUnitBuilder(builder: UnitBuilder, teamId: Id): Unit {
     values: ZERO_UNIT.values,
     flags: ZERO_UNIT.flags,
     registry: ZERO_UNIT.registry,
+    augments: [],
     modifiers: () => [],
     actions: [],
     metadata: ZERO_UNIT.metadata,

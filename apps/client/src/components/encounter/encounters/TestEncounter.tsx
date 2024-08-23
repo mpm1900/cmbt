@@ -3,6 +3,7 @@ import { TeamId } from '@repo/game/data'
 import { Encounter, EncounterNode, Team } from '@repo/game/types'
 import { makeEnemyUnit } from '@repo/game/utils'
 import { nanoid } from 'nanoid'
+import { GiCrossedSwords } from 'react-icons/gi'
 import { IoMdReturnLeft, IoMdReturnRight } from 'react-icons/io'
 import { Narration } from '../Narration'
 
@@ -24,6 +25,7 @@ const TestNode1: EncounterNode = {
       id: nanoid(),
       label: (
         <div className="flex space-x-2 items-center">
+          <GiCrossedSwords />
           <span>Ambush the enemies</span>
           <IoMdReturnRight />
         </div>
@@ -60,8 +62,8 @@ const TestNode1: EncounterNode = {
       id: nanoid(),
       label: (
         <div className="flex space-x-2 items-center">
-          <IoMdReturnLeft />
           <span>Leave</span>
+          <IoMdReturnLeft />
         </div>
       ),
       resolve: (ctx) => ctx.back(),
@@ -71,8 +73,8 @@ const TestNode1: EncounterNode = {
       id: nanoid(),
       label: (
         <div className="flex space-x-2 items-center">
-          <IoMdReturnLeft />
           <span>Complete encounter</span>
+          <IoMdReturnLeft />
         </div>
       ),
       resolve: (ctx) => {
@@ -104,6 +106,7 @@ const TestNode2: EncounterNode = {
       id: nanoid(),
       label: (
         <div className="flex space-x-2 items-center">
+          <GiCrossedSwords />
           <span>Begin combat</span>
           <IoMdReturnRight />
         </div>

@@ -1,6 +1,7 @@
 import { Encounter, Id } from '.'
 
 export type GameWorldNodeIconKey =
+  | '?'
   | 'combat'
   | 'shop'
   | 'start'

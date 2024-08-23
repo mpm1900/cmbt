@@ -22,7 +22,7 @@ export function StatDebug(props: StatDebugProps) {
         : 'inherit'
 
   return (
-    <span style={{ color }} className="font-mono">
+    <span style={{ color }}>
       {before}
       {parseFloat((map ? map(value) : value).toFixed(1))}
       {after}

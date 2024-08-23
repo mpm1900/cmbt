@@ -39,6 +39,12 @@ export class HyperBeam extends Action {
       attackType: 'magic',
       maxTargetCount: 1,
     })
+
+    this.damage = {
+      value: 0,
+      attackType: 'magic',
+      damageType: 'force',
+    }
   }
 
   threshold = (source: Unit): number | undefined => 95 + source.stats.accuracy

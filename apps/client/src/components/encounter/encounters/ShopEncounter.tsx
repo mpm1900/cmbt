@@ -13,6 +13,7 @@ import { Key01, Key01Id, Potion, PotionId, TeamId } from '@repo/game/data'
 import { Encounter, EncounterNode, Item, Team } from '@repo/game/types'
 import { makeEnemyUnit } from '@repo/game/utils'
 import { nanoid } from 'nanoid'
+import { GiCreditsCurrency, GiCrossedSwords } from 'react-icons/gi'
 import { IoMdReturnLeft, IoMdReturnRight } from 'react-icons/io'
 import { Narration } from '../Narration'
 
@@ -34,7 +35,12 @@ const ShopIntroductionNode: EncounterNode = {
   choices: () => [
     {
       id: nanoid(),
-      label: <div>View Wares</div>,
+      label: (
+        <div className="flex space-x-2 items-center">
+          <GiCreditsCurrency />
+          <span>View wares.</span>
+        </div>
+      ),
       resolve: (ctx) => {
         ctx.updateEncounter((s) => ({
           activeNodeId: ShopWaresNode.id,
@@ -46,6 +52,7 @@ const ShopIntroductionNode: EncounterNode = {
       id: nanoid(),
       label: (
         <div className="flex space-x-2 items-center">
+          <GiCrossedSwords />
           <span>Attack the shopkeep.</span>
           <IoMdReturnRight />
         </div>
@@ -75,8 +82,8 @@ const ShopIntroductionNode: EncounterNode = {
       id: nanoid(),
       label: (
         <div className="flex space-x-2 items-center">
-          <IoMdReturnLeft />
           <span>Leave</span>
+          <IoMdReturnLeft />
         </div>
       ),
       resolve: (ctx) => {
@@ -107,7 +114,11 @@ const ShopWaresNode: EncounterNode = {
   choices: (ctx) => [],
   renderChoice: (choice, index, ctx) => null,
   renderChoices: (ctx) => {
-    const reset = () => {}
+    const reset = () => {
+      return ctx.updateEncounter((s) => ({
+        activeNodeId: ShopIntroductionNode.id,
+      }))
+    }
     const buyItem = (item: Item) => {
       ctx.updateEncounter((e) => ({
         values: {
@@ -118,9 +129,7 @@ const ShopWaresNode: EncounterNode = {
       ctx.addItem(item)
     }
     const end = () => {
-      const encounter = ctx.updateEncounter((s) => ({
-        activeNodeId: ShopIntroductionNode.id,
-      }))
+      const encounter = reset()
       ctx.updateActiveWorldNode((n) => ({
         completed: true,
         encounter,

@@ -46,6 +46,7 @@ export class BodySlam extends Action {
     this.missDamage = {
       value: 30,
       attackType,
+      damageType: 'force',
     }
   }
 

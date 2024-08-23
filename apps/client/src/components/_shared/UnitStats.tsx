@@ -92,25 +92,25 @@ export function UnitStats(props: UnitStatsProps) {
               <div>
                 <div className="flex justify-between space-x-2">
                   <strong className="text-muted-foreground">HP</strong>
-                  <span className="font-mono">
+                  <span className="">
                     ({remainingHealth}/{unit.stats.health})
                   </span>
                 </div>
                 <div className="flex justify-between space-x-2">
                   <strong className="text-muted-foreground">FP</strong>
-                  <span className="font-mono">
+                  <span className="">
                     ({Math.max(unit.values.focus, 0)}/{unit.stats.focus})
                   </span>
                 </div>
                 <div className="flex justify-between space-x-2">
                   <strong className="text-muted-foreground">SP</strong>
-                  <span className="font-mono">
+                  <span className="">
                     ({Math.max(unit.values.stamina, 0)}/{unit.stats.stamina})
                   </span>
                 </div>
                 <div className="flex justify-between space-x-2">
                   <strong className="text-muted-foreground">DV</strong>
-                  <span className="font-mono">
+                  <span className="">
                     ({Math.max(unit.values.devotion, 0)}/{unit.stats.devotion})
                   </span>
                 </div>

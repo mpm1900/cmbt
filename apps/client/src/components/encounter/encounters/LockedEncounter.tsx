@@ -17,8 +17,8 @@ const LockedNode1 = (): EncounterNode => {
           id: nanoid(),
           label: (
             <div className="flex space-x-2 items-center">
-              <IoMdReturnLeft />
               <span>Leave</span>
+              <IoMdReturnLeft />
             </div>
           ),
           resolve: (ctx) => ctx.back(),
@@ -33,6 +33,7 @@ const LockedNode1 = (): EncounterNode => {
               <div className="flex space-x-2 items-center">
                 <MdOutlineVpnKey />
                 <span>Unlock the door</span>
+                <IoMdReturnLeft />
               </div>
             ),
             resolve: (ctx) => {

@@ -46,7 +46,7 @@ type NodeMaker = (
 const ShopNode: NodeMaker = (id, edges, overrides) => ({
   id: shop(id),
   size: 20,
-  icon: 'shop',
+  icon: '?',
   completedIcon: 'shop',
   encounter: ShopEncounter,
   edges,
@@ -61,7 +61,7 @@ const ShopNode: NodeMaker = (id, edges, overrides) => ({
 const TestNode: NodeMaker = (id, edges, overrides) => ({
   id: test(id),
   size: 20,
-  icon: 'combat',
+  icon: '?',
   completedIcon: 'combat',
   encounter: TestEncounter,
   edges,

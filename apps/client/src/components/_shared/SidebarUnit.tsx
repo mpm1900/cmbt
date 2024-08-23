@@ -37,7 +37,12 @@ export function SidebarUnit(props: SidebarUnitProps) {
           <div className="p-4 pr-0 flex-1">
             <div className="flex-1 space-y-2">
               <div className="space-x-2">
-                <span className="font-black">{unit.level}</span>
+                <span className="font-black">
+                  <span className="text-sm text-muted-foreground font-thin">
+                    Lv.
+                  </span>
+                  {unit.level}
+                </span>
                 <span>{unit.name}</span>
               </div>
               <UnitBars

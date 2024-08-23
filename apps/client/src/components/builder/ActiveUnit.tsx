@@ -141,7 +141,7 @@ export function ActiveUnit() {
             <CardHeader>
               <CardTitle>Actions</CardTitle>
               <CardDescription>
-                Select between 1 and {builder.config.actionsCount} actions.
+                Select up to {builder.config.actionsCount} actions.
               </CardDescription>
             </CardHeader>
             <CardContent>

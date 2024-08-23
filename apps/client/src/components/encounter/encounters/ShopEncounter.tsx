@@ -24,7 +24,14 @@ import { nanoid } from 'nanoid'
 import { BsArrowLeft } from 'react-icons/bs'
 import { GiCreditsCurrency, GiCrossedSwords } from 'react-icons/gi'
 import { IoMdReturnLeft, IoMdReturnRight } from 'react-icons/io'
+import { ChoiceLabel } from '../ChoiceLabel'
 import { Narration } from '../Narration'
+
+const enemyTeam: Team = {
+  id: TeamId(),
+  resources: { credits: 0 },
+  items: [],
+}
 
 const ShopIntroductionNode: EncounterNode = {
   id: nanoid(),
@@ -45,33 +52,22 @@ const ShopIntroductionNode: EncounterNode = {
     {
       id: nanoid(),
       label: (
-        <div className="flex space-x-2 items-center">
-          <GiCreditsCurrency />
-          <span>View wares.</span>
-        </div>
+        <ChoiceLabel before={<GiCreditsCurrency />}>View wares</ChoiceLabel>
       ),
       resolve: (ctx) => {
         ctx.updateEncounter((s) => ({
           activeNodeId: ShopWaresNode.id,
         }))
       },
-      options: [],
     },
     {
       id: nanoid(),
       label: (
-        <div className="flex space-x-2 items-center">
-          <GiCrossedSwords />
-          <span>Attack the shopkeep.</span>
-          <IoMdReturnRight />
-        </div>
+        <ChoiceLabel before={<GiCrossedSwords />} after={<IoMdReturnRight />}>
+          Attack the shopkeep
+        </ChoiceLabel>
       ),
       resolve: (ctx) => {
-        const enemyTeam: Team = {
-          id: TeamId(),
-          resources: { credits: 0 },
-          items: [],
-        }
         ctx.initializeCombat({
           enemyTeam,
           enemyUnits: Array.from({ length: 4 }).map(() =>
@@ -85,16 +81,10 @@ const ShopIntroductionNode: EncounterNode = {
           onFailure: () => {},
         })
       },
-      options: [],
     },
     {
       id: nanoid(),
-      label: (
-        <div className="flex space-x-2 items-center">
-          <span>Leave</span>
-          <IoMdReturnLeft />
-        </div>
-      ),
+      label: <ChoiceLabel after={<IoMdReturnLeft />}>Leave</ChoiceLabel>,
       resolve: (ctx) => {
         ctx.updateActiveWorldNode((n) => ({
           completed: true,
@@ -102,7 +92,6 @@ const ShopIntroductionNode: EncounterNode = {
         }))
         ctx.back()
       },
-      options: [],
     },
   ],
 }
@@ -121,7 +110,6 @@ const ShopWaresNode: EncounterNode = {
     </div>
   ),
   choices: (ctx) => [],
-  renderChoice: (choice, index, ctx) => null,
   renderChoices: (ctx) => {
     const reset = () => {
       return ctx.updateEncounter((s) => ({

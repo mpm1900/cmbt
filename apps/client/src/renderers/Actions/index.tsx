@@ -521,6 +521,6 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
     name: ACTION_NAMES[PotionActionId],
     baseDamage: () => '',
     cost: '',
-    description: () => 'Heals 20 damage from target friendly unit.',
+    description: () => 'Heals 30 damage on target unit.',
   },
 }

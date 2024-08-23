@@ -6,7 +6,7 @@ import { Action, Id, Item, Unit } from '@repo/game/types'
 import { useEffect, useState } from 'react'
 import { Button } from '../ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
-import { ActionTargets } from './ActionTargets'
+import { ActiveAction } from './ActiveAction'
 
 export type ItemsListProps = {
   onConfirm: (action: Action, targetIds: Id[]) => void
@@ -22,7 +22,6 @@ export function ItemsList(props: ItemsListProps) {
   const [activeItem, setActiveItem] = useState<Item>()
   const activeAction =
     unit && activeItem?.action ? activeItem?.action(unit) : undefined
-  const renderer = ActionRenderers[activeAction?.id ?? '']
   const [targets, setTargets] = useState<Unit[]>([])
 
   function updateActiveItem(item: Item | undefined) {
@@ -99,33 +98,22 @@ export function ItemsList(props: ItemsListProps) {
             No Items
           </div>
         )}
-        {activeAction && (
-          <Card className="dark:bg-muted/40 space-y-2">
-            <CardContent className="p-4 pt-6">
-              <div>
-                <div>{renderer?.description(activeAction)}</div>
-                {renderer?.help && (
-                  <div className="text-sm text-muted-foreground/80 italic">
-                    {renderer?.help(activeAction)}
-                  </div>
-                )}
-              </div>
-            </CardContent>
-            <ActionTargets
-              action={activeAction}
-              targets={targets}
-              onTargetClick={(target, isSelected) => {
-                setTargets((s) =>
-                  isSelected
-                    ? s.filter((t) => t.id !== target.id)
-                    : s.concat(target)
-                )
-              }}
-              onConfirmClick={() => {
-                handleConfirm()
-              }}
-            />
-          </Card>
+        {activeAction && unit && (
+          <ActiveAction
+            action={activeAction}
+            source={unit}
+            targets={targets}
+            onTargetClick={(target, isSelected) => {
+              setTargets((s) =>
+                isSelected
+                  ? s.filter((t) => t.id !== target.id)
+                  : s.concat(target)
+              )
+            }}
+            onConfirmClick={() => {
+              handleConfirm()
+            }}
+          />
         )}
       </CardContent>
     </Card>

@@ -6,6 +6,7 @@ import {
   DefenseDownParentId,
   DefenseUpAllId,
   FireNegationUpParentId,
+  HealParentOnUnitSwitchId,
   InspectAllOnUnitEnterId,
   InvertSpeedAllId,
   PhysicalAttackDownParentId,
@@ -33,8 +34,9 @@ export const MODIFIER_NAMES: Record<string, string> = {
   [SetIsProtectedParentId]: 'Protected',
 
   [CreateSandstormOnUnitEnterId]: 'Sand Stream',
-  [SandstormOnTurnEndId]: 'Sandstorm',
   [DamageNewUnitsOnUnitEnterId]: 'Spikes',
-  [PowerDownAllOtherOnUnitEnterId]: 'Intimidate',
+  [HealParentOnUnitSwitchId]: 'Renerate',
   [InspectAllOnUnitEnterId]: 'Scholar',
+  [PowerDownAllOtherOnUnitEnterId]: 'Intimidate',
+  [SandstormOnTurnEndId]: 'Sandstorm',
 }

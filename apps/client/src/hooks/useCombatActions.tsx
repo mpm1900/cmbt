@@ -64,6 +64,7 @@ export function useCombatActions() {
       addedModifiers: modifiers,
       mutations,
       addedUnits,
+      removedUnits,
       updateModifiers,
       updateActionQueue,
     } = result
@@ -72,6 +73,9 @@ export function useCombatActions() {
       logMiss(result, context)
     }
 
+    if (removedUnits?.length) {
+      context = runTriggers('on Unit Switch Out', context)
+    }
     if (mutations?.length) {
       if (options?.enableLog) logMutations(mutations, context)
       context.units = combat.mutate(mutations, context)

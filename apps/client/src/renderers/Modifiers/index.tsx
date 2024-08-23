@@ -13,6 +13,7 @@ import {
   DefenseUpAllId,
   FireNegationUpParent,
   FireNegationUpParentId,
+  HealParentOnUnitSwitchId,
   InspectAllOnUnitEnterId,
   InvertSpeedAllId,
   PhysicalAttackDownParent,
@@ -193,6 +194,23 @@ export const ModifierRenderers: Record<string, ModifierRenderer> = {
         </div>
       )
     },
+  },
+  [HealParentOnUnitSwitchId]: {
+    name: (
+      <span className="text-white">
+        {MODIFIER_NAMES[HealParentOnUnitSwitchId]}
+      </span>
+    ),
+    description: (modifier: Modifier) => (
+      <div className="text-muted-foreground">
+        <span className="opacity-50 uppercase text-sm font-bold">
+          On self switch out:{' '}
+        </span>
+        This unit heals{' '}
+        {(modifier as unknown as DamagePercentAllOnTurnEnd).factor * 100}% of
+        their health.
+      </div>
+    ),
   },
   [PoisonedDamageOnTurnEndId]: {
     name: (

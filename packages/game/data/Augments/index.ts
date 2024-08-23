@@ -1,4 +1,5 @@
 export * from './FlameShield'
 export * from './Intimidate'
+export * from './Regeneration'
 export * from './SandStream'
 export * from './Scholar'

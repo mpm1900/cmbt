@@ -2,7 +2,11 @@ import { Id } from '.'
 import { CombatContext } from './CombatContext'
 import { Modifier, ModifierProps } from './Modifier'
 
-export type TriggerEvent = 'on Turn Start' | 'on Turn End' | 'on Unit Enter'
+export type TriggerEvent =
+  | 'on Turn Start'
+  | 'on Turn End'
+  | 'on Unit Enter'
+  | 'on Unit Switch Out'
 export const AllTriggerEvents: TriggerEvent[] = ['on Turn Start', 'on Turn End']
 
 export type TriggerProps<T = {}> = ModifierProps<T> & {

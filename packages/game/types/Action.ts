@@ -43,6 +43,7 @@ export type ActionResult = {
   mutations?: Mutation[]
   addedModifiers?: Modifier[]
   addedUnits?: Unit[]
+  removedUnits?: Unit[]
   updateModifiers?: (modifiers: Modifier[]) => Modifier[]
   updateActionQueue?: (queue: ActionsQueueItem[]) => ActionsQueueItem[]
 }

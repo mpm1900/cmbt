@@ -3,9 +3,11 @@ import {
   DamagePercentAllOnTurnEnd,
   FireNegationUpParent,
   FlameShieldId,
+  HealParentOnUnitSwitch,
   InspectAllOnUnitEnter,
   IntimidateId,
   PowerDownAllOtherOnUnitEnter,
+  RegenerationId,
   SandstormOnTurnEndId,
   SandStreamId,
   ScholarId,
@@ -47,6 +49,20 @@ export const AugmentRenderers: Record<Id, AugmentRenderer> = {
             new PowerDownAllOtherOnUnitEnter({
               factor: 1.5,
               duration: 0,
+            })
+          }
+        />
+      </div>
+    ),
+  },
+  [RegenerationId]: {
+    name: <div className="text-white">{AUGMENT_NAMES[RegenerationId]}</div>,
+    description: () => (
+      <div>
+        <ModifierDescription
+          modifier={
+            new HealParentOnUnitSwitch({
+              factor: 0.3,
             })
           }
         />

@@ -67,6 +67,7 @@ export class SwitchUnit extends Action {
       ],
       addedModifiers: getModifiersFromUnit(target),
       addedUnits: [target],
+      removedUnits: [source],
       updateModifiers: (modifiers) => {
         return (
           modifiers

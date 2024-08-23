@@ -52,7 +52,7 @@ export function WorldMap() {
   return (
     <>
       {cy && (
-        <div style={{ position: 'absolute', bottom: 8, right: 8, zIndex: 2 }}>
+        <div style={{ position: 'absolute', top: 8, right: 8, zIndex: 2 }}>
           <Button variant="ghost" onClick={() => fitAll(cy)}>
             Fit All
           </Button>

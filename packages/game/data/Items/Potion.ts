@@ -9,7 +9,7 @@ import {
   Unit,
 } from '../../types'
 import { PotionActionId } from '../Ids'
-import { DamageParent, Identity } from '../Mutations'
+import { HealParent, Identity } from '../Mutations'
 import { GetUnits } from '../Queries'
 
 export class PotionAction extends Action {
@@ -40,10 +40,10 @@ export class PotionAction extends Action {
       source,
       targets,
       mutations: [
-        new DamageParent({
+        new HealParent({
           sourceId: source.id,
           parentId: target.id,
-          damage: -20,
+          offset: 20,
         }),
       ],
       addedModifiers: [],

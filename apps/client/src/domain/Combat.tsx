@@ -7,6 +7,13 @@ import { Sidebar } from '@/components/combat/Sidebar'
 import { Team } from '@/components/combat/Team'
 import { Button } from '@/components/ui/button'
 import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card'
+import {
   useAiActions,
   useInputController,
   useTurnController,
@@ -43,19 +50,27 @@ export function Combat() {
         <Team teamId={aiTeam?.id} />
         <div className="flex flex-1 items-center justify-center">
           <RequireTurnStatus status="done">
-            <div>
-              <div className="text-xxl">battle over!</div>
-              <Link to="/world">
-                <Button
-                  onClick={() => {
-                    commit()
-                    combat.onSuccess()
-                  }}
-                >
-                  Back to World
-                </Button>
-              </Link>
-            </div>
+            <Card>
+              <CardHeader>
+                <CardTitle>Battle over!</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div>You did it! Here's what you get!</div>
+                <div>Nothing.</div>
+              </CardContent>
+              <CardFooter className="justify-end">
+                <Link to="/world">
+                  <Button
+                    onClick={() => {
+                      commit()
+                      combat.onSuccess()
+                    }}
+                  >
+                    Back to Map
+                  </Button>
+                </Link>
+              </CardFooter>
+            </Card>
           </RequireTurnStatus>
           <RequireTurnStatus status="combat">
             <RunningTurn />

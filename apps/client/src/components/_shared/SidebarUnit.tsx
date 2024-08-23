@@ -6,7 +6,7 @@ import { CgDetailsMore } from 'react-icons/cg'
 import { Button } from '../ui/button'
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '../ui/hover-card'
 import { EditUnitModal } from './EditUnitModal'
-import { UnitBars } from './UnitBars'
+import { HealthBar } from './HealthBar'
 import { UnitStats } from './UnitStats'
 
 export type SidebarUnitProps = {
@@ -29,7 +29,8 @@ export function SidebarUnit(props: SidebarUnitProps) {
       []
     )
   )
-
+  const remainingHealth = Math.max(unit.stats.health - unit.values.damage, 0)
+  const ratio = (remainingHealth / unit.stats.health) * 100
   return (
     <div className="rounded hover:bg-slate-800 flex flex-row space-x-2 items-center">
       <HoverCard openDelay={300} closeDelay={100}>
@@ -45,12 +46,7 @@ export function SidebarUnit(props: SidebarUnitProps) {
                 </span>
                 <span>{unit.name}</span>
               </div>
-              <UnitBars
-                unit={unit}
-                isActive={false}
-                hideStats={false}
-                initial={100}
-              />
+              <HealthBar unit={unit} initial={ratio} />
             </div>
           </div>
         </HoverCardTrigger>

@@ -21,6 +21,7 @@ import {
 import { makeEnemyUnit } from '@repo/game/utils'
 import { ItemListTable } from '@shared/ItemListTable'
 import { nanoid } from 'nanoid'
+import { BsArrowLeft } from 'react-icons/bs'
 import { GiCreditsCurrency, GiCrossedSwords } from 'react-icons/gi'
 import { IoMdReturnLeft, IoMdReturnRight } from 'react-icons/io'
 import { Narration } from '../Narration'
@@ -161,19 +162,23 @@ const ShopWaresNode: EncounterNode = {
         <div className="flex justify-end space-x-4">
           <Button
             variant="secondary"
+            className="space-x-2"
             onClick={() => {
               reset()
             }}
           >
-            Back
+            <BsArrowLeft />
+            <span>Back</span>
           </Button>
           <Button
             variant="secondary"
+            className="space-x-2"
             onClick={() => {
               end()
             }}
           >
-            Leave
+            <span>Leave</span>
+            <IoMdReturnRight />
           </Button>
         </div>
       </div>

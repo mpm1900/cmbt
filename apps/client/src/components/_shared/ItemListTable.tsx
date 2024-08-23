@@ -28,10 +28,9 @@ export function ItemListTable(props: ItemListTableProps) {
         <TableRow>
           <TableHead>#</TableHead>
           <TableHead>name</TableHead>
+          {onClick && <TableHead className="w-[48px]">cost</TableHead>}
           {onClick && (
-            <TableHead className="flex justify-end items-center">
-              cost
-            </TableHead>
+            <TableHead className="w-[32px] flex justify-end items-center"></TableHead>
           )}
         </TableRow>
       </TableHeader>
@@ -47,9 +46,18 @@ export function ItemListTable(props: ItemListTableProps) {
               >
                 x{quantities[item.id]}
               </TableCell>
-              <TableCell>{item.name}</TableCell>
+              <TableCell className={cn('w-full')}>{item.name}</TableCell>
               {onClick && (
-                <TableCell className="flex justify-end items-center p-0">
+                <TableCell
+                  className={cn({
+                    'text-red-400': (resources.credits ?? 0) < item.cost,
+                  })}
+                >
+                  {item.cost}g
+                </TableCell>
+              )}
+              {onClick && (
+                <TableCell className="p-0">
                   <Button
                     disabled={
                       (resources.credits ?? 0) < item.cost ||
@@ -65,7 +73,7 @@ export function ItemListTable(props: ItemListTableProps) {
                       onClick(item)
                     }}
                   >
-                    Buy {item.cost}g
+                    Buy
                   </Button>
                 </TableCell>
               )}

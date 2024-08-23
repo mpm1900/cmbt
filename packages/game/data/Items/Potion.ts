@@ -62,6 +62,7 @@ export const Potion = (): Item => ({
       sourceId: u.id,
       teamId: u.teamId,
       maxTargetCount: 1,
+      priority: 5,
       cost: new Identity({}),
     }),
   cost: 150,

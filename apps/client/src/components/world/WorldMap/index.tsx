@@ -44,7 +44,7 @@ export function WorldMap() {
       duration: 200,
       fit: {
         eles: nodes,
-        padding: nodesRadio * 32,
+        padding: nodesRadio * 48,
       },
     })
   }

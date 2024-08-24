@@ -40,9 +40,10 @@ export function EditUnitModal(props: EditUnitModalProps) {
             Change this unit's actions and augments for combat.
           </DialogDescription>
         </DialogHeader>
+        <Separator />
         <div className="flex space-x-4">
           {base && (
-            <div className="min-w-[280px] p-2 space-y-4">
+            <div className="min-w-[280px] space-y-4">
               <div>
                 <div className="flex justify-between items-center">
                   <div className="font-bold">Items</div>
@@ -63,6 +64,7 @@ export function EditUnitModal(props: EditUnitModalProps) {
                   Select up to {base.augmentSlots} slots worth of items
                 </div>
               </div>
+              <Separator />
               <div className="space-y-2">
                 {unit.augments.map((a, index) => (
                   <div key={a?.itemRtid} className="flex space-x-1">
@@ -110,7 +112,7 @@ export function EditUnitModal(props: EditUnitModalProps) {
           )}
           <Separator orientation="vertical" />
           {config && (
-            <div className="space-y-3">
+            <div className="space-y-4 flex-1">
               <div>
                 <div className="flex justify-between items-center">
                   <div className="font-bold">Actions</div>
@@ -131,6 +133,7 @@ export function EditUnitModal(props: EditUnitModalProps) {
                   Select up to {config.actionsCount} actions.
                 </div>
               </div>
+              <Separator />
               <ActionListTable
                 actions={config.actions}
                 maxActionCount={config.actionsCount}

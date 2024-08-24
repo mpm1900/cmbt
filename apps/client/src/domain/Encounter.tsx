@@ -1,6 +1,10 @@
 import { EncounterSidebar } from '@/components/encounter/EncounterSidebar'
 import { NodeRenderer } from '@/components/encounter/NodeRenderer'
-import { useEncounterContext, useEncounterSetup } from '@/hooks'
+import {
+  useEncounterContext,
+  useEncounterSetup,
+  VantaContextProvider,
+} from '@/hooks'
 import { useGame } from '@/hooks/state'
 import { Navbar } from '@shared/Navbar'
 import { PageLayout } from '@shared/PageLayout'
@@ -12,14 +16,16 @@ export function Encounter() {
   useEncounterSetup()
 
   return (
-    <PageLayout
-      navbar={<Navbar />}
-      aside={<EncounterSidebar defaultValue="team" />}
-      header={<TeamHeader team={game.team} />}
-    >
-      <div className="flex flex-1 items-center justify-center">
-        {ctx.activeNode && <NodeRenderer node={ctx.activeNode} />}
-      </div>
-    </PageLayout>
+    <VantaContextProvider>
+      <PageLayout
+        navbar={<Navbar />}
+        aside={<EncounterSidebar defaultValue="team" />}
+        header={<TeamHeader team={game.team} />}
+      >
+        <div className="flex flex-1 items-center justify-center">
+          {ctx.activeNode && <NodeRenderer node={ctx.activeNode} />}
+        </div>
+      </PageLayout>
+    </VantaContextProvider>
   )
 }

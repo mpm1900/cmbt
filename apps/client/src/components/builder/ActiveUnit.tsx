@@ -29,6 +29,7 @@ export function ActiveUnit() {
           <Card className="w-[320px]">
             <CardHeader>
               <CardTitle>{builder.name}</CardTitle>
+              <CardDescription>Set unit details</CardDescription>
             </CardHeader>
 
             <CardContent>

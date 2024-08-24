@@ -1,7 +1,7 @@
 import { GameStartModal } from '@/components/world/GameStartModal'
 import { WorldMap } from '@/components/world/WorldMap'
 import { WorldSidebar } from '@/components/world/WorldSidebar'
-import { useWorldSetup } from '@/hooks'
+import { useWorldSetup, VantaContextProvider } from '@/hooks'
 import { useGame } from '@/hooks/state'
 import { Navbar } from '@shared/Navbar'
 import { PageLayout } from '@shared/PageLayout'
@@ -22,15 +22,17 @@ export function World() {
   }, [])
 
   return (
-    <PageLayout
-      navbar={<Navbar />}
-      aside={<WorldSidebar />}
-      header={<TeamHeader team={game.team} />}
-    >
-      <WorldMap />
-      {game.world.activeNodeId === game.world.startingNodeId && ready && (
-        <GameStartModal />
-      )}
-    </PageLayout>
+    <VantaContextProvider>
+      <PageLayout
+        navbar={<Navbar />}
+        aside={<WorldSidebar />}
+        header={<TeamHeader team={game.team} />}
+      >
+        <WorldMap />
+        {game.world.activeNodeId === game.world.startingNodeId && ready && (
+          <GameStartModal />
+        )}
+      </PageLayout>
+    </VantaContextProvider>
   )
 }

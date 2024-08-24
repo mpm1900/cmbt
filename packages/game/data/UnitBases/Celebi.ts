@@ -20,7 +20,7 @@ export const Celebi: UnitBase = {
     stamina: 30,
     devotion: 20,
   },
-  augmentSlots: 5,
+  augmentSlots: 3,
   affinities: [],
   resistances: [],
   weaknesses: [],

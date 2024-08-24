@@ -9,9 +9,26 @@ import {
 } from 'react'
 import Fog from 'vanta/dist/vanta.fog.min'
 
+export type VantaEffectOptions = {
+  minHeight: number
+  minWidth: number
+  highlightColor: number
+  midtoneColor: number
+  lowlightColor: number
+  baseColor: number
+  blurFactor: number
+  speed: number
+  zoom: number
+}
+
+export type VantaEffect = {
+  setOptions: (options: Partial<VantaEffectOptions>) => void
+  destroy: () => void
+}
+
 export type VantaEffectContext = {
   ref: RefObject<HTMLDivElement>
-  effect: any | undefined
+  effect: VantaEffect | undefined
   set: (v: any) => void
 }
 
@@ -25,7 +42,7 @@ export const VantaContext = createContext(defaultValue)
 export const useVantaContext = () => useContext(VantaContext)
 
 export function VantaContextProvider(props: PropsWithChildren) {
-  const [effect, set] = useState<any>()
+  const [effect, set] = useState<VantaEffect>()
   const ref = useRef<HTMLDivElement>(null)
 
   useEffect(() => {

@@ -10,7 +10,6 @@ export function RunningTurn() {
     user: s.user,
   }))
   const renderer = ActionRenderers[active?.action?.id ?? '']
-  console.log(active)
 
   return (
     <div>

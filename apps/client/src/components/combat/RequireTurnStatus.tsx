@@ -8,6 +8,7 @@ export type RequireTurnStatusProps = PropsWithChildren<{ status: TurnStatus }>
 export function RequireTurnStatus(props: RequireTurnStatusProps) {
   const { children, status } = props
   const turn = useCombat((s) => s.turn)
+
   return turn.status === status ? (
     <motion.div
       initial={{ opacity: 0 }}

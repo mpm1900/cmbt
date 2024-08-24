@@ -19,7 +19,7 @@ import {
   Team,
 } from '@repo/game/types'
 import { makeEnemyUnit } from '@repo/game/utils'
-import { ItemListTable } from '@shared/ItemListTable'
+import { ItemListTables } from '@shared/ItemListTables'
 import { nanoid } from 'nanoid'
 import { BsArrowLeft } from 'react-icons/bs'
 import { GiCreditsCurrency, GiCrossedSwords } from 'react-icons/gi'
@@ -136,7 +136,7 @@ const ShopWaresNode: EncounterNode = {
     return (
       <div className="space-y-4">
         {ctx.team && (
-          <ItemListTable
+          <ItemListTables
             unit={ZERO_UNIT}
             items={[Potion(), Key01(), Ruby()] as GroupedItem[]}
             resources={ctx.team.resources}

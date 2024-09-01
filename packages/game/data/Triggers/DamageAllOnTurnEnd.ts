@@ -1,6 +1,7 @@
 import {
   CombatContext,
   Modifier,
+  MutationFilterArgs,
   Trigger,
   TriggerProps,
   Unit,
@@ -30,7 +31,11 @@ export class DamageAllOnTurnEnd extends Trigger {
     }
   }
 
-  filter = (unit: Unit, ctx: CombatContext): boolean => {
-    return super.filter(unit, ctx)
+  filter = (
+    unit: Unit,
+    ctx: CombatContext,
+    args: MutationFilterArgs
+  ): boolean => {
+    return super.filter(unit, ctx, args)
   }
 }

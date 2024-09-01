@@ -18,7 +18,7 @@ export function ChoiceButton(props: ChoiceButtonProps) {
         choice.resolve(ctx)
       }}
     >
-      <span>{index}.</span> {choice.label}
+      <span>{index + 1})</span> {choice.label}
     </Button>
   )
 }

@@ -1,31 +1,24 @@
-import {
-  GameWorld,
-  GameWorldNode,
-  Id,
-  Item,
-  Team,
-  Unit,
-} from '@repo/game/types'
+import { Id, Item, Team, Unit, World, WorldNode } from '@repo/game/types'
 import { create } from 'zustand'
 
 export type GameState = {
   team: Team
   units: Unit[]
-  world: GameWorld
+  world: World
 }
 
 export type InitializeWorldProps = {
   team: Team
   units: Unit[]
-  world: GameWorld
+  world: World
 }
 
 export type GameStore = GameState & {
   initialize: (props: InitializeWorldProps) => void
-  setActiveNodeId: (node: GameWorldNode) => void
+  setActiveNodeId: (node: WorldNode) => void
   updateWorldNode: (
     nodeId: Id,
-    fn: (n: GameWorldNode) => Partial<GameWorldNode>
+    fn: (n: WorldNode) => Partial<WorldNode>
   ) => void
   updateTeam: (fn: (team: Team) => Partial<Team>) => void
   updateUnits: (fn: (unit: Unit) => Partial<Unit>) => void

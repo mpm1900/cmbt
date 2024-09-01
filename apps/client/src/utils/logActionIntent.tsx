@@ -1,25 +1,34 @@
 import { LogActionName, LogUnit } from '@/components/ui/log'
+import { CombatLogger } from '@/hooks/state'
 import { ActionRenderers } from '@/renderers'
 import { Action, ActionResult, CombatContext } from '@repo/game/types'
+import { TextList } from '@shared/TextList'
 
 export function logActionIntent(
   action: Action,
   result: ActionResult,
+  log: CombatLogger,
   ctx: CombatContext
 ) {
-  const { source, targets } = result
+  const { source, targets, expandedTargets } = result
+  const logTargets = expandedTargets ?? targets
   const renderer = ActionRenderers[action.id]
-  if (targets) {
+  if (logTargets) {
     const baseLog = (
       <span className="">
         <LogUnit teamId={source?.teamId} user={ctx.user}>
           {source?.name}
         </LogUnit>{' '}
-        used <LogActionName action={action} />
+        used <LogActionName action={action} /> on{' '}
+        <TextList>
+          {logTargets.map((t) => (
+            <LogUnit key={t.id} teamId={t.teamId} user={ctx.user}>
+              {t.name}
+            </LogUnit>
+          ))}
+        </TextList>
       </span>
     )
-    ctx.log(
-      renderer?.log ? renderer.log(action, source, targets, ctx) : baseLog
-    )
+    log(renderer?.log ? renderer.log(action, source, logTargets, ctx) : baseLog)
   }
 }

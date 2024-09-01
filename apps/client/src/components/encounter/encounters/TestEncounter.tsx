@@ -1,10 +1,11 @@
 import { faker } from '@faker-js/faker'
-import { TeamId } from '@repo/game/data'
+import { SpeedUpTeam, TeamId } from '@repo/game/data'
 import { Encounter, EncounterNode, Team } from '@repo/game/types'
 import { makeEnemyUnit } from '@repo/game/utils'
 import { nanoid } from 'nanoid'
 import { GiCrossedSwords } from 'react-icons/gi'
 import { IoMdReturnLeft, IoMdReturnRight } from 'react-icons/io'
+import { ChoiceLabel } from '../ChoiceLabel'
 import { Narration } from '../Narration'
 
 const TestNode1: EncounterNode = {
@@ -24,11 +25,9 @@ const TestNode1: EncounterNode = {
     {
       id: nanoid(),
       label: (
-        <div className="flex space-x-2 items-center">
-          <GiCrossedSwords />
-          <span>Ambush the enemies</span>
-          <IoMdReturnRight />
-        </div>
+        <ChoiceLabel before={<GiCrossedSwords />} after={<IoMdReturnRight />}>
+          Ambush the enemies
+        </ChoiceLabel>
       ),
       resolve: (ctx) => {
         const enemyTeam: Team = {
@@ -36,11 +35,20 @@ const TestNode1: EncounterNode = {
           resources: { credits: 0 },
           items: [],
         }
+        const unit = ctx.units.find((u) => true)
         ctx.initializeCombat({
           enemyTeam,
           enemyUnits: Array.from({ length: 3 }).map(() =>
             makeEnemyUnit(faker.person.fullName(), enemyTeam.id, 15)
           ),
+          modifiers: [
+            new SpeedUpTeam({
+              sourceId: unit?.id,
+              parentId: unit?.id,
+              factor: 1.5,
+              duration: 2,
+            }),
+          ],
           onSuccess: () => {
             ctx.updateActiveWorldNode((n) => ({
               completed: true,
@@ -49,33 +57,22 @@ const TestNode1: EncounterNode = {
           onFailure: () => {},
         })
       },
-      options: [],
     },
     {
       id: nanoid(),
       label: <div>Get the enemies' attention</div>,
       resolve: (ctx) =>
         ctx.updateEncounter((e) => ({ activeNodeId: TestNode2.id })),
-      options: [],
     },
     {
       id: nanoid(),
-      label: (
-        <div className="flex space-x-2 items-center">
-          <span>Leave</span>
-          <IoMdReturnLeft />
-        </div>
-      ),
+      label: <ChoiceLabel after={<IoMdReturnLeft />}>Leave</ChoiceLabel>,
       resolve: (ctx) => ctx.back(),
-      options: [],
     },
     {
       id: nanoid(),
       label: (
-        <div className="flex space-x-2 items-center">
-          <span>Complete encounter</span>
-          <IoMdReturnLeft />
-        </div>
+        <ChoiceLabel after={<IoMdReturnLeft />}>Complete encounter</ChoiceLabel>
       ),
       resolve: (ctx) => {
         ctx.updateActiveWorldNode((n) => ({
@@ -105,11 +102,9 @@ const TestNode2: EncounterNode = {
     {
       id: nanoid(),
       label: (
-        <div className="flex space-x-2 items-center">
-          <GiCrossedSwords />
-          <span>Begin combat</span>
-          <IoMdReturnRight />
-        </div>
+        <ChoiceLabel before={<GiCrossedSwords />} after={<IoMdReturnRight />}>
+          Begin combat
+        </ChoiceLabel>
       ),
       resolve: (ctx) => {
         // TODO: but make it harder
@@ -131,7 +126,6 @@ const TestNode2: EncounterNode = {
           onFailure: () => {},
         })
       },
-      options: [],
     },
   ],
 }
@@ -139,6 +133,7 @@ const TestNode2: EncounterNode = {
 export const TestEncounterId = nanoid()
 export const TestEncounter: Encounter = {
   id: TestEncounterId,
+  setup: () => {},
   nodes: [TestNode1, TestNode2],
   activeNodeId: TestNode1.id,
   values: {},

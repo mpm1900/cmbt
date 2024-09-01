@@ -1,18 +1,30 @@
 import { LogSecondary, LogUnit } from '@/components/ui/log'
+import { CombatLogger } from '@/hooks/state'
 import { DamageParent, SetLastUsedActionId } from '@repo/game/data'
-import { CombatContext, Mutation, Unit } from '@repo/game/types'
+import {
+  CombatContext,
+  Mutation,
+  MutationFilterArgs,
+  Unit,
+} from '@repo/game/types'
 import { applyMutations } from '@repo/game/utils'
 
-export function logMutations(mutations: Mutation[], ctx: CombatContext) {
+export function logMutations(
+  mutations: Mutation[],
+  log: CombatLogger,
+  ctx: CombatContext,
+  args?: MutationFilterArgs
+) {
+  args = args ?? {}
   const logMutations = mutations.filter((m) => m.id !== SetLastUsedActionId)
   const units = ctx.units.filter((u) =>
-    logMutations.some((m) => m.filter(u, ctx))
+    logMutations.some((m) => m.filter(u, ctx, args))
   )
   units.forEach((unit, i) => {
-    const unitMutations = logMutations.filter((m) => m.filter(unit, ctx))
+    const unitMutations = logMutations.filter((m) => m.filter(unit, ctx, args))
     if (unitMutations.length > 0) {
       const diffs = applyMutations(unit, unitMutations)
-      logMutationDiffs(unit, diffs, unitMutations, i, ctx)
+      logMutationDiffs(unit, diffs, unitMutations, i, log, ctx)
     }
   })
 }
@@ -22,6 +34,7 @@ export function logMutationDiffs(
   diffs: Unit,
   mutations: Mutation[],
   index: number,
+  log: CombatLogger,
   ctx: CombatContext
 ) {
   const name = parent.name
@@ -30,7 +43,7 @@ export function logMutationDiffs(
   const mArmorDiff = diffs.values.magicArmor - parent.values.magicArmor
   const ratio = (damageDiff / parent.stats.health) * 100
   if (damageDiff !== 0) {
-    ctx.log(
+    log(
       <LogSecondary className="italic">
         <LogUnit teamId={parent?.teamId} user={ctx.user} className="opacity-70">
           {name}
@@ -45,7 +58,7 @@ export function logMutationDiffs(
     )
   }
   if (pArmorDiff !== 0) {
-    ctx.log(
+    log(
       <LogSecondary className="italic">
         <LogUnit teamId={parent?.teamId} user={ctx.user} className="opacity-70">
           {name}
@@ -57,7 +70,7 @@ export function logMutationDiffs(
     )
   }
   if (mArmorDiff !== 0) {
-    ctx.log(
+    log(
       <LogSecondary className="italic">
         <LogUnit teamId={parent?.teamId} user={ctx.user} className="opacity-70">
           {name}
@@ -68,7 +81,7 @@ export function logMutationDiffs(
     )
   }
   if (mutations.some((m) => (m as DamageParent).evasionSuccess)) {
-    ctx.log(
+    log(
       <LogSecondary className="italic">
         <LogUnit teamId={parent?.teamId} user={ctx.user} className="opacity-70">
           {name}

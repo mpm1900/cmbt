@@ -1,4 +1,10 @@
-import { CombatContext, Trigger, TriggerProps, Unit } from '../../types'
+import {
+  CombatContext,
+  MutationFilterArgs,
+  Trigger,
+  TriggerProps,
+  Unit,
+} from '../../types'
 import { CreateSandstormOnUnitEnterId, SandstormOnTurnEndId } from '../Ids'
 import { DamagePercentAllOnTurnEnd } from './DamagePercentAllOnTurnEnd'
 
@@ -27,7 +33,11 @@ export class CreateSandstormOnUnitEnter extends Trigger {
     return unit
   }
 
-  filter = (unit: Unit, ctx: CombatContext): boolean => {
-    return super.filter(unit, ctx) && unit.id === this.sourceId
+  filter = (
+    unit: Unit,
+    ctx: CombatContext,
+    args: MutationFilterArgs
+  ): boolean => {
+    return super.filter(unit, ctx, args) && unit.id === this.sourceId
   }
 }

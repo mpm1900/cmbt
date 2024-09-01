@@ -1,5 +1,6 @@
 import { ActiveUnit } from '@/components/combat/ActiveUnit'
 import { CleanupSwitchUnits } from '@/components/combat/CleanupSwitchUnits'
+import { CombatHeader } from '@/components/combat/CombatHeader'
 import { RequireTurnStatus } from '@/components/combat/RequireTurnStatus'
 import { RunningTurn } from '@/components/combat/RunningTurn'
 import { Sidebar } from '@/components/combat/Sidebar'
@@ -44,7 +45,7 @@ export function Combat() {
     <VantaContextProvider>
       <PageLayout
         navbar={<Navbar />}
-        // header={<CombatHeader />}
+        header={<CombatHeader />}
         aside={<Sidebar />}
       >
         <div className="flex flex-1 flex-col p-2 justify-between">

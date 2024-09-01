@@ -8,6 +8,5 @@ export function useCombatContext(): CombatContext {
     turn: s.turn,
     units: s.units,
     user: s.user,
-    log: s.log,
   }))
 }

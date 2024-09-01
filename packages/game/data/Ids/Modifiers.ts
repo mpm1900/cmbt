@@ -15,6 +15,7 @@ export const SetIsProtectedParentId = ModifierId()
 export const SetIsStunnedParentId = ModifierId()
 export const SpeedDownAllOtherId = ModifierId()
 export const SpeedUpParentId = ModifierId()
+export const SpeedUpTeamId = ModifierId()
 
 export const BurnedPowerDownId = ModifierId()
 export const PoisonedDamageOnTurnEndId = ModifierId()

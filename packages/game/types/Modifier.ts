@@ -1,6 +1,5 @@
 import { Id } from '.'
 import { Mutation, MutationProps } from './Mutation'
-import { Unit } from './Unit'
 
 export type ModifierProps<T = {}> = MutationProps<T> & {
   duration?: number
@@ -19,7 +18,6 @@ export abstract class Modifier extends Mutation {
   persistOnCombatEnd: boolean
   statusId: Id | undefined
 
-  abstract resolve(unit: Unit): Partial<Unit>
   get key(): string {
     return `${this.rid}.${this.parentId ?? this.sourceId}`
   }
@@ -32,24 +30,6 @@ export abstract class Modifier extends Mutation {
     this.persistOnSwitch = props.persistOnSwitch || false
     this.persistOnCombatEnd = props.persistOnCombatEnd || false
     this.statusId = props.statusId
-  }
-
-  getProps(): ModifierProps {
-    return {
-      duration: this.duration,
-      maxInstances: this.maxInstances,
-      priority: this.priority,
-      persistOnSwitch: this.persistOnSwitch,
-      persistOnCombatEnd: this.persistOnCombatEnd,
-    }
-  }
-
-  clone(props: Partial<ModifierProps>) {
-    const { constructor } = Object.getPrototypeOf(this)
-    return new constructor(this.id, {
-      ...this.getProps(),
-      ...props,
-    }) as typeof this
   }
 
   decrementDuration() {

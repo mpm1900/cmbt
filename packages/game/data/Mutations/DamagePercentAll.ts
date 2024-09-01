@@ -1,5 +1,9 @@
 import { CombatContext, Unit } from '../../types'
-import { Mutation, MutationProps } from '../../types/Mutation'
+import {
+  Mutation,
+  MutationFilterArgs,
+  MutationProps,
+} from '../../types/Mutation'
 import { DamagePercentAllId } from '../Ids'
 
 export class DamagePercentAll extends Mutation {
@@ -18,7 +22,11 @@ export class DamagePercentAll extends Mutation {
     }
   }
 
-  filter = (unit: Unit, ctx: CombatContext): boolean => {
-    return super.filter(unit, ctx)
+  filter = (
+    unit: Unit,
+    ctx: CombatContext,
+    args: MutationFilterArgs
+  ): boolean => {
+    return super.filter(unit, ctx, args)
   }
 }

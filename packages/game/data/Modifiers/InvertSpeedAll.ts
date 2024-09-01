@@ -1,4 +1,10 @@
-import { CombatContext, Modifier, ModifierProps, Unit } from '../../types'
+import {
+  CombatContext,
+  Modifier,
+  ModifierProps,
+  MutationFilterArgs,
+  Unit,
+} from '../../types'
 import { InvertSpeedAllId } from '../Ids'
 
 export class InvertSpeedAll extends Modifier {
@@ -18,7 +24,11 @@ export class InvertSpeedAll extends Modifier {
     }
   }
 
-  filter = (unit: Unit, ctx: CombatContext): boolean => {
-    return super.filter(unit, ctx)
+  filter = (
+    unit: Unit,
+    ctx: CombatContext,
+    args: MutationFilterArgs
+  ): boolean => {
+    return super.filter(unit, ctx, args)
   }
 }

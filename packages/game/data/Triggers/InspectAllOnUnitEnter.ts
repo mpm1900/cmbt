@@ -1,4 +1,10 @@
-import { CombatContext, Trigger, TriggerProps, Unit } from '../../types'
+import {
+  CombatContext,
+  MutationFilterArgs,
+  Trigger,
+  TriggerProps,
+  Unit,
+} from '../../types'
 import { InspectAllOnUnitEnterId } from '../Ids'
 import { SetIsInspectedAll } from '../Modifiers'
 
@@ -25,7 +31,11 @@ export class InspectAllOnUnitEnter extends Trigger {
     return unit
   }
 
-  filter = (unit: Unit, ctx: CombatContext): boolean => {
-    return super.filter(unit, ctx)
+  filter = (
+    unit: Unit,
+    ctx: CombatContext,
+    args: MutationFilterArgs
+  ): boolean => {
+    return super.filter(unit, ctx, args)
   }
 }

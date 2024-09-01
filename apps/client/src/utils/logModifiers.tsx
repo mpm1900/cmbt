@@ -1,23 +1,32 @@
 import { LogSecondary, LogUnit } from '@/components/ui/log'
-import { CombatContext, Modifier } from '@repo/game/types'
+import { CombatLogger } from '@/hooks/state'
+import { CombatContext, Modifier, MutationFilterArgs } from '@repo/game/types'
 import { validateModifiers } from '@repo/game/utils'
 import { ModifierInline } from '@shared/ModifierInline'
 import { StatusInline } from '@shared/StatusInline'
 import { TextList } from '@shared/TextList'
 import { getStatusesFromModifiers } from './getStatusesFromModifiers'
 
-export function logModifiers(modifiers: Modifier[], ctx: CombatContext) {
-  const units = ctx.units.filter((u) => modifiers.some((m) => m.filter(u, ctx)))
+export function logModifiers(
+  modifiers: Modifier[],
+  log: CombatLogger,
+  ctx: CombatContext,
+  args?: MutationFilterArgs
+) {
+  args = args ?? {}
+  const units = ctx.units.filter((u) =>
+    modifiers.some((m) => m.filter(u, ctx, args))
+  )
   units.forEach((unit, index) => {
     const unitModifiers = validateModifiers(
-      modifiers.filter((m) => m.filter(unit, ctx)),
+      modifiers.filter((m) => m.filter(unit, ctx, args)),
       ctx.modifiers
     )
     const nonStatusModifiers = unitModifiers.filter((m) => !m.statusId)
     const statuses = getStatusesFromModifiers(unitModifiers)
 
     if (nonStatusModifiers.length > 0) {
-      ctx.log(
+      log(
         <LogSecondary className="italic">
           <LogUnit teamId={unit.teamId} user={ctx.user} className="opacity-70">
             {unit.name}
@@ -40,7 +49,7 @@ export function logModifiers(modifiers: Modifier[], ctx: CombatContext) {
       )
     }
     if (statuses.length > 0) {
-      ctx.log(
+      log(
         <LogSecondary className="italic">
           <LogUnit teamId={unit.teamId} user={ctx.user} className="opacity-70">
             {unit.name}

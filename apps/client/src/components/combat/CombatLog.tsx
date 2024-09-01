@@ -7,10 +7,11 @@ export function CombatLog() {
     logs: s.logs,
     updateLog: s.updateLog,
   }))
+
   const ref = useScrollToView(logs.length)
 
   return (
-    <div className="overflow-auto">
+    <div className="overflow-auto h-full">
       {logs.map((log) => (
         <CombatLogItem
           key={log.id}

@@ -15,7 +15,13 @@ export type EncounterStore = EncounterState & {
 }
 
 export const useEncounter = create<EncounterStore>((set, get) => ({
-  encounter: { id: '', nodes: [], activeNodeId: '', values: {} },
+  encounter: {
+    id: '',
+    nodes: [],
+    activeNodeId: '',
+    values: {},
+    setup: () => {},
+  },
   logs: [],
   log: (item, delay) => {},
   getActiveNode: () => {

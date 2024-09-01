@@ -5,6 +5,7 @@ import {
   Item,
   Modifier,
   Mutation,
+  MutationFilterArgs,
   Team,
   Turn,
   TurnStatus,
@@ -14,6 +15,8 @@ import { validateModifiers } from '@repo/game/utils'
 import { nanoid } from 'nanoid/non-secure'
 import { ReactNode } from 'react'
 import { create } from 'zustand'
+
+export type CombatLogger = (node: React.ReactNode, delay?: number) => void
 
 export type InitializeProps = {
   units: Unit[]
@@ -28,6 +31,7 @@ export type InitializeProps = {
 export type CombatLog = { id: Id; delay: number; node: ReactNode }
 export type CombatState = CombatContext & {
   logs: CombatLog[]
+  log: CombatLogger
   updateLog: (id: Id, fn: (log: CombatLog) => Partial<CombatLog>) => void
 }
 export type CombatStore = CombatState & {
@@ -35,7 +39,11 @@ export type CombatStore = CombatState & {
 
   // units
   setUnits: (units: Unit[]) => Unit[]
-  mutate(mutations: Mutation[], ctx: CombatContext): Unit[]
+  mutate(
+    mutations: Mutation[],
+    ctx: CombatContext,
+    args?: MutationFilterArgs
+  ): Unit[]
 
   // modifiers
   add(modifiers: Modifier[]): Modifier[]
@@ -104,12 +112,15 @@ export const useCombat = create<CombatStore>((set, get) => {
       })
       return units
     },
-    mutate(mutations, ctx) {
+    mutate(mutations, ctx, args) {
+      args = args ?? {}
       set(({ units }) => ({
         units: units.map((unit) =>
           mutations.reduce<Unit>(
             (u, mutation) =>
-              mutation.filter(u, ctx) ? { ...u, ...mutation.resolve(u) } : u,
+              mutation.filter(u, ctx, args)
+                ? { ...u, ...mutation.resolve(u) }
+                : u,
             unit
           )
         ),
@@ -188,17 +199,6 @@ export const useCombat = create<CombatStore>((set, get) => {
           results: [],
           hasRanOnTurnEndTriggers: false,
         },
-        units: s.units.map((u) =>
-          u.flags.isActive
-            ? {
-                ...u,
-                metadata: {
-                  ...u.metadata,
-                  activeTurns: u.metadata.activeTurns + 1,
-                },
-              }
-            : u
-        ),
       })),
     setStatus: (status) => set((s) => ({ turn: { ...s.turn, status } })),
     setTurn: (fn) => {

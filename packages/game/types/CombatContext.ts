@@ -9,6 +9,4 @@ export type CombatContext = {
   teams: Team[]
   turn: Turn
   user: Id
-  log: (node: React.ReactNode, delay?: number) => void
-  // queue: ActionsQueueItem[]
 }

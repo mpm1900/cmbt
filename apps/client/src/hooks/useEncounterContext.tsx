@@ -4,7 +4,7 @@ import {
   InitializeCombatOptions,
 } from '@repo/game/types'
 import { useNavigate } from '@tanstack/react-router'
-import { useGame } from './state'
+import { useGame, useNpcs } from './state'
 import { useEncounter } from './state/useEncounter'
 import { useInitializeCombat } from './useInitializeCombat'
 
@@ -13,14 +13,15 @@ export function useEncounterContext(): EncounterContext {
   const store = useEncounter()
   const init = useInitializeCombat()
   const nav = useNavigate()
+  const npcs = useNpcs()
 
   function initializeCombat(props: InitializeCombatOptions) {
     if (game.team) {
       init({
         userTeam: game.team,
         userUnits: game.units,
-        modifiers: [],
-        mutations: [],
+        modifiers: props.modifiers ?? [],
+        mutations: props.mutations ?? [],
         enemyTeam: props.enemyTeam,
         enemyUnits: props.enemyUnits,
         onFailure: props.onFailure,
@@ -33,6 +34,8 @@ export function useEncounterContext(): EncounterContext {
     activeNode: store.getActiveNode() as EncounterNode,
     encounter: store.encounter,
     team: game.team,
+    units: game.units,
+    npcs: npcs.npcs,
     back: () => nav({ to: '/world' }),
     log: store.log,
     initializeCombat,
@@ -41,5 +44,7 @@ export function useEncounterContext(): EncounterContext {
     updateEncounter: store.updateEncounter,
     updateTeam: game.updateTeam,
     addItem: game.addItem,
+    addNpc: npcs.addNpc,
+    updateNpcValue: npcs.updateNpcValue,
   }
 }

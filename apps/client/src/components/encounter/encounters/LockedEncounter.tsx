@@ -1,8 +1,9 @@
-import { Key01Id } from '@repo/game/data'
+import { Key01Key } from '@repo/game/data'
 import { Encounter, EncounterChoice, EncounterNode } from '@repo/game/types'
 import { nanoid } from 'nanoid'
 import { IoMdReturnLeft } from 'react-icons/io'
 import { MdOutlineVpnKey } from 'react-icons/md'
+import { ChoiceLabel } from '../ChoiceLabel'
 import { Narration } from '../Narration'
 
 const LockedNodeId = nanoid()
@@ -12,29 +13,25 @@ const LockedNode1 = (): EncounterNode => {
     title: 'Locked Door',
     text: <Narration>The door before you is locked.</Narration>,
     choices: (ctx) => {
-      const options: EncounterChoice[] = [
+      const choices: EncounterChoice[] = [
         {
           id: nanoid(),
-          label: (
-            <div className="flex space-x-2 items-center">
-              <span>Leave</span>
-              <IoMdReturnLeft />
-            </div>
-          ),
+          label: <ChoiceLabel after={<IoMdReturnLeft />}>Leave</ChoiceLabel>,
           resolve: (ctx) => ctx.back(),
         },
       ]
 
-      if (ctx.team?.items.find((i) => i.id === Key01Id)) {
+      if (ctx.team?.items.find((i) => i.key === Key01Key)) {
         return [
           {
             id: LockedNodeId,
             label: (
-              <div className="flex space-x-2 items-center">
-                <MdOutlineVpnKey />
-                <span>Unlock the door</span>
-                <IoMdReturnLeft />
-              </div>
+              <ChoiceLabel
+                before={<MdOutlineVpnKey />}
+                after={<IoMdReturnLeft />}
+              >
+                Unlock the door
+              </ChoiceLabel>
             ),
             resolve: (ctx) => {
               ctx.updateActiveWorldNode((n) => ({
@@ -44,11 +41,11 @@ const LockedNode1 = (): EncounterNode => {
               ctx.back()
             },
           },
-          ...options,
+          ...choices,
         ]
       }
 
-      return options
+      return choices
     },
   }
 }
@@ -56,6 +53,7 @@ const LockedNode1 = (): EncounterNode => {
 export const LockedEncounterId = nanoid()
 export const LockedEncounter: Encounter = {
   id: LockedEncounterId,
+  setup: () => {},
   nodes: [LockedNode1()],
   activeNodeId: LockedNodeId,
   values: {},

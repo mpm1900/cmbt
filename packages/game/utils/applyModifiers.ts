@@ -1,5 +1,5 @@
 import { CombatContext, Modifier, Trigger, Unit } from '../types'
-import { Mutation } from '../types/Mutation'
+import { Mutation, MutationFilterArgs } from '../types/Mutation'
 
 export type ApplyModifiersResult = {
   unit: Unit
@@ -22,11 +22,15 @@ export function applyMutations(unit: Unit, mutations: Mutation[]): Unit {
 
 export function applyModifiers(
   unit: Unit,
-  ctx: CombatContext
+  ctx: CombatContext,
+  args?: MutationFilterArgs
 ): ApplyModifiersResult {
   if (unit.metadata.modified) {
     console.log('double modified', unit.name)
     return { unit, appliedModifiers: [], registeredTriggers: [] }
+  }
+  const filterArgs: MutationFilterArgs = {
+    ...(args ?? {}),
   }
   // this weird loop is so that modifiers can affect if later modifiers are applied
   // one example is if a modifer grants an immunity in a prior layer
@@ -36,7 +40,7 @@ export function applyModifiers(
     .sort((a, b) => a.priority - b.priority)
     .reduce<ApplyModifiersResult>(
       (result, modifier) => {
-        if (modifier.filter(result.unit, ctx)) {
+        if (modifier.filter(result.unit, ctx, filterArgs)) {
           if (modifier instanceof Trigger) {
             result.registeredTriggers.push(modifier)
           } else {

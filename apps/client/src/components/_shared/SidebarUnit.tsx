@@ -25,7 +25,7 @@ export function SidebarUnit(props: SidebarUnitProps) {
     validateModifiers(
       props.unit
         .modifiers()
-        .filter((m) => !(m instanceof Trigger) && m.filter(mock, ctx)),
+        .filter((m) => !(m instanceof Trigger) && m.filter(mock, ctx, {})),
       []
     )
   )

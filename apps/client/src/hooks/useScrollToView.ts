@@ -8,7 +8,8 @@ export function useScrollToView<T>(
     if (ref.current) {
       ref.current.scrollIntoView({
         behavior: 'smooth',
-        block: 'end',
+        block: 'nearest',
+        inline: 'start',
       })
     }
   }, [dep])

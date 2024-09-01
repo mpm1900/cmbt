@@ -1,4 +1,4 @@
-import { GameWorldNode, Id, Item, Modifier, Mutation, Team, Unit } from '.'
+import { Id, Item, Modifier, Mutation, Npc, Team, Unit, WorldNode } from '.'
 
 export type InitializeCombatOptions = {
   userTeam?: Team
@@ -13,48 +13,60 @@ export type InitializeCombatOptions = {
 
 export type EncounterContext = {
   team: Team | undefined
+  units: Unit[]
   encounter: Encounter
   activeNode: EncounterNode
+  npcs: Npc[]
   back: () => void
   log: (item: React.ReactNode, delay?: number) => void
   initializeCombat: (props: InitializeCombatOptions) => void
-  updateActiveWorldNode: (
-    fn: (n: GameWorldNode) => Partial<GameWorldNode>
-  ) => void
+  updateActiveWorldNode: (fn: (n: WorldNode) => Partial<WorldNode>) => void
   updateEncounter: (fn: (e: Encounter) => Partial<Encounter>) => Encounter
   updateTeam: (fn: (e: Team) => Partial<Team>) => void
   addItem: (item: Item) => void
+  addNpc: (npc: Npc) => void
+  updateNpcValue: (
+    id: Id,
+    key: string,
+    fn: (v: number | undefined) => number
+  ) => void
 }
 
 export type Encounter = {
   id: Id
   nodes: EncounterNode[]
   activeNodeId: Id
+  setup: (ctx: EncounterContext) => void
   values: {
     [key: string]: number
   }
 }
 
+export type EncounterNodeProps = {
+  ctx: EncounterContext
+}
+
+export type EncounterChoiceProps = {
+  choice: EncounterChoice
+  index: number
+  ctx: EncounterContext
+}
+
+export type EncounterComponent = (props: EncounterNodeProps) => React.ReactNode
+export type EncounterChoiceComponent = (
+  props: EncounterChoiceProps
+) => React.ReactNode
+
 export type EncounterNode = {
   id: Id
   title: React.ReactNode
   text: React.ReactNode
-  choices: (ctx: EncounterContext) => EncounterChoice[]
-  renderChoice?: (
-    choice: EncounterChoice,
-    index: number,
-    ctx: EncounterContext
-  ) => React.ReactNode
-  renderChoices?: (ctx: EncounterContext) => React.ReactNode
+  choices?: (ctx: EncounterContext) => EncounterChoice[]
+  Choice?: EncounterChoiceComponent
+  Component?: EncounterComponent
 }
 
 export type EncounterChoice = {
-  id: Id
-  label: React.ReactNode
-  resolve: (ctx: EncounterContext) => void
-}
-
-export type EncounterChoiceOption = {
   id: Id
   label: React.ReactNode
   resolve: (ctx: EncounterContext) => void

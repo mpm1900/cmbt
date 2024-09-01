@@ -3,7 +3,7 @@ import {
   ShopEncounter,
 } from '@/components/encounter/encounters'
 import { TestEncounter } from '@/components/encounter/encounters/TestEncounter'
-import { GameWorld, GameWorldEdge, GameWorldNode, Id } from '@repo/game/types'
+import { Id, World, WorldEdge, WorldNode } from '@repo/game/types'
 import { nanoid } from 'nanoid'
 
 function edge(target: Id) {
@@ -18,7 +18,7 @@ const test = (app: Id) => 'Test' + app
 const lock = (app: Id) => 'Locked' + app
 
 export const StartId = nanoid()
-const StartNode: GameWorldNode = {
+const StartNode: WorldNode = {
   id: StartId,
   size: 20,
   icon: 'start',
@@ -28,6 +28,7 @@ const StartNode: GameWorldNode = {
     nodes: [],
     activeNodeId: '',
     values: {},
+    setup: () => {},
   },
   edges: [edge(shop('0'))],
   completed: true,
@@ -39,9 +40,9 @@ const StartNode: GameWorldNode = {
 
 type NodeMaker = (
   id: Id,
-  edges: GameWorldEdge[],
-  overries?: Partial<GameWorldNode>
-) => GameWorldNode
+  edges: WorldEdge[],
+  overries?: Partial<WorldNode>
+) => WorldNode
 
 const ShopNode: NodeMaker = (id, edges, overrides) => ({
   id: shop(id),
@@ -88,7 +89,7 @@ const LockedNode: NodeMaker = (id, edges, overrides) => ({
   ...overrides,
 })
 
-export function makeWorld(): GameWorld {
+export function makeWorld(): World {
   return {
     startingNodeId: StartId,
     activeNodeId: StartId,

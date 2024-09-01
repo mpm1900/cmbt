@@ -1,4 +1,10 @@
-import { CombatContext, Trigger, TriggerProps, Unit } from '../../types'
+import {
+  CombatContext,
+  MutationFilterArgs,
+  Trigger,
+  TriggerProps,
+  Unit,
+} from '../../types'
 import { SpeedDownAllOtherStaticOnUnitEnterId } from '../Ids'
 import { SpeedDownAllOther } from '../Modifiers/SpeedDownAllOther'
 
@@ -22,7 +28,11 @@ export class SpeedDownAllOtherStaticOnUnitEnter extends Trigger {
 
   resolve = (unit: Unit): Partial<Unit> => unit
 
-  filter = (unit: Unit, ctx: CombatContext): boolean => {
-    return super.filter(unit, ctx)
+  filter = (
+    unit: Unit,
+    ctx: CombatContext,
+    args: MutationFilterArgs
+  ): boolean => {
+    return super.filter(unit, ctx, args)
   }
 }

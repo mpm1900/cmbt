@@ -1,4 +1,10 @@
-import { CombatContext, Modifier, ModifierProps, Unit } from '../../types'
+import {
+  CombatContext,
+  Modifier,
+  ModifierProps,
+  MutationFilterArgs,
+  Unit,
+} from '../../types'
 import { FireNegationUpParentId } from '../Ids'
 
 export class FireNegationUpParent extends Modifier {
@@ -23,7 +29,11 @@ export class FireNegationUpParent extends Modifier {
     }
   }
 
-  filter = (unit: Unit, ctx: CombatContext): boolean => {
-    return super.filter(unit, ctx) && unit.id === this.parentId
+  filter = (
+    unit: Unit,
+    ctx: CombatContext,
+    args: MutationFilterArgs
+  ): boolean => {
+    return super.filter(unit, ctx, args) && unit.id === this.parentId
   }
 }

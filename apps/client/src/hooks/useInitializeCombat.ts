@@ -27,6 +27,7 @@ export function useInitializeCombat() {
       units,
       user: userTeam,
       enemy: enemyTeam,
+      modifiers,
       onFailure,
       onSuccess,
     })

@@ -1,6 +1,6 @@
 import { Encounter, Id } from '.'
 
-export type GameWorldNodeIconKey =
+export type WorldNodeIconKey =
   | '?'
   | 'combat'
   | 'shop'
@@ -8,19 +8,19 @@ export type GameWorldNodeIconKey =
   | 'locked'
   | 'unlocked'
 
-export type GameWorldEdge = {
+export type WorldEdge = {
   id: Id
   target: Id
 }
 
-export type GameWorldNode = {
+export type WorldNode = {
   id: Id
   size: number
-  edges: GameWorldEdge[]
+  edges: WorldEdge[]
 
   encounter: Encounter
-  icon: GameWorldNodeIconKey
-  completedIcon: GameWorldNodeIconKey
+  icon: WorldNodeIconKey
+  completedIcon: WorldNodeIconKey
 
   visited: boolean
   completed: boolean
@@ -29,8 +29,8 @@ export type GameWorldNode = {
   locked: boolean
 }
 
-export type GameWorld = {
-  nodes: GameWorldNode[]
+export type World = {
+  nodes: WorldNode[]
   startingNodeId: Id
   activeNodeId: Id
 }

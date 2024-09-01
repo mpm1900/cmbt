@@ -34,7 +34,6 @@ export function AugmentItemSelect(props: AugmentItemSelectProps) {
       disabled={disabled}
       value={value?.itemRtid}
       onValueChange={(rtid) => {
-        console.log('onchange', rtid)
         if (rtid === value?.itemRtid) {
           onChange(undefined)
         } else {

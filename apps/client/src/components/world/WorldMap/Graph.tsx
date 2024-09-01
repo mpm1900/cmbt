@@ -1,4 +1,4 @@
-import { GameWorldNode, Id } from '@repo/game/types'
+import { Id, WorldNode } from '@repo/game/types'
 import cytoscape, { Core, EdgeDefinition, LayoutOptions } from 'cytoscape'
 import cola from 'cytoscape-cola'
 import COSE from 'cytoscape-cose-bilkent'
@@ -16,7 +16,7 @@ cytoscape.use(Layers)
 
 export type GraphProps = {
   activeNodeId: Id
-  nodes: GameWorldNode[]
+  nodes: WorldNode[]
   cy?: (cy: Core) => void
 }
 

@@ -4,17 +4,20 @@ import { PropsWithChildren, ReactNode } from 'react'
 
 export type ChoiceLabelProps = PropsWithChildren<
   PropsWithClassname<{
+    action?: boolean
     before?: ReactNode
     after?: ReactNode
   }>
 >
 
 export function ChoiceLabel(props: ChoiceLabelProps) {
+  const { action = true, before, after, className, children } = props
+
   return (
-    <div className={cn('flex space-x-2 items-center', props.className)}>
-      {props.before}
-      <div>{props.children}</div>
-      {props.after}
+    <div className={cn('flex space-x-2 items-center', className)}>
+      {before}
+      <div className={cn({ italic: action })}>{children}</div>
+      {after}
     </div>
   )
 }

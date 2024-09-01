@@ -1,4 +1,10 @@
-import { CombatContext, Modifier, ModifierProps, Unit } from '../../types'
+import {
+  CombatContext,
+  Modifier,
+  ModifierProps,
+  MutationFilterArgs,
+  Unit,
+} from '../../types'
 import { SetIsInspectedAllId } from '../Ids'
 
 export class SetIsInspectedAll extends Modifier {
@@ -17,7 +23,11 @@ export class SetIsInspectedAll extends Modifier {
     }
   }
 
-  filter = (unit: Unit, ctx: CombatContext): boolean => {
-    return super.filter(unit, ctx) && unit.teamId !== ctx.user
+  filter = (
+    unit: Unit,
+    ctx: CombatContext,
+    args: MutationFilterArgs
+  ): boolean => {
+    return super.filter(unit, ctx, args) && unit.teamId !== ctx.user
   }
 }

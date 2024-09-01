@@ -1,7 +1,6 @@
 import { MutationId } from './_base'
 
 export const AddModifiersToParentId = MutationId()
-export const IncrementActiveTurnsId = MutationId()
 export const SetDeadAsInactiveId = MutationId()
 export const SetIsActiveParentId = MutationId()
 export const SetLastUsedActionId = MutationId()

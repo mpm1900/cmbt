@@ -11,6 +11,7 @@ export type NodeRendererProps = {
 export function NodeRenderer(props: NodeRendererProps) {
   const { node } = props
   const ctx = useEncounterContext()
+  const { Component, choices, Choice = ChoiceButton } = node
 
   return (
     <Card className="w-[640px]">
@@ -20,23 +21,12 @@ export function NodeRenderer(props: NodeRendererProps) {
       <CardContent className="space-y-4">
         <div>{node.text}</div>
         <Separator />
-        {node.renderChoices ? (
-          node.renderChoices(ctx)
-        ) : (
+        {Component && <Component ctx={ctx} />}
+        {choices && (
           <div className="flex flex-col">
-            {node
-              .choices(ctx)
-              .map((choice, index) =>
-                ctx.activeNode.renderChoice ? (
-                  ctx.activeNode.renderChoice(choice, index, ctx)
-                ) : (
-                  <ChoiceButton
-                    key={choice.id}
-                    choice={choice}
-                    index={index + 1}
-                  />
-                )
-              )}
+            {choices(ctx).map((choice, index) => (
+              <Choice key={choice.id} choice={choice} index={index} ctx={ctx} />
+            ))}
           </div>
         )}
       </CardContent>

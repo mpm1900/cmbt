@@ -1,5 +1,5 @@
 import { getNodeIconRaw } from '@/utils/getNodeIconRaw'
-import { GameWorldNode } from '@repo/game/types'
+import { WorldNode } from '@repo/game/types'
 import { NodeSingular } from 'cytoscape'
 import { isPathableNode } from './isPathable'
 import { RenderLayersOptions } from './useWorldMapLayers'
@@ -9,7 +9,7 @@ export function renderNodeIcon(
   node: NodeSingular,
   options: RenderLayersOptions
 ) {
-  const data: GameWorldNode = node.data()
+  const data: WorldNode = node.data()
   const state = isPathableNode(node, options)
   element.style.width = `${node.data('size') + 2}px`
   element.style.height = `${node.data('size') + 2}px`

@@ -6,7 +6,7 @@ import { useCombatActions } from '../useCombatActions'
 import { useCombatContext } from '../useCombatContext'
 
 export function useTurnController() {
-  const { turn, pushResult } = useCombat()
+  const { turn, log, pushResult } = useCombat()
   const gameSpeed = useCombatSettings((s) => s.gameSpeed)
   const active = turn.results[turn.results.length - 1]
 
@@ -19,6 +19,7 @@ export function useTurnController() {
       handleNextAction(
         'combat',
         queue,
+        log,
         ctx,
         fns.commitResult,
         (result, length, _ctx) => {

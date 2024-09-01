@@ -7,6 +7,7 @@ import {
   SetIsInspectedAllId,
   SetIsProtectedParentId,
   SetIsStunnedParentId,
+  SpeedUpTeamId,
 } from '@repo/game/data'
 import { Id } from '@repo/game/types'
 import { ReactNode } from 'react'
@@ -17,6 +18,7 @@ import {
   GiBiceps,
   GiSandstorm,
   GiShoulderArmor,
+  GiSprint,
   GiVibratingShield,
 } from 'react-icons/gi'
 import { ImFire } from 'react-icons/im'
@@ -67,4 +69,13 @@ export const MODIFIER_ICONS: Record<Id, ReactNode> = {
     <GiVibratingShield className="fill-white h-full w-full" />
   ),
   [SetIsStunnedParentId]: <TiSpiral className="fill-red-200 h-full w-full" />,
+  [SpeedUpTeamId]: (
+    <div className="h-full w-full relative">
+      <GiSprint className="fill-white h-full w-full" />
+      <AiFillCaretUp
+        className="absolute fill-green-400 h-[24px] w-[24px]"
+        style={{ bottom: -4, right: -6 }}
+      />
+    </div>
+  ),
 }

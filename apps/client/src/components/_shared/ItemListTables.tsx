@@ -8,11 +8,13 @@ export function ItemListTables(props: ItemListTableProps) {
 
   return (
     <Tabs defaultValue="all">
-      <TabsList>
-        <TabsTrigger value="all">All</TabsTrigger>
-        <TabsTrigger value="consumables">Consumables</TabsTrigger>
-        <TabsTrigger value="equipables">Equipables</TabsTrigger>
-      </TabsList>
+      <div className="flex justify-center">
+        <TabsList>
+          <TabsTrigger value="all">All</TabsTrigger>
+          <TabsTrigger value="consumables">Consumables</TabsTrigger>
+          <TabsTrigger value="equipables">Equipables</TabsTrigger>
+        </TabsList>
+      </div>
       <TabsContent value="all">
         <ItemListTable {...props} />
       </TabsContent>

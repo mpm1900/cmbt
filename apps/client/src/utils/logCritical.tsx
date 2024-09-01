@@ -1,13 +1,18 @@
 import { LogSecondary } from '@/components/ui/log'
+import { CombatLogger } from '@/hooks/state'
 import { ActionResult, CombatContext } from '@repo/game/types'
 
-export function logCritical(result: ActionResult, ctx: CombatContext) {
+export function logCritical(
+  result: ActionResult,
+  log: CombatLogger,
+  ctx: CombatContext
+) {
   if (
     result.data &&
     result.data.accuracyRoll.success &&
     result.data.accuracyRoll.criticalSuccess
   ) {
-    ctx.log(
+    log(
       <LogSecondary>
         <span className="text-yellow-300">Critical Hit!</span>{' '}
         <span className="text-green-300/80">

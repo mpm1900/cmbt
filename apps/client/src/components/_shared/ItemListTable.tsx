@@ -1,5 +1,6 @@
 import { cn } from '@/lib/utils'
 import { GroupedItem, Id, Item, TeamResources, Unit } from '@repo/game/types'
+import { GiCreditsCurrency } from 'react-icons/gi'
 import { Button } from '../ui/button'
 import {
   Table,
@@ -28,7 +29,7 @@ export function ItemListTable(props: ItemListTableProps) {
         <TableRow>
           <TableHead>#</TableHead>
           <TableHead>name</TableHead>
-          {onClick && <TableHead className="w-[48px]">cost</TableHead>}
+          {onClick && <TableHead className="w-[48px] text-end">cost</TableHead>}
           {onClick && (
             <TableHead className="w-[32px] flex justify-end items-center"></TableHead>
           )}
@@ -49,11 +50,12 @@ export function ItemListTable(props: ItemListTableProps) {
               <TableCell className={cn('w-full')}>{item.name}</TableCell>
               {onClick && (
                 <TableCell
-                  className={cn({
+                  className={cn('flex items-center justify-end', {
                     'text-red-400': (resources.credits ?? 0) < item.cost,
                   })}
                 >
-                  {item.cost}g
+                  <span>{item.cost}</span>
+                  <GiCreditsCurrency />
                 </TableCell>
               )}
               {onClick && (

@@ -1,4 +1,11 @@
-import { CombatContext, Id, Mutation, MutationProps, Unit } from '../../types'
+import {
+  CombatContext,
+  Id,
+  Mutation,
+  MutationFilterArgs,
+  MutationProps,
+  Unit,
+} from '../../types'
 import { AddModifierRegistryId } from '../Ids'
 
 export class AddModifierRegistry extends Mutation {
@@ -19,7 +26,11 @@ export class AddModifierRegistry extends Mutation {
     }
   }
 
-  filter = (unit: Unit, ctx: CombatContext): boolean => {
-    return super.filter(unit, ctx) && unit.id === this.parentId
+  filter = (
+    unit: Unit,
+    ctx: CombatContext,
+    args: MutationFilterArgs
+  ): boolean => {
+    return super.filter(unit, ctx, args) && unit.id === this.parentId
   }
 }

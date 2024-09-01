@@ -1,4 +1,4 @@
-import { GameWorldNode } from '@repo/game/types'
+import { WorldNode } from '@repo/game/types'
 import { NodeSingular } from 'cytoscape'
 import { getOutgoers } from './getPath'
 
@@ -14,7 +14,7 @@ export function getNodeState(node: NodeSingular, options: GetNodeStateOptions) {
     ?.cy()
     .nodes()
     .filter((n) => n.data('completed'))
-  const data: GameWorldNode = node.data()
+  const data: WorldNode = node.data()
   const isActive = !!activeNode?.same(node)
   const isActiveNeightbor =
     (!isActive && !!getOutgoers(completedNodes)?.has(node)) ||

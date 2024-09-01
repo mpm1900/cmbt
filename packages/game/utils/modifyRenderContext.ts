@@ -6,6 +6,5 @@ export function modifyRenderContext(
 ): CombatContext {
   return {
     ...ctx,
-    log: options?.disableLogging ? () => {} : ctx.log,
   }
 }

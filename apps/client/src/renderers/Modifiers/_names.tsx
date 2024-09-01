@@ -17,6 +17,7 @@ import {
   SetIsInspectedAllId,
   SetIsProtectedParentId,
   SetIsStunnedParentId,
+  SpeedUpTeamId,
 } from '@repo/game/data'
 
 export const MODIFIER_NAMES: Record<string, string> = {
@@ -32,6 +33,7 @@ export const MODIFIER_NAMES: Record<string, string> = {
   [PhysicalAttackDownParentId]: 'Physical Attack Down',
   [PhysicalAttackUpParentId]: 'Physical Attack Up',
   [SetIsProtectedParentId]: 'Protected',
+  [SpeedUpTeamId]: 'Speed Up',
 
   [CreateSandstormOnUnitEnterId]: 'Sand Stream',
   [DamageNewUnitsOnUnitEnterId]: 'Spikes',

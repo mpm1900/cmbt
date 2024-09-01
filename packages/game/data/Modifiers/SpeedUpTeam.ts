@@ -5,18 +5,14 @@ import {
   MutationFilterArgs,
   Unit,
 } from '../../types'
-import { PhysicalAttackUpParentId } from '../Ids'
+import { SpeedUpTeamId } from '../Ids'
 
-export class PhysicalAttackUpParent extends Modifier {
+export class SpeedUpTeam extends Modifier {
   factor: number
   offset: number
 
-  get key(): string {
-    return `${this.id}.${this.parentId ?? this.sourceId}@${this.factor}`
-  }
-
   constructor(props: ModifierProps<{ factor?: number; offset?: number }>) {
-    super(PhysicalAttackUpParentId, props)
+    super(SpeedUpTeamId, props)
     this.factor = props.factor !== undefined ? props.factor : 1
     this.offset = props.offset ?? 0
   }
@@ -24,7 +20,7 @@ export class PhysicalAttackUpParent extends Modifier {
   resolve = (unit: Unit): Partial<Unit> => {
     return {
       stats: Modifier.setStats(unit, (stats) => ({
-        physical: stats.physical * this.factor + this.offset,
+        speed: stats.speed * this.factor + this.offset,
       })),
     }
   }
@@ -34,6 +30,7 @@ export class PhysicalAttackUpParent extends Modifier {
     ctx: CombatContext,
     args: MutationFilterArgs
   ): boolean => {
-    return super.filter(unit, ctx, args) && unit.id === this.parentId
+    const parent = ctx.units.find((u) => u.id === this.parentId)
+    return super.filter(unit, ctx, args) && unit.teamId === parent?.teamId
   }
 }

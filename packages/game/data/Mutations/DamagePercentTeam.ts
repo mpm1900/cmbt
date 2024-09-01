@@ -1,4 +1,10 @@
-import { CombatContext, Mutation, MutationProps, Unit } from '../../types'
+import {
+  CombatContext,
+  Mutation,
+  MutationFilterArgs,
+  MutationProps,
+  Unit,
+} from '../../types'
 import { DamagePercentTeamId } from '../Ids'
 
 export class DamagePercentTeam extends Mutation {
@@ -17,8 +23,12 @@ export class DamagePercentTeam extends Mutation {
     }
   }
 
-  filter = (unit: Unit, ctx: CombatContext): boolean => {
+  filter = (
+    unit: Unit,
+    ctx: CombatContext,
+    args: MutationFilterArgs
+  ): boolean => {
     const parent = ctx.units.find((u) => u.id === this.parentId)
-    return super.filter(unit, ctx) && unit.teamId === parent?.teamId
+    return super.filter(unit, ctx, args) && unit.teamId === parent?.teamId
   }
 }

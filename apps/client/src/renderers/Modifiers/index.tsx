@@ -26,6 +26,8 @@ import {
   SetIsInspectedAllId,
   SetIsProtectedParentId,
   SetIsStunnedParentId,
+  SpeedUpTeam,
+  SpeedUpTeamId,
 } from '@repo/game/data'
 import { Modifier } from '@repo/game/types'
 import { ModifierInline } from '@shared/ModifierInline'
@@ -164,6 +166,13 @@ export const ModifierRenderers: Record<string, ModifierRenderer> = {
     ),
     description: (mod) => {
       return <div>Stunned units cannot act.</div>
+    },
+  },
+  [SpeedUpTeamId]: {
+    name: <span className="text-white">{MODIFIER_NAMES[SpeedUpTeamId]}</span>,
+    description: (mod) => {
+      const modifier = mod as SpeedUpTeam
+      return <div>+{modifier.factor}% Speed.</div>
     },
   },
 

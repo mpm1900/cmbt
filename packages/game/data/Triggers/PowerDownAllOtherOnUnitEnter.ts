@@ -1,6 +1,7 @@
 import {
   CombatContext,
   Modifier,
+  MutationFilterArgs,
   Trigger,
   TriggerProps,
   Unit,
@@ -18,7 +19,7 @@ export class PowerDownAllOtherOnUnitEnter extends Trigger {
       maxInstances: 1,
       modifiers: (ctx) =>
         ctx.units
-          .filter((u) => super.filter(u, ctx) && u.id !== props.sourceId)
+          .filter((u) => super.filter(u, ctx, {}) && u.id !== props.sourceId)
           .map(
             (u) =>
               new PhysicalAttackDownParent({
@@ -39,7 +40,11 @@ export class PowerDownAllOtherOnUnitEnter extends Trigger {
     }
   }
 
-  filter = (unit: Unit, ctx: CombatContext): boolean => {
-    return super.filter(unit, ctx) && unit.id === this.sourceId
+  filter = (
+    unit: Unit,
+    ctx: CombatContext,
+    args: MutationFilterArgs
+  ): boolean => {
+    return super.filter(unit, ctx, args) && unit.id === this.sourceId
   }
 }

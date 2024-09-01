@@ -1,6 +1,7 @@
 import {
   CombatContext,
   Modifier,
+  MutationFilterArgs,
   Trigger,
   TriggerProps,
   Unit,
@@ -23,14 +24,17 @@ export class DamageNewUnitsOnUnitEnter extends Trigger {
       values: Modifier.setValues(unit, (values) => ({
         damage: values.damage + this.damage,
       })),
-      metadata: {
-        ...unit.metadata,
-        activeTurns: 1,
-      },
     }
   }
 
-  filter = (unit: Unit, ctx: CombatContext): boolean => {
-    return super.filter(unit, ctx) && unit.metadata.activeTurns == 0
+  filter = (
+    unit: Unit,
+    ctx: CombatContext,
+    args: MutationFilterArgs
+  ): boolean => {
+    const newUnits = args.units ?? []
+    return (
+      super.filter(unit, ctx, args) && !!newUnits.find((u) => u.id === unit.id)
+    )
   }
 }

@@ -7,6 +7,7 @@ export type Item = {
   cost: number
   action?: (unit: Unit) => Action
   augment?: Augment
+  key?: Id
 }
 
 export type GroupedItem = Item & {

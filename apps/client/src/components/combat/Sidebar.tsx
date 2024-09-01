@@ -13,7 +13,7 @@ export function Sidebar() {
               <TabsTrigger value="mods">Settings</TabsTrigger>
             </TabsList>
           </div>
-          <div className="flex-1 overflow-auto w-full">
+          <div className="flex flex-1 overflow-auto w-full">
             <TabsContent value="log">
               <CombatLog />
             </TabsContent>

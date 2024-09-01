@@ -1,21 +1,17 @@
 import { LogCritical, LogHeader } from '@/components/ui/log'
 import { logActionResults, logMiss, logModifiers, logMutations } from '@/utils'
 import { handleCleanup } from '@/utils/handleCleanup'
+import { handleTriggerEvent } from '@/utils/handleTriggerEvent'
 import { logCritical } from '@/utils/logCritical'
-import { logTriggers } from '@/utils/logTriggers'
 import { SetDeadAsInactive } from '@repo/game/data'
 import {
   ActionResult,
   ActionsQueueItem,
   CombatContext,
-  Trigger,
+  MutationFilterArgs,
   TriggerEvent,
 } from '@repo/game/types'
-import {
-  getTriggersByEvent,
-  isUnitAliveCtx,
-  validateModifiers,
-} from '@repo/game/utils'
+import { isUnitAliveCtx } from '@repo/game/utils'
 import {
   useActions,
   useCleanup,
@@ -28,11 +24,14 @@ export type CommitResultOptions = {
   enableLog?: boolean
 }
 
-export type CommitResults = (
+export type CommitResult = (
   result: ActionResult,
   context: CombatContext,
-  options?: CommitResultOptions
+  options?: CommitResultOptions,
+  args?: MutationFilterArgs
 ) => CombatContext
+
+export type CleanupResult = (context: CombatContext) => CombatContext
 
 export function useCombatActions() {
   const combat = useCombat()
@@ -41,15 +40,22 @@ export function useCombatActions() {
   const cleanupStore = useCleanup()
   const settings = useCombatSettings()
 
-  const cleanupResult = (context: CombatContext): CombatContext => {
+  const cleanupResult: CleanupResult = (context) => {
     // round cleanup
     const deadActiveUnits = context.units.filter(
       (u) => u.flags.isActive && !isUnitAliveCtx(u.id, context)
     )
     deadActiveUnits.forEach((u) => {
-      context.log(<LogCritical>{u.name} died.</LogCritical>)
+      combat.log(<LogCritical>{u.name} died.</LogCritical>)
     })
+
     context.units = combat.mutate([new SetDeadAsInactive()], context)
+
+    if (deadActiveUnits.length > 0) {
+      context = runTriggers('on Unit Die', context, {
+        units: deadActiveUnits,
+      })
+    }
 
     context.modifiers = combat.removeWhere((modifier) => {
       const parent = context.units.find((u) => u.id === modifier.parentId)
@@ -59,7 +65,7 @@ export function useCombatActions() {
     return context
   }
 
-  const commitResult: CommitResults = (result, context, options) => {
+  const commitResult: CommitResult = (result, context, options, args) => {
     const {
       addedModifiers: modifiers,
       mutations,
@@ -70,22 +76,24 @@ export function useCombatActions() {
     } = result
 
     if (options?.enableLog) {
-      logMiss(result, context)
+      logMiss(result, combat.log, context)
     }
 
     if (removedUnits?.length) {
-      context = runTriggers('on Unit Switch Out', context)
+      context = runTriggers('on Unit Switch Out', context, {
+        units: removedUnits,
+      })
     }
     if (mutations?.length) {
-      if (options?.enableLog) logMutations(mutations, context)
-      context.units = combat.mutate(mutations, context)
+      if (options?.enableLog) logMutations(mutations, combat.log, context)
+      context.units = combat.mutate(mutations, context, args)
     }
     if (modifiers?.length) {
-      if (options?.enableLog) logModifiers(modifiers, context)
+      if (options?.enableLog) logModifiers(modifiers, combat.log, context)
       context.modifiers = combat.add(modifiers)
     }
     if (options?.enableLog) {
-      logCritical(result, context)
+      logCritical(result, combat.log, context)
     }
     if (updateModifiers) {
       context.modifiers = combat.updateModifiers(updateModifiers)
@@ -94,37 +102,24 @@ export function useCombatActions() {
       actionsStore.setQueue(updateActionQueue)
     }
     if (addedUnits?.length) {
-      context = runTriggers('on Unit Enter', context)
+      context = runTriggers('on Unit Enter', context, {
+        units: addedUnits,
+      })
     }
 
     if (options?.enableLog) {
-      logActionResults(result, context)
+      logActionResults(result, combat.log, context)
     }
     return context
   }
 
   function runTriggers(
     event: TriggerEvent,
-    context: CombatContext
+    context: CombatContext,
+    args?: MutationFilterArgs
   ): CombatContext {
-    const triggers = validateModifiers(
-      getTriggersByEvent(context.modifiers, event),
-      []
-    ) as Trigger[]
-    const result: ActionResult = {
-      addedModifiers: triggers
-        .filter((trigger) => trigger.modifiers !== undefined)
-        .flatMap(
-          (trigger) => (trigger.modifiers && trigger.modifiers(context)) ?? []
-        ),
-      mutations: triggers.filter((trigger) => !trigger.modifiers),
-    }
-
-    logTriggers(triggers, event, context)
-    if (result.addedModifiers) logModifiers(result.addedModifiers, context)
-    if (result.mutations) logMutations(result.mutations, context)
-
-    context = commitResult(result, context)
+    const result = handleTriggerEvent(event, combat.log, context, args)
+    context = commitResult(result, context, { enableLog: false })
     return cleanupResult(context)
   }
 
@@ -142,7 +137,7 @@ export function useCombatActions() {
     } else {
       combat.setStatus('upkeep')
       combat.next()
-      context.log(<LogHeader>turn {combat.turn.count + 1}</LogHeader>)
+      combat.log(<LogHeader>turn {combat.turn.count + 1}</LogHeader>)
       activeUnit.setActiveUnit(
         context.units.find((u) => u.flags.isActive && u.teamId === context.user)
       )

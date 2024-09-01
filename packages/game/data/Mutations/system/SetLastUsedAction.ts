@@ -1,4 +1,10 @@
-import { CombatContext, Mutation, MutationProps, Unit } from '../../../types'
+import {
+  CombatContext,
+  Mutation,
+  MutationFilterArgs,
+  MutationProps,
+  Unit,
+} from '../../../types'
 import { SetLastUsedActionId } from '../../Ids'
 
 export class SetLastUsedAction extends Mutation {
@@ -18,6 +24,9 @@ export class SetLastUsedAction extends Mutation {
     }
   }
 
-  filter = (unit: Unit, ctx: CombatContext): boolean =>
-    super.filter(unit, ctx) && unit.id === this.parentId
+  filter = (
+    unit: Unit,
+    ctx: CombatContext,
+    args: MutationFilterArgs
+  ): boolean => super.filter(unit, ctx, args) && unit.id === this.parentId
 }

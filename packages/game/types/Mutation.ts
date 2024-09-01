@@ -3,6 +3,10 @@ import { Id } from '.'
 import { CombatContext } from './CombatContext'
 import { Flags, Stats, Unit, Values } from './Unit'
 
+export type MutationFilterArgs = {
+  units?: Unit[]
+}
+
 export type MutationProps<T = {}> = T & {
   id?: Id
   rid?: Id
@@ -30,7 +34,7 @@ export abstract class Mutation {
     this.parentId = props.parentId
   }
 
-  filter(unit: Unit, ctx: CombatContext): boolean {
+  filter(unit: Unit, ctx: CombatContext, args: MutationFilterArgs): boolean {
     const isImmune = unit.registry.modifiers.includes(this.rid)
     const isActive = unit.flags.isActive
     return isActive && !isImmune

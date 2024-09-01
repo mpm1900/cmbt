@@ -1,6 +1,7 @@
 import {
   CombatContext,
   Mutation,
+  MutationFilterArgs,
   Trigger,
   TriggerProps,
   Unit,
@@ -33,7 +34,11 @@ export class HealParentOnUnitSwitch extends Trigger {
     }
   }
 
-  filter = (unit: Unit, ctx: CombatContext): boolean => {
+  filter = (
+    unit: Unit,
+    ctx: CombatContext,
+    args: MutationFilterArgs
+  ): boolean => {
     return unit.id === this.parentId
   }
 }

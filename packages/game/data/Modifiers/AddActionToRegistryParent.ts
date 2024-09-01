@@ -1,4 +1,10 @@
-import { CombatContext, Modifier, ModifierProps, Unit } from '../../types'
+import {
+  CombatContext,
+  Modifier,
+  ModifierProps,
+  MutationFilterArgs,
+  Unit,
+} from '../../types'
 import { AddActionToRegistryParentId } from '../Ids'
 
 export class AddActionToRegistryParent extends Modifier {
@@ -20,6 +26,9 @@ export class AddActionToRegistryParent extends Modifier {
     }
   }
 
-  filter = (unit: Unit, ctx: CombatContext): boolean =>
-    super.filter(unit, ctx) && unit.id === this.parentId
+  filter = (
+    unit: Unit,
+    ctx: CombatContext,
+    args: MutationFilterArgs
+  ): boolean => super.filter(unit, ctx, args) && unit.id === this.parentId
 }

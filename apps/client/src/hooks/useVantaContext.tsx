@@ -46,22 +46,24 @@ export function VantaContextProvider(props: PropsWithChildren) {
   const ref = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    if (!effect) {
-      set(
-        Fog({
-          el: ref.current,
-          minHeight: 200.0,
-          minWidth: 200.0,
-          highlightColor: 0x76aeff,
-          midtoneColor: 0x0,
-          lowlightColor: 0xb13333,
-          baseColor: 0x0,
-          blurFactor: 0.29,
-          speed: 0.2,
-          zoom: 0.2,
-        })
-      )
-    }
+    try {
+      if (!effect) {
+        set(
+          Fog({
+            el: ref.current,
+            minHeight: 200.0,
+            minWidth: 200.0,
+            highlightColor: 0x76aeff,
+            midtoneColor: 0x0,
+            lowlightColor: 0xb13333,
+            baseColor: 0x0,
+            blurFactor: 0.29,
+            speed: 0.2,
+            zoom: 0.2,
+          })
+        )
+      }
+    } catch (e) {}
     return () => {
       if (effect) effect.destroy()
     }

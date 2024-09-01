@@ -1,6 +1,6 @@
 import { useGame } from '@/hooks/state'
 import { useEncounter } from '@/hooks/state/useEncounter'
-import { GameWorldNode } from '@repo/game/types'
+import { WorldNode } from '@repo/game/types'
 import { useNavigate } from '@tanstack/react-router'
 import { Core, NodeSingular } from 'cytoscape'
 import { useEffect, useState } from 'react'
@@ -27,7 +27,7 @@ export function useWorldMapEvents(cy: Core | undefined) {
 
       cy.on('tap', 'node', function (event) {
         const node = event.target as NodeSingular
-        const data: GameWorldNode = event.target.data()
+        const data: WorldNode = event.target.data()
         const state = isPathableNode(node, options)
         const isInteractable =
           (!state.isCompleted || state.isRepeatable) && state.isPathable

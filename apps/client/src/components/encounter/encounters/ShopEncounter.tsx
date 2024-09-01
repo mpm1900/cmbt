@@ -110,19 +110,16 @@ const ShopWaresNode: EncounterNode = {
     </div>
   ),
   choices: (ctx) => [],
-  renderChoices: (ctx) => {
+  Component: (props) => {
+    const { ctx } = props
+    const npc = ctx.npcs.find((c) => c.id === ShopkeepNpcId)
     const reset = () => {
       return ctx.updateEncounter((s) => ({
         activeNodeId: ShopIntroductionNode.id,
       }))
     }
     const buyItem = (item: Item) => {
-      ctx.updateEncounter((e) => ({
-        values: {
-          ...e.values,
-          [item.id]: e.values[item.id] - 1,
-        },
-      }))
+      ctx.updateNpcValue(ShopkeepNpcId, item.id, (v) => (v ?? 0) - 1)
       ctx.addItem(item)
     }
     const end = () => {
@@ -133,14 +130,15 @@ const ShopWaresNode: EncounterNode = {
       }))
       ctx.back()
     }
+
     return (
       <div className="space-y-4">
-        {ctx.team && (
+        {ctx.team && npc && (
           <ItemListTables
             unit={ZERO_UNIT}
             items={[Potion(), Key01(), Ruby()] as GroupedItem[]}
             resources={ctx.team.resources}
-            quantities={ctx.encounter.values}
+            quantities={npc?.values}
             onClick={(item) => {
               buyItem(rebaseItem(item))
             }}
@@ -174,14 +172,24 @@ const ShopWaresNode: EncounterNode = {
   },
 }
 
+export const ShopkeepNpcId = nanoid()
 export const ShopEncounterId = nanoid()
 export const ShopEncounter: Encounter = {
   id: nanoid(),
+  setup: (ctx) => {
+    if (!ctx.npcs.find((c) => c.id === ShopkeepNpcId)) {
+      ctx.addNpc({
+        id: ShopkeepNpcId,
+        name: 'Shopkeep Person',
+        values: {
+          [PotionId]: 5,
+          [Key01Id]: 1,
+          [RubyId]: 1,
+        },
+      })
+    }
+  },
   activeNodeId: ShopIntroductionNode.id,
   nodes: [ShopIntroductionNode, ShopWaresNode],
-  values: {
-    [PotionId]: 5,
-    [Key01Id]: 1,
-    [RubyId]: 1,
-  },
+  values: {},
 }

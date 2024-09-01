@@ -1,7 +1,12 @@
 import { useCombatContext } from '@/hooks'
 import { useGame } from '@/hooks/state'
 import { Trigger, Unit } from '@repo/game/types'
-import { applyMutations, validateModifiers } from '@repo/game/utils'
+import {
+  applyMutations,
+  getModifiersFromUnit,
+  getUnitBase,
+  validateModifiers,
+} from '@repo/game/utils'
 import { CgDetailsMore } from 'react-icons/cg'
 import { Button } from '../ui/button'
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '../ui/hover-card'
@@ -16,6 +21,7 @@ export type SidebarUnitProps = {
 export function SidebarUnit(props: SidebarUnitProps) {
   const game = useGame()
   const ctx = useCombatContext()
+  const { base } = getUnitBase(props.unit.baseId)
   const mock: Unit = {
     ...props.unit,
     flags: { ...props.unit.flags, isActive: true },
@@ -23,9 +29,9 @@ export function SidebarUnit(props: SidebarUnitProps) {
   const unit = applyMutations(
     props.unit,
     validateModifiers(
-      props.unit
-        .modifiers()
-        .filter((m) => !(m instanceof Trigger) && m.filter(mock, ctx, {})),
+      getModifiersFromUnit(mock).filter(
+        (m) => !(m instanceof Trigger) && m.filter(mock, ctx, {})
+      ),
       []
     )
   )
@@ -37,15 +43,21 @@ export function SidebarUnit(props: SidebarUnitProps) {
         <HoverCardTrigger asChild>
           <div className="p-4 pr-0 flex-1">
             <div className="flex-1 space-y-2">
-              <div className="space-x-2">
-                <span className="font-black">
-                  <span className="text-sm text-muted-foreground font-thin">
-                    Lv.
+              <div className="flex justify-between items-center">
+                <span className="space-x-2">
+                  <span className="font-black">
+                    <span className="text-sm text-muted-foreground font-thin">
+                      Lv.
+                    </span>
+                    {unit.level}
                   </span>
-                  {unit.level}
+                  <span>{unit.name}</span>
                 </span>
-                <span>{unit.name}</span>
+                <span className="text-xs text-muted-foreground">
+                  {base?.name}
+                </span>
               </div>
+
               <HealthBar unit={unit} initial={ratio} />
             </div>
           </div>

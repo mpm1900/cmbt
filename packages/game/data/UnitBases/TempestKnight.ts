@@ -2,13 +2,13 @@ import { nanoid } from 'nanoid'
 import { UnitBase, UnitBaseConfig } from '../../types'
 import { PiercingStrike, QuickAttack, Slash, SwordsDance } from '../Actions'
 import { PiercingStrikeId, QuickAttackId, SlashId, SwordsDanceId } from '../Ids'
-import { ZERO_UNIT } from '../Units'
+import { BASE_UNIT } from '../Units/system/BASE_UNIT'
 
 export const TempestKnight: UnitBase = {
   id: nanoid(),
   name: 'Tempest Knight',
   stats: {
-    ...ZERO_UNIT.stats,
+    ...BASE_UNIT.stats,
     health: 88,
     physical: 120,
     defense: 70,

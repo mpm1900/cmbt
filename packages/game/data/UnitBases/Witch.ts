@@ -11,13 +11,13 @@ import {
   RegenerationId,
   TrickRoomId,
 } from '../Ids'
-import { ZERO_UNIT } from '../Units'
+import { BASE_UNIT } from '../Units/system/BASE_UNIT'
 
 export const Witch: UnitBase = {
   id: nanoid(),
   name: 'Witch',
   stats: {
-    ...ZERO_UNIT.stats,
+    ...BASE_UNIT.stats,
     health: 120,
     physical: 50,
     defense: 70,

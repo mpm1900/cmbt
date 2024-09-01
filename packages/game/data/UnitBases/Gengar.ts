@@ -9,13 +9,13 @@ import {
   ScholarId,
   WillOWispId,
 } from '../Ids'
-import { ZERO_UNIT } from '../Units'
+import { BASE_UNIT } from '../Units/system/BASE_UNIT'
 
 export const Gengar: UnitBase = {
   id: nanoid(),
   name: 'Wizard',
   stats: {
-    ...ZERO_UNIT.stats,
+    ...BASE_UNIT.stats,
     health: 60,
     physical: 55,
     defense: 55,

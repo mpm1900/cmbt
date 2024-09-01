@@ -1,5 +1,6 @@
 import {
   DefenseDownParentId,
+  FireDamageUpParentId,
   FireNegationUpParentId,
   PhysicalAttackDownParentId,
   PhysicalAttackUpParentId,
@@ -31,6 +32,15 @@ export const MODIFIER_ICONS: Record<Id, ReactNode> = {
       <AiFillCaretDown
         className="absolute fill-red-400 h-[16px] w-[16px]"
         style={{ bottom: -6, right: -6 }}
+      />
+    </div>
+  ),
+  [FireDamageUpParentId]: (
+    <div className="h-full w-full relative">
+      <ImFire className="fill-white h-full w-full" />
+      <BsShieldFillPlus
+        className="absolute fill-green-400 h-[16px] w-[16px]"
+        style={{ bottom: -2, right: -2 }}
       />
     </div>
   ),

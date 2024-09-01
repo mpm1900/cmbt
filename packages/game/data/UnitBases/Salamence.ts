@@ -9,13 +9,13 @@ import {
   IntimidateId,
   SlashId,
 } from '../Ids'
-import { ZERO_UNIT } from '../Units'
+import { BASE_UNIT } from '../Units/system/BASE_UNIT'
 
 export const Salamence: UnitBase = {
   id: nanoid(),
   name: 'Battlemage',
   stats: {
-    ...ZERO_UNIT.stats,
+    ...BASE_UNIT.stats,
     health: 95,
     physical: 115,
     defense: 70,

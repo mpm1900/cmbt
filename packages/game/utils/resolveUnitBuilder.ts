@@ -1,9 +1,9 @@
 import {
   UpdateDamageExpansionParent,
   UpdateDamageNegationParent,
-  ZERO_UNIT,
 } from '../data'
 import { UnitId } from '../data/Ids/_base'
+import { BASE_UNIT } from '../data/Units/system/BASE_UNIT'
 import { Id, Modifier, Mutation, Unit, UnitBuilder } from '../types'
 import { applyMutations } from './applyModifiers'
 import { mapBaseStat } from './mapBaseStat'
@@ -71,13 +71,13 @@ export function resolveUnitBuilder(builder: UnitBuilder, teamId: Id): Unit {
       magic: mapBaseStat('magic', builder.base.stats.magic, builder.level),
       speed: mapBaseStat('speed', builder.base.stats.speed, builder.level),
     },
-    values: ZERO_UNIT.values,
-    flags: ZERO_UNIT.flags,
-    registry: ZERO_UNIT.registry,
+    values: BASE_UNIT.values,
+    flags: BASE_UNIT.flags,
+    registry: BASE_UNIT.registry,
     augments: [],
     modifiers: () => [],
     actions: [],
-    metadata: ZERO_UNIT.metadata,
+    metadata: BASE_UNIT.metadata,
   }
 
   unit.stats = {

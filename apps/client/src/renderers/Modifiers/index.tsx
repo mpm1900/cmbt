@@ -11,6 +11,7 @@ import {
   DefenseDownParent,
   DefenseDownParentId,
   DefenseUpAllId,
+  FireDamageUpParentId,
   FireNegationUpParent,
   FireNegationUpParentId,
   HealParentOnUnitSwitchId,
@@ -99,14 +100,51 @@ export const ModifierRenderers: Record<string, ModifierRenderer> = {
   [DefenseUpAllId]: {
     name: MODIFIER_NAMES[DefenseUpAllId],
   },
+  [FireDamageUpParentId]: {
+    name: MODIFIER_NAMES[FireDamageUpParentId],
+    description: (mod) => {
+      const modifier = mod as FireNegationUpParent
+      return (
+        <div>
+          {modifier.dynamic !== 0 && (
+            <div>
+              {modifier.dynamic > 0 ? '+' : '-'}
+              {modifier.dynamic * 100}% Fire damage.
+            </div>
+          )}
+          {modifier.factor !== 1 && (
+            <div>
+              Afflicted unit's fire damage is multiplied by {modifier.factor}.
+            </div>
+          )}
+        </div>
+      )
+    },
+  },
   [FireNegationUpParentId]: {
     name: MODIFIER_NAMES[FireNegationUpParentId],
     description: (mod) => {
       const modifier = mod as FireNegationUpParent
       return (
         <div>
-          {modifier.offset > 0 ? '+' : '-'}
-          {modifier.offset * 100}% Fire damage negation.
+          {modifier.dynamic !== 0 && (
+            <div>
+              {modifier.dynamic > 0 ? '+' : '-'}
+              {modifier.dynamic * 100}% of Fire damage negation.
+            </div>
+          )}
+          {modifier.static !== 0 && (
+            <div>
+              {modifier.static > 0 ? '+' : '-'}
+              {modifier.static * 100}% Fire damage negation.
+            </div>
+          )}
+          {modifier.factor !== 1 && (
+            <div>
+              Afflicted unit's fire damage negation is multiplied by{' '}
+              {modifier.factor}.
+            </div>
+          )}
         </div>
       )
     },

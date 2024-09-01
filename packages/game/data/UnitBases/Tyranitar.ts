@@ -22,13 +22,13 @@ import {
   SlashId,
   SpikesId,
 } from '../Ids'
-import { ZERO_UNIT } from '../Units'
+import { BASE_UNIT } from '../Units/system/BASE_UNIT'
 
 export const Tyranitar: UnitBase = {
   id: nanoid(),
   name: 'Flamestorm Knight',
   stats: {
-    ...ZERO_UNIT.stats,
+    ...BASE_UNIT.stats,
     health: 100,
     physical: 134,
     defense: 110,

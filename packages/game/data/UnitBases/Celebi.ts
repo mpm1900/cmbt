@@ -2,14 +2,14 @@ import { nanoid } from 'nanoid'
 import { UnitBase, UnitBaseConfig } from '../../types'
 import { Protect } from '../Actions'
 import { ProtectId } from '../Ids'
-import { ZERO_UNIT } from '../Units'
+import { BASE_UNIT } from '../Units/system/BASE_UNIT'
 
 export const CelebiId = nanoid()
 export const Celebi: UnitBase = {
   id: CelebiId,
   name: 'Celebi',
   stats: {
-    ...ZERO_UNIT.stats,
+    ...BASE_UNIT.stats,
     health: 100,
     physical: 100,
     defense: 100,

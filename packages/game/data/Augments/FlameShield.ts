@@ -1,6 +1,6 @@
 import { Augment, Modifier, Mutation, Unit } from '../../types'
 import { FlameShieldId } from '../Ids'
-import { FireNegationUpParent } from '../Modifiers/FireNegationUpParent'
+import { FireNegationUpParent } from '../Modifiers'
 
 export const FlameShield: Augment = {
   id: FlameShieldId,
@@ -11,7 +11,7 @@ export const FlameShield: Augment = {
       new FireNegationUpParent({
         sourceId: unit.id,
         parentId: unit.id,
-        offset: 0.5,
+        static: 0.5,
       }),
     ]
   },

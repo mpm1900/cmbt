@@ -15,7 +15,7 @@ export function AugmentDescription(props: AugmentDescriptionProps) {
     <div className="text-muted-foreground space-y-1">
       {renderer.description && renderer.description()}
       {augment.modifiers(ZERO_UNIT).map((modifier) => (
-        <ModifierDescription modifier={modifier} />
+        <ModifierDescription key={modifier.id} modifier={modifier} />
       ))}
     </div>
   )

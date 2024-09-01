@@ -1,5 +1,6 @@
 import { nanoid } from 'nanoid'
 import { Item } from '../../types'
+import { FireDamageUpParent } from '../Modifiers'
 
 export const RubyId = nanoid()
 export const RubyAugmentId = nanoid()
@@ -15,7 +16,13 @@ export const Ruby = (): Item => {
       itemRtid: rtid,
       name: 'Ruby',
       cost: 1,
-      modifiers: () => [],
+      modifiers: (u) => [
+        new FireDamageUpParent({
+          sourceId: u.id,
+          parentId: u.id,
+          factor: 1.2,
+        }),
+      ],
       mutations: () => [],
     },
   }

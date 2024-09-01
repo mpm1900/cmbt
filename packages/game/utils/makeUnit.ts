@@ -17,7 +17,7 @@ import { Disable } from '../data/Actions/Disable'
 import { Explosion } from '../data/Actions/Explosion'
 import { UnitId } from '../data/Ids/_base'
 import { CelebiId } from '../data/UnitBases/Celebi'
-import { ZERO_UNIT } from '../data/Units'
+import { BASE_UNIT } from '../data/Units/system/BASE_UNIT'
 import { Id, Unit } from '../types'
 import { rebuildUnit } from './rebuildUnit'
 
@@ -26,7 +26,7 @@ export function unitMaker(
   map: (unit: Unit) => Partial<Unit>
 ): Unit {
   const base = {
-    ...ZERO_UNIT,
+    ...BASE_UNIT,
     ...partial,
   }
 
@@ -46,7 +46,7 @@ export function makeEnemyUnit(name: string, teamId: Id, level: number): Unit {
       level,
       baseId: CelebiId,
       stats: {
-        ...ZERO_UNIT.stats,
+        ...BASE_UNIT.stats,
         speed: random.int(70, 140),
         physical: 100, //random.int(70, 140),
         magic: 100, // random.int(70, 140),
@@ -57,13 +57,13 @@ export function makeEnemyUnit(name: string, teamId: Id, level: number): Unit {
         devotion: random.int(0, 20),
       },
       flags: {
-        ...ZERO_UNIT.flags,
+        ...BASE_UNIT.flags,
         isActive: false,
       },
     },
     (unit) => ({
       values: {
-        ...ZERO_UNIT.values,
+        ...BASE_UNIT.values,
         focus: unit.stats.focus,
         stamina: unit.stats.stamina,
         devotion: unit.stats.devotion,

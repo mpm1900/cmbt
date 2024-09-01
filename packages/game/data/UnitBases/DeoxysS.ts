@@ -1,12 +1,12 @@
 import { nanoid } from 'nanoid'
 import { UnitBase, UnitBaseConfig } from '../../types'
-import { ZERO_UNIT } from '../Units'
+import { BASE_UNIT } from '../Units/system/BASE_UNIT'
 
 export const DeoxysS: UnitBase = {
   id: nanoid(),
   name: 'Deoxys-S',
   stats: {
-    ...ZERO_UNIT.stats,
+    ...BASE_UNIT.stats,
     health: 50,
     physical: 85,
     defense: 85,

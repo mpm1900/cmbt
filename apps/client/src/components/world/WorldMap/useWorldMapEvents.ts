@@ -4,7 +4,6 @@ import { WorldNode } from '@repo/game/types'
 import { useNavigate } from '@tanstack/react-router'
 import { Core, NodeSingular } from 'cytoscape'
 import { useEffect, useState } from 'react'
-import { getNodeState } from './getNodeState'
 import { isPathableNode } from './isPathable'
 
 export type UseWorldMapEventsProps = {
@@ -43,8 +42,10 @@ export function useWorldMapEvents(cy: Core | undefined) {
       })
 
       cy.on('mouseover', 'node', function (event) {
-        const { isSelectable } = getNodeState(event.target, options)
-        if (isSelectable) {
+        const state = isPathableNode(event.target, options)
+        const isInteractable =
+          (!state.isCompleted || state.isRepeatable) && state.isPathable
+        if (isInteractable) {
           setHoverNode(event.target)
         }
       })

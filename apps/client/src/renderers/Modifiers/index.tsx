@@ -172,7 +172,11 @@ export const ModifierRenderers: Record<string, ModifierRenderer> = {
     name: <span className="text-white">{MODIFIER_NAMES[SpeedUpTeamId]}</span>,
     description: (mod) => {
       const modifier = mod as SpeedUpTeam
-      return <div>+{modifier.factor}% Speed.</div>
+      return (
+        <div>
+          Afflicted unit's speed stat is multiplied by {modifier.factor}.
+        </div>
+      )
     },
   },
 

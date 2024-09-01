@@ -31,12 +31,6 @@ export function handleTriggerEvent(
   }
 
   logTriggers(triggers, event, log, ctx)
-  if (
-    event === 'on Unit Enter' &&
-    (result.addedModifiers?.length || result.mutations?.length)
-  ) {
-    console.log(result)
-  }
   if (result.addedModifiers?.length) {
     logModifiers(result.addedModifiers, log, ctx, args)
   }

@@ -14,6 +14,7 @@ export class InvertSpeedAll extends Modifier {
 
   constructor(props: ModifierProps) {
     super(InvertSpeedAllId, props)
+    this.priority = -1
   }
 
   resolve = (unit: Unit): Partial<Unit> => {

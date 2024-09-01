@@ -2,7 +2,7 @@ import { ModifierRenderers } from '@/renderers'
 import { HoverCardPortal } from '@radix-ui/react-hover-card'
 import { Modifier } from '@repo/game/types'
 import { PropsWithChildren } from 'react'
-import { IoTimerSharp } from 'react-icons/io5'
+import { FaHourglassStart } from 'react-icons/fa6'
 import { SiPersistent } from 'react-icons/si'
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '../ui/hover-card'
 import { ModifierDescription } from './ModifierDescription'
@@ -33,7 +33,7 @@ export function ModifierHover(props: ModifierHoverProps) {
               )}
               {!!modifier.duration && (
                 <div className="flex items-center space-x-1">
-                  <IoTimerSharp />{' '}
+                  <FaHourglassStart />{' '}
                   <span>
                     {modifier.duration} turn{modifier.duration > 1 && 's'}
                   </span>

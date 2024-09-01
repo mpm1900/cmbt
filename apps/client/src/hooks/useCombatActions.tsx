@@ -142,7 +142,10 @@ export function useCombatActions() {
     args?: MutationFilterArgs
   ): CombatContext {
     const result = handleTriggerEvent(event, combat.log, context, args)
-    context = commitResult(result, context, { enableLog: false })
+    if (event === 'on Unit Enter') {
+      console.log(result, args)
+    }
+    context = commitResult(result, context, { enableLog: false }, args)
     return cleanupResult(context)
   }
 

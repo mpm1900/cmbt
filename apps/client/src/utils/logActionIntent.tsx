@@ -18,15 +18,21 @@ export function logActionIntent(
       <span className="">
         <LogUnit teamId={source?.teamId} user={ctx.user}>
           {source?.name}
-        </LogUnit>{' '}
-        used <LogActionName action={action} /> on{' '}
-        <TextList>
-          {logTargets.map((t) => (
-            <LogUnit key={t.id} teamId={t.teamId} user={ctx.user}>
-              {t.name}
-            </LogUnit>
-          ))}
-        </TextList>
+        </LogUnit>
+        {' used '}
+        <LogActionName action={action} />
+        {logTargets.length > 0 && (
+          <span>
+            {' on '}
+            <TextList>
+              {logTargets.map((t) => (
+                <LogUnit key={t.id} teamId={t.teamId} user={ctx.user}>
+                  {t.name}
+                </LogUnit>
+              ))}
+            </TextList>
+          </span>
+        )}
       </span>
     )
     log(renderer?.log ? renderer.log(action, source, logTargets, ctx) : baseLog)

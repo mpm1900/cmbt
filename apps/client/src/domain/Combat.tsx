@@ -1,18 +1,11 @@
 import { ActiveUnit } from '@/components/combat/ActiveUnit'
 import { CleanupSwitchUnits } from '@/components/combat/CleanupSwitchUnits'
+import { CombatComplete } from '@/components/combat/CombatComplete'
 import { CombatHeader } from '@/components/combat/CombatHeader'
 import { RequireTurnStatus } from '@/components/combat/RequireTurnStatus'
 import { RunningTurn } from '@/components/combat/RunningTurn'
 import { Sidebar } from '@/components/combat/Sidebar'
 import { Team } from '@/components/combat/Team'
-import { Button } from '@/components/ui/button'
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card'
 import { VantaContextProvider } from '@/hooks'
 import {
   useAiActions,
@@ -21,23 +14,19 @@ import {
 } from '@/hooks/controllers'
 import { useCombat } from '@/hooks/state'
 import { useCombatSetup } from '@/hooks/useCombatSetup'
-import { useCombatToWorldState } from '@/hooks/useCombatToWorldState'
 import { Navbar } from '@shared/Navbar'
 import { PageLayout } from '@shared/PageLayout'
-import { Link } from '@tanstack/react-router'
 
 export function Combat() {
-  const combat = useCombat()
+  const { teams, user } = useCombat((s) => ({ teams: s.teams, user: s.user }))
 
   useCombatSetup()
   useTurnController()
-  useAiActions()
   useCleanupController()
+  useAiActions()
 
-  const userTeam = combat.teams.find((t) => t.id === combat.user)
-  const aiTeam = combat.teams.find((t) => t.id !== combat.user)
-
-  const commit = useCombatToWorldState()
+  const userTeam = teams.find((t) => t.id === user)
+  const aiTeam = teams.find((t) => t.id !== user)
 
   return (
     <VantaContextProvider>
@@ -50,27 +39,7 @@ export function Combat() {
           <Team teamId={aiTeam?.id} />
           <div className="flex flex-1 items-center justify-center">
             <RequireTurnStatus status="done">
-              <Card>
-                <CardHeader>
-                  <CardTitle>Battle over!</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div>You did it! Here's what you get!</div>
-                  <div>Nothing.</div>
-                </CardContent>
-                <CardFooter className="justify-end">
-                  <Link to="/world">
-                    <Button
-                      onClick={() => {
-                        commit()
-                        combat.onSuccess()
-                      }}
-                    >
-                      Back to Map
-                    </Button>
-                  </Link>
-                </CardFooter>
-              </Card>
+              <CombatComplete />
             </RequireTurnStatus>
             <RequireTurnStatus status="combat">
               <RunningTurn />

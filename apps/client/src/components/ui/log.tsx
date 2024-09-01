@@ -46,14 +46,14 @@ export function LogSecondary(
   props: PropsWithChildren & { className?: string }
 ) {
   return (
-    <span
+    <div
       className={cn(
-        'pl-4 text-muted-foreground font-thin opacity-65',
+        'pl-8 indent-[-16px] text-muted-foreground font-thin opacity-65',
         props.className
       )}
     >
       {props.children}
-    </span>
+    </div>
   )
 }
 

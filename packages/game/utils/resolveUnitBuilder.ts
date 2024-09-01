@@ -55,6 +55,7 @@ export function resolveUnitBuilder(builder: UnitBuilder, teamId: Id): Unit {
     baseId: builder.base.id,
     name: builder.name,
     level: builder.level,
+    xp: 0,
     stats: {
       ...builder.base.stats,
       health: mapBaseStat('health', builder.base.stats.health, builder.level),

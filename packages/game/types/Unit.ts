@@ -70,6 +70,7 @@ export type Unit = {
   baseId: Id
   name: string
   level: number
+  xp: number
   stats: Stats
   values: Values
   flags: Flags

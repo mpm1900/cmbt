@@ -73,6 +73,13 @@ const ShopIntroductionNode: EncounterNode = {
           enemyUnits: Array.from({ length: 4 }).map(() =>
             makeEnemyUnit(faker.person.fullName(), enemyTeam.id, 20)
           ),
+          reward: {
+            items: [],
+            resources: {
+              credits: 200,
+            },
+            xp: 0,
+          },
           onSuccess: () => {
             ctx.updateActiveWorldNode((n) => ({
               completed: true,

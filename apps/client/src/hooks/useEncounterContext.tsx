@@ -24,6 +24,7 @@ export function useEncounterContext(): EncounterContext {
         mutations: props.mutations ?? [],
         enemyTeam: props.enemyTeam,
         enemyUnits: props.enemyUnits,
+        reward: props.reward,
         onFailure: props.onFailure,
         onSuccess: props.onSuccess,
       })
@@ -43,7 +44,7 @@ export function useEncounterContext(): EncounterContext {
       game.updateWorldNode(game.world.activeNodeId, fn),
     updateEncounter: store.updateEncounter,
     updateTeam: game.updateTeam,
-    addItem: game.addItem,
+    addItem: game.buyItem,
     addNpc: npcs.addNpc,
     updateNpcValue: npcs.updateNpcValue,
   }

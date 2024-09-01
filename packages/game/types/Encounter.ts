@@ -1,10 +1,27 @@
-import { Id, Item, Modifier, Mutation, Npc, Team, Unit, WorldNode } from '.'
+import {
+  Id,
+  Item,
+  Modifier,
+  Mutation,
+  Npc,
+  Team,
+  TeamResources,
+  Unit,
+  WorldNode,
+} from '.'
+
+export type CombatReward = {
+  items: Item[]
+  resources: TeamResources
+  xp: number
+}
 
 export type InitializeCombatOptions = {
   userTeam?: Team
   userUnits?: Unit[]
   enemyTeam: Team
   enemyUnits: Unit[]
+  reward: CombatReward
   modifiers?: Modifier[]
   mutations?: Mutation[]
   onSuccess: () => void

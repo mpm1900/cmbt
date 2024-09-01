@@ -41,6 +41,13 @@ const TestNode1: EncounterNode = {
           enemyUnits: Array.from({ length: 3 }).map(() =>
             makeEnemyUnit(faker.person.fullName(), enemyTeam.id, 15)
           ),
+          reward: {
+            items: [],
+            resources: {
+              credits: 200,
+            },
+            xp: 0,
+          },
           modifiers: [
             new SpeedUpTeam({
               sourceId: unit?.id,
@@ -118,6 +125,13 @@ const TestNode2: EncounterNode = {
           enemyUnits: Array.from({ length: 3 }).map(() =>
             makeEnemyUnit(faker.person.fullName(), enemyTeam.id, 15)
           ),
+          reward: {
+            items: [],
+            resources: {
+              credits: 200,
+            },
+            xp: 0,
+          },
           onSuccess: () => {
             ctx.updateActiveWorldNode((n) => ({
               completed: true,

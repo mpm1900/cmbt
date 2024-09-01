@@ -6,6 +6,7 @@ export const ZERO_UNIT: Unit = {
   baseId: '',
   name: '',
   level: 0,
+  xp: 0,
   stats: {
     health: 0,
     defense: 0,

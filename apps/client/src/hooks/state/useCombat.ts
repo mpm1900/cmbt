@@ -1,6 +1,7 @@
 import {
   ActionResult,
   CombatContext,
+  CombatReward,
   Id,
   Item,
   Modifier,
@@ -22,6 +23,7 @@ export type InitializeProps = {
   units: Unit[]
   user: Team
   enemy: Team
+  reward: CombatReward
   mutations?: Mutation[]
   modifiers?: Modifier[]
   onSuccess: () => void
@@ -30,6 +32,7 @@ export type InitializeProps = {
 
 export type CombatLog = { id: Id; delay: number; node: ReactNode }
 export type CombatState = CombatContext & {
+  reward: CombatReward
   logs: CombatLog[]
   log: CombatLogger
   updateLog: (id: Id, fn: (log: CombatLog) => Partial<CombatLog>) => void
@@ -77,21 +80,25 @@ export const useCombat = create<CombatStore>((set, get) => {
         units,
         user,
         enemy,
+        reward,
         modifiers = [],
         mutations = [],
         onSuccess,
         onFailure,
       } = props
+
       const initialModifiers = [
         ...props.units
           .filter((u) => u.flags.isActive)
           .flatMap((u) => u.modifiers()),
         ...modifiers,
       ]
+
       set({
         units: units,
         teams: [user, enemy],
         user: user.id,
+        reward,
         modifiers: validateModifiers(initialModifiers, []),
         turn: {
           count: 0,
@@ -217,6 +224,14 @@ export const useCombat = create<CombatStore>((set, get) => {
           results: [...s.turn.results, result],
         },
       })),
+
+    reward: {
+      items: [],
+      resources: {
+        credits: 0,
+      },
+      xp: 0,
+    },
 
     logs: [],
     log: (node, delay = 0) =>

@@ -11,6 +11,7 @@ import {
   DefenseDownParent,
   DefenseDownParentId,
   DefenseUpAllId,
+  FireDamageUpParent,
   FireDamageUpParentId,
   FireNegationUpParent,
   FireNegationUpParentId,
@@ -103,7 +104,7 @@ export const ModifierRenderers: Record<string, ModifierRenderer> = {
   [FireDamageUpParentId]: {
     name: MODIFIER_NAMES[FireDamageUpParentId],
     description: (mod) => {
-      const modifier = mod as FireNegationUpParent
+      const modifier = mod as FireDamageUpParent
       return (
         <div>
           {modifier.dynamic !== 0 && (

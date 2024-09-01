@@ -9,23 +9,24 @@ import { FireDamageUpParentId } from '../Ids'
 
 export class FireDamageUpParent extends Modifier {
   factor: number
-  offset: number
+  dynamic: number
 
   get key(): string {
-    return `${this.id}.${this.parentId ?? this.sourceId}@${this.factor}_${this.offset}`
+    return `${this.id}.${this.parentId ?? this.sourceId}@${this.factor}_${this.dynamic}`
   }
 
-  constructor(props: ModifierProps<{ factor?: number; offset?: number }>) {
+  constructor(props: ModifierProps<{ factor?: number; dynamic?: number }>) {
     super(FireDamageUpParentId, props)
     this.factor = props.factor !== undefined ? props.factor : 1
-    this.offset = props.offset ?? 0
+    this.dynamic = props.dynamic ?? 0
   }
 
   resolve = (unit: Unit): Partial<Unit> => {
     return {
       stats: Modifier.setStats(unit, (stats) => ({
         fireExpansion:
-          stats.fireExpansion * this.factor + this.offset * stats.fireExpansion,
+          stats.fireExpansion * this.factor +
+          this.dynamic * stats.fireExpansion,
       })),
     }
   }

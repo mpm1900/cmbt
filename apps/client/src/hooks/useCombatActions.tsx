@@ -1,14 +1,8 @@
 import { LogCritical, LogHeader } from '@/components/ui/log'
-import {
-  getDamageFromMutations,
-  logActionResults,
-  logMiss,
-  logModifiers,
-  logMutations,
-} from '@/utils'
+import { getDamageFromMutations } from '@/utils'
 import { handleCleanup } from '@/utils/handleCleanup'
 import { handleTriggerEvent } from '@/utils/handleTriggerEvent'
-import { logCritical } from '@/utils/logCritical'
+import { logResult } from '@/utils/logResult'
 import { SetDeadAsInactive } from '@repo/game/data'
 import {
   ActionResult,
@@ -47,7 +41,6 @@ export function useCombatActions() {
   const settings = useCombatSettings()
 
   const cleanupResult: CleanupResult = (context) => {
-    // round cleanup
     const deadActiveUnits = context.units.filter(
       (u) => u.flags.isActive && !isUnitAliveCtx(u.id, context)
     )
@@ -81,9 +74,7 @@ export function useCombatActions() {
       updateActionQueue,
     } = result
 
-    if (options?.enableLog) {
-      logMiss(result, combat.log, context)
-    }
+    logResult(result, combat.log, context, options)
 
     if (removedUnits?.length) {
       context = runTriggers('on Unit Switch Out', context, {
@@ -91,9 +82,9 @@ export function useCombatActions() {
       })
     }
     if (mutations?.length) {
-      if (options?.enableLog) logMutations(mutations, combat.log, context)
       const targets = result.expandedTargets ?? result.targets ?? []
       const damages = getDamageFromMutations(targets, mutations, context, args)
+      context.units = combat.mutate(mutations, context, args)
       Object.entries(damages).forEach(([unitId, damage]) => {
         if (damage > 0) {
           const target = context.units.find((u) => u.id === unitId)
@@ -109,14 +100,9 @@ export function useCombatActions() {
           }
         }
       })
-      context.units = combat.mutate(mutations, context, args)
     }
     if (modifiers?.length) {
-      if (options?.enableLog) logModifiers(modifiers, combat.log, context)
       context.modifiers = combat.add(modifiers)
-    }
-    if (options?.enableLog) {
-      logCritical(result, combat.log, context)
     }
     if (updateModifiers) {
       context.modifiers = combat.updateModifiers(updateModifiers)
@@ -129,10 +115,6 @@ export function useCombatActions() {
         units: addedUnits,
       })
     }
-
-    if (options?.enableLog) {
-      logActionResults(result, combat.log, context)
-    }
     return context
   }
 
@@ -142,9 +124,6 @@ export function useCombatActions() {
     args?: MutationFilterArgs
   ): CombatContext {
     const result = handleTriggerEvent(event, combat.log, context, args)
-    if (event === 'on Unit Enter') {
-      console.log(result, args)
-    }
     context = commitResult(result, context, { enableLog: false }, args)
     return cleanupResult(context)
   }

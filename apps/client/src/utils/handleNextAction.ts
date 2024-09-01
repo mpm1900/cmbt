@@ -11,11 +11,7 @@ export function handleNextAction(
   log: CombatLogger,
   ctx: CombatContext,
   commitResult: CommitResult,
-  handleResult: (
-    result: ActionResult | undefined,
-    queueLength: number,
-    ctx: CombatContext
-  ) => void,
+  handleResult: (result: ActionResult | undefined, ctx: CombatContext) => void,
   handleNext?: (ctx: CombatContext) => void
 ) {
   queue.sort(ctx)
@@ -32,10 +28,10 @@ export function handleNextAction(
       )
       const result = getResultFromActionItem(item, ctx)
       logActionIntent(item.action, result, log, ctx)
-      return handleResult(result, sorted.length, ctx)
+      return handleResult(result, ctx)
     }
 
-    return handleResult(undefined, sorted.length, ctx)
+    return handleResult(undefined, ctx)
   }
 
   return handleNext && handleNext(ctx)

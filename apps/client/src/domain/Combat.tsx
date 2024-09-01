@@ -16,10 +16,9 @@ import {
 import { VantaContextProvider } from '@/hooks'
 import {
   useAiActions,
-  useInputController,
+  useCleanupController,
   useTurnController,
 } from '@/hooks/controllers'
-import { useCleanupController } from '@/hooks/controllers/useCleanupController'
 import { useCombat } from '@/hooks/state'
 import { useCombatSetup } from '@/hooks/useCombatSetup'
 import { useCombatToWorldState } from '@/hooks/useCombatToWorldState'
@@ -32,7 +31,6 @@ export function Combat() {
 
   useCombatSetup()
   useTurnController()
-  useInputController()
   useAiActions()
   useCleanupController()
 

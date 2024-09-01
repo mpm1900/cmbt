@@ -3,7 +3,7 @@ import { CombatLogger } from '@/hooks/state'
 import { ActionRenderers } from '@/renderers'
 import { ActionResult, CombatContext } from '@repo/game/types'
 
-export function logActionResults(
+export function logActionSuccessFailure(
   result: ActionResult,
   log: CombatLogger,
   ctx: CombatContext

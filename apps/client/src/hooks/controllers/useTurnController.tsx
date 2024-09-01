@@ -1,35 +1,23 @@
 import { handleNextAction } from '@/utils'
-import { isUnitAliveCtx } from '@repo/game/utils'
+import { getActionableUnitsCtx, isUnitAliveCtx } from '@repo/game/utils'
 import { useEffect } from 'react'
 import { useActions, useCombat, useCombatSettings } from '../state'
 import { useCombatActions } from '../useCombatActions'
 import { useCombatContext } from '../useCombatContext'
 
 export function useTurnController() {
-  const { turn, log, pushResult } = useCombat()
-  const gameSpeed = useCombatSettings((s) => s.gameSpeed)
+  const { turn, log, pushResult, setStatus } = useCombat()
+  const { gameSpeed, isDebugMode } = useCombatSettings()
   const active = turn.results[turn.results.length - 1]
-
   const fns = useCombatActions()
+  const queue = useActions()
   let ctx = useCombatContext()
-  let queue = useActions()
 
-  useEffect(() => {
-    if (turn.status === 'combat') {
-      handleNextAction(
-        'combat',
-        queue,
-        log,
-        ctx,
-        fns.commitResult,
-        (result, length, _ctx) => {
-          ctx = _ctx
-          pushResult(result)
-        },
-        () => fns.cleanup(true, ctx)
-      )
-    }
-  }, [turn.status, queue.queue.length])
+  function startTurn() {
+    setStatus('combat')
+    ctx = fns.runTriggers('on Turn Start', ctx)
+    queue.sort(ctx)
+  }
 
   function nextAction() {
     setTimeout(
@@ -39,6 +27,34 @@ export function useTurnController() {
       gameSpeed * 2 * (active ? 1 : 0)
     )
   }
+
+  useEffect(() => {
+    if (ctx.turn.status === 'main') {
+      const actionableUnits = getActionableUnitsCtx(ctx)
+
+      const checkLength = isDebugMode ? 1 : actionableUnits.length
+      if (queue.queue.length === checkLength && queue.queue.length > 0) {
+        startTurn()
+      }
+    }
+  }, [ctx.turn.status, queue.queue.length])
+
+  useEffect(() => {
+    if (turn.status === 'combat') {
+      handleNextAction(
+        'combat',
+        queue,
+        log,
+        ctx,
+        fns.commitResult,
+        (result, _ctx) => {
+          ctx = _ctx
+          pushResult(result)
+        },
+        () => fns.cleanup(true, ctx)
+      )
+    }
+  }, [turn.status, queue.queue.length])
 
   useEffect(() => {
     if (turn.status === 'combat') {

@@ -29,7 +29,7 @@ export function useCleanupController() {
           log,
           ctx,
           fns.commitResult,
-          (result, queueLength, ctx) => {
+          (result, ctx) => {
             if (result) {
               ctx = fns.commitResult(result, ctx, { enableLog: true })
               ctx = fns.cleanupResult(ctx)

@@ -1,5 +1,11 @@
 import { LogCritical, LogHeader } from '@/components/ui/log'
-import { logActionResults, logMiss, logModifiers, logMutations } from '@/utils'
+import {
+  getDamageFromMutations,
+  logActionResults,
+  logMiss,
+  logModifiers,
+  logMutations,
+} from '@/utils'
 import { handleCleanup } from '@/utils/handleCleanup'
 import { handleTriggerEvent } from '@/utils/handleTriggerEvent'
 import { logCritical } from '@/utils/logCritical'
@@ -86,6 +92,23 @@ export function useCombatActions() {
     }
     if (mutations?.length) {
       if (options?.enableLog) logMutations(mutations, combat.log, context)
+      const targets = result.expandedTargets ?? result.targets ?? []
+      const damages = getDamageFromMutations(targets, mutations, context, args)
+      Object.entries(damages).forEach(([unitId, damage]) => {
+        if (damage > 0) {
+          const target = context.units.find((u) => u.id === unitId)
+          if (target) {
+            context = runTriggers('on Unit Take Damage', context, {
+              units: [target],
+            })
+          }
+          if (result.source) {
+            context = runTriggers('on Unit Deal Damage', context, {
+              units: [result.source],
+            })
+          }
+        }
+      })
       context.units = combat.mutate(mutations, context, args)
     }
     if (modifiers?.length) {

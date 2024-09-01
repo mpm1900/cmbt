@@ -5,16 +5,20 @@ import { Modifier, ModifierProps } from './Modifier'
 export type TriggerEvent =
   | 'on Turn Start'
   | 'on Turn End'
-  | 'on Unit Die'
   | 'on Unit Enter'
   | 'on Unit Switch Out'
+  | 'on Unit Take Damage'
+  | 'on Unit Deal Damage'
+  | 'on Unit Die'
 
 export const AllTriggerEvents: TriggerEvent[] = [
   'on Turn Start',
   'on Turn End',
-  'on Unit Die',
   'on Unit Enter',
   'on Unit Switch Out',
+  'on Unit Take Damage',
+  'on Unit Deal Damage',
+  'on Unit Die',
 ]
 
 export type TriggerProps<T = {}> = ModifierProps<T> & {

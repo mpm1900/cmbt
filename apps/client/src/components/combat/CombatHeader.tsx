@@ -17,7 +17,7 @@ const StatusBadge = ({
 export function CombatHeader() {
   const turn = useCombat((s) => s.turn)
   return (
-    <div className="bg-slate-950 border-b flex min-h-[48px]">
+    <div className="bg-slate-950 border-b flex items-center min-h-[48px]">
       <div className="w-[64px] bg-black p-2 text-center font-mono text-muted-foreground border-r">
         cmbt
       </div>

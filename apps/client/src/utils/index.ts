@@ -1,3 +1,4 @@
+export * from './getDamageFromMutations'
 export * from './getResultFromActionItem'
 export * from './getTeamsWithSelectionRequired'
 export * from './groupItemsById'

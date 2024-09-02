@@ -16,11 +16,14 @@ import {
   ExplosionId,
   Fireball,
   FireballId,
+  FireBlast,
   FireBlastId,
+  FirePunch,
   FirePunchId,
   FurySwipes,
   FurySwipesId,
   HoldPersonId,
+  HyperBeam,
   HyperBeamId,
   IcyWindId,
   InspectAllId,
@@ -38,6 +41,7 @@ import {
   ProtectId,
   QuickAttack,
   QuickAttackId,
+  Rest,
   RestId,
   Sandstorm,
   SandstormId,
@@ -52,6 +56,7 @@ import {
   SwordsDance,
   SwordsDanceId,
   TrickRoomId,
+  Ward,
   WardId,
   WillOWispId,
 } from '@repo/game/data'
@@ -63,14 +68,15 @@ import { PhysicalArmor } from '@shared/PhysicalArmor'
 import { StatusInline } from '@shared/StatusInline'
 import { TextList } from '@shared/TextList'
 import { ReactNode } from 'react'
+import { HoldPerson } from '../../../../../packages/game/data/Actions/HoldPerson'
 import { ACTION_NAMES } from './_names'
 
 export * from './_names'
 
 export type ActionRenderer = {
   name: string
-  baseDamage: (action: Action) => string
-  cost: string
+  baseDamage?: (action: Action) => string
+  cost?: (action: Action) => string
   costAlt?: ReactNode
   description: (
     action: Action,
@@ -92,8 +98,6 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
   /// SYSTEM ACTIONS
   [SetIsActiveId]: {
     name: ACTION_NAMES[SetIsActiveId],
-    baseDamage: () => '',
-    cost: '',
     description: () => <></>,
     log: (_, __, targets, ctx) => (
       <span>
@@ -110,8 +114,6 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
   },
   [SwitchUnitId]: {
     name: ACTION_NAMES[SwitchUnitId],
-    baseDamage: () => '',
-    cost: '',
     description: () => <></>,
     log: (_, source, [target], ctx) => (
       <span>
@@ -127,8 +129,6 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
   },
   [InspectAllId]: {
     name: ACTION_NAMES[InspectAllId],
-    baseDamage: () => '',
-    cost: '',
     description: (action, props) => (
       <>
         Applies{' '}
@@ -141,13 +141,11 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
   /// OTHER ACTIONS
   [ArmorUpId]: {
     name: ACTION_NAMES[ArmorUpId],
-    baseDamage: () => '',
-    cost: '',
     description: (action) => {
       const armorup = action as ArmorUp
       return (
         <div>
-          This unit gains <PhysicalArmor>{armorup.amount * -1}</PhysicalArmor>
+          This unit gains <PhysicalArmor>{armorup.amount}</PhysicalArmor>
         </div>
       )
     },
@@ -155,7 +153,6 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
   [BodySlamId]: {
     name: ACTION_NAMES[BodySlamId],
     baseDamage: (action) => `${action.damage?.value}`,
-    cost: '',
     description: (action) => {
       const bodyslam = action as BodySlam
       return (
@@ -171,7 +168,6 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
   [PiercingStrikeId]: {
     name: ACTION_NAMES[PiercingStrikeId],
     baseDamage: (action) => `${action.damage?.value}`,
-    cost: '',
     description: (action, props) => {
       const crunch = action as PiercingStrike
       return (
@@ -183,16 +179,14 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
             modifier={
               new DefenseDownParent({ factor: crunch.defenseDownFactor })
             }
-          />{' '}
-          to target.
+          />
+          .
         </div>
       )
     },
   },
   [DisableId]: {
     name: 'Disable',
-    baseDamage: () => '',
-    cost: '',
     description: (action, props) => {
       const disable = action as Disable
       return (
@@ -214,7 +208,6 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
   [EarthquakeId]: {
     name: ACTION_NAMES[EarthquakeId],
     baseDamage: (action) => `${action.damage?.value}`,
-    cost: '',
     description: (action) => (
       <>
         Deals <DamageInline damage={action.damage} /> to all other units.
@@ -224,7 +217,6 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
   [ExplosionId]: {
     name: 'Explosion',
     baseDamage: () => 'ƒx',
-    cost: '',
     description: (action) => (
       <>
         Deals damage equal to 4 times this unit's physical stat to all other
@@ -239,7 +231,6 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
       const fireball = action as Fireball
       return `${fireball.damage.value} (${fireball.splashDamage.value})`
     },
-    cost: '',
     description: (action) => {
       const fireball = action as Fireball
       return (
@@ -254,73 +245,76 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
   [FireBlastId]: {
     name: ACTION_NAMES[FireBlastId],
     baseDamage: (action) => `${action.damage?.value}`,
-    cost: '',
-    description: (action, props) => (
-      <div>
-        Deals <DamageInline damage={action.damage} /> to target enemy unit. 10%
-        chance to apply <StatusInline status={Burn} side={props?.side} /> to
-        target.
-      </div>
-    ),
+    description: (action, props) => {
+      const fireblast = action as FireBlast
+      return (
+        <div>
+          Deals <DamageInline damage={action.damage} /> to target enemy unit.{' '}
+          {fireblast.burnChance}% chance to apply{' '}
+          <StatusInline status={Burn} side={props?.side} /> to target.
+        </div>
+      )
+    },
   },
   [FirePunchId]: {
     name: ACTION_NAMES[FirePunchId],
     baseDamage: (action) => `${action.damage?.value}`,
-    cost: '',
-    description: (action, props) => (
-      <div>
-        Deals <DamageInline damage={action.damage} /> to target enemy unit. 10%
-        chance to apply <StatusInline status={Burn} side={props?.side} /> to
-        target.
-      </div>
-    ),
+    description: (action, props) => {
+      const firepunch = action as FirePunch
+      return (
+        <div>
+          Deals <DamageInline damage={action.damage} /> to target enemy unit.{' '}
+          {firepunch.burnChance}% chance to apply{' '}
+          <StatusInline status={Burn} side={props?.side} /> to target.
+        </div>
+      )
+    },
   },
   [FurySwipesId]: {
     name: 'Fury Swipes',
     baseDamage: (action) => `${action.damage?.value}`,
-    cost: '',
     description: (action) => {
       const furySwipes = action as any as FurySwipes
       return (
-        <>
+        <div>
           Deals <DamageInline damage={furySwipes.damage} /> to target enemy
           unit. Repeats 4-6 times.
-        </>
+        </div>
       )
     },
   },
   [HoldPersonId]: {
     name: ACTION_NAMES[HoldPersonId],
-    baseDamage: () => '',
-    cost: '',
     description: (action, props) => {
+      const holdperson = action as HoldPerson
       return (
-        <>
+        <div>
           Applies{' '}
           <ModifierInline side={props?.side} modifier={new StunnedParent({})} />{' '}
-          to target enemy unit for 2 turns.
-        </>
+          to target enemy unit for {holdperson.duration - 1} turns.
+        </div>
       )
     },
   },
   [HyperBeamId]: {
     name: ACTION_NAMES[HyperBeamId],
     baseDamage: () => 'ƒ(x)',
-    cost: '30 FP',
+    cost: () => '30 FP',
     costAlt: <span className="text-blue-300">30 FP</span>,
-    description: (action, props) => (
-      <>
-        Deals base force damage equal to twice this unit's base magic stat to
-        target enemy unit. Applies{' '}
-        <ModifierInline side={props?.side} modifier={new StunnedParent({})} />{' '}
-        to this unit for 1 turn.
-      </>
-    ),
+    description: (action, props) => {
+      const hyperbeam = action as HyperBeam
+      return (
+        <div>
+          Deals base force damage equal to twice this unit's base magic stat to
+          target enemy unit. Applies{' '}
+          <ModifierInline side={props?.side} modifier={new StunnedParent({})} />{' '}
+          to this unit for {hyperbeam.stunDuration - 1} turn.
+        </div>
+      )
+    },
   },
   [IcyWindId]: {
     name: 'Icy Wind',
-    baseDamage: () => '',
-    cost: '',
     description: (action) => (
       <>
         Applies <span className="font-bold text-white">Speed Down</span> to
@@ -333,7 +327,6 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
   [MagicMissileId]: {
     name: 'Magic Missile',
     baseDamage: (action) => `${action.damage?.value}`,
-    cost: '',
     description: (action) => (
       <>
         Deals <DamageInline damage={action.damage} /> to 2 target enemy units.
@@ -344,7 +337,6 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
   [QuickAttackId]: {
     name: 'Quick Attack',
     baseDamage: (action) => `${action.damage?.value}`,
-    cost: '',
     description: (action) => {
       const quickAttack = action as QuickAttack
       return (
@@ -358,7 +350,6 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
   [PoisonSprayId]: {
     name: ACTION_NAMES[PoisonSprayId],
     baseDamage: (a) => `${a.damage?.value}`,
-    cost: '',
     description: (action, props) => {
       const poisionSpray = action as QuickAttack
       return (
@@ -372,7 +363,6 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
   [PowerWordKillId]: {
     name: ACTION_NAMES[PowerWordKillId],
     baseDamage: () => '∞',
-    cost: '',
     description: () => (
       <>
         Deals <span className="text-white">∞ damage</span> to target enemy unit.
@@ -385,8 +375,6 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
   },
   [ProtectId]: {
     name: ACTION_NAMES[ProtectId],
-    baseDamage: () => '',
-    cost: '',
     description: (action, props) => {
       const protect = action as Protect
       return (
@@ -409,20 +397,19 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
   },
   [RestId]: {
     name: ACTION_NAMES[RestId],
-    baseDamage: () => '',
-    cost: '',
-    description: (action, props) => (
-      <>
-        Removes all damage from this unit. Applies{' '}
-        <ModifierInline side={props?.side} modifier={new StunnedParent({})} />{' '}
-        to this unit for 2 turns.
-      </>
-    ),
+    description: (action, props) => {
+      const rest = action as Rest
+      return (
+        <div>
+          Removes all damage from this unit. Applies{' '}
+          <ModifierInline side={props?.side} modifier={new StunnedParent({})} />{' '}
+          to this unit for {rest.duration - 1} turns.
+        </div>
+      )
+    },
   },
   [SandstormId]: {
     name: ACTION_NAMES[SandstormId],
-    baseDamage: () => '',
-    cost: '',
     description: (action) => {
       const sandstorm = action as Sandstorm
       return (
@@ -445,7 +432,6 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
   [SlashId]: {
     name: ACTION_NAMES[SlashId],
     baseDamage: (a) => `${a.damage?.value}`,
-    cost: '',
     description: (action, props) => {
       const slash = action as Slash
       return (
@@ -458,8 +444,6 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
   },
   [SpikesId]: {
     name: ACTION_NAMES[SpikesId],
-    baseDamage: () => '',
-    cost: '',
     description: (action, props) => {
       const spikes = action as Spikes
       return (
@@ -483,8 +467,7 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
   },
   [SwordsDanceId]: {
     name: 'Swords Dance',
-    baseDamage: () => '',
-    cost: '30 FP',
+    cost: () => '30 FP',
     description: (action, props) => {
       const swordsDance = action as SwordsDance
       return (
@@ -501,8 +484,6 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
   },
   [TrickRoomId]: {
     name: 'Trick Room',
-    baseDamage: () => '',
-    cost: '',
     description: (action, props) => (
       <>
         Applies{' '}
@@ -513,21 +494,18 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
   },
   [WardId]: {
     name: ACTION_NAMES[WardId],
-    baseDamage: () => '',
-    cost: '',
     description: (action) => {
-      const ward = action as ArmorUp
+      const ward = action as Ward
       return (
         <>
-          This unit gains <MagicArmor>{ward.amount * -1}</MagicArmor>
+          This unit gains <MagicArmor>{ward.amount}</MagicArmor>
         </>
       )
     },
   },
   [WillOWispId]: {
     name: 'Will-O-Wisp',
-    baseDamage: () => '',
-    cost: '20 FP',
+    cost: () => '20 FP',
     costAlt: <span className="text-blue-300">20 FP</span>,
     description: (action, props) => (
       <div>
@@ -544,8 +522,6 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
   },
   [PotionActionId]: {
     name: ACTION_NAMES[PotionActionId],
-    baseDamage: () => '',
-    cost: '',
     description: () => 'Heals 30 damage on target unit.',
   },
 }

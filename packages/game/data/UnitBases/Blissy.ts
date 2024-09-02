@@ -6,7 +6,7 @@ import { BASE_UNIT } from '../Units/system/BASE_UNIT'
 
 export const Blissy: UnitBase = {
   id: nanoid(),
-  name: 'Apothecary',
+  name: 'Clergyman',
   stats: {
     ...BASE_UNIT.stats,
     health: 250,

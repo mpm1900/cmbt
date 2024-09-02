@@ -11,7 +11,7 @@ import { buildActionResult, getActionData } from '../../utils'
 import { modifyRenderContext } from '../../utils/modifyRenderContext'
 import { SwordsDanceId } from '../Ids'
 import { AttackUpParent } from '../Modifiers'
-import { ReduceFocusParent } from '../Mutations'
+import { UpdateFocusParent } from '../Mutations'
 import { EmptyArray } from '../Queries/EmptyArray'
 
 export class SwordsDance extends Action {
@@ -21,10 +21,10 @@ export class SwordsDance extends Action {
     super(SwordsDanceId, {
       sourceId,
       teamId,
-      cost: new ReduceFocusParent({
+      cost: new UpdateFocusParent({
         sourceId: sourceId,
         parentId: sourceId,
-        offset: 30,
+        static: -30,
       }),
 
       targets: new EmptyArray(),

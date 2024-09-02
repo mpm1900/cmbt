@@ -83,6 +83,7 @@ const ShopIntroductionNode: EncounterNode = {
           onSuccess: () => {
             ctx.updateActiveWorldNode((n) => ({
               completed: true,
+              visited: true,
             }))
           },
           onFailure: () => {},
@@ -95,6 +96,7 @@ const ShopIntroductionNode: EncounterNode = {
       resolve: (ctx) => {
         ctx.updateActiveWorldNode((n) => ({
           completed: true,
+          visited: true,
           encounter: ctx.encounter,
         }))
         ctx.back()
@@ -133,6 +135,7 @@ const ShopWaresNode: EncounterNode = {
       const encounter = reset()
       ctx.updateActiveWorldNode((n) => ({
         completed: true,
+        visited: true,
         encounter,
       }))
       ctx.back()

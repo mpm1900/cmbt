@@ -59,6 +59,7 @@ const TestNode1: EncounterNode = {
           onSuccess: () => {
             ctx.updateActiveWorldNode((n) => ({
               completed: true,
+              visited: true,
             }))
           },
           onFailure: () => {},
@@ -74,7 +75,12 @@ const TestNode1: EncounterNode = {
     {
       id: nanoid(),
       label: <ChoiceLabel after={<IoMdReturnLeft />}>Leave</ChoiceLabel>,
-      resolve: (ctx) => ctx.back(),
+      resolve: (ctx) => {
+        ctx.updateActiveWorldNode((n) => ({
+          visited: true,
+        }))
+        ctx.back()
+      },
     },
     {
       id: nanoid(),
@@ -84,6 +90,7 @@ const TestNode1: EncounterNode = {
       resolve: (ctx) => {
         ctx.updateActiveWorldNode((n) => ({
           completed: true,
+          visited: true,
         }))
         ctx.back()
       },
@@ -135,6 +142,7 @@ const TestNode2: EncounterNode = {
           onSuccess: () => {
             ctx.updateActiveWorldNode((n) => ({
               completed: true,
+              visited: true,
             }))
           },
           onFailure: () => {},

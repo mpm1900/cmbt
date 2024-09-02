@@ -19,18 +19,20 @@ import { getDamageAi } from '../../utils/getDamageAiAction'
 import { modifyRenderContext } from '../../utils/modifyRenderContext'
 import { HyperBeamId } from '../Ids'
 import { StunnedParent } from '../Modifiers'
-import { ReduceFocusParent } from '../Mutations'
+import { UpdateFocusParent } from '../Mutations'
 import { GetUnits } from '../Queries'
 
 export class HyperBeam extends Action {
+  stunDuration: number = 2
+
   constructor(sourceId: Id, teamId: Id) {
     super(HyperBeamId, {
       sourceId,
       teamId,
-      cost: new ReduceFocusParent({
+      cost: new UpdateFocusParent({
         sourceId: sourceId,
         parentId: sourceId,
-        offset: 30,
+        static: -30,
       }),
       targets: new GetUnits({
         notTeamId: teamId,

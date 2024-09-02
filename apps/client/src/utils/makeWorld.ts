@@ -63,6 +63,7 @@ const TestNode: NodeMaker = (id, edges, overrides) => ({
   id: test(id),
   size: 20,
   icon: '?',
+  visitedIcon: 'combat',
   completedIcon: 'combat',
   encounter: TestEncounter,
   edges,

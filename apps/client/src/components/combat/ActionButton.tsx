@@ -21,7 +21,9 @@ export function ActionButton(props: ActionButtonProps) {
   const accuracy = action.threshold(modified.unit)
   const costCheck = checkActionCost(action, source)
   const isDisabled = modified.unit.registry.actions.includes(action.id)
-  const baseDamage = renderer?.baseDamage(action)
+  const baseDamage = renderer?.baseDamage
+    ? renderer.baseDamage(action)
+    : undefined
 
   return (
     <Button
@@ -68,7 +70,9 @@ export function ActionButton(props: ActionButtonProps) {
             <span className="opacity-25">—</span>
           )}
           <span className={cn({ 'text-red-300': !costCheck })}>
-            {renderer.cost || <span className="opacity-25">N/A</span>}
+            {(renderer.cost && renderer.cost(action)) || (
+              <span className="opacity-25">N/A</span>
+            )}
           </span>
           <span>{baseDamage || <span className="opacity-25">N/A</span>}</span>
         </div>

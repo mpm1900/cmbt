@@ -20,6 +20,7 @@ export type WorldNode = {
 
   encounter: Encounter
   icon: WorldNodeIconKey
+  visitedIcon?: WorldNodeIconKey
   completedIcon: WorldNodeIconKey
 
   visited: boolean

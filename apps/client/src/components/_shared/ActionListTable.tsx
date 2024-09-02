@@ -134,7 +134,7 @@ function ActionListRow(props: ActionListRowProps) {
         </TableCell>
         <TableCell>{accuracy !== undefined ? `${accuracy}%` : '—'}</TableCell>
         <TableCell>
-          {renderer.baseDamage(action) ? (
+          {renderer.baseDamage && renderer.baseDamage(action) ? (
             <span className="inline-flex items-center space-x-1">
               <DamageIcon damageType={action.damage?.damageType} />
               <span>{renderer.baseDamage(action)}</span>
@@ -143,7 +143,7 @@ function ActionListRow(props: ActionListRowProps) {
             '—'
           )}
         </TableCell>
-        <TableCell>{renderer.cost || '—'}</TableCell>
+        <TableCell>{(renderer.cost && renderer.cost(action)) || '—'}</TableCell>
         {action.criticalFactor(ZERO_UNIT) ? (
           <TableCell>
             {action.criticalThreshold(ZERO_UNIT)}% x

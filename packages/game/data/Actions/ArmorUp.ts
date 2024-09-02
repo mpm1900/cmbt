@@ -13,7 +13,7 @@ import {
   modifyRenderContext,
 } from '../../utils'
 import { ArmorUpId } from '../Ids'
-import { Identity, RemovePhysicalArmorParent } from '../Mutations'
+import { Identity, UpdatePhysicalArmorParent } from '../Mutations'
 import { EmptyArray } from '../Queries'
 
 export class ArmorUp extends Action {
@@ -26,7 +26,7 @@ export class ArmorUp extends Action {
       targets: new EmptyArray(),
       maxTargetCount: 0,
     })
-    this.amount = -50
+    this.amount = 50
   }
 
   getAi(targets: Unit[], ctx: CombatContext): ActionAi {
@@ -51,10 +51,10 @@ export class ArmorUp extends Action {
       (modifiedTargets) => ({
         onSuccess: {
           mutations: [
-            new RemovePhysicalArmorParent({
+            new UpdatePhysicalArmorParent({
               sourceId: source.id,
               parentId: source.id,
-              amount: this.amount,
+              static: this.amount,
             }),
           ],
         },

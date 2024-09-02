@@ -18,6 +18,8 @@ import { Identity, RemoveAllDamageParent } from '../Mutations'
 import { EmptyArray } from '../Queries'
 
 export class Rest extends Action {
+  duration: number = 3
+
   constructor(sourceId: Id, teamId: Id) {
     super(RestId, {
       sourceId,
@@ -64,7 +66,7 @@ export class Rest extends Action {
             new StunnedParent({
               sourceId: source.id,
               parentId: source.id,
-              duration: 3,
+              duration: this.duration,
             }),
           ],
         },

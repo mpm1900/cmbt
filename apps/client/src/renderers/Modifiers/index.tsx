@@ -1,11 +1,8 @@
 import {
   AttackDownAllOtherOnUnitEnterId,
-  AttackDownParent,
   AttackDownParentId,
   AttackUpParentId,
-  CreateSandstormOnUnitEnter,
   CreateSandstormOnUnitEnterId,
-  DamageAllOnTurnEnd,
   DamageAllOnTurnEndId,
   DamageNewUnitsOnUnitEnterId,
   DamageParentOnTurnEndId,
@@ -20,7 +17,6 @@ import {
   InspectedAllId,
   InvertSpeedAllId,
   ProtectedParentId,
-  SandstormOnTurnEndId,
   SpeedUpTeamId,
   StunnedParentId,
 } from '@repo/game/data'
@@ -31,17 +27,20 @@ import { ModifierName, TriggerName } from './_helpers'
 import { MODIFIER_NAMES } from './_names'
 import { AttackDownParentRenderer } from './AttackDownParent'
 import { AttackUpParentRenderer } from './AttackUpParent'
-import { DamageAllOnTurnEndRenderer } from './DamageAllOnTurnEnd'
-import { DamageNewUnitsOnUnitEnterRenderer } from './DamageNewUnitsOnUnitEnter'
-import { DamageParentOnTurnEndRenderer } from './DamageParentOnTurnEnd'
 import { DefenseDownParentRenderer } from './DefenseDownParent'
 import { DisabledParentRenderer } from './DisabledParent'
 import { FireDamageUpParentRenderer } from './FireDamageUpParent'
 import { FireNegationUpParentRenderer } from './FireNegationUpParent'
 import { InspectedAllRenderer } from './InspectedAll'
+import { InvertSpeedAllRenderer } from './InvertSpeedAll'
 import { ProtectedParentRenderer } from './ProtectedParent'
 import { SpeedUpTeamRenderer } from './SpeedUpTeam'
 import { StunnedParentRenderer } from './StunnedParent'
+import { AttackDownAllOtherOnUnitEnterRenderer } from './Triggers/AttackDownAllOtherOnUnitEnter'
+import { CreateSandstormOnUnitEnterRenderer } from './Triggers/CreateSandstormOnUnitEnter'
+import { DamageAllOnTurnEndRenderer } from './Triggers/DamageAllOnTurnEnd'
+import { DamageNewUnitsOnUnitEnterRenderer } from './Triggers/DamageNewUnitsOnUnitEnter'
+import { DamageParentOnTurnEndRenderer } from './Triggers/DamageParentOnTurnEnd'
 
 export * from './_icons'
 export * from './_names'
@@ -54,50 +53,22 @@ export type ModifierRenderer = {
 export const ModifierRenderers: Record<string, ModifierRenderer> = {
   [AttackDownParentId]: AttackDownParentRenderer,
   [AttackUpParentId]: AttackUpParentRenderer,
-  [DamageAllOnTurnEndId]: DamageAllOnTurnEndRenderer,
-  [DamageNewUnitsOnUnitEnterId]: DamageNewUnitsOnUnitEnterRenderer,
-  [DamageParentOnTurnEndId]: DamageParentOnTurnEndRenderer,
   [DefenseDownParentId]: DefenseDownParentRenderer,
   [DisabledParentId]: DisabledParentRenderer,
   [FireDamageUpParentId]: FireDamageUpParentRenderer,
   [FireNegationUpParentId]: FireNegationUpParentRenderer,
   [InspectedAllId]: InspectedAllRenderer,
+  [InvertSpeedAllId]: InvertSpeedAllRenderer,
   [ProtectedParentId]: ProtectedParentRenderer,
   [SpeedUpTeamId]: SpeedUpTeamRenderer,
   [StunnedParentId]: StunnedParentRenderer,
 
-  [InvertSpeedAllId]: {
-    name: () => <ModifierName>{MODIFIER_NAMES[InvertSpeedAllId]}</ModifierName>,
-    description: (mod) => (
-      <div>Afflicted units' speed stats are multiplied by -1.</div>
-    ),
-  },
-
   // Triggers
-  [CreateSandstormOnUnitEnterId]: {
-    name: () => MODIFIER_NAMES[CreateSandstormOnUnitEnterId],
-    description: (mod) => {
-      const modifier = mod as CreateSandstormOnUnitEnter
-      return (
-        <div className="space-x-2">
-          <TriggerName>On self enter:</TriggerName>
-          <span>
-            Applies{' '}
-            <ModifierInline
-              modifier={
-                new DamageAllOnTurnEnd({
-                  registryId: SandstormOnTurnEndId,
-                  factor: modifier.damageFactor,
-                  duration: modifier.damageDuration,
-                })
-              }
-            />{' '}
-            to all units for {modifier.damageDuration} turns.
-          </span>
-        </div>
-      )
-    },
-  },
+  [AttackDownAllOtherOnUnitEnterId]: AttackDownAllOtherOnUnitEnterRenderer,
+  [CreateSandstormOnUnitEnterId]: CreateSandstormOnUnitEnterRenderer,
+  [DamageAllOnTurnEndId]: DamageAllOnTurnEndRenderer,
+  [DamageNewUnitsOnUnitEnterId]: DamageNewUnitsOnUnitEnterRenderer,
+  [DamageParentOnTurnEndId]: DamageParentOnTurnEndRenderer,
   [HealParentOnUnitSwitchId]: {
     name: () => (
       <ModifierName>{MODIFIER_NAMES[HealParentOnUnitSwitchId]}</ModifierName>
@@ -111,7 +82,6 @@ export const ModifierRenderers: Record<string, ModifierRenderer> = {
       </div>
     ),
   },
-
   [InspectAllOnUnitEnterId]: {
     name: () => (
       <ModifierName>{MODIFIER_NAMES[InspectAllOnUnitEnterId]}</ModifierName>
@@ -122,29 +92,6 @@ export const ModifierRenderers: Record<string, ModifierRenderer> = {
         <span>
           Applies <ModifierInline modifier={new InspectedAll({})} /> to all
           units.
-        </span>
-      </div>
-    ),
-  },
-  [AttackDownAllOtherOnUnitEnterId]: {
-    name: () => (
-      <ModifierName>
-        {MODIFIER_NAMES[AttackDownAllOtherOnUnitEnterId]}
-      </ModifierName>
-    ),
-    description: (modifier: Modifier) => (
-      <div className="space-x-2">
-        <TriggerName>On self enter:</TriggerName>
-        <span>
-          Applies{' '}
-          <ModifierInline
-            modifier={
-              new AttackDownParent({
-                factor: (modifier as AttackDownParent).factor,
-              })
-            }
-          />{' '}
-          to all other active units.
         </span>
       </div>
     ),

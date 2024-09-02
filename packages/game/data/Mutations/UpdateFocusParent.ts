@@ -6,20 +6,23 @@ import {
   MutationProps,
   Unit,
 } from '../../types'
-import { ReduceFocusParentId } from '../Ids'
+import { UpdateFocusParentId } from '../Ids'
 
-export class ReduceFocusParent extends Mutation {
-  offset: number
+export class UpdateFocusParent extends Mutation {
+  factor: number
+  static: number
 
-  constructor(props: MutationProps & { offset: number }) {
-    super(ReduceFocusParentId, props)
-    this.offset = props.offset
+  constructor(props: MutationProps & { factor?: number; static?: number }) {
+    super(UpdateFocusParentId, props)
+
+    this.factor = props.factor ?? 0
+    this.static = props.static ?? 0
   }
 
   resolve = (unit: Unit): Partial<Unit> => {
     return {
       values: Modifier.setValues(unit, (values) => ({
-        focus: values.focus - this.offset,
+        focus: values.focus + unit.stats.focus * this.factor + this.static,
       })),
     }
   }

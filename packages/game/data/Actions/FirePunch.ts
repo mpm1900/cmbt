@@ -24,6 +24,7 @@ import { Burn } from '../Statuses/Burn'
 
 export class FirePunch extends Action {
   damage: Damage
+  burnChance: number = 10
 
   constructor(sourceId: Id, teamId: Id) {
     const attackType = 'physical'
@@ -64,7 +65,7 @@ export class FirePunch extends Action {
     ctx = modifyRenderContext(options, ctx)
     const data = getActionData(source, this, ctx)
     const applyModifierRoll = random.int(0, 100)
-    const applyBurn = applyModifierRoll <= 10
+    const applyBurn = applyModifierRoll <= this.burnChance
 
     return buildActionResult(
       this,

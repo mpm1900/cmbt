@@ -14,7 +14,11 @@ export function renderNodeIcon(
   element.style.width = `${node.data('size') + 2}px`
   element.style.height = `${node.data('size') + 2}px`
   element.innerHTML = getNodeIconRaw(
-    data.completed ? data.completedIcon : data.icon,
+    data.completed
+      ? data.completedIcon
+      : data.visited
+        ? (data.visitedIcon ?? data.icon)
+        : data.icon,
     { size: node.data('size') - 8 }
   )
 

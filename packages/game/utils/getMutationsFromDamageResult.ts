@@ -1,6 +1,6 @@
 import { DamageParent } from '../data'
-import { RemoveMagicArmorParent } from '../data/Mutations/RemoveMagicArmorParent'
-import { RemovePhysicalArmorParent } from '../data/Mutations/RemovePhysicalArmorParent'
+import { UpdateMagicArmorParent } from '../data/Mutations/UpdateMagicArmorParent'
+import { UpdatePhysicalArmorParent } from '../data/Mutations/UpdatePhysicalArmorParent'
 import { Mutation, Unit } from '../types'
 import { CalculateDamageResult } from './calculateDamage'
 
@@ -12,15 +12,15 @@ export function getMutationsFromDamageResult(
   const { damage, evasionSuccess, physicalArmor, magicArmor } = result
 
   return [
-    new RemoveMagicArmorParent({
+    new UpdateMagicArmorParent({
       sourceId: source.id,
       parentId: target.id,
-      amount: magicArmor,
+      static: magicArmor * -1,
     }),
-    new RemovePhysicalArmorParent({
+    new UpdatePhysicalArmorParent({
       sourceId: source.id,
       parentId: target.id,
-      amount: physicalArmor,
+      static: physicalArmor * -1,
     }),
     new DamageParent({
       sourceId: source.id,

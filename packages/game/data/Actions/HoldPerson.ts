@@ -18,6 +18,8 @@ import { Identity } from '../Mutations'
 import { GetUnits } from '../Queries'
 
 export class HoldPerson extends Action {
+  duration: number = 3
+
   constructor(sourceId: Id, teamId: Id) {
     super(HoldPersonId, {
       sourceId,
@@ -60,7 +62,7 @@ export class HoldPerson extends Action {
               new StunnedParent({
                 sourceId: source.id,
                 parentId: target.id,
-                duration: 3,
+                duration: this.duration,
               })
           ),
         },

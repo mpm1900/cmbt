@@ -10,7 +10,7 @@ import {
 import { buildActionResult, getActionData } from '../../utils'
 import { modifyRenderContext } from '../../utils/modifyRenderContext'
 import { WillOWispId } from '../Ids'
-import { ReduceFocusParent } from '../Mutations'
+import { UpdateFocusParent } from '../Mutations'
 import { GetUnits } from '../Queries'
 import { Burn } from '../Statuses/Burn'
 
@@ -19,10 +19,10 @@ export class WillOWisp extends Action {
     super(WillOWispId, {
       sourceId,
       teamId,
-      cost: new ReduceFocusParent({
+      cost: new UpdateFocusParent({
         sourceId: sourceId,
         parentId: sourceId,
-        offset: 20,
+        static: -20,
       }),
       targets: new GetUnits({
         notTeamId: teamId,

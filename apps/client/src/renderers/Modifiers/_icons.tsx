@@ -37,7 +37,7 @@ export const MODIFIER_ICONS: Record<Id, ReactNode> = {
     <div className="h-full w-full relative">
       <GiCrenulatedShield className="fill-white h-full w-full" />
       <AiFillCaretDown
-        className="absolute fill-red-400 h-[16px] w-[16px]"
+        className="absolute fill-red-400 h-[24px] w-[24px]"
         style={{ bottom: -6, right: -6 }}
       />
     </div>
@@ -45,9 +45,9 @@ export const MODIFIER_ICONS: Record<Id, ReactNode> = {
   [FireDamageUpParentId]: (
     <div className="h-full w-full relative">
       <BsFire className="fill-white h-full w-full" />
-      <BsShieldFillPlus
-        className="absolute fill-green-400 h-[16px] w-[16px]"
-        style={{ bottom: -2, right: -2 }}
+      <AiFillCaretUp
+        className="absolute fill-green-400 h-[24px] w-[24px]"
+        style={{ top: -6, right: -6 }}
       />
     </div>
   ),

@@ -8,7 +8,6 @@ import {
   getUnitBase,
   validateModifiers,
 } from '@repo/game/utils'
-import { Button } from '../ui/button'
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '../ui/hover-card'
 import { EditUnitModal } from './EditUnitModal'
 import { HealthBar } from './HealthBar'
@@ -49,7 +48,7 @@ export function SidebarUnit(props: SidebarUnitProps) {
         game.updateUnits((u) => (u.id === unit.id ? changes : u))
       }
     >
-      <Button variant="ghost" className="w-full h-full p-0">
+      <div className="w-full h-full p-0 hover:bg-muted cursor-pointer">
         <HoverCard openDelay={300} closeDelay={100}>
           <HoverCardTrigger asChild>
             <div className="flex-1 p-4">
@@ -86,7 +85,7 @@ export function SidebarUnit(props: SidebarUnitProps) {
             <UnitStats unit={unit} comp={props.unit} />
           </HoverCardContent>
         </HoverCard>
-      </Button>
+      </div>
     </EditUnitModal>
   )
 }

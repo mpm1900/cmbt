@@ -49,6 +49,7 @@ export function ActionsList(props: ActionsListProps) {
   const pages = Math.ceil(actions.length / 4)
   useEffect(() => {
     carousel.setCount(pages)
+    carousel.api?.scrollTo(0)
   }, [unit.id])
 
   if (!unit) return null

@@ -17,7 +17,7 @@ export function Sidebar() {
             <TabsContent value="log">
               <CombatLog />
             </TabsContent>
-            <TabsContent value="mods">
+            <TabsContent value="mods" className="w-full">
               <CombatSettings />
             </TabsContent>
           </div>

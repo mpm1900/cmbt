@@ -305,9 +305,21 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
       const hyperbeam = action as HyperBeam
       return (
         <div>
-          Deals base force damage equal to twice this unit's base magic stat to
-          target enemy unit. Applies{' '}
-          <ModifierInline side={props?.side} modifier={new StunnedParent({})} />{' '}
+          Deals base{' '}
+          <DamageInline
+            className="items-start"
+            damage={{
+              damageType: 'force',
+              attackType: 'magic',
+              value: 0,
+            }}
+          />{' '}
+          equal to twice this unit's base magic stat to target enemy unit.
+          Applies{' '}
+          <ModifierInline
+            side={props?.side}
+            modifier={new StunnedParent({ duration: hyperbeam.stunDuration })}
+          />{' '}
           to this unit for {hyperbeam.stunDuration - 1} turn.
         </div>
       )

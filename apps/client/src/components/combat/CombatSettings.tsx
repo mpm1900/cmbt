@@ -7,7 +7,7 @@ export function CombatSettings() {
   const settings = useCombatSettings()
   const queue = useActions()
   return (
-    <div className="py-2 px-4 space-y-4">
+    <div className="py-2 px-4 space-y-4 w-full">
       <div className="flex items-center space-x-2">
         <Label htmlFor="debug-mode">Debug Mode</Label>
         <Switch

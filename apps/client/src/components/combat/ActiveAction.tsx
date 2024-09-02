@@ -45,7 +45,7 @@ export function ActiveAction(props: ActiveActionProps) {
               variant="outline"
               className="bg-slate-950 text-muted-foreground mb-4"
             >
-              {renderer.costAlt ?? renderer.cost}
+              {renderer.costAlt ?? (renderer.cost && renderer.cost(action))}
             </Badge>
           )}
 

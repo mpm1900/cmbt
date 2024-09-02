@@ -22,6 +22,7 @@ import {
   FirePunchId,
   FurySwipes,
   FurySwipesId,
+  HoldPerson,
   HoldPersonId,
   HyperBeam,
   HyperBeamId,
@@ -68,7 +69,6 @@ import { PhysicalArmor } from '@shared/PhysicalArmor'
 import { StatusInline } from '@shared/StatusInline'
 import { TextList } from '@shared/TextList'
 import { ReactNode } from 'react'
-import { HoldPerson } from '../../../../../packages/game/data/Actions/HoldPerson'
 import { ACTION_NAMES } from './_names'
 
 export * from './_names'

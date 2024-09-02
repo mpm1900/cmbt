@@ -31,6 +31,7 @@ import {
   InspectedAll,
   InvertSpeedAll,
   MagicMissileId,
+  NegateArmorId,
   PiercingStrike,
   PiercingStrikeId,
   Poison,
@@ -70,6 +71,7 @@ import { StatusInline } from '@shared/StatusInline'
 import { TextList } from '@shared/TextList'
 import { ReactNode } from 'react'
 import { ACTION_NAMES } from './_names'
+import { NegateArmorRenderer } from './NegateArmor'
 
 export * from './_names'
 
@@ -95,6 +97,7 @@ export type ActionRenderer = {
 }
 
 export const ActionRenderers: Record<string, ActionRenderer> = {
+  [NegateArmorId]: NegateArmorRenderer,
   /// SYSTEM ACTIONS
   [SetIsActiveId]: {
     name: ACTION_NAMES[SetIsActiveId],

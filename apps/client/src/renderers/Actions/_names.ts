@@ -13,6 +13,7 @@ import {
   IcyWindId,
   InspectAllId,
   MagicMissileId,
+  NegateArmorId,
   PiercingStrikeId,
   PoisonSprayId,
   PotionActionId,
@@ -64,4 +65,6 @@ export const ACTION_NAMES: Record<string, string> = {
   [WillOWispId]: 'Will-o-wisp',
 
   [PotionActionId]: 'Potion',
+
+  [NegateArmorId]: 'Negate Armor',
 }

@@ -58,6 +58,7 @@ export function ActionTargets(props: UnitActionTargetsProps) {
               className="h-full px-8 mb-2"
               variant={isSelected ? 'default' : 'outline'}
               onClick={() => {
+                setHoverTargetUnit(undefined)
                 onTargetClick(target, isSelected)
               }}
               onMouseOver={() => setHoverTargetUnit(target)}

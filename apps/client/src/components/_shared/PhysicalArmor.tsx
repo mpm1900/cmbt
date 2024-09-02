@@ -23,7 +23,7 @@ export function PhysicalArmor({
             className={cn('space-x-1 px-1 bg-green-600 text-white', className)}
           >
             <FaShieldHalved />
-            <span>{children}</span>
+            {children && <span>{children}</span>}
           </Badge>
         </TooltipTrigger>
         <TooltipContent>Physical Armor</TooltipContent>

@@ -1,4 +1,5 @@
 import {
+  ArmorUp,
   ENEMY_BASES,
   Fireball,
   FurySwipes,
@@ -11,6 +12,7 @@ import {
   Sandstorm,
   SwordsDance,
   TrickRoom,
+  Ward,
   WillOWisp,
 } from '../data'
 import { Disable } from '../data/Actions/Disable'
@@ -81,6 +83,8 @@ export function makeEnemyUnit(config: MakeEnemeyUnitConfig): Unit {
         new IcyWind(unit.id, unit.teamId),
         new Sandstorm(unit.id, unit.teamId),
         new TrickRoom(unit.id, unit.teamId),
+        new ArmorUp(unit.id, unit.teamId),
+        new Ward(unit.id, unit.teamId),
       ],
       modifiers: () => [],
     })

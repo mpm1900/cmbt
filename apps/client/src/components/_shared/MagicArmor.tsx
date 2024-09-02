@@ -23,7 +23,7 @@ export function MagicArmor({
             className={cn('space-x-1 px-1 bg-blue-600 text-white', className)}
           >
             <FaShieldHalved />
-            <span>{children}</span>
+            {children && <span>{children}</span>}
           </Badge>
         </TooltipTrigger>
         <TooltipContent>Magic Armor</TooltipContent>

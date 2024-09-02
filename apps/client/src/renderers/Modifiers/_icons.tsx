@@ -20,7 +20,7 @@ import {
   AiOutlineUserSwitch,
 } from 'react-icons/ai'
 import { BiSearch } from 'react-icons/bi'
-import { BsShieldFillPlus } from 'react-icons/bs'
+import { BsFire, BsShieldFillPlus } from 'react-icons/bs'
 import { FaHeartCirclePlus } from 'react-icons/fa6'
 import {
   GiBiceps,
@@ -30,7 +30,6 @@ import {
   GiVibratingShield,
 } from 'react-icons/gi'
 import { HiMiniNoSymbol } from 'react-icons/hi2'
-import { ImFire } from 'react-icons/im'
 import { TiSpiral } from 'react-icons/ti'
 
 export const MODIFIER_ICONS: Record<Id, ReactNode> = {
@@ -45,7 +44,7 @@ export const MODIFIER_ICONS: Record<Id, ReactNode> = {
   ),
   [FireDamageUpParentId]: (
     <div className="h-full w-full relative">
-      <ImFire className="fill-white h-full w-full" />
+      <BsFire className="fill-white h-full w-full" />
       <BsShieldFillPlus
         className="absolute fill-green-400 h-[16px] w-[16px]"
         style={{ bottom: -2, right: -2 }}
@@ -54,9 +53,9 @@ export const MODIFIER_ICONS: Record<Id, ReactNode> = {
   ),
   [FireNegationUpParentId]: (
     <div className="h-full w-full relative">
-      <ImFire className="fill-white h-full w-full" />
+      <BsFire className="fill-white h-full w-full" />
       <BsShieldFillPlus
-        className="absolute fill-green-400 h-[16px] w-[16px]"
+        className="absolute fill-green-400 h-[12px] w-[12px]"
         style={{ bottom: -2, right: -2 }}
       />
     </div>

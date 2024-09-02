@@ -136,7 +136,10 @@ function ActionListRow(props: ActionListRowProps) {
         <TableCell>
           {renderer.baseDamage && renderer.baseDamage(action) ? (
             <span className="inline-flex items-center space-x-1">
-              <DamageIcon damageType={action.damage?.damageType} />
+              <DamageIcon
+                damageType={action.damage?.damageType}
+                className="h-[20px] w-[20px]"
+              />
               <span>{renderer.baseDamage(action)}</span>
             </span>
           ) : (

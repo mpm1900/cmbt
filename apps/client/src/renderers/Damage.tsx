@@ -1,9 +1,8 @@
 import { DamageType } from '@repo/game/types'
 import { ReactNode } from 'react'
 import { AiFillEye } from 'react-icons/ai'
-import { BsLightningChargeFill } from 'react-icons/bs'
+import { BsFire, BsLightningChargeFill } from 'react-icons/bs'
 import { GiPunchBlast } from 'react-icons/gi'
-import { ImFire } from 'react-icons/im'
 import { PiPentagramFill } from 'react-icons/pi'
 
 export type DamageRenderer = {
@@ -18,7 +17,7 @@ export const DamageRenderers: Record<DamageType, DamageRenderer | undefined> = {
   },
   fire: {
     name: <>Fire</>,
-    icon: <ImFire className="h-full w-full" />,
+    icon: <BsFire className="h-full w-full" />,
   },
   force: {
     name: <>Force</>,

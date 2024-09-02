@@ -22,8 +22,8 @@ export function DamageInline(props: PropsWithClassname<DamageInlineProps>) {
       )}
       <DamageIcon
         damageType={damage?.damageType}
-        className="h-[20px] w-[20px] mb-[-3px] self-end"
-      />{' '}
+        className="h-[20px] w-[20px] mb-[-3px] mr-[4px]"
+      />
       <span>damage</span>
     </span>
   )

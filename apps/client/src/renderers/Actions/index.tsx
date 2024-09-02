@@ -383,7 +383,11 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
         Deals{' '}
         <span className="text-white">
           <span>∞</span>{' '}
-          <DamageIcon damageType="arcane" className="mb-[-3px]" /> damage
+          <DamageIcon
+            damageType="arcane"
+            className="mb-[-3px] h-[20px] w-[20px]"
+          />{' '}
+          damage
         </span>{' '}
         to target enemy unit. Ignores all damage negation.
       </>

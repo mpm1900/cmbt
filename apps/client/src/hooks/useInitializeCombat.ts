@@ -30,6 +30,7 @@ export function useInitializeCombat() {
       enemy: enemyTeam,
       reward,
       modifiers,
+      mutations,
       onFailure,
       onSuccess,
     })

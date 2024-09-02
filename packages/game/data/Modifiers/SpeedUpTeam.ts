@@ -1,5 +1,6 @@
 import {
   CombatContext,
+  Id,
   Modifier,
   ModifierProps,
   MutationFilterArgs,
@@ -8,11 +9,15 @@ import {
 import { SpeedUpTeamId } from '../Ids'
 
 export class SpeedUpTeam extends Modifier {
+  teamId: Id
   factor: number
   static: number
 
-  constructor(props: ModifierProps<{ factor?: number; static?: number }>) {
+  constructor(
+    props: ModifierProps<{ teamId: Id; factor?: number; static?: number }>
+  ) {
     super(SpeedUpTeamId, props)
+    this.teamId = props.teamId
     this.factor = props.factor ?? 0
     this.static = props.static ?? 0
   }
@@ -30,7 +35,6 @@ export class SpeedUpTeam extends Modifier {
     ctx: CombatContext,
     args: MutationFilterArgs
   ): boolean => {
-    const parent = ctx.units.find((u) => u.id === this.parentId)
-    return super.filter(unit, ctx, args) && unit.teamId === parent?.teamId
+    return unit.teamId === this.teamId
   }
 }

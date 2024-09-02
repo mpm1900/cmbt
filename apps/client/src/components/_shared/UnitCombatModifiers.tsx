@@ -21,6 +21,7 @@ export function UnitCombatModifiers(
   const list = [...appliedModifiers, ...registeredTriggers]
   const nonStatusModifiers = list.filter((m) => !m.statusId)
   const statuses = getStatusesFromModifiers(list)
+
   return (
     <UnitModifiers
       className={props.className}

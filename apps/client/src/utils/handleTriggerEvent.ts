@@ -30,11 +30,6 @@ export function handleTriggerEvent(
       ),
     mutations: triggers.filter((trigger) => !trigger.modifiers),
   }
-
-  if (event === 'on Unit Switch Out') {
-    console.log(result, args)
-  }
-
   if ((result.addedModifiers?.length ?? 0 > 0) || result.mutations?.length) {
     logTriggers(triggers, event, log, ctx, args)
   }

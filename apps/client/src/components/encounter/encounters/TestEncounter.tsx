@@ -37,34 +37,35 @@ const TestNode1: EncounterNode = {
           items: [],
         }
         const unit = ctx.units.find((u) => true)
-        ctx.initializeCombat({
-          enemyTeam,
-          enemyUnits: Array.from({ length: 3 }).map((_, index) =>
-            makeEnemyUnit({ index, level: 15, teamId: enemyTeam.id })
-          ),
-          reward: {
-            items: [],
-            resources: {
-              credits: 200,
+        if (unit) {
+          ctx.initializeCombat({
+            enemyTeam,
+            enemyUnits: Array.from({ length: 3 }).map((_, index) =>
+              makeEnemyUnit({ index, level: 15, teamId: enemyTeam.id })
+            ),
+            reward: {
+              items: [],
+              resources: {
+                credits: 200,
+              },
+              xp: 0,
             },
-            xp: 0,
-          },
-          modifiers: [
-            new SpeedUpTeam({
-              sourceId: unit?.id,
-              parentId: unit?.id,
-              factor: 0.5,
-              duration: 2,
-            }),
-          ],
-          onSuccess: () => {
-            ctx.updateActiveWorldNode((n) => ({
-              completed: true,
-              visited: true,
-            }))
-          },
-          onFailure: () => {},
-        })
+            modifiers: [
+              new SpeedUpTeam({
+                teamId: unit.teamId,
+                factor: 0.5,
+                duration: 2,
+              }),
+            ],
+            onSuccess: () => {
+              ctx.updateActiveWorldNode((n) => ({
+                completed: true,
+                visited: true,
+              }))
+            },
+            onFailure: () => {},
+          })
+        }
       },
     },
     {

@@ -54,7 +54,10 @@ export function makeEnemyUnit(config: MakeEnemeyUnitConfig): Unit {
       teamId,
       level,
       baseId: base.id,
-      stats: BASE_UNIT.stats,
+      stats: {
+        ...BASE_UNIT.stats,
+        ...base.stats,
+      },
       flags: {
         ...BASE_UNIT.flags,
         isActive: false,
@@ -63,9 +66,9 @@ export function makeEnemyUnit(config: MakeEnemeyUnitConfig): Unit {
     (unit) => ({
       values: {
         ...BASE_UNIT.values,
-        focus: unit.stats.focus,
-        stamina: unit.stats.stamina,
-        devotion: unit.stats.devotion,
+        focus: base.stats.focus,
+        stamina: base.stats.stamina,
+        devotion: base.stats.devotion,
       },
       actions: [
         new PiercingStrike(unit.id, unit.teamId),

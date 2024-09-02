@@ -8,7 +8,7 @@ export const makeBuilder = (i: number = 0): UnitBuilder => {
   const config = BASE_CONFIGS[base.id]
   return {
     id: nanoid(),
-    name: faker.person.fullName(),
+    name: faker.person.firstName(),
     level: 20,
     base,
     config,

@@ -1,6 +1,6 @@
-import { getNodeIconRaw } from '@/utils/getNodeIconRaw'
 import { WorldNode } from '@repo/game/types'
 import { NodeSingular } from 'cytoscape'
+import { getNodeIconRaw } from './getNodeIconRaw'
 import { isPathableNode } from './isPathable'
 import { RenderLayersOptions } from './useWorldMapLayers'
 

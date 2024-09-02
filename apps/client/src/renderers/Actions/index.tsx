@@ -63,6 +63,7 @@ import {
   WillOWispId,
 } from '@repo/game/data'
 import { Action, ActionResult, CombatContext, Unit } from '@repo/game/types'
+import { DamageIcon } from '@shared/DamageIcon'
 import { DamageInline } from '@shared/DamageInline'
 import { MagicArmor } from '@shared/MagicArmor'
 import { ModifierInline } from '@shared/ModifierInline'
@@ -379,8 +380,12 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
     baseDamage: () => '∞',
     description: () => (
       <>
-        Deals <span className="text-white">∞ damage</span> to target enemy unit.
-        Ignores all damage negation.
+        Deals{' '}
+        <span className="text-white">
+          <span>∞</span>{' '}
+          <DamageIcon damageType="arcane" className="mb-[-3px]" /> damage
+        </span>{' '}
+        to target enemy unit. Ignores all damage negation.
       </>
     ),
     lore: () => (

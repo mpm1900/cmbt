@@ -1,3 +1,4 @@
+import { WORLD_NODE_COLORS } from '@/constants/world'
 import { NodeSingular, Stylesheet } from 'cytoscape'
 import { isPathableNode } from './isPathable'
 
@@ -6,29 +7,30 @@ function getNodeBackgroundColor(
   options: GetNodeStylesheetOptions
 ) {
   const state = isPathableNode(node, options)
-  const isActiveable =
+  const isActiveSelectable =
     state.isCompleted && state.isActive ? state.isRepeatable : state.isActive
-  if (isActiveable) return 'limegreen'
-  if (state.isActive) return '#cce3cc'
+
+  if (isActiveSelectable) return WORLD_NODE_COLORS.IsActiveSelectable
+  if (state.isActive) return WORLD_NODE_COLORS.IsActiveUnselectable
   if (
     state.isActiveNeightbor &&
     !state.isCompleted &&
     state.isPathable &&
     state.isLocked
   )
-    return 'plum'
+    return WORLD_NODE_COLORS.IsLockedSelectable
   if (state.isActiveNeightbor && !state.isCompleted && state.isPathable)
-    return 'royalblue'
+    return WORLD_NODE_COLORS.IsNotCompleteSelectable
   if (
     state.isActiveNeightbor &&
     state.isCompleted &&
     state.isPathable &&
     state.isRepeatable
   ) {
-    return 'mediumturquoise'
+    return WORLD_NODE_COLORS.IsCompleteSelectable
   }
 
-  return 'white'
+  return WORLD_NODE_COLORS.IsUnselectable
 }
 
 export type GetNodeStylesheetOptions = {

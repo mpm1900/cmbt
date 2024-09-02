@@ -5,13 +5,13 @@ import {
   MutationFilterArgs,
   Unit,
 } from '../../types'
-import { SetIsInspectedAllId } from '../Ids'
+import { InspectedAllId } from '../Ids'
 
-export class SetIsInspectedAll extends Modifier {
+export class InspectedAll extends Modifier {
   private isInspected?: boolean
 
   constructor(props: ModifierProps & { isInspected?: boolean }) {
-    super(SetIsInspectedAllId, props)
+    super(InspectedAllId, props)
     this.isInspected = props.isInspected
   }
 

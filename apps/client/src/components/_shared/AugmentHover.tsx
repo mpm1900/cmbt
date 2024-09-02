@@ -6,14 +6,15 @@ import { HoverCard, HoverCardContent, HoverCardTrigger } from '../ui/hover-card'
 import { AugmentDescription } from './AugmentDescription'
 
 export type AugmentHoverProps = PropsWithChildren<{
-  augment: Augment
+  augment: Augment | undefined
   side?: 'top' | 'right' | 'bottom' | 'left'
 }>
 
 export function AugmentHover(props: AugmentHoverProps) {
   const { children, augment } = props
-  const renderer = AugmentRenderers[augment.id]
+  if (!augment) return children
 
+  const renderer = AugmentRenderers[augment.id]
   return (
     <HoverCard openDelay={0} closeDelay={0}>
       <HoverCardTrigger asChild>{children}</HoverCardTrigger>

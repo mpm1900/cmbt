@@ -8,7 +8,7 @@ export const DeoxysS: UnitBase = {
   stats: {
     ...BASE_UNIT.stats,
     health: 50,
-    physical: 85,
+    attack: 85,
     defense: 85,
     magic: 90,
     speed: 180,

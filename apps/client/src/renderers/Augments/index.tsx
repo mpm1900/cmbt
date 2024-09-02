@@ -1,5 +1,5 @@
 import {
-  DamagePercentAllOnTurnEnd,
+  DamageAllOnTurnEnd,
   FlameShieldId,
   IntimidateId,
   RegenerationId,
@@ -40,9 +40,10 @@ export const AugmentRenderers: Record<Id, AugmentRenderer> = {
         This unit gains immunity from{' '}
         <ModifierInline
           modifier={
-            new DamagePercentAllOnTurnEnd({
-              rid: SandstormOnTurnEndId,
+            new DamageAllOnTurnEnd({
+              registryId: SandstormOnTurnEndId,
               factor: 0.1,
+              duration: 5,
             })
           }
         />

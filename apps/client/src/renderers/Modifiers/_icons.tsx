@@ -1,20 +1,26 @@
 import {
+  AttackDownParentId,
+  AttackUpParentId,
   DefenseDownParentId,
   FireDamageUpParentId,
   FireNegationUpParentId,
-  PhysicalAttackDownParentId,
-  PhysicalAttackUpParentId,
+  HealParentOnUnitSwitchId,
+  InspectedAllId,
+  ProtectedParentId,
   SandstormOnTurnEndId,
-  SetIsInspectedAllId,
-  SetIsProtectedParentId,
-  SetIsStunnedParentId,
   SpeedUpTeamId,
+  StunnedParentId,
 } from '@repo/game/data'
 import { Id } from '@repo/game/types'
 import { ReactNode } from 'react'
-import { AiFillCaretDown, AiFillCaretUp } from 'react-icons/ai'
+import {
+  AiFillCaretDown,
+  AiFillCaretUp,
+  AiOutlineUserSwitch,
+} from 'react-icons/ai'
 import { BiSearch } from 'react-icons/bi'
 import { BsShieldFillPlus } from 'react-icons/bs'
+import { FaHeartCirclePlus } from 'react-icons/fa6'
 import {
   GiBiceps,
   GiSandstorm,
@@ -53,7 +59,7 @@ export const MODIFIER_ICONS: Record<Id, ReactNode> = {
       />
     </div>
   ),
-  [PhysicalAttackDownParentId]: (
+  [AttackDownParentId]: (
     <div className="h-full w-full relative">
       <GiBiceps className="fill-white h-full w-full" />
       <AiFillCaretDown
@@ -62,7 +68,7 @@ export const MODIFIER_ICONS: Record<Id, ReactNode> = {
       />
     </div>
   ),
-  [PhysicalAttackUpParentId]: (
+  [AttackUpParentId]: (
     <div className="h-full w-full relative">
       <GiBiceps className="fill-white h-full w-full" />
       <AiFillCaretUp
@@ -74,17 +80,26 @@ export const MODIFIER_ICONS: Record<Id, ReactNode> = {
   [SandstormOnTurnEndId]: (
     <GiSandstorm className="fill-amber-100 h-full w-full" />
   ),
-  [SetIsInspectedAllId]: <BiSearch className="fill-white h-full w-full" />,
-  [SetIsProtectedParentId]: (
+  [InspectedAllId]: <BiSearch className="fill-white h-full w-full" />,
+  [ProtectedParentId]: (
     <GiVibratingShield className="fill-white h-full w-full" />
   ),
-  [SetIsStunnedParentId]: <TiSpiral className="fill-red-200 h-full w-full" />,
+  [StunnedParentId]: <TiSpiral className="fill-red-200 h-full w-full" />,
   [SpeedUpTeamId]: (
     <div className="h-full w-full relative">
       <GiSprint className="fill-white h-full w-full" />
       <AiFillCaretUp
         className="absolute fill-green-400 h-[24px] w-[24px]"
         style={{ bottom: -4, right: -6 }}
+      />
+    </div>
+  ),
+  [HealParentOnUnitSwitchId]: (
+    <div className="h-full w-full relative">
+      <AiOutlineUserSwitch className="fill-white h-full w-full" />
+      <FaHeartCirclePlus
+        className="absolute fill-green-400 h-[12px] w-[12px]"
+        style={{ bottom: 0, left: 0 }}
       />
     </div>
   ),

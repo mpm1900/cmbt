@@ -9,33 +9,33 @@ export type MutationFilterArgs = {
 
 export type MutationProps<T = {}> = T & {
   id?: Id
-  rid?: Id
+  registryId?: Id
   sourceId?: Id
   parentId?: Id
 }
 
 export abstract class Mutation {
   id: Id
-  rid: Id
+  registryId: Id
   rtid: Id
   sourceId: Id | undefined
   parentId: Id | undefined
 
   abstract resolve(unit: Unit): Partial<Unit>
   get key(): string {
-    return `${this.rid}.${this.parentId ?? this.sourceId}`
+    return `${this.registryId}.${this.parentId ?? this.sourceId}`
   }
 
   constructor(id: Id, props: MutationProps) {
     this.id = id
-    this.rid = props.rid ?? id
+    this.registryId = props.registryId ?? id
     this.rtid = nanoid()
     this.sourceId = props.sourceId
     this.parentId = props.parentId
   }
 
   filter(unit: Unit, ctx: CombatContext, args: MutationFilterArgs): boolean {
-    const isImmune = unit.registry.modifiers.includes(this.rid)
+    const isImmune = unit.registry.modifiers.includes(this.registryId)
     const isActive = unit.flags.isActive
     return isActive && !isImmune
   }

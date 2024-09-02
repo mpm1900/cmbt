@@ -10,7 +10,7 @@ export const Blissy: UnitBase = {
   stats: {
     ...BASE_UNIT.stats,
     health: 250,
-    physical: 7,
+    attack: 7,
     defense: 7,
     magic: 105,
     speed: 50,

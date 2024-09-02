@@ -27,7 +27,7 @@ export function UnitModifiers(props: PropsWithClassname<UnitModifiersProps>) {
       className={cn('px-3 space-x-2 flex flex-row h-[28px]', props.className)}
     >
       {nonStatusModifiers.map((m) => {
-        const r = ModifierRenderers[m.rid]
+        const r = ModifierRenderers[m.id]
         return (
           <ModifierIcon
             key={m.rtid}

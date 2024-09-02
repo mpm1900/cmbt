@@ -41,13 +41,15 @@ export function AugmentItemSelect(props: AugmentItemSelectProps) {
         }
       }}
     >
-      <SelectTrigger>
-        {!disabled && <SelectValue placeholder="Select an item" />}
-        {disabled && <SelectValue placeholder="No available items" />}
-      </SelectTrigger>
+      <AugmentHover side="left" augment={value}>
+        <SelectTrigger>
+          {!disabled && <SelectValue placeholder="Select an item" />}
+          {disabled && <SelectValue placeholder="No available items" />}
+        </SelectTrigger>
+      </AugmentHover>
       <SelectContent>
         {augmentItems.map((item) => (
-          <AugmentHover key={item.rtid} side="left" augment={item.augment!}>
+          <AugmentHover key={item.rtid} side="left" augment={item.augment}>
             <SelectItem
               disabled={
                 equippedAugmentIds.includes(item.rtid) &&

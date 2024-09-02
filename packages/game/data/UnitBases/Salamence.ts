@@ -17,7 +17,7 @@ export const Salamence: UnitBase = {
   stats: {
     ...BASE_UNIT.stats,
     health: 95,
-    physical: 115,
+    attack: 115,
     defense: 70,
     magic: 115,
     speed: 100,

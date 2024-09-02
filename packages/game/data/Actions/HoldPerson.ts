@@ -13,7 +13,7 @@ import {
   modifyRenderContext,
 } from '../../utils'
 import { HoldPersonId } from '../Ids'
-import { SetIsStunnedParent } from '../Modifiers'
+import { StunnedParent } from '../Modifiers'
 import { Identity } from '../Mutations'
 import { GetUnits } from '../Queries'
 
@@ -57,7 +57,7 @@ export class HoldPerson extends Action {
         onSuccess: {
           addedModifiers: modifiedTargets.map(
             (target) =>
-              new SetIsStunnedParent({
+              new StunnedParent({
                 sourceId: source.id,
                 parentId: target.id,
                 duration: 3,

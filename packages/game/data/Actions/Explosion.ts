@@ -82,7 +82,7 @@ export class Explosion extends Action {
             ...modifiedTargets.flatMap((target) => {
               const damage = calculateDamage(
                 {
-                  value: data.source.stats.physical * 4,
+                  value: data.source.stats.attack * 4,
                   attackType: this.attackType as AttackTypes,
                 },
                 data.source,

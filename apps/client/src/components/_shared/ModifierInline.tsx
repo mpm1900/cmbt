@@ -11,14 +11,14 @@ export type ModifierInlineProps = {
 
 export function ModifierInline(props: ModifierInlineProps) {
   const { className, modifier, side } = props
-  const renderer = ModifierRenderers[modifier.rid]
+  const renderer = ModifierRenderers[modifier.id]
 
   return (
     <ModifierHover side={side} modifier={modifier}>
       <span
         className={cn('hover:underline cursor-pointer font-bold', className)}
       >
-        {renderer?.name}
+        {renderer?.name(modifier)}
       </span>
     </ModifierHover>
   )

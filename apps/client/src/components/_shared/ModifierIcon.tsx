@@ -12,7 +12,7 @@ export type ModifierIconProps = {
 
 export function ModifierIcon(props: ModifierIconProps) {
   const { modifier, fallback, side } = props
-  const ModIcon = MODIFIER_ICONS[modifier.rid]
+  const ModIcon = MODIFIER_ICONS[modifier.registryId]
   if (!ModIcon) return fallback
   return (
     <ModifierHover side={side} modifier={modifier}>

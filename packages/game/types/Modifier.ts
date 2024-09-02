@@ -19,7 +19,7 @@ export abstract class Modifier extends Mutation {
   statusId: Id | undefined
 
   get key(): string {
-    return `${this.rid}.${this.parentId ?? this.sourceId}`
+    return `${this.registryId}.${this.parentId ?? this.sourceId}`
   }
 
   constructor(id: Id, props: ModifierProps) {

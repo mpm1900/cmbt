@@ -15,7 +15,7 @@ export function calculateBaseDamage(
 ): number {
   let base = power
   if (attackType === 'physical')
-    base = power * (source.stats.physical / target.stats.defense)
+    base = power * (source.stats.attack / target.stats.defense)
   if (attackType === 'magic')
     base = power * (source.stats.magic / target.stats.magic)
 

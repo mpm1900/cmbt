@@ -19,7 +19,7 @@ export const Witch: UnitBase = {
   stats: {
     ...BASE_UNIT.stats,
     health: 120,
-    physical: 50,
+    attack: 50,
     defense: 70,
     magic: 100,
     speed: 30,

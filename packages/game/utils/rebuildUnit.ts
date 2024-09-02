@@ -11,7 +11,7 @@ export function rebuildUnit(unit: Unit): Unit {
     stats: {
       ...unit.stats,
       health: mapBaseStat('health', base.stats.health, unit.level),
-      physical: mapBaseStat('physical', base.stats.physical, unit.level),
+      attack: mapBaseStat('attack', base.stats.attack, unit.level),
       defense: mapBaseStat('defense', base.stats.defense, unit.level),
       magic: mapBaseStat('magic', base.stats.magic, unit.level),
       speed: mapBaseStat('speed', base.stats.speed, unit.level),

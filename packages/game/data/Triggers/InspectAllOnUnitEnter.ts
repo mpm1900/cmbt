@@ -6,7 +6,7 @@ import {
   Unit,
 } from '../../types'
 import { InspectAllOnUnitEnterId } from '../Ids'
-import { SetIsInspectedAll } from '../Modifiers'
+import { InspectedAll } from '../Modifiers'
 
 export class InspectAllOnUnitEnter extends Trigger {
   get key() {
@@ -19,7 +19,7 @@ export class InspectAllOnUnitEnter extends Trigger {
       events: ['on Unit Enter'],
       maxInstances: 1,
       modifiers: (ctx) => [
-        new SetIsInspectedAll({
+        new InspectedAll({
           sourceId: props.sourceId,
           parentId: props.parentId,
         }),

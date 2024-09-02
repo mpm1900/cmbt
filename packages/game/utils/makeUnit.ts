@@ -48,7 +48,7 @@ export function makeEnemyUnit(name: string, teamId: Id, level: number): Unit {
       stats: {
         ...BASE_UNIT.stats,
         speed: random.int(70, 140),
-        physical: 100, //random.int(70, 140),
+        attack: 100, //random.int(70, 140),
         magic: 100, // random.int(70, 140),
         defense: 100, // random.int(50, 100),
         health: random.int(250, 440),

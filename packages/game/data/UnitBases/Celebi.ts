@@ -11,7 +11,7 @@ export const Celebi: UnitBase = {
   stats: {
     ...BASE_UNIT.stats,
     health: 100,
-    physical: 100,
+    attack: 100,
     defense: 100,
     magic: 100,
     speed: 100,

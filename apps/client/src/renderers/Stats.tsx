@@ -54,8 +54,8 @@ export const StatRenderers: Record<StatKey, StatRenderer | undefined> = {
     name: <>Magic</>,
     icon: <GiPortal className="h-full w-full" />,
   },
-  physical: {
-    name: <>Physical</>,
+  attack: {
+    name: <>Attack</>,
     icon: <GiBiceps className="h-full w-full" />,
   },
   psychicExpansion: undefined,

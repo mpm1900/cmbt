@@ -9,20 +9,25 @@ import {
 import { DamageParentOnTurnEndId } from '../Ids'
 
 export class DamageParentOnTurnEnd extends Trigger {
-  damage: number
+  factor: number
+  static: number
 
-  constructor(props: TriggerProps<{ damage: number }>) {
+  constructor(props: TriggerProps<{ factor?: number; static?: number }>) {
     super(DamageParentOnTurnEndId, {
       ...props,
       events: ['on Turn End'],
     })
-    this.damage = props.damage
+
+    this.factor = props.factor ?? 0
+    this.static = props.static ?? 0
   }
 
   resolve = (unit: Unit): Partial<Unit> => {
     return {
       values: Modifier.setValues(unit, (values) => ({
-        damage: values.damage + this.damage,
+        damage: Math.round(
+          values.damage + unit.stats.health * this.factor + this.static
+        ),
       })),
     }
   }

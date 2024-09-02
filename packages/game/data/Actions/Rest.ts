@@ -13,7 +13,7 @@ import {
   modifyRenderContext,
 } from '../../utils'
 import { RestId } from '../Ids'
-import { SetIsStunnedParent } from '../Modifiers'
+import { StunnedParent } from '../Modifiers'
 import { Identity, RemoveAllDamageParent } from '../Mutations'
 import { EmptyArray } from '../Queries'
 
@@ -61,7 +61,7 @@ export class Rest extends Action {
             }),
           ],
           addedModifiers: [
-            new SetIsStunnedParent({
+            new StunnedParent({
               sourceId: source.id,
               parentId: source.id,
               duration: 3,

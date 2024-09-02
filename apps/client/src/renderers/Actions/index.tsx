@@ -2,11 +2,12 @@ import { LogUnit } from '@/components/ui/log'
 import {
   ArmorUp,
   ArmorUpId,
+  AttackUpParent,
   BodySlam,
   BodySlamId,
-  BurnStatus,
+  Burn,
+  DamageAllOnTurnEnd,
   DamageNewUnitsOnUnitEnter,
-  DamagePercentAllOnTurnEnd,
   DefenseDownParent,
   DisableId,
   EarthquakeId,
@@ -21,15 +22,16 @@ import {
   HyperBeamId,
   IcyWindId,
   InspectAllId,
+  InspectedAll,
   InvertSpeedAll,
   MagicMissileId,
-  PhysicalAttackUpParent,
   PiercingStrike,
   PiercingStrikeId,
+  Poison,
   PoisonSprayId,
-  PoisonStatus,
   PotionActionId,
   PowerWordKillId,
+  ProtectedParent,
   ProtectId,
   QuickAttack,
   QuickAttackId,
@@ -37,12 +39,10 @@ import {
   SandstormId,
   SandstormOnTurnEndId,
   SetIsActiveId,
-  SetIsInspectedAll,
-  SetIsProtectedParent,
-  SetIsStunnedParent,
   Slash,
   SlashId,
   SpikesId,
+  StunnedParent,
   SwitchUnitId,
   SwordsDanceId,
   TrickRoomId,
@@ -126,11 +126,8 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
     description: (action, props) => (
       <>
         Applies{' '}
-        <ModifierInline
-          modifier={new SetIsInspectedAll({})}
-          side={props?.side}
-        />{' '}
-        to all enemy units.
+        <ModifierInline modifier={new InspectedAll({})} side={props?.side} /> to
+        all enemy units.
       </>
     ),
   },
@@ -177,7 +174,7 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
           20% chance to apply{' '}
           <ModifierInline
             side={props?.side}
-            modifier={new DefenseDownParent({ factor: 1.5 })}
+            modifier={new DefenseDownParent({ factor: 0.25 })}
           />{' '}
           to target.
         </>
@@ -243,8 +240,8 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
     description: (action, props) => (
       <>
         Deals <DamageInline damage={action.damage} /> to target enemy unit. 10%
-        chance to apply <StatusInline status={BurnStatus} side={props?.side} />{' '}
-        to target for 5 turns.
+        chance to apply <StatusInline status={Burn} side={props?.side} /> to
+        target for 5 turns.
       </>
     ),
   },
@@ -255,8 +252,8 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
     description: (action, props) => (
       <>
         Deals <DamageInline damage={action.damage} /> to target enemy unit. 10%
-        chance to apply <StatusInline status={BurnStatus} side={props?.side} />{' '}
-        to target for 5 turns.
+        chance to apply <StatusInline status={Burn} side={props?.side} /> to
+        target for 5 turns.
       </>
     ),
   },
@@ -282,10 +279,7 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
       return (
         <>
           Applies{' '}
-          <ModifierInline
-            side={props?.side}
-            modifier={new SetIsStunnedParent({})}
-          />{' '}
+          <ModifierInline side={props?.side} modifier={new StunnedParent({})} />{' '}
           to target enemy unit for 2 turns.
         </>
       )
@@ -300,10 +294,7 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
       <>
         Deals base force damage equal to twice this unit's base magic stat to
         target enemy unit. Applies{' '}
-        <ModifierInline
-          side={props?.side}
-          modifier={new SetIsStunnedParent({})}
-        />{' '}
+        <ModifierInline side={props?.side} modifier={new StunnedParent({})} />{' '}
         to this unit for 1 turn.
       </>
     ),
@@ -355,8 +346,7 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
       return (
         <>
           Deals <DamageInline damage={poisionSpray.damage} /> to target enemy
-          unit and applies{' '}
-          <StatusInline side={props?.side} status={PoisonStatus} />.
+          unit and applies <StatusInline side={props?.side} status={Poison} />.
         </>
       )
     },
@@ -384,7 +374,11 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
         Applies{' '}
         <ModifierInline
           side={props?.side}
-          modifier={new SetIsProtectedParent({})}
+          modifier={
+            new ProtectedParent({
+              duration: 1,
+            })
+          }
         />{' '}
         to this unit for 1 turn. Cannot be used twice in a row.
       </>
@@ -398,10 +392,7 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
     description: (action, props) => (
       <>
         Removes all damage from this unit. Applies{' '}
-        <ModifierInline
-          side={props?.side}
-          modifier={new SetIsStunnedParent({})}
-        />{' '}
+        <ModifierInline side={props?.side} modifier={new StunnedParent({})} />{' '}
         to this unit for 2 turns.
       </>
     ),
@@ -415,9 +406,10 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
         Applies{' '}
         <ModifierInline
           modifier={
-            new DamagePercentAllOnTurnEnd({
-              rid: SandstormOnTurnEndId,
+            new DamageAllOnTurnEnd({
+              registryId: SandstormOnTurnEndId,
               factor: 0.1,
+              duration: 5,
             })
           }
         />{' '}
@@ -468,7 +460,7 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
         Applies{' '}
         <ModifierInline
           side={props?.side}
-          modifier={new PhysicalAttackUpParent({ factor: 1.5 })}
+          modifier={new AttackUpParent({ factor: 1.0 })}
         />{' '}
         to this unit.
       </>
@@ -512,8 +504,8 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
     ),
     description: (action, props) => (
       <>
-        Applies <StatusInline status={BurnStatus} side={props?.side} /> to
-        target enemy unit for 5 turns.
+        Applies <StatusInline status={Burn} side={props?.side} /> to target
+        enemy unit for 5 turns.
       </>
     ),
   },

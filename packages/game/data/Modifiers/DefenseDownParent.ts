@@ -9,22 +9,22 @@ import { DefenseDownParentId } from '../Ids'
 
 export class DefenseDownParent extends Modifier {
   factor: number
-  offset: number
+  static: number
 
   get key(): string {
-    return `${this.id}.${this.parentId ?? this.sourceId}@${this.factor}`
+    return `${this.id}.${this.parentId ?? this.sourceId}@${this.factor}_${this.static}`
   }
 
-  constructor(props: ModifierProps<{ factor?: number; offset?: number }>) {
+  constructor(props: ModifierProps<{ factor?: number; static?: number }>) {
     super(DefenseDownParentId, props)
-    this.factor = props.factor !== undefined ? props.factor : 1
-    this.offset = props.offset ?? 0
+    this.factor = props.factor ?? 0
+    this.static = props.static ?? 0
   }
 
   resolve = (unit: Unit): Partial<Unit> => {
     return {
       stats: Modifier.setStats(unit, (stats) => ({
-        defense: stats.defense / this.factor - this.offset,
+        defense: stats.defense - stats.defense * this.factor - this.static,
       })),
     }
   }

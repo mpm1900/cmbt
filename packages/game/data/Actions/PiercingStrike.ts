@@ -51,7 +51,7 @@ export class PiercingStrike extends Action {
     return 90 + source.stats.accuracy
   }
   criticalThreshold = (source: Unit): number | undefined => {
-    return 5 + source.stats.criticalChance
+    return 90 + source.stats.criticalChance
   }
   criticalFactor = (source: Unit): number | undefined =>
     1.5 + source.stats.criticalDamage
@@ -95,7 +95,7 @@ export class PiercingStrike extends Action {
                   new DefenseDownParent({
                     sourceId: source.id,
                     parentId: target.id,
-                    factor: 1.5,
+                    factor: 0.25,
                   })
               )
             : [],

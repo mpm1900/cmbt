@@ -10,7 +10,7 @@ export const ZERO_UNIT: Unit = {
   stats: {
     health: 0,
     defense: 0,
-    physical: 0,
+    attack: 0,
     magic: 0,
     speed: 0,
 

@@ -17,9 +17,9 @@ export function UnitBaseStats(props: UnitBaseStatsProps) {
         <StatBar ratio={base.stats.health / 255} />
       </div>
       <div className="flex items-center space-x-2">
-        <div className="h-[24px] w-[24px]">{StatRenderers.physical?.icon} </div>
-        <Label className="w-[100px]">Physical</Label>
-        <StatBar ratio={base.stats.physical / 255} />
+        <div className="h-[24px] w-[24px]">{StatRenderers.attack?.icon} </div>
+        <Label className="w-[100px]">Attack</Label>
+        <StatBar ratio={base.stats.attack / 255} />
       </div>
       <div className="flex items-center space-x-2">
         <div className="h-[24px] w-[24px]">{StatRenderers.defense?.icon}</div>
@@ -36,15 +36,6 @@ export function UnitBaseStats(props: UnitBaseStatsProps) {
         <Label className="w-[100px]">Speed</Label>
         <StatBar ratio={base.stats.speed / 255} />
       </div>
-      {/*<div className="flex items-center">
-        <div className="text-left">
-          {base.stats.health +
-            base.stats.physical +
-            base.stats.defense +
-            base.stats.magic +
-            base.stats.speed}
-        </div>
-      </div>*/}
     </div>
   )
 }

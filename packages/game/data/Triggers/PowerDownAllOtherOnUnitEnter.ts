@@ -1,19 +1,18 @@
 import {
   CombatContext,
-  Modifier,
   MutationFilterArgs,
   Trigger,
   TriggerProps,
   Unit,
 } from '../../types'
-import { PowerDownAllOtherOnUnitEnterId } from '../Ids'
-import { PhysicalAttackDownParent } from '../Modifiers'
+import { AttackDownAllOtherOnUnitEnterId } from '../Ids'
+import { AttackDownParent } from '../Modifiers'
 
 export class PowerDownAllOtherOnUnitEnter extends Trigger {
   private factor: number
 
   constructor(props: TriggerProps<{ factor: number }>) {
-    super(PowerDownAllOtherOnUnitEnterId, {
+    super(AttackDownAllOtherOnUnitEnterId, {
       ...props,
       events: ['on Unit Enter'],
       maxInstances: 1,
@@ -22,22 +21,14 @@ export class PowerDownAllOtherOnUnitEnter extends Trigger {
           .filter((u) => super.filter(u, ctx, {}) && u.id !== props.sourceId)
           .map(
             (u) =>
-              new PhysicalAttackDownParent({
+              new AttackDownParent({
                 sourceId: props.sourceId,
                 parentId: u.id,
-                factor: 1.5,
+                factor: this.factor,
               })
           ),
     })
     this.factor = props.factor
-  }
-
-  resolve = (unit: Unit): Partial<Unit> => {
-    return {
-      stats: Modifier.setStats(unit, (stats) => ({
-        physical: stats.physical / this.factor,
-      })),
-    }
   }
 
   filter = (

@@ -17,7 +17,7 @@ export const Gengar: UnitBase = {
   stats: {
     ...BASE_UNIT.stats,
     health: 60,
-    physical: 55,
+    attack: 55,
     defense: 55,
     magic: 140,
     speed: 135,

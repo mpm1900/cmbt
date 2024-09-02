@@ -6,7 +6,7 @@ import {
   Unit,
 } from '../../types'
 import { CreateSandstormOnUnitEnterId, SandstormOnTurnEndId } from '../Ids'
-import { DamagePercentAllOnTurnEnd } from './DamagePercentAllOnTurnEnd'
+import { DamageAllOnTurnEnd } from './DamageAllOnTurnEnd'
 
 export class CreateSandstormOnUnitEnter extends Trigger {
   get key() {
@@ -19,8 +19,8 @@ export class CreateSandstormOnUnitEnter extends Trigger {
       events: ['on Unit Enter'],
       maxInstances: 1,
       modifiers: (ctx) => [
-        new DamagePercentAllOnTurnEnd({
-          rid: SandstormOnTurnEndId,
+        new DamageAllOnTurnEnd({
+          registryId: SandstormOnTurnEndId,
           factor: 0.1,
           duration: 5,
           maxInstances: 1,

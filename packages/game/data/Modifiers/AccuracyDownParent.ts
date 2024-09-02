@@ -8,17 +8,17 @@ import {
 import { AccuracyDownParentId } from '../Ids'
 
 export class AccuracyDownParent extends Modifier {
-  private offset: number
+  static: number
 
-  constructor(props: ModifierProps<{ offset: number }>) {
+  constructor(props: ModifierProps<{ static: number }>) {
     super(AccuracyDownParentId, props)
-    this.offset = props.offset
+    this.static = props.static
   }
 
   resolve = (unit: Unit): Partial<Unit> => {
     return {
       stats: Modifier.setStats(unit, (stats) => ({
-        accuracy: stats.accuracy - this.offset,
+        accuracy: stats.accuracy - this.static,
       })),
     }
   }

@@ -10,7 +10,7 @@ export const TempestKnight: UnitBase = {
   stats: {
     ...BASE_UNIT.stats,
     health: 88,
-    physical: 120,
+    attack: 120,
     defense: 70,
     magic: 75,
     speed: 142,

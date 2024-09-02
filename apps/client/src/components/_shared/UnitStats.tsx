@@ -84,7 +84,7 @@ export function UnitStats(props: UnitStatsProps) {
               Stats
             </div>
             <Separator className="my-1" />
-            <UnitStat unit={unit} comp={comp} stat="physical" />
+            <UnitStat unit={unit} comp={comp} stat="attack" />
             <UnitStat unit={unit} comp={comp} stat="defense" />
             <UnitStat unit={unit} comp={comp} stat="magic" />
             <UnitStat unit={unit} comp={comp} stat="speed" />

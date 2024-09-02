@@ -20,7 +20,7 @@ export class SpeedUpTeam extends Modifier {
   resolve = (unit: Unit): Partial<Unit> => {
     return {
       stats: Modifier.setStats(unit, (stats) => ({
-        speed: stats.speed * this.factor + this.offset,
+        speed: stats.speed + stats.speed * this.factor + this.offset,
       })),
     }
   }

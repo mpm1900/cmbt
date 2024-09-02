@@ -59,11 +59,7 @@ export function resolveUnitBuilder(builder: UnitBuilder, teamId: Id): Unit {
     stats: {
       ...builder.base.stats,
       health: mapBaseStat('health', builder.base.stats.health, builder.level),
-      physical: mapBaseStat(
-        'physical',
-        builder.base.stats.physical,
-        builder.level
-      ),
+      attack: mapBaseStat('attack', builder.base.stats.attack, builder.level),
       defense: mapBaseStat(
         'defense',
         builder.base.stats.defense,

@@ -19,7 +19,7 @@ import {
 import { PoisonSprayId } from '../Ids'
 import { Identity } from '../Mutations'
 import { GetUnits } from '../Queries'
-import { PoisonStatus } from '../Statuses'
+import { Poison } from '../Statuses'
 
 export class PoisonSpray extends Action {
   damage: Damage
@@ -82,7 +82,7 @@ export class PoisonSpray extends Action {
             return getMutationsFromDamageResult(source, target, damage)
           }),
           addedModifiers: modifiedTargets.flatMap((target) =>
-            PoisonStatus.modifiers(source, target)
+            Poison.modifiers(source, target)
           ),
         },
       })

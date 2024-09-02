@@ -5,21 +5,17 @@ import {
   MutationFilterArgs,
   Unit,
 } from '../../types'
-import { DefenseUpAllId } from '../Ids'
+import { ProtectedParentId } from '../Ids'
 
-export class DefenseUpAll extends Modifier {
+export class ProtectedParent extends Modifier {
   constructor(props: ModifierProps) {
-    super(DefenseUpAllId, props)
-  }
-
-  get key(): string {
-    return `${this.id}`
+    super(ProtectedParentId, props)
   }
 
   resolve = (unit: Unit): Partial<Unit> => {
     return {
-      stats: Modifier.setStats(unit, (stats) => ({
-        defense: stats.defense + 10,
+      flags: Modifier.setFlags(unit, (flags) => ({
+        isProtected: true,
       })),
     }
   }
@@ -29,6 +25,6 @@ export class DefenseUpAll extends Modifier {
     ctx: CombatContext,
     args: MutationFilterArgs
   ): boolean => {
-    return super.filter(unit, ctx, args)
+    return super.filter(unit, ctx, args) && unit.id === this.parentId
   }
 }

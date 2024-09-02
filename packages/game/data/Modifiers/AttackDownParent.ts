@@ -5,9 +5,9 @@ import {
   MutationFilterArgs,
   Unit,
 } from '../../types'
-import { FireDamageUpParentId } from '../Ids'
+import { AttackDownParentId } from '../Ids'
 
-export class FireDamageUpParent extends Modifier {
+export class AttackDownParent extends Modifier {
   factor: number
   static: number
 
@@ -16,7 +16,7 @@ export class FireDamageUpParent extends Modifier {
   }
 
   constructor(props: ModifierProps<{ factor?: number; static?: number }>) {
-    super(FireDamageUpParentId, props)
+    super(AttackDownParentId, props)
     this.factor = props.factor ?? 0
     this.static = props.static ?? 0
   }
@@ -24,8 +24,7 @@ export class FireDamageUpParent extends Modifier {
   resolve = (unit: Unit): Partial<Unit> => {
     return {
       stats: Modifier.setStats(unit, (stats) => ({
-        fireExpansion:
-          stats.fireExpansion + this.factor * stats.fireExpansion + this.static,
+        attack: stats.attack - stats.attack * this.factor - this.static,
       })),
     }
   }

@@ -20,7 +20,7 @@ import { modifyRenderContext } from '../../utils/modifyRenderContext'
 import { FirePunchId } from '../Ids'
 import { Identity } from '../Mutations'
 import { GetUnits } from '../Queries'
-import { BurnStatus } from '../Statuses/BurnStatus'
+import { Burn } from '../Statuses/Burn'
 
 export class FirePunch extends Action {
   damage: Damage
@@ -85,7 +85,7 @@ export class FirePunch extends Action {
           }),
           addedModifiers: applyBurn
             ? modifiedTargets.flatMap((target) =>
-                BurnStatus.modifiers(source, target)
+                Burn.modifiers(source, target)
               )
             : [],
         },

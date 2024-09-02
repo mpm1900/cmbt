@@ -15,7 +15,7 @@ import {
 import { SandstormId, SandstormOnTurnEndId } from '../Ids'
 import { Identity } from '../Mutations'
 import { EmptyArray } from '../Queries/EmptyArray'
-import { DamagePercentAllOnTurnEnd } from '../Triggers'
+import { DamageAllOnTurnEnd } from '../Triggers'
 
 export class Sandstorm extends Action {
   constructor(sourceId: Id, teamId: Id) {
@@ -47,8 +47,8 @@ export class Sandstorm extends Action {
     return buildActionResult(this, data, source, targets, ctx, () => ({
       onSuccess: {
         addedModifiers: [
-          new DamagePercentAllOnTurnEnd({
-            rid: SandstormOnTurnEndId,
+          new DamageAllOnTurnEnd({
+            registryId: SandstormOnTurnEndId,
             sourceId: source.id,
             factor: 0.1,
             duration: 5,

@@ -20,7 +20,7 @@ export const Ruby = (): Item => {
         new FireDamageUpParent({
           sourceId: u.id,
           parentId: u.id,
-          factor: 1.2,
+          static: 0.2,
         }),
       ],
       mutations: () => [],

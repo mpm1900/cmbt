@@ -1,4 +1,4 @@
-import { Id } from '.'
+import { Id, Unit } from '.'
 import { CombatContext } from './CombatContext'
 import { Modifier, ModifierProps } from './Modifier'
 
@@ -34,5 +34,9 @@ export abstract class Trigger extends Modifier {
 
     this.modifiers = props.modifiers
     this.events = props.events ?? []
+  }
+
+  resolve(unit: Unit): Partial<Unit> {
+    return {}
   }
 }

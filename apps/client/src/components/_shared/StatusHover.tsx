@@ -3,7 +3,7 @@ import { HoverCardPortal } from '@radix-ui/react-hover-card'
 import { ZERO_UNIT } from '@repo/game/data'
 import { Status } from '@repo/game/types'
 import { PropsWithChildren } from 'react'
-import { IoTimerSharp } from 'react-icons/io5'
+import { FaHourglassStart } from 'react-icons/fa6'
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '../ui/hover-card'
 import { ModifierDescription } from './ModifierDescription'
 
@@ -25,7 +25,8 @@ export function StatusHover(props: StatusHoverProps) {
         <HoverCardContent side={side} className="w-[320px]">
           <div className="space-y-2">
             {renderer.name}
-            <div>
+
+            <div className="space-y-1">
               {modifiers.map((modifier) => (
                 <ModifierDescription key={modifier.id} modifier={modifier} />
               ))}
@@ -33,7 +34,7 @@ export function StatusHover(props: StatusHoverProps) {
             <div className="text-xs font-bold text-muted-foreground/60 text-right space-x-4 flex flex-row justify-end items-center">
               {!!status.duration && (
                 <div className="flex items-center space-x-1">
-                  <IoTimerSharp />{' '}
+                  <FaHourglassStart />
                   <span>
                     {status.duration} turn{status.duration > 1 && 's'}
                   </span>

@@ -12,7 +12,7 @@ import { modifyRenderContext } from '../../utils/modifyRenderContext'
 import { WillOWispId } from '../Ids'
 import { ReduceFocusParent } from '../Mutations'
 import { GetUnits } from '../Queries'
-import { BurnStatus } from '../Statuses/BurnStatus'
+import { Burn } from '../Statuses/Burn'
 
 export class WillOWisp extends Action {
   constructor(sourceId: Id, teamId: Id) {
@@ -59,7 +59,7 @@ export class WillOWisp extends Action {
       (modifiedTargets) => ({
         onSuccess: {
           addedModifiers: modifiedTargets.flatMap((target) =>
-            BurnStatus.modifiers(source, target)
+            Burn.modifiers(source, target)
           ),
         },
       })

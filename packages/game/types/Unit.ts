@@ -16,7 +16,8 @@ export type StatKey =
   | 'health'
   | 'speed'
   | 'stamina'
-  | AttackTypes
+  | 'attack'
+  | 'magic'
   | `${DamageType}Negation`
   | `${DamageType}Expansion`
 

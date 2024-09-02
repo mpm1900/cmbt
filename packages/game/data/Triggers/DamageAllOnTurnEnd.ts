@@ -9,24 +9,27 @@ import {
 import { DamageAllOnTurnEndId } from '../Ids'
 
 export class DamageAllOnTurnEnd extends Trigger {
-  damage: number
+  factor: number
+  static: number
 
   get key() {
-    return this.rid
+    return this.registryId
   }
 
-  constructor(props: TriggerProps<{ damage: number }>) {
+  constructor(props: TriggerProps<{ factor?: number; static?: number }>) {
     super(DamageAllOnTurnEndId, {
       ...props,
       events: ['on Turn End'],
     })
-    this.damage = props.damage
+
+    this.factor = props.factor ?? 0
+    this.static = props.static ?? 0
   }
 
   resolve = (unit: Unit): Partial<Unit> => {
     return {
       values: Modifier.setValues(unit, (values) => ({
-        damage: values.damage + this.damage,
+        damage: values.damage + unit.stats.health * this.factor + this.static,
       })),
     }
   }

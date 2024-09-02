@@ -30,7 +30,7 @@ export const Tyranitar: UnitBase = {
   stats: {
     ...BASE_UNIT.stats,
     health: 100,
-    physical: 134,
+    attack: 134,
     defense: 110,
     magic: 90,
     speed: 61,

@@ -13,7 +13,7 @@ import {
   modifyRenderContext,
 } from '../../../utils'
 import { InspectAllId } from '../../Ids'
-import { SetIsInspectedAll } from '../../Modifiers'
+import { InspectedAll } from '../../Modifiers'
 import { Identity } from '../../Mutations'
 import { EmptyArray } from '../../Queries/EmptyArray'
 
@@ -46,7 +46,7 @@ export class InspectAll extends Action {
     return buildActionResult(this, data, source, targets, ctx, () => ({
       onSuccess: {
         addedModifiers: [
-          new SetIsInspectedAll({
+          new InspectedAll({
             sourceId: source.id,
             maxInstances: 1,
           }),

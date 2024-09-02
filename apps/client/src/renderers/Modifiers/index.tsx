@@ -88,11 +88,11 @@ export const ModifierRenderers: Record<string, ModifierRenderer> = {
                 new DamageAllOnTurnEnd({
                   registryId: SandstormOnTurnEndId,
                   factor: modifier.damageFactor,
-                  duration: modifier.duration,
+                  duration: modifier.damageDuration,
                 })
               }
             />{' '}
-            to all units for {modifier.duration} turns.
+            to all units for {modifier.damageDuration} turns.
           </span>
         </div>
       )

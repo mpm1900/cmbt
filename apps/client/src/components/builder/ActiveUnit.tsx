@@ -2,6 +2,7 @@ import { useBuilderUi } from '@/hooks/state/useBuilderUi'
 import { useUnitBuilders } from '@/hooks/state/useUnitBuilders'
 import { BASE_CONFIGS } from '@repo/game/data'
 import { DamageIcon } from '@shared/DamageIcon'
+import { FaRegSquareFull, FaSquare } from 'react-icons/fa6'
 import {
   Card,
   CardContent,
@@ -140,10 +141,27 @@ export function ActiveUnit() {
         <div className="w-[680px]">
           <Card>
             <CardHeader>
-              <CardTitle>Actions</CardTitle>
-              <CardDescription>
-                Select up to {builder.config.actionsCount} actions.
-              </CardDescription>
+              <div className="flex justify-between items-center">
+                <div>
+                  <CardTitle>Actions</CardTitle>
+                  <CardDescription>
+                    Select up to {builder.config.actionsCount} actions.
+                  </CardDescription>
+                </div>
+                <div className="flex space-x-1 justify-center">
+                  {Array.from({ length: builder.config.actionsCount }).map(
+                    (_, i) =>
+                      builder.actions.length >= i + 1 ? (
+                        <FaSquare key={i} className="fill-muted-foreground" />
+                      ) : (
+                        <FaRegSquareFull
+                          key={i}
+                          className="fill-muted-foreground"
+                        />
+                      )
+                  )}
+                </div>
+              </div>
             </CardHeader>
             <CardContent>
               <ActionsTable builder={builder} />

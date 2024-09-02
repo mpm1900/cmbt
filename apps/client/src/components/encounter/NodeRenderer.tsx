@@ -1,5 +1,6 @@
 import { useEncounterContext } from '@/hooks'
 import { EncounterNode } from '@repo/game/types'
+import { Button } from '../ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
 import { Separator } from '../ui/separator'
 import { ChoiceButton } from './ChoiceButton'
@@ -16,7 +17,22 @@ export function NodeRenderer(props: NodeRendererProps) {
   return (
     <Card className="w-[640px]">
       <CardHeader>
-        <CardTitle>{node.title}</CardTitle>
+        <div className="flex justify-between items-center">
+          <CardTitle>{node.title}</CardTitle>
+          {node.tabs && (
+            <div className="flex">
+              {node.tabs(ctx).map((tab) => (
+                <Button
+                  key={tab.id}
+                  variant="ghost"
+                  onClick={() => tab.resolve(ctx)}
+                >
+                  {tab.label}
+                </Button>
+              ))}
+            </div>
+          )}
+        </div>
       </CardHeader>
       <CardContent className="space-y-4">
         <div>{node.text}</div>

@@ -78,6 +78,7 @@ export type EncounterNode = {
   id: Id
   title: React.ReactNode
   text: React.ReactNode
+  tabs?: (ctx: EncounterContext) => EncounterChoice[]
   choices?: (ctx: EncounterContext) => EncounterChoice[]
   Choice?: EncounterChoiceComponent
   Component?: EncounterComponent

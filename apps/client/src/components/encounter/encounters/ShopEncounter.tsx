@@ -48,6 +48,20 @@ const ShopIntroductionNode: EncounterNode = {
       </div>
     </div>
   ),
+  tabs: (ctx) => [
+    {
+      id: nanoid(),
+      label: <ChoiceLabel after={<IoMdReturnLeft />}>Leave</ChoiceLabel>,
+      resolve: (ctx) => {
+        ctx.updateActiveWorldNode((n) => ({
+          completed: true,
+          visited: true,
+          encounter: ctx.encounter,
+        }))
+        ctx.back()
+      },
+    },
+  ],
   choices: () => [
     {
       id: nanoid(),

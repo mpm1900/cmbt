@@ -18,7 +18,7 @@ export function ModifierValues(
       {props.factor !== 0 && (
         <div>
           {props.factor > 0 ? '+' : '-'}
-          {Math.abs(props.factor) * 100}%{props.after} {props.children}.
+          {Math.abs(props.factor) * 100}%{props.after} {props.children}
         </div>
       )}
       {props.static !== 0 && (

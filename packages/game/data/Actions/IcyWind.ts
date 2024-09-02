@@ -12,8 +12,8 @@ import {
   getActionData,
   modifyRenderContext,
 } from '../../utils'
-import { IcyWindId } from '../Ids'
-import { SpeedUpParent } from '../Modifiers'
+import { IcyWindId, SpeedDownParentId } from '../Ids'
+import { UpdateStatParent } from '../Modifiers'
 import { Identity } from '../Mutations'
 import { GetUnits } from '../Queries'
 
@@ -58,10 +58,12 @@ export class IcyWind extends Action {
         onSuccess: {
           addedModifiers: modifiedTargets.map(
             (target) =>
-              new SpeedUpParent({
+              new UpdateStatParent({
+                registryId: SpeedDownParentId,
+                stat: 'speed',
                 sourceId: source.id,
                 parentId: target.id,
-                offset: -10,
+                static: -10,
               })
           ),
         },

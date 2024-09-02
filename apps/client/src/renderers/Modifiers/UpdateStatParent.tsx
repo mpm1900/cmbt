@@ -7,13 +7,21 @@ export const UpdateStatParentRenderer: ModifierRenderer = {
   name: (mod) => <ModifierName>{MODIFIER_NAMES[mod.registryId]}</ModifierName>,
   description: (mod) => {
     const modifier = mod as UpdateStatParent
+    const renderer = StatRenderers[modifier.stat]
     return (
       <ModifierValues
         factor={modifier.factor}
         static={modifier.static}
         after={modifier.percentage && '%'}
       >
-        {StatRenderers[modifier.stat]?.name ?? modifier.stat}
+        {renderer?.name ?? modifier.stat}{' '}
+        {renderer?.icon && (
+          <>
+            (
+            <div className="h-[20px] w-[20px] inline-flex">{renderer.icon}</div>
+            )
+          </>
+        )}
       </ModifierValues>
     )
   },

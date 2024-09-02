@@ -483,7 +483,7 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
               new DamageNewUnitsOnUnitEnter({ static: spikes.enterDamage })
             }
           />{' '}
-          to all units.
+          to the battlefield.
         </div>
       )
     },

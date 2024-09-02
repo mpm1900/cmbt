@@ -14,16 +14,20 @@ import { PiTargetFill } from 'react-icons/pi'
 
 export type StatRenderer = {
   name: ReactNode
-  icon: ReactNode
+  icon?: ReactNode
 }
 
-export const StatRenderers: Record<StatKey, StatRenderer | undefined> = {
+export const StatRenderers: Record<StatKey, StatRenderer> = {
   accuracy: {
     name: <>Accuracy</>,
     icon: <GiDiceTarget className="h-full w-full" />,
   },
-  arcaneExpansion: undefined,
-  arcaneNegation: undefined,
+  arcaneExpansion: {
+    name: <>Arcane Damage</>,
+  },
+  arcaneNegation: {
+    name: <>Arcane Negation</>,
+  },
   criticalChance: {
     name: <>Crit Chance</>,
     icon: <PiTargetFill className="h-full w-full" />,
@@ -36,16 +40,28 @@ export const StatRenderers: Record<StatKey, StatRenderer | undefined> = {
     name: <>Defense</>,
     icon: <GiCrenulatedShield className="h-full w-full" />,
   },
-  devotion: undefined,
+  devotion: {
+    name: <>Devotion</>,
+  },
   evasion: {
     name: <>Evasion</>,
     icon: <GiDodging className="h-full w-full" />,
   },
-  fireExpansion: undefined,
-  fireNegation: undefined,
-  focus: undefined,
-  forceExpansion: undefined,
-  forceNegation: undefined,
+  fireExpansion: {
+    name: <>Fire Damage</>,
+  },
+  fireNegation: {
+    name: <>Fire Negation</>,
+  },
+  focus: {
+    name: <>Focus</>,
+  },
+  forceExpansion: {
+    name: <>Force Damage</>,
+  },
+  forceNegation: {
+    name: <>Force Negation</>,
+  },
   health: {
     name: <>Health</>,
     icon: <FaHeartbeat className="h-full w-full" />,
@@ -58,13 +74,23 @@ export const StatRenderers: Record<StatKey, StatRenderer | undefined> = {
     name: <>Attack</>,
     icon: <GiBiceps className="h-full w-full" />,
   },
-  psychicExpansion: undefined,
-  psychicNegation: undefined,
-  shockExpansion: undefined,
-  shockNegation: undefined,
+  psychicExpansion: {
+    name: <>Psychic Damage</>,
+  },
+  psychicNegation: {
+    name: <>Psychic Negation</>,
+  },
+  shockExpansion: {
+    name: <>Shock Damage</>,
+  },
+  shockNegation: {
+    name: <>Shock Negation</>,
+  },
   speed: {
     name: <>Speed</>,
     icon: <GiSprint className="h-full w-full" />,
   },
-  stamina: undefined,
+  stamina: {
+    name: <>Stamina</>,
+  },
 }

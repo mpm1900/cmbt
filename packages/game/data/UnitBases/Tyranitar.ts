@@ -40,9 +40,9 @@ export const Tyranitar: UnitBase = {
     devotion: 20,
   },
   augmentSlots: 3,
-  affinities: [{ type: 'fire', factor: 0.25 }],
-  resistances: [{ type: 'fire', factor: 0.3 }],
-  weaknesses: [{ type: 'arcane', factor: 0.25 }],
+  affinities: [{ type: 'fire', factor: 25 }],
+  resistances: [{ type: 'fire', factor: 30 }],
+  weaknesses: [{ type: 'arcane', factor: 25 }],
 }
 
 export const TyranitarConfig: UnitBaseConfig = {

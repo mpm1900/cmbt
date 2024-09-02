@@ -1,4 +1,4 @@
-import { AttackDownParent } from '@repo/game/data'
+import { AttackDownParentId, UpdateStatParent } from '@repo/game/data'
 import { ModifierInline } from '@shared/ModifierInline'
 import { MODIFIER_NAMES, ModifierRenderer } from '..'
 import { ModifierName, TriggerName } from '../_helpers'
@@ -6,7 +6,7 @@ import { ModifierName, TriggerName } from '../_helpers'
 export const AttackDownAllOtherOnUnitEnterRenderer: ModifierRenderer = {
   name: (mod) => <ModifierName>{MODIFIER_NAMES[mod.registryId]}</ModifierName>,
   description: (mod) => {
-    const modifier = mod as AttackDownParent
+    const modifier = mod as UpdateStatParent
     return (
       <div className="space-x-2">
         <TriggerName>On self enter:</TriggerName>
@@ -14,8 +14,10 @@ export const AttackDownAllOtherOnUnitEnterRenderer: ModifierRenderer = {
           Applies{' '}
           <ModifierInline
             modifier={
-              new AttackDownParent({
-                factor: modifier.factor,
+              new UpdateStatParent({
+                stat: 'attack',
+                registryId: AttackDownParentId,
+                factor: modifier.factor * -1,
               })
             }
           />{' '}

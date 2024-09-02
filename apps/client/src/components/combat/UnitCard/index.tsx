@@ -9,11 +9,11 @@ import { CgDetailsMore } from 'react-icons/cg'
 import { useCombatContext } from '../../../hooks'
 import { useActions, useCombatUi } from '../../../hooks/state'
 import { UnitBars } from '../../_shared/UnitBars'
+import { UnitCombatModifiers } from '../../_shared/UnitCombatModifiers'
 import { UnitStats } from '../../_shared/UnitStats'
 import { Button } from '../../ui/button'
 import { CardContent } from '../../ui/card'
 import { Popover, PopoverContent, PopoverTrigger } from '../../ui/popover'
-import { UnitModifiers } from './UnitModifiers'
 
 export type UnitCardProps = {
   unit: Unit
@@ -115,7 +115,7 @@ export function UnitCard(props: UnitCardProps) {
           <UnitBars unit={unit} isActive={isActive} hideStats={hideStats} />
         </CardContent>
       </div>
-      <UnitModifiers
+      <UnitCombatModifiers
         unit={props.unit}
         side={reverse ? 'top' : 'bottom'}
         className={cn({ 'mt-2': !reverse, 'mb-2': reverse })}

@@ -1,5 +1,6 @@
 import { useCombatContext } from '@/hooks'
 import { useGame } from '@/hooks/state'
+import { getStatusesFromModifiers } from '@/utils/getStatusesFromModifiers'
 import { Trigger, Unit } from '@repo/game/types'
 import {
   applyMutations,
@@ -12,6 +13,7 @@ import { Button } from '../ui/button'
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '../ui/hover-card'
 import { EditUnitModal } from './EditUnitModal'
 import { HealthBar } from './HealthBar'
+import { UnitModifiers } from './UnitModifiers'
 import { UnitStats } from './UnitStats'
 
 export type SidebarUnitProps = {
@@ -37,6 +39,10 @@ export function SidebarUnit(props: SidebarUnitProps) {
   )
   const remainingHealth = Math.max(unit.stats.health - unit.values.damage, 0)
   const ratio = (remainingHealth / unit.stats.health) * 100
+
+  const mods = getModifiersFromUnit(unit)
+  const nonStatusModifiers = mods.filter((m) => !m.statusId)
+  const statuses = getStatusesFromModifiers(mods)
   return (
     <div className="rounded hover:bg-slate-800 flex flex-row space-x-2 items-center">
       <HoverCard openDelay={300} closeDelay={100}>
@@ -59,6 +65,10 @@ export function SidebarUnit(props: SidebarUnitProps) {
               </div>
 
               <HealthBar unit={unit} initial={ratio} />
+              <UnitModifiers
+                modifiers={nonStatusModifiers}
+                statuses={statuses}
+              />
             </div>
           </div>
         </HoverCardTrigger>

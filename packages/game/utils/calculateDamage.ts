@@ -27,13 +27,13 @@ export function calculateBaseDamage(
 export function getDamageNegation(type: DamageType | undefined, target: Unit) {
   if (!type) return 1
   const typeNegation = target.stats[`${type}Negation`]
-  return 1 - typeNegation
+  return (100 - typeNegation) / 100
 }
 
 export function getDamageExpansion(type: DamageType | undefined, source: Unit) {
   if (!type) return 1
   const typeExpansion = source.stats[`${type}Expansion`]
-  return typeExpansion
+  return typeExpansion / 100
 }
 
 export type CalculateDamageConfig = ActionAccuracyResult & {

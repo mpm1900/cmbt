@@ -15,17 +15,18 @@ import {
   getActionData,
   getDamageAi,
   getMutationsFromDamageResult,
+  ifArray,
   modifyRenderContext,
 } from '../../utils'
-import { PiercingStrikeId } from '../Ids'
-import { DefenseDownParent } from '../Modifiers'
+import { DefenseDownParentId, PiercingStrikeId } from '../Ids'
+import { UpdateStatParent } from '../Modifiers'
 import { Identity } from '../Mutations'
 import { GetUnits } from '../Queries'
 
 export class PiercingStrike extends Action {
   damage: Damage
   defenseDownChance: number = 20
-  defenseDownFactor: number = 0.25
+  defenseDownFactor: number = -0.25
 
   constructor(sourceId: Id, teamId: Id) {
     const attackType = 'physical'
@@ -53,7 +54,7 @@ export class PiercingStrike extends Action {
     return 90 + source.stats.accuracy
   }
   criticalThreshold = (source: Unit): number | undefined => {
-    return 90 + source.stats.criticalChance
+    return 5 + source.stats.criticalChance
   }
   criticalFactor = (source: Unit): number | undefined =>
     1.5 + source.stats.criticalDamage
@@ -91,16 +92,19 @@ export class PiercingStrike extends Action {
 
             return getMutationsFromDamageResult(source, target, damage)
           }),
-          addedModifiers: applyDefenseDown
-            ? modifiedTargets.map(
-                (target) =>
-                  new DefenseDownParent({
-                    sourceId: source.id,
-                    parentId: target.id,
-                    factor: this.defenseDownFactor,
-                  })
-              )
-            : [],
+          addedModifiers: ifArray(
+            applyDefenseDown,
+            modifiedTargets.map(
+              (target) =>
+                new UpdateStatParent({
+                  registryId: DefenseDownParentId,
+                  stat: 'defense',
+                  sourceId: source.id,
+                  parentId: target.id,
+                  factor: this.defenseDownFactor,
+                })
+            )
+          ),
         },
       })
     )

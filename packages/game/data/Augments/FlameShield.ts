@@ -1,6 +1,6 @@
 import { Augment, Modifier, Mutation, Unit } from '../../types'
-import { FlameShieldId } from '../Ids'
-import { FireNegationUpParent } from '../Modifiers'
+import { FireNegationUpParentId, FlameShieldId } from '../Ids'
+import { UpdateStatParent } from '../Modifiers'
 
 export const FlameShield: Augment = {
   id: FlameShieldId,
@@ -8,10 +8,13 @@ export const FlameShield: Augment = {
 
   modifiers(unit: Unit): Modifier[] {
     return [
-      new FireNegationUpParent({
+      new UpdateStatParent({
+        registryId: FireNegationUpParentId,
+        stat: 'fireNegation',
+        percentage: true,
         sourceId: unit.id,
         parentId: unit.id,
-        static: 0.5,
+        static: 50,
       }),
     ]
   },

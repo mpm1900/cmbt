@@ -2,13 +2,13 @@ import { LogUnit } from '@/components/ui/log'
 import {
   ArmorUp,
   ArmorUpId,
-  AttackUpParent,
+  AttackUpParentId,
   BodySlam,
   BodySlamId,
   Burn,
   DamageAllOnTurnEnd,
   DamageNewUnitsOnUnitEnter,
-  DefenseDownParent,
+  DefenseDownParentId,
   Disable,
   DisabledParent,
   DisableId,
@@ -58,6 +58,7 @@ import {
   SwordsDance,
   SwordsDanceId,
   TrickRoomId,
+  UpdateStatParent,
   Ward,
   WardId,
   WillOWispId,
@@ -181,7 +182,11 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
           <ModifierInline
             side={props?.side}
             modifier={
-              new DefenseDownParent({ factor: crunch.defenseDownFactor })
+              new UpdateStatParent({
+                registryId: DefenseDownParentId,
+                stat: 'defense',
+                factor: crunch.defenseDownFactor,
+              })
             }
           />
           .
@@ -498,7 +503,13 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
           Applies{' '}
           <ModifierInline
             side={props?.side}
-            modifier={new AttackUpParent({ factor: swordsDance.factor })}
+            modifier={
+              new UpdateStatParent({
+                registryId: AttackUpParentId,
+                stat: 'attack',
+                factor: swordsDance.factor,
+              })
+            }
           />{' '}
           to this unit.
         </div>

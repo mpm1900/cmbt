@@ -141,7 +141,6 @@ export function UnitStats(props: UnitStatsProps) {
             unit={unit}
             comp={comp}
             damageType="arcane"
-            map={(v) => v * 100}
             after="%"
           />
           <UnitDamageStat
@@ -149,7 +148,6 @@ export function UnitStats(props: UnitStatsProps) {
             unit={unit}
             comp={comp}
             damageType="fire"
-            map={(v) => v * 100}
             after="%"
           />
           <UnitDamageStat
@@ -157,7 +155,6 @@ export function UnitStats(props: UnitStatsProps) {
             unit={unit}
             comp={comp}
             damageType="force"
-            map={(v) => v * 100}
             after="%"
           />
           <UnitDamageStat
@@ -165,7 +162,6 @@ export function UnitStats(props: UnitStatsProps) {
             unit={unit}
             comp={comp}
             damageType="psychic"
-            map={(v) => v * 100}
             after="%"
           />
           <UnitDamageStat
@@ -173,7 +169,6 @@ export function UnitStats(props: UnitStatsProps) {
             unit={unit}
             comp={comp}
             damageType="shock"
-            map={(v) => v * 100}
             after="%"
           />
           <Separator className="my-2" />
@@ -204,7 +199,6 @@ export function UnitStats(props: UnitStatsProps) {
             unit={unit}
             comp={comp}
             damageType="arcane"
-            map={(v) => v * 100}
             after="%"
           />
           <UnitDamageStat
@@ -212,7 +206,6 @@ export function UnitStats(props: UnitStatsProps) {
             unit={unit}
             comp={comp}
             damageType="fire"
-            map={(v) => v * 100}
             after="%"
           />
           <UnitDamageStat
@@ -220,7 +213,6 @@ export function UnitStats(props: UnitStatsProps) {
             unit={unit}
             comp={comp}
             damageType="force"
-            map={(v) => v * 100}
             after="%"
           />
           <UnitDamageStat
@@ -228,7 +220,6 @@ export function UnitStats(props: UnitStatsProps) {
             unit={unit}
             comp={comp}
             damageType="psychic"
-            map={(v) => v * 100}
             after="%"
           />
           <UnitDamageStat
@@ -236,7 +227,6 @@ export function UnitStats(props: UnitStatsProps) {
             unit={unit}
             comp={comp}
             damageType="shock"
-            map={(v) => v * 100}
             after="%"
           />
           <Separator className="my-2" />

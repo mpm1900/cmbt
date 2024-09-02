@@ -1,6 +1,6 @@
 import { Augment, Modifier, Mutation, Unit } from '../../types'
 import { IntimidateId } from '../Ids'
-import { PowerDownAllOtherOnUnitEnter } from '../Triggers'
+import { AttackDownAllOtherOnUnitEnter } from '../Triggers'
 
 export const Intimidate: Augment = {
   id: IntimidateId,
@@ -8,7 +8,7 @@ export const Intimidate: Augment = {
 
   modifiers(unit: Unit): Modifier[] {
     return [
-      new PowerDownAllOtherOnUnitEnter({
+      new AttackDownAllOtherOnUnitEnter({
         sourceId: unit.id,
         parentId: unit.id,
         factor: 0.25,

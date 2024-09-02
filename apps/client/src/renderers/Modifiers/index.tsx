@@ -1,15 +1,10 @@
 import {
   AttackDownAllOtherOnUnitEnterId,
-  AttackDownParentId,
-  AttackUpParentId,
   CreateSandstormOnUnitEnterId,
   DamageAllOnTurnEndId,
   DamageNewUnitsOnUnitEnterId,
   DamageParentOnTurnEndId,
-  DefenseDownParentId,
   DisabledParentId,
-  FireDamageUpParentId,
-  FireNegationUpParentId,
   HealParentOnUnitSwitch,
   HealParentOnUnitSwitchId,
   InspectAllOnUnitEnterId,
@@ -19,18 +14,14 @@ import {
   ProtectedParentId,
   SpeedUpTeamId,
   StunnedParentId,
+  UpdateStatParentId,
 } from '@repo/game/data'
 import { Modifier } from '@repo/game/types'
 import { ModifierInline } from '@shared/ModifierInline'
 import { ReactNode } from 'react'
 import { ModifierName, TriggerName } from './_helpers'
 import { MODIFIER_NAMES } from './_names'
-import { AttackDownParentRenderer } from './AttackDownParent'
-import { AttackUpParentRenderer } from './AttackUpParent'
-import { DefenseDownParentRenderer } from './DefenseDownParent'
 import { DisabledParentRenderer } from './DisabledParent'
-import { FireDamageUpParentRenderer } from './FireDamageUpParent'
-import { FireNegationUpParentRenderer } from './FireNegationUpParent'
 import { InspectedAllRenderer } from './InspectedAll'
 import { InvertSpeedAllRenderer } from './InvertSpeedAll'
 import { ProtectedParentRenderer } from './ProtectedParent'
@@ -41,6 +32,7 @@ import { CreateSandstormOnUnitEnterRenderer } from './Triggers/CreateSandstormOn
 import { DamageAllOnTurnEndRenderer } from './Triggers/DamageAllOnTurnEnd'
 import { DamageNewUnitsOnUnitEnterRenderer } from './Triggers/DamageNewUnitsOnUnitEnter'
 import { DamageParentOnTurnEndRenderer } from './Triggers/DamageParentOnTurnEnd'
+import { UpdateStatParentRenderer } from './UpdateStatParent'
 
 export * from './_icons'
 export * from './_names'
@@ -51,17 +43,13 @@ export type ModifierRenderer = {
 }
 
 export const ModifierRenderers: Record<string, ModifierRenderer> = {
-  [AttackDownParentId]: AttackDownParentRenderer,
-  [AttackUpParentId]: AttackUpParentRenderer,
-  [DefenseDownParentId]: DefenseDownParentRenderer,
   [DisabledParentId]: DisabledParentRenderer,
-  [FireDamageUpParentId]: FireDamageUpParentRenderer,
-  [FireNegationUpParentId]: FireNegationUpParentRenderer,
   [InspectedAllId]: InspectedAllRenderer,
   [InvertSpeedAllId]: InvertSpeedAllRenderer,
   [ProtectedParentId]: ProtectedParentRenderer,
   [SpeedUpTeamId]: SpeedUpTeamRenderer,
   [StunnedParentId]: StunnedParentRenderer,
+  [UpdateStatParentId]: UpdateStatParentRenderer,
 
   // Triggers
   [AttackDownAllOtherOnUnitEnterId]: AttackDownAllOtherOnUnitEnterRenderer,

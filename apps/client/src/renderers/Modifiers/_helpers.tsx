@@ -1,6 +1,6 @@
 import { cn } from '@/lib/utils'
 import { PropsWithClassname } from '@/types'
-import { PropsWithChildren } from 'react'
+import { PropsWithChildren, ReactNode } from 'react'
 
 type ElementProps<T = {}> = PropsWithChildren<PropsWithClassname<T>>
 
@@ -11,40 +11,21 @@ export function ModifierName(props: ElementProps) {
 }
 
 export function ModifierValues(
-  props: ElementProps & { factor: number; static: number }
+  props: ElementProps & { factor: number; static: number; after?: ReactNode }
 ) {
   return (
     <div>
       {props.factor !== 0 && (
         <div>
           {props.factor > 0 ? '+' : '-'}
-          {Math.abs(props.factor) * 100}% {props.children}.
+          {Math.abs(props.factor) * 100}%{props.after} {props.children}.
         </div>
       )}
       {props.static !== 0 && (
         <div>
           {props.static > 0 ? '+' : '-'}
-          {Math.abs(props.static)} {props.children}.
-        </div>
-      )}
-    </div>
-  )
-}
-
-export function ModifierValuesPercent(
-  props: ElementProps & { factor: number; static: number }
-) {
-  return (
-    <div>
-      {props.factor !== 0 && (
-        <div>
-          ×{props.factor + 1} {props.children}.
-        </div>
-      )}
-      {props.static !== 0 && (
-        <div>
-          {props.static > 0 ? '+' : '-'}
-          {Math.abs(props.static * 100)}% {props.children}.
+          {Math.abs(props.static)}
+          {props.after} {props.children}.
         </div>
       )}
     </div>

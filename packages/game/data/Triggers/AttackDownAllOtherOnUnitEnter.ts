@@ -5,10 +5,10 @@ import {
   TriggerProps,
   Unit,
 } from '../../types'
-import { AttackDownAllOtherOnUnitEnterId } from '../Ids'
-import { AttackDownParent } from '../Modifiers'
+import { AttackDownAllOtherOnUnitEnterId, AttackDownParentId } from '../Ids'
+import { UpdateStatParent } from '../Modifiers'
 
-export class PowerDownAllOtherOnUnitEnter extends Trigger {
+export class AttackDownAllOtherOnUnitEnter extends Trigger {
   private factor: number
 
   constructor(props: TriggerProps<{ factor: number }>) {
@@ -21,10 +21,12 @@ export class PowerDownAllOtherOnUnitEnter extends Trigger {
           .filter((u) => super.filter(u, ctx, {}) && u.id !== props.sourceId)
           .map(
             (u) =>
-              new AttackDownParent({
+              new UpdateStatParent({
+                stat: 'attack',
+                registryId: AttackDownParentId,
                 sourceId: props.sourceId,
                 parentId: u.id,
-                factor: this.factor,
+                factor: this.factor * -1,
               })
           ),
     })

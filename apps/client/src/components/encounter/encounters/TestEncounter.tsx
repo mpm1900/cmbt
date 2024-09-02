@@ -1,4 +1,3 @@
-import { faker } from '@faker-js/faker'
 import { SpeedUpTeam, TeamId } from '@repo/game/data'
 import { Encounter, EncounterNode, Team } from '@repo/game/types'
 import { makeEnemyUnit } from '@repo/game/utils'
@@ -38,8 +37,8 @@ const TestNode1: EncounterNode = {
         const unit = ctx.units.find((u) => true)
         ctx.initializeCombat({
           enemyTeam,
-          enemyUnits: Array.from({ length: 3 }).map(() =>
-            makeEnemyUnit(faker.person.fullName(), enemyTeam.id, 15)
+          enemyUnits: Array.from({ length: 3 }).map((_, index) =>
+            makeEnemyUnit({ index, level: 15, teamId: enemyTeam.id })
           ),
           reward: {
             items: [],
@@ -129,8 +128,8 @@ const TestNode2: EncounterNode = {
         }
         ctx.initializeCombat({
           enemyTeam,
-          enemyUnits: Array.from({ length: 3 }).map(() =>
-            makeEnemyUnit(faker.person.fullName(), enemyTeam.id, 15)
+          enemyUnits: Array.from({ length: 3 }).map((_, index) =>
+            makeEnemyUnit({ index, level: 15, teamId: enemyTeam.id })
           ),
           reward: {
             items: [],

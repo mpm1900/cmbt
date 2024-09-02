@@ -4,6 +4,7 @@ import { ZERO_UNIT } from '@repo/game/data'
 import { ItemListTable } from '@shared/ItemListTable'
 import { SidebarUnit } from '../_shared/SidebarUnit'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../ui/tabs'
+import { WorldLegend } from './WorldLegend'
 
 export type WorldSidebarProps = {
   defaultValue?: string
@@ -21,9 +22,10 @@ export function WorldSidebar(props: WorldSidebarProps) {
         className="flex flex-1 flex-col overflow-hidden"
       >
         <div className="p-2">
-          <TabsList className="grid w-full grid-cols-2">
+          <TabsList className="grid w-full grid-cols-3">
             <TabsTrigger value="team">Team</TabsTrigger>
             <TabsTrigger value="items">Items</TabsTrigger>
+            <TabsTrigger value="legend">Legend</TabsTrigger>
           </TabsList>
         </div>
         <div className="flex-1 overflow-auto w-full">
@@ -33,7 +35,7 @@ export function WorldSidebar(props: WorldSidebarProps) {
             ))}
           </TabsContent>
           <TabsContent value="items">
-            <div className="p-2">
+            <div className="px-4">
               <ItemListTable
                 unit={ZERO_UNIT}
                 items={groupedItems}
@@ -42,6 +44,11 @@ export function WorldSidebar(props: WorldSidebarProps) {
                 )}
                 resources={{ credits: 0 }}
               />
+            </div>
+          </TabsContent>
+          <TabsContent value="legend">
+            <div className="px-4">
+              <WorldLegend />
             </div>
           </TabsContent>
         </div>

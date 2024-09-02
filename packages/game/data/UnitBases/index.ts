@@ -1,7 +1,6 @@
 import { Id, UnitBase, UnitBaseConfig } from '../../types'
 import { Blissy, BlissyConfig } from './Blissy'
-import { Celebi, CelebiConfig } from './Celebi'
-import { DeoxysS, DeoxysSConfig } from './DeoxysS'
+import { Celebi, CelebiConfig } from './Enemy'
 import { Gengar, GengarConfig } from './Gengar'
 import { Salamence, SalamenceConfig } from './Salamence'
 import { Snorlax, SnorlaxConfig } from './Snorlax'
@@ -17,36 +16,17 @@ export const PLAYER_BASES: UnitBase[] = [
   Salamence,
   Blissy,
   Witch,
-  //DeoxysP,
-  //DeoxysM,
-  //DeoxysS,
-
   Gengar,
-
-  // Steelix,,
-  //Celebi,
 ]
 
-export const ALL_BASES: UnitBase[] = [
-  Tyranitar,
-  TempestKnight,
-  Blissy,
-  Witch,
-  //DeoxysP,
-  //DeoxysM,
-  //DeoxysS,
-  Gengar,
-  Salamence,
-  Snorlax,
-  // Steelix,,
-  Celebi,
-]
+export const ENEMY_BASES = [Celebi]
+
+export const ALL_BASES: UnitBase[] = [...PLAYER_BASES, ...ENEMY_BASES]
 
 export const BASE_CONFIGS: Record<Id, UnitBaseConfig> = {
   [Blissy.id]: BlissyConfig,
   [Celebi.id]: CelebiConfig,
   [TempestKnight.id]: TempestKnightConfig,
-  [DeoxysS.id]: DeoxysSConfig,
   [Gengar.id]: GengarConfig,
   [Salamence.id]: SalamenceConfig,
   [Snorlax.id]: SnorlaxConfig,

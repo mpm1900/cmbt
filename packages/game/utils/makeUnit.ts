@@ -1,5 +1,5 @@
-import random from 'random'
 import {
+  ENEMY_BASES,
   Fireball,
   FurySwipes,
   HyperBeam,
@@ -16,7 +16,6 @@ import {
 import { Disable } from '../data/Actions/Disable'
 import { Explosion } from '../data/Actions/Explosion'
 import { UnitId } from '../data/Ids/_base'
-import { CelebiId } from '../data/UnitBases/Celebi'
 import { BASE_UNIT } from '../data/Units/system/BASE_UNIT'
 import { Id, Unit } from '../types'
 import { rebuildUnit } from './rebuildUnit'
@@ -36,26 +35,24 @@ export function unitMaker(
   }
 }
 
-export function makeEnemyUnit(name: string, teamId: Id, level: number): Unit {
+export type MakeEnemeyUnitConfig = {
+  index: number
+  level: number
+  teamId: Id
+}
+
+export function makeEnemyUnit(config: MakeEnemeyUnitConfig): Unit {
+  const { index, level, teamId } = config
   const id = UnitId()
+  const base = ENEMY_BASES[Math.floor(Math.random() * ENEMY_BASES.length)]
   const unit = unitMaker(
     {
       id,
-      name,
+      name: base.name + ' ' + (index + 1),
       teamId,
       level,
-      baseId: CelebiId,
-      stats: {
-        ...BASE_UNIT.stats,
-        speed: random.int(70, 140),
-        attack: 100, //random.int(70, 140),
-        magic: 100, // random.int(70, 140),
-        defense: 100, // random.int(50, 100),
-        health: random.int(250, 440),
-        focus: random.int(30, 100),
-        stamina: random.int(0, 100),
-        devotion: random.int(0, 20),
-      },
+      baseId: base.id,
+      stats: BASE_UNIT.stats,
       flags: {
         ...BASE_UNIT.flags,
         isActive: false,

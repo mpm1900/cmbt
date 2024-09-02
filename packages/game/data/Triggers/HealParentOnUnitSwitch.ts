@@ -39,6 +39,9 @@ export class HealParentOnUnitSwitch extends Trigger {
     ctx: CombatContext,
     args: MutationFilterArgs
   ): boolean => {
-    return unit.id === this.parentId
+    return (
+      unit.id === this.parentId &&
+      (!args.units?.length || !!args.units?.find((u) => u.id === unit.id))
+    )
   }
 }

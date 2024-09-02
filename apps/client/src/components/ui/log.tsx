@@ -1,8 +1,24 @@
 import { cn } from '@/lib/utils'
 import { ActionRenderers } from '@/renderers'
+import { PropsWithClassname } from '@/types'
 import { Action, Id } from '@repo/game/types'
 import { ActionHover } from '@shared/ActionHover'
 import { PropsWithChildren } from 'react'
+
+type ElementProps<T = {}> = PropsWithChildren<PropsWithClassname<T>>
+
+export function LogTriggerName(props: ElementProps) {
+  return (
+    <div
+      className={cn(
+        'flex flex-row items-center space-x-2 text-muted-foreground/40 uppercase',
+        props.className
+      )}
+    >
+      {props.children}
+    </div>
+  )
+}
 
 export function LogActionName(props: { action: Action }) {
   const { action } = props
@@ -21,11 +37,11 @@ export function LogActionName(props: { action: Action }) {
   )
 }
 
-export function LogCritical(props: PropsWithChildren<{ className?: string }>) {
+export function LogCritical(props: ElementProps) {
   return <span className="text-red-400">{props.children}</span>
 }
 
-export function LogHeader(props: PropsWithChildren<{ className?: string }>) {
+export function LogHeader(props: ElementProps) {
   return (
     <div
       className={cn(
@@ -42,9 +58,7 @@ export function LogHeader(props: PropsWithChildren<{ className?: string }>) {
   )
 }
 
-export function LogSecondary(
-  props: PropsWithChildren & { className?: string }
-) {
+export function LogSecondary(props: ElementProps) {
   return (
     <div
       className={cn(
@@ -57,9 +71,7 @@ export function LogSecondary(
   )
 }
 
-export function LogUnit(
-  props: PropsWithChildren<{ className?: string; teamId?: Id; user: Id }>
-) {
+export function LogUnit(props: ElementProps<{ teamId?: Id; user: Id }>) {
   return (
     <span
       className={cn('font-normal', props.className, {

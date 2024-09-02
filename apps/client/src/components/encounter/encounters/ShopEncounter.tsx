@@ -1,6 +1,5 @@
 import { Button } from '@/components/ui/button'
 import { rebaseItem } from '@/utils'
-import { faker } from '@faker-js/faker'
 import {
   Key01,
   Key01Id,
@@ -84,8 +83,8 @@ const ShopIntroductionNode: EncounterNode = {
       resolve: (ctx) => {
         ctx.initializeCombat({
           enemyTeam,
-          enemyUnits: Array.from({ length: 4 }).map(() =>
-            makeEnemyUnit(faker.person.fullName(), enemyTeam.id, 20)
+          enemyUnits: Array.from({ length: 4 }).map((_, index) =>
+            makeEnemyUnit({ index, level: 20, teamId: enemyTeam.id })
           ),
           reward: {
             items: [],

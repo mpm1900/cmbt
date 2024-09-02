@@ -9,6 +9,8 @@ import {
   DamageAllOnTurnEnd,
   DamageNewUnitsOnUnitEnter,
   DefenseDownParent,
+  Disable,
+  DisabledParent,
   DisableId,
   EarthquakeId,
   ExplosionId,
@@ -31,19 +33,23 @@ import {
   PoisonSprayId,
   PotionActionId,
   PowerWordKillId,
+  Protect,
   ProtectedParent,
   ProtectId,
   QuickAttack,
   QuickAttackId,
   RestId,
+  Sandstorm,
   SandstormId,
   SandstormOnTurnEndId,
   SetIsActiveId,
   Slash,
   SlashId,
+  Spikes,
   SpikesId,
   StunnedParent,
   SwitchUnitId,
+  SwordsDance,
   SwordsDanceId,
   TrickRoomId,
   WardId,
@@ -140,9 +146,9 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
     description: (action) => {
       const armorup = action as ArmorUp
       return (
-        <>
+        <div>
           This unit gains <PhysicalArmor>{armorup.amount * -1}</PhysicalArmor>
-        </>
+        </div>
       )
     },
   },
@@ -153,12 +159,12 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
     description: (action) => {
       const bodyslam = action as BodySlam
       return (
-        <>
+        <div>
           Deals <DamageInline damage={bodyslam.damage} /> to target enemey unit.
           If this attack misses, deals{' '}
           <DamageInline damage={bodyslam.missDamage} /> base damage to this unit
           instead.
-        </>
+        </div>
       )
     },
   },
@@ -169,15 +175,17 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
     description: (action, props) => {
       const crunch = action as PiercingStrike
       return (
-        <>
-          Deals <DamageInline damage={crunch.damage} /> to target enemy unit.
-          20% chance to apply{' '}
+        <div>
+          Deals <DamageInline damage={crunch.damage} /> to target enemy unit.{' '}
+          {crunch.defenseDownChance}% chance to apply{' '}
           <ModifierInline
             side={props?.side}
-            modifier={new DefenseDownParent({ factor: 0.25 })}
+            modifier={
+              new DefenseDownParent({ factor: crunch.defenseDownFactor })
+            }
           />{' '}
           to target.
-        </>
+        </div>
       )
     },
   },
@@ -185,13 +193,23 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
     name: 'Disable',
     baseDamage: () => '',
     cost: '',
-    description: (action) => (
-      <>
-        Applies <span className="font-bold text-white">Disabled</span> to target
-        enemy unit for 2 turns.
-      </>
-    ),
-    help: () => <div>(The unit cannot use their last used action.)</div>,
+    description: (action, props) => {
+      const disable = action as Disable
+      return (
+        <div>
+          Applies{' '}
+          <ModifierInline
+            side={props?.side}
+            modifier={
+              new DisabledParent({
+                duration: disable.duration,
+              })
+            }
+          />{' '}
+          to target enemy unit for {disable.duration} turns.
+        </div>
+      )
+    },
   },
   [EarthquakeId]: {
     name: ACTION_NAMES[EarthquakeId],
@@ -238,11 +256,11 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
     baseDamage: (action) => `${action.damage?.value}`,
     cost: '',
     description: (action, props) => (
-      <>
+      <div>
         Deals <DamageInline damage={action.damage} /> to target enemy unit. 10%
         chance to apply <StatusInline status={Burn} side={props?.side} /> to
-        target for 5 turns.
-      </>
+        target.
+      </div>
     ),
   },
   [FirePunchId]: {
@@ -250,11 +268,11 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
     baseDamage: (action) => `${action.damage?.value}`,
     cost: '',
     description: (action, props) => (
-      <>
+      <div>
         Deals <DamageInline damage={action.damage} /> to target enemy unit. 10%
         chance to apply <StatusInline status={Burn} side={props?.side} /> to
-        target for 5 turns.
-      </>
+        target.
+      </div>
     ),
   },
   [FurySwipesId]: {
@@ -369,20 +387,24 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
     name: ACTION_NAMES[ProtectId],
     baseDamage: () => '',
     cost: '',
-    description: (action, props) => (
-      <>
-        Applies{' '}
-        <ModifierInline
-          side={props?.side}
-          modifier={
-            new ProtectedParent({
-              duration: 1,
-            })
-          }
-        />{' '}
-        to this unit for 1 turn. Cannot be used twice in a row.
-      </>
-    ),
+    description: (action, props) => {
+      const protect = action as Protect
+      return (
+        <div>
+          Applies{' '}
+          <ModifierInline
+            side={props?.side}
+            modifier={
+              new ProtectedParent({
+                duration: protect.duration,
+              })
+            }
+          />{' '}
+          to this unit for {protect.duration} turn. Cannot be used twice in a
+          row.
+        </div>
+      )
+    },
     failureLog: (result) => <>Protect failed.</>,
   },
   [RestId]: {
@@ -401,21 +423,24 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
     name: ACTION_NAMES[SandstormId],
     baseDamage: () => '',
     cost: '',
-    description: (action) => (
-      <>
-        Applies{' '}
-        <ModifierInline
-          modifier={
-            new DamageAllOnTurnEnd({
-              registryId: SandstormOnTurnEndId,
-              factor: 0.1,
-              duration: 5,
-            })
-          }
-        />{' '}
-        to all units for 5 turns.
-      </>
-    ),
+    description: (action) => {
+      const sandstorm = action as Sandstorm
+      return (
+        <div>
+          Applies{' '}
+          <ModifierInline
+            modifier={
+              new DamageAllOnTurnEnd({
+                registryId: SandstormOnTurnEndId,
+                factor: sandstorm.damageFactor,
+                duration: sandstorm.duration,
+              })
+            }
+          />{' '}
+          to all units for {sandstorm.duration} turns.
+        </div>
+      )
+    },
   },
   [SlashId]: {
     name: ACTION_NAMES[SlashId],
@@ -435,16 +460,21 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
     name: ACTION_NAMES[SpikesId],
     baseDamage: () => '',
     cost: '',
-    description: (action, props) => (
-      <>
-        Applies{' '}
-        <ModifierInline
-          side={props?.side}
-          modifier={new DamageNewUnitsOnUnitEnter({ damage: 20 })}
-        />{' '}
-        to all units.
-      </>
-    ),
+    description: (action, props) => {
+      const spikes = action as Spikes
+      return (
+        <div>
+          Applies{' '}
+          <ModifierInline
+            side={props?.side}
+            modifier={
+              new DamageNewUnitsOnUnitEnter({ static: spikes.enterDamage })
+            }
+          />{' '}
+          to all units.
+        </div>
+      )
+    },
     successLog: () => (
       <span className="text-muted-foreground">
         Spikes were put onto the battle!
@@ -455,16 +485,19 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
     name: 'Swords Dance',
     baseDamage: () => '',
     cost: '30 FP',
-    description: (action, props) => (
-      <>
-        Applies{' '}
-        <ModifierInline
-          side={props?.side}
-          modifier={new AttackUpParent({ factor: 1.0 })}
-        />{' '}
-        to this unit.
-      </>
-    ),
+    description: (action, props) => {
+      const swordsDance = action as SwordsDance
+      return (
+        <div>
+          Applies{' '}
+          <ModifierInline
+            side={props?.side}
+            modifier={new AttackUpParent({ factor: swordsDance.factor })}
+          />{' '}
+          to this unit.
+        </div>
+      )
+    },
   },
   [TrickRoomId]: {
     name: 'Trick Room',
@@ -496,16 +529,16 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
     baseDamage: () => '',
     cost: '20 FP',
     costAlt: <span className="text-blue-300">20 FP</span>,
+    description: (action, props) => (
+      <div>
+        Applies <StatusInline status={Burn} side={props?.side} /> to target
+        enemy unit.
+      </div>
+    ),
     lore: () => (
       <>
         The user shoots a sinister, bluish-white flame at the target. Said to
         harbor the power of death.
-      </>
-    ),
-    description: (action, props) => (
-      <>
-        Applies <StatusInline status={Burn} side={props?.side} /> to target
-        enemy unit for 5 turns.
       </>
     ),
   },

@@ -15,6 +15,8 @@ import { Identity } from '../Mutations'
 import { EmptyArray } from '../Queries/EmptyArray'
 
 export class Protect extends Action {
+  duration: number = 1
+
   constructor(sourceId: Id, teamId: Id) {
     super(ProtectId, {
       sourceId,
@@ -49,7 +51,7 @@ export class Protect extends Action {
           new ProtectedParent({
             sourceId: source.id,
             parentId: source.id,
-            duration: 1,
+            duration: this.duration,
           }),
         ],
       },

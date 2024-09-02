@@ -5,12 +5,13 @@ import {
   MutationFilterArgs,
   Unit,
 } from '../../types'
-import { AddActionToRegistryParentId } from '../Ids'
+import { DisabledParentId } from '../Ids'
 
-export class AddActionToRegistryParent extends Modifier {
+export class DisabledParent extends Modifier {
   readonly actionId: string | undefined
-  constructor(props: ModifierProps<{ actionId: string | undefined }>) {
-    super(AddActionToRegistryParentId, props)
+
+  constructor(props: ModifierProps<{ actionId?: string }>) {
+    super(DisabledParentId, props)
 
     this.actionId = props.actionId
     this.duration = props.duration

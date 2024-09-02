@@ -1,8 +1,8 @@
 import { ModifierId } from './_base'
 
 export const AccuracyDownParentId = ModifierId()
-export const AddActionToRegistryParentId = ModifierId()
 export const DefenseDownParentId = ModifierId()
+export const DisabledParentId = ModifierId()
 export const FireDamageUpParentId = ModifierId()
 export const FireNegationUpParentId = ModifierId()
 export const InspectedAllId = ModifierId()

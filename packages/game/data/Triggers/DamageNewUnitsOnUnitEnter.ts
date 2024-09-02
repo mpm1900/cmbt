@@ -9,20 +9,23 @@ import {
 import { DamageNewUnitsOnUnitEnterId } from '../Ids'
 
 export class DamageNewUnitsOnUnitEnter extends Trigger {
-  damage: number
+  factor: number
+  static: number
 
-  constructor(props: TriggerProps<{ damage: number }>) {
+  constructor(props: TriggerProps<{ factor?: number; static?: number }>) {
     super(DamageNewUnitsOnUnitEnterId, {
       ...props,
       events: ['on Unit Enter'],
     })
-    this.damage = props.damage
+
+    this.factor = props.factor ?? 0
+    this.static = props.static ?? 0
   }
 
   resolve = (unit: Unit): Partial<Unit> => {
     return {
       values: Modifier.setValues(unit, (values) => ({
-        damage: values.damage + this.damage,
+        damage: values.damage + unit.stats.health * this.factor + this.static,
       })),
     }
   }

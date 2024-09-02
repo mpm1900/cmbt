@@ -8,15 +8,15 @@ export const DamageAllOnTurnEndRenderer: ModifierRenderer = {
     const modifier = mod as DamageAllOnTurnEnd
     return (
       <div className="space-x-2">
-        <TriggerName>{modifier.events.join(', ')}:</TriggerName>
+        <TriggerName>On turn end:</TriggerName>
 
         {modifier.factor !== 0 && (
           <span>
-            Afflicted units takes {(modifier.factor * 100).toFixed(1)}% damage.
+            Afflicted units take {(modifier.factor * 100).toFixed(1)}% damage.
           </span>
         )}
         {modifier.static !== 0 && (
-          <span>Afflicted units takes {modifier.static} damage.</span>
+          <span>Afflicted units take {modifier.static} damage.</span>
         )}
       </div>
     )

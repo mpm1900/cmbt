@@ -9,7 +9,7 @@ export const DamageNewUnitsOnUnitEnterRenderer: ModifierRenderer = {
     return (
       <div className="space-x-2">
         <TriggerName>On unit enter:</TriggerName>
-        <span>That unit takes {modifier.damage} damage.</span>
+        <span>That unit takes {modifier.static} damage.</span>
       </div>
     )
   },

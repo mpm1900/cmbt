@@ -9,9 +9,9 @@ export const SandStream: Augment = {
   modifiers(unit: Unit): Modifier[] {
     return [
       new CreateSandstormOnUnitEnter({
-        duration: 0,
         sourceId: unit.id,
         parentId: unit.id,
+        duration: 0,
       }),
     ]
   },

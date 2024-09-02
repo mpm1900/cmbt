@@ -15,6 +15,8 @@ import { ReduceFocusParent } from '../Mutations'
 import { EmptyArray } from '../Queries/EmptyArray'
 
 export class SwordsDance extends Action {
+  factor: number = 1.0
+
   constructor(sourceId: Id, teamId: Id) {
     super(SwordsDanceId, {
       sourceId,
@@ -59,7 +61,7 @@ export class SwordsDance extends Action {
             new AttackUpParent({
               sourceId: source.id,
               parentId: source.id,
-              factor: 1.0,
+              factor: this.factor,
               maxInstances: 6,
             }),
           ],

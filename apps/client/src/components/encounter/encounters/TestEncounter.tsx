@@ -52,7 +52,7 @@ const TestNode1: EncounterNode = {
             new SpeedUpTeam({
               sourceId: unit?.id,
               parentId: unit?.id,
-              factor: 1.5,
+              factor: 0.5,
               duration: 2,
             }),
           ],

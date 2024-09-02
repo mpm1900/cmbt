@@ -9,6 +9,9 @@ import { CreateSandstormOnUnitEnterId, SandstormOnTurnEndId } from '../Ids'
 import { DamageAllOnTurnEnd } from './DamageAllOnTurnEnd'
 
 export class CreateSandstormOnUnitEnter extends Trigger {
+  damageDuration: number = 5
+  damageFactor: number = 0.1
+
   get key() {
     return this.id
   }
@@ -21,8 +24,8 @@ export class CreateSandstormOnUnitEnter extends Trigger {
       modifiers: (ctx) => [
         new DamageAllOnTurnEnd({
           registryId: SandstormOnTurnEndId,
-          factor: 0.1,
-          duration: 5,
+          factor: this.damageFactor,
+          duration: this.damageDuration,
           maxInstances: 1,
         }),
       ],

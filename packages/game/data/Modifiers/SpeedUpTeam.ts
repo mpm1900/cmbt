@@ -9,18 +9,18 @@ import { SpeedUpTeamId } from '../Ids'
 
 export class SpeedUpTeam extends Modifier {
   factor: number
-  offset: number
+  static: number
 
-  constructor(props: ModifierProps<{ factor?: number; offset?: number }>) {
+  constructor(props: ModifierProps<{ factor?: number; static?: number }>) {
     super(SpeedUpTeamId, props)
-    this.factor = props.factor !== undefined ? props.factor : 1
-    this.offset = props.offset ?? 0
+    this.factor = props.factor ?? 0
+    this.static = props.static ?? 0
   }
 
   resolve = (unit: Unit): Partial<Unit> => {
     return {
       stats: Modifier.setStats(unit, (stats) => ({
-        speed: stats.speed + stats.speed * this.factor + this.offset,
+        speed: stats.speed + stats.speed * this.factor + this.static,
       })),
     }
   }

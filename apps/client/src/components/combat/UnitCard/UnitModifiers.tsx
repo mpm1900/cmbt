@@ -35,7 +35,7 @@ export function UnitModifiers(props: PropsWithClassname<UnitModifiersProps>) {
             side={props.side}
             fallback={
               <span key={m.rtid} className="font-bold">
-                {`${r?.name ?? m.id}`}
+                {`${r?.name(m) ?? m.id}`}
               </span>
             }
           />

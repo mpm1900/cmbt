@@ -18,6 +18,8 @@ import { EmptyArray } from '../Queries/EmptyArray'
 import { DamageNewUnitsOnUnitEnter } from '../Triggers'
 
 export class Spikes extends Action {
+  enterDamage: number = 20
+
   constructor(sourceId: Id, teamId: Id) {
     super(SpikesId, {
       sourceId,
@@ -49,7 +51,7 @@ export class Spikes extends Action {
         addedModifiers: [
           new DamageNewUnitsOnUnitEnter({
             sourceId: source.id,
-            damage: 20,
+            static: 20,
             maxInstances: 3,
           }),
         ],

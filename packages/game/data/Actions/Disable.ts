@@ -12,11 +12,13 @@ import {
   modifyRenderContext,
 } from '../../utils'
 import { DisableId } from '../Ids'
-import { AddActionToRegistryParent } from '../Modifiers'
+import { DisabledParent } from '../Modifiers'
 import { Identity } from '../Mutations'
 import { GetUnits } from '../Queries'
 
 export class Disable extends Action {
+  duration: number = 2
+
   constructor(sourceId: Id, teamId: Id) {
     super(DisableId, {
       sourceId,
@@ -50,11 +52,11 @@ export class Disable extends Action {
       (modifiedTargets) => ({
         onSuccess: {
           addedModifiers: modifiedTargets.map((target) => {
-            return new AddActionToRegistryParent({
+            return new DisabledParent({
               sourceId: source.id,
               parentId: target.id,
               actionId: target.metadata.lastUsedActionId,
-              duration: 2,
+              duration: this.duration,
             })
           }),
         },

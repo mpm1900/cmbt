@@ -2,6 +2,7 @@ import {
   AttackDownParentId,
   AttackUpParentId,
   DefenseDownParentId,
+  DisabledParentId,
   FireDamageUpParentId,
   FireNegationUpParentId,
   HealParentOnUnitSwitchId,
@@ -28,6 +29,7 @@ import {
   GiSprint,
   GiVibratingShield,
 } from 'react-icons/gi'
+import { HiMiniNoSymbol } from 'react-icons/hi2'
 import { ImFire } from 'react-icons/im'
 import { TiSpiral } from 'react-icons/ti'
 
@@ -80,6 +82,7 @@ export const MODIFIER_ICONS: Record<Id, ReactNode> = {
   [SandstormOnTurnEndId]: (
     <GiSandstorm className="fill-amber-100 h-full w-full" />
   ),
+  [DisabledParentId]: <HiMiniNoSymbol className="fill-white h-full w-full" />,
   [InspectedAllId]: <BiSearch className="fill-white h-full w-full" />,
   [ProtectedParentId]: (
     <GiVibratingShield className="fill-white h-full w-full" />

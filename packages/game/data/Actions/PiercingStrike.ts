@@ -24,6 +24,8 @@ import { GetUnits } from '../Queries'
 
 export class PiercingStrike extends Action {
   damage: Damage
+  defenseDownChance: number = 20
+  defenseDownFactor: number = 0.25
 
   constructor(sourceId: Id, teamId: Id) {
     const attackType = 'physical'
@@ -69,7 +71,7 @@ export class PiercingStrike extends Action {
     ctx = modifyRenderContext(options, ctx)
     const data = getActionData(source, this, ctx)
     const applyModifierRoll = random.int(0, 100)
-    const applyDefenseDown = applyModifierRoll <= 20
+    const applyDefenseDown = applyModifierRoll <= this.defenseDownChance
 
     return buildActionResult(
       this,
@@ -95,7 +97,7 @@ export class PiercingStrike extends Action {
                   new DefenseDownParent({
                     sourceId: source.id,
                     parentId: target.id,
-                    factor: 0.25,
+                    factor: this.defenseDownFactor,
                   })
               )
             : [],

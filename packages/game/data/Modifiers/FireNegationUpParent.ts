@@ -17,7 +17,7 @@ export class FireNegationUpParent extends Modifier {
 
   constructor(props: ModifierProps<{ factor?: number; static?: number }>) {
     super(FireNegationUpParentId, props)
-    this.factor = props.factor !== undefined ? props.factor : 1
+    this.factor = props.factor ?? 0
     this.static = props.static ?? 0
   }
 

@@ -43,8 +43,8 @@ export function ModifierValuesPercent(
       )}
       {props.static !== 0 && (
         <div>
-          {props.static > 0 ? '+' : ''}
-          {props.static * 100}% {props.children}.
+          {props.static > 0 ? '+' : '-'}
+          {Math.abs(props.static * 100)}% {props.children}.
         </div>
       )}
     </div>

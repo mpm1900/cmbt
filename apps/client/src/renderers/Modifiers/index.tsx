@@ -10,9 +10,8 @@ import {
   DamageNewUnitsOnUnitEnterId,
   DamageParentOnTurnEndId,
   DefenseDownParentId,
-  FireDamageUpParent,
+  DisabledParentId,
   FireDamageUpParentId,
-  FireNegationUpParent,
   FireNegationUpParentId,
   HealParentOnUnitSwitch,
   HealParentOnUnitSwitchId,
@@ -22,22 +21,26 @@ import {
   InvertSpeedAllId,
   ProtectedParentId,
   SandstormOnTurnEndId,
-  SpeedUpTeam,
   SpeedUpTeamId,
   StunnedParentId,
 } from '@repo/game/data'
 import { Modifier } from '@repo/game/types'
 import { ModifierInline } from '@shared/ModifierInline'
 import { ReactNode } from 'react'
-import { ModifierName, ModifierValuesPercent, TriggerName } from './_helpers'
+import { ModifierName, TriggerName } from './_helpers'
 import { MODIFIER_NAMES } from './_names'
 import { AttackDownParentRenderer } from './AttackDownParent'
+import { AttackUpParentRenderer } from './AttackUpParent'
 import { DamageAllOnTurnEndRenderer } from './DamageAllOnTurnEnd'
 import { DamageNewUnitsOnUnitEnterRenderer } from './DamageNewUnitsOnUnitEnter'
 import { DamageParentOnTurnEndRenderer } from './DamageParentOnTurnEnd'
 import { DefenseDownParentRenderer } from './DefenseDownParent'
+import { DisabledParentRenderer } from './DisabledParent'
+import { FireDamageUpParentRenderer } from './FireDamageUpParent'
+import { FireNegationUpParentRenderer } from './FireNegationUpParent'
 import { InspectedAllRenderer } from './InspectedAll'
 import { ProtectedParentRenderer } from './ProtectedParent'
+import { SpeedUpTeamRenderer } from './SpeedUpTeam'
 import { StunnedParentRenderer } from './StunnedParent'
 
 export * from './_icons'
@@ -50,81 +53,24 @@ export type ModifierRenderer = {
 
 export const ModifierRenderers: Record<string, ModifierRenderer> = {
   [AttackDownParentId]: AttackDownParentRenderer,
+  [AttackUpParentId]: AttackUpParentRenderer,
   [DamageAllOnTurnEndId]: DamageAllOnTurnEndRenderer,
   [DamageNewUnitsOnUnitEnterId]: DamageNewUnitsOnUnitEnterRenderer,
   [DamageParentOnTurnEndId]: DamageParentOnTurnEndRenderer,
   [DefenseDownParentId]: DefenseDownParentRenderer,
+  [DisabledParentId]: DisabledParentRenderer,
+  [FireDamageUpParentId]: FireDamageUpParentRenderer,
+  [FireNegationUpParentId]: FireNegationUpParentRenderer,
   [InspectedAllId]: InspectedAllRenderer,
   [ProtectedParentId]: ProtectedParentRenderer,
+  [SpeedUpTeamId]: SpeedUpTeamRenderer,
   [StunnedParentId]: StunnedParentRenderer,
 
-  [FireDamageUpParentId]: {
-    name: () => (
-      <ModifierName>{MODIFIER_NAMES[FireDamageUpParentId]}</ModifierName>
-    ),
-    description: (mod) => {
-      const modifier = mod as FireDamageUpParent
-      return (
-        <ModifierValuesPercent
-          factor={modifier.factor}
-          static={modifier.static}
-        >
-          Fire Damage
-        </ModifierValuesPercent>
-      )
-    },
-  },
-  [FireNegationUpParentId]: {
-    name: () => (
-      <ModifierName>{MODIFIER_NAMES[FireNegationUpParentId]}</ModifierName>
-    ),
-    description: (mod) => {
-      const modifier = mod as FireNegationUpParent
-      return (
-        <div>
-          {modifier.factor !== 0 && (
-            <div>×{modifier.factor + 1} Fire damage negation.</div>
-          )}
-          {modifier.static !== 0 && (
-            <div>
-              {modifier.static > 0 ? '+' : ''}
-              {modifier.static * 100}% Fire damage negation.
-            </div>
-          )}
-        </div>
-      )
-    },
-  },
   [InvertSpeedAllId]: {
     name: () => <ModifierName>{MODIFIER_NAMES[InvertSpeedAllId]}</ModifierName>,
     description: (mod) => (
       <div>Afflicted units' speed stats are multiplied by -1.</div>
     ),
-  },
-
-  [AttackUpParentId]: {
-    name: () => <ModifierName>{MODIFIER_NAMES[AttackUpParentId]}</ModifierName>,
-    description: (mod) => {
-      const modifier = mod as AttackDownParent
-      return (
-        <div>
-          {modifier.factor > 0 ? '+' : '-'}
-          {Math.abs(modifier.factor) * 100}% Attack.
-        </div>
-      )
-    },
-  },
-
-  [SpeedUpTeamId]: {
-    name: () => <ModifierName>{MODIFIER_NAMES[SpeedUpTeamId]}</ModifierName>,
-    description: (mod) => {
-      const modifier = mod as SpeedUpTeam
-      return (
-        <div>
-          Afflicted unit's speed stat is multiplied by {modifier.factor}.
-        </div>
-      )
-    },
   },
 
   // Triggers
@@ -141,13 +87,12 @@ export const ModifierRenderers: Record<string, ModifierRenderer> = {
               modifier={
                 new DamageAllOnTurnEnd({
                   registryId: SandstormOnTurnEndId,
-                  factor: 0.1,
-                  duration: 5,
-                  maxInstances: 1,
+                  factor: modifier.damageFactor,
+                  duration: modifier.duration,
                 })
               }
             />{' '}
-            to all units for 5 turns.
+            to all units for {modifier.duration} turns.
           </span>
         </div>
       )

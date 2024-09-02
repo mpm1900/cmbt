@@ -18,6 +18,9 @@ import { EmptyArray } from '../Queries/EmptyArray'
 import { DamageAllOnTurnEnd } from '../Triggers'
 
 export class Sandstorm extends Action {
+  duration: number = 5
+  damageFactor = 0.1
+
   constructor(sourceId: Id, teamId: Id) {
     super(SandstormId, {
       sourceId,
@@ -50,8 +53,8 @@ export class Sandstorm extends Action {
           new DamageAllOnTurnEnd({
             registryId: SandstormOnTurnEndId,
             sourceId: source.id,
-            factor: 0.1,
-            duration: 5,
+            factor: this.damageFactor,
+            duration: this.duration,
             maxInstances: 1,
           }),
         ],

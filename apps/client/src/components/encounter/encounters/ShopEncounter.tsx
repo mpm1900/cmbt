@@ -21,7 +21,7 @@ import { makeEnemyUnit } from '@repo/game/utils'
 import { ItemListTables } from '@shared/ItemListTables'
 import { nanoid } from 'nanoid'
 import { BsArrowLeft } from 'react-icons/bs'
-import { GiCreditsCurrency, GiCrossedSwords } from 'react-icons/gi'
+import { GiCash, GiCreditsCurrency, GiCrossedSwords } from 'react-icons/gi'
 import { IoMdReturnLeft, IoMdReturnRight } from 'react-icons/io'
 import { ChoiceLabel } from '../ChoiceLabel'
 import { Narration } from '../Narration'
@@ -34,6 +34,7 @@ const enemyTeam: Team = {
 
 const ShopIntroductionNode: EncounterNode = {
   id: nanoid(),
+  icon: <GiCash />,
   title: 'Test Shop',
   text: (
     <div className="space-y-4">
@@ -120,6 +121,7 @@ const ShopIntroductionNode: EncounterNode = {
 
 const ShopWaresNode: EncounterNode = {
   id: nanoid(),
+  icon: <GiCash />,
   title: 'Test Shop - View Wares',
   text: (
     <div className="space-y-4">

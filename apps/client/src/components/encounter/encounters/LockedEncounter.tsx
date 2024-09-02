@@ -1,6 +1,7 @@
 import { Key01Key } from '@repo/game/data'
 import { Encounter, EncounterChoice, EncounterNode } from '@repo/game/types'
 import { nanoid } from 'nanoid'
+import { HiLockClosed } from 'react-icons/hi2'
 import { IoMdReturnLeft } from 'react-icons/io'
 import { MdOutlineVpnKey } from 'react-icons/md'
 import { ChoiceLabel } from '../ChoiceLabel'
@@ -10,6 +11,7 @@ const LockedNodeId = nanoid()
 const LockedNode1 = (): EncounterNode => {
   return {
     id: LockedNodeId,
+    icon: <HiLockClosed />,
     title: 'Locked Door',
     text: <Narration>The door before you is locked.</Narration>,
     choices: (ctx) => {

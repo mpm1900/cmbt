@@ -4,11 +4,13 @@ import { makeEnemyUnit } from '@repo/game/utils'
 import { nanoid } from 'nanoid'
 import { GiCrossedSwords } from 'react-icons/gi'
 import { IoMdReturnLeft, IoMdReturnRight } from 'react-icons/io'
+import { IoSkullSharp } from 'react-icons/io5'
 import { ChoiceLabel } from '../ChoiceLabel'
 import { Narration } from '../Narration'
 
 const TestNode1: EncounterNode = {
   id: nanoid(),
+  icon: <IoSkullSharp />,
   title: 'Test Encounter 001',
   text: (
     <div className="space-y-4">
@@ -99,6 +101,7 @@ const TestNode1: EncounterNode = {
 
 const TestNode2: EncounterNode = {
   id: nanoid(),
+  icon: <IoSkullSharp />,
   title: 'Test Encounter 001',
   text: (
     <div className="space-y-4">

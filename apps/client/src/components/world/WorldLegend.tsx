@@ -4,7 +4,7 @@ import { PropsWithClassname } from '@/types'
 import { AccordionContent } from '@radix-ui/react-accordion'
 import { PropsWithChildren, ReactNode } from 'react'
 import { BsQuestionLg } from 'react-icons/bs'
-import { GiPayMoney } from 'react-icons/gi'
+import { GiCash } from 'react-icons/gi'
 import { IoArrowForwardCircleOutline, IoSkullSharp } from 'react-icons/io5'
 import { Accordion, AccordionItem, AccordionTrigger } from '../ui/accordion'
 
@@ -82,7 +82,7 @@ export function WorldLegend() {
             <Icon icon={<BsQuestionLg className="h-[24px] w-[24px]" />}>
               Unknown
             </Icon>
-            <Icon icon={<GiPayMoney className="h-[24px] w-[24px]" />}>
+            <Icon icon={<GiCash className="h-[24px] w-[24px]" />}>
               Shop/Trade
             </Icon>
             <Icon icon={<IoSkullSharp className="h-[24px] w-[24px]" />}>

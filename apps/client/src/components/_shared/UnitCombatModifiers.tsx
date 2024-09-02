@@ -23,6 +23,7 @@ export function UnitCombatModifiers(
   const statuses = getStatusesFromModifiers(list)
   return (
     <UnitModifiers
+      className={props.className}
       side={props.side}
       modifiers={nonStatusModifiers}
       statuses={statuses}

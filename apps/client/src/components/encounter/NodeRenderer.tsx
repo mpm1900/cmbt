@@ -18,7 +18,10 @@ export function NodeRenderer(props: NodeRendererProps) {
     <Card className="w-[640px]">
       <CardHeader>
         <div className="flex justify-between items-center">
-          <CardTitle>{node.title}</CardTitle>
+          <CardTitle className="flex space-x-2">
+            <div>{node.icon}</div>
+            <div>{node.title}</div>
+          </CardTitle>
           {node.tabs && (
             <div className="flex">
               {node.tabs(ctx).map((tab) => (

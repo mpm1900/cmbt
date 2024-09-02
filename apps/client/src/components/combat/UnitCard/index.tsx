@@ -26,14 +26,15 @@ export function UnitCard(props: UnitCardProps) {
   const ctx = useCombatContext()
   const status = ctx.turn.status
   const result = ctx.turn.results[ctx.turn.results.length - 1]
-  const { queue, removeWhere } = useActions()
-  const { activeUnit: activeUnit, setActiveUnit: setActiveUnit } = useCombatUi()
+  const { queue } = useActions()
+  const { activeUnit, setActiveUnit, hoverTargetUnit } = useCombatUi()
   const { unit } = applyModifiers(props.unit, ctx)
   const stagedItem = queue.find((i) => i.action.sourceId === unit.id)
 
   const isTargeted =
-    status === 'combat' &&
-    !!result?.expandedTargets?.find((t) => t.id === unit.id)
+    hoverTargetUnit?.id === unit.id ||
+    (status === 'combat' &&
+      !!result?.expandedTargets?.find((t) => t.id === unit.id))
 
   const isActive =
     (status === 'combat'

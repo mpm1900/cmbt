@@ -16,7 +16,8 @@ export function GameStartModal() {
         <DialogHeader>
           <DialogTitle>Welcome</DialogTitle>
           <DialogDescription>
-            Welcome to the game! Maybe I'll put some helpful tip here some time.
+            Welcome to the game! Maybe I'll put some helpful tip here
+            eventually.
           </DialogDescription>
         </DialogHeader>
         <DialogFooter>

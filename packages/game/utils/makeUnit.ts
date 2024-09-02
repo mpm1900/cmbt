@@ -48,7 +48,7 @@ export function makeEnemyUnit(config: MakeEnemeyUnitConfig): Unit {
   const unit = unitMaker(
     {
       id,
-      name: base.name + ' ' + (index + 1),
+      name: base.name,
       teamId,
       level,
       baseId: base.id,

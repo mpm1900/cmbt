@@ -1,3 +1,4 @@
+import { useCombatUi } from '@/hooks/state'
 import { Action, Unit } from '@repo/game/types'
 import { useEffect } from 'react'
 import { useCombatContext } from '../../hooks'
@@ -13,6 +14,7 @@ export type UnitActionTargetsProps = {
 export function ActionTargets(props: UnitActionTargetsProps) {
   const { action, targets, onConfirmClick, onTargetClick } = props
   const ctx = useCombatContext()
+  const { setHoverTargetUnit } = useCombatUi()
   const possibleTargets = action.targets.resolve(ctx)
 
   useEffect(() => {
@@ -58,6 +60,8 @@ export function ActionTargets(props: UnitActionTargetsProps) {
               onClick={() => {
                 onTargetClick(target, isSelected)
               }}
+              onMouseOver={() => setHoverTargetUnit(target)}
+              onMouseLeave={() => setHoverTargetUnit(undefined)}
             >
               {target.name}
             </Button>

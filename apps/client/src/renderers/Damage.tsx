@@ -1,9 +1,10 @@
 import { DamageType } from '@repo/game/types'
 import { ReactNode } from 'react'
+import { AiFillEye } from 'react-icons/ai'
 import { BsLightningChargeFill } from 'react-icons/bs'
 import { GiPunchBlast } from 'react-icons/gi'
 import { ImFire } from 'react-icons/im'
-import { PiHandEyeFill, PiPentagramFill } from 'react-icons/pi'
+import { PiPentagramFill } from 'react-icons/pi'
 
 export type DamageRenderer = {
   name: ReactNode
@@ -25,7 +26,7 @@ export const DamageRenderers: Record<DamageType, DamageRenderer | undefined> = {
   },
   psychic: {
     name: <>Psychic</>,
-    icon: <PiHandEyeFill className="h-full w-full" />,
+    icon: <AiFillEye className="h-full w-full" />,
   },
   shock: {
     name: <>Shock</>,

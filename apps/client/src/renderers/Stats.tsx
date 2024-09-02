@@ -4,10 +4,10 @@ import { FaHeartbeat } from 'react-icons/fa'
 import {
   GiArrowScope,
   GiBiceps,
+  GiCrenulatedShield,
+  GiCursedStar,
   GiDiceTarget,
   GiDodging,
-  GiPortal,
-  GiShoulderArmor,
   GiSprint,
 } from 'react-icons/gi'
 import { PiTargetFill } from 'react-icons/pi'
@@ -34,7 +34,7 @@ export const StatRenderers: Record<StatKey, StatRenderer | undefined> = {
   },
   defense: {
     name: <>Defense</>,
-    icon: <GiShoulderArmor className="h-full w-full" />,
+    icon: <GiCrenulatedShield className="h-full w-full" />,
   },
   devotion: undefined,
   evasion: {
@@ -52,7 +52,7 @@ export const StatRenderers: Record<StatKey, StatRenderer | undefined> = {
   },
   magic: {
     name: <>Magic</>,
-    icon: <GiPortal className="h-full w-full" />,
+    icon: <GiCursedStar className="h-full w-full" />,
   },
   attack: {
     name: <>Attack</>,

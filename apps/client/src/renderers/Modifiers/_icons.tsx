@@ -24,8 +24,8 @@ import { BsShieldFillPlus } from 'react-icons/bs'
 import { FaHeartCirclePlus } from 'react-icons/fa6'
 import {
   GiBiceps,
+  GiCrenulatedShield,
   GiSandstorm,
-  GiShoulderArmor,
   GiSprint,
   GiVibratingShield,
 } from 'react-icons/gi'
@@ -36,7 +36,7 @@ import { TiSpiral } from 'react-icons/ti'
 export const MODIFIER_ICONS: Record<Id, ReactNode> = {
   [DefenseDownParentId]: (
     <div className="h-full w-full relative">
-      <GiShoulderArmor className="fill-white h-full w-full" />
+      <GiCrenulatedShield className="fill-white h-full w-full" />
       <AiFillCaretDown
         className="absolute fill-red-400 h-[16px] w-[16px]"
         style={{ bottom: -6, right: -6 }}

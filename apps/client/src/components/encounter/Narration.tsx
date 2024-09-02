@@ -9,7 +9,7 @@ export function Narration(props: NarrationProps) {
     <span
       {...props}
       className={cn(
-        'text-muted-foreground/60 font-thin italic',
+        'text-muted-foreground/80 font-thin italic',
         props.className
       )}
     />

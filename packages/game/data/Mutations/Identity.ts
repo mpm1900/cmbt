@@ -7,6 +7,5 @@ export class Identity extends Mutation {
   }
 
   resolve = (unit: Unit): Partial<Unit> => unit
-  filter = (unit: Unit, ctx: CombatContext): boolean =>
-    unit.id === this.sourceId
+  filter = (unit: Unit, ctx: CombatContext): boolean => true
 }

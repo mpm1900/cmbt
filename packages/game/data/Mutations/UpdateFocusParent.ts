@@ -22,7 +22,12 @@ export class UpdateFocusParent extends Mutation {
   resolve = (unit: Unit): Partial<Unit> => {
     return {
       values: Modifier.setValues(unit, (values) => ({
-        focus: values.focus + unit.stats.focus * this.factor + this.static,
+        focus: Math.max(
+          Math.round(
+            values.focus + unit.stats.focus * this.factor + this.static
+          ),
+          0
+        ),
       })),
     }
   }

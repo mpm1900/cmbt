@@ -14,7 +14,7 @@ import {
 } from '../../utils'
 import { RestId } from '../Ids'
 import { StunnedParent } from '../Modifiers'
-import { Identity, RemoveAllDamageParent } from '../Mutations'
+import { HealParent, Identity } from '../Mutations'
 import { EmptyArray } from '../Queries'
 
 export class Rest extends Action {
@@ -57,9 +57,10 @@ export class Rest extends Action {
       (modifiedTargets) => ({
         onSuccess: {
           mutations: [
-            new RemoveAllDamageParent({
+            new HealParent({
               sourceId: source.id,
               parentId: source.id,
+              damageFactor: 1,
             }),
           ],
           addedModifiers: [

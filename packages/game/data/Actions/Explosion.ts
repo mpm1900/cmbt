@@ -77,7 +77,7 @@ export class Explosion extends Action {
             new DamageParent({
               sourceId: source.id,
               parentId: source.id,
-              damage: remainingHealth,
+              static: remainingHealth,
             }),
             ...modifiedTargets.flatMap((target) => {
               const damage = calculateDamage(

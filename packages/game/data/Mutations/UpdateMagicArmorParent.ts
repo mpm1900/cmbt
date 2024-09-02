@@ -21,8 +21,12 @@ export class UpdateMagicArmorParent extends Mutation {
   resolve = (unit: Unit): Partial<Unit> => {
     return {
       values: Mutation.setValues(unit, (values) => ({
-        magicArmor:
-          values.magicArmor + values.magicArmor * this.factor + this.static,
+        magicArmor: Math.max(
+          Math.round(
+            values.magicArmor + values.magicArmor * this.factor + this.static
+          ),
+          0
+        ),
       })),
     }
   }

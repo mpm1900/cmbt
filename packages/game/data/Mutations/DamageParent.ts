@@ -8,21 +8,33 @@ import {
 import { DamageParentId } from '../Ids'
 
 export class DamageParent extends Mutation {
-  damage: number
+  factor: number
+  static: number
   evasionSuccess: boolean
 
   constructor(
-    props: MutationProps<{ damage: number; evasionSuccess?: boolean }>
+    props: MutationProps<{
+      factor?: number
+      static?: number
+      evasionSuccess?: boolean
+    }>
   ) {
     super(DamageParentId, props)
-    this.damage = props.damage
+
+    this.factor = props.factor ?? 0
+    this.static = props.static ?? 0
     this.evasionSuccess = props.evasionSuccess ?? false
   }
 
   resolve = (unit: Unit): Partial<Unit> => {
     return {
       values: Mutation.setValues(unit, (values) => ({
-        damage: Math.max(values.damage + this.damage, 0),
+        damage: Math.max(
+          Math.round(
+            values.damage + unit.stats.health * this.factor + this.static
+          ),
+          0
+        ),
       })),
     }
   }

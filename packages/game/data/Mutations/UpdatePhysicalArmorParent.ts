@@ -21,10 +21,14 @@ export class UpdatePhysicalArmorParent extends Mutation {
   resolve = (unit: Unit): Partial<Unit> => {
     return {
       values: Mutation.setValues(unit, (values) => ({
-        physicalArmor:
-          values.physicalArmor +
-          values.physicalArmor * this.factor +
-          this.static,
+        physicalArmor: Math.max(
+          Math.round(
+            values.physicalArmor +
+              values.physicalArmor * this.factor +
+              this.static
+          ),
+          0
+        ),
       })),
     }
   }

@@ -25,7 +25,7 @@ export function getMutationsFromDamageResult(
     new DamageParent({
       sourceId: source.id,
       parentId: target.id,
-      damage,
+      static: damage,
       evasionSuccess,
     }),
   ]

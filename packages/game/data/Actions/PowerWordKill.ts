@@ -58,7 +58,7 @@ export class PowerWordKill extends Action {
             return new DamageParent({
               sourceId: source.id,
               parentId: target.id,
-              damage,
+              static: damage,
             })
           }),
         },

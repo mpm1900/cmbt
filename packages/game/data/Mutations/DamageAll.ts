@@ -7,17 +7,25 @@ import {
 import { DamageAllId } from '../Ids'
 
 export class DamageAll extends Mutation {
-  damage: number
+  factor: number
+  static: number
 
-  constructor(props: MutationProps<{ damage: number }>) {
+  constructor(props: MutationProps<{ factor?: number; static?: number }>) {
     super(DamageAllId, props)
-    this.damage = props.damage
+
+    this.factor = props.factor ?? 0
+    this.static = props.static ?? 0
   }
 
   resolve = (unit: Unit): Partial<Unit> => {
     return {
       values: Mutation.setValues(unit, (values) => ({
-        damage: values.damage + this.damage,
+        damage: Math.max(
+          Math.round(
+            values.damage + unit.stats.health * this.factor + this.static
+          ),
+          0
+        ),
       })),
     }
   }

@@ -2,13 +2,22 @@ import { CombatContext, Mutation, MutationProps, Unit } from '../../types'
 import { HealParentId } from '../Ids'
 
 export class HealParent extends Mutation {
-  offset: number
-  factor: number
+  damageFactor: number
+  healthFactor: number
+  static: number
 
-  constructor(props: MutationProps<{ offset?: number; factor?: number }>) {
+  constructor(
+    props: MutationProps<{
+      damageFactor?: number
+      healthFactor?: number
+      static?: number
+    }>
+  ) {
     super(HealParentId, props)
-    this.offset = props.offset ?? 0
-    this.factor = props.factor ?? 0
+
+    this.damageFactor = props.damageFactor ?? 0
+    this.healthFactor = props.healthFactor ?? 0
+    this.static = props.static ?? 0
   }
 
   resolve = (unit: Unit): Partial<Unit> => {
@@ -16,7 +25,10 @@ export class HealParent extends Mutation {
       values: Mutation.setValues(unit, (values) => ({
         damage: Math.max(
           Math.round(
-            values.damage - this.factor * unit.stats.health - this.offset
+            values.damage -
+              this.damageFactor * values.damage -
+              this.healthFactor * unit.stats.health -
+              this.static
           ),
           0
         ),

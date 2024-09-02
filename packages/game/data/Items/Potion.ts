@@ -44,7 +44,7 @@ export class PotionAction extends Action {
         new HealParent({
           sourceId: source.id,
           parentId: target.id,
-          offset: 20,
+          static: 20,
         }),
       ],
       addedModifiers: [],

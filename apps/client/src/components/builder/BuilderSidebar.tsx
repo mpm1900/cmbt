@@ -13,7 +13,7 @@ export function BuilderSidebar(props: BuilderSidebarProps) {
   const ui = useBuilderUi()
 
   return (
-    <div className="w-[420px] bg-slate-950 border-l h-screen flex flex-col overflow-hidden">
+    <div className="w-[420px] bg-slate-950 border-l flex flex-col overflow-hidden">
       <Tabs
         defaultValue={defaultValue}
         className="flex flex-1 flex-col overflow-hidden"

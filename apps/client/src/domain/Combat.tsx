@@ -35,7 +35,7 @@ export function Combat() {
         header={<CombatHeader />}
         aside={<Sidebar />}
       >
-        <div className="flex flex-1 flex-col p-2 justify-between">
+        <div className="flex flex-col p-2 h-full">
           <Team teamId={aiTeam?.id} />
           <div className="flex flex-1 items-center justify-center">
             <RequireTurnStatus status="done">

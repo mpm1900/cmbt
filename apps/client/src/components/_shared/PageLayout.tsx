@@ -11,9 +11,9 @@ export function PageLayout(props: PageLayoutProps) {
   const { children, header, navbar, aside } = props
   const { effect, ref } = useVantaContext()
   return (
-    <div className="min-h-screen w-full flex-col bg-slate-900">
+    <div className="h-full w-full flex flex-1 flex-col bg-slate-900">
       {header}
-      <div className="h-full flex flex-row">
+      <div className="flex-1 flex flex-row">
         {navbar}
         <div
           ref={ref}

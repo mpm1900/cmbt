@@ -129,7 +129,14 @@ const TestNode2: EncounterNode = {
     {
       id: nanoid(),
       label: (
-        <ChoiceLabel before={<GiCrossedSwords />} after={<IoMdReturnRight />}>
+        <ChoiceLabel
+          before={
+            <ChoiceAttributes>
+              <GiCrossedSwords />
+            </ChoiceAttributes>
+          }
+          after={<IoMdReturnRight />}
+        >
           Begin combat
         </ChoiceLabel>
       ),

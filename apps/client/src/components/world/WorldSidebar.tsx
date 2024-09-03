@@ -16,7 +16,7 @@ export function WorldSidebar(props: WorldSidebarProps) {
   const groupedItems = groupItemsById(game.team.items)
 
   return (
-    <div className="w-[420px] bg-slate-950 border-l flex overflow-hidden">
+    <div className="w-[420px] h-full bg-slate-950 border-l flex overflow-hidden">
       <Tabs
         defaultValue={defaultValue}
         className="flex flex-1 flex-col overflow-hidden"

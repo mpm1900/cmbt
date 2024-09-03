@@ -20,7 +20,7 @@ export function CombatLog() {
         scrollBehavior: 'smooth',
       }}
     >
-      <div className="pb-[56px]">
+      <div className="pb-4">
         {logs.map((log) => (
           <CombatLogItem
             key={log.id}

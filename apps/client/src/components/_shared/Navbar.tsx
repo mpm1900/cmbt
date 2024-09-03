@@ -4,7 +4,7 @@ import { Button } from '../ui/button'
 
 export function Navbar() {
   return (
-    <div className="w-[64px] bg-black flex flex-col justify-start items-center border-r p-2">
+    <div className="w-[64px] h-full bg-black flex flex-col justify-start items-center border-r p-2">
       <div>
         <Link to="/">
           <Button

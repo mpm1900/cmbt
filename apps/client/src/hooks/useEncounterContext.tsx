@@ -1,7 +1,9 @@
 import {
   EncounterContext,
   EncounterNode,
+  Id,
   InitializeCombatOptions,
+  Unit,
 } from '@repo/game/types'
 import { useNavigate } from '@tanstack/react-router'
 import { useGame, useNpcs } from './state'
@@ -31,6 +33,10 @@ export function useEncounterContext(): EncounterContext {
     }
   }
 
+  function updateUnit(id: Id, fn: (unit: Unit) => Partial<Unit>) {
+    game.updateUnits((u) => (u.id === id ? fn(u) : u))
+  }
+
   return {
     activeNode: store.getActiveNode() as EncounterNode,
     encounter: store.encounter,
@@ -44,6 +50,7 @@ export function useEncounterContext(): EncounterContext {
       game.updateWorldNode(game.world.activeNodeId, fn),
     updateEncounter: store.updateEncounter,
     updateTeam: game.updateTeam,
+    updateUnit: updateUnit,
     addItem: game.buyItem,
     addNpc: npcs.addNpc,
     updateNpcValue: npcs.updateNpcValue,

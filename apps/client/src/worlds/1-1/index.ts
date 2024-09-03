@@ -2,17 +2,13 @@ import {
   LockedEncounter,
   ShopEncounter,
 } from '@/components/encounter/encounters'
+import { SpringEncounter } from '@/components/encounter/encounters/SpringEncounter'
 import { TestEncounter } from '@/components/encounter/encounters/TestEncounter'
-import { Id, World, WorldEdge, WorldNode } from '@repo/game/types'
+import { Id, World, WorldNode } from '@repo/game/types'
 import { nanoid } from 'nanoid'
+import { edge, NodeMaker } from '../_utils'
 
-function edge(target: Id) {
-  return {
-    id: nanoid(),
-    target,
-  }
-}
-
+const spring = (app: Id) => 'Spring' + app
 const shop = (app: Id) => 'Shop' + app
 const test = (app: Id) => 'Test' + app
 const lock = (app: Id) => 'Locked' + app
@@ -38,18 +34,28 @@ const StartNode: WorldNode = {
   visited: true,
 }
 
-type NodeMaker = (
-  id: Id,
-  edges: WorldEdge[],
-  overries?: Partial<WorldNode>
-) => WorldNode
-
 const ShopNode: NodeMaker = (id, edges, overrides) => ({
   id: shop(id),
   size: 20,
   icon: '?',
   completedIcon: 'shop',
   encounter: ShopEncounter,
+  edges,
+  completed: false,
+  repeatable: true,
+  retreatable: true,
+  locked: false,
+  visited: false,
+  ...overrides,
+})
+
+const SpringNode: NodeMaker = (id, edges, overrides) => ({
+  id: spring(id),
+  size: 20,
+  icon: '?',
+  visitedIcon: 'spring',
+  completedIcon: 'spring',
+  encounter: SpringEncounter,
   edges,
   completed: false,
   repeatable: true,
@@ -90,7 +96,7 @@ const LockedNode: NodeMaker = (id, edges, overrides) => ({
   ...overrides,
 })
 
-export function makeWorld(): World {
+export function makeWorld1_1(): World {
   return {
     startingNodeId: StartId,
     activeNodeId: StartId,
@@ -100,8 +106,8 @@ export function makeWorld(): World {
       TestNode('0', [edge(shop('0'))], { retreatable: false }),
       TestNode('1', [edge(test('2')), edge(test('4'))]),
       TestNode('4', [edge(lock('0'))]),
-      TestNode('2', [edge(shop('0')), edge(test('1')), edge(shop('1'))]),
-      ShopNode('1', [edge(test('0')), edge(test('3'))]),
+      TestNode('2', [edge(shop('0')), edge(test('1')), edge(spring('0'))]),
+      SpringNode('0', [edge(test('0')), edge(test('3'))]),
       TestNode('3', [edge(lock('0'))]),
       LockedNode('0', [edge(test('5')), edge(test('1'))]),
       TestNode('5', [], { size: 30 }),

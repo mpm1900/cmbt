@@ -7,6 +7,7 @@ export type WorldNodeIconKey =
   | 'start'
   | 'locked'
   | 'unlocked'
+  | 'spring'
 
 export type WorldEdge = {
   id: Id

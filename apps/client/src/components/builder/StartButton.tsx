@@ -1,7 +1,7 @@
 import { useGame, useUnitBuilders } from '@/hooks/state'
 import { cn } from '@/lib/utils'
 import { PropsWithClassname } from '@/types'
-import { makeWorld } from '@/utils/makeWorld'
+import { makeWorld1_1 } from '@/worlds'
 import { Potion } from '@repo/game/data'
 import { Team } from '@repo/game/types'
 import { resolveUnitBuilder } from '@repo/game/utils'
@@ -23,7 +23,7 @@ export function StartButton(props: PropsWithClassname) {
         credits: 1500,
       },
     }
-    const world = makeWorld()
+    const world = makeWorld1_1()
     game.initialize({
       team,
       units: store.builders.map((b) => resolveUnitBuilder(b, team.id)),

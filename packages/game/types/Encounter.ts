@@ -39,6 +39,7 @@ export type EncounterContext = {
   initializeCombat: (props: InitializeCombatOptions) => void
   updateActiveWorldNode: (fn: (n: WorldNode) => Partial<WorldNode>) => void
   updateEncounter: (fn: (e: Encounter) => Partial<Encounter>) => Encounter
+  updateUnit: (id: Id, fn: (e: Unit) => Partial<Unit>) => void
   updateTeam: (fn: (e: Team) => Partial<Team>) => void
   addItem: (item: Item) => void
   addNpc: (npc: Npc) => void

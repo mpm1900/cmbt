@@ -12,6 +12,7 @@ import {
   Disable,
   DisabledParent,
   DisableId,
+  DragonStanceId,
   EarthquakeId,
   ExplosionId,
   Fireball,
@@ -73,6 +74,7 @@ import { StatusInline } from '@shared/StatusInline'
 import { TextList } from '@shared/TextList'
 import { ReactNode } from 'react'
 import { ACTION_NAMES } from './_names'
+import { DragonStanceRenderer } from './DragonStance'
 import { NegateArmorRenderer } from './NegateArmor'
 
 export * from './_names'
@@ -99,6 +101,7 @@ export type ActionRenderer = {
 }
 
 export const ActionRenderers: Record<string, ActionRenderer> = {
+  [DragonStanceId]: DragonStanceRenderer,
   [NegateArmorId]: NegateArmorRenderer,
   /// SYSTEM ACTIONS
   [SetIsActiveId]: {

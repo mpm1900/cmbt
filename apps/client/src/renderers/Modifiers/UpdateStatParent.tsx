@@ -18,7 +18,9 @@ export const UpdateStatParentRenderer: ModifierRenderer = {
         {renderer?.icon && (
           <>
             (
-            <div className="h-[20px] w-[20px] inline-flex">{renderer.icon}</div>
+            <div className="h-[20px] w-[20px] inline-block mb-[-4px]">
+              {renderer.icon}
+            </div>
             )
           </>
         )}

@@ -17,6 +17,7 @@ import {
   PoisonedDamageOnTurnEndId,
   ProtectedParentId,
   SandstormOnTurnEndId,
+  SpeedUpParentId,
   SpeedUpTeamId,
   StunnedParentId,
 } from '@repo/game/data'
@@ -38,6 +39,7 @@ export const MODIFIER_NAMES: Record<string, string> = {
   [AttackUpParentId]: 'Attack Up',
 
   [SpeedUpTeamId]: 'Speed Up',
+  [SpeedUpParentId]: 'Speed Up',
   [CreateSandstormOnUnitEnterId]: 'Sand Stream',
   [HealParentOnUnitSwitchId]: 'Regenerate',
   [InspectAllOnUnitEnterId]: 'Scholar',

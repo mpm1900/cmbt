@@ -1,17 +1,17 @@
 import {
   AttackUpParentId,
-  DragonStance,
-  DragonStanceId,
-  SpeedUpParentId,
+  BattleStance,
+  BattleStanceId,
+  DefneseUpParentId,
   UpdateStatParent,
 } from '@repo/game/data'
 import { ModifierInline } from '@shared/ModifierInline'
 import { ACTION_NAMES, ActionRenderer } from '.'
 
-export const DragonStanceRenderer: ActionRenderer = {
-  name: ACTION_NAMES[DragonStanceId],
+export const BattleStanceRenderer: ActionRenderer = {
+  name: ACTION_NAMES[BattleStanceId],
   description: (action, props) => {
-    const dragonstance = action as DragonStance
+    const battlestance = action as BattleStance
     return (
       <div>
         Applies{' '}
@@ -21,7 +21,7 @@ export const DragonStanceRenderer: ActionRenderer = {
             new UpdateStatParent({
               registryId: AttackUpParentId,
               stat: 'attack',
-              factor: dragonstance.factor,
+              factor: battlestance.factor,
             })
           }
         />
@@ -30,9 +30,9 @@ export const DragonStanceRenderer: ActionRenderer = {
           side={props?.side}
           modifier={
             new UpdateStatParent({
-              registryId: SpeedUpParentId,
-              stat: 'speed',
-              factor: dragonstance.factor,
+              registryId: DefneseUpParentId,
+              stat: 'defense',
+              factor: battlestance.factor,
             })
           }
         />{' '}

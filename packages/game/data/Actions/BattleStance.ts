@@ -9,19 +9,19 @@ import {
 } from '../../types'
 import { buildActionResult, getActionData } from '../../utils'
 import { modifyRenderContext } from '../../utils/modifyRenderContext'
-import { AttackUpParentId, SwordsDanceId } from '../Ids'
+import { AttackUpParentId, BattleStanceId, DefneseUpParentId } from '../Ids'
 import { UpdateStatParent } from '../Modifiers'
 import { Identity } from '../Mutations'
 import { EmptyArray } from '../Queries/EmptyArray'
 
-export class SwordsDance extends Action {
-  factor: number = 1.0
+export class BattleStance extends Action {
+  factor: number = 0.5
 
   constructor(sourceId: Id, teamId: Id) {
-    super(SwordsDanceId, {
+    super(BattleStanceId, {
       sourceId,
       teamId,
-      cost: new Identity({}),
+      cost: new Identity({ sourceId }),
       targets: new EmptyArray(),
       maxTargetCount: 0,
     })
@@ -55,6 +55,14 @@ export class SwordsDance extends Action {
             new UpdateStatParent({
               registryId: AttackUpParentId,
               stat: 'attack',
+              sourceId: source.id,
+              parentId: source.id,
+              factor: this.factor,
+              maxInstances: 1,
+            }),
+            new UpdateStatParent({
+              registryId: DefneseUpParentId,
+              stat: 'defense',
               sourceId: source.id,
               parentId: source.id,
               factor: this.factor,

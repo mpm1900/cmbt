@@ -3,6 +3,7 @@ import {
   ArmorUp,
   ArmorUpId,
   AttackUpParentId,
+  BattleStanceId,
   BodySlam,
   BodySlamId,
   Burn,
@@ -74,6 +75,7 @@ import { StatusInline } from '@shared/StatusInline'
 import { TextList } from '@shared/TextList'
 import { ReactNode } from 'react'
 import { ACTION_NAMES } from './_names'
+import { BattleStanceRenderer } from './BattleStance'
 import { DragonStanceRenderer } from './DragonStance'
 import { NegateArmorRenderer } from './NegateArmor'
 
@@ -101,6 +103,7 @@ export type ActionRenderer = {
 }
 
 export const ActionRenderers: Record<string, ActionRenderer> = {
+  [BattleStanceId]: BattleStanceRenderer,
   [DragonStanceId]: DragonStanceRenderer,
   [NegateArmorId]: NegateArmorRenderer,
   /// SYSTEM ACTIONS
@@ -263,7 +266,7 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
         <div>
           Deals <DamageInline damage={action.damage} /> to target enemy unit.{' '}
           {fireblast.burnChance}% chance to apply{' '}
-          <StatusInline status={Burn} side={props?.side} /> to target.
+          <StatusInline status={Burn} side={props?.side} />.
         </div>
       )
     },
@@ -277,7 +280,7 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
         <div>
           Deals <DamageInline damage={action.damage} /> to target enemy unit.{' '}
           {firepunch.burnChance}% chance to apply{' '}
-          <StatusInline status={Burn} side={props?.side} /> to target.
+          <StatusInline status={Burn} side={props?.side} />.
         </div>
       )
     },
@@ -498,7 +501,6 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
   },
   [SwordsDanceId]: {
     name: 'Swords Dance',
-    cost: () => '30 FP',
     description: (action, props) => {
       const swordsDance = action as SwordsDance
       return (

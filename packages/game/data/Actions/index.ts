@@ -5,6 +5,7 @@ import { InspectAll } from './system'
 export * from './system'
 
 export * from './ArmorUp'
+export * from './BattleStance'
 export * from './BodySlam'
 export * from './Disable'
 export * from './DragonStance'

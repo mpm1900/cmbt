@@ -18,7 +18,7 @@ export function World() {
       if (game.world.activeNodeId === game.world.startingNodeId) {
         setReady(true)
       }
-    }, 350)
+    }, 300)
   }, [])
 
   return (

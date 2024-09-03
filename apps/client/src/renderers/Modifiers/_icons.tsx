@@ -2,6 +2,7 @@ import {
   AttackDownParentId,
   AttackUpParentId,
   DefenseDownParentId,
+  DefneseUpParentId,
   DisabledParentId,
   FireDamageUpParentId,
   FireNegationUpParentId,
@@ -9,6 +10,7 @@ import {
   InspectedAllId,
   ProtectedParentId,
   SandstormOnTurnEndId,
+  SpeedUpParentId,
   SpeedUpTeamId,
   StunnedParentId,
 } from '@repo/game/data'
@@ -38,6 +40,15 @@ export const MODIFIER_ICONS: Record<Id, ReactNode> = {
       <GiCrenulatedShield className="fill-white h-full w-full" />
       <AiFillCaretDown
         className="absolute fill-red-400 h-[24px] w-[24px]"
+        style={{ bottom: -6, right: -6 }}
+      />
+    </div>
+  ),
+  [DefneseUpParentId]: (
+    <div className="h-full w-full relative">
+      <GiCrenulatedShield className="fill-white h-full w-full" />
+      <AiFillCaretUp
+        className="absolute fill-green-400 h-[24px] w-[24px]"
         style={{ bottom: -6, right: -6 }}
       />
     </div>
@@ -87,12 +98,21 @@ export const MODIFIER_ICONS: Record<Id, ReactNode> = {
     <GiVibratingShield className="fill-white h-full w-full" />
   ),
   [StunnedParentId]: <TiSpiral className="fill-red-200 h-full w-full" />,
+  [SpeedUpParentId]: (
+    <div className="h-full w-full relative">
+      <GiSprint className="fill-white h-full w-full" />
+      <AiFillCaretUp
+        className="absolute fill-green-400 h-[24px] w-[24px]"
+        style={{ bottom: -6, right: -6 }}
+      />
+    </div>
+  ),
   [SpeedUpTeamId]: (
     <div className="h-full w-full relative">
       <GiSprint className="fill-white h-full w-full" />
       <AiFillCaretUp
         className="absolute fill-green-400 h-[24px] w-[24px]"
-        style={{ bottom: -4, right: -6 }}
+        style={{ bottom: -6, right: -6 }}
       />
     </div>
   ),

@@ -7,6 +7,7 @@ import {
   DamageNewUnitsOnUnitEnterId,
   DamageParentOnTurnEndId,
   DefenseDownParentId,
+  DefneseUpParentId,
   DisabledParentId,
   FireDamageUpParentId,
   FireNegationUpParentId,
@@ -27,6 +28,7 @@ export const MODIFIER_NAMES: Record<string, string> = {
   [DamageNewUnitsOnUnitEnterId]: 'Spikes',
   [DamageParentOnTurnEndId]: 'Damage on Turn End',
   [DefenseDownParentId]: 'Defense Down',
+  [DefneseUpParentId]: 'Defense Up',
   [DisabledParentId]: 'Disabled',
   [ProtectedParentId]: 'Protected',
 

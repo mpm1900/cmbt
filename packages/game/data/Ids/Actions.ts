@@ -1,6 +1,7 @@
 import { ActionId } from './_base'
 
 export const ArmorUpId = ActionId()
+export const BattleStanceId = ActionId()
 export const BodySlamId = ActionId()
 export const PiercingStrikeId = ActionId()
 export const DisableId = ActionId()

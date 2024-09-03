@@ -1,6 +1,7 @@
 import { nanoid } from 'nanoid'
 import { UnitBase, UnitBaseConfig } from '../../types'
 import {
+  BattleStance,
   DragonStance,
   Earthquake,
   Fireball,
@@ -13,6 +14,7 @@ import {
 import { Spikes } from '../Actions/Spikes'
 import { SandStream } from '../Augments'
 import {
+  BattleStanceId,
   DragonStanceId,
   EarthquakeId,
   FireballId,
@@ -51,6 +53,10 @@ export const TyranitarConfig: UnitBaseConfig = {
   abilities: [SandStream],
   actionsCount: 4,
   actions: [
+    {
+      id: BattleStanceId,
+      make: (unit) => new BattleStance(unit.id, unit.teamId),
+    },
     {
       id: DragonStanceId,
       make: (unit) => new DragonStance(unit.id, unit.teamId),

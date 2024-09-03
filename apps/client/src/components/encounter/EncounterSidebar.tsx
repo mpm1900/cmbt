@@ -28,6 +28,9 @@ export function EncounterSidebar(props: EncounterSidebarProps) {
         </div>
         <div className="flex-1 overflow-auto w-full">
           <TabsContent value="team" className="px-2 my-0 space-y-2">
+            <div className="flex justify-center text-muted-foreground">
+              Click units to edit
+            </div>
             {game.units.map((unit) => (
               <SidebarUnit key={unit.id} unit={unit} />
             ))}

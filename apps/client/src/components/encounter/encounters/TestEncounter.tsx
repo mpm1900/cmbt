@@ -5,6 +5,7 @@ import { nanoid } from 'nanoid'
 import { GiCrossedSwords } from 'react-icons/gi'
 import { IoMdReturnLeft, IoMdReturnRight } from 'react-icons/io'
 import { IoSkullSharp } from 'react-icons/io5'
+import { ChoiceAttributes } from '../ChoiceAttributes'
 import { ChoiceLabel } from '../ChoiceLabel'
 import { Narration } from '../Narration'
 
@@ -26,7 +27,14 @@ const TestNode1: EncounterNode = {
     {
       id: nanoid(),
       label: (
-        <ChoiceLabel before={<GiCrossedSwords />} after={<IoMdReturnRight />}>
+        <ChoiceLabel
+          before={
+            <ChoiceAttributes>
+              <GiCrossedSwords />
+            </ChoiceAttributes>
+          }
+          after={<IoMdReturnRight />}
+        >
           Ambush the enemies
         </ChoiceLabel>
       ),

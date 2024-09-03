@@ -12,6 +12,7 @@ import {
 } from '@repo/game/data'
 import {
   Encounter,
+  EncounterChoice,
   EncounterNode,
   GroupedItem,
   Item,
@@ -23,6 +24,8 @@ import { nanoid } from 'nanoid'
 import { BsArrowLeft } from 'react-icons/bs'
 import { GiCash, GiCreditsCurrency, GiCrossedSwords } from 'react-icons/gi'
 import { IoMdReturnLeft, IoMdReturnRight } from 'react-icons/io'
+import { RiSpeakLine } from 'react-icons/ri'
+import { ChoiceAttributes } from '../ChoiceAttributes'
 import { ChoiceLabel } from '../ChoiceLabel'
 import { Narration } from '../Narration'
 
@@ -62,61 +65,102 @@ const ShopIntroductionNode: EncounterNode = {
       },
     },
   ],
-  choices: () => [
-    {
-      id: nanoid(),
-      label: (
-        <ChoiceLabel before={<GiCreditsCurrency />}>View wares</ChoiceLabel>
-      ),
-      resolve: (ctx) => {
-        ctx.updateEncounter((s) => ({
-          activeNodeId: ShopWaresNode.id,
-        }))
+  choices: (ctx) => {
+    const npc = ctx.npcs.find((c) => c.id === ShopkeepNpcId)
+    const charmAttempts = npc?.values.charmAttempts
+    const choices: (EncounterChoice | undefined)[] = [
+      {
+        id: nanoid(),
+        label: (
+          <ChoiceLabel
+            before={
+              <ChoiceAttributes>
+                <GiCreditsCurrency />
+              </ChoiceAttributes>
+            }
+          >
+            View wares
+          </ChoiceLabel>
+        ),
+        resolve: (ctx) => {
+          ctx.updateEncounter((s) => ({
+            activeNodeId: ShopWaresNode.id,
+          }))
+        },
       },
-    },
-    {
-      id: nanoid(),
-      label: (
-        <ChoiceLabel before={<GiCrossedSwords />} after={<IoMdReturnRight />}>
-          Attack the shopkeep
-        </ChoiceLabel>
-      ),
-      resolve: (ctx) => {
-        ctx.initializeCombat({
-          enemyTeam,
-          enemyUnits: Array.from({ length: 4 }).map((_, index) =>
-            makeEnemyUnit({ index, level: 20, teamId: enemyTeam.id })
-          ),
-          reward: {
-            items: [],
-            resources: {
-              credits: 200,
+      charmAttempts === 0 && npc
+        ? {
+            id: nanoid(),
+            label: (
+              <ChoiceLabel
+                before={
+                  <ChoiceAttributes>
+                    <RiSpeakLine />
+                    {', 50%'}
+                  </ChoiceAttributes>
+                }
+              >
+                Atempt to charm the shopkeep
+              </ChoiceLabel>
+            ),
+            resolve: (ctx) => {
+              ctx.updateNpcValue(npc.id, 'charmAttempts', (v) => (v ?? 0) + 1)
             },
-            xp: 0,
-          },
-          onSuccess: () => {
-            ctx.updateActiveWorldNode((n) => ({
-              completed: true,
-              visited: true,
-            }))
-          },
-          onFailure: () => {},
-        })
+          }
+        : undefined,
+      {
+        id: nanoid(),
+        label: (
+          <ChoiceLabel
+            before={
+              <ChoiceAttributes>
+                <GiCrossedSwords />
+              </ChoiceAttributes>
+            }
+            after={<IoMdReturnRight />}
+          >
+            Attack the shopkeep
+          </ChoiceLabel>
+        ),
+        resolve: (ctx) => {
+          ctx.initializeCombat({
+            enemyTeam,
+            enemyUnits: Array.from({ length: 4 }).map((_, index) =>
+              makeEnemyUnit({ index, level: 20, teamId: enemyTeam.id })
+            ),
+            reward: {
+              items: [],
+              resources: {
+                credits: 200,
+              },
+              xp: 0,
+            },
+            onSuccess: () => {
+              ctx.updateActiveWorldNode((n) => ({
+                completed: true,
+                visited: true,
+              }))
+            },
+            onFailure: () => {},
+          })
+        },
       },
-    },
-    {
-      id: nanoid(),
-      label: <ChoiceLabel after={<IoMdReturnLeft />}>Leave</ChoiceLabel>,
-      resolve: (ctx) => {
-        ctx.updateActiveWorldNode((n) => ({
-          completed: true,
-          visited: true,
-          encounter: ctx.encounter,
-        }))
-        ctx.back()
+      {
+        id: nanoid(),
+        label: <ChoiceLabel after={<IoMdReturnLeft />}>Leave</ChoiceLabel>,
+        resolve: (ctx) => {
+          ctx.updateActiveWorldNode((n) => ({
+            completed: true,
+            visited: true,
+            encounter: ctx.encounter,
+          }))
+          ctx.back()
+        },
       },
-    },
-  ],
+    ]
+
+    return choices.filter((c) => c !== undefined)
+  },
 }
 
 const ShopWaresNode: EncounterNode = {
@@ -207,6 +251,7 @@ export const ShopEncounter: Encounter = {
         id: ShopkeepNpcId,
         name: 'Shopkeep Person',
         values: {
+          charmAttempts: 0,
           [PotionId]: 5,
           [Key01Id]: 1,
           [RubyId]: 1,

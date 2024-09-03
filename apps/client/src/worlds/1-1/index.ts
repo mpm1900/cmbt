@@ -1,17 +1,19 @@
 import {
+  HealingEncounter,
   LockedEncounter,
   ShopEncounter,
+  TestEncounter,
 } from '@/components/encounter/encounters'
-import { SpringEncounter } from '@/components/encounter/encounters/SpringEncounter'
-import { TestEncounter } from '@/components/encounter/encounters/TestEncounter'
+import { ReviveEncounter } from '@/components/encounter/encounters/ReviveEncounter'
 import { Id, World, WorldNode } from '@repo/game/types'
 import { nanoid } from 'nanoid'
 import { edge, NodeMaker } from '../_utils'
 
-const spring = (app: Id) => 'Spring' + app
+const heal = (app: Id) => 'Spring' + app
 const shop = (app: Id) => 'Shop' + app
 const test = (app: Id) => 'Test' + app
 const lock = (app: Id) => 'Locked' + app
+const revive = (app: Id) => 'Revive' + app
 
 export const StartId = nanoid()
 const StartNode: WorldNode = {
@@ -49,13 +51,13 @@ const ShopNode: NodeMaker = (id, edges, overrides) => ({
   ...overrides,
 })
 
-const SpringNode: NodeMaker = (id, edges, overrides) => ({
-  id: spring(id),
+const HealingNode: NodeMaker = (id, edges, overrides) => ({
+  id: heal(id),
   size: 20,
   icon: '?',
   visitedIcon: 'spring',
   completedIcon: 'spring',
-  encounter: SpringEncounter,
+  encounter: HealingEncounter,
   edges,
   completed: false,
   repeatable: true,
@@ -75,6 +77,22 @@ const TestNode: NodeMaker = (id, edges, overrides) => ({
   edges,
   completed: false,
   repeatable: false,
+  retreatable: true,
+  locked: false,
+  visited: false,
+  ...overrides,
+})
+
+const ReviveNode: NodeMaker = (id, edges, overrides) => ({
+  id: revive(id),
+  size: 20,
+  icon: '?',
+  visitedIcon: 'altar',
+  completedIcon: 'altar',
+  encounter: ReviveEncounter,
+  edges,
+  completed: false,
+  repeatable: true,
   retreatable: true,
   locked: false,
   visited: false,
@@ -103,14 +121,16 @@ export function makeWorld1_1(): World {
     nodes: [
       StartNode,
       ShopNode('0', [edge(test('1'))]),
-      TestNode('0', [edge(shop('0'))], { retreatable: false }),
-      TestNode('1', [edge(test('2')), edge(test('4'))]),
-      TestNode('4', [edge(lock('0'))]),
-      TestNode('2', [edge(shop('0')), edge(test('1')), edge(spring('0'))]),
-      SpringNode('0', [edge(test('0')), edge(test('3'))]),
-      TestNode('3', [edge(lock('0'))]),
-      LockedNode('0', [edge(test('5')), edge(test('1'))]),
+      TestNode('0', [edge(heal('0'))], { retreatable: false }),
+      TestNode('1', [edge(test('2'))]),
+      TestNode('4', [edge(lock('0')), edge(revive('0'))]),
+      ReviveNode('0', [edge(test('4'))]),
+      TestNode('2', [edge(shop('0')), edge(heal('0'))]),
+      HealingNode('0', [edge(test('0')), edge(test('3'))]),
+      TestNode('3', [edge(lock('0')), edge(test('6'))]),
+      LockedNode('0', [edge(test('1')), edge(test('4')), edge(test('5'))]),
       TestNode('5', [], { size: 30 }),
+      TestNode('6', [edge(test('3')), edge(revive('0'))]),
     ],
   }
 }

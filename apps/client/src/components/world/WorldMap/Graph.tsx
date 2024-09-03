@@ -68,6 +68,7 @@ export function Graph(props: GraphProps) {
       layout={
         {
           name: 'cola',
+          randomize: false,
           animate: false,
           padding: 64,
         } as LayoutOptions

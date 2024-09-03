@@ -45,6 +45,7 @@ export function getNodeStylesheet(
     selector: 'node',
     style: {
       label: (node: NodeSingular) => {
+        // return node.data().id
         const { activeNode } = options
         if (activeNode?.same(node)) {
           return '*'

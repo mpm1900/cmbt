@@ -12,7 +12,7 @@ import { IoMdReturnLeft, IoMdReturnRight } from 'react-icons/io'
 import { ChoiceLabel } from '../ChoiceLabel'
 import { Narration } from '../Narration'
 
-const SpringIntroductionNode: EncounterNode = {
+const HealingIntroductionNode: EncounterNode = {
   id: nanoid(),
   icon: <GiWaterfall />,
   title: 'Healing Waterfall',
@@ -80,10 +80,10 @@ const SpringIntroductionNode: EncounterNode = {
   },
 }
 
-export const SpringEncounter: Encounter = {
+export const HealingEncounter: Encounter = {
   id: nanoid(),
   setup: (ctx) => {},
-  activeNodeId: SpringIntroductionNode.id,
-  nodes: [SpringIntroductionNode],
+  activeNodeId: HealingIntroductionNode.id,
+  nodes: [HealingIntroductionNode],
   values: {},
 }

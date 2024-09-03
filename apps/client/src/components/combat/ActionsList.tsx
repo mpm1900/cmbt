@@ -1,6 +1,8 @@
+import { useCombatContext } from '@/hooks'
 import { cn } from '@/lib/utils'
 import { GLOBAL_ACTIONS } from '@repo/game/data'
 import { Action, Id, Unit } from '@repo/game/types'
+import { applyModifiers } from '@repo/game/utils'
 import { useEffect, useState } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
 import {
@@ -21,11 +23,16 @@ export type ActionsListProps = {
 
 export function ActionsList(props: ActionsListProps) {
   const { unit, onConfirm } = props
+  const ctx = useCombatContext()
   const [selectedAction, setSelectedAction] = useState<Action>()
   const [selectedTargets, setSelectedTargets] = useState<Unit[]>([])
   const carousel = useCarouselApi()
 
-  const actions = [...unit.actions, ...GLOBAL_ACTIONS.map((m) => m.make(unit))]
+  const modified = applyModifiers(unit, ctx).unit
+  const actions = [
+    ...modified.actions,
+    ...GLOBAL_ACTIONS.map((m) => m.make(unit)),
+  ]
 
   function updateActiveAction(action: Action | undefined) {
     setSelectedAction(action)

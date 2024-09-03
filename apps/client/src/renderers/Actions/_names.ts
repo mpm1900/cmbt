@@ -19,6 +19,8 @@ import {
   PiercingStrikeId,
   PoisonSprayId,
   PotionActionId,
+  PowerCleaveId,
+  PowerStanceId,
   PowerWordKillId,
   ProtectId,
   QuickAttackId,
@@ -71,4 +73,6 @@ export const ACTION_NAMES: Record<string, string> = {
   [BattleStanceId]: 'Battle Stance',
   [DragonStanceId]: 'Dragon Stance',
   [NegateArmorId]: 'Negate Armor',
+  [PowerCleaveId]: 'Power Cleave',
+  [PowerStanceId]: 'Power Stance',
 }

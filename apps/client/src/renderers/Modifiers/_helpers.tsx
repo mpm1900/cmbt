@@ -25,7 +25,7 @@ export function ModifierValues(
         <div>
           {props.static > 0 ? '+' : '-'}
           {Math.abs(props.static)}
-          {props.after} {props.children}.
+          {props.after} {props.children}
         </div>
       )}
     </div>

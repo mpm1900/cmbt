@@ -1,5 +1,6 @@
 import { ModifierId } from './_base'
 
+export const AddActionParentId = ModifierId()
 export const AccuracyDownParentId = ModifierId()
 export const DefenseDownParentId = ModifierId()
 export const DefneseUpParentId = ModifierId()

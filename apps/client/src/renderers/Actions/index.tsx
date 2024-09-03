@@ -39,6 +39,8 @@ import {
   Poison,
   PoisonSprayId,
   PotionActionId,
+  PowerCleaveId,
+  PowerStanceId,
   PowerWordKillId,
   Protect,
   ProtectedParent,
@@ -78,6 +80,8 @@ import { ACTION_NAMES } from './_names'
 import { BattleStanceRenderer } from './BattleStance'
 import { DragonStanceRenderer } from './DragonStance'
 import { NegateArmorRenderer } from './NegateArmor'
+import { PowerCleaveRenderer } from './PowerCleave'
+import { PowerStanceRenderer } from './PowerStance'
 
 export * from './_names'
 
@@ -106,6 +110,8 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
   [BattleStanceId]: BattleStanceRenderer,
   [DragonStanceId]: DragonStanceRenderer,
   [NegateArmorId]: NegateArmorRenderer,
+  [PowerCleaveId]: PowerCleaveRenderer,
+  [PowerStanceId]: PowerStanceRenderer,
   /// SYSTEM ACTIONS
   [SetIsActiveId]: {
     name: ACTION_NAMES[SetIsActiveId],
@@ -458,7 +464,7 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
               })
             }
           />{' '}
-          to all units for {sandstorm.duration} turns.
+          to the battlefield for {sandstorm.duration} turns.
         </div>
       )
     },

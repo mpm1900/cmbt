@@ -1,4 +1,4 @@
-import { SpeedUpTeam, TeamId } from '@repo/game/data'
+import { SpeedUpTeamId, TeamId, UpdateStatTeam } from '@repo/game/data'
 import { Encounter, EncounterNode, Team } from '@repo/game/types'
 import { makeEnemyUnit } from '@repo/game/utils'
 import { nanoid } from 'nanoid'
@@ -59,8 +59,10 @@ const TestNode1: EncounterNode = {
               xp: 0,
             },
             modifiers: [
-              new SpeedUpTeam({
+              new UpdateStatTeam({
+                registryId: SpeedUpTeamId,
                 teamId: unit.teamId,
+                stat: 'speed',
                 factor: 0.5,
                 duration: 2,
               }),

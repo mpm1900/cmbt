@@ -1,4 +1,5 @@
 import {
+  AddActionParentId,
   AttackDownAllOtherOnUnitEnterId,
   CreateSandstormOnUnitEnterId,
   DamageAllOnTurnEndId,
@@ -12,7 +13,6 @@ import {
   InspectedAllId,
   InvertSpeedAllId,
   ProtectedParentId,
-  SpeedUpTeamId,
   StunnedParentId,
   UpdateStatParentId,
 } from '@repo/game/data'
@@ -21,11 +21,11 @@ import { ModifierInline } from '@shared/ModifierInline'
 import { ReactNode } from 'react'
 import { ModifierName, TriggerName } from './_helpers'
 import { MODIFIER_NAMES } from './_names'
+import { AddActionParentRenderer } from './AddActionParent'
 import { DisabledParentRenderer } from './DisabledParent'
 import { InspectedAllRenderer } from './InspectedAll'
 import { InvertSpeedAllRenderer } from './InvertSpeedAll'
 import { ProtectedParentRenderer } from './ProtectedParent'
-import { SpeedUpTeamRenderer } from './SpeedUpTeam'
 import { StunnedParentRenderer } from './StunnedParent'
 import { AttackDownAllOtherOnUnitEnterRenderer } from './Triggers/AttackDownAllOtherOnUnitEnter'
 import { CreateSandstormOnUnitEnterRenderer } from './Triggers/CreateSandstormOnUnitEnter'
@@ -43,11 +43,11 @@ export type ModifierRenderer = {
 }
 
 export const ModifierRenderers: Record<string, ModifierRenderer> = {
+  [AddActionParentId]: AddActionParentRenderer,
   [DisabledParentId]: DisabledParentRenderer,
   [InspectedAllId]: InspectedAllRenderer,
   [InvertSpeedAllId]: InvertSpeedAllRenderer,
   [ProtectedParentId]: ProtectedParentRenderer,
-  [SpeedUpTeamId]: SpeedUpTeamRenderer,
   [StunnedParentId]: StunnedParentRenderer,
   [UpdateStatParentId]: UpdateStatParentRenderer,
 

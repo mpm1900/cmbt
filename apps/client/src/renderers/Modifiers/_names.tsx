@@ -16,6 +16,7 @@ import {
   InspectedAllId,
   InvertSpeedAllId,
   PoisonedDamageOnTurnEndId,
+  PowerStanceId,
   ProtectedParentId,
   SandstormOnTurnEndId,
   SpeedUpParentId,
@@ -48,4 +49,5 @@ export const MODIFIER_NAMES: Record<string, string> = {
   [AttackDownAllOtherOnUnitEnterId]: 'Intimidate',
   [SandstormOnTurnEndId]: 'Sandstorm',
   [PoisonedDamageOnTurnEndId]: 'Poisoned',
+  [PowerStanceId]: 'Power Stance',
 }

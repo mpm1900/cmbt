@@ -25,7 +25,7 @@ export const CreateSandstormOnUnitEnterRenderer: ModifierRenderer = {
               })
             }
           />{' '}
-          to all units for {modifier.damageDuration} turns.
+          to the battlefield for {modifier.damageDuration} turns.
         </span>
       </div>
     )

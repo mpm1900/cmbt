@@ -8,6 +8,7 @@ import {
   FireNegationUpParentId,
   HealParentOnUnitSwitchId,
   InspectedAllId,
+  PowerStanceId,
   ProtectedParentId,
   SandstormOnTurnEndId,
   SpeedUpParentId,
@@ -28,6 +29,7 @@ import {
   GiBiceps,
   GiCrenulatedShield,
   GiSandstorm,
+  GiSpinningBlades,
   GiSprint,
   GiVibratingShield,
 } from 'react-icons/gi'
@@ -123,6 +125,11 @@ export const MODIFIER_ICONS: Record<Id, ReactNode> = {
         className="absolute fill-green-400 h-[12px] w-[12px]"
         style={{ bottom: 0, left: 0 }}
       />
+    </div>
+  ),
+  [PowerStanceId]: (
+    <div>
+      <GiSpinningBlades className="fill-white h-full w-full" />
     </div>
   ),
 }

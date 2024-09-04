@@ -9,7 +9,7 @@ import {
 } from '../../types'
 import { buildActionResult, getActionData } from '../../utils'
 import { modifyRenderContext } from '../../utils/modifyRenderContext'
-import { AttackUpParentId, PowerStanceId } from '../Ids'
+import { PowerStanceId } from '../Ids'
 import { AddActionParent } from '../Modifiers'
 import { Identity } from '../Mutations'
 import { EmptyArray } from '../Queries/EmptyArray'
@@ -54,7 +54,7 @@ export class PowerStance extends Action {
         onSuccess: {
           addedModifiers: [
             new AddActionParent({
-              registryId: AttackUpParentId,
+              registryId: PowerStanceId,
               sourceId: source.id,
               parentId: source.id,
               maxInstances: 1,

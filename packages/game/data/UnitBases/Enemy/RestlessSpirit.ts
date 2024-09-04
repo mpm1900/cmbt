@@ -1,7 +1,7 @@
 import { nanoid } from 'nanoid'
 import { UnitBase, UnitBaseConfig } from '../../../types'
-import { Protect, WillOWisp } from '../../Actions'
-import { ProtectId, WillOWispId } from '../../Ids'
+import { MagicMissile, Protect, WillOWisp } from '../../Actions'
+import { MagicMissileId, ProtectId, WillOWispId } from '../../Ids'
 import { BASE_UNIT } from '../../Units/system/BASE_UNIT'
 
 export const RestlessSpiritId = nanoid()
@@ -38,6 +38,10 @@ export const RestlessSpiritConfig: UnitBaseConfig = {
   actionsCount: 5,
   actions: [
     {
+      id: MagicMissileId,
+      make: (u) => new MagicMissile(u.id, u.teamId),
+    },
+    {
       id: ProtectId,
       make: (u) => new Protect(u.id, u.teamId),
     },
@@ -47,5 +51,5 @@ export const RestlessSpiritConfig: UnitBaseConfig = {
     },
   ],
   defaultAbilityId: undefined,
-  defaultActionIds: [ProtectId],
+  defaultActionIds: [MagicMissileId, ProtectId, WillOWispId],
 }

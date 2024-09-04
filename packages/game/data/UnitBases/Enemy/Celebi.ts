@@ -1,7 +1,7 @@
 import { nanoid } from 'nanoid'
 import { UnitBase, UnitBaseConfig } from '../../../types'
-import { Protect } from '../../Actions'
-import { ProtectId } from '../../Ids'
+import { PiercingStrike, Protect } from '../../Actions'
+import { PiercingStrikeId, ProtectId } from '../../Ids'
 import { BASE_UNIT } from '../../Units/system/BASE_UNIT'
 
 export const CelebiId = nanoid()
@@ -31,10 +31,14 @@ export const CelebiConfig: UnitBaseConfig = {
   actionsCount: 5,
   actions: [
     {
+      id: PiercingStrikeId,
+      make: (u) => new PiercingStrike(u.id, u.teamId),
+    },
+    {
       id: ProtectId,
       make: (u) => new Protect(u.id, u.teamId),
     },
   ],
   defaultAbilityId: undefined,
-  defaultActionIds: [ProtectId],
+  defaultActionIds: [PiercingStrikeId, ProtectId],
 }

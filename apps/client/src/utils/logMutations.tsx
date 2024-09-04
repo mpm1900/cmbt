@@ -1,6 +1,12 @@
 import { LogSecondary, LogUnit } from '@/components/ui/log'
 import { CombatLogger } from '@/hooks/state'
-import { DamageParent, SetLastUsedActionId } from '@repo/game/data'
+import {
+  DamageAllId,
+  DamageParent,
+  DamageParentId,
+  DamageTeamId,
+  SetLastUsedActionId,
+} from '@repo/game/data'
 import {
   CombatContext,
   Mutation,
@@ -42,6 +48,25 @@ export function logMutationDiffs(
   const pArmorDiff = diffs.values.physicalArmor - parent.values.physicalArmor
   const mArmorDiff = diffs.values.magicArmor - parent.values.magicArmor
   const ratio = (damageDiff / parent.stats.health) * 100
+  const damageMutations = mutations.filter((m) =>
+    [DamageAllId, DamageParentId, DamageTeamId].includes(m.id)
+  )
+  if (
+    damageMutations.length > 0 &&
+    mArmorDiff === 0 &&
+    pArmorDiff === 0 &&
+    damageDiff === 0
+  ) {
+    log(
+      <LogSecondary className="italic">
+        <LogUnit teamId={parent?.teamId} user={ctx.user} className="opacity-70">
+          {name}
+        </LogUnit>{' '}
+        resisted all damage.
+      </LogSecondary>,
+      (index + 1) * 0.1
+    )
+  }
   if (damageDiff !== 0) {
     log(
       <LogSecondary className="italic">

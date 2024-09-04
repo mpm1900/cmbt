@@ -14,7 +14,7 @@ export function GameStartModal() {
     <Dialog defaultOpen={true}>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>Welcome</DialogTitle>
+          <DialogTitle>Your Journe y Begins!</DialogTitle>
           <DialogDescription>
             Welcome to the game! Maybe I'll put some helpful tip here
             eventually.
@@ -22,7 +22,7 @@ export function GameStartModal() {
         </DialogHeader>
         <DialogFooter>
           <DialogClose asChild>
-            <Button type="submit">Begin Game!</Button>
+            <Button type="submit">Begin!</Button>
           </DialogClose>
         </DialogFooter>
       </DialogContent>

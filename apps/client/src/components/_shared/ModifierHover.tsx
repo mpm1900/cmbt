@@ -1,6 +1,6 @@
 import { ModifierRenderers } from '@/renderers'
 import { HoverCardPortal } from '@radix-ui/react-hover-card'
-import { Modifier } from '@repo/game/types'
+import { Modifier, Trigger } from '@repo/game/types'
 import { PropsWithChildren } from 'react'
 import { FaHourglassStart } from 'react-icons/fa6'
 import { SiPersistent } from 'react-icons/si'
@@ -28,7 +28,7 @@ export function ModifierHover(props: ModifierHoverProps) {
             <div className="flex items-start justify-between">
               <div>{renderer.name(modifier)}</div>
               <div className="font-black text-xs uppercase text-muted-foreground/40">
-                Modifier
+                {modifier instanceof Trigger ? 'Trigger' : 'Modifier'}
               </div>
             </div>
             <ModifierDescription modifier={modifier} />

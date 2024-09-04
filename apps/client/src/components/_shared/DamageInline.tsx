@@ -16,7 +16,10 @@ export function DamageInline(props: PropsWithClassname<DamageInlineProps>) {
   const icon = renderer?.icon
 
   return (
-    <span className={cn('text-white', className)}>
+    <span
+      className={cn('text-white', className)}
+      style={{ color: renderer?.color }}
+    >
       {damage && damage.value !== 0 && (
         <span className="font-black">{damage?.value} </span>
       )}

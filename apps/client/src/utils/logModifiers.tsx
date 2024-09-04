@@ -18,8 +18,11 @@ export function logModifiers(
     modifiers.some((m) => m.filter(u, ctx, args))
   )
   units.forEach((unit, index) => {
+    const unitHasModifier = (modifier: Modifier) =>
+      !!unit.modifiers().find((m) => m.rtid === modifier.rtid)
+
     const unitModifiers = validateModifiers(
-      modifiers.filter((m) => m.filter(unit, ctx, args)),
+      modifiers.filter((m) => m.filter(unit, ctx, args) && !unitHasModifier(m)),
       ctx.modifiers
     )
     const nonStatusModifiers = unitModifiers.filter((m) => !m.statusId)

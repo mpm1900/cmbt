@@ -15,7 +15,10 @@ export function PageLayout(props: PageLayoutProps) {
       {header}
       <div className="flex-1 flex flex-row overflow-hidden">
         {navbar}
-        <div ref={ref} className="flex flex-1 flex-col relative overflow-auto">
+        <div
+          ref={ref}
+          className="flex flex-1 flex-col relative overflow-hidden"
+        >
           {children}
         </div>
         <div>{aside}</div>

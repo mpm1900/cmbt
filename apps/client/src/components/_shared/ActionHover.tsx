@@ -19,7 +19,12 @@ export function ActionHover(props: ActionHoverProps) {
       <HoverCardPortal>
         <HoverCardContent side={side} className="w-[320px]">
           <div className="space-y-2">
-            <div>{renderer.name}</div>
+            <div className="flex items-start justify-between">
+              <div>{renderer.name}</div>
+              <div className="font-black text-xs uppercase text-muted-foreground/40">
+                Action
+              </div>
+            </div>
             <ActionDescription action={action} />
           </div>
         </HoverCardContent>

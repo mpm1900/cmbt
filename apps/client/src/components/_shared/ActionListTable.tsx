@@ -149,7 +149,7 @@ function ActionListRow(props: ActionListRowProps) {
         <TableCell>{(renderer.cost && renderer.cost(action)) || '—'}</TableCell>
         {action.criticalFactor(ZERO_UNIT) ? (
           <TableCell>
-            {action.criticalThreshold(ZERO_UNIT)}% x
+            {action.criticalThreshold(ZERO_UNIT)}%{', '}x
             {action.criticalFactor(ZERO_UNIT)}
           </TableCell>
         ) : (

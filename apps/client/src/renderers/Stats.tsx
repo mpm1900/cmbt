@@ -28,6 +28,12 @@ export const StatRenderers: Record<StatKey, StatRenderer> = {
   arcaneNegation: {
     name: <>Arcane Negation</>,
   },
+  blightExpansion: {
+    name: <>Blight Damage</>,
+  },
+  blightNegation: {
+    name: <>Blight Negation</>,
+  },
   criticalChance: {
     name: <>Crit Chance</>,
     icon: <PiTargetFill className="h-full w-full" />,
@@ -65,6 +71,12 @@ export const StatRenderers: Record<StatKey, StatRenderer> = {
   health: {
     name: <>Health</>,
     icon: <FaHeartbeat className="h-full w-full" />,
+  },
+  holyExpansion: {
+    name: <>Holy Damage</>,
+  },
+  holyNegation: {
+    name: <>Holy Negation</>,
   },
   magic: {
     name: <>Magic</>,

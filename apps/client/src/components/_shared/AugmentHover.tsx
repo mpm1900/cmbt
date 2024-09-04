@@ -21,7 +21,12 @@ export function AugmentHover(props: AugmentHoverProps) {
       <HoverCardPortal>
         <HoverCardContent side="left" className="w-[360px]">
           <div className="space-y-2">
-            {renderer?.name}
+            <div className="flex items-start justify-between">
+              <div>{renderer?.name}</div>
+              <div className="font-black text-xs uppercase text-muted-foreground/40">
+                Augment
+              </div>
+            </div>
             <AugmentDescription augment={augment} />
           </div>
         </HoverCardContent>

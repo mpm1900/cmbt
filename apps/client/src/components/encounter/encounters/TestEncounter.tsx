@@ -48,8 +48,8 @@ const TestNode1: EncounterNode = {
         if (unit) {
           ctx.initializeCombat({
             enemyTeam,
-            enemyUnits: Array.from({ length: 3 }).map((_, index) =>
-              makeEnemyUnit({ index, level: 15, teamId: enemyTeam.id })
+            enemyUnits: Array.from({ length: 3 }).map(() =>
+              makeEnemyUnit({ level: 15, teamId: enemyTeam.id })
             ),
             reward: {
               items: [],
@@ -141,7 +141,6 @@ const TestNode2: EncounterNode = {
         </ChoiceLabel>
       ),
       resolve: (ctx) => {
-        // TODO: but make it harder
         const enemyTeam: Team = {
           id: TeamId(),
           resources: { credits: 0 },
@@ -149,8 +148,8 @@ const TestNode2: EncounterNode = {
         }
         ctx.initializeCombat({
           enemyTeam,
-          enemyUnits: Array.from({ length: 3 }).map((_, index) =>
-            makeEnemyUnit({ index, level: 15, teamId: enemyTeam.id })
+          enemyUnits: Array.from({ length: 3 }).map(() =>
+            makeEnemyUnit({ level: 15, teamId: enemyTeam.id })
           ),
           reward: {
             items: [],

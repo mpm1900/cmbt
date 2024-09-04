@@ -25,7 +25,12 @@ export function ModifierHover(props: ModifierHoverProps) {
           className="w-[320px]"
         >
           <div className="space-y-2">
-            <div>{renderer.name(modifier)}</div>
+            <div className="flex items-start justify-between">
+              <div>{renderer.name(modifier)}</div>
+              <div className="font-black text-xs uppercase text-muted-foreground/40">
+                Modifier
+              </div>
+            </div>
             <ModifierDescription modifier={modifier} />
             <div className="text-xs font-bold text-muted-foreground/60 text-right space-x-4 flex flex-row justify-end items-center">
               {modifier.persistOnSwitch && modifier.persistOnCombatEnd && (

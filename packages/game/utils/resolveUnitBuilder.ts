@@ -47,6 +47,7 @@ function getModifiersFromBuilder(builder: UnitBuilder, unit: Unit): Modifier[] {
 
 export function resolveUnitBuilder(builder: UnitBuilder, teamId: Id): Unit {
   let unit: Unit = {
+    ...BASE_UNIT,
     id: UnitId(),
     teamId,
     baseId: builder.base.id,
@@ -65,13 +66,6 @@ export function resolveUnitBuilder(builder: UnitBuilder, teamId: Id): Unit {
       magic: mapBaseStat('magic', builder.base.stats.magic, builder.level),
       speed: mapBaseStat('speed', builder.base.stats.speed, builder.level),
     },
-    values: BASE_UNIT.values,
-    flags: BASE_UNIT.flags,
-    registry: BASE_UNIT.registry,
-    augments: [],
-    modifiers: () => [],
-    actions: [],
-    metadata: BASE_UNIT.metadata,
   }
 
   unit.stats = {

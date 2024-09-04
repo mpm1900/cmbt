@@ -125,8 +125,8 @@ const ShopIntroductionNode: EncounterNode = {
         resolve: (ctx) => {
           ctx.initializeCombat({
             enemyTeam,
-            enemyUnits: Array.from({ length: 4 }).map((_, index) =>
-              makeEnemyUnit({ index, level: 20, teamId: enemyTeam.id })
+            enemyUnits: Array.from({ length: 4 }).map(() =>
+              makeEnemyUnit({ level: 20, teamId: enemyTeam.id })
             ),
             reward: {
               items: [],
@@ -188,7 +188,7 @@ const ShopWaresNode: EncounterNode = {
     }
     const buyItem = (item: Item) => {
       ctx.updateNpcValue(ShopkeepNpcId, item.id, (v) => (v ?? 0) - 1)
-      ctx.addItem(item)
+      ctx.buyItem(item, item.cost)
     }
     const end = () => {
       const encounter = reset()

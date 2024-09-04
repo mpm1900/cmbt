@@ -41,7 +41,7 @@ export type EncounterContext = {
   updateEncounter: (fn: (e: Encounter) => Partial<Encounter>) => Encounter
   updateUnit: (id: Id, fn: (e: Unit) => Partial<Unit>) => void
   updateTeam: (fn: (e: Team) => Partial<Team>) => void
-  addItem: (item: Item) => void
+  buyItem: (item: Item, cost: number) => void
   addNpc: (npc: Npc) => void
   updateNpcValue: (
     id: Id,

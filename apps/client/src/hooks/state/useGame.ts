@@ -22,7 +22,7 @@ export type GameStore = GameState & {
   ) => void
   updateTeam: (fn: (team: Team) => Partial<Team>) => void
   updateUnits: (fn: (unit: Unit) => Partial<Unit>) => void
-  buyItem: (item: Item) => void
+  buyItem: (item: Item, cost: number) => void
 }
 
 export const useGame = create<GameStore>((set) => ({
@@ -82,14 +82,14 @@ export const useGame = create<GameStore>((set) => ({
       })),
     }))
   },
-  buyItem: (item) => {
+  buyItem: (item, cost) => {
     set((s) => {
       return {
         team: {
           ...s.team,
           resources: {
             ...s.team.resources,
-            credits: s.team.resources.credits - item.cost,
+            credits: s.team.resources.credits - cost,
           },
           items: [...s.team.items, item],
         },

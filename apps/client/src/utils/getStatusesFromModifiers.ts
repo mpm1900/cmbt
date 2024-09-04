@@ -1,11 +1,23 @@
 import { ALL_STATUSES } from '@repo/game/data'
-import { Modifier, Status } from '@repo/game/types'
+import { Id, Modifier, Status } from '@repo/game/types'
 
 export function getStatusesFromModifiers(modifiers: Modifier[]): Status[] {
-  const statusIds = Array.from(
-    new Set(modifiers.filter((m) => m.statusId).map((m) => m.statusId))
+  const statusModifiers = modifiers.filter((m) => m.statusId)
+  const statusIds = Array.from(new Set(statusModifiers.map((m) => m.statusId)))
+  const durations = statusModifiers.reduce<{ [key: Id]: number | undefined }>(
+    (result, curr) => {
+      return {
+        ...result,
+        [curr.statusId!]: curr.duration,
+      }
+    },
+    {}
   )
   return statusIds
     .map((id) => ALL_STATUSES.find((s) => s.id === id))
     .filter((s) => s !== undefined)
+    .map((status) => ({
+      ...status,
+      duration: durations[status.id] ?? status.duration,
+    }))
 }

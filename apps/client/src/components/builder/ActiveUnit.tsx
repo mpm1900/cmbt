@@ -27,7 +27,7 @@ export function ActiveUnit() {
     <div className="flex space-x-4 justify-center">
       {builder && (
         <div>
-          <Card className="w-[320px]">
+          <Card className="w-[360px]">
             <CardHeader>
               <CardTitle>{builder.name}</CardTitle>
               <CardDescription>Set unit details</CardDescription>
@@ -93,40 +93,48 @@ export function ActiveUnit() {
                 <Separator />
                 <div>
                   {builder.base.affinities.length > 0 && (
-                    <div className="flex space-x-2 justify-between">
+                    <div className="flex space-x-4 justify-between">
                       <div className="text-muted-foreground">Affinities</div>
-                      {builder.base.affinities.map((affinity, i) => (
-                        <div key={i} className="flex space-x-1">
-                          <DamageIcon damageType={affinity.type} />
-                          <div className="text-green-200">
-                            {affinity.factor}%
+                      <div className="flex space-x-2">
+                        {builder.base.affinities.map((affinity, i) => (
+                          <div key={i} className="flex space-x-1">
+                            <DamageIcon damageType={affinity.type} />
+                            <div className="text-green-200">
+                              {affinity.factor}%
+                            </div>
                           </div>
-                        </div>
-                      ))}
+                        ))}
+                      </div>
                     </div>
                   )}
                   {builder.base.resistances.length > 0 && (
-                    <div className="flex space-x-2 justify-between">
+                    <div className="flex space-x-4 justify-between">
                       <div className="text-muted-foreground">Resistances</div>
-                      {builder.base.resistances.map((affinity, i) => (
-                        <div key={i} className="flex space-x-1">
-                          <DamageIcon damageType={affinity.type} />
-                          <div className="text-green-200">
-                            {affinity.factor}%
+                      <div className="flex space-x-2">
+                        {builder.base.resistances.map((affinity, i) => (
+                          <div key={i} className="flex space-x-1">
+                            <DamageIcon damageType={affinity.type} />
+                            <div className="text-green-200">
+                              {affinity.factor}%
+                            </div>
                           </div>
-                        </div>
-                      ))}
+                        ))}
+                      </div>
                     </div>
                   )}
                   {builder.base.weaknesses.length > 0 && (
-                    <div className="flex space-x-2 justify-between">
+                    <div className="flex space-x-4 justify-between">
                       <div className="text-muted-foreground"> Weaknesses</div>
-                      {builder.base.weaknesses.map((affinity, i) => (
-                        <div key={i} className="flex space-x-1">
-                          <DamageIcon damageType={affinity.type} />
-                          <div className="text-red-200">{affinity.factor}%</div>
-                        </div>
-                      ))}
+                      <div className="flex space-x-2">
+                        {builder.base.weaknesses.map((affinity, i) => (
+                          <div key={i} className="flex space-x-1">
+                            <DamageIcon damageType={affinity.type} />
+                            <div className="text-red-200">
+                              {affinity.factor}%
+                            </div>
+                          </div>
+                        ))}
+                      </div>
                     </div>
                   )}
                 </div>

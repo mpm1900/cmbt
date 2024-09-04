@@ -7,7 +7,7 @@ import { BASE_UNIT } from '../../Units/system/BASE_UNIT'
 export const CelebiId = nanoid()
 export const Celebi: UnitBase = {
   id: CelebiId,
-  name: 'Dark Paladin',
+  name: 'Death Knight',
   stats: {
     ...BASE_UNIT.stats,
     health: 100,

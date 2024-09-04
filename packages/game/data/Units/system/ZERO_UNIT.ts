@@ -24,14 +24,18 @@ export const ZERO_UNIT: Unit = {
     devotion: 0,
 
     arcaneNegation: 0,
+    blightNegation: 0,
     fireNegation: 0,
     forceNegation: 0,
+    holyNegation: 0,
     psychicNegation: 0,
     shockNegation: 0,
 
     arcaneExpansion: 0,
+    blightExpansion: 0,
     fireExpansion: 0,
     forceExpansion: 0,
+    holyExpansion: 0,
     psychicExpansion: 0,
     shockExpansion: 0,
   },

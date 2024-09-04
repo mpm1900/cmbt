@@ -8,12 +8,13 @@ import { HoverCard, HoverCardContent, HoverCardTrigger } from '../ui/hover-card'
 import { ModifierDescription } from './ModifierDescription'
 
 export type StatusHoverProps = PropsWithChildren<{
+  duration?: number
   status: Status
   side?: 'top' | 'right' | 'bottom' | 'left'
 }>
 
 export function StatusHover(props: StatusHoverProps) {
-  const { children, status, side } = props
+  const { children, duration, status, side } = props
 
   const renderer = StatusRenderers[status.id]
   const modifiers = status.modifiers(ZERO_UNIT, ZERO_UNIT)
@@ -24,8 +25,12 @@ export function StatusHover(props: StatusHoverProps) {
       <HoverCardPortal>
         <HoverCardContent side={side} className="w-[320px]">
           <div className="space-y-2">
-            {renderer.name}
-
+            <div className="flex items-start justify-between">
+              <div> {renderer.name}</div>
+              <div className="font-black text-xs uppercase text-muted-foreground/40">
+                Status
+              </div>
+            </div>
             <div className="space-y-1">
               {modifiers.map((modifier) => (
                 <ModifierDescription key={modifier.id} modifier={modifier} />
@@ -36,7 +41,8 @@ export function StatusHover(props: StatusHoverProps) {
                 <div className="flex items-center space-x-1">
                   <FaHourglassStart />
                   <span>
-                    {status.duration} turn{status.duration > 1 && 's'}
+                    {duration || status.duration} turn
+                    {duration || (status.duration > 1 && 's')}
                   </span>
                 </div>
               )}

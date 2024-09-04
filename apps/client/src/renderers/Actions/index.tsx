@@ -340,7 +340,7 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
             side={props?.side}
             modifier={new StunnedParent({ duration: hyperbeam.stunDuration })}
           />{' '}
-          to this unit for {hyperbeam.stunDuration - 1} turn.
+          to this unit.
         </div>
       )
     },
@@ -428,8 +428,7 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
               })
             }
           />{' '}
-          to this unit for {protect.duration} turn. Cannot be used twice in a
-          row.
+          to this unit. Cannot be used twice in a row.
         </div>
       )
     },
@@ -442,8 +441,15 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
       return (
         <div>
           Removes all damage from this unit. Applies{' '}
-          <ModifierInline side={props?.side} modifier={new StunnedParent({})} />{' '}
-          to this unit for {rest.duration - 1} turns.
+          <ModifierInline
+            side={props?.side}
+            modifier={
+              new StunnedParent({
+                duration: rest.duration,
+              })
+            }
+          />{' '}
+          to this unit.
         </div>
       )
     },
@@ -464,7 +470,7 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
               })
             }
           />{' '}
-          to the battlefield for {sandstorm.duration} turns.
+          to the battlefield.
         </div>
       )
     },

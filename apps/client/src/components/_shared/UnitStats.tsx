@@ -1,5 +1,6 @@
 import { Separator } from '@/components/ui/separator'
 import { useCombatContext } from '@/hooks'
+import { cn } from '@/lib/utils'
 import { DamageRenderers } from '@/renderers/Damage'
 import { StatRenderers } from '@/renderers/Stats'
 import { DamageType, StatKey, Unit } from '@repo/game/types'
@@ -41,14 +42,21 @@ function UnitStat(props: UnitStatProps) {
 
 type UnitDamageStatProps = UnitStatProps & { damageType: DamageType }
 function UnitDamageStat(props: UnitDamageStatProps) {
+  const renderer = DamageRenderers[props.damageType]
   return (
     <div className="flex space-x-4 justify-between">
       <div className="flex items-center space-x-1">
-        <div className="h-[20px] w-[20px]">
-          {DamageRenderers[props.damageType]?.icon}
+        <div
+          className={cn('h-[20px] w-[20px]')}
+          style={{ fill: renderer?.color }}
+        >
+          {renderer?.icon}
         </div>
-        <strong className="text-muted-foreground">
-          {DamageRenderers[props.damageType]?.name}
+        <strong
+          className="text-muted-foreground"
+          style={{ color: renderer?.color }}
+        >
+          {renderer?.name}
         </strong>
       </div>
       <span>
@@ -144,6 +152,13 @@ export function UnitStats(props: UnitStatsProps) {
             after="%"
           />
           <UnitDamageStat
+            stat="blightExpansion"
+            unit={unit}
+            comp={comp}
+            damageType="blight"
+            after="%"
+          />
+          <UnitDamageStat
             stat="fireExpansion"
             unit={unit}
             comp={comp}
@@ -155,6 +170,13 @@ export function UnitStats(props: UnitStatsProps) {
             unit={unit}
             comp={comp}
             damageType="force"
+            after="%"
+          />
+          <UnitDamageStat
+            stat="holyExpansion"
+            unit={unit}
+            comp={comp}
+            damageType="holy"
             after="%"
           />
           <UnitDamageStat
@@ -202,6 +224,13 @@ export function UnitStats(props: UnitStatsProps) {
             after="%"
           />
           <UnitDamageStat
+            stat="blightNegation"
+            unit={unit}
+            comp={comp}
+            damageType="blight"
+            after="%"
+          />
+          <UnitDamageStat
             stat="fireNegation"
             unit={unit}
             comp={comp}
@@ -213,6 +242,13 @@ export function UnitStats(props: UnitStatsProps) {
             unit={unit}
             comp={comp}
             damageType="force"
+            after="%"
+          />
+          <UnitDamageStat
+            stat="holyNegation"
+            unit={unit}
+            comp={comp}
+            damageType="holy"
             after="%"
           />
           <UnitDamageStat

@@ -20,7 +20,13 @@ export function ItemHover(props: ItemHoverProps) {
       <HoverCardPortal>
         <HoverCardContent side={side} className="w-[320px]">
           <div className="space-y-2">
-            <div>{item.name}</div>
+            <div className="flex items-start justify-between">
+              <div>{item.name}</div>
+              <div className="font-black text-xs uppercase text-muted-foreground/40">
+                Item
+              </div>
+            </div>
+
             {item.augment && <AugmentDescription augment={item.augment} />}
             {item.action && <ActionDescription action={item.action(unit)} />}
           </div>

@@ -4,9 +4,9 @@ import { ElementProps } from '@/types'
 export function ChoiceAttributes(props: ElementProps) {
   return (
     <div className={cn('flex items-center space-x-1', props.className)}>
-      <div>[</div>
+      <div className="font-bold">[</div>
       {props.children}
-      <div>]</div>
+      <div className="font-bold">]</div>
     </div>
   )
 }

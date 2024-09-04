@@ -25,6 +25,7 @@ const StartNode: WorldNode = {
     id: '',
     nodes: [],
     activeNodeId: '',
+    visitedNodeIds: [],
     values: {},
     setup: () => {},
   },

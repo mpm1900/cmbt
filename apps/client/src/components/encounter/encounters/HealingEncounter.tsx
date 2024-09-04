@@ -85,5 +85,6 @@ export const HealingEncounter: Encounter = {
   setup: (ctx) => {},
   activeNodeId: HealingIntroductionNode.id,
   nodes: [HealingIntroductionNode],
+  visitedNodeIds: [],
   values: {},
 }

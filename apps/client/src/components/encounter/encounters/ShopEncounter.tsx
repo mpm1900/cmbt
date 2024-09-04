@@ -1,4 +1,5 @@
 import { Button } from '@/components/ui/button'
+import { Separator } from '@/components/ui/separator'
 import { rebaseItem } from '@/utils'
 import {
   Key01,
@@ -39,18 +40,28 @@ const ShopIntroductionNode: EncounterNode = {
   id: nanoid(),
   icon: <GiCash />,
   title: 'Test Shop',
-  text: (
-    <div className="space-y-4">
-      <Narration>
-        You look around a dusty old shop and see small shopkeep just barely
-        visable behind the counter.
-      </Narration>
+  render: (ctx) => {
+    const visitCount = ctx.encounter.visitedNodeIds.filter(
+      (id) => id === ctx.encounter.activeNodeId
+    ).length
+
+    if (visitCount === 0) {
+      ctx.clearLog()
+      ctx.log(
+        <Narration>
+          You look around a dusty old shop and see small shopkeep just barely
+          visable behind the counter.
+        </Narration>
+      )
+    }
+    ctx.log(
       <div>
         "Welcome to the testy test, test shop. How can I help you?"{' '}
         <Narration>You hear the shopkeep say.</Narration>
       </div>
-    </div>
-  ),
+    )
+    ctx.log(<Separator />)
+  },
   tabs: (ctx) => [
     {
       id: nanoid(),
@@ -83,9 +94,7 @@ const ShopIntroductionNode: EncounterNode = {
           </ChoiceLabel>
         ),
         resolve: (ctx) => {
-          ctx.updateEncounter((s) => ({
-            activeNodeId: ShopWaresNode.id,
-          }))
+          ctx.gotoNode(ShopWaresNode.id)
         },
       },
       charmAttempts === 0 && npc
@@ -125,21 +134,25 @@ const ShopIntroductionNode: EncounterNode = {
         resolve: (ctx) => {
           ctx.initializeCombat({
             enemyTeam,
-            enemyUnits: Array.from({ length: 4 }).map(() =>
-              makeEnemyUnit({ level: 20, teamId: enemyTeam.id })
-            ),
+            enemyUnits: Array.from({ length: 1 }).map(() => {
+              const unit = makeEnemyUnit({ level: 40, teamId: enemyTeam.id })
+              unit.name = npc?.name ?? unit.name
+              return unit
+            }),
             reward: {
               items: [],
               resources: {
                 credits: 200,
               },
-              xp: 0,
+              xp: 5555,
             },
             onSuccess: () => {
               ctx.updateActiveWorldNode((n) => ({
                 completed: true,
                 visited: true,
               }))
+              ctx.clearLog()
+              ctx.nav('/world')
             },
             onFailure: () => {},
           })
@@ -154,6 +167,7 @@ const ShopIntroductionNode: EncounterNode = {
             visited: true,
             encounter: ctx.encounter,
           }))
+          ctx.clearLog()
           ctx.back()
         },
       },
@@ -167,24 +181,23 @@ const ShopWaresNode: EncounterNode = {
   id: nanoid(),
   icon: <GiCash />,
   title: 'Test Shop - View Wares',
-  text: (
-    <div className="space-y-4">
-      <div>"We have a number of things you might like!"</div>
+
+  render: (ctx) => {
+    ctx.log(<div>"We have a number of things you might like!"</div>)
+    ctx.log(
       <div>
         <Narration>
           The shopkeep gestures toward the shelf behind them.
         </Narration>
       </div>
-    </div>
-  ),
-  choices: (ctx) => [],
+    )
+    ctx.log(<Separator />)
+  },
   Component: (props) => {
     const { ctx } = props
     const npc = ctx.npcs.find((c) => c.id === ShopkeepNpcId)
     const reset = () => {
-      return ctx.updateEncounter((s) => ({
-        activeNodeId: ShopIntroductionNode.id,
-      }))
+      return ctx.gotoNode(ShopIntroductionNode.id)
     }
     const buyItem = (item: Item) => {
       ctx.updateNpcValue(ShopkeepNpcId, item.id, (v) => (v ?? 0) - 1)
@@ -250,6 +263,9 @@ export const ShopEncounter: Encounter = {
       ctx.addNpc({
         id: ShopkeepNpcId,
         name: 'Shopkeep Person',
+        attr: {
+          alive: true,
+        },
         values: {
           charmAttempts: 0,
           [PotionId]: 5,
@@ -261,5 +277,6 @@ export const ShopEncounter: Encounter = {
   },
   activeNodeId: ShopIntroductionNode.id,
   nodes: [ShopIntroductionNode, ShopWaresNode],
+  visitedNodeIds: [],
   values: {},
 }

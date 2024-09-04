@@ -1,7 +1,7 @@
 import {
   ActionResult,
   CombatContext,
-  CombatReward,
+  CombatRewards,
   Id,
   Item,
   Modifier,
@@ -23,7 +23,7 @@ export type InitializeProps = {
   units: Unit[]
   user: Team
   enemy: Team
-  reward: CombatReward
+  reward: CombatRewards
   mutations?: Mutation[]
   modifiers?: Modifier[]
   onSuccess: () => void
@@ -32,7 +32,7 @@ export type InitializeProps = {
 
 export type CombatLog = { id: Id; delay: number; node: ReactNode }
 export type CombatState = CombatContext & {
-  reward: CombatReward
+  reward: CombatRewards
   logs: CombatLog[]
   log: CombatLogger
   updateLog: (id: Id, fn: (log: CombatLog) => Partial<CombatLog>) => void

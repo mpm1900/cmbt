@@ -89,5 +89,6 @@ export const ReviveEncounter: Encounter = {
   setup: (ctx) => {},
   activeNodeId: ReviveIntroductionNode.id,
   nodes: [ReviveIntroductionNode],
+  visitedNodeIds: [],
   values: {},
 }

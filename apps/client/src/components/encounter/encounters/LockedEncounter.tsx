@@ -58,5 +58,6 @@ export const LockedEncounter: Encounter = {
   setup: () => {},
   nodes: [LockedNode1()],
   activeNodeId: LockedNodeId,
+  visitedNodeIds: [],
   values: {},
 }

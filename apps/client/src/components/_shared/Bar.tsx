@@ -1,6 +1,6 @@
 import { cn } from '@/lib/utils'
 import { PropsWithClassname } from '@/types'
-import { motion } from 'framer-motion'
+import { AnimationDefinition, motion, Transition } from 'framer-motion'
 import { CSSProperties } from 'react'
 
 export type BarProps = PropsWithClassname<{
@@ -8,10 +8,20 @@ export type BarProps = PropsWithClassname<{
   initial?: number
   variant: string
   style?: CSSProperties
+  transition?: Partial<Transition>
+  onAnimationComplete?: (def: AnimationDefinition) => void
 }>
 
 export function Bar(props: BarProps) {
-  const { className, style = {}, value, initial = 0, variant } = props
+  const {
+    className,
+    style = {},
+    value,
+    initial = 0,
+    variant,
+    transition,
+    onAnimationComplete,
+  } = props
 
   return (
     <div
@@ -25,11 +35,13 @@ export function Bar(props: BarProps) {
         className="absolute top-0 left-0 h-3 bg-white/70"
         initial={{ width: `${initial}%` }}
         animate={{ width: `${value}%` }}
+        onAnimationComplete={onAnimationComplete}
         transition={{
           type: 'spring',
           damping: 20,
           stiffness: 80,
           delay: 0.5,
+          ...(transition ?? {}),
         }}
       />
       <motion.div

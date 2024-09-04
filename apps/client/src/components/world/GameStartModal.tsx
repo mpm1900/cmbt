@@ -14,7 +14,7 @@ export function GameStartModal() {
     <Dialog defaultOpen={true}>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>Your Journe y Begins!</DialogTitle>
+          <DialogTitle>Your Journey Begins!</DialogTitle>
           <DialogDescription>
             Welcome to the game! Maybe I'll put some helpful tip here
             eventually.

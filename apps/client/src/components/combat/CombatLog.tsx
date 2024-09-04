@@ -4,12 +4,12 @@ import { useRef } from 'react'
 import { CombatLogItem } from './CombatLogItem'
 
 export function CombatLog() {
-  const containerRef = useRef<HTMLDivElement>(null)
   const { logs, updateLog } = useCombat((s) => ({
     logs: s.logs,
     updateLog: s.updateLog,
   }))
 
+  const containerRef = useRef<HTMLDivElement>(null)
   const ref = useScrollToView(containerRef.current, logs.length)
 
   return (

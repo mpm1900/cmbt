@@ -43,12 +43,25 @@ export function useEncounterContext(): EncounterContext {
     team: game.team,
     units: game.units,
     npcs: npcs.npcs,
-    back: () => nav({ to: '/world' }),
+    nav: (to) => {
+      store.clearLog()
+      return nav({ to })
+    },
+    back: () => {
+      store.clearLog()
+      nav({ to: '/world' })
+    },
     log: store.log,
+    clearLog: store.clearLog,
     initializeCombat,
     updateActiveWorldNode: (fn) =>
       game.updateWorldNode(game.world.activeNodeId, fn),
     updateEncounter: store.updateEncounter,
+    gotoNode: (id) =>
+      store.updateEncounter((e) => ({
+        activeNodeId: id,
+        visitedNodeIds: [...e.visitedNodeIds, id],
+      })),
     updateTeam: game.updateTeam,
     updateUnit: updateUnit,
     buyItem: game.buyItem,

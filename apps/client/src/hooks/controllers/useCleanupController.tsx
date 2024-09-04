@@ -11,8 +11,10 @@ export function useCleanupController() {
   let queue = useCleanup()
   let ctx = useCombatContext()
   const log = useCombat((s) => s.log)
+  const setStatus = useCombat((s) => s.setStatus)
 
   useEffect(() => {
+    // return setStatus('done')
     if (ctx.turn.status === 'cleanup') {
       const teams = getTeamsWithSelectionRequired(ctx)
       if (queue.queue.length === teams.length && teams.length > 0) {

@@ -1,3 +1,4 @@
+import { Separator } from '@/components/ui/separator'
 import { SpeedUpTeamId, TeamId, UpdateStatTeam } from '@repo/game/data'
 import { Encounter, EncounterNode, Team } from '@repo/game/types'
 import { makeEnemyUnit } from '@repo/game/utils'
@@ -14,14 +15,15 @@ const CombatIntroductionNode: EncounterNode = {
   id: nanoid(),
   icon: <BsQuestionLg />,
   title: 'Enemies in the distance',
-  text: (
-    <div className="space-y-4">
+  render: (ctx) => {
+    ctx.log(
       <Narration>
         Ahead of you stands a group of enemies. They don't seem to have noticed
         you yet.
       </Narration>
-    </div>
-  ),
+    )
+    ctx.log(<Separator />)
+  },
   choices: () => [
     {
       id: nanoid(),
@@ -48,7 +50,7 @@ const CombatIntroductionNode: EncounterNode = {
         if (unit) {
           ctx.initializeCombat({
             enemyTeam,
-            enemyUnits: Array.from({ length: 3 }).map(() =>
+            enemyUnits: Array.from({ length: 2 }).map(() =>
               makeEnemyUnit({ level: 15, teamId: enemyTeam.id })
             ),
             reward: {
@@ -56,7 +58,7 @@ const CombatIntroductionNode: EncounterNode = {
               resources: {
                 credits: 200,
               },
-              xp: 0,
+              xp: 300,
             },
             modifiers: [
               new UpdateStatTeam({
@@ -72,6 +74,7 @@ const CombatIntroductionNode: EncounterNode = {
                 completed: true,
                 visited: true,
               }))
+              ctx.nav('/world')
             },
             onFailure: () => {},
           })
@@ -125,17 +128,16 @@ const CombatNode2: EncounterNode = {
   id: nanoid(),
   icon: <IoSkullSharp />,
   title: 'Angry Enemies',
-  text: (
-    <div className="space-y-4">
+  render: (ctx) => {
+    ctx.log(
       <div>
         "Well look who it is, if it isn't some fresh meet for the grinder.
         You've wondered into the wrong neighborhood travelers."
       </div>
-      <div>
-        <Narration>You see the group ready their weapons.</Narration>
-      </div>
-    </div>
-  ),
+    )
+    ctx.log(<Narration>You see the group ready their weapons.</Narration>)
+    ctx.log(<Separator />)
+  },
   choices: () => [
     {
       id: nanoid(),
@@ -159,7 +161,7 @@ const CombatNode2: EncounterNode = {
         }
         ctx.initializeCombat({
           enemyTeam,
-          enemyUnits: Array.from({ length: 3 }).map(() =>
+          enemyUnits: Array.from({ length: 2 }).map(() =>
             makeEnemyUnit({ level: 15, teamId: enemyTeam.id })
           ),
           reward: {
@@ -167,13 +169,14 @@ const CombatNode2: EncounterNode = {
             resources: {
               credits: 200,
             },
-            xp: 0,
+            xp: 300,
           },
           onSuccess: () => {
             ctx.updateActiveWorldNode((n) => ({
               completed: true,
               visited: true,
             }))
+            ctx.nav('/world')
           },
           onFailure: () => {},
         })
@@ -189,6 +192,7 @@ export function CombatEncounter(): Encounter {
     setup: () => {},
     nodes: [CombatIntroductionNode, CombatNode2],
     activeNodeId: CombatIntroductionNode.id,
+    visitedNodeIds: [],
     values: {},
   }
 }

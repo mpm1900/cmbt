@@ -2,6 +2,7 @@ import { SpeedUpTeamId, TeamId, UpdateStatTeam } from '@repo/game/data'
 import { Encounter, EncounterNode, Team } from '@repo/game/types'
 import { makeEnemyUnit } from '@repo/game/utils'
 import { nanoid } from 'nanoid'
+import { BsQuestionLg } from 'react-icons/bs'
 import { GiCrossedSwords } from 'react-icons/gi'
 import { IoMdReturnLeft, IoMdReturnRight } from 'react-icons/io'
 import { IoSkullSharp } from 'react-icons/io5'
@@ -9,18 +10,16 @@ import { ChoiceAttributes } from '../ChoiceAttributes'
 import { ChoiceLabel } from '../ChoiceLabel'
 import { Narration } from '../Narration'
 
-const TestNode1: EncounterNode = {
+const CombatIntroductionNode: EncounterNode = {
   id: nanoid(),
-  icon: <IoSkullSharp />,
-  title: 'Test Encounter 001',
+  icon: <BsQuestionLg />,
+  title: 'Enemies in the distance',
   text: (
     <div className="space-y-4">
       <Narration>
         Ahead of you stands a group of enemies. They don't seem to have noticed
         you yet.
       </Narration>
-
-      <div>What will you do?</div>
     </div>
   ),
   choices: () => [
@@ -31,6 +30,7 @@ const TestNode1: EncounterNode = {
           before={
             <ChoiceAttributes>
               <GiCrossedSwords />
+              {', 50%'}
             </ChoiceAttributes>
           }
           after={<IoMdReturnRight />}
@@ -80,9 +80,20 @@ const TestNode1: EncounterNode = {
     },
     {
       id: nanoid(),
-      label: <div>Get the enemies' attention</div>,
+      label: (
+        <ChoiceLabel
+          before={
+            <ChoiceAttributes>
+              <BsQuestionLg />
+            </ChoiceAttributes>
+          }
+          after={<IoMdReturnRight />}
+        >
+          Get the enemies' attention
+        </ChoiceLabel>
+      ),
       resolve: (ctx) =>
-        ctx.updateEncounter((e) => ({ activeNodeId: TestNode2.id })),
+        ctx.updateEncounter((e) => ({ activeNodeId: CombatNode2.id })),
     },
     {
       id: nanoid(),
@@ -110,10 +121,10 @@ const TestNode1: EncounterNode = {
   ],
 }
 
-const TestNode2: EncounterNode = {
+const CombatNode2: EncounterNode = {
   id: nanoid(),
   icon: <IoSkullSharp />,
-  title: 'Test Encounter 001',
+  title: 'Angry Enemies',
   text: (
     <div className="space-y-4">
       <div>
@@ -171,11 +182,13 @@ const TestNode2: EncounterNode = {
   ],
 }
 
-export const TestEncounterId = nanoid()
-export const TestEncounter: Encounter = {
-  id: TestEncounterId,
-  setup: () => {},
-  nodes: [TestNode1, TestNode2],
-  activeNodeId: TestNode1.id,
-  values: {},
+export const CombatEncounterId = nanoid()
+export function CombatEncounter(): Encounter {
+  return {
+    id: CombatEncounterId,
+    setup: () => {},
+    nodes: [CombatIntroductionNode, CombatNode2],
+    activeNodeId: CombatIntroductionNode.id,
+    values: {},
+  }
 }

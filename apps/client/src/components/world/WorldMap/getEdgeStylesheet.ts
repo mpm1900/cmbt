@@ -24,9 +24,9 @@ export function getEdgeStylesheet(
         const targetState = getNodeState(edge.target(), options)
         if (sourceState.isLocked && !targetState.isCompleted) return 0
         if (!sourceState.isVisited && !sourceState.isActive) return 0
-        if (state.isInHoverPath) return 0.8
+        if (state.isInHoverPath) return 1.0
         const isPathable = isPathableEdge(edge, options)
-        return isPathable ? 0.3 : 0.1
+        return isPathable ? 0.2 : 0.1
       },
       'line-style': (edge) => {
         const state = getEdgeState(edge, options)

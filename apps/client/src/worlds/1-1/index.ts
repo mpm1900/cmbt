@@ -1,8 +1,8 @@
 import {
+  CombatEncounter,
   HealingEncounter,
   LockedEncounter,
   ShopEncounter,
-  TestEncounter,
 } from '@/components/encounter/encounters'
 import { ReviveEncounter } from '@/components/encounter/encounters/ReviveEncounter'
 import { Id, World, WorldNode } from '@repo/game/types'
@@ -73,7 +73,7 @@ const TestNode: NodeMaker = (id, edges, overrides) => ({
   icon: '?',
   visitedIcon: 'combat',
   completedIcon: 'combat',
-  encounter: TestEncounter,
+  encounter: CombatEncounter(),
   edges,
   completed: false,
   repeatable: false,
@@ -121,7 +121,7 @@ export function makeWorld1_1(): World {
     nodes: [
       StartNode,
       ShopNode('0', [edge(test('1'))]),
-      TestNode('0', [edge(heal('0'))], { retreatable: false }),
+      TestNode('0', [edge(test('2'))], { retreatable: false }),
       TestNode('1', [edge(test('2'))]),
       TestNode('4', [edge(lock('0')), edge(revive('0'))]),
       ReviveNode('0', [edge(test('4'))]),

@@ -14,6 +14,8 @@ export const FlameShield: Augment = {
         percentage: true,
         sourceId: unit.id,
         parentId: unit.id,
+        persistOnCombatEnd: true,
+        persistOnSwitch: true,
         static: 50,
       }),
     ]

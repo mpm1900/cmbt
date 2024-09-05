@@ -11,6 +11,8 @@ export const Regeneration: Augment = {
       new HealParentOnUnitSwitch({
         sourceId: unit.id,
         parentId: unit.id,
+        persistOnCombatEnd: true,
+        persistOnSwitch: true,
         factor: 0.3,
       }),
     ]

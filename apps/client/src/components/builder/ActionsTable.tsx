@@ -13,7 +13,7 @@ export function ActionsTable(props: ActionsTablePrpos) {
 
   return (
     <ActionListTable
-      actions={builder.config.actions}
+      makers={builder.config.actions}
       selectedActionIds={builder.actions.map((m) => m.make(ZERO_UNIT).id)}
       maxActionCount={builder.config.actionsCount}
       onSelect={(maker, isSelected) => {

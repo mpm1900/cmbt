@@ -31,7 +31,7 @@ export function EditUnitModal(props: EditUnitModalProps) {
     <Dialog>
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent
-        className="max-w-[920px]"
+        className="max-w-[980px]"
         onOpenAutoFocus={(e) => e.preventDefault()}
       >
         <DialogHeader>
@@ -135,7 +135,8 @@ export function EditUnitModal(props: EditUnitModalProps) {
               </div>
               <Separator />
               <ActionListTable
-                actions={config.actions}
+                makers={config.actions}
+                unit={unit}
                 maxActionCount={config.actionsCount}
                 selectedActionIds={selectedActionIds}
                 onSelect={(maker, isSelected) => {

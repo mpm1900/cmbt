@@ -50,6 +50,7 @@ export type ActionResult = {
 
 export type ActionMaker = {
   id: Id
+  level?: number
   make: (source: Unit) => Action
 }
 

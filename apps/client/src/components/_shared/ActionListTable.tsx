@@ -1,8 +1,7 @@
 import { cn } from '@/lib/utils'
 import { ActionRenderers } from '@/renderers'
-import { ZERO_UNIT } from '@repo/game/data'
-import { ActionMaker, Id } from '@repo/game/types'
-import { useState } from 'react'
+import { BASE_UNIT, ZERO_UNIT } from '@repo/game/data'
+import { ActionMaker, Id, Unit } from '@repo/game/types'
 import { Badge } from '../ui/badge'
 import { Checkbox } from '../ui/checkbox'
 import {
@@ -17,19 +16,25 @@ import { ActionHover } from './ActionHover'
 import { DamageInline } from './DamageInline'
 
 export type ActionListTableProps = {
-  actions: ActionMaker[]
+  unit?: Unit
+  makers: ActionMaker[]
   selectedActionIds: Id[]
   maxActionCount: number
   onSelect?: (maker: ActionMaker, isSelected: boolean) => void
 }
 
 export function ActionListTable(props: ActionListTableProps) {
-  const { actions, selectedActionIds, maxActionCount, onSelect } = props
-  const [hoverRow, setHoverRow] = useState<Id>()
+  const {
+    makers,
+    selectedActionIds,
+    maxActionCount,
+    unit = BASE_UNIT,
+    onSelect,
+  } = props
   const list = [
-    ...actions.filter((m) => selectedActionIds.includes(m.make(ZERO_UNIT).id)),
-    ...actions.filter((m) => !selectedActionIds.includes(m.make(ZERO_UNIT).id)),
-  ]
+    ...makers.filter((m) => selectedActionIds.includes(m.id)),
+    ...makers.filter((m) => !selectedActionIds.includes(m.id)),
+  ].filter((maker) => !maker.level || maker.level <= unit.level)
 
   return (
     <Table>
@@ -37,6 +42,7 @@ export function ActionListTable(props: ActionListTableProps) {
         <TableRow>
           {onSelect && <TableHead></TableHead>}
           <TableHead>Name</TableHead>
+          <TableHead>Req</TableHead>
           <TableHead>Type</TableHead>
           <TableHead>Accuracy</TableHead>
           <TableHead>Base Damage</TableHead>
@@ -46,7 +52,7 @@ export function ActionListTable(props: ActionListTableProps) {
       </TableHeader>
       <TableBody>
         {list.map((maker) => {
-          const action = maker.make(ZERO_UNIT)
+          const action = maker.make(unit)
           const isSelected = !!selectedActionIds.includes(action.id)
           const isDisabled =
             !isSelected && selectedActionIds.length >= maxActionCount
@@ -54,10 +60,9 @@ export function ActionListTable(props: ActionListTableProps) {
             <ActionListRow
               key={maker.id}
               maker={maker}
+              unit={unit}
               isSelected={isSelected}
               isDisabled={isDisabled}
-              onMouseEnter={() => setHoverRow(maker.id)}
-              onMouseLeave={() => setHoverRow(undefined)}
               onSelect={onSelect}
             />
           )
@@ -69,24 +74,16 @@ export function ActionListTable(props: ActionListTableProps) {
 
 type ActionListRowProps = {
   maker: ActionMaker
+  unit: Unit
   isSelected: boolean
   isDisabled: boolean
-  onMouseEnter: React.MouseEventHandler<HTMLTableRowElement>
-  onMouseLeave: React.MouseEventHandler<HTMLTableRowElement>
   onSelect?: (maker: ActionMaker, isSelected: boolean) => void
 }
 function ActionListRow(props: ActionListRowProps) {
-  const {
-    maker,
-    isDisabled,
-    isSelected,
-    onMouseEnter,
-    onMouseLeave,
-    onSelect,
-  } = props
-  const action = maker.make(ZERO_UNIT)
+  const { maker, unit, isDisabled, isSelected, onSelect } = props
+  const action = maker.make(unit)
   const renderer = ActionRenderers[action.id]
-  const accuracy = action.threshold(ZERO_UNIT)
+  const accuracy = action.threshold(unit)
 
   return (
     <ActionHover action={action} side="right">
@@ -100,8 +97,6 @@ function ActionListRow(props: ActionListRowProps) {
             onSelect(maker, !isSelected)
           }
         }}
-        onMouseEnter={onMouseEnter}
-        onMouseLeave={onMouseLeave}
       >
         {onSelect && (
           <TableCell className="flex items-center">
@@ -117,6 +112,7 @@ function ActionListRow(props: ActionListRowProps) {
           </TableCell>
         )}
         <TableCell>{renderer.name}</TableCell>
+        <TableCell>{maker.level ? `Lv.${maker.level}` : '—'}</TableCell>
         <TableCell>
           {action.attackType ? (
             <Badge

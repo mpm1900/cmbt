@@ -81,6 +81,7 @@ export const TyranitarConfig: UnitBaseConfig = {
     },
     {
       id: PowerStanceId,
+      level: 50,
       make: (unit) => new PowerStance(unit.id, unit.teamId),
     },
     {

@@ -24,7 +24,7 @@ export function UnitBuilder() {
   const builder = store.builders.find((b) => b.id === ui.activeBuilderId)
 
   return (
-    <div className="flex space-y-4 lg:space-x-4 justify-center flex-col lg:flex-row">
+    <div className="flex space-y-4 lg:space-y-0 lg:space-x-4 justify-center flex-col lg:flex-row">
       {builder && (
         <div>
           <Card className="w-full lg:w-[360px]">

@@ -20,7 +20,7 @@ export function DamageIcon(props: DamageIconProps) {
   return (
     <TooltipProvider>
       <Tooltip delayDuration={200}>
-        <TooltipTrigger>
+        <TooltipTrigger asChild>
           <div className={cn(className)} style={{ fill: renderer?.color }}>
             {icon}
           </div>

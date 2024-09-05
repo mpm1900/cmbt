@@ -67,8 +67,13 @@ import {
   WardId,
   WillOWispId,
 } from '@repo/game/data'
-import { Action, ActionResult, CombatContext, Unit } from '@repo/game/types'
-import { DamageIcon } from '@shared/DamageIcon'
+import {
+  Action,
+  ActionResult,
+  CombatContext,
+  Damage,
+  Unit,
+} from '@repo/game/types'
 import { DamageInline } from '@shared/DamageInline'
 import { MagicArmor } from '@shared/MagicArmor'
 import { ModifierInline } from '@shared/ModifierInline'
@@ -324,18 +329,15 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
     costAlt: <span className="text-blue-300">30 FP</span>,
     description: (action, props) => {
       const hyperbeam = action as HyperBeam
+      const d: Damage = {
+        damageType: 'force',
+        attackType: 'magic',
+        value: 0,
+      }
       return (
         <div>
-          Deals{' '}
-          <DamageInline
-            className="items-start"
-            damage={{
-              damageType: 'force',
-              attackType: 'magic',
-              value: 0,
-            }}
-          />{' '}
-          equal to twice this unit's magic stat to target enemy unit. Applies{' '}
+          Deals <DamageInline damage={d} /> equal to twice this unit's magic
+          stat to target enemy unit. Applies{' '}
           <ModifierInline
             side={props?.side}
             modifier={new StunnedParent({ duration: hyperbeam.stunDuration })}
@@ -395,18 +397,10 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
   [PowerWordKillId]: {
     name: ACTION_NAMES[PowerWordKillId],
     baseDamage: () => '∞',
-    description: () => (
+    description: (action) => (
       <>
-        Deals{' '}
-        <span className="text-white">
-          <span>∞</span>{' '}
-          <DamageIcon
-            damageType="arcane"
-            className="mb-[-3px] h-[20px] w-[20px]"
-          />{' '}
-          damage
-        </span>{' '}
-        to target enemy unit. Ignores all damage negation.
+        Deals <DamageInline damage={action.damage} /> to target enemy unit.
+        Ignores all damage negation.
       </>
     ),
     lore: () => (

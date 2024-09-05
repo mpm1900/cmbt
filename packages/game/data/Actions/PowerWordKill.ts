@@ -26,6 +26,12 @@ export class PowerWordKill extends Action {
       attackType: 'magic',
       maxTargetCount: 1,
     })
+
+    this.damage = {
+      value: Infinity,
+      attackType: 'magic',
+      damageType: 'force',
+    }
   }
 
   threshold = (source: Unit): number | undefined => {

@@ -27,6 +27,8 @@ export const Witch: UnitBase = {
     focus: 40,
     stamina: 30,
     devotion: 20,
+
+    xpMultiplier: 70,
   },
   augmentSlots: 3,
   affinities: [],

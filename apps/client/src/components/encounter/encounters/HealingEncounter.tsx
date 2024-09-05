@@ -9,6 +9,7 @@ import { applyMutations, getModifiersFromUnit } from '@repo/game/utils'
 import { nanoid } from 'nanoid/non-secure'
 import { GiWaterfall } from 'react-icons/gi'
 import { IoMdReturnLeft, IoMdReturnRight } from 'react-icons/io'
+import { ChoiceAttributes } from '../ChoiceAttributes'
 import { ChoiceLabel } from '../ChoiceLabel'
 import { Narration } from '../Narration'
 
@@ -39,7 +40,9 @@ const HealingIntroductionNode: EncounterNode = {
         id: nanoid(),
         label: (
           <ChoiceLabel
-            before={<div>{StatRenderers.health.icon}</div>}
+            before={
+              <ChoiceAttributes>{StatRenderers.health.icon}</ChoiceAttributes>
+            }
             after={<IoMdReturnRight />}
           >
             Heal {u.name}{' '}

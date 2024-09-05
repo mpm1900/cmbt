@@ -42,7 +42,7 @@ const ShopNode: NodeMaker = (id, edges, overrides) => ({
   size: 20,
   icon: '?',
   completedIcon: 'shop',
-  encounter: ShopEncounter,
+  encounter: ShopEncounter(),
   edges,
   completed: false,
   repeatable: true,

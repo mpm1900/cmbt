@@ -256,27 +256,30 @@ const ShopWaresNode: EncounterNode = {
 
 export const ShopkeepNpcId = nanoid()
 export const ShopEncounterId = nanoid()
-export const ShopEncounter: Encounter = {
-  id: nanoid(),
-  setup: (ctx) => {
-    if (!ctx.npcs.find((c) => c.id === ShopkeepNpcId)) {
-      ctx.addNpc({
-        id: ShopkeepNpcId,
-        name: 'Shopkeep Person',
-        attr: {
-          alive: true,
-        },
-        values: {
-          charmAttempts: 0,
-          [PotionId]: 5,
-          [Key01Id]: 1,
-          [RubyId]: 1,
-        },
-      })
-    }
-  },
-  activeNodeId: ShopIntroductionNode.id,
-  nodes: [ShopIntroductionNode, ShopWaresNode],
-  visitedNodeIds: [],
-  values: {},
+export const ShopEncounter = (): Encounter => {
+  return {
+    id: ShopEncounterId,
+    setup: (ctx) => {
+      ctx.updateEncounter((e) => ({ visitedNodeIds: [] }))
+      if (!ctx.npcs.find((c) => c.id === ShopkeepNpcId)) {
+        ctx.addNpc({
+          id: ShopkeepNpcId,
+          name: 'Shopkeep Person',
+          attr: {
+            alive: true,
+          },
+          values: {
+            charmAttempts: 0,
+            [PotionId]: 5,
+            [Key01Id]: 1,
+            [RubyId]: 1,
+          },
+        })
+      }
+    },
+    activeNodeId: ShopIntroductionNode.id,
+    nodes: [ShopIntroductionNode, ShopWaresNode],
+    visitedNodeIds: [],
+    values: {},
+  }
 }

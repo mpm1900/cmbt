@@ -1,4 +1,4 @@
-import { useGame, useUnitBuilders } from '@/hooks/state'
+import { useGame, useNpcs, useUnitBuilders } from '@/hooks/state'
 import { cn } from '@/lib/utils'
 import { PropsWithClassname } from '@/types'
 import { makeWorld1_1 } from '@/worlds'
@@ -14,6 +14,7 @@ export function StartButton(props: PropsWithClassname) {
   const nav = useNavigate()
   const game = useGame()
   const store = useUnitBuilders()
+  const npcs = useNpcs()
 
   function initialize() {
     const team: Team = {
@@ -23,6 +24,8 @@ export function StartButton(props: PropsWithClassname) {
         credits: 1500,
       },
     }
+
+    npcs.removeWhere(() => true)
     const world = makeWorld1_1()
     game.initialize({
       team,

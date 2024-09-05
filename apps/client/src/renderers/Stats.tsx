@@ -105,4 +105,7 @@ export const StatRenderers: Record<StatKey, StatRenderer> = {
   stamina: {
     name: <>Stamina</>,
   },
+  xpMultiplier: {
+    name: <>XP Multiplier</>,
+  },
 }

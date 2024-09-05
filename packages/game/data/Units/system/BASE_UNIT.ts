@@ -13,5 +13,7 @@ export const BASE_UNIT: Unit = {
     holyExpansion: 100,
     psychicExpansion: 100,
     shockExpansion: 100,
+
+    xpMultiplier: 100,
   },
 }

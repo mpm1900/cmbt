@@ -1,4 +1,5 @@
 import { useCombat } from '@/hooks/state'
+import { applyModifiers } from '@repo/game/utils'
 import { GiCreditsCurrency } from 'react-icons/gi'
 import { XpBar } from './XpBar'
 
@@ -7,8 +8,11 @@ export type CombatRewardsPreviewProps = {}
 export function CombatRewardsPreview(props: CombatRewardsPreviewProps) {
   const {} = props
   const combat = useCombat()
-  const userUnits = combat.units.filter((u) => u.teamId === combat.user)
-  const xpUnit = userUnits[0]
+  const userUnits = combat.units
+    .filter((u) => u.teamId === combat.user)
+    .map((u) => applyModifiers(u, combat).unit)
+  const xpUnit = userUnits.find((u) => u.stats.xpMultiplier === 100)
+  const nonStandardUnits = userUnits.filter((u) => u.stats.xpMultiplier !== 100)
 
   return (
     <div className="space-y-4">
@@ -16,10 +20,23 @@ export function CombatRewardsPreview(props: CombatRewardsPreviewProps) {
         <div className="font-black">+{combat.reward.resources.credits}</div>
         <GiCreditsCurrency />
       </div>
-      <div key={xpUnit.id}>
-        <div className="font-black">+{combat.reward.xp}XP</div>
-        <XpBar unit={xpUnit} xp={combat.reward.xp} />
-      </div>
+      {xpUnit && (
+        <div>
+          <div className="font-black">+{combat.reward.xp}XP</div>
+          <XpBar unit={xpUnit} xp={combat.reward.xp} />
+        </div>
+      )}
+      {nonStandardUnits.map((u) => (
+        <div>
+          <div className="font-black">
+            {u.name} ({u.stats.xpMultiplier}%)
+          </div>
+          <XpBar
+            unit={u}
+            xp={combat.reward.xp * (u.stats.xpMultiplier / 100)}
+          />
+        </div>
+      ))}
     </div>
   )
 }

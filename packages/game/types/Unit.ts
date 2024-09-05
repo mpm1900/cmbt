@@ -18,6 +18,7 @@ export type StatKey =
   | 'stamina'
   | 'attack'
   | 'magic'
+  | 'xpMultiplier'
   | `${DamageType}Negation`
   | `${DamageType}Expansion`
 

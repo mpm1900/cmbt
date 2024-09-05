@@ -46,10 +46,7 @@ const ReviveIntroductionNode: EncounterNode = {
             }
             after={<IoMdReturnRight />}
           >
-            Revive {u.name}{' '}
-            <span className="font-thin">
-              ({u.stats.health - u.values.damage}/{u.stats.health})
-            </span>
+            Revive {u.name}
           </ChoiceLabel>
         ),
         resolve: (ctx) => {

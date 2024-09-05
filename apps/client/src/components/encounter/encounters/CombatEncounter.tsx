@@ -58,7 +58,7 @@ const CombatIntroductionNode: EncounterNode = {
               resources: {
                 credits: 200,
               },
-              xp: 300,
+              xp: 2024,
             },
             modifiers: [
               new UpdateStatTeam({
@@ -169,7 +169,7 @@ const CombatNode2: EncounterNode = {
             resources: {
               credits: 200,
             },
-            xp: 300,
+            xp: 2024,
           },
           onSuccess: () => {
             ctx.updateActiveWorldNode((n) => ({

@@ -38,6 +38,8 @@ export const ZERO_UNIT: Unit = {
     holyExpansion: 0,
     psychicExpansion: 0,
     shockExpansion: 0,
+
+    xpMultiplier: 0,
   },
   values: {
     damage: 0,

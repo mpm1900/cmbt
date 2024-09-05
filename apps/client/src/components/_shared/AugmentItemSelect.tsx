@@ -22,7 +22,11 @@ export function AugmentItemSelect(props: AugmentItemSelectProps) {
   const equippedAugmentIds = game.units.flatMap((u) =>
     u.augments.map((a) => a.itemRtid)
   )
-  const augmentItems = game.team.items.filter((i) => !!i.augment)
+  const augmentItems = game.team.items.filter(
+    (i) =>
+      !!i.augment &&
+      (!i.augment.unitBaseIds || i.augment.unitBaseIds.includes(unit.baseId))
+  )
   const availableItems = augmentItems.filter(
     (i) => !equippedAugmentIds.includes(i.rtid)
   )

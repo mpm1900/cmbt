@@ -5,6 +5,7 @@ export type Augment = {
   name: string
   itemRtid?: Id
   cost?: number
+  unitBaseIds?: Id[]
 
   mutations(unit: Unit): Mutation[]
   modifiers(unit: Unit): Modifier[]

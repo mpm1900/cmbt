@@ -1,4 +1,3 @@
-import { MAX_ACTIVE_UNITS_COUNT } from '@/constants'
 import { getTeamsWithSelectionRequired } from '@/utils'
 import { GetUnits, SetIsActive } from '@repo/game/data'
 import {
@@ -65,7 +64,7 @@ export function useAiActions() {
         }).resolve(ctx)
 
         const count = Math.min(
-          MAX_ACTIVE_UNITS_COUNT - aliveActiveUnits.length,
+          aiTeam.maxActiveUnits - aliveActiveUnits.length,
           aliveInactiveUnits.length
         )
         const item = getBestAiAction(new SetIsActive('', aiTeam.id, count), ctx)

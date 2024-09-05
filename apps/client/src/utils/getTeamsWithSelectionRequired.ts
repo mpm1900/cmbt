@@ -1,4 +1,3 @@
-import { MAX_ACTIVE_UNITS_COUNT } from '@/constants'
 import { GetUnits } from '@repo/game/data'
 import { CombatContext } from '@repo/game/types'
 
@@ -15,8 +14,7 @@ export function getTeamsWithSelectionRequired(ctx: CombatContext) {
       isAlive: true,
     }).resolve(ctx)
     return (
-      activeUnits.length < MAX_ACTIVE_UNITS_COUNT &&
-      inactiveAliveUnits.length > 0
+      activeUnits.length < team.maxActiveUnits && inactiveAliveUnits.length > 0
     )
   })
 }

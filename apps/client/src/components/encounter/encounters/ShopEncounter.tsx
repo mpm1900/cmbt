@@ -34,6 +34,7 @@ const enemyTeam: Team = {
   id: TeamId(),
   resources: { credits: 0 },
   items: [],
+  maxActiveUnits: 2,
 }
 
 const ShopIntroductionNode: EncounterNode = {

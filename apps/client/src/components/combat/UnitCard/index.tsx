@@ -47,11 +47,13 @@ export function UnitCard(props: UnitCardProps) {
   return (
     <motion.div
       layout
-      className={cn('flex flex-col', { 'flex-col-reverse': reverse })}
+      className={cn('flex flex-1 flex-col', {
+        'flex-col-reverse': reverse,
+      })}
     >
       <div
         className={cn(
-          'w-[400px] rounded transition-colors ease-in-out bg-slate-950 border',
+          'rounded transition-colors ease-in-out bg-slate-950 border',
           {
             'hover:bg-slate-900': isSelectable,
             'bg-slate-200 hover:bg-slate-200': isActive,

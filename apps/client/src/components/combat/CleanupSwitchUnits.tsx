@@ -1,4 +1,3 @@
-import { MAX_ACTIVE_UNITS_COUNT } from '@/constants'
 import { getTeamsWithSelectionRequired } from '@/utils'
 import { GetUnits, SetIsActive } from '@repo/game/data'
 import { nanoid } from 'nanoid/non-secure'
@@ -16,10 +15,10 @@ export function CleanupSwitchUnits(props: CleanupSwitchUnitsProps) {
     isActive: true,
     isAlive: true,
   }).resolve(ctx)
-  const selectCount = MAX_ACTIVE_UNITS_COUNT - aliveActiveUnits.length
   const team = getTeamsWithSelectionRequired(ctx).find(
     (team) => team.id === ctx.user
   )
+  const selectCount = (team?.maxActiveUnits ?? 0) - aliveActiveUnits.length
 
   return (
     <div className="w-[580px]">

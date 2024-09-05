@@ -23,6 +23,7 @@ export function StartButton(props: PropsWithClassname) {
       resources: {
         credits: 1500,
       },
+      maxActiveUnits: 2,
     }
 
     npcs.removeWhere(() => true)

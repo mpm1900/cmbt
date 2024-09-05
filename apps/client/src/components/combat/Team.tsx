@@ -40,7 +40,7 @@ export function Team(props: TeamProps) {
         {units.map((unit) => (
           <motion.div
             key={unit.id}
-            className="text-left p-4 px-8"
+            className="text-left p-4 px-8 flex flex-1 max-w-[400px]"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}

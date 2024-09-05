@@ -8,4 +8,5 @@ export type Team = {
   id: Id
   items: Item[]
   resources: TeamResources
+  maxActiveUnits: number
 }

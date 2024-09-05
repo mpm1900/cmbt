@@ -45,12 +45,13 @@ const CombatIntroductionNode: EncounterNode = {
           id: TeamId(),
           resources: { credits: 0 },
           items: [],
+          maxActiveUnits: 3,
         }
         const unit = ctx.units.find((u) => true)
         if (unit) {
           ctx.initializeCombat({
             enemyTeam,
-            enemyUnits: Array.from({ length: 2 }).map(() =>
+            enemyUnits: Array.from({ length: 3 }).map(() =>
               makeEnemyUnit({ level: 15, teamId: enemyTeam.id })
             ),
             reward: {
@@ -158,10 +159,11 @@ const CombatNode2: EncounterNode = {
           id: TeamId(),
           resources: { credits: 0 },
           items: [],
+          maxActiveUnits: 3,
         }
         ctx.initializeCombat({
           enemyTeam,
-          enemyUnits: Array.from({ length: 2 }).map(() =>
+          enemyUnits: Array.from({ length: 3 }).map(() =>
             makeEnemyUnit({ level: 15, teamId: enemyTeam.id })
           ),
           reward: {

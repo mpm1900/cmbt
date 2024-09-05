@@ -38,6 +38,7 @@ export const useGame = create<GameStore>((set) => ({
     resources: {
       credits: 0,
     },
+    maxActiveUnits: 2,
   },
   units: [],
   initialize: (props) =>

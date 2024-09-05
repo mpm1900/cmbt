@@ -1,14 +1,16 @@
 import { useVantaContext } from '@/hooks'
-import { PropsWithChildren, ReactNode } from 'react'
+import { cn } from '@/lib/utils'
+import { ElementProps } from '@/types'
+import { ReactNode } from 'react'
 
-export type PageLayoutProps = PropsWithChildren<{
+export type PageLayoutProps = ElementProps<{
   navbar?: ReactNode
   header?: ReactNode
   aside?: ReactNode
 }>
 
 export function PageLayout(props: PageLayoutProps) {
-  const { children, header, navbar, aside } = props
+  const { children, className, header, navbar, aside } = props
   const { effect, ref } = useVantaContext()
   return (
     <div className="w-full h-full max-h-screen flex flex-1 flex-col bg-slate-900">
@@ -17,7 +19,10 @@ export function PageLayout(props: PageLayoutProps) {
         {navbar}
         <div
           ref={ref}
-          className="flex flex-1 flex-col relative overflow-hidden"
+          className={cn(
+            'flex flex-1 flex-col relative overflow-hidden',
+            className
+          )}
         >
           {children}
         </div>

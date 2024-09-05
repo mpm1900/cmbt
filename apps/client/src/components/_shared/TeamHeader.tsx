@@ -1,6 +1,7 @@
 import { Team } from '@repo/game/types'
 import { GiCreditsCurrency } from 'react-icons/gi'
 import { Counter } from './Counter'
+import { PageHeader } from './PageHeader'
 
 export type TeamHeaderProps = {
   team: Team | undefined
@@ -12,15 +13,12 @@ export function TeamHeader(props: TeamHeaderProps) {
 
   return (
     team && (
-      <div className="border-b bg-slate-950 flex flex-row justify-between">
-        <div className="w-[64px] bg-black p-2 text-center font-mono text-muted-foreground border-r">
-          cmbt
-        </div>
+      <PageHeader className="justify-between">
         <div className="flex items-center space-x-1 px-4">
           <Counter from={team.resources.credits} to={credits} duration={0.5} />
           <GiCreditsCurrency />
         </div>
-      </div>
+      </PageHeader>
     )
   )
 }

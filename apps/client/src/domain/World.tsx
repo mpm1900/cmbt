@@ -1,11 +1,11 @@
 import { GameStartModal } from '@/components/world/GameStartModal'
+import { WorldHeader } from '@/components/world/WorldHeader'
 import { WorldMap } from '@/components/world/WorldMap'
 import { WorldSidebar } from '@/components/world/WorldSidebar'
 import { useWorldSetup, VantaContextProvider } from '@/hooks'
 import { useGame } from '@/hooks/state'
 import { Navbar } from '@shared/Navbar'
 import { PageLayout } from '@shared/PageLayout'
-import { TeamHeader } from '@shared/TeamHeader'
 import { useEffect, useState } from 'react'
 
 export function World() {
@@ -26,7 +26,7 @@ export function World() {
       <PageLayout
         navbar={<Navbar />}
         aside={<WorldSidebar />}
-        header={<TeamHeader team={game.team} />}
+        header={<WorldHeader />}
       >
         <WorldMap />
         {game.world.activeNodeId === game.world.startingNodeId && ready && (

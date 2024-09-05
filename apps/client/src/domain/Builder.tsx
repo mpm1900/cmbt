@@ -1,6 +1,6 @@
-import { ActiveUnit } from '@/components/builder/ActiveUnit'
-import { BuilderSidebar } from '@/components/builder/BuilderSidebar'
+import { BuilderHeader } from '@/components/builder/BuilderHeader'
 import { StartButton } from '@/components/builder/StartButton'
+import { UnitBuilder } from '@/components/builder/UnitBuilder'
 import { VantaContextProvider } from '@/hooks'
 import { useBuilderUi } from '@/hooks/state/useBuilderUi'
 import { useUnitBuilders } from '@/hooks/state/useUnitBuilders'
@@ -20,14 +20,9 @@ export function Builder() {
     <VantaContextProvider>
       <PageLayout
         navbar={<Navbar />}
-        aside={<BuilderSidebar />}
-        header={
-          <div className="h-[42px] bg-slate-950 border-b items-start justify-start">
-            <div className="w-[64px] bg-black p-2 text-center font-mono text-muted-foreground border-r">
-              cmbt
-            </div>
-          </div>
-        }
+        // aside={<BuilderSidebar />}
+        header={<BuilderHeader />}
+        className="overflow-auto"
       >
         <div className="flex flex-col flex-1 items-center p-8">
           <div>
@@ -43,7 +38,7 @@ export function Builder() {
                 <StartButton className="w-[280px]" />
               </div>
             </div>
-            {ui.activeBuilderId && <ActiveUnit />}
+            {ui.activeBuilderId && <UnitBuilder />}
           </div>
         </div>
       </PageLayout>

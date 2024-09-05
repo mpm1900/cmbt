@@ -18,16 +18,16 @@ import { UnitAbilitySelect } from './UnitAbilitySelect'
 import { UnitBaseSelect } from './UnitBaseSelect'
 import { UnitBaseStats } from './UnitBaseStats'
 
-export function ActiveUnit() {
+export function UnitBuilder() {
   const ui = useBuilderUi()
   const store = useUnitBuilders()
   const builder = store.builders.find((b) => b.id === ui.activeBuilderId)
 
   return (
-    <div className="flex space-x-4 justify-center">
+    <div className="flex space-y-4 lg:space-x-4 justify-center flex-col lg:flex-row">
       {builder && (
         <div>
-          <Card className="w-[360px]">
+          <Card className="w-full lg:w-[360px]">
             <CardHeader>
               <CardTitle>{builder.name}</CardTitle>
               <CardDescription>Set unit details</CardDescription>
@@ -144,7 +144,7 @@ export function ActiveUnit() {
         </div>
       )}
       {builder && (
-        <div className="w-[680px]">
+        <div className="w-full lg:w-[680px]">
           <Card>
             <CardHeader>
               <div className="flex justify-between items-center">

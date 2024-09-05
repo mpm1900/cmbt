@@ -51,18 +51,18 @@ export function SidebarUnit(props: SidebarUnitProps) {
       <div className="w-full h-full p-0 hover:bg-muted cursor-pointer">
         <HoverCard openDelay={300} closeDelay={100}>
           <HoverCardTrigger asChild>
-            <div className="flex-1 p-4">
-              <div className="flex-1 space-y-2">
-                <div className="flex justify-between items-center">
-                  <span className="space-x-2">
-                    <span className="font-black">
+            <div className="flex flex-1 items-center p-3">
+              <div className="flex-1 p-0">
+                <div className="flex justify-between items-center space-x-4 mb-1">
+                  <div className="flex space-x-2">
+                    <span>
                       <span className="text-sm text-muted-foreground font-thin">
                         Lv.
                       </span>
-                      {unit.level}
+                      <span className="font-black">{unit.level}</span>
                     </span>
-                    <span>{unit.name}</span>
-                  </span>
+                    <div className="font-bold">{unit.name}</div>
+                  </div>
                   <span className="text-xs text-muted-foreground">
                     {base?.name}
                   </span>
@@ -70,6 +70,8 @@ export function SidebarUnit(props: SidebarUnitProps) {
 
                 <HealthBar unit={unit} initial={ratio} />
                 <UnitModifiers
+                  className="px-0"
+                  iconClassName="h-[20px] w-[20px] mt-2"
                   modifiers={nonStatusModifiers}
                   statuses={statuses}
                 />
@@ -80,7 +82,7 @@ export function SidebarUnit(props: SidebarUnitProps) {
             side="left"
             className="w-full"
             collisionPadding={32}
-            sideOffset={16}
+            sideOffset={8}
           >
             <UnitStats unit={unit} comp={props.unit} />
           </HoverCardContent>

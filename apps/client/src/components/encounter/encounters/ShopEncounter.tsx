@@ -25,7 +25,7 @@ import { nanoid } from 'nanoid'
 import { BsArrowLeft } from 'react-icons/bs'
 import { GiCash, GiCreditsCurrency, GiCrossedSwords } from 'react-icons/gi'
 import { IoMdReturnLeft, IoMdReturnRight } from 'react-icons/io'
-import { RiSpeakLine } from 'react-icons/ri'
+import { SlSpeech } from 'react-icons/sl'
 import { ChoiceAttributes } from '../ChoiceAttributes'
 import { ChoiceLabel } from '../ChoiceLabel'
 import { Narration } from '../Narration'
@@ -104,7 +104,7 @@ const ShopIntroductionNode: EncounterNode = {
               <ChoiceLabel
                 before={
                   <ChoiceAttributes>
-                    <RiSpeakLine />
+                    <SlSpeech />
                     {', 50%'}
                   </ChoiceAttributes>
                 }

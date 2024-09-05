@@ -8,10 +8,12 @@ export type UnitModifiersProps = PropsWithClassname<{
   modifiers: Modifier[]
   statuses: Status[]
   side?: 'top' | 'right' | 'bottom' | 'left'
+  iconClassName?: string
 }>
 
 export function UnitModifiers(props: UnitModifiersProps) {
-  const { modifiers, statuses } = props
+  const { modifiers, statuses, iconClassName } = props
+  if (modifiers.length === 0 && statuses.length === 0) return null
 
   return (
     <div className={cn('px-3 space-x-2 flex flex-row', props.className)}>
@@ -22,12 +24,19 @@ export function UnitModifiers(props: UnitModifiersProps) {
             modifier={m}
             side={props.side}
             fallback={null}
+            className={iconClassName}
           />
         )
       })}
       {statuses.map((s) => {
         return (
-          <StatusIcon key={s.id} status={s} side={props.side} fallback={null} />
+          <StatusIcon
+            key={s.id}
+            status={s}
+            side={props.side}
+            fallback={null}
+            className={iconClassName}
+          />
         )
       })}
     </div>

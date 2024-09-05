@@ -3,6 +3,7 @@ import { cn } from '@/lib/utils'
 import { ActionRenderers } from '@/renderers'
 import { Action, Unit } from '@repo/game/types'
 import { applyModifiers, checkActionCost } from '@repo/game/utils'
+import { DamageInline } from '@shared/DamageInline'
 import { Button } from '../ui/button'
 
 export type ActionButtonProps = {
@@ -32,21 +33,30 @@ export function ActionButton(props: ActionButtonProps) {
       disabled={!costCheck || isDisabled}
       onClick={onClick}
     >
-      <span
-        className={cn('text-lg', {
-          'text-green-100': action.attackType === 'physical',
-          'text-green-950': action.attackType === 'physical' && isActive,
-          'text-blue-200': action.attackType === 'magic',
-          'text-blue-950': action.attackType === 'magic' && isActive,
-        })}
-      >
-        {renderer?.name}
-      </span>
+      <div className="flex w-full items-center justify-between">
+        <div
+          className={cn('text-lg', {
+            'text-green-100': action.attackType === 'physical',
+            'text-green-950': action.attackType === 'physical' && isActive,
+            'text-blue-200': action.attackType === 'magic',
+            'text-blue-950': action.attackType === 'magic' && isActive,
+          })}
+        >
+          {renderer?.name}
+        </div>
+        {action.damage && (
+          <DamageInline
+            damage={action.damage}
+            children=""
+            color={isActive ? 'black' : undefined}
+          />
+        )}
+      </div>
 
       {renderer && (
         <div
           className={cn(
-            'text-xs text-muted-foreground flex w-full justify-between',
+            'text-xs text-muted-foreground flex w-full space-x-2 items-center justify-start',
             {
               'text-slate-700': isActive,
             }
@@ -69,12 +79,11 @@ export function ActionButton(props: ActionButtonProps) {
           ) : (
             <span className="opacity-25">—</span>
           )}
-          <span className={cn({ 'text-red-300': !costCheck })}>
-            {(renderer.cost && renderer.cost(action)) || (
-              <span className="opacity-25">N/A</span>
-            )}
-          </span>
-          <span>{baseDamage || <span className="opacity-25">N/A</span>}</span>
+          {renderer.cost && (
+            <span className={cn({ 'text-red-300': !costCheck })}>
+              {renderer.cost(action) || <span className="opacity-25">N/A</span>}
+            </span>
+          )}
         </div>
       )}
     </Button>

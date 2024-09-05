@@ -52,7 +52,7 @@ const CombatIntroductionNode: EncounterNode = {
           ctx.initializeCombat({
             enemyTeam,
             enemyUnits: Array.from({ length: 3 }).map(() =>
-              makeEnemyUnit({ level: 15, teamId: enemyTeam.id })
+              makeEnemyUnit({ level: 12, teamId: enemyTeam.id })
             ),
             reward: {
               items: [],
@@ -164,7 +164,7 @@ const CombatNode2: EncounterNode = {
         ctx.initializeCombat({
           enemyTeam,
           enemyUnits: Array.from({ length: 3 }).map(() =>
-            makeEnemyUnit({ level: 15, teamId: enemyTeam.id })
+            makeEnemyUnit({ level: 12, teamId: enemyTeam.id })
           ),
           reward: {
             items: [],

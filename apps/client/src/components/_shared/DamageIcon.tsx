@@ -10,18 +10,22 @@ import {
 } from '../ui/tooltip'
 
 export type DamageIconProps = PropsWithClassname<{
+  color?: string
   damageType: DamageType | undefined
 }>
 
 export function DamageIcon(props: DamageIconProps) {
-  const { className, damageType } = props
+  const { className, color, damageType } = props
   const renderer = damageType ? DamageRenderers[damageType] : undefined
   const icon = renderer?.icon
   return (
     <TooltipProvider>
       <Tooltip delayDuration={200}>
         <TooltipTrigger asChild>
-          <div className={cn(className)} style={{ fill: renderer?.color }}>
+          <div
+            className={cn(className)}
+            style={{ fill: color || renderer?.color }}
+          >
             {icon}
           </div>
         </TooltipTrigger>

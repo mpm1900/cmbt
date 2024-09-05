@@ -19,7 +19,7 @@ export function WorldHeader() {
   return (
     <PageHeader>
       <div className="flex flex-1 justify-between">
-        <Menubar>
+        <Menubar className="border-0">
           <UnitsMenu units={game.units} />
           <ItemsMenu items={game.team.items} />
           <MenubarMenu>

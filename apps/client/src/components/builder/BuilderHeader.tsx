@@ -17,7 +17,7 @@ export function BuilderHeader() {
   return (
     <PageHeader>
       <div className="flex flex-1 justify-between items-center px-1">
-        <Menubar>
+        <Menubar className="border-0">
           <MenubarMenu>
             <MenubarTrigger className="space-x-2">
               <FiEdit3 />

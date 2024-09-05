@@ -4,15 +4,9 @@ import { ItemsMenu } from '@shared/ItemsMenu'
 import { PageHeader } from '@shared/PageHeader'
 import { UnitsMenu } from '@shared/UnitsMenu'
 import { GiCreditsCurrency } from 'react-icons/gi'
-import {
-  Menubar,
-  MenubarContent,
-  MenubarMenu,
-  MenubarTrigger,
-} from '../ui/menubar'
-import { WorldLegend } from './WorldLegend'
+import { Menubar } from '../ui/menubar'
 
-export function WorldHeader() {
+export function EncounterHeader() {
   const game = useGame()
   const credits = game.team.resources.credits ?? 0
 
@@ -22,12 +16,6 @@ export function WorldHeader() {
         <Menubar>
           <UnitsMenu units={game.units} />
           <ItemsMenu items={game.team.items} />
-          <MenubarMenu>
-            <MenubarTrigger>Legend</MenubarTrigger>
-            <MenubarContent className="px-4">
-              <WorldLegend />
-            </MenubarContent>
-          </MenubarMenu>
         </Menubar>
 
         <div className="flex items-center space-x-1 px-4">

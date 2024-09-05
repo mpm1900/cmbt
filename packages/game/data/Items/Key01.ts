@@ -8,5 +8,6 @@ export const Key01 = (): Item => ({
   rtid: nanoid(),
   name: 'Key - 01',
   cost: 50,
+  rarity: 'uncommon',
   key: Key01Key,
 })

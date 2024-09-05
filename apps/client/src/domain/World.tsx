@@ -1,7 +1,6 @@
 import { GameStartModal } from '@/components/world/GameStartModal'
 import { WorldHeader } from '@/components/world/WorldHeader'
 import { WorldMap } from '@/components/world/WorldMap'
-import { WorldSidebar } from '@/components/world/WorldSidebar'
 import { useWorldSetup, VantaContextProvider } from '@/hooks'
 import { useGame } from '@/hooks/state'
 import { Navbar } from '@shared/Navbar'
@@ -25,7 +24,7 @@ export function World() {
     <VantaContextProvider>
       <PageLayout
         navbar={<Navbar />}
-        aside={<WorldSidebar />}
+        // aside={<WorldSidebar />}
         header={<WorldHeader />}
       >
         <WorldMap />

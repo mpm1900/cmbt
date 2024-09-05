@@ -1,4 +1,4 @@
-import { EncounterSidebar } from '@/components/encounter/EncounterSidebar'
+import { EncounterHeader } from '@/components/encounter/EncounterHeader'
 import { NodeRenderer } from '@/components/encounter/NodeRenderer'
 import {
   useEncounterContext,
@@ -8,7 +8,6 @@ import {
 import { useGame } from '@/hooks/state'
 import { Navbar } from '@shared/Navbar'
 import { PageLayout } from '@shared/PageLayout'
-import { TeamHeader } from '@shared/TeamHeader'
 
 export function Encounter() {
   const ctx = useEncounterContext()
@@ -19,8 +18,8 @@ export function Encounter() {
     <VantaContextProvider>
       <PageLayout
         navbar={<Navbar />}
-        aside={<EncounterSidebar defaultValue="team" />}
-        header={<TeamHeader team={game.team} />}
+        // aside={<EncounterSidebar defaultValue="team" />}
+        header={<EncounterHeader />}
       >
         <div className="flex flex-1 items-center justify-center">
           {ctx.activeNode && <NodeRenderer node={ctx.activeNode} />}

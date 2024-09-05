@@ -75,7 +75,7 @@ export function logMutationDiffs(
         </LogUnit>{' '}
         {damageDiff > 0 ? 'lost' : 'healed'}{' '}
         <span className="tracking-wide">
-          {(ratio * (ratio > 0 ? 1 : -1)).toFixed(0)}%
+          {Math.abs(Math.min(ratio, 100)).toFixed(0)}%
         </span>{' '}
         of their health.
       </LogSecondary>,

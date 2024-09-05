@@ -57,6 +57,7 @@ export const Potion = (): Item => ({
   id: PotionId,
   rtid: nanoid(),
   name: 'Potion',
+  rarity: 'common',
   action: (u: Unit) =>
     new PotionAction({
       sourceId: u.id,

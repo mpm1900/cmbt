@@ -1,3 +1,4 @@
+import { ItemRarityRenderers } from '@/renderers/ItemRarity'
 import { HoverCardPortal } from '@radix-ui/react-hover-card'
 import { Item, Unit } from '@repo/game/types'
 import { PropsWithChildren } from 'react'
@@ -13,15 +14,19 @@ export type ItemHoverProps = PropsWithChildren<{
 
 export function ItemHover(props: ItemHoverProps) {
   const { item, unit, children, side } = props
-  // const renderer = ActionRenderers[action.id]
+  const renderer = ItemRarityRenderers[item.rarity]
   return (
     <HoverCard openDelay={100} closeDelay={0}>
       <HoverCardTrigger asChild>{children}</HoverCardTrigger>
       <HoverCardPortal>
-        <HoverCardContent side={side} className="w-[320px]">
+        <HoverCardContent
+          side={side}
+          className="w-[320px]"
+          style={{ backgroundColor: renderer.bg }}
+        >
           <div className="space-y-2">
             <div className="flex items-start justify-between">
-              <div>{item.name}</div>
+              <div style={{ color: renderer.color }}>{item.name}</div>
               <div className="font-black text-xs uppercase text-muted-foreground/40">
                 Item
               </div>

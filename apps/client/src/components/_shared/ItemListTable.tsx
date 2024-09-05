@@ -1,4 +1,5 @@
 import { cn } from '@/lib/utils'
+import { ItemRarityRenderers } from '@/renderers/ItemRarity'
 import { GroupedItem, Id, Item, TeamResources, Unit } from '@repo/game/types'
 import { GiCreditsCurrency } from 'react-icons/gi'
 import { Button } from '../ui/button'
@@ -27,9 +28,9 @@ export function ItemListTable(props: ItemListTableProps) {
     <Table>
       <TableHeader>
         <TableRow>
-          <TableHead>#</TableHead>
           <TableHead>name</TableHead>
           {onClick && <TableHead className="w-[48px] text-end">cost</TableHead>}
+          <TableHead>#</TableHead>
           {onClick && (
             <TableHead className="w-[32px] flex justify-end items-center"></TableHead>
           )}
@@ -40,14 +41,11 @@ export function ItemListTable(props: ItemListTableProps) {
           <ItemHover key={item.id} item={item} unit={unit} side="right">
             <TableRow>
               <TableCell
-                width={32}
-                className={cn({
-                  'text-red-400': quantities[item.id] <= 0,
-                })}
+                className={cn('w-full')}
+                style={{ color: ItemRarityRenderers[item.rarity].color }}
               >
-                x{quantities[item.id]}
+                {item.name}
               </TableCell>
-              <TableCell className={cn('w-full')}>{item.name}</TableCell>
               {onClick && (
                 <TableCell
                   className={cn('flex items-center justify-end', {
@@ -58,6 +56,14 @@ export function ItemListTable(props: ItemListTableProps) {
                   <GiCreditsCurrency />
                 </TableCell>
               )}
+              <TableCell
+                width={32}
+                className={cn({
+                  'text-red-400': quantities[item.id] <= 0,
+                })}
+              >
+                x{quantities[item.id]}
+              </TableCell>
               {onClick && (
                 <TableCell className="p-0">
                   <Button

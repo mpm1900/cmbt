@@ -16,13 +16,14 @@ import { ItemHover } from './ItemHover'
 export type ItemListTableProps = {
   unit: Unit
   items: GroupedItem[]
+  costMultiplier: number
   quantities: Record<Id, number>
   resources: TeamResources
   onClick?: (item: Item) => void
 }
 
 export function ItemListTable(props: ItemListTableProps) {
-  const { unit, items, quantities, resources, onClick } = props
+  const { unit, items, costMultiplier, quantities, resources, onClick } = props
 
   return (
     <Table>
@@ -52,7 +53,7 @@ export function ItemListTable(props: ItemListTableProps) {
                     'text-red-400': (resources.credits ?? 0) < item.cost,
                   })}
                 >
-                  <span>{item.cost}</span>
+                  <span>{Math.round(item.cost * costMultiplier)}</span>
                   <GiCreditsCurrency />
                 </TableCell>
               )}

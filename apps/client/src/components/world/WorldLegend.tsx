@@ -43,7 +43,7 @@ export function WorldLegend() {
       <AccordionItem value="colors">
         <AccordionTrigger>Colors</AccordionTrigger>
         <AccordionContent>
-          <div className="space-y-2">
+          <div className="space-y-2 pb-4">
             <Color color={WORLD_NODE_COLORS.IsActiveSelectable}>
               Current Location and Selectable
             </Color>
@@ -71,7 +71,7 @@ export function WorldLegend() {
       <AccordionItem value="icons">
         <AccordionTrigger>Icons</AccordionTrigger>
         <AccordionContent>
-          <div className="space-y-2">
+          <div className="space-y-2 pb-4">
             <Icon
               icon={
                 <IoArrowForwardCircleOutline className="h-[24px] w-[24px]" />

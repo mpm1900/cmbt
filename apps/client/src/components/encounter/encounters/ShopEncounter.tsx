@@ -22,12 +22,14 @@ import {
 import { makeEnemyUnit } from '@repo/game/utils'
 import { ItemListTables } from '@shared/ItemListTables'
 import { nanoid } from 'nanoid'
+import random from 'random'
 import { BsArrowLeft } from 'react-icons/bs'
 import { GiCash, GiCreditsCurrency, GiCrossedSwords } from 'react-icons/gi'
 import { IoMdReturnLeft, IoMdReturnRight } from 'react-icons/io'
 import { SlSpeech } from 'react-icons/sl'
 import { ChoiceAttributes } from '../ChoiceAttributes'
 import { ChoiceLabel } from '../ChoiceLabel'
+import { ChoiceLog } from '../ChoiceLog'
 import { Narration } from '../Narration'
 
 const enemyTeam: Team = {
@@ -95,6 +97,7 @@ const ShopIntroductionNode: EncounterNode = {
           </ChoiceLabel>
         ),
         resolve: (ctx) => {
+          ctx.log(<ChoiceLog>View wares</ChoiceLog>)
           ctx.gotoNode(ShopWaresNode.id)
         },
       },
@@ -114,7 +117,27 @@ const ShopIntroductionNode: EncounterNode = {
               </ChoiceLabel>
             ),
             resolve: (ctx) => {
+              ctx.log(<ChoiceLog>Attempt to charm the shopkeep</ChoiceLog>)
+              const chance = 50
               ctx.updateNpcValue(npc.id, 'charmAttempts', (v) => (v ?? 0) + 1)
+              const roll = random.int(0, 100)
+              if (chance >= roll) {
+                ctx.updateNpcValue(npc.id, 'priceFactor', (v) => 0.9)
+                ctx.log(
+                  <div>
+                    "Oh you're too kind. I'm flattered, just for that, I'll give
+                    you 10% off my prices."{' '}
+                    <Narration>You hear the shopkeep say.</Narration>
+                  </div>
+                )
+              } else {
+                ctx.log(
+                  <div>
+                    "Your charm won't work on me!"{' '}
+                    <Narration>You hear the shopkeep say.</Narration>
+                  </div>
+                )
+              }
             },
           }
         : undefined,
@@ -201,8 +224,10 @@ const ShopWaresNode: EncounterNode = {
       return ctx.gotoNode(ShopIntroductionNode.id)
     }
     const buyItem = (item: Item) => {
-      ctx.updateNpcValue(ShopkeepNpcId, item.id, (v) => (v ?? 0) - 1)
-      ctx.buyItem(item, item.cost)
+      if (npc) {
+        ctx.updateNpcValue(ShopkeepNpcId, item.id, (v) => (v ?? 0) - 1)
+        ctx.buyItem(item, item.cost * npc.values.priceFactor)
+      }
     }
     const end = () => {
       const encounter = reset()
@@ -220,6 +245,7 @@ const ShopWaresNode: EncounterNode = {
           <ItemListTables
             unit={ZERO_UNIT}
             items={[Potion(), Key01(), Ruby()] as GroupedItem[]}
+            costMultiplier={npc.values.priceFactor}
             resources={ctx.team.resources}
             quantities={npc?.values}
             onClick={(item) => {
@@ -271,6 +297,7 @@ export const ShopEncounter = (): Encounter => {
           },
           values: {
             charmAttempts: 0,
+            priceFactor: 1,
             [PotionId]: 5,
             [Key01Id]: 1,
             [RubyId]: 1,

@@ -19,6 +19,7 @@ export function ItemsMenu(props: ItemsMenuProps) {
         <ItemListTable
           unit={BASE_UNIT}
           items={groupedItems}
+          costMultiplier={1}
           quantities={Object.fromEntries(
             groupedItems.map((i) => [i.id, i.count])
           )}

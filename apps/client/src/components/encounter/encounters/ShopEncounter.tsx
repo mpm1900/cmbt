@@ -44,19 +44,6 @@ const ShopIntroductionNode: EncounterNode = {
   icon: <GiCash />,
   title: 'Test Shop',
   render: (ctx) => {
-    const visitCount = ctx.encounter.visitedNodeIds.filter(
-      (id) => id === ctx.encounter.activeNodeId
-    ).length
-
-    if (visitCount === 0) {
-      ctx.clearLog()
-      ctx.log(
-        <Narration>
-          You look around a dusty old shop and see small shopkeep just barely
-          visable behind the counter.
-        </Narration>
-      )
-    }
     ctx.log(
       <div>
         "Welcome to the testy test, test shop. How can I help you?"{' '}
@@ -175,8 +162,8 @@ const ShopIntroductionNode: EncounterNode = {
               ctx.updateActiveWorldNode((n) => ({
                 completed: true,
                 visited: true,
+                repeatable: false,
               }))
-              ctx.clearLog()
               ctx.nav('/world')
             },
             onFailure: () => {},
@@ -192,7 +179,6 @@ const ShopIntroductionNode: EncounterNode = {
             visited: true,
             encounter: ctx.encounter,
           }))
-          ctx.clearLog()
           ctx.back()
         },
       },
@@ -226,8 +212,8 @@ const ShopWaresNode: EncounterNode = {
     }
     const buyItem = (item: Item) => {
       if (npc) {
-        ctx.updateNpcValue(ShopkeepNpcId, item.id, (v) => (v ?? 0) - 1)
-        ctx.buyItem(item, item.cost * npc.values.priceFactor)
+        ctx.updateNpcValue(ShopkeepNpcId, item.id, (v) => v! - 1)
+        ctx.buyItem(item, item.cost * npc.values.costMultiplier)
       }
     }
     const end = () => {
@@ -246,7 +232,7 @@ const ShopWaresNode: EncounterNode = {
           <ItemListTables
             unit={ZERO_UNIT}
             items={[Potion(), Key01(), Ruby()] as GroupedItem[]}
-            costMultiplier={npc.values.priceFactor}
+            costMultiplier={npc.values.costMultiplier}
             resources={ctx.team.resources}
             quantities={npc?.values}
             onClick={(item) => {
@@ -288,6 +274,7 @@ export const ShopEncounter = (): Encounter => {
   return {
     id: ShopEncounterId,
     setup: (ctx) => {
+      ctx.clearLog()
       ctx.updateEncounter((e) => ({ visitedNodeIds: [] }))
       if (!ctx.npcs.find((c) => c.id === ShopkeepNpcId)) {
         ctx.addNpc({
@@ -298,13 +285,19 @@ export const ShopEncounter = (): Encounter => {
           },
           values: {
             charmAttempts: 0,
-            priceFactor: 1,
+            costMultiplier: 1,
             [PotionId]: 5,
             [Key01Id]: 1,
             [RubyId]: 1,
           },
         })
       }
+      ctx.log(
+        <Narration>
+          You look around a dusty old shop and see small shopkeep just barely
+          visable behind the counter.
+        </Narration>
+      )
     },
     activeNodeId: ShopIntroductionNode.id,
     nodes: [ShopIntroductionNode, ShopWaresNode],

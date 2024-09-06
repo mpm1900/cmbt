@@ -5,14 +5,12 @@ import {
   useEncounterSetup,
   VantaContextProvider,
 } from '@/hooks'
-import { useGame } from '@/hooks/state'
 import { Navbar } from '@shared/Navbar'
 import { PageLayout } from '@shared/PageLayout'
 
 export function Encounter() {
   const ctx = useEncounterContext()
-  const game = useGame()
-  useEncounterSetup()
+  const ready = useEncounterSetup()
 
   return (
     <VantaContextProvider>
@@ -22,7 +20,7 @@ export function Encounter() {
         header={<EncounterHeader />}
       >
         <div className="flex flex-1 items-center justify-center">
-          {ctx.activeNode && <NodeRenderer node={ctx.activeNode} />}
+          {ctx.activeNode && ready && <NodeRenderer node={ctx.activeNode} />}
         </div>
       </PageLayout>
     </VantaContextProvider>

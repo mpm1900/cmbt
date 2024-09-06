@@ -1,11 +1,17 @@
 import { cn } from '@/lib/utils'
 import { ElementProps } from '@/types'
+import { TbChevronsRight } from 'react-icons/tb'
 
 export function ChoiceLog(props: ElementProps) {
   return (
-    <span className={cn('space-x-2 text-muted-foreground', props.className)}>
-      <span>{'>>>'}</span>
+    <div
+      className={cn(
+        'flex items-center space-x-2 text-muted-foreground italic',
+        props.className
+      )}
+    >
+      <TbChevronsRight />
       <span>{props.children}</span>
-    </span>
+    </div>
   )
 }

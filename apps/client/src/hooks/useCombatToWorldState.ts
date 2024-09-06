@@ -30,14 +30,23 @@ export function useCombatToWorldState() {
         unit.xp,
         (reward.xp * modified.stats.xpMultiplier) / 100
       )
-      return rebuildUnit({
+      const isDead = modified.values.damage >= modified.stats.health
+      const resultUnit = rebuildUnit({
         ...unit,
         level: result.level,
         xp: result.xp,
-        values: combatUnit.values,
+        values: {
+          ...combatUnit.values,
+          damage: isDead ? combatUnit.stats.health : combatUnit.values.damage,
+        },
         modifiers: () =>
           combatUnit?.modifiers().filter((m) => m.persistOnCombatEnd) ?? [],
       })
+      resultUnit.values = {
+        ...resultUnit.values,
+        damage: isDead ? resultUnit.stats.health : resultUnit.values.damage,
+      }
+      return resultUnit
     })
   }
 }

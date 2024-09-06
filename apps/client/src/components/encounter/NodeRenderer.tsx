@@ -31,9 +31,9 @@ export function NodeRenderer(props: NodeRendererProps) {
             <div>{node.icon}</div>
             <div>{node.title}</div>
           </CardTitle>
-          {node.tabs && (
+          {node.actions && (
             <div className="flex">
-              {node.tabs(ctx).map((tab) => (
+              {node.actions(ctx).map((tab) => (
                 <Button
                   key={tab.id}
                   variant="ghost"
@@ -47,11 +47,25 @@ export function NodeRenderer(props: NodeRendererProps) {
         </div>
       </CardHeader>
       <CardContent>
-        <div className="space-y-4">
+        <div className="space-y-4 flex flex-col items-center">
+          {node.tabs && (
+            <div className="flex justify-center border-2 border-muted rounded-lg p-1">
+              {node.tabs(ctx).map((tab) => (
+                <Button
+                  key={tab.id}
+                  size="sm"
+                  variant={tab.active ? 'default' : 'ghost'}
+                >
+                  {tab.label}
+                </Button>
+              ))}
+            </div>
+          )}
           <EncounterLogRenderer />
-          {node.text && <div>{node.text}</div>}
+          {node.text && <div className="w-full">{node.text}</div>}
           {Component && (
             <motion.div
+              className="w-full"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}

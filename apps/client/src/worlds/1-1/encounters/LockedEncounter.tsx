@@ -1,11 +1,11 @@
+import { ChoiceLabel } from '@/components/encounter/ChoiceLabel'
+import { Narration } from '@/components/encounter/Narration'
 import { Key01Key } from '@repo/game/data'
 import { Encounter, EncounterChoice, EncounterNode } from '@repo/game/types'
 import { nanoid } from 'nanoid'
 import { HiLockClosed } from 'react-icons/hi2'
 import { IoMdReturnLeft } from 'react-icons/io'
 import { MdOutlineVpnKey } from 'react-icons/md'
-import { ChoiceLabel } from '../ChoiceLabel'
-import { Narration } from '../Narration'
 
 const LockedNodeId = nanoid()
 const LockedNode1 = (): EncounterNode => {

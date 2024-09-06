@@ -1,3 +1,5 @@
+import { ChoiceLabel } from '@/components/encounter/ChoiceLabel'
+import { Narration } from '@/components/encounter/Narration'
 import {
   Encounter,
   EncounterChoice,
@@ -8,8 +10,6 @@ import { applyMutations, getModifiersFromUnit } from '@repo/game/utils'
 import { nanoid } from 'nanoid'
 import { GiHeartWings, GiStarAltar } from 'react-icons/gi'
 import { IoMdReturnLeft, IoMdReturnRight } from 'react-icons/io'
-import { ChoiceLabel } from '../ChoiceLabel'
-import { Narration } from '../Narration'
 
 const ReviveIntroductionNode: EncounterNode = {
   id: nanoid(),

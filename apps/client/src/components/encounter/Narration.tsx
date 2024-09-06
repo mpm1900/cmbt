@@ -1,8 +1,7 @@
 import { cn } from '@/lib/utils'
-import { PropsWithClassname } from '@/types'
-import { PropsWithChildren } from 'react'
+import { ElementProps } from '@/types'
 
-export type NarrationProps = PropsWithChildren<PropsWithClassname<{}>>
+export type NarrationProps = ElementProps
 
 export function Narration(props: NarrationProps) {
   return (

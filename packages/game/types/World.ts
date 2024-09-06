@@ -21,10 +21,13 @@ export type WorldNode = {
   edges: WorldEdge[]
 
   encounter: Encounter
+
   icon: WorldNodeIconKey
+  seenIcon?: WorldNodeIconKey
   visitedIcon?: WorldNodeIconKey
   completedIcon: WorldNodeIconKey
 
+  seen: boolean
   visited: boolean
   completed: boolean
   retreatable: boolean

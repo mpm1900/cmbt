@@ -1,6 +1,7 @@
 import {
   ArmorUpId,
   BattleStanceId,
+  BiteId,
   BodySlamId,
   DisableId,
   DragonStanceId,
@@ -71,6 +72,7 @@ export const ACTION_NAMES: Record<string, string> = {
   [PotionActionId]: 'Potion',
 
   [BattleStanceId]: 'Battle Stance',
+  [BiteId]: 'Bite',
   [DragonStanceId]: 'Dragon Stance',
   [NegateArmorId]: 'Negate Armor',
   [PowerCleaveId]: 'Power Cleave',

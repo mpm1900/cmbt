@@ -1,3 +1,8 @@
+import { ChoiceAttributes } from '@/components/encounter/ChoiceAttributes'
+import { ChoiceLabel } from '@/components/encounter/ChoiceLabel'
+import { ChoiceLog } from '@/components/encounter/ChoiceLog'
+import { Narration } from '@/components/encounter/Narration'
+import { Quote } from '@/components/encounter/Quote'
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
 import { rebaseItem } from '@/utils'
@@ -28,10 +33,6 @@ import { BsArrowLeft } from 'react-icons/bs'
 import { GiCash, GiCreditsCurrency, GiCrossedSwords } from 'react-icons/gi'
 import { IoMdReturnLeft, IoMdReturnRight } from 'react-icons/io'
 import { SlSpeech } from 'react-icons/sl'
-import { ChoiceAttributes } from '../ChoiceAttributes'
-import { ChoiceLabel } from '../ChoiceLabel'
-import { ChoiceLog } from '../ChoiceLog'
-import { Narration } from '../Narration'
 
 type ShopKeepNpcValues = {
   charmAttempts: number
@@ -48,17 +49,27 @@ const enemyTeam: Team = {
 const ShopIntroductionNode: EncounterNode = {
   id: nanoid(),
   icon: <GiCash />,
-  title: 'Test Shop',
+  title: 'Friendly Camp',
   render: (ctx) => {
+    const npc = ctx.npcs.find((c) => c.id === ShopkeepNpcId)
     ctx.log(
-      <div>
-        "Welcome to the testy test, test shop. How can I help you?"{' '}
-        <Narration>You hear the shopkeep say.</Narration>
+      <div className="space-y-4">
+        <div>
+          <span>"Allied aventures are few and far between out here." </span>
+          <Narration>
+            Says the women sitting near the fire in front of you.
+          </Narration>
+        </div>
+        <div>
+          <Quote name={npc!.name}>
+            "I'm {npc!.name}, a shopkeep of sorts. What can I do for you?"
+          </Quote>
+        </div>
       </div>
     )
     ctx.log(<Separator />)
   },
-  tabs: (ctx) => [
+  actions: (ctx) => [
     {
       id: nanoid(),
       label: <ChoiceLabel after={<IoMdReturnLeft />}>Leave</ChoiceLabel>,
@@ -70,6 +81,19 @@ const ShopIntroductionNode: EncounterNode = {
         }))
         ctx.back()
       },
+    },
+  ],
+  tabs: (ctx) => [
+    {
+      id: nanoid(),
+      active: true,
+      label: <>Shop</>,
+      resolve: (ctx) => {},
+    },
+    {
+      id: nanoid(),
+      label: <>Combat Training</>,
+      resolve: (ctx) => {},
     },
   ],
   choices: (ctx) => {
@@ -106,19 +130,31 @@ const ShopIntroductionNode: EncounterNode = {
                   </ChoiceAttributes>
                 }
               >
-                Atempt to charm the shopkeep
+                Atempt to charm {npc!.name}
               </ChoiceLabel>
             ),
             resolve: (ctx) => {
-              ctx.log(<ChoiceLog>Attempt to charm the shopkeep</ChoiceLog>)
               const chance = 50
+              const roll = random.int(0, 100)
+              const success = chance >= roll
+              ctx.log(
+                <div className="flex items-center space-x-2">
+                  <ChoiceLog>Attempt to charm {npc!.name}</ChoiceLog>
+                  {success ? (
+                    <span className="text-green-400">[Success]</span>
+                  ) : (
+                    <span className="text-red-400">[Failure]</span>
+                  )}
+                </div>
+              )
+
               ctx.updateNpcValue<keyof ShopKeepNpcValues>(
                 npc.id,
                 'charmAttempts',
                 (v) => v! + 1
               )
-              const roll = random.int(0, 100)
-              if (chance >= roll) {
+
+              if (success) {
                 ctx.updateNpcValue<keyof ShopKeepNpcValues>(
                   npc.id,
                   'costMultiplier',
@@ -154,7 +190,7 @@ const ShopIntroductionNode: EncounterNode = {
             }
             after={<IoMdReturnRight />}
           >
-            Attack the shopkeep
+            Attack {npc!.name}
           </ChoiceLabel>
         ),
         resolve: (ctx) => {
@@ -208,13 +244,13 @@ const ShopWaresNode: EncounterNode = {
   title: 'Test Shop - View Wares',
 
   render: (ctx) => {
-    ctx.log(<div>"We have a number of things you might like!"</div>)
     ctx.log(
-      <div>
-        <Narration>
-          The shopkeep gestures toward the shelf behind them.
-        </Narration>
-      </div>
+      <span>
+        <Quote name="Chiblee">
+          "We have a number of things your sort might need."
+        </Quote>{' '}
+        <Narration>She gestures toward the shelf behind them.</Narration>
+      </span>
     )
     ctx.log(<Separator />)
   },
@@ -287,7 +323,7 @@ export const ShopEncounterId = nanoid()
 export const ShopEncounter = (): Encounter => {
   const shopNpc: Npc<ShopKeepNpcValues> = {
     id: ShopkeepNpcId,
-    name: 'Shopkeep Person',
+    name: 'Chiblee',
     attr: {
       alive: true,
     },
@@ -307,12 +343,7 @@ export const ShopEncounter = (): Encounter => {
       if (!ctx.npcs.find((c) => c.id === ShopkeepNpcId)) {
         ctx.addNpc(shopNpc)
       }
-      ctx.log(
-        <Narration>
-          You look around a dusty old shop and see small shopkeep just barely
-          visable behind the counter.
-        </Narration>
-      )
+      ctx.log(<Narration>Your party finds a fiendly camp.</Narration>)
     },
     activeNodeId: ShopIntroductionNode.id,
     nodes: [ShopIntroductionNode, ShopWaresNode],

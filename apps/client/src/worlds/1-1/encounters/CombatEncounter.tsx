@@ -1,3 +1,6 @@
+import { ChoiceAttributes } from '@/components/encounter/ChoiceAttributes'
+import { ChoiceLabel } from '@/components/encounter/ChoiceLabel'
+import { Narration } from '@/components/encounter/Narration'
 import { Separator } from '@/components/ui/separator'
 import { SpeedUpTeamId, TeamId, UpdateStatTeam } from '@repo/game/data'
 import { Encounter, EncounterNode, Team } from '@repo/game/types'
@@ -7,9 +10,6 @@ import { BsQuestionLg } from 'react-icons/bs'
 import { GiCrossedSwords } from 'react-icons/gi'
 import { IoMdReturnLeft, IoMdReturnRight } from 'react-icons/io'
 import { IoSkullSharp } from 'react-icons/io5'
-import { ChoiceAttributes } from '../ChoiceAttributes'
-import { ChoiceLabel } from '../ChoiceLabel'
-import { Narration } from '../Narration'
 
 const CombatIntroductionNode: EncounterNode = {
   id: nanoid(),

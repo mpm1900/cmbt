@@ -4,6 +4,7 @@ import {
   ArmorUpId,
   AttackUpParentId,
   BattleStanceId,
+  BiteId,
   BodySlam,
   BodySlamId,
   Burn,
@@ -83,6 +84,7 @@ import { TextList } from '@shared/TextList'
 import { ReactNode } from 'react'
 import { ACTION_NAMES } from './_names'
 import { BattleStanceRenderer } from './BattleStance'
+import { BiteRenderer } from './Bite'
 import { DragonStanceRenderer } from './DragonStance'
 import { NegateArmorRenderer } from './NegateArmor'
 import { PowerCleaveRenderer } from './PowerCleave'
@@ -113,6 +115,7 @@ export type ActionRenderer = {
 
 export const ActionRenderers: Record<string, ActionRenderer> = {
   [BattleStanceId]: BattleStanceRenderer,
+  [BiteId]: BiteRenderer,
   [DragonStanceId]: DragonStanceRenderer,
   [NegateArmorId]: NegateArmorRenderer,
   [PowerCleaveId]: PowerCleaveRenderer,

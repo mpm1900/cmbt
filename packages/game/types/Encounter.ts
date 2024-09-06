@@ -86,6 +86,7 @@ export type EncounterNode = {
   text?: React.ReactNode
   render?: (ctx: EncounterContext) => void
   tabs?: (ctx: EncounterContext) => EncounterChoice[]
+  actions?: (ctx: EncounterContext) => EncounterChoice[]
   choices?: (ctx: EncounterContext) => EncounterChoice[]
   Choice?: EncounterChoiceComponent
   Component?: EncounterComponent
@@ -94,5 +95,6 @@ export type EncounterNode = {
 export type EncounterChoice = {
   id: Id
   label: React.ReactNode
+  active?: boolean
   resolve: (ctx: EncounterContext) => void
 }

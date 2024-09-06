@@ -6,6 +6,7 @@ export * from './system'
 
 export * from './ArmorUp'
 export * from './BattleStance'
+export * from './Bite'
 export * from './BodySlam'
 export * from './Disable'
 export * from './DragonStance'

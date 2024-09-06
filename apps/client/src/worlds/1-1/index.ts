@@ -1,20 +1,38 @@
-import {
-  CombatEncounter,
-  HealingEncounter,
-  LockedEncounter,
-  ShopEncounter,
-} from '@/components/encounter/encounters'
-import { ReviveEncounter } from '@/components/encounter/encounters/ReviveEncounter'
 import { Id, World, WorldNode } from '@repo/game/types'
 import { nanoid } from 'nanoid'
 import { edge, NodeMaker } from '../_utils'
+import {
+  CombatEncounter,
+  FirstCombatEncounter,
+  HealingEncounter,
+  LockedEncounter,
+  ReviveEncounter,
+  ShopEncounter,
+} from './encounters'
 
+const fcombat = (app: Id) => 'FirstCombat' + app
 const heal = (app: Id) => 'Spring' + app
 const shop = (app: Id) => 'Shop' + app
 const test = (app: Id) => 'Test' + app
 const lock = (app: Id) => 'Locked' + app
 const revive = (app: Id) => 'Revive' + app
 
+export const FirstCombatId = nanoid()
+const FirstCombatNode: NodeMaker = (id, edges, overrides) => ({
+  id: fcombat(id),
+  size: 20,
+  icon: '?',
+  completedIcon: 'combat',
+  encounter: FirstCombatEncounter(),
+  edges,
+  seen: false,
+  completed: false,
+  repeatable: false,
+  retreatable: false,
+  locked: false,
+  visited: false,
+  ...overrides,
+})
 export const StartId = nanoid()
 const StartNode: WorldNode = {
   id: StartId,
@@ -29,7 +47,8 @@ const StartNode: WorldNode = {
     values: {},
     setup: () => {},
   },
-  edges: [edge(shop('0'))],
+  edges: [edge(fcombat('0'))],
+  seen: false,
   completed: true,
   repeatable: false,
   retreatable: false,
@@ -39,11 +58,12 @@ const StartNode: WorldNode = {
 
 const ShopNode: NodeMaker = (id, edges, overrides) => ({
   id: shop(id),
-  size: 20,
+  size: 40,
   icon: '?',
   completedIcon: 'shop',
   encounter: ShopEncounter(),
   edges,
+  seen: false,
   completed: false,
   repeatable: true,
   retreatable: true,
@@ -60,6 +80,7 @@ const HealingNode: NodeMaker = (id, edges, overrides) => ({
   completedIcon: 'spring',
   encounter: HealingEncounter,
   edges,
+  seen: false,
   completed: false,
   repeatable: true,
   retreatable: true,
@@ -76,6 +97,7 @@ const TestNode: NodeMaker = (id, edges, overrides) => ({
   completedIcon: 'combat',
   encounter: CombatEncounter(),
   edges,
+  seen: false,
   completed: false,
   repeatable: false,
   retreatable: true,
@@ -92,6 +114,7 @@ const ReviveNode: NodeMaker = (id, edges, overrides) => ({
   completedIcon: 'altar',
   encounter: ReviveEncounter,
   edges,
+  seen: false,
   completed: false,
   repeatable: true,
   retreatable: true,
@@ -107,6 +130,7 @@ const LockedNode: NodeMaker = (id, edges, overrides) => ({
   completedIcon: 'unlocked',
   encounter: LockedEncounter,
   edges,
+  seen: false,
   completed: false,
   repeatable: false,
   retreatable: true,
@@ -121,6 +145,7 @@ export function makeWorld1_1(): World {
     activeNodeId: StartId,
     nodes: [
       StartNode,
+      FirstCombatNode('0', [edge(shop('0'))]),
       ShopNode('0', [edge(test('1'))]),
       TestNode('0', [edge(test('2'))], { retreatable: false }),
       TestNode('1', [edge(test('2'))]),

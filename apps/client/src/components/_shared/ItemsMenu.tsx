@@ -15,7 +15,7 @@ export function ItemsMenu(props: ItemsMenuProps) {
   return (
     <MenubarMenu>
       <MenubarTrigger>Items</MenubarTrigger>
-      <MenubarContent className="min-w-[320px]">
+      <MenubarContent className="w-[320px]">
         <ItemListTable
           unit={BASE_UNIT}
           items={groupedItems}

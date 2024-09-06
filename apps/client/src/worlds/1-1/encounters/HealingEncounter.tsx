@@ -1,3 +1,6 @@
+import { ChoiceAttributes } from '@/components/encounter/ChoiceAttributes'
+import { ChoiceLabel } from '@/components/encounter/ChoiceLabel'
+import { Narration } from '@/components/encounter/Narration'
 import { StatRenderers } from '@/renderers/Stats'
 import {
   Encounter,
@@ -9,9 +12,6 @@ import { applyMutations, getModifiersFromUnit } from '@repo/game/utils'
 import { nanoid } from 'nanoid/non-secure'
 import { GiWaterfall } from 'react-icons/gi'
 import { IoMdReturnLeft, IoMdReturnRight } from 'react-icons/io'
-import { ChoiceAttributes } from '../ChoiceAttributes'
-import { ChoiceLabel } from '../ChoiceLabel'
-import { Narration } from '../Narration'
 
 const HealingIntroductionNode: EncounterNode = {
   id: nanoid(),

@@ -1,4 +1,5 @@
 import { Unit } from '@repo/game/types'
+import { Fragment } from 'react/jsx-runtime'
 import {
   MenubarContent,
   MenubarMenu,
@@ -19,10 +20,10 @@ export function UnitsMenu(props: UnitsMenuProps) {
       <MenubarTrigger>Units</MenubarTrigger>
       <MenubarContent className="min-w-[320px]">
         {units.map((unit, i) => (
-          <>
+          <Fragment key={unit.id}>
             {i !== 0 && <MenubarSeparator />}
             <SidebarUnit unit={unit} />
-          </>
+          </Fragment>
         ))}
       </MenubarContent>
     </MenubarMenu>

@@ -30,6 +30,7 @@ export function BuilderHeader() {
               >
                 {store.builders.map((builder) => (
                   <MenubarRadioItem
+                    key={builder.id}
                     value={builder.id}
                     className="cursor-pointer"
                   >

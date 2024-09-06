@@ -11,7 +11,7 @@ export function EncounterLogRenderer() {
 
   return (
     <div
-      className="max-h-[240px] overflow-auto"
+      className="max-h-[240px] w-full overflow-auto"
       ref={containerRef}
       style={{
         scrollBehavior: 'smooth',

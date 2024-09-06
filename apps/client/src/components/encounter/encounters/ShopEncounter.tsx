@@ -17,6 +17,7 @@ import {
   EncounterNode,
   GroupedItem,
   Item,
+  Npc,
   Team,
 } from '@repo/game/types'
 import { makeEnemyUnit } from '@repo/game/utils'
@@ -31,6 +32,11 @@ import { ChoiceAttributes } from '../ChoiceAttributes'
 import { ChoiceLabel } from '../ChoiceLabel'
 import { ChoiceLog } from '../ChoiceLog'
 import { Narration } from '../Narration'
+
+type ShopKeepNpcValues = {
+  charmAttempts: number
+  costMultiplier: number
+}
 
 const enemyTeam: Team = {
   id: TeamId(),
@@ -106,10 +112,18 @@ const ShopIntroductionNode: EncounterNode = {
             resolve: (ctx) => {
               ctx.log(<ChoiceLog>Attempt to charm the shopkeep</ChoiceLog>)
               const chance = 50
-              ctx.updateNpcValue(npc.id, 'charmAttempts', (v) => (v ?? 0) + 1)
+              ctx.updateNpcValue<keyof ShopKeepNpcValues>(
+                npc.id,
+                'charmAttempts',
+                (v) => v! + 1
+              )
               const roll = random.int(0, 100)
               if (chance >= roll) {
-                ctx.updateNpcValue(npc.id, 'priceFactor', (v) => 0.9)
+                ctx.updateNpcValue<keyof ShopKeepNpcValues>(
+                  npc.id,
+                  'costMultiplier',
+                  (v) => v! * (1 - 0.1)
+                )
                 ctx.log(
                   <div>
                     "Oh you're too kind. I'm flattered, just for that, I'll give
@@ -271,26 +285,27 @@ const ShopWaresNode: EncounterNode = {
 export const ShopkeepNpcId = nanoid()
 export const ShopEncounterId = nanoid()
 export const ShopEncounter = (): Encounter => {
+  const shopNpc: Npc<ShopKeepNpcValues> = {
+    id: ShopkeepNpcId,
+    name: 'Shopkeep Person',
+    attr: {
+      alive: true,
+    },
+    values: {
+      charmAttempts: 0,
+      costMultiplier: 1.4,
+      [PotionId]: 5,
+      [Key01Id]: 1,
+      [RubyId]: 1,
+    },
+  }
   return {
     id: ShopEncounterId,
     setup: (ctx) => {
       ctx.clearLog()
       ctx.updateEncounter((e) => ({ visitedNodeIds: [] }))
       if (!ctx.npcs.find((c) => c.id === ShopkeepNpcId)) {
-        ctx.addNpc({
-          id: ShopkeepNpcId,
-          name: 'Shopkeep Person',
-          attr: {
-            alive: true,
-          },
-          values: {
-            charmAttempts: 0,
-            costMultiplier: 1,
-            [PotionId]: 5,
-            [Key01Id]: 1,
-            [RubyId]: 1,
-          },
-        })
+        ctx.addNpc(shopNpc)
       }
       ctx.log(
         <Narration>

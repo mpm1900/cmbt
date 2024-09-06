@@ -30,10 +30,10 @@ export function ItemListTable(props: ItemListTableProps) {
       <TableHeader>
         <TableRow>
           <TableHead>name</TableHead>
-          {onClick && <TableHead className="w-[48px] text-end">cost</TableHead>}
+          <TableHead>{onClick ? 'cost' : 'value'}</TableHead>
           <TableHead>#</TableHead>
           {onClick && (
-            <TableHead className="w-[32px] flex justify-end items-center"></TableHead>
+            <TableHead className="flex justify-end items-center"></TableHead>
           )}
         </TableRow>
       </TableHeader>
@@ -47,16 +47,17 @@ export function ItemListTable(props: ItemListTableProps) {
               >
                 {item.name}
               </TableCell>
-              {onClick && (
-                <TableCell
-                  className={cn('flex items-center justify-end', {
-                    'text-red-400': (resources.credits ?? 0) < item.cost,
-                  })}
-                >
-                  <span>{Math.round(item.cost * costMultiplier)}</span>
-                  <GiCreditsCurrency />
-                </TableCell>
-              )}
+
+              <TableCell
+                className={cn('flex items-center justify-end', {
+                  'text-red-400':
+                    !!onClick && (resources.credits ?? 0) < item.cost,
+                })}
+              >
+                <span>{Math.round(item.cost * costMultiplier)}</span>
+                <GiCreditsCurrency />
+              </TableCell>
+
               <TableCell
                 width={32}
                 className={cn({

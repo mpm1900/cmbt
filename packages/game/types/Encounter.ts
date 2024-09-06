@@ -46,9 +46,9 @@ export type EncounterContext = {
   updateTeam: (fn: (e: Team) => Partial<Team>) => void
   buyItem: (item: Item, cost: number) => void
   addNpc: (npc: Npc) => void
-  updateNpcValue: (
+  updateNpcValue: <T extends string>(
     id: Id,
-    key: string,
+    key: T,
     fn: (v: number | undefined) => number
   ) => void
 }

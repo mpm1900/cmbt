@@ -138,6 +138,7 @@ const ShopIntroductionNode: EncounterNode = {
                   </div>
                 )
               }
+              ctx.log(<Separator />)
             },
           }
         : undefined,

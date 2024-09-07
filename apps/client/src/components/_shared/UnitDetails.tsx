@@ -3,9 +3,8 @@ import { cn } from '@/lib/utils'
 import { DamageRenderers } from '@/renderers/Damage'
 import { StatRenderers } from '@/renderers/Stats'
 import { ElementProps } from '@/types'
-import { getStatusesFromModifiers } from '@/utils/getStatusesFromModifiers'
 import { AspectRatio } from '@radix-ui/react-aspect-ratio'
-import { DamageType, StatKey, Unit } from '@repo/game/types'
+import { DamageType, Modifier, StatKey, Unit } from '@repo/game/types'
 import { getModifiersFromUnit, getUnitBase } from '@repo/game/utils'
 import { ReactNode } from '@tanstack/react-router'
 import { MagicArmor } from './MagicArmor'
@@ -90,19 +89,17 @@ function UnitDamageStat(props: UnitDamageStatProps) {
   )
 }
 
-export type UnitStatsProps = {
+export type UnitDetailsProps = {
   unit: Unit
   comp: Unit
+  modifiers?: Modifier[]
 }
 
-export function UnitStats(props: UnitStatsProps) {
-  const { unit, comp } = props
+export function UnitDetails(props: UnitDetailsProps) {
+  const { unit, comp, modifiers } = props
   const base = getUnitBase(unit.baseId)
   const remainingHealth = Math.max(unit.stats.health - unit.values.damage, 0)
   const mods = getModifiersFromUnit(unit)
-  const nonStatusModifiers = mods.filter((m) => !m.statusId)
-  const statuses = getStatusesFromModifiers(mods)
-  const hasModifiers = nonStatusModifiers.length > 0 || statuses.length > 0
 
   return (
     <div className="space-y-2">
@@ -307,12 +304,11 @@ export function UnitStats(props: UnitStatsProps) {
         </div>
       </div>
       <Separator />
-      {hasModifiers && (
-        <div className="space-y-2">
-          <Title className="text-left">Modifiers</Title>
-          <UnitModifiers modifiers={nonStatusModifiers} statuses={statuses} />
-        </div>
-      )}
+
+      <div className="space-y-2">
+        <Title className="text-left">Modifiers</Title>
+        <UnitModifiers modifiers={modifiers ?? mods} />
+      </div>
     </div>
   )
 }

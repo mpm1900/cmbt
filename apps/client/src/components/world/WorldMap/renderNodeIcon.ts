@@ -13,14 +13,11 @@ export function renderNodeIcon(
   const state = isPathableNode(node, options)
   element.style.width = `${node.data('size') + 2}px`
   element.style.height = `${node.data('size') + 2}px`
-  element.innerHTML = getNodeIconRaw(
-    data.completed
-      ? data.completedIcon
-      : data.visited
-        ? (data.visitedIcon ?? data.icon)
-        : data.icon,
-    { size: node.data('size') - 8 }
-  )
+  let icon = data.icon
+  if (data.visited && data.visitedIcon) icon = data.visitedIcon
+  if (data.seen && data.seenIcon) icon = data.seenIcon
+  if (data.completed && data.completedIcon) icon = data.completedIcon
+  element.innerHTML = getNodeIconRaw(icon, { size: node.data('size') - 8 })
 
   element.style.display = 'flex'
   element.style.justifyContent = 'center'

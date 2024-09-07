@@ -10,7 +10,7 @@ import { useCombatContext } from '../../../hooks'
 import { useActions, useCombatUi } from '../../../hooks/state'
 import { UnitBars } from '../../_shared/UnitBars'
 import { UnitCombatModifiers } from '../../_shared/UnitCombatModifiers'
-import { UnitStats } from '../../_shared/UnitStats'
+import { UnitDetails } from '../../_shared/UnitDetails'
 import { Button } from '../../ui/button'
 import { CardContent } from '../../ui/card'
 import { Popover, PopoverContent, PopoverTrigger } from '../../ui/popover'
@@ -28,7 +28,11 @@ export function UnitCard(props: UnitCardProps) {
   const result = ctx.turn.results[ctx.turn.results.length - 1]
   const { queue } = useActions()
   const { activeUnit, setActiveUnit, hoverTargetUnit } = useCombatUi()
-  const { unit } = applyModifiers(props.unit, ctx)
+  const { unit, appliedModifiers, registeredTriggers } = applyModifiers(
+    props.unit,
+    ctx
+  )
+  const modifiers = [...appliedModifiers, ...registeredTriggers]
   const stagedItem = queue.find((i) => i.action.sourceId === unit.id)
 
   const isTargeted =
@@ -107,7 +111,11 @@ export function UnitCard(props: UnitCardProps) {
                   className="w-full text-center"
                   onOpenAutoFocus={(e) => e.preventDefault()}
                 >
-                  <UnitStats unit={unit} comp={props.unit} />
+                  <UnitDetails
+                    unit={unit}
+                    comp={props.unit}
+                    modifiers={modifiers}
+                  />
                 </PopoverContent>
               </Popover>
             )}

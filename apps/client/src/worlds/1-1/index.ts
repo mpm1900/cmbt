@@ -22,6 +22,7 @@ const FirstCombatNode: NodeMaker = (id, edges, overrides) => ({
   id: fcombat(id),
   size: 20,
   icon: '?',
+  seenIcon: 'combat',
   completedIcon: 'combat',
   encounter: FirstCombatEncounter(),
   edges,
@@ -145,7 +146,7 @@ export function makeWorld1_1(): World {
     activeNodeId: StartId,
     nodes: [
       StartNode,
-      FirstCombatNode('0', [edge(shop('0'))]),
+      { ...FirstCombatNode('0', [edge(shop('0'))]), seen: true },
       ShopNode('0', [edge(test('1'))]),
       TestNode('0', [edge(test('2'))], { retreatable: false }),
       TestNode('1', [edge(test('2'))]),

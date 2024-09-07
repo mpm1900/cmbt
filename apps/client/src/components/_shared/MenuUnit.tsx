@@ -10,7 +10,7 @@ import {
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '../ui/hover-card'
 import { EditUnitModal } from './EditUnitModal'
 import { HealthBar } from './HealthBar'
-import { UnitStats } from './UnitStats'
+import { UnitDetails } from './UnitDetails'
 
 export type SidebarUnitProps = {
   unit: Unit
@@ -73,7 +73,7 @@ export function MenuUnit(props: SidebarUnitProps) {
             collisionPadding={32}
             sideOffset={8}
           >
-            <UnitStats unit={unit} comp={props.unit} />
+            <UnitDetails unit={unit} comp={props.unit} />
           </HoverCardContent>
         </HoverCard>
       </div>

@@ -1,6 +1,5 @@
 import { useCombatContext } from '@/hooks'
 import { PropsWithClassname } from '@/types'
-import { getStatusesFromModifiers } from '@/utils/getStatusesFromModifiers'
 import { Unit } from '@repo/game/types'
 import { applyModifiers } from '@repo/game/utils'
 import { UnitModifiers } from './UnitModifiers'
@@ -19,15 +18,11 @@ export function UnitCombatModifiers(
     ctx
   )
   const list = [...appliedModifiers, ...registeredTriggers]
-  const nonStatusModifiers = list.filter((m) => !m.statusId)
-  const statuses = getStatusesFromModifiers(list)
-
   return (
     <UnitModifiers
       className={props.className}
       side={props.side}
-      modifiers={nonStatusModifiers}
-      statuses={statuses}
+      modifiers={list}
     />
   )
 }

@@ -11,7 +11,6 @@ export function useCleanupController() {
   let queue = useCleanup()
   let ctx = useCombatContext()
   const log = useCombat((s) => s.log)
-  const setStatus = useCombat((s) => s.setStatus)
 
   useEffect(() => {
     // return setStatus('done')

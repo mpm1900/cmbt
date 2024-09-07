@@ -22,7 +22,16 @@ export function useTurnController() {
   function nextAction() {
     setTimeout(
       () => {
-        queue.dequeue()
+        const aliveTeams = ctx.teams.filter((team) =>
+          ctx.units.some(
+            (u) => u.teamId === team.id && isUnitAliveCtx(u.id, ctx)
+          )
+        )
+        if (aliveTeams.length === 2) {
+          queue.dequeue()
+        } else {
+          setStatus('done')
+        }
       },
       gameSpeed * 2 * (active ? 1 : 0)
     )

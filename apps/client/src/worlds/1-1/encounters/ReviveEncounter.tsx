@@ -33,7 +33,6 @@ const ReviveIntroductionNode: EncounterNode = {
       })
       .filter((u) => u.stats.health <= u.values.damage)
 
-    console.log(deadUnits)
     return [
       ...deadUnits.map<EncounterChoice>((u) => ({
         id: nanoid(),

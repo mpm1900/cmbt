@@ -18,10 +18,8 @@ export function NodeRenderer(props: NodeRendererProps) {
   const { Component, choices, Choice = ChoiceButton } = node
   const tabs = node.tabs ? node.tabs(ctx) : undefined
   const activeTab = tabs?.find((t) => t.active)?.id
-  console.log(activeTab, tabs)
 
   useEffect(() => {
-    console.log('render node', node.id)
     if (node.render) {
       node.render(ctx)
     }

@@ -25,7 +25,9 @@ export class DamageNewUnitsOnUnitEnter extends Trigger {
   resolve = (unit: Unit): Partial<Unit> => {
     return {
       values: Modifier.setValues(unit, (values) => ({
-        damage: values.damage + unit.stats.health * this.factor + this.static,
+        damage: Math.round(
+          values.damage + unit.stats.health * this.factor + this.static
+        ),
       })),
     }
   }
@@ -35,9 +37,9 @@ export class DamageNewUnitsOnUnitEnter extends Trigger {
     ctx: CombatContext,
     args: MutationFilterArgs
   ): boolean => {
-    const newUnits = args.units ?? []
+    const newUnits = args.units
     return (
-      super.filter(unit, ctx, args) && !!newUnits.find((u) => u.id === unit.id)
+      super.filter(unit, ctx, args) && !!newUnits?.find((u) => u.id === unit.id)
     )
   }
 }

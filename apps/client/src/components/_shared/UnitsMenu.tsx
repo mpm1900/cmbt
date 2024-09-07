@@ -18,7 +18,7 @@ export function UnitsMenu(props: UnitsMenuProps) {
   return (
     <MenubarMenu>
       <MenubarTrigger>Units</MenubarTrigger>
-      <MenubarContent className="min-w-[320px]">
+      <MenubarContent className="min-w-[320px] space-y-1">
         {units.map((unit, i) => (
           <Fragment key={unit.id}>
             {i !== 0 && <MenubarSeparator />}

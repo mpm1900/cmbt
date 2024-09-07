@@ -56,7 +56,7 @@ export function MenuUnit(props: SidebarUnitProps) {
                       </span>
                       <span className="font-black">{unit.level}</span>
                     </span>
-                    <div className="font-bold">{unit.name}</div>
+                    <div className="font-normal">{unit.name}</div>
                   </div>
                   <span className="text-xs text-muted-foreground">
                     {base?.name}

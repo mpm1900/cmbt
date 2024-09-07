@@ -9,7 +9,7 @@ import { getModifiersFromUnit, getUnitBase } from '@repo/game/utils'
 import { ReactNode } from '@tanstack/react-router'
 import { MagicArmor } from './MagicArmor'
 import { PhysicalArmor } from './PhysicalArmor'
-import { StatDebug } from './StatDebug'
+import { StatValue } from './StatValue'
 import { UnitModifiers } from './UnitModifiers'
 
 type UnitStatProps = {
@@ -44,7 +44,7 @@ function UnitStat(props: UnitStatProps) {
           {StatRenderers[stat]?.name ?? stat}
         </span>
       </div>
-      <StatDebug
+      <StatValue
         stat={stat}
         unit={unit}
         comp={comp}
@@ -76,7 +76,7 @@ function UnitDamageStat(props: UnitDamageStatProps) {
         </strong>
       </div>
       <span>
-        <StatDebug
+        <StatValue
           stat={props.stat}
           unit={props.unit}
           comp={props.comp}

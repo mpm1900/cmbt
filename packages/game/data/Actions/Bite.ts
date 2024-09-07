@@ -24,7 +24,7 @@ import { Bleed } from '../Statuses'
 
 export class Bite extends Action {
   damage: Damage
-  bleedChance: number = 5
+  bleedChance: number = 10
 
   constructor(sourceId: Id, teamId: Id) {
     const attackType = 'physical'

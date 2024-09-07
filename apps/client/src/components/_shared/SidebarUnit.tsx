@@ -68,7 +68,7 @@ export function SidebarUnit(props: SidebarUnitProps) {
                   </span>
                 </div>
 
-                <HealthBar unit={unit} initial={ratio} />
+                <HealthBar unit={unit} initial={ratio} className="h-[6px]" />
                 <UnitModifiers
                   className="px-0"
                   iconClassName="h-[20px] w-[20px] mt-2"

@@ -41,7 +41,7 @@ export function Builder() {
             </div>
             <div className="flex justify-center">
               <Tabs
-                defaultValue={ui.activeBuilderId}
+                value={ui.activeBuilderId}
                 onValueChange={(id) => ui.setActiveBuilderId(id)}
               >
                 <TabsList>

@@ -1,4 +1,4 @@
-import { useGame } from '@/hooks/state'
+import { useCy, useGame } from '@/hooks/state'
 import { Counter } from '@shared/Counter'
 import { ItemsMenu } from '@shared/ItemsMenu'
 import { PageHeader } from '@shared/PageHeader'
@@ -7,6 +7,7 @@ import { GiCreditsCurrency } from 'react-icons/gi'
 import {
   Menubar,
   MenubarContent,
+  MenubarItem,
   MenubarMenu,
   MenubarTrigger,
 } from '../ui/menubar'
@@ -14,12 +15,25 @@ import { WorldLegend } from './WorldLegend'
 
 export function WorldHeader() {
   const game = useGame()
+  const { cy, fitAll, fitActive, centerActive } = useCy()
   const credits = game.team.resources.credits ?? 0
 
   return (
     <PageHeader>
       <div className="flex flex-1 justify-between">
         <Menubar className="border-0">
+          <MenubarMenu>
+            <MenubarTrigger>View</MenubarTrigger>
+            {cy && (
+              <MenubarContent>
+                <MenubarItem onClick={() => fitAll(cy)}>Fit all</MenubarItem>
+                <MenubarItem onClick={() => centerActive(cy)}>
+                  Center
+                </MenubarItem>
+                <MenubarItem onClick={() => fitActive(cy)}>Reset</MenubarItem>
+              </MenubarContent>
+            )}
+          </MenubarMenu>
           <UnitsMenu units={game.units} />
           <ItemsMenu items={game.team.items} />
           <MenubarMenu>

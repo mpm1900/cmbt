@@ -24,7 +24,7 @@ export function UnitBuilder() {
   const builder = store.builders.find((b) => b.id === ui.activeBuilderId)
 
   return (
-    <div className="flex space-y-4 lg:space-y-0 lg:space-x-4 justify-center flex-col lg:flex-row">
+    <div className="flex space-y-4 lg:space-y-0 lg:space-x-4 items-start justify-center flex-col lg:flex-row">
       {builder && (
         <Card className="w-full lg:w-[360px]">
           <CardHeader>
@@ -140,36 +140,34 @@ export function UnitBuilder() {
         </Card>
       )}
       {builder && (
-        <div className="w-full lg:w-[680px]">
-          <Card>
-            <CardHeader>
-              <div className="flex justify-between items-center">
-                <div>
-                  <CardTitle>Actions</CardTitle>
-                  <CardDescription>
-                    Select up to {builder.config.actionsCount} actions.
-                  </CardDescription>
-                </div>
-                <div className="flex space-x-1 justify-center">
-                  {Array.from({ length: builder.config.actionsCount }).map(
-                    (_, i) =>
-                      builder.actions.length >= i + 1 ? (
-                        <FaSquare key={i} className="fill-muted-foreground" />
-                      ) : (
-                        <FaRegSquareFull
-                          key={i}
-                          className="fill-muted-foreground"
-                        />
-                      )
-                  )}
-                </div>
+        <Card className="w-full lg:w-[680px]">
+          <CardHeader>
+            <div className="flex justify-between items-center">
+              <div>
+                <CardTitle>Actions</CardTitle>
+                <CardDescription>
+                  Select up to {builder.config.actionsCount} actions.
+                </CardDescription>
               </div>
-            </CardHeader>
-            <CardContent>
-              <ActionsTable builder={builder} />
-            </CardContent>
-          </Card>
-        </div>
+              <div className="flex space-x-1 justify-center">
+                {Array.from({ length: builder.config.actionsCount }).map(
+                  (_, i) =>
+                    builder.actions.length >= i + 1 ? (
+                      <FaSquare key={i} className="fill-muted-foreground" />
+                    ) : (
+                      <FaRegSquareFull
+                        key={i}
+                        className="fill-muted-foreground"
+                      />
+                    )
+                )}
+              </div>
+            </div>
+          </CardHeader>
+          <CardContent>
+            <ActionsTable builder={builder} />
+          </CardContent>
+        </Card>
       )}
     </div>
   )

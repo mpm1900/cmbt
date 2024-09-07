@@ -20,7 +20,7 @@ export const Snorlax: UnitBase = {
     attack: 110,
     defense: 84,
     magic: 80,
-    speed: 61,
+    speed: 60,
 
     focus: 40,
     stamina: 30,

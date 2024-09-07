@@ -45,6 +45,7 @@ export function useWorldMapEvents(cy: Core | undefined) {
           })
 
           encounter.updateEncounter(() => data.encounter)
+          game.addVisitedNodes(data.encounter.id)
           nav({ to: '/encounter' })
         }
       })

@@ -1,6 +1,7 @@
 import { cn } from '@/lib/utils'
 import { DamageRenderers } from '@/renderers/Damage'
 import { PropsWithClassname } from '@/types'
+import { TooltipPortal } from '@radix-ui/react-tooltip'
 import { DamageType } from '@repo/game/types'
 import {
   Tooltip,
@@ -29,7 +30,9 @@ export function DamageIcon(props: DamageIconProps) {
             {icon}
           </div>
         </TooltipTrigger>
-        <TooltipContent>{renderer?.name}</TooltipContent>
+        <TooltipPortal>
+          <TooltipContent>{renderer?.name}</TooltipContent>
+        </TooltipPortal>
       </Tooltip>
     </TooltipProvider>
   )

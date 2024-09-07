@@ -18,4 +18,6 @@ export const Bleed: Status = {
     }),
   ],
   mutations: () => [],
+  persistOnCombatEnd: true,
+  persistOnSwitch: true,
 }

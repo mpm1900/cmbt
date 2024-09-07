@@ -5,6 +5,7 @@ export type GameState = {
   team: Team
   units: Unit[]
   world: World
+  visitedNodeIds: Id[]
 }
 
 export type InitializeWorldProps = {
@@ -23,6 +24,7 @@ export type GameStore = GameState & {
   updateTeam: (fn: (team: Team) => Partial<Team>) => void
   updateUnits: (fn: (unit: Unit) => Partial<Unit>) => void
   buyItem: (item: Item, cost: number) => void
+  addVisitedNodes: (...ids: Id[]) => void
 }
 
 export const useGame = create<GameStore>((set) => ({
@@ -32,6 +34,7 @@ export const useGame = create<GameStore>((set) => ({
     nodes: [],
     visitedNodeIds: [],
   },
+  visitedNodeIds: [],
   team: {
     id: '',
     items: [],
@@ -46,6 +49,7 @@ export const useGame = create<GameStore>((set) => ({
       team: props.team,
       units: props.units,
       world: props.world,
+      visitedNodeIds: [],
     }),
   setActiveNodeId: (node) => {
     set((s) => ({
@@ -96,5 +100,11 @@ export const useGame = create<GameStore>((set) => ({
         },
       }
     })
+  },
+
+  addVisitedNodes: (...ids) => {
+    set((s) => ({
+      visitedNodeIds: [...s.visitedNodeIds, ...ids],
+    }))
   },
 }))

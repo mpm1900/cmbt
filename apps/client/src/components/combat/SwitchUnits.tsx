@@ -1,4 +1,4 @@
-import { useActions } from '@/hooks/state'
+import { useActions, useCombatUi } from '@/hooks/state'
 import { SwitchUnitId } from '@repo/game/data'
 import { Action, Unit } from '@repo/game/types'
 import { applyModifiers, getUnitBase } from '@repo/game/utils'
@@ -22,6 +22,7 @@ export type SwitchUnitsProps = {
 
 export function SwitchUnits(props: SwitchUnitsProps) {
   const { action, onClick, onConfirm } = props
+  const ui = useCombatUi()
   const ctx = useCombatContext()
   const queue = useActions((s) => s.queue)
   const queuedSwitchActions = queue.filter(
@@ -117,7 +118,11 @@ export function SwitchUnits(props: SwitchUnitsProps) {
       {selectedTargets.length === action.maxTargetCount && (
         <CardFooter className="justify-end">
           <Button onClick={() => onConfirm(selectedTargets)}>
-            {ctx.turn.count === 0 ? 'Start Combat' : 'Switch In'}
+            {ctx.turn.count === 0
+              ? 'Start Combat'
+              : ui.activeUnit
+                ? `Switch with ${ui.activeUnit.name}`
+                : 'Switch In'}
           </Button>
         </CardFooter>
       )}

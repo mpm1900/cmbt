@@ -31,4 +31,6 @@ export const Burn: Status = {
     }),
   ],
   mutations: () => [],
+  persistOnSwitch: true,
+  persistOnCombatEnd: true,
 }

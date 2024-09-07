@@ -17,4 +17,6 @@ export const Poison: Status = {
     }),
   ],
   mutations: () => [],
+  persistOnSwitch: true,
+  persistOnCombatEnd: true,
 }

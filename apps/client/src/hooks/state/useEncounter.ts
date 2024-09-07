@@ -26,6 +26,7 @@ export const useEncounter = create<EncounterStore>((set, get) => ({
     setup: () => {},
   },
   logs: [],
+  visitedNodeIds: [],
   log: (item) => {
     set((s) => ({
       logs: [...s.logs, { id: nanoid(), node: item }],

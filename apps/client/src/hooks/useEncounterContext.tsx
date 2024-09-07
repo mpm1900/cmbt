@@ -43,6 +43,7 @@ export function useEncounterContext(): EncounterContext {
     team: game.team,
     units: game.units,
     npcs: npcs.npcs,
+    visitedNodeIds: game.visitedNodeIds,
     nav: (to) => {
       store.clearLog()
       return nav({ to })
@@ -54,8 +55,9 @@ export function useEncounterContext(): EncounterContext {
     log: store.log,
     clearLog: store.clearLog,
     initializeCombat,
-    updateActiveWorldNode: (fn) =>
-      game.updateWorldNode(game.world.activeNodeId, fn),
+    updateActiveWorldNode: (fn) => {
+      game.updateWorldNode(game.world.activeNodeId, fn)
+    },
     updateEncounter: store.updateEncounter,
     gotoNode: (id) =>
       store.updateEncounter((e) => ({
@@ -67,5 +69,6 @@ export function useEncounterContext(): EncounterContext {
     buyItem: game.buyItem,
     addNpc: npcs.addNpc,
     updateNpcValue: npcs.updateNpcValue,
+    addVisitedNodes: game.addVisitedNodes,
   }
 }

@@ -2,12 +2,12 @@ import { Id, World, WorldNode } from '@repo/game/types'
 import { nanoid } from 'nanoid'
 import { edge, NodeMaker } from '../_utils'
 import {
+  CampEncounter,
   CombatEncounter,
   FirstCombatEncounter,
   HealingEncounter,
   LockedEncounter,
   ReviveEncounter,
-  ShopEncounter,
 } from './encounters'
 
 const fcombat = (app: Id) => 'FirstCombat' + app
@@ -63,7 +63,7 @@ const ShopNode: NodeMaker = (id, edges, overrides) => ({
   icon: '?',
   seenIcon: 'shop',
   completedIcon: 'shop',
-  encounter: ShopEncounter(),
+  encounter: CampEncounter(),
   edges,
   seen: false,
   completed: false,

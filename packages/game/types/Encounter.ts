@@ -33,6 +33,7 @@ export type EncounterContext = {
   units: Unit[]
   encounter: Encounter
   activeNode: EncounterNode
+  visitedNodeIds: Id[]
   npcs: Npc[]
   nav: (to: string, clearLog?: boolean) => Promise<void>
   back: () => void
@@ -51,6 +52,7 @@ export type EncounterContext = {
     key: T,
     fn: (v: number | undefined) => number
   ) => void
+  addVisitedNodes: (...ids: Id[]) => void
 }
 
 export type Encounter = {

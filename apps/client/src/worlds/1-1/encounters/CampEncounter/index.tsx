@@ -48,28 +48,48 @@ const enemyTeam: Team = {
   maxActiveUnits: 2,
 }
 
-const ShopIntroductionNode: EncounterNode = {
+const CampIntroductionNode: EncounterNode = {
   id: nanoid(),
   icon: <LiaFortAwesome />,
   title: 'Friendly Camp',
   render: (ctx) => {
-    const npc = ctx.npcs.find((c) => c.id === ShopkeepNpcId)
-    ctx.log(
-      <div className="space-y-4">
-        <div>
-          <span>"Allied aventurers are few and far between out here." </span>
-          <Narration>
-            Says the woman sitting near the fire in front of you.
-          </Narration>
-        </div>
-        <div>
-          <Quote name={npc!.name}>
-            "I'm {npc!.name}, a shopkeep of sorts. What can I do for you?"
-          </Quote>
-        </div>
-      </div>
-    )
-    ctx.log(<Separator />)
+    const npc = ctx.npcs.find((c) => c.id === ChibleeId)
+    const count = ctx.encounter.visitedNodeIds.filter(
+      (id) => id === ctx.encounter.activeNodeId
+    ).length
+    const encounterCount = ctx.visitedNodeIds.filter(
+      (id) => id === ctx.encounter.id
+    )!.length
+
+    if (count === 0) {
+      if (encounterCount === 1) {
+        ctx.log(
+          <div className="space-y-4">
+            <div>
+              <span>
+                "Allied adventurers are few and far between out here."{' '}
+              </span>
+              <Narration>
+                Says the woman sitting near the fire in front of you.
+              </Narration>
+            </div>
+            <div>
+              <Quote name={npc!.name}>
+                "It's refreshing to see a frindly face. I'm {npc!.name}. And
+                over there are Ryab and Dan."
+              </Quote>
+            </div>
+            <Narration>
+              You see two similarly looking men in the distance practicing their
+              sword skills.
+            </Narration>
+          </div>
+        )
+      } else {
+        ctx.log(<Quote name={npc!.name}>"What can I do for you?"</Quote>)
+      }
+      ctx.log(<Separator />)
+    }
   },
   actions: (ctx) => [
     {
@@ -88,9 +108,10 @@ const ShopIntroductionNode: EncounterNode = {
   tabs: (ctx) => [
     {
       id: nanoid(),
-      active: true,
       label: <>Shop</>,
-      resolve: (ctx) => {},
+      resolve: (ctx) => {
+        ctx.gotoNode(ShopWaresNode.id)
+      },
     },
     {
       id: nanoid(),
@@ -102,7 +123,7 @@ const ShopIntroductionNode: EncounterNode = {
     },
   ],
   choices: (ctx) => {
-    const npc = ctx.npcs.find((c) => c.id === ShopkeepNpcId)
+    const npc = ctx.npcs.find((c) => c.id === ChibleeId)
     const charmAttempts = npc?.values.charmAttempts
     const choices: (EncounterChoice | undefined)[] = [
       {
@@ -247,6 +268,10 @@ const ShopWaresNode: EncounterNode = {
   title: `Friendly Camp - Chiblee's Shop`,
 
   render: (ctx) => {
+    const encounterCount = ctx.visitedNodeIds.filter(
+      (id) => id === ctx.encounter.id
+    )!.length
+
     ctx.log(
       <span>
         <Quote name="Chiblee">
@@ -289,13 +314,13 @@ const ShopWaresNode: EncounterNode = {
   ],
   Component: (props) => {
     const { ctx } = props
-    const npc = ctx.npcs.find((c) => c.id === ShopkeepNpcId)
+    const npc = ctx.npcs.find((c) => c.id === ChibleeId)
     const reset = () => {
-      return ctx.gotoNode(ShopIntroductionNode.id)
+      return ctx.gotoNode(CampIntroductionNode.id)
     }
     const buyItem = (item: Item) => {
       if (npc) {
-        ctx.updateNpcValue(ShopkeepNpcId, item.id, (v) => v! - 1)
+        ctx.updateNpcValue(ChibleeId, item.id, (v) => v! - 1)
         const cost = Math.round(item.cost * npc.values.costMultiplier)
         ctx.buyItem(item, cost)
       }
@@ -376,7 +401,7 @@ const CombatTraining: EncounterNode = {
       label: <>Shop</>,
       resolve: (ctx) => {
         ctx.clearLog()
-        ctx.gotoNode(ShopIntroductionNode.id)
+        ctx.gotoNode(CampIntroductionNode.id)
       },
     },
     {
@@ -388,11 +413,11 @@ const CombatTraining: EncounterNode = {
   ],
 }
 
-export const ShopkeepNpcId = nanoid()
-export const ShopEncounterId = nanoid()
-export const ShopEncounter = (): Encounter => {
+export const ChibleeId = nanoid()
+export const CampEncounterId = nanoid()
+export const CampEncounter = (): Encounter => {
   const shopNpc: Npc<ShopKeepNpcValues> = {
-    id: ShopkeepNpcId,
+    id: ChibleeId,
     name: 'Chiblee',
     attr: {
       alive: true,
@@ -406,17 +431,31 @@ export const ShopEncounter = (): Encounter => {
     },
   }
   return {
-    id: ShopEncounterId,
+    id: CampEncounterId,
     setup: (ctx) => {
       ctx.clearLog()
       ctx.updateEncounter((e) => ({ visitedNodeIds: [] }))
-      if (!ctx.npcs.find((c) => c.id === ShopkeepNpcId)) {
+      if (!ctx.npcs.find((c) => c.id === ChibleeId)) {
         ctx.addNpc(shopNpc)
       }
-      ctx.log(<Narration>Your party finds a fiendly camp.</Narration>)
+      const encounterCount = ctx.visitedNodeIds.filter(
+        (id) => id === ctx.encounter.id
+      )!.length
+
+      if (encounterCount === 1) {
+        ctx.log(
+          <Narration>
+            Your party finds their way to a friendly camp. You see a small group
+            of merchants and adventures preparing dinner and settling in for the
+            night.
+          </Narration>
+        )
+      } else {
+        ctx.log(<Quote name={shopNpc.name}>"Welcome back travelers!"</Quote>)
+      }
     },
-    activeNodeId: ShopIntroductionNode.id,
-    nodes: [ShopIntroductionNode, ShopWaresNode, CombatTraining],
+    activeNodeId: CampIntroductionNode.id,
+    nodes: [CampIntroductionNode, ShopWaresNode, CombatTraining],
     visitedNodeIds: [],
     values: {},
   }

@@ -4,6 +4,7 @@ import { WorldNode } from '@repo/game/types'
 import { useNavigate } from '@tanstack/react-router'
 import { Core, NodeSingular } from 'cytoscape'
 import { useEffect, useState } from 'react'
+import { getOutgoers } from './getPath'
 import { isPathableNode } from './isPathable'
 
 export type UseWorldMapEventsProps = {
@@ -34,8 +35,15 @@ export function useWorldMapEvents(cy: Core | undefined) {
         if (isInteractable) {
           game.setActiveNodeId(data)
           game.updateWorldNode(data.id, (n) => ({
+            seen: true,
             visited: true,
           }))
+          getOutgoers(node)?.forEach((n) => {
+            game.updateWorldNode(n.id(), (n) => ({
+              seen: true,
+            }))
+          })
+
           encounter.updateEncounter(() => data.encounter)
           nav({ to: '/encounter' })
         }

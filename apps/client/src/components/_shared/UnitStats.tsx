@@ -1,12 +1,12 @@
 import { Separator } from '@/components/ui/separator'
-import { useCombatContext } from '@/hooks'
 import { cn } from '@/lib/utils'
 import { DamageRenderers } from '@/renderers/Damage'
 import { StatRenderers } from '@/renderers/Stats'
 import { ElementProps } from '@/types'
 import { getStatusesFromModifiers } from '@/utils/getStatusesFromModifiers'
+import { AspectRatio } from '@radix-ui/react-aspect-ratio'
 import { DamageType, StatKey, Unit } from '@repo/game/types'
-import { getModifiersFromUnit } from '@repo/game/utils'
+import { getModifiersFromUnit, getUnitBase } from '@repo/game/utils'
 import { ReactNode } from '@tanstack/react-router'
 import { MagicArmor } from './MagicArmor'
 import { PhysicalArmor } from './PhysicalArmor'
@@ -97,7 +97,7 @@ export type UnitStatsProps = {
 
 export function UnitStats(props: UnitStatsProps) {
   const { unit, comp } = props
-  const ctx = useCombatContext()
+  const base = getUnitBase(unit.baseId)
   const remainingHealth = Math.max(unit.stats.health - unit.values.damage, 0)
   const mods = getModifiersFromUnit(unit)
   const nonStatusModifiers = mods.filter((m) => !m.statusId)
@@ -107,6 +107,28 @@ export function UnitStats(props: UnitStatsProps) {
   return (
     <div className="space-y-2">
       <div className="flex space-x-4">
+        <div className="w-[160px]">
+          <Title>Unit</Title>
+          <Separator className="my-1" />
+          <div className="space-y-2">
+            <div className="flex flex-col items-center">
+              <div className="flex space-x-2 pt-2">
+                <span>
+                  <span className="text-sm text-muted-foreground font-thin">
+                    Lv.
+                  </span>
+                  <span className="font-black">{unit.level}</span>
+                </span>
+                <div className="font-bold">{unit.name}</div>
+              </div>
+
+              <div className="text-muted-foreground">{base.base?.name}</div>
+            </div>
+            <Separator />
+            <AspectRatio ratio={1} className="bg-muted"></AspectRatio>
+          </div>
+        </div>
+        <div className="w-[1px] bg-border" />
         <div className="space-y-4">
           <div>
             <Title>Stats</Title>

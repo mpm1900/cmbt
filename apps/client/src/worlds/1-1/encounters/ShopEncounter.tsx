@@ -30,7 +30,7 @@ import { ItemListTables } from '@shared/ItemListTables'
 import { nanoid } from 'nanoid'
 import random from 'random'
 import { BsArrowLeft } from 'react-icons/bs'
-import { GiCash, GiCreditsCurrency, GiCrossedSwords } from 'react-icons/gi'
+import { GiCash, GiCreditsCurrency } from 'react-icons/gi'
 import { IoMdReturnLeft, IoMdReturnRight } from 'react-icons/io'
 import { LuSwords } from 'react-icons/lu'
 import { SlSpeech } from 'react-icons/sl'
@@ -187,7 +187,7 @@ const ShopIntroductionNode: EncounterNode = {
           <ChoiceLabel
             before={
               <ChoiceAttributes>
-                <GiCrossedSwords />
+                <LuSwords />
               </ChoiceAttributes>
             }
             after={<IoMdReturnRight />}

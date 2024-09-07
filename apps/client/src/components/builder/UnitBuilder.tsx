@@ -26,122 +26,118 @@ export function UnitBuilder() {
   return (
     <div className="flex space-y-4 lg:space-y-0 lg:space-x-4 justify-center flex-col lg:flex-row">
       {builder && (
-        <div>
-          <Card className="w-full lg:w-[360px]">
-            <CardHeader>
-              <CardTitle>{builder.name}</CardTitle>
-              <CardDescription>Set unit details</CardDescription>
-            </CardHeader>
+        <Card className="w-full lg:w-[360px]">
+          <CardHeader>
+            <CardTitle>{builder.name}</CardTitle>
+            <CardDescription>Set unit details</CardDescription>
+          </CardHeader>
 
-            <CardContent>
-              <div className="space-y-2">
-                <div className="flex items-center space-x-2">
-                  <Label htmlFor="name" className="min-w-[86px]">
-                    Name
-                  </Label>
-                  <Input
-                    value={builder.name}
-                    onChange={(e) => {
-                      const name = e.target.value
-                      if (name) {
-                        store.updateBuilder(builder.id, (b) => ({
-                          name,
-                        }))
-                      }
-                    }}
-                  />
-                </div>
-
-                <div className="flex items-center space-x-2">
-                  <Label htmlFor="base" className="min-w-[86px]">
-                    Class
-                  </Label>
-                  <UnitBaseSelect
-                    value={builder.base}
-                    onChange={(base) => {
-                      const config = BASE_CONFIGS[base.id]
+          <CardContent>
+            <div className="space-y-2">
+              <div className="flex items-center space-x-2">
+                <Label htmlFor="name" className="min-w-[86px]">
+                  Name
+                </Label>
+                <Input
+                  value={builder.name}
+                  onChange={(e) => {
+                    const name = e.target.value
+                    if (name) {
                       store.updateBuilder(builder.id, (b) => ({
-                        base,
-                        config,
-                        ability: config.abilities.find(
-                          (a) => a.id === config.defaultAbilityId
-                        ),
-                        actions: config.actions.filter((m) =>
-                          config.defaultActionIds.includes(m.id)
-                        ),
-                      }))
-                    }}
-                  />
-                </div>
-
-                <div className="flex items-center space-x-2">
-                  <Label htmlFor="name" className="min-w-[86px]">
-                    Ability
-                  </Label>
-                  <UnitAbilitySelect
-                    options={builder.config.abilities}
-                    value={builder.ability}
-                    onChnage={(ability) =>
-                      store.updateBuilder(builder.id, (b) => ({
-                        ability,
+                        name,
                       }))
                     }
-                  />
-                </div>
-                <Separator />
-                <UnitBaseStats base={builder.base} />
-                <Separator />
-                <div>
-                  {builder.base.affinities.length > 0 && (
-                    <div className="flex space-x-4 justify-between">
-                      <div className="text-muted-foreground">Affinities</div>
-                      <div className="flex space-x-2">
-                        {builder.base.affinities.map((affinity, i) => (
-                          <div key={i} className="flex space-x-1">
-                            <DamageIcon damageType={affinity.type} />
-                            <div className="text-green-200">
-                              {affinity.factor}%
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                  {builder.base.resistances.length > 0 && (
-                    <div className="flex space-x-4 justify-between">
-                      <div className="text-muted-foreground">Resistances</div>
-                      <div className="flex space-x-2">
-                        {builder.base.resistances.map((affinity, i) => (
-                          <div key={i} className="flex space-x-1">
-                            <DamageIcon damageType={affinity.type} />
-                            <div className="text-green-200">
-                              {affinity.factor}%
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                  {builder.base.weaknesses.length > 0 && (
-                    <div className="flex space-x-4 justify-between">
-                      <div className="text-muted-foreground"> Weaknesses</div>
-                      <div className="flex space-x-2">
-                        {builder.base.weaknesses.map((affinity, i) => (
-                          <div key={i} className="flex space-x-1">
-                            <DamageIcon damageType={affinity.type} />
-                            <div className="text-red-200">
-                              {affinity.factor}%
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                </div>
+                  }}
+                />
               </div>
-            </CardContent>
-          </Card>
-        </div>
+
+              <div className="flex items-center space-x-2">
+                <Label htmlFor="base" className="min-w-[86px]">
+                  Class
+                </Label>
+                <UnitBaseSelect
+                  value={builder.base}
+                  onChange={(base) => {
+                    const config = BASE_CONFIGS[base.id]
+                    store.updateBuilder(builder.id, (b) => ({
+                      base,
+                      config,
+                      ability: config.abilities.find(
+                        (a) => a.id === config.defaultAbilityId
+                      ),
+                      actions: config.actions.filter((m) =>
+                        config.defaultActionIds.includes(m.id)
+                      ),
+                    }))
+                  }}
+                />
+              </div>
+
+              <div className="flex items-center space-x-2">
+                <Label htmlFor="name" className="min-w-[86px]">
+                  Ability
+                </Label>
+                <UnitAbilitySelect
+                  options={builder.config.abilities}
+                  value={builder.ability}
+                  onChnage={(ability) =>
+                    store.updateBuilder(builder.id, (b) => ({
+                      ability,
+                    }))
+                  }
+                />
+              </div>
+              <Separator />
+              <UnitBaseStats base={builder.base} />
+              <Separator />
+              <div>
+                {builder.base.affinities.length > 0 && (
+                  <div className="flex space-x-4 justify-between">
+                    <div className="text-muted-foreground">Affinities</div>
+                    <div className="flex space-x-2">
+                      {builder.base.affinities.map((affinity, i) => (
+                        <div key={i} className="flex space-x-1">
+                          <DamageIcon damageType={affinity.type} />
+                          <div className="text-green-200">
+                            {affinity.factor}%
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+                {builder.base.resistances.length > 0 && (
+                  <div className="flex space-x-4 justify-between">
+                    <div className="text-muted-foreground">Resistances</div>
+                    <div className="flex space-x-2">
+                      {builder.base.resistances.map((affinity, i) => (
+                        <div key={i} className="flex space-x-1">
+                          <DamageIcon damageType={affinity.type} />
+                          <div className="text-green-200">
+                            {affinity.factor}%
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+                {builder.base.weaknesses.length > 0 && (
+                  <div className="flex space-x-4 justify-between">
+                    <div className="text-muted-foreground"> Weaknesses</div>
+                    <div className="flex space-x-2">
+                      {builder.base.weaknesses.map((affinity, i) => (
+                        <div key={i} className="flex space-x-1">
+                          <DamageIcon damageType={affinity.type} />
+                          <div className="text-red-200">{affinity.factor}%</div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+          </CardContent>
+        </Card>
       )}
       {builder && (
         <div className="w-full lg:w-[680px]">

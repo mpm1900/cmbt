@@ -6,8 +6,8 @@ import { Encounter, EncounterNode, Team } from '@repo/game/types'
 import { makeEnemyUnit } from '@repo/game/utils'
 import { nanoid } from 'nanoid'
 import { BsQuestionLg } from 'react-icons/bs'
-import { GiCrossedSwords } from 'react-icons/gi'
 import { IoMdReturnLeft, IoMdReturnRight } from 'react-icons/io'
+import { LuSwords } from 'react-icons/lu'
 
 const IntroductionNode: EncounterNode = {
   id: nanoid(),
@@ -28,7 +28,7 @@ const IntroductionNode: EncounterNode = {
         <ChoiceLabel
           before={
             <ChoiceAttributes>
-              <GiCrossedSwords />
+              <LuSwords />
             </ChoiceAttributes>
           }
           after={<IoMdReturnRight />}

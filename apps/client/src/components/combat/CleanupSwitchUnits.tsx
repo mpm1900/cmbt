@@ -1,7 +1,7 @@
 import { getTeamsWithSelectionRequired } from '@/utils'
 import { GetUnits, SetIsActive } from '@repo/game/data'
 import { nanoid } from 'nanoid/non-secure'
-import { GiCrossedSwords } from 'react-icons/gi'
+import { LuSwords } from 'react-icons/lu'
 import { useCombatActions, useCombatContext } from '../../hooks'
 import { SwitchUnits } from './SwitchUnits'
 
@@ -24,7 +24,7 @@ export function CleanupSwitchUnits(props: CleanupSwitchUnitsProps) {
     <div className="w-[580px]">
       {ctx.turn.count === 0 && (
         <div className="p-5 mb-8 space-y-2 flex flex-col items-center">
-          <GiCrossedSwords className="h-[64px] w-[64px]" />
+          <LuSwords className="h-[64px] w-[64px]" />
           <div className="text-5xl font-black">Combat Start!</div>
         </div>
       )}

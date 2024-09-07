@@ -7,9 +7,9 @@ import { Encounter, EncounterNode, Team } from '@repo/game/types'
 import { makeEnemyUnit } from '@repo/game/utils'
 import { nanoid } from 'nanoid'
 import { BsQuestionLg } from 'react-icons/bs'
-import { GiCrossedSwords } from 'react-icons/gi'
 import { IoMdReturnLeft, IoMdReturnRight } from 'react-icons/io'
 import { IoSkullSharp } from 'react-icons/io5'
+import { LuSwords } from 'react-icons/lu'
 
 const CombatIntroductionNode: EncounterNode = {
   id: nanoid(),
@@ -31,7 +31,7 @@ const CombatIntroductionNode: EncounterNode = {
         <ChoiceLabel
           before={
             <ChoiceAttributes>
-              <GiCrossedSwords />
+              <LuSwords />
               {', 50%'}
             </ChoiceAttributes>
           }
@@ -146,7 +146,7 @@ const CombatNode2: EncounterNode = {
         <ChoiceLabel
           before={
             <ChoiceAttributes>
-              <GiCrossedSwords />
+              <LuSwords />
             </ChoiceAttributes>
           }
           after={<IoMdReturnRight />}

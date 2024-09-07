@@ -1,6 +1,7 @@
 import { BuilderHeader } from '@/components/builder/BuilderHeader'
 import { StartButton } from '@/components/builder/StartButton'
 import { UnitBuilder } from '@/components/builder/UnitBuilder'
+import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { VantaContextProvider } from '@/hooks'
 import { useBuilderUi } from '@/hooks/state/useBuilderUi'
 import { useUnitBuilders } from '@/hooks/state/useUnitBuilders'
@@ -25,9 +26,9 @@ export function Builder() {
         className="overflow-auto"
       >
         <div className="flex flex-col flex-1 items-center p-8">
-          <div>
+          <div className="space-y-4">
             <div className="flex">
-              <div className="flex flex-col items-start w-full p-12">
+              <div className="flex flex-col items-start w-full p-12 space-y-4">
                 <div className="text-7xl font-black">Who are you?</div>
                 <div className="text-lg text-muted-foreground">
                   Change up your units if you want and then hit "Start!" to
@@ -37,6 +38,20 @@ export function Builder() {
               <div className="flex flex-1 items-center justify-center px-12">
                 <StartButton className="w-[280px]" />
               </div>
+            </div>
+            <div className="flex justify-center">
+              <Tabs
+                defaultValue={ui.activeBuilderId}
+                onValueChange={(id) => ui.setActiveBuilderId(id)}
+              >
+                <TabsList>
+                  {store.builders.map((b) => (
+                    <TabsTrigger key={b.id} value={b.id}>
+                      {b.name}
+                    </TabsTrigger>
+                  ))}
+                </TabsList>
+              </Tabs>
             </div>
             {ui.activeBuilderId && <UnitBuilder />}
           </div>

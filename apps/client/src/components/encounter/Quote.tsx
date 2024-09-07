@@ -9,8 +9,8 @@ export type QuoteProps = ElementProps<{
 export function Quote(props: QuoteProps) {
   return (
     <span className={cn('space-x-2', props.className)}>
-      <span className="text-muted-foreground">{props.name}</span>:{' '}
-      {props.children}
+      <span className="text-muted-foreground">{props.name}:</span>
+      <span className="">{props.children}</span>
     </span>
   )
 }

@@ -1,7 +1,6 @@
 import { ChoiceAttributes } from '@/components/encounter/ChoiceAttributes'
 import { ChoiceLabel } from '@/components/encounter/ChoiceLabel'
 import { Narration } from '@/components/encounter/Narration'
-import { Separator } from '@/components/ui/separator'
 import { TeamId, Wolf } from '@repo/game/data'
 import { Encounter, EncounterNode, Team } from '@repo/game/types'
 import { makeEnemyUnit } from '@repo/game/utils'
@@ -21,7 +20,6 @@ const IntroductionNode: EncounterNode = {
         unable to be reasoned with.
       </Narration>
     )
-    ctx.log(<Separator />)
   },
   choices: () => [
     {
@@ -93,7 +91,9 @@ export const FirstCombatEncounterId = nanoid()
 export function FirstCombatEncounter(): Encounter {
   return {
     id: FirstCombatEncounterId,
-    setup: () => {},
+    setup: (ctx) => {
+      ctx.clearLog()
+    },
     nodes: [IntroductionNode],
     activeNodeId: IntroductionNode.id,
     visitedNodeIds: [],

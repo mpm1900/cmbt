@@ -14,14 +14,7 @@ export type UnitBuildersStore = UnitBuildersState & {
 }
 
 export const useUnitBuilders = create<UnitBuildersStore>((set) => ({
-  builders: [
-    makeBuilder(0),
-    makeBuilder(1),
-    makeBuilder(2),
-    makeBuilder(3),
-    makeBuilder(4),
-    makeBuilder(5),
-  ],
+  builders: [makeBuilder(0), makeBuilder(1), makeBuilder(2), makeBuilder(3)],
   addBuilder: (builder) =>
     set((s) => ({ builders: s.builders.concat(builder) })),
   updateBuilder: (id, fn) =>

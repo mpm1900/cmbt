@@ -38,58 +38,61 @@ export function ItemListTable(props: ItemListTableProps) {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {items.map((item) => (
-          <ItemHover key={item.id} item={item} unit={unit} side="right">
-            <TableRow>
-              <TableCell
-                className={cn('w-full')}
-                style={{ color: ItemRarityRenderers[item.rarity].color }}
-              >
-                {item.name}
-              </TableCell>
-
-              <TableCell
-                className={cn('flex items-center justify-end', {
-                  'text-red-400':
-                    !!onClick && (resources.credits ?? 0) < item.cost,
-                })}
-              >
-                <span>{Math.round(item.cost * costMultiplier)}</span>
-                <GiCreditsCurrency />
-              </TableCell>
-
-              <TableCell
-                width={32}
-                className={cn({
-                  'text-red-400': quantities[item.id] <= 0,
-                })}
-              >
-                x{quantities[item.id]}
-              </TableCell>
-              {onClick && (
-                <TableCell className="p-0">
-                  <Button
-                    disabled={
-                      (resources.credits ?? 0) < item.cost ||
-                      quantities[item.id] <= 0
-                    }
-                    variant="ghost"
-                    className={cn({
-                      'text-red-400':
-                        (resources.credits ?? 0) < item.cost ||
-                        quantities[item.id] <= 0,
-                    })}
-                    onClick={() => {
-                      onClick(item)
-                    }}
-                  >
-                    Buy
-                  </Button>
+        {items.map((item) => {
+          const cost = Math.round(item.cost * costMultiplier)
+          return (
+            <ItemHover key={item.id} item={item} unit={unit} side="right">
+              <TableRow>
+                <TableCell
+                  className={cn('w-full')}
+                  style={{ color: ItemRarityRenderers[item.rarity].color }}
+                >
+                  {item.name}
                 </TableCell>
-              )}
-            </TableRow>
-          </ItemHover>
-        ))}
+
+                <TableCell
+                  className={cn('flex items-center justify-end', {
+                    'text-red-400':
+                      !!onClick && (resources.credits ?? 0) < cost,
+                  })}
+                >
+                  <span>{cost}</span>
+                  <GiCreditsCurrency />
+                </TableCell>
+
+                <TableCell
+                  width={32}
+                  className={cn({
+                    'text-red-400': quantities[item.id] <= 0,
+                  })}
+                >
+                  x{quantities[item.id]}
+                </TableCell>
+                {onClick && (
+                  <TableCell className="p-0">
+                    <Button
+                      disabled={
+                        (resources.credits ?? 0) < cost ||
+                        quantities[item.id] <= 0
+                      }
+                      variant="ghost"
+                      className={cn({
+                        'text-red-400':
+                          (resources.credits ?? 0) < cost ||
+                          quantities[item.id] <= 0,
+                      })}
+                      onClick={() => {
+                        onClick(item)
+                      }}
+                    >
+                      Buy
+                    </Button>
+                  </TableCell>
+                )}
+              </TableRow>
+            </ItemHover>
+          )
+        })}
       </TableBody>
     </Table>
   )

@@ -28,10 +28,10 @@ export function Builder() {
           <div>
             <div className="flex">
               <div className="flex flex-col items-start w-full p-12">
-                <div className="text-7xl font-black">Welcome!</div>
+                <div className="text-7xl font-black">Who are you?</div>
                 <div className="text-lg text-muted-foreground">
                   Change up your units if you want and then hit "Start!" to
-                  begin.
+                  begin your journey.
                 </div>
               </div>
               <div className="flex flex-1 items-center justify-center px-12">

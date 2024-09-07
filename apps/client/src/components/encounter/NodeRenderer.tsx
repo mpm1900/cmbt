@@ -55,6 +55,7 @@ export function NodeRenderer(props: NodeRendererProps) {
                   key={tab.id}
                   size="sm"
                   variant={tab.active ? 'default' : 'ghost'}
+                  onClick={() => tab.resolve(ctx)}
                 >
                   {tab.label}
                 </Button>

@@ -9,7 +9,7 @@ export function WorldActions() {
       {cy && (
         <div>
           <Button variant="ghost" onClick={() => fitAll(cy)}>
-            Fit All
+            Zoom Out
           </Button>
           <Button variant="ghost" onClick={() => centerActive(cy)}>
             Center

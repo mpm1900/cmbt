@@ -108,6 +108,7 @@ export function UnitCard(props: UnitCardProps) {
                   </Button>
                 </PopoverTrigger>
                 <PopoverContent
+                  sideOffset={12}
                   className="w-full text-center"
                   onOpenAutoFocus={(e) => e.preventDefault()}
                 >

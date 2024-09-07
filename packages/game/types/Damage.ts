@@ -9,6 +9,16 @@ export type DamageType =
   | 'psychic'
   | 'shock'
 
+export const DAMAGE_TYPES: DamageType[] = [
+  'arcane',
+  'blight',
+  'fire',
+  'force',
+  'holy',
+  'psychic',
+  'shock',
+]
+
 export type Damage = {
   attackType: AttackTypes
   damageType?: DamageType

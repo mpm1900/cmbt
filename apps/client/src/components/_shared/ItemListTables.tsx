@@ -8,7 +8,7 @@ export function ItemListTables(props: ItemListTableProps) {
 
   return (
     <Tabs defaultValue="all">
-      <div className="flex justify-center">
+      <div className="flex justify-start">
         <TabsList>
           <TabsTrigger value="all">All</TabsTrigger>
           <TabsTrigger value="consumables">Consumables</TabsTrigger>

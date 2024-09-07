@@ -262,16 +262,13 @@ const CampIntroductionNode: EncounterNode = {
   },
 }
 
+const ShopWaresNodeId = nanoid()
 const ShopWaresNode: EncounterNode = {
-  id: nanoid(),
+  id: ShopWaresNodeId,
   icon: <LiaFortAwesome />,
   title: `Friendly Camp - Chiblee's Shop`,
 
   render: (ctx) => {
-    const encounterCount = ctx.visitedNodeIds.filter(
-      (id) => id === ctx.encounter.id
-    )!.length
-
     ctx.log(
       <span>
         <Quote name="Chiblee">
@@ -285,7 +282,7 @@ const ShopWaresNode: EncounterNode = {
   actions: (ctx) => [
     {
       id: nanoid(),
-      label: <ChoiceLabel after={<IoMdReturnLeft />}>Leave</ChoiceLabel>,
+      label: <IoMdReturnLeft />,
       resolve: (ctx) => {
         ctx.updateActiveWorldNode((n) => ({
           completed: true,
@@ -377,6 +374,7 @@ const ShopWaresNode: EncounterNode = {
   },
 }
 
+const CombatTrainingId = nanoid()
 const CombatTraining: EncounterNode = {
   id: nanoid(),
   icon: <LuSwords />,
@@ -384,7 +382,7 @@ const CombatTraining: EncounterNode = {
   actions: (ctx) => [
     {
       id: nanoid(),
-      label: <ChoiceLabel after={<IoMdReturnLeft />}>Leave</ChoiceLabel>,
+      label: <IoMdReturnLeft />,
       resolve: (ctx) => {
         ctx.updateActiveWorldNode((n) => ({
           completed: true,
@@ -401,7 +399,7 @@ const CombatTraining: EncounterNode = {
       label: <>Shop</>,
       resolve: (ctx) => {
         ctx.clearLog()
-        ctx.gotoNode(CampIntroductionNode.id)
+        ctx.gotoNode(ShopWaresNode.id)
       },
     },
     {

@@ -4,7 +4,13 @@ import { DamageRenderers } from '@/renderers/Damage'
 import { StatRenderers } from '@/renderers/Stats'
 import { ElementProps } from '@/types'
 import { AspectRatio } from '@radix-ui/react-aspect-ratio'
-import { DamageType, Modifier, StatKey, Unit } from '@repo/game/types'
+import {
+  DAMAGE_TYPES,
+  DamageType,
+  Modifier,
+  StatKey,
+  Unit,
+} from '@repo/game/types'
 import { getModifiersFromUnit, getUnitBase } from '@repo/game/utils'
 import { ReactNode } from '@tanstack/react-router'
 import { MagicArmor } from './MagicArmor'
@@ -177,59 +183,66 @@ export function UnitDetails(props: UnitDetailsProps) {
           </div>
         </div>
         <div className="w-[1px] bg-border" />
-        <div className="flex flex-col text-left flex-1">
-          <Title>Damage</Title>
-          <Separator className="my-1" />
-          <UnitDamageStat
-            stat="arcaneExpansion"
-            unit={unit}
-            comp={comp}
-            damageType="arcane"
-            after="%"
-          />
-          <UnitDamageStat
-            stat="blightExpansion"
-            unit={unit}
-            comp={comp}
-            damageType="blight"
-            after="%"
-          />
-          <UnitDamageStat
-            stat="fireExpansion"
-            unit={unit}
-            comp={comp}
-            damageType="fire"
-            after="%"
-          />
-          <UnitDamageStat
-            stat="forceExpansion"
-            unit={unit}
-            comp={comp}
-            damageType="force"
-            after="%"
-          />
-          <UnitDamageStat
-            stat="holyExpansion"
-            unit={unit}
-            comp={comp}
-            damageType="holy"
-            after="%"
-          />
-          <UnitDamageStat
-            stat="psychicExpansion"
-            unit={unit}
-            comp={comp}
-            damageType="psychic"
-            after="%"
-          />
-          <UnitDamageStat
-            stat="shockExpansion"
-            unit={unit}
-            comp={comp}
-            damageType="shock"
-            after="%"
-          />
+        <div>
+          <div className="flex flex-1 space-x-2">
+            <div>
+              <Title>Type</Title>
+              <Separator className="my-1" />
+              {DAMAGE_TYPES.map((damageType) => {
+                const renderer = DamageRenderers[damageType]
+                return (
+                  <div className="flex items-center space-x-1">
+                    <div
+                      className={cn('h-[20px] w-[20px]')}
+                      style={{ fill: renderer?.color }}
+                    >
+                      {renderer?.icon}
+                    </div>
+                    <strong
+                      className="text-muted-foreground"
+                      style={{ color: renderer?.color }}
+                    >
+                      {renderer?.name}
+                    </strong>
+                  </div>
+                )
+              })}
+            </div>
+            <div>
+              <Title>Dmg</Title>
+              <Separator className="my-1" />
+              {DAMAGE_TYPES.map((damageType) => {
+                return (
+                  <div className="flex items-center justify-end space-x-1">
+                    <StatValue
+                      stat={`${damageType}Expansion`}
+                      unit={unit}
+                      comp={comp}
+                      after="%"
+                    />
+                  </div>
+                )
+              })}
+            </div>
+            <div>
+              <Title>Res</Title>
+              <Separator className="my-1" />
+              {DAMAGE_TYPES.map((damageType) => {
+                return (
+                  <div className="flex items-center justify-end space-x-1">
+                    <StatValue
+                      stat={`${damageType}Negation`}
+                      unit={unit}
+                      comp={comp}
+                      after="%"
+                    />
+                  </div>
+                )
+              })}
+            </div>
+          </div>
           <Separator className="my-2" />
+          <UnitStat unit={unit} comp={comp} stat="evasion" after="%" />
           <UnitStat
             stat="accuracy"
             unit={unit}
@@ -244,63 +257,13 @@ export function UnitDetails(props: UnitDetailsProps) {
             before="+"
             after="%"
           />
-          <UnitStat stat="criticalDamage" unit={unit} comp={comp} before="+" />
-        </div>
-        <div className="w-[1px] bg-border" />
-        <div className="flex flex-col text-left flex-1">
-          <Title>Negation</Title>
-          <Separator className="my-1" />
-          <UnitDamageStat
-            stat="arcaneNegation"
+          <UnitStat
+            stat="criticalDamage"
             unit={unit}
             comp={comp}
-            damageType="arcane"
+            before="+"
             after="%"
           />
-          <UnitDamageStat
-            stat="blightNegation"
-            unit={unit}
-            comp={comp}
-            damageType="blight"
-            after="%"
-          />
-          <UnitDamageStat
-            stat="fireNegation"
-            unit={unit}
-            comp={comp}
-            damageType="fire"
-            after="%"
-          />
-          <UnitDamageStat
-            stat="forceNegation"
-            unit={unit}
-            comp={comp}
-            damageType="force"
-            after="%"
-          />
-          <UnitDamageStat
-            stat="holyNegation"
-            unit={unit}
-            comp={comp}
-            damageType="holy"
-            after="%"
-          />
-          <UnitDamageStat
-            stat="psychicNegation"
-            unit={unit}
-            comp={comp}
-            damageType="psychic"
-            after="%"
-          />
-          <UnitDamageStat
-            stat="shockNegation"
-            unit={unit}
-            comp={comp}
-            damageType="shock"
-            after="%"
-          />
-          <Separator className="my-2" />
-          <UnitStat unit={unit} comp={comp} stat="evasion" after="%" />
         </div>
       </div>
       <Separator />

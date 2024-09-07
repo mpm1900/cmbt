@@ -26,7 +26,7 @@ export function WorldHeader() {
             <MenubarTrigger>View</MenubarTrigger>
             {cy && (
               <MenubarContent>
-                <MenubarItem onClick={() => fitAll(cy)}>Fit all</MenubarItem>
+                <MenubarItem onClick={() => fitAll(cy)}>Zoom Out</MenubarItem>
                 <MenubarItem onClick={() => centerActive(cy)}>
                   Center
                 </MenubarItem>

@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import { useEffect } from 'react'
 import { Button } from '../ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
+import { Tabs, TabsList, TabsTrigger } from '../ui/tabs'
 import { ChoiceButton } from './ChoiceButton'
 import { EncounterLogRenderer } from './EncounterLogRenderer'
 
@@ -15,6 +16,9 @@ export function NodeRenderer(props: NodeRendererProps) {
   const { node } = props
   const ctx = useEncounterContext()
   const { Component, choices, Choice = ChoiceButton } = node
+  const tabs = node.tabs ? node.tabs(ctx) : undefined
+  const activeTab = tabs?.find((t) => t.active)?.id
+  console.log(activeTab, tabs)
 
   useEffect(() => {
     console.log('render node', node.id)
@@ -49,19 +53,20 @@ export function NodeRenderer(props: NodeRendererProps) {
       </CardHeader>
       <CardContent>
         <div className="space-y-4 flex flex-col items-center">
-          {node.tabs && (
-            <div className="flex justify-center border-2 border-muted rounded-lg p-1">
-              {node.tabs(ctx).map((tab) => (
-                <Button
-                  key={tab.id}
-                  size="sm"
-                  variant={tab.active ? 'default' : 'ghost'}
-                  onClick={() => tab.resolve(ctx)}
-                >
-                  {tab.label}
-                </Button>
-              ))}
-            </div>
+          {tabs && (
+            <Tabs value={activeTab}>
+              <TabsList>
+                {tabs.map((tab) => (
+                  <TabsTrigger
+                    key={tab.id}
+                    value={tab.id}
+                    onClick={() => tab.resolve(ctx)}
+                  >
+                    {tab.label}
+                  </TabsTrigger>
+                ))}
+              </TabsList>
+            </Tabs>
           )}
           <EncounterLogRenderer />
           {node.text && <div className="w-full">{node.text}</div>}

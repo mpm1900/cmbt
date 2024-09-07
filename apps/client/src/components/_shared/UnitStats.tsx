@@ -3,11 +3,15 @@ import { useCombatContext } from '@/hooks'
 import { cn } from '@/lib/utils'
 import { DamageRenderers } from '@/renderers/Damage'
 import { StatRenderers } from '@/renderers/Stats'
+import { ElementProps } from '@/types'
+import { getStatusesFromModifiers } from '@/utils/getStatusesFromModifiers'
 import { DamageType, StatKey, Unit } from '@repo/game/types'
+import { getModifiersFromUnit } from '@repo/game/utils'
 import { ReactNode } from '@tanstack/react-router'
 import { MagicArmor } from './MagicArmor'
 import { PhysicalArmor } from './PhysicalArmor'
 import { StatDebug } from './StatDebug'
+import { UnitModifiers } from './UnitModifiers'
 
 type UnitStatProps = {
   unit: Unit
@@ -16,6 +20,19 @@ type UnitStatProps = {
   before?: ReactNode
   after?: ReactNode
   map?: (value: number) => number
+}
+
+function Title(props: ElementProps) {
+  return (
+    <div
+      className={cn(
+        'text-center font-black text-muted-foreground/60 uppercase text-sm',
+        props.className
+      )}
+    >
+      {props.children}
+    </div>
+  )
 }
 
 function UnitStat(props: UnitStatProps) {
@@ -82,15 +99,17 @@ export function UnitStats(props: UnitStatsProps) {
   const { unit, comp } = props
   const ctx = useCombatContext()
   const remainingHealth = Math.max(unit.stats.health - unit.values.damage, 0)
+  const mods = getModifiersFromUnit(unit)
+  const nonStatusModifiers = mods.filter((m) => !m.statusId)
+  const statuses = getStatusesFromModifiers(mods)
+  const hasModifiers = nonStatusModifiers.length > 0 || statuses.length > 0
 
   return (
-    <div>
+    <div className="space-y-2">
       <div className="flex space-x-4">
         <div className="space-y-4">
           <div>
-            <div className="text-center font-black text-muted-foreground/60 uppercase text-sm">
-              Stats
-            </div>
+            <Title>Stats</Title>
             <Separator className="my-1" />
             <UnitStat unit={unit} comp={comp} stat="attack" />
             <UnitStat unit={unit} comp={comp} stat="defense" />
@@ -140,9 +159,7 @@ export function UnitStats(props: UnitStatsProps) {
         </div>
         <div className="w-[1px] bg-border" />
         <div className="flex flex-col text-left flex-1">
-          <div className="text-center font-black text-muted-foreground/60 uppercase text-sm">
-            Damage
-          </div>
+          <Title>Damage</Title>
           <Separator className="my-1" />
           <UnitDamageStat
             stat="arcaneExpansion"
@@ -212,9 +229,7 @@ export function UnitStats(props: UnitStatsProps) {
         </div>
         <div className="w-[1px] bg-border" />
         <div className="flex flex-col text-left flex-1">
-          <div className="text-center font-black text-muted-foreground/60 uppercase text-sm">
-            Negation
-          </div>
+          <Title>Negation</Title>
           <Separator className="my-1" />
           <UnitDamageStat
             stat="arcaneNegation"
@@ -269,6 +284,13 @@ export function UnitStats(props: UnitStatsProps) {
           <UnitStat unit={unit} comp={comp} stat="evasion" after="%" />
         </div>
       </div>
+      <Separator />
+      {hasModifiers && (
+        <div className="space-y-2">
+          <Title className="text-left">Modifiers</Title>
+          <UnitModifiers modifiers={nonStatusModifiers} statuses={statuses} />
+        </div>
+      )}
     </div>
   )
 }

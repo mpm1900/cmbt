@@ -73,7 +73,7 @@ const ShopIntroductionNode: EncounterNode = {
   actions: (ctx) => [
     {
       id: nanoid(),
-      label: <ChoiceLabel after={<IoMdReturnLeft />}>Leave</ChoiceLabel>,
+      label: <IoMdReturnLeft />,
       resolve: (ctx) => {
         ctx.updateActiveWorldNode((n) => ({
           completed: true,

@@ -2,7 +2,7 @@ import { useGame } from '@/hooks/state'
 import { groupItemsById } from '@/utils'
 import { ZERO_UNIT } from '@repo/game/data'
 import { ItemListTable } from '@shared/ItemListTable'
-import { SidebarUnit } from '../_shared/SidebarUnit'
+import { MenuUnit } from '../_shared/MenuUnit'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../ui/tabs'
 
 export type EncounterSidebarProps = {
@@ -32,7 +32,7 @@ export function EncounterSidebar(props: EncounterSidebarProps) {
               Click units to edit
             </div>
             {game.units.map((unit) => (
-              <SidebarUnit key={unit.id} unit={unit} />
+              <MenuUnit key={unit.id} unit={unit} />
             ))}
           </TabsContent>
           <TabsContent value="items">

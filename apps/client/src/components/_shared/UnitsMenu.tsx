@@ -6,7 +6,7 @@ import {
   MenubarSeparator,
   MenubarTrigger,
 } from '../ui/menubar'
-import { SidebarUnit } from './SidebarUnit'
+import { MenuUnit } from './MenuUnit'
 
 export type UnitsMenuProps = {
   units: Unit[]
@@ -22,7 +22,7 @@ export function UnitsMenu(props: UnitsMenuProps) {
         {units.map((unit, i) => (
           <Fragment key={unit.id}>
             {i !== 0 && <MenubarSeparator />}
-            <SidebarUnit unit={unit} />
+            <MenuUnit unit={unit} />
           </Fragment>
         ))}
       </MenubarContent>

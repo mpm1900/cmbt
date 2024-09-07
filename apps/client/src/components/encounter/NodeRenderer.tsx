@@ -37,6 +37,7 @@ export function NodeRenderer(props: NodeRendererProps) {
                 <Button
                   key={tab.id}
                   variant="ghost"
+                  size="icon"
                   onClick={() => tab.resolve(ctx)}
                 >
                   {tab.label}

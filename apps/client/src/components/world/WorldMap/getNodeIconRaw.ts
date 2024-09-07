@@ -29,7 +29,10 @@ const altar = (props: NodeIconProps) =>
   `<svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" height="${props.size}" width="${props.size}" xmlns="http://www.w3.org/2000/svg"><path d="M256 25.61l-97.8 36.67L256 86.72l97.8-24.44L256 25.61zM136.1 75.3L105.9 407h300.2L375.9 75.3l-119.9 30-119.9-30zM256 128l30 72.7 78.3 6-59.8 51L323 334l-67-41.2-66.9 41.3 18.4-76.5-59.8-50.9 78.4-6L256 128zM70.09 425l-24.8 62H237.3l-49.6-62H70.09zm140.61 0l45.3 56.6 45.3-56.6h-90.6zm113.6 0l-49.6 62h192l-24.8-62H324.3z"></path></svg>`
 // import { LuSwords } from "react-icons/lu";
 const swords = (props: NodeIconProps) =>
-  `<svg stroke="currentColor" fill="none" stroke-width="1" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="${props.size}" width="${props.size}" xmlns="http://www.w3.org/2000/svg"><polyline points="14.5 17.5 3 6 3 3 6 3 17.5 14.5"></polyline><line x1="13" x2="19" y1="19" y2="13"></line><line x1="16" x2="20" y1="16" y2="20"></line><line x1="19" x2="21" y1="21" y2="19"></line><polyline points="14.5 6.5 18 3 21 3 21 6 17.5 9.5"></polyline><line x1="5" x2="9" y1="14" y2="18"></line><line x1="7" x2="4" y1="17" y2="20"></line><line x1="3" x2="5" y1="19" y2="21"></line></svg>`
+  `<svg stroke="currentColor" fill="currentColor" stroke-width="1" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="${props.size}" width="${props.size}" xmlns="http://www.w3.org/2000/svg"><polyline points="14.5 17.5 3 6 3 3 6 3 17.5 14.5"></polyline><line x1="13" x2="19" y1="19" y2="13"></line><line x1="16" x2="20" y1="16" y2="20"></line><line x1="19" x2="21" y1="21" y2="19"></line><polyline points="14.5 6.5 18 3 21 3 21 6 17.5 9.5"></polyline><line x1="5" x2="9" y1="14" y2="18"></line><line x1="7" x2="4" y1="17" y2="20"></line><line x1="3" x2="5" y1="19" y2="21"></line></svg>`
+// import { LiaFortAwesome } from "react-icons/lia";
+const fort = (props: NodeIconProps) =>
+  `<svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 32 32" height="${props.size}" width="${props.size}" xmlns="http://www.w3.org/2000/svg"><path d="M 15.5 4 C 15.225 4 15 4.225 15 4.5 L 15 10 L 15 11.5 L 15 12 L 13 12 L 13 10 L 11 10 L 11 12 L 8.9941406 12 L 8.9941406 10 L 7 10 L 7 19 L 5 19 L 5 17 L 3 17 L 3 27 L 13 27 L 13 24 C 13 22.343 14.343 21 16 21 C 17.657 21 19 22.343 19 24 L 19 27 L 29 27 L 29 17 L 27 17 L 27 19 L 25 19 L 25 10 L 22.994141 10 L 22.994141 12 L 21 12 L 21 10 L 19 10 L 19 12 L 17 12 L 17 10 L 16 10 L 16 7.90625 C 16.275 7.80625 16.725391 7.6779687 17.275391 7.6679688 C 18.037391 7.6579687 18.411609 7.8670313 19.224609 7.9570312 C 19.571609 8.0000312 20.069219 8.0291719 20.699219 7.9511719 C 20.869219 7.9301719 21 7.7784219 21 7.6074219 L 21 4.4316406 C 21 4.3316406 20.886719 4.26125 20.761719 4.28125 C 20.099719 4.36125 19.586609 4.3310156 19.224609 4.2910156 C 18.411609 4.2010156 18.037391 3.9819531 17.275391 4.0019531 C 16.725391 4.0119531 16.275 4.1402344 16 4.2402344 L 16 4.5 C 16 4.225 15.775 4 15.5 4 z M 11 14 L 13 14 L 13 18 L 11 18 L 11 14 z M 19 14 L 21 14 L 21 18 L 19 18 L 19 14 z"></path></svg>`
 
 export function getNodeIconRaw(
   key: WorldNodeIconKey,
@@ -43,7 +46,7 @@ export function getNodeIconRaw(
     case 'locked':
       return locked(props)
     case 'shop':
-      return cashSvg(props)
+      return fort(props)
     case 'spring':
       return waterfall(props)
     case 'start':

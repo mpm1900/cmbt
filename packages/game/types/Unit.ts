@@ -46,6 +46,7 @@ export type UnitMetadata = {
   lastUsedActionId: string | undefined
   modified: boolean
   hasBeenSeen: boolean
+  activeTurns: number
 }
 
 export type UnitBaseAffinity = {

@@ -44,8 +44,8 @@ export function ActionListTable(props: ActionListTableProps) {
           <TableHead>Name</TableHead>
           <TableHead>Req</TableHead>
           <TableHead>Type</TableHead>
-          <TableHead>Accuracy</TableHead>
           <TableHead>Base Damage</TableHead>
+          <TableHead>Accuracy</TableHead>
           <TableHead>Cost</TableHead>
           <TableHead>Critical</TableHead>
         </TableRow>
@@ -128,7 +128,7 @@ function ActionListRow(props: ActionListRowProps) {
             '—'
           )}
         </TableCell>
-        <TableCell>{accuracy !== undefined ? `${accuracy}%` : '—'}</TableCell>
+
         <TableCell>
           {renderer.baseDamage && renderer.baseDamage(action) ? (
             <span className="inline-flex items-center space-x-1">
@@ -138,6 +138,7 @@ function ActionListRow(props: ActionListRowProps) {
             '—'
           )}
         </TableCell>
+        <TableCell>{accuracy !== undefined ? `${accuracy}%` : '—'}</TableCell>
         <TableCell>{(renderer.cost && renderer.cost(action)) || '—'}</TableCell>
         {action.criticalFactor(ZERO_UNIT) ? (
           <TableCell>

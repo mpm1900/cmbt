@@ -22,6 +22,7 @@ export const CreateSandstormOnUnitEnterRenderer: ModifierRenderer = {
                 registryId: SandstormOnTurnEndId,
                 factor: modifier.damageFactor,
                 duration: modifier.damageDuration,
+                damageType: 'force',
               })
             }
           />{' '}

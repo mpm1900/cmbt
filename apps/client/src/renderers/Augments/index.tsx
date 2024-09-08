@@ -44,6 +44,7 @@ export const AugmentRenderers: Record<Id, AugmentRenderer> = {
               registryId: SandstormOnTurnEndId,
               factor: 0.1,
               duration: 5,
+              damageType: 'force',
             })
           }
         />

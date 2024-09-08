@@ -6,7 +6,9 @@ import { DamageIcon } from './DamageIcon'
 
 export type DamageInlineProps = {
   color?: string
-  damage: Damage | undefined
+  damage:
+    | (Omit<Damage, 'attackType' | 'value'> & { value: string | number })
+    | undefined
 }
 
 export function DamageInline(props: ElementProps<DamageInlineProps>) {
@@ -17,15 +19,15 @@ export function DamageInline(props: ElementProps<DamageInlineProps>) {
 
   return (
     <span
-      className={cn('text-white space-x-1 inline-flex items-center', className)}
+      className={cn(
+        'text-white space-x-1 inline-flex items-center flex-wrap',
+        className
+      )}
       style={{ color: color || renderer?.color }}
     >
-      {damage?.value === 0 && (
-        <span className="font-black">{damage.value || '--'}</span>
-      )}
       {damage && damage.value === Infinity && <span>∞</span>}
-      {damage && damage.value > 0 && damage.value !== Infinity && (
-        <span className="font-black">{damage?.value}</span>
+      {damage && damage.value && damage.value !== Infinity && (
+        <span className="font-black">{damage?.value ?? '--'}</span>
       )}
       <DamageIcon
         color={color}

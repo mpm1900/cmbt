@@ -25,6 +25,7 @@ export class CreateSandstormOnUnitEnter extends Trigger {
         new DamageAllOnTurnEnd({
           registryId: SandstormOnTurnEndId,
           factor: this.damageFactor,
+          damageType: 'force',
           duration: this.damageDuration,
           maxInstances: 1,
         }),

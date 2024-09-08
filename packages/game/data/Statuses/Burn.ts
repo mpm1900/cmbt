@@ -24,6 +24,7 @@ export const Burn: Status = {
       parentId: parent.id,
       statusId: BurnId,
       factor: 0.08,
+      damageType: 'fire',
       duration: 5,
       maxInstances: 1,
       persistOnCombatEnd: true,

@@ -191,7 +191,7 @@ export function UnitDetails(props: UnitDetailsProps) {
               {DAMAGE_TYPES.map((damageType) => {
                 const renderer = DamageRenderers[damageType]
                 return (
-                  <div className="flex items-center space-x-1">
+                  <div key={damageType} className="flex items-center space-x-1">
                     <div
                       className={cn('h-[20px] w-[20px]')}
                       style={{ fill: renderer?.color }}
@@ -213,7 +213,10 @@ export function UnitDetails(props: UnitDetailsProps) {
               <Separator className="my-1" />
               {DAMAGE_TYPES.map((damageType) => {
                 return (
-                  <div className="flex items-center justify-end space-x-1">
+                  <div
+                    key={damageType}
+                    className="flex items-center justify-end space-x-1"
+                  >
                     <StatValue
                       stat={`${damageType}Expansion`}
                       unit={unit}
@@ -229,7 +232,10 @@ export function UnitDetails(props: UnitDetailsProps) {
               <Separator className="my-1" />
               {DAMAGE_TYPES.map((damageType) => {
                 return (
-                  <div className="flex items-center justify-end space-x-1">
+                  <div
+                    key={damageType}
+                    className="flex items-center justify-end space-x-1"
+                  >
                     <StatValue
                       stat={`${damageType}Negation`}
                       unit={unit}

@@ -463,6 +463,7 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
               new DamageAllOnTurnEnd({
                 registryId: SandstormOnTurnEndId,
                 factor: sandstorm.damageFactor,
+                damageType: 'force',
                 duration: sandstorm.duration,
               })
             }

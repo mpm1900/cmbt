@@ -11,6 +11,7 @@ export const Bleed: Status = {
       parentId: parent.id,
       statusId: BleedId,
       factor: 0.1,
+      damageType: 'blight',
       duration: 5,
       maxInstances: 1,
       persistOnCombatEnd: true,

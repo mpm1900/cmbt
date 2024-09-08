@@ -39,7 +39,7 @@ export class FurySwipes extends Action {
     })
 
     this.damage = {
-      value: 4,
+      power: 4,
       attackType,
       damageType: 'force',
     }

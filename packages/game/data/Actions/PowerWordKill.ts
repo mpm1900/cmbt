@@ -28,7 +28,7 @@ export class PowerWordKill extends Action {
     })
 
     this.damage = {
-      value: Infinity,
+      power: Infinity,
       attackType: 'magic',
       damageType: 'force',
     }

@@ -41,7 +41,7 @@ export class FireBlast extends Action {
     })
 
     this.damage = {
-      value: 120,
+      power: 120,
       attackType,
       damageType: 'fire',
     }

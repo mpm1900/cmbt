@@ -38,7 +38,7 @@ export class Slash extends Action {
     })
 
     this.damage = {
-      value: 75,
+      power: 75,
       attackType,
       damageType: 'force',
     }

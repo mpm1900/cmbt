@@ -43,7 +43,7 @@ export class HyperBeam extends Action {
     })
 
     this.damage = {
-      value: 0,
+      power: 0,
       attackType: 'magic',
       damageType: 'force',
     }
@@ -77,7 +77,7 @@ export class HyperBeam extends Action {
             const { base } = getUnitBase(source.baseId)
             const damage = calculateDamage(
               {
-                value: (base?.stats.magic ?? 0) * 2,
+                power: (base?.stats.magic ?? 0) * 2,
                 attackType: this.attackType as AttackTypes,
                 damageType: 'force',
               },

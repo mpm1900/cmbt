@@ -22,5 +22,6 @@ export const DAMAGE_TYPES: DamageType[] = [
 export type Damage = {
   attackType: AttackTypes
   damageType?: DamageType
-  value: number
+  power?: number
+  factor?: number
 }

@@ -5,7 +5,7 @@ import { ACTION_NAMES, ActionRenderer } from '.'
 
 export const BiteRenderer: ActionRenderer = {
   name: ACTION_NAMES[BiteId],
-  baseDamage: (action) => `${action.damage?.value}`,
+  baseDamage: (action) => `${action.damage?.power}`,
   description: (action, props) => {
     const bite = action as Bite
     return (

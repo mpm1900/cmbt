@@ -41,7 +41,7 @@ export class FirePunch extends Action {
     })
 
     this.damage = {
-      value: 75,
+      power: 75,
       attackType,
       damageType: 'fire',
     }

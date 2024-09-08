@@ -177,7 +177,7 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
   },
   [BodySlamId]: {
     name: ACTION_NAMES[BodySlamId],
-    baseDamage: (action) => `${action.damage?.value}`,
+    baseDamage: (action) => `${action.damage?.power}`,
     description: (action) => {
       const bodyslam = action as BodySlam
       return (
@@ -192,7 +192,7 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
   },
   [PiercingStrikeId]: {
     name: ACTION_NAMES[PiercingStrikeId],
-    baseDamage: (action) => `${action.damage?.value}`,
+    baseDamage: (action) => `${action.damage?.power}`,
     description: (action, props) => {
       const crunch = action as PiercingStrike
       return (
@@ -236,7 +236,7 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
   },
   [EarthquakeId]: {
     name: ACTION_NAMES[EarthquakeId],
-    baseDamage: (action) => `${action.damage?.value}`,
+    baseDamage: (action) => `${action.damage?.power}`,
     description: (action) => (
       <>
         Deals <DamageInline damage={action.damage} /> to all other units.
@@ -258,7 +258,7 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
     name: ACTION_NAMES[FireballId],
     baseDamage: (action) => {
       const fireball = action as Fireball
-      return `${fireball.damage.value} (${fireball.splashDamage.value})`
+      return `${fireball.damage.power} (${fireball.splashDamage.power})`
     },
     description: (action) => {
       const fireball = action as Fireball
@@ -273,7 +273,7 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
   },
   [FireBlastId]: {
     name: ACTION_NAMES[FireBlastId],
-    baseDamage: (action) => `${action.damage?.value}`,
+    baseDamage: (action) => `${action.damage?.power}`,
     description: (action, props) => {
       const fireblast = action as FireBlast
       return (
@@ -287,7 +287,7 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
   },
   [FirePunchId]: {
     name: ACTION_NAMES[FirePunchId],
-    baseDamage: (action) => `${action.damage?.value}`,
+    baseDamage: (action) => `${action.damage?.power}`,
     description: (action, props) => {
       const firepunch = action as FirePunch
       return (
@@ -301,7 +301,7 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
   },
   [FurySwipesId]: {
     name: 'Fury Swipes',
-    baseDamage: (action) => `${action.damage?.value}`,
+    baseDamage: (action) => `${action.damage?.power}`,
     description: (action) => {
       const furySwipes = action as any as FurySwipes
       return (
@@ -335,7 +335,7 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
       const d: Damage = {
         damageType: 'force',
         attackType: 'magic',
-        value: 0,
+        power: 0,
       }
       return (
         <div>
@@ -363,7 +363,7 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
   },
   [MagicMissileId]: {
     name: 'Magic Missile',
-    baseDamage: (action) => `${action.damage?.value}`,
+    baseDamage: (action) => `${action.damage?.power}`,
     description: (action) => (
       <>
         Deals <DamageInline damage={action.damage} /> to 2 target enemy units.
@@ -373,7 +373,7 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
   },
   [QuickAttackId]: {
     name: 'Quick Attack',
-    baseDamage: (action) => `${action.damage?.value}`,
+    baseDamage: (action) => `${action.damage?.power}`,
     description: (action) => {
       const quickAttack = action as QuickAttack
       return (
@@ -386,7 +386,7 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
   },
   [PoisonSprayId]: {
     name: ACTION_NAMES[PoisonSprayId],
-    baseDamage: (a) => `${a.damage?.value}`,
+    baseDamage: (a) => `${a.damage?.power}`,
     description: (action, props) => {
       const poisionSpray = action as QuickAttack
       return (
@@ -475,7 +475,7 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
   },
   [SlashId]: {
     name: ACTION_NAMES[SlashId],
-    baseDamage: (a) => `${a.damage?.value}`,
+    baseDamage: (a) => `${a.damage?.power}`,
     description: (action, props) => {
       const slash = action as Slash
       return (

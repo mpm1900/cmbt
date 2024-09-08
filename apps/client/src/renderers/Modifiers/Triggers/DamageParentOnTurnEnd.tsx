@@ -20,7 +20,8 @@ export const DamageParentOnTurnEndRenderer: ModifierRenderer = {
             <DamageInline
               damage={{
                 damageType: modifier.damageType,
-                value,
+                power: modifier.static,
+                factor: modifier.factor,
               }}
             />
           ) : (

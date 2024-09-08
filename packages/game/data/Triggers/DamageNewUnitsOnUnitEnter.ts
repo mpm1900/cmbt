@@ -1,18 +1,28 @@
 import {
   CombatContext,
+  Damage,
+  DamageType,
   Modifier,
   MutationFilterArgs,
   Trigger,
   TriggerProps,
   Unit,
 } from '../../types'
+import { calculateBaseDamage, getTypedDamage } from '../../utils'
 import { DamageNewUnitsOnUnitEnterId } from '../Ids'
 
 export class DamageNewUnitsOnUnitEnter extends Trigger {
   factor: number
   static: number
+  damageType?: DamageType
 
-  constructor(props: TriggerProps<{ factor?: number; static?: number }>) {
+  constructor(
+    props: TriggerProps<{
+      factor?: number
+      static?: number
+      damageType?: DamageType
+    }>
+  ) {
     super(DamageNewUnitsOnUnitEnterId, {
       ...props,
       events: ['on Unit Enter'],
@@ -24,11 +34,21 @@ export class DamageNewUnitsOnUnitEnter extends Trigger {
 
   resolve = (unit: Unit): Partial<Unit> => {
     return {
-      values: Modifier.setValues(unit, (values) => ({
-        damage: Math.round(
-          values.damage + unit.stats.health * this.factor + this.static
-        ),
-      })),
+      values: Modifier.setValues(unit, (values) => {
+        const d = {
+          damageType: this.damageType,
+          factor: this.factor,
+        } as Damage
+        const baseDamage = calculateBaseDamage(d, undefined, unit) + this.static
+        const damage = getTypedDamage(
+          this.damageType,
+          baseDamage,
+          undefined,
+          unit
+        )
+
+        return { damage: values.damage + Math.round(damage) }
+      }),
     }
   }
 

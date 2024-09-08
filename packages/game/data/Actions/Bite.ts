@@ -41,7 +41,7 @@ export class Bite extends Action {
     })
 
     this.damage = {
-      value: 45,
+      power: 45,
       attackType,
       damageType: 'force',
     }

@@ -36,7 +36,7 @@ export class Earthquake extends Action {
     })
 
     this.damage = {
-      value: 100,
+      power: 100,
       attackType,
       damageType: 'force',
     }

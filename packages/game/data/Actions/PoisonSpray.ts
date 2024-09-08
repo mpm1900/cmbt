@@ -39,7 +39,7 @@ export class PoisonSpray extends Action {
     })
 
     this.damage = {
-      value: 20,
+      power: 20,
       attackType,
       damageType: 'blight',
     }

@@ -38,7 +38,7 @@ export class PowerCleave extends Action {
     })
 
     this.damage = {
-      value: 160,
+      power: 160,
       attackType,
       damageType: 'force',
     }

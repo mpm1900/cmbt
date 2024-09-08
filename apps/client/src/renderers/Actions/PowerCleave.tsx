@@ -4,7 +4,7 @@ import { ACTION_NAMES, ActionRenderer } from '.'
 
 export const PowerCleaveRenderer: ActionRenderer = {
   name: ACTION_NAMES[PowerCleaveId],
-  baseDamage: (a) => `${a.damage?.value}`,
+  baseDamage: (a) => `${a.damage?.power}`,
   description: (action, props) => {
     const powercleave = action as PowerCleave
     return (

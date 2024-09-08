@@ -1,5 +1,6 @@
 import {
   CombatContext,
+  Damage,
   DamageType,
   Modifier,
   MutationFilterArgs,
@@ -7,7 +8,7 @@ import {
   TriggerProps,
   Unit,
 } from '../../types'
-import { getDamageNegation } from '../../utils'
+import { calculateBaseDamage, getTypedDamage } from '../../utils'
 import { DamageAllOnTurnEndId } from '../Ids'
 
 export class DamageAllOnTurnEnd extends Trigger {
@@ -39,11 +40,19 @@ export class DamageAllOnTurnEnd extends Trigger {
   resolve = (unit: Unit): Partial<Unit> => {
     return {
       values: Modifier.setValues(unit, (values) => {
-        const baseDamage =
-          values.damage + unit.stats.health * this.factor + this.static
-        const damage = baseDamage * getDamageNegation(this.damageType, unit)
+        const d = {
+          damageType: this.damageType,
+          factor: this.factor,
+        } as Damage
+        const baseDamage = calculateBaseDamage(d, undefined, unit) + this.static
+        const damage = getTypedDamage(
+          this.damageType,
+          baseDamage,
+          undefined,
+          unit
+        )
 
-        return { damage: Math.round(damage) }
+        return { damage: values.damage + Math.round(damage) }
       }),
     }
   }

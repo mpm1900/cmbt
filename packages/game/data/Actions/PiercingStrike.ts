@@ -44,7 +44,7 @@ export class PiercingStrike extends Action {
     })
 
     this.damage = {
-      value: 80,
+      power: 80,
       attackType,
       damageType: 'force',
     }

@@ -7,15 +7,17 @@ export function logMiss(
   log: CombatLogger,
   ctx: CombatContext
 ) {
-  if (result.data && !result.data.accuracyRoll.success) {
-    log(
-      <LogSecondary>
-        Miss!{' '}
-        <span className="text-sm text-muted-foreground/50">
-          ({result.data.accuracyRoll.roll}, needed{' '}
-          {result.data.accuracyRoll.threshold} or lower)
-        </span>
-      </LogSecondary>
-    )
+  if (result.data) {
+    if (!result.data.accuracyRoll.success) {
+      log(
+        <LogSecondary>
+          Miss!{' '}
+          <span className="text-sm text-muted-foreground/50">
+            ({result.data.accuracyRoll.roll}, needed{' '}
+            {result.data.accuracyRoll.threshold} or lower)
+          </span>
+        </LogSecondary>
+      )
+    }
   }
 }

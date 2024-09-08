@@ -51,6 +51,7 @@ export const ZERO_UNIT: Unit = {
   },
   flags: {
     isActive: false,
+    isHexed: false,
     isProtected: false,
     isInspected: false,
     isStunned: false,

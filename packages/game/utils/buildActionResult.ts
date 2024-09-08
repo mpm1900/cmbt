@@ -38,7 +38,7 @@ export function buildActionResult(
     onFailure = {},
   } = config(expandedTargets)
 
-  if (accuracyRoll.success && !forceFailure) {
+  if (accuracyRoll.success && !forceFailure && !data.source.flags.isHexed) {
     const { mutations = [] } = onSuccess
     return {
       ...onSuccess,
@@ -51,7 +51,7 @@ export function buildActionResult(
       mutations: [setLastUsed, ...mutations],
     }
   }
-  if (!accuracyRoll.success || forceFailure) {
+  if (!accuracyRoll.success || forceFailure || data.source.flags.isHexed) {
     const { mutations = [] } = onFailure
     return {
       ...onFailure,

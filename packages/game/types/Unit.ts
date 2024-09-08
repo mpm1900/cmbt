@@ -31,7 +31,12 @@ export type ValueKey =
   | `${AttackTypes}Armor`
 export type Values = Record<ValueKey, number>
 
-export type FlagKey = 'isActive' | 'isInspected' | 'isProtected' | 'isStunned'
+export type FlagKey =
+  | 'isActive'
+  | 'isHexed'
+  | 'isInspected'
+  | 'isProtected'
+  | 'isStunned'
 export type Flags = Record<FlagKey, boolean>
 
 export type UnitRegistryKey = 'modifiers' | 'actions'

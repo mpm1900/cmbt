@@ -48,7 +48,7 @@ export function Team(props: TeamProps) {
           >
             <UnitCard
               unit={unit}
-              hideStats={teamId !== ctx.user}
+              isEnemy={teamId !== ctx.user}
               reverse={reverse}
             />
           </motion.div>

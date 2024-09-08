@@ -17,12 +17,12 @@ import { Popover, PopoverContent, PopoverTrigger } from '../../ui/popover'
 
 export type UnitCardProps = {
   unit: Unit
-  hideStats: boolean
+  isEnemy: boolean
   reverse?: boolean
 }
 
 export function UnitCard(props: UnitCardProps) {
-  const { reverse, hideStats } = props
+  const { reverse, isEnemy } = props
   const ctx = useCombatContext()
   const status = ctx.turn.status
   const result = ctx.turn.results[ctx.turn.results.length - 1]
@@ -63,6 +63,8 @@ export function UnitCard(props: UnitCardProps) {
             'bg-slate-200 hover:bg-slate-200': isActive,
             'bg-red-500/40': isTargeted && !isActive,
             'cursor-pointer': isSelectable,
+            'max-h-[62px]': isEnemy,
+            'max-h-[68px]': !isEnemy,
           }
         )}
         onClick={() => {
@@ -123,7 +125,7 @@ export function UnitCard(props: UnitCardProps) {
           </div>
         </div>
         <CardContent className="p-2 pt-0">
-          <UnitBars unit={unit} isActive={isActive} hideStats={hideStats} />
+          <UnitBars unit={unit} isActive={isActive} hideStats={isEnemy} />
         </CardContent>
       </div>
       <UnitCombatModifiers

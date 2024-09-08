@@ -57,7 +57,7 @@ export function UnitCard(props: UnitCardProps) {
     >
       <div
         className={cn(
-          'rounded transition-colors ease-in-out bg-slate-950 border',
+          'rounded transition-colors ease-in-out bg-slate-950 border max-h-[62px]',
           {
             'hover:bg-slate-900': isSelectable,
             'bg-slate-200 hover:bg-slate-200': isActive,

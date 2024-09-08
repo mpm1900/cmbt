@@ -61,7 +61,7 @@ export class Hex extends Action {
               sourceId: source.id,
               parentId: target.id,
               maxInstances: 1,
-              duration: 2,
+              duration: 1,
             }),
           ]),
         },

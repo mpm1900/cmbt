@@ -11,9 +11,9 @@ export const HexRenderer: ActionRenderer = {
         Applies{' '}
         <ModifierInline
           side={props?.side}
-          modifier={new HexedParent({ duration: 2 })}
+          modifier={new HexedParent({ duration: 1 })}
         />{' '}
-        to target enemy unit.
+        to target enemy unit. Usable only on the first turn after switching in.
       </div>
     )
   },

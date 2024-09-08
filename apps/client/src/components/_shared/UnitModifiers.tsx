@@ -15,12 +15,12 @@ export function UnitModifiers(props: UnitModifiersProps) {
   const { modifiers, iconClassName } = props
   const nonStatusModifiers = modifiers.filter((m) => !m.statusId)
   const statuses = getStatusesFromModifiers(modifiers)
-  const hasModifiers = nonStatusModifiers.length > 0 || statuses.length > 0
-  if (!hasModifiers) return null
 
   return (
-    <div className={cn('px-3 space-x-2 flex flex-row', props.className)}>
-      {modifiers.map((m) => {
+    <div
+      className={cn('px-3 space-x-2 flex flex-row h-[28px]', props.className)}
+    >
+      {nonStatusModifiers.map((m) => {
         return (
           <ModifierIcon
             key={m.rtid}

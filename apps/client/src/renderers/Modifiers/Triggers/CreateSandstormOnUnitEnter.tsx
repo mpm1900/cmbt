@@ -12,7 +12,7 @@ export const CreateSandstormOnUnitEnterRenderer: ModifierRenderer = {
   description: (mod) => {
     const modifier = mod as CreateSandstormOnUnitEnter
     return (
-      <div className="space-x-2">
+      <div>
         <TriggerName>On self enter:</TriggerName>
         <span>
           Applies{' '}

@@ -8,7 +8,7 @@ export const AttackDownAllOtherOnUnitEnterRenderer: ModifierRenderer = {
   description: (mod) => {
     const modifier = mod as UpdateStatParent
     return (
-      <div className="space-x-2">
+      <div>
         <TriggerName>On self enter:</TriggerName>
         <span>
           Applies{' '}

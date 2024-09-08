@@ -12,7 +12,7 @@ export const DamageNewUnitsOnUnitEnterRenderer: ModifierRenderer = {
       : modifier.static
 
     return (
-      <div className="space-x-2">
+      <div>
         <TriggerName>On unit enter:</TriggerName>
         <div>
           Unit takes{' '}

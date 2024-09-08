@@ -69,7 +69,7 @@ export const ModifierRenderers: Record<string, ModifierRenderer> = {
       <ModifierName>{MODIFIER_NAMES[InspectAllOnUnitEnterId]}</ModifierName>
     ),
     description: (modifier: Modifier) => (
-      <div className="space-x-2">
+      <div>
         <TriggerName>On self enter:</TriggerName>
         <span>
           Applies <ModifierInline modifier={new InspectedAll({})} /> to all

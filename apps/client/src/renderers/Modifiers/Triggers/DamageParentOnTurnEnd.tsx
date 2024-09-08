@@ -12,7 +12,7 @@ export const DamageParentOnTurnEndRenderer: ModifierRenderer = {
       : modifier.static
 
     return (
-      <div className="space-x-2">
+      <div>
         <TriggerName>On turn end:</TriggerName>
         <div>
           Unit takes{' '}

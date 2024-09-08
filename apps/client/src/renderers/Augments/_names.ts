@@ -1,4 +1,5 @@
 import {
+  DivineHealingId,
   FlameShieldId,
   IntimidateId,
   RegenerationId,
@@ -10,6 +11,8 @@ import { Id } from '@repo/game/types'
 
 export const AUGMENT_NAMES: Record<Id, string> = {
   [RubyAugmentId]: 'Ruby',
+
+  [DivineHealingId]: 'Divine Healing',
   [FlameShieldId]: 'Flame Shield',
   [IntimidateId]: 'Intimidate',
   [RegenerationId]: 'Regeneration',

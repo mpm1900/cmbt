@@ -8,8 +8,10 @@ import {
   Spikes,
   Ward,
 } from '../Actions'
+import { DivineHealing } from '../Augments'
 import {
   ArmorUpId,
+  DivineHealingId,
   NegateArmorId,
   PoisonSprayId,
   ProtectId,
@@ -40,7 +42,7 @@ export const Blissy: UnitBase = {
 }
 
 export const BlissyConfig: UnitBaseConfig = {
-  abilities: [],
+  abilities: [DivineHealing],
   actionsCount: 5,
   actions: [
     {
@@ -68,6 +70,6 @@ export const BlissyConfig: UnitBaseConfig = {
       make: (u) => new Ward(u.id, u.teamId),
     },
   ],
-  defaultAbilityId: undefined,
+  defaultAbilityId: DivineHealingId,
   defaultActionIds: [ArmorUpId, PoisonSprayId, ProtectId, SpikesId, WardId],
 }

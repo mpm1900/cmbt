@@ -1,3 +1,4 @@
+export * from './DivineHealing'
 export * from './FlameShield'
 export * from './Intimidate'
 export * from './Regeneration'

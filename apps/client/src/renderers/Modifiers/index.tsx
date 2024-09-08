@@ -6,7 +6,7 @@ import {
   DamageNewUnitsOnUnitEnterId,
   DamageParentOnTurnEndId,
   DisabledParentId,
-  HealParentOnUnitSwitch,
+  HealParentOnTurnEndId,
   HealParentOnUnitSwitchId,
   HexedParentId,
   InspectAllOnUnitEnterId,
@@ -34,6 +34,8 @@ import { CreateSandstormOnUnitEnterRenderer } from './Triggers/CreateSandstormOn
 import { DamageAllOnTurnEndRenderer } from './Triggers/DamageAllOnTurnEnd'
 import { DamageNewUnitsOnUnitEnterRenderer } from './Triggers/DamageNewUnitsOnUnitEnter'
 import { DamageParentOnTurnEndRenderer } from './Triggers/DamageParentOnTurnEnd'
+import { HealParentOnTurnEndRenderer } from './Triggers/HealParentOnTurnEnd'
+import { HealParentOnUnitSwitchRenderer } from './Triggers/HealParentOnUnitSwitch'
 import { UpdateStatParentRenderer } from './UpdateStatParent'
 
 export * from './_icons'
@@ -60,19 +62,8 @@ export const ModifierRenderers: Record<string, ModifierRenderer> = {
   [DamageAllOnTurnEndId]: DamageAllOnTurnEndRenderer,
   [DamageNewUnitsOnUnitEnterId]: DamageNewUnitsOnUnitEnterRenderer,
   [DamageParentOnTurnEndId]: DamageParentOnTurnEndRenderer,
-  [HealParentOnUnitSwitchId]: {
-    name: () => (
-      <ModifierName>{MODIFIER_NAMES[HealParentOnUnitSwitchId]}</ModifierName>
-    ),
-    description: (modifier: Modifier) => (
-      <div className="space-x-2">
-        <TriggerName>On self switch out:</TriggerName>
-        This unit heals{' '}
-        {(modifier as unknown as HealParentOnUnitSwitch).factor * 100}% of their
-        max health.
-      </div>
-    ),
-  },
+  [HealParentOnTurnEndId]: HealParentOnTurnEndRenderer,
+  [HealParentOnUnitSwitchId]: HealParentOnUnitSwitchRenderer,
   [InspectAllOnUnitEnterId]: {
     name: () => (
       <ModifierName>{MODIFIER_NAMES[InspectAllOnUnitEnterId]}</ModifierName>

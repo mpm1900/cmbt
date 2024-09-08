@@ -1,5 +1,6 @@
 import {
   DamageAllOnTurnEnd,
+  DivineHealingId,
   FlameShieldId,
   IntimidateId,
   RegenerationId,
@@ -21,6 +22,9 @@ export type AugmentRenderer = {
 }
 
 export const AugmentRenderers: Record<Id, AugmentRenderer> = {
+  [DivineHealingId]: {
+    name: <div className="text-white">{AUGMENT_NAMES[DivineHealingId]}</div>,
+  },
   [FlameShieldId]: {
     name: <div className="text-white">{AUGMENT_NAMES[FlameShieldId]}</div>,
   },

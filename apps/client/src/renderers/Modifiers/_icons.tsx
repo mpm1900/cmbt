@@ -4,6 +4,7 @@ import {
   DefenseDownParentId,
   DefneseUpParentId,
   DisabledParentId,
+  DivineHealingId,
   FireDamageUpParentId,
   FireNegationUpParentId,
   HealParentOnUnitSwitchId,
@@ -32,6 +33,7 @@ import {
   GiSandstorm,
   GiSpinningBlades,
   GiSprint,
+  GiTemplarHeart,
   GiVibratingShield,
 } from 'react-icons/gi'
 import { HiMiniNoSymbol } from 'react-icons/hi2'
@@ -137,6 +139,11 @@ export const MODIFIER_ICONS: Record<Id, ReactNode> = {
   [HexedParentId]: (
     <div>
       <MdOutlineHexagon className="fill-white h-full w-full" />
+    </div>
+  ),
+  [DivineHealingId]: (
+    <div className="p-0.5">
+      <GiTemplarHeart className="fill-amber-200 h-full w-full" />
     </div>
   ),
 }

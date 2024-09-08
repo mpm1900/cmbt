@@ -35,11 +35,7 @@ function Icon(
 
 export function WorldLegend() {
   return (
-    <Accordion
-      type="multiple"
-      className="w-full"
-      defaultValue={['colors', 'icons']}
-    >
+    <Accordion type="multiple" className="w-full" defaultValue={['colors']}>
       <AccordionItem value="colors">
         <AccordionTrigger>Colors</AccordionTrigger>
         <AccordionContent>

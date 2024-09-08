@@ -1,6 +1,6 @@
 import { ChoiceAttributes } from '@/components/encounter/ChoiceAttributes'
-import { ChoiceLabel } from '@/components/encounter/ChoiceLabel'
 import { Narration } from '@/components/encounter/Narration'
+import { choice } from '@/worlds/_utils'
 import { TeamId, Wolf } from '@repo/game/data'
 import { Encounter, EncounterNode, Team } from '@repo/game/types'
 import { makeEnemyUnit } from '@repo/game/utils'
@@ -22,20 +22,15 @@ const IntroductionNode: EncounterNode = {
     )
   },
   choices: () => [
-    {
-      id: nanoid(),
-      label: (
-        <ChoiceLabel
-          before={
-            <ChoiceAttributes>
-              <LuSwords />
-            </ChoiceAttributes>
-          }
-          after={<IoMdReturnRight />}
-        >
-          Attack the wolves.
-        </ChoiceLabel>
+    choice({
+      before: (
+        <ChoiceAttributes>
+          <LuSwords />
+        </ChoiceAttributes>
       ),
+      label: <>Attack the wolves.</>,
+      after: <IoMdReturnRight />,
+      action: true,
       resolve: (ctx) => {
         const enemyTeam: Team = {
           id: TeamId(),
@@ -68,22 +63,13 @@ const IntroductionNode: EncounterNode = {
           })
         }
       },
-    },
-    {
-      id: nanoid(),
-      label: (
-        <ChoiceLabel after={<IoMdReturnLeft />}>
-          [DEBUG] Complete encounter
-        </ChoiceLabel>
-      ),
-      resolve: (ctx) => {
-        ctx.updateActiveWorldNode((n) => ({
-          completed: true,
-          visited: true,
-        }))
-        ctx.back()
-      },
-    },
+    }),
+    choice({
+      label: <>[DEBUG] Complete encounter</>,
+      after: <IoMdReturnLeft />,
+      action: true,
+      back: true,
+    }),
   ],
 }
 

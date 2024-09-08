@@ -1,7 +1,6 @@
 import { useUnitBuilders } from '@/hooks/state'
 import { useBuilderUi } from '@/hooks/state/useBuilderUi'
 import { PageHeader } from '@shared/PageHeader'
-import { FiEdit3 } from 'react-icons/fi'
 import {
   Menubar,
   MenubarContent,
@@ -20,8 +19,7 @@ export function BuilderHeader() {
         <Menubar className="border-0">
           <MenubarMenu>
             <MenubarTrigger className="space-x-2">
-              <FiEdit3 />
-              <div>Team</div>
+              <div>Units</div>
             </MenubarTrigger>
             <MenubarContent>
               <MenubarRadioGroup

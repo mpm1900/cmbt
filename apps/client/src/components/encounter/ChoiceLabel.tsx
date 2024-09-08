@@ -11,7 +11,7 @@ export type ChoiceLabelProps = PropsWithChildren<
 >
 
 export function ChoiceLabel(props: ChoiceLabelProps) {
-  const { action = true, before, after, className, children } = props
+  const { action, before, after, className, children } = props
 
   return (
     <div className={cn('flex space-x-2 items-center', className)}>

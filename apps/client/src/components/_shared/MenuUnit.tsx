@@ -11,6 +11,7 @@ import { HoverCard, HoverCardContent, HoverCardTrigger } from '../ui/hover-card'
 import { EditUnitModal } from './EditUnitModal'
 import { HealthBar } from './HealthBar'
 import { UnitDetails } from './UnitDetails'
+import { XpBar } from './XpBar'
 
 export type SidebarUnitProps = {
   unit: Unit
@@ -47,23 +48,24 @@ export function MenuUnit(props: SidebarUnitProps) {
         <HoverCard openDelay={300} closeDelay={100}>
           <HoverCardTrigger asChild>
             <div className="flex flex-1 items-center p-3">
-              <div className="flex-1 p-0">
-                <div className="flex justify-between items-center space-x-4 mb-1">
+              <div className="flex-1 p-0 space-y-1">
+                <div className="flex justify-between items-center space-x-4">
                   <div className="flex space-x-2">
+                    <div className="font-bold">{unit.name}</div>
+                  </div>
+                  <div className="space-x-1 text-xs">
                     <span>
-                      <span className="text-sm text-muted-foreground font-thin">
+                      <span className="text-muted-foreground font-thin">
                         Lv.
                       </span>
                       <span className="font-black">{unit.level}</span>
                     </span>
-                    <div className="font-normal">{unit.name}</div>
+                    <span className="text-muted-foreground">{base?.name}</span>
                   </div>
-                  <span className="text-xs text-muted-foreground">
-                    {base?.name}
-                  </span>
                 </div>
 
                 <HealthBar unit={unit} initial={ratio} className="h-[6px]" />
+                <XpBar unit={unit} className="h-[4px]" />
               </div>
             </div>
           </HoverCardTrigger>

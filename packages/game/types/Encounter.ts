@@ -60,13 +60,18 @@ export type Encounter = {
   nodes: EncounterNode[]
   activeNodeId: Id
   visitedNodeIds: Id[]
-  setup: (ctx: EncounterContext) => void
+  setup: (ctx: EncounterContext, props: EncounterRenderProps) => void
   values: {
     [key: string]: number
   }
 }
 
-export type EncounterNodeProps = {
+export type EncounterRenderProps = {
+  nodeVisitCount: number
+  encounterVisitCount: number
+}
+
+export type EncounterComponentProps = EncounterRenderProps & {
   ctx: EncounterContext
 }
 
@@ -76,7 +81,9 @@ export type EncounterChoiceProps = {
   ctx: EncounterContext
 }
 
-export type EncounterComponent = (props: EncounterNodeProps) => React.ReactNode
+export type EncounterComponent = (
+  props: EncounterComponentProps
+) => React.ReactNode
 export type EncounterChoiceComponent = (
   props: EncounterChoiceProps
 ) => React.ReactNode
@@ -86,12 +93,25 @@ export type EncounterNode = {
   icon: React.ReactNode
   title: React.ReactNode
   text?: React.ReactNode
-  render?: (ctx: EncounterContext) => void
-  tabs?: (ctx: EncounterContext) => EncounterChoice[]
-  actions?: (ctx: EncounterContext) => EncounterChoice[]
-  choices?: (ctx: EncounterContext) => EncounterChoice[]
+  render?: (ctx: EncounterContext, props: EncounterRenderProps) => void
+  tabs?: (
+    ctx: EncounterContext,
+    props: EncounterRenderProps
+  ) => EncounterChoice[]
+  actions?: (
+    ctx: EncounterContext,
+    props: EncounterRenderProps
+  ) => EncounterChoice[]
+  choices?: (
+    ctx: EncounterContext,
+    props: EncounterRenderProps
+  ) => EncounterChoice[]
   Choice?: EncounterChoiceComponent
   Component?: EncounterComponent
+  footer?: (
+    ctx: EncounterContext,
+    props: EncounterRenderProps
+  ) => EncounterChoice[]
 }
 
 export type EncounterChoice = {

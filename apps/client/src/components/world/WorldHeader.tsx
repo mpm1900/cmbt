@@ -22,6 +22,8 @@ export function WorldHeader() {
     <PageHeader>
       <div className="flex flex-1 justify-between">
         <Menubar className="border-0">
+          <UnitsMenu units={game.units} />
+          <ItemsMenu items={game.team.items} />
           <MenubarMenu>
             <MenubarTrigger>View</MenubarTrigger>
             {cy && (
@@ -34,8 +36,6 @@ export function WorldHeader() {
               </MenubarContent>
             )}
           </MenubarMenu>
-          <UnitsMenu units={game.units} />
-          <ItemsMenu items={game.team.items} />
           <MenubarMenu>
             <MenubarTrigger>Legend</MenubarTrigger>
             <MenubarContent className="px-4">

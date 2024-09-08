@@ -25,7 +25,6 @@ export class PoisonSpray extends Action {
   damage: Damage
 
   constructor(sourceId: Id, teamId: Id) {
-    const attackType = 'magic'
     super(PoisonSprayId, {
       sourceId,
       teamId,
@@ -34,13 +33,12 @@ export class PoisonSpray extends Action {
         notTeamId: teamId,
         isActive: true,
       }),
-      attackType,
       maxTargetCount: 1,
     })
 
     this.damage = {
       power: 20,
-      attackType,
+      attackType: 'magic',
       damageType: 'blight',
     }
   }

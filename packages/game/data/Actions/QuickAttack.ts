@@ -24,7 +24,6 @@ export class QuickAttack extends Action {
   damage: Damage
 
   constructor(sourceId: Id, teamId: Id) {
-    const attackType = 'physical'
     super(QuickAttackId, {
       sourceId,
       teamId,
@@ -34,13 +33,12 @@ export class QuickAttack extends Action {
         isActive: true,
       }),
       priority: 1,
-      attackType,
       maxTargetCount: 1,
     })
 
     this.damage = {
       power: 40,
-      attackType,
+      attackType: 'physical',
       damageType: 'force',
     }
   }

@@ -2,7 +2,6 @@ import {
   ActionAi,
   ActionResolveOptions,
   ActionResult,
-  AttackTypes,
   CombatContext,
   Id,
   Unit,
@@ -29,9 +28,14 @@ export class Explosion extends Action {
       teamId,
       cost: new Identity({ sourceId }),
       targets: new EmptyArray(),
-      attackType: 'physical',
       maxTargetCount: 0,
     })
+
+    this.damage = {
+      power: 0,
+      attackType: 'physical',
+      damageType: 'force',
+    }
   }
 
   getDamage = (source: Unit, targets: Unit[], ctx: CombatContext): number[] => {
@@ -82,8 +86,8 @@ export class Explosion extends Action {
             ...modifiedTargets.flatMap((target) => {
               const damage = calculateDamage(
                 {
+                  ...this.damage!,
                   power: data.source.stats.attack * 4,
-                  attackType: this.attackType as AttackTypes,
                 },
                 data.source,
                 target,

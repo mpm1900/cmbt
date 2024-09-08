@@ -36,10 +36,11 @@ export function ActionButton(props: ActionButtonProps) {
       <div className="flex w-full items-center justify-between">
         <div
           className={cn('text-lg', {
-            'text-green-100': action.attackType === 'physical',
-            'text-green-950': action.attackType === 'physical' && isActive,
-            'text-blue-200': action.attackType === 'magic',
-            'text-blue-950': action.attackType === 'magic' && isActive,
+            'text-green-100': action.damage?.attackType === 'physical',
+            'text-green-950':
+              action.damage?.attackType === 'physical' && isActive,
+            'text-blue-200': action.damage?.attackType === 'magic',
+            'text-blue-950': action.damage?.attackType === 'magic' && isActive,
           })}
         >
           {renderer?.name}

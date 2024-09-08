@@ -25,7 +25,6 @@ export class BodySlam extends Action {
   missDamage: Damage
 
   constructor(sourceId: Id, teamId: Id) {
-    const attackType = 'physical'
     super(BodySlamId, {
       sourceId,
       teamId,
@@ -34,18 +33,17 @@ export class BodySlam extends Action {
         notTeamId: teamId,
         isActive: true,
       }),
-      attackType,
       maxTargetCount: 1,
     })
 
     this.damage = {
       power: 100,
-      attackType,
+      attackType: 'physical',
       damageType: 'force',
     }
     this.missDamage = {
       power: 30,
-      attackType,
+      attackType: 'physical',
       damageType: 'force',
     }
   }

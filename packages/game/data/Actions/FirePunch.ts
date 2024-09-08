@@ -27,7 +27,6 @@ export class FirePunch extends Action {
   burnChance: number = 10
 
   constructor(sourceId: Id, teamId: Id) {
-    const attackType = 'physical'
     super(FirePunchId, {
       sourceId,
       teamId,
@@ -36,13 +35,12 @@ export class FirePunch extends Action {
         notTeamId: teamId,
         isActive: true,
       }),
-      attackType,
       maxTargetCount: 1,
     })
 
     this.damage = {
       power: 75,
-      attackType,
+      attackType: 'physical',
       damageType: 'fire',
     }
   }

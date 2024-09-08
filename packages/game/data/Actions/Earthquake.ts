@@ -25,19 +25,17 @@ export class Earthquake extends Action {
   damage: Damage
 
   constructor(sourceId: Id, teamId: Id) {
-    const attackType = 'physical'
     super(EarthquakeId, {
       sourceId,
       teamId,
       cost: new Identity({}),
       targets: new EmptyArray(),
-      attackType,
       maxTargetCount: 0,
     })
 
     this.damage = {
       power: 100,
-      attackType,
+      attackType: 'physical',
       damageType: 'force',
     }
   }

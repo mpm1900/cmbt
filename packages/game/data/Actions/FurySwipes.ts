@@ -25,7 +25,6 @@ export class FurySwipes extends Action {
   damage: Damage
 
   constructor(sourceId: Id, teamId: Id) {
-    const attackType = 'physical'
     super(FurySwipesId, {
       sourceId,
       teamId,
@@ -34,13 +33,12 @@ export class FurySwipes extends Action {
         notTeamId: teamId,
         isActive: true,
       }),
-      attackType,
       maxTargetCount: 1,
     })
 
     this.damage = {
       power: 4,
-      attackType,
+      attackType: 'physical',
       damageType: 'force',
     }
   }

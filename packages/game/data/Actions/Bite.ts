@@ -27,7 +27,6 @@ export class Bite extends Action {
   bleedChance: number = 10
 
   constructor(sourceId: Id, teamId: Id) {
-    const attackType = 'physical'
     super(BiteId, {
       sourceId,
       teamId,
@@ -36,13 +35,12 @@ export class Bite extends Action {
         notTeamId: teamId,
         isActive: true,
       }),
-      attackType,
       maxTargetCount: 1,
     })
 
     this.damage = {
       power: 45,
-      attackType,
+      attackType: 'physical',
       damageType: 'force',
     }
   }

@@ -29,8 +29,6 @@ export class PiercingStrike extends Action {
   defenseDownFactor: number = -0.25
 
   constructor(sourceId: Id, teamId: Id) {
-    const attackType = 'physical'
-
     super(PiercingStrikeId, {
       sourceId,
       teamId,
@@ -39,13 +37,12 @@ export class PiercingStrike extends Action {
         notTeamId: teamId,
         isActive: true,
       }),
-      attackType,
       maxTargetCount: 1,
     })
 
     this.damage = {
       power: 80,
-      attackType,
+      attackType: 'physical',
       damageType: 'force',
     }
   }

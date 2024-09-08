@@ -4,7 +4,7 @@ import { CombatContext } from './CombatContext'
 import { Modifier } from './Modifier'
 import { Mutation } from './Mutation'
 import { Query } from './Query'
-import { AttackTypes, Unit } from './Unit'
+import { Unit } from './Unit'
 
 export type ActionAi = {
   action: Action
@@ -65,7 +65,6 @@ export type ActionProps = {
   teamId: Id
   cost: Mutation
   targets: Query<Unit[]>
-  attackType?: AttackTypes
   priority?: number
   maxTargetCount: number
 }
@@ -77,7 +76,6 @@ export abstract class Action {
   readonly teamId: Id
   readonly priority: number
   readonly maxTargetCount: number
-  readonly attackType: AttackTypes | undefined
   readonly cost: Mutation
   readonly targets: Query<Unit[]>
   damage?: Damage
@@ -107,7 +105,6 @@ export abstract class Action {
     this.cost = props.cost
     this.targets = props.targets
     this.priority = props.priority ?? 0
-    this.attackType = props.attackType
     this.maxTargetCount = props.maxTargetCount
   }
 }

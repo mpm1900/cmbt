@@ -26,7 +26,6 @@ export class Fireball extends Action {
   splashDamage: Damage
 
   constructor(sourceId: Id, teamId: Id) {
-    const attackType = 'magic'
     super(FireballId, {
       sourceId,
       teamId,
@@ -35,7 +34,6 @@ export class Fireball extends Action {
         notTeamId: teamId,
         isActive: true,
       }),
-      attackType,
       maxTargetCount: 1,
     })
 

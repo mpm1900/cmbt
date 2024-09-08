@@ -24,7 +24,6 @@ export class MagicMissile extends Action {
   damage: Damage
 
   constructor(sourceId: Id, teamId: Id) {
-    const attackType = 'magic'
     super(MagicMissileId, {
       sourceId,
       teamId,
@@ -33,14 +32,13 @@ export class MagicMissile extends Action {
         notTeamId: teamId,
         isActive: true,
       }),
-      attackType,
       maxTargetCount: 2,
     })
 
     this.damage = {
       power: 55,
       damageType: 'arcane',
-      attackType,
+      attackType: 'magic',
     }
   }
 

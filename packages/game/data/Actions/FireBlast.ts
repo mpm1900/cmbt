@@ -27,7 +27,6 @@ export class FireBlast extends Action {
   burnChance: number = 10
 
   constructor(sourceId: Id, teamId: Id) {
-    const attackType = 'magic'
     super(FireBlastId, {
       sourceId,
       teamId,
@@ -36,13 +35,12 @@ export class FireBlast extends Action {
         notTeamId: teamId,
         isActive: true,
       }),
-      attackType,
       maxTargetCount: 1,
     })
 
     this.damage = {
       power: 120,
-      attackType,
+      attackType: 'magic',
       damageType: 'fire',
     }
   }

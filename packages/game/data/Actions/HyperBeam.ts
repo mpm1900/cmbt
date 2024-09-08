@@ -3,7 +3,6 @@ import {
   ActionAi,
   ActionResolveOptions,
   ActionResult,
-  AttackTypes,
   CombatContext,
   Id,
   Unit,
@@ -38,7 +37,6 @@ export class HyperBeam extends Action {
         notTeamId: teamId,
         isActive: true,
       }),
-      attackType: 'magic',
       maxTargetCount: 1,
     })
 
@@ -77,9 +75,8 @@ export class HyperBeam extends Action {
             const { base } = getUnitBase(source.baseId)
             const damage = calculateDamage(
               {
+                ...this.damage!,
                 power: (base?.stats.magic ?? 0) * 2,
-                attackType: this.attackType as AttackTypes,
-                damageType: 'force',
               },
               data.source,
               target,

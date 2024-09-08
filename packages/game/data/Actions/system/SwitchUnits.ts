@@ -24,7 +24,6 @@ export class SwitchUnit extends Action {
         isActive: false,
         isAlive: true,
       }),
-      attackType: 'physical',
       maxTargetCount: 1,
     })
   }

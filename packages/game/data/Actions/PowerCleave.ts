@@ -24,7 +24,6 @@ export class PowerCleave extends Action {
   damage: Damage
 
   constructor(sourceId: Id, teamId: Id) {
-    const attackType = 'physical'
     super(PowerCleaveId, {
       sourceId,
       teamId,
@@ -33,13 +32,12 @@ export class PowerCleave extends Action {
         notTeamId: teamId,
         isActive: true,
       }),
-      attackType,
       maxTargetCount: 1,
     })
 
     this.damage = {
       power: 160,
-      attackType,
+      attackType: 'physical',
       damageType: 'force',
     }
   }

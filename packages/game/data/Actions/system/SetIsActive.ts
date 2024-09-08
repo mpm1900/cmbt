@@ -23,7 +23,6 @@ export class SetIsActive extends Action {
         isActive: false,
         isAlive: true,
       }),
-      attackType: 'physical',
       maxTargetCount,
     })
   }

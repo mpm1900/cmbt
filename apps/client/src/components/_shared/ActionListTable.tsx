@@ -114,15 +114,17 @@ function ActionListRow(props: ActionListRowProps) {
         <TableCell>{renderer.name}</TableCell>
         <TableCell>{maker.level ? `Lv.${maker.level}` : '—'}</TableCell>
         <TableCell>
-          {action.attackType ? (
+          {action.damage?.attackType ? (
             <Badge
               className={cn('border-none hover:text-white', {
-                'bg-blue-600 text-blue-200': action.attackType === 'magic',
-                'bg-green-600 text-green-100': action.attackType === 'physical',
+                'bg-blue-600 text-blue-200':
+                  action.damage?.attackType === 'magic',
+                'bg-green-600 text-green-100':
+                  action.damage?.attackType === 'physical',
               })}
               variant="outline"
             >
-              {action.attackType}
+              {action.damage?.attackType}
             </Badge>
           ) : (
             '—'

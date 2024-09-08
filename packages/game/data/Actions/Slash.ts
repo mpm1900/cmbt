@@ -24,7 +24,6 @@ export class Slash extends Action {
   damage: Damage
 
   constructor(sourceId: Id, teamId: Id) {
-    const attackType = 'physical'
     super(SlashId, {
       sourceId,
       teamId,
@@ -33,13 +32,12 @@ export class Slash extends Action {
         notTeamId: teamId,
         isActive: true,
       }),
-      attackType,
       maxTargetCount: 1,
     })
 
     this.damage = {
       power: 75,
-      attackType,
+      attackType: 'physical',
       damageType: 'force',
     }
   }

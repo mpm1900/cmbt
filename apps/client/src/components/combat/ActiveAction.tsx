@@ -29,15 +29,17 @@ export function ActiveAction(props: ActiveActionProps) {
     <Card className="dark:bg-muted/40 space-y-2">
       <CardContent className="p-4 pt-6">
         <div className="flex space-x-2">
-          {action.attackType && (
+          {action.damage?.attackType && (
             <Badge
               className={cn('border-none hover:text-white mb-4', {
-                'bg-blue-600 text-blue-200': action.attackType === 'magic',
-                'bg-green-600 text-green-100': action.attackType === 'physical',
+                'bg-blue-600 text-blue-200':
+                  action.damage?.attackType === 'magic',
+                'bg-green-600 text-green-100':
+                  action.damage?.attackType === 'physical',
               })}
               variant="outline"
             >
-              {action.attackType}
+              {action.damage?.attackType}
             </Badge>
           )}
           {renderer.cost && (

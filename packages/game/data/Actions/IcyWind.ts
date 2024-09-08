@@ -27,7 +27,6 @@ export class IcyWind extends Action {
         notTeamId: teamId,
         isActive: true,
       }),
-      attackType: 'magic',
       maxTargetCount: 1,
     })
   }

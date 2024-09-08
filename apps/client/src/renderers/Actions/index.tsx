@@ -25,6 +25,7 @@ import {
   FirePunchId,
   FurySwipes,
   FurySwipesId,
+  HexId,
   HoldPerson,
   HoldPersonId,
   HyperBeam,
@@ -86,6 +87,7 @@ import { ACTION_NAMES } from './_names'
 import { BattleStanceRenderer } from './BattleStance'
 import { BiteRenderer } from './Bite'
 import { DragonStanceRenderer } from './DragonStance'
+import { HexRenderer } from './Hex'
 import { NegateArmorRenderer } from './NegateArmor'
 import { PowerCleaveRenderer } from './PowerCleave'
 import { PowerStanceRenderer } from './PowerStance'
@@ -117,6 +119,7 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
   [BattleStanceId]: BattleStanceRenderer,
   [BiteId]: BiteRenderer,
   [DragonStanceId]: DragonStanceRenderer,
+  [HexId]: HexRenderer,
   [NegateArmorId]: NegateArmorRenderer,
   [PowerCleaveId]: PowerCleaveRenderer,
   [PowerStanceId]: PowerStanceRenderer,
@@ -429,7 +432,7 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
         </div>
       )
     },
-    failureLog: (result) => <>Protect failed.</>,
+    failureLog: (result) => <>{ACTION_NAMES[ProtectId]} failed.</>,
   },
   [RestId]: {
     name: ACTION_NAMES[RestId],

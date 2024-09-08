@@ -16,11 +16,11 @@ export function logActionSuccessFailure(
     if (renderer?.failureLog) {
       log(<LogSecondary>{renderer.failureLog(result)}</LogSecondary>)
     }
-    if (result.source?.flags.isHexed) {
+    if (result.data?.source?.flags.isHexed) {
       log(
         <LogSecondary>
-          <LogUnit teamId={result.source.teamId} user={ctx.user}>
-            {result.source.name}
+          <LogUnit teamId={result.data.source.teamId} user={ctx.user}>
+            {result.data.source.name}
           </LogUnit>{' '}
           is hexed.
         </LogSecondary>

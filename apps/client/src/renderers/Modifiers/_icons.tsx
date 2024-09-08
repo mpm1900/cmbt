@@ -7,6 +7,7 @@ import {
   FireDamageUpParentId,
   FireNegationUpParentId,
   HealParentOnUnitSwitchId,
+  HexedParentId,
   InspectedAllId,
   PowerStanceId,
   ProtectedParentId,
@@ -34,6 +35,7 @@ import {
   GiVibratingShield,
 } from 'react-icons/gi'
 import { HiMiniNoSymbol } from 'react-icons/hi2'
+import { MdOutlineHexagon } from 'react-icons/md'
 import { TiSpiral } from 'react-icons/ti'
 
 export const MODIFIER_ICONS: Record<Id, ReactNode> = {
@@ -130,6 +132,11 @@ export const MODIFIER_ICONS: Record<Id, ReactNode> = {
   [PowerStanceId]: (
     <div>
       <GiSpinningBlades className="fill-white h-full w-full" />
+    </div>
+  ),
+  [HexedParentId]: (
+    <div>
+      <MdOutlineHexagon className="fill-white h-full w-full" />
     </div>
   ),
 }

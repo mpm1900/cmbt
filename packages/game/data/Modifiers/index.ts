@@ -1,5 +1,6 @@
 export * from './AddActionParent'
 export * from './DisabledParent'
+export * from './HexedParent'
 export * from './InspectedAll'
 export * from './InvertSpeedAll'
 export * from './ProtectedParent'

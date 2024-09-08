@@ -8,6 +8,7 @@ import {
   DisabledParentId,
   HealParentOnUnitSwitch,
   HealParentOnUnitSwitchId,
+  HexedParentId,
   InspectAllOnUnitEnterId,
   InspectedAll,
   InspectedAllId,
@@ -23,6 +24,7 @@ import { ModifierName, TriggerName } from './_helpers'
 import { MODIFIER_NAMES } from './_names'
 import { AddActionParentRenderer } from './AddActionParent'
 import { DisabledParentRenderer } from './DisabledParent'
+import { HexedParentRenderer } from './HexedParent'
 import { InspectedAllRenderer } from './InspectedAll'
 import { InvertSpeedAllRenderer } from './InvertSpeedAll'
 import { ProtectedParentRenderer } from './ProtectedParent'
@@ -45,6 +47,7 @@ export type ModifierRenderer = {
 export const ModifierRenderers: Record<string, ModifierRenderer> = {
   [AddActionParentId]: AddActionParentRenderer,
   [DisabledParentId]: DisabledParentRenderer,
+  [HexedParentId]: HexedParentRenderer,
   [InspectedAllId]: InspectedAllRenderer,
   [InvertSpeedAllId]: InvertSpeedAllRenderer,
   [ProtectedParentId]: ProtectedParentRenderer,

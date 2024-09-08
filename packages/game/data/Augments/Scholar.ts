@@ -11,6 +11,7 @@ export const Scholar: Augment = {
       new InspectAllOnUnitEnter({
         sourceId: unit.id,
         parentId: unit.id,
+        maxInstances: 1,
         persistOnCombatEnd: true,
         persistOnSwitch: true,
         duration: 0,

@@ -11,6 +11,7 @@ export const SandStream: Augment = {
       new CreateSandstormOnUnitEnter({
         sourceId: unit.id,
         parentId: unit.id,
+        maxInstances: 1,
         persistOnCombatEnd: true,
         persistOnSwitch: true,
         duration: 0,

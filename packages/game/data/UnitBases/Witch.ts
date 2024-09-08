@@ -1,10 +1,11 @@
 import { nanoid } from 'nanoid'
 import { UnitBase, UnitBaseConfig } from '../../types'
-import { Disable, PoisonSpray, Protect, TrickRoom } from '../Actions'
+import { Disable, Hex, PoisonSpray, Protect, TrickRoom } from '../Actions'
 import { HoldPerson } from '../Actions/HoldPerson'
 import { Regeneration } from '../Augments'
 import {
   DisableId,
+  HexId,
   HoldPersonId,
   PoisonSprayId,
   ProtectId,
@@ -45,6 +46,10 @@ export const WitchConfig: UnitBaseConfig = {
       make: (u) => new Disable(u.id, u.teamId),
     },
     {
+      id: HexId,
+      make: (u) => new Hex(u.id, u.teamId),
+    },
+    {
       id: HoldPersonId,
       make: (u) => new HoldPerson(u.id, u.teamId),
     },
@@ -62,11 +67,5 @@ export const WitchConfig: UnitBaseConfig = {
     },
   ],
   defaultAbilityId: RegenerationId,
-  defaultActionIds: [
-    DisableId,
-    HoldPersonId,
-    PoisonSprayId,
-    ProtectId,
-    TrickRoomId,
-  ],
+  defaultActionIds: [DisableId, HexId, HoldPersonId, PoisonSprayId, ProtectId],
 }

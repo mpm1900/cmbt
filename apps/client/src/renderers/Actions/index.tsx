@@ -2,7 +2,7 @@ import { LogUnit } from '@/components/ui/log'
 import {
   ArmorUp,
   ArmorUpId,
-  AttackUpParentId,
+  AttackUpPlusParentId,
   BattleStanceId,
   BiteId,
   BodySlam,
@@ -523,7 +523,7 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
             side={props?.side}
             modifier={
               new UpdateStatParent({
-                registryId: AttackUpParentId,
+                registryId: AttackUpPlusParentId,
                 stat: 'attack',
                 factor: swordsDance.factor,
               })

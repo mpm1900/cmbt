@@ -1,6 +1,7 @@
 import {
   AttackDownParentId,
   AttackUpParentId,
+  AttackUpPlusParentId,
   DefenseDownParentId,
   DefneseUpParentId,
   DisabledParentId,
@@ -87,6 +88,15 @@ export const MODIFIER_ICONS: Record<Id, ReactNode> = {
     </div>
   ),
   [AttackUpParentId]: (
+    <div className="h-full w-full relative">
+      <GiBiceps className="fill-white h-full w-full" />
+      <AiFillCaretUp
+        className="absolute fill-green-400 h-[24px] w-[24px]"
+        style={{ bottom: -6, right: -6 }}
+      />
+    </div>
+  ),
+  [AttackUpPlusParentId]: (
     <div className="h-full w-full relative">
       <GiBiceps className="fill-white h-full w-full" />
       <AiFillCaretUp

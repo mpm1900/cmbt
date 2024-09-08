@@ -9,7 +9,7 @@ import {
 } from '../../types'
 import { buildActionResult, getActionData } from '../../utils'
 import { modifyRenderContext } from '../../utils/modifyRenderContext'
-import { AttackUpParentId, SwordsDanceId } from '../Ids'
+import { AttackUpPlusParentId, SwordsDanceId } from '../Ids'
 import { UpdateStatParent } from '../Modifiers'
 import { Identity } from '../Mutations'
 import { EmptyArray } from '../Queries/EmptyArray'
@@ -53,7 +53,7 @@ export class SwordsDance extends Action {
         onSuccess: {
           addedModifiers: [
             new UpdateStatParent({
-              registryId: AttackUpParentId,
+              registryId: AttackUpPlusParentId,
               stat: 'attack',
               sourceId: source.id,
               parentId: source.id,

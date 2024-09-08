@@ -35,7 +35,9 @@ export abstract class Mutation {
   }
 
   filter(unit: Unit, ctx: CombatContext, args: MutationFilterArgs): boolean {
-    const isImmune = unit.registry.modifiers.includes(this.registryId)
+    const isImmune =
+      unit.registry.modifiers.includes(this.registryId) ||
+      unit.registry.modifiers.includes(this.id)
     const isActive = unit.flags.isActive
     return isActive && !isImmune
   }

@@ -1,3 +1,4 @@
+import { ApplyStatStages } from '../data'
 import { CombatContext, Modifier, Trigger, Unit } from '../types'
 import { Mutation, MutationFilterArgs } from '../types/Mutation'
 
@@ -32,11 +33,16 @@ export function applyModifiers(
   const filterArgs: MutationFilterArgs = {
     ...(args ?? {}),
   }
+
+  const modifiers = [
+    ...ctx.modifiers,
+    new ApplyStatStages({ sourceId: unit.id, parentId: unit.id }),
+  ]
   // this weird loop is so that modifiers can affect if later modifiers are applied
   // one example is if a modifer grants an immunity in a prior layer
   // or if modifiers have stat requirements in their fns, things can change during
   // this functions's execution
-  const result = ctx.modifiers
+  const result = modifiers
     .sort((a, b) => a.priority - b.priority)
     .reduce<ApplyModifiersResult>(
       (result, modifier) => {

@@ -3,7 +3,7 @@ import { Narration } from '@/components/encounter/Narration'
 import { Quote } from '@/components/encounter/Quote'
 import { check, choice } from '@/worlds/_utils'
 import { Separator } from '@radix-ui/react-menubar'
-import { TeamId } from '@repo/game/data'
+import { Celebi, TeamId } from '@repo/game/data'
 import { EncounterChoice, EncounterNode, Team } from '@repo/game/types'
 import { makeEnemyUnit } from '@repo/game/utils'
 import { nanoid } from 'nanoid'
@@ -126,7 +126,9 @@ export const CampEncounterStart: EncounterNode = {
           ctx.initializeCombat({
             enemyTeam,
             enemyUnits: Array.from({ length: 1 }).map(() => {
-              const unit = makeEnemyUnit({ level: 40, teamId: enemyTeam.id })
+              const unit = makeEnemyUnit({ level: 40, teamId: enemyTeam.id }, [
+                Celebi,
+              ])
               unit.name = npc?.name ?? unit.name
               return unit
             }),

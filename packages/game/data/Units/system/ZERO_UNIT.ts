@@ -56,6 +56,7 @@ export const ZERO_UNIT: Unit = {
 
     xpMultiplier: 0,
   },
+  stages: {},
   values: {
     damage: 0,
     physicalArmor: 0,

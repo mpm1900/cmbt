@@ -89,6 +89,7 @@ export type Unit = {
   level: number
   xp: number
   stats: Stats
+  stages: Partial<Stats>
   values: Values
   flags: Flags
   registry: UnitRegistry

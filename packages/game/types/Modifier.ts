@@ -1,6 +1,15 @@
 import { Id } from '.'
 import { Mutation, MutationProps } from './Mutation'
 
+export const MODIFIER_PRIORITIES = {
+  PRE: -1,
+  DEFAULT: 0,
+  STAGE: 1,
+  POST: 2,
+  WIPE: 3,
+  SET: 4,
+}
+
 export type ModifierProps<T = {}> = MutationProps<T> & {
   duration?: number
   maxInstances?: number
@@ -24,7 +33,7 @@ export abstract class Modifier extends Mutation {
 
   constructor(id: Id, props: ModifierProps) {
     super(id, props)
-    this.priority = props.priority ?? 0
+    this.priority = props.priority ?? MODIFIER_PRIORITIES.DEFAULT
     this.duration = props.duration
     this.maxInstances = props.maxInstances
     this.persistOnSwitch = props.persistOnSwitch || false

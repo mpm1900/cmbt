@@ -63,6 +63,7 @@ import {
   SwitchUnitId,
   SwordsDance,
   SwordsDanceId,
+  TauntId,
   TrickRoomId,
   UpdateStatParent,
   Ward,
@@ -91,6 +92,7 @@ import { HexRenderer } from './Hex'
 import { NegateArmorRenderer } from './NegateArmor'
 import { PowerCleaveRenderer } from './PowerCleave'
 import { PowerStanceRenderer } from './PowerStance'
+import { TauntRenderer } from './Taunt'
 
 export * from './_names'
 
@@ -123,6 +125,7 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
   [NegateArmorId]: NegateArmorRenderer,
   [PowerCleaveId]: PowerCleaveRenderer,
   [PowerStanceId]: PowerStanceRenderer,
+  [TauntId]: TauntRenderer,
   /// SYSTEM ACTIONS
   [SetIsActiveId]: {
     name: ACTION_NAMES[SetIsActiveId],

@@ -42,6 +42,7 @@ export function useTurnController() {
       const actionableUnits = getActionableUnitsCtx(ctx)
 
       const checkLength = isDebugMode ? 1 : actionableUnits.length
+      //const checkLength = actionableUnits.length
       if (queue.queue.length === checkLength && queue.queue.length > 0) {
         startTurn()
       }

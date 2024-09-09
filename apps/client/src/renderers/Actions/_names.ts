@@ -33,6 +33,7 @@ import {
   SpikesId,
   SwitchUnitId,
   SwordsDanceId,
+  TauntId,
   TrickRoomId,
   WardId,
   WillOWispId,
@@ -79,4 +80,5 @@ export const ACTION_NAMES: Record<string, string> = {
   [NegateArmorId]: 'Negate Armor',
   [PowerCleaveId]: 'Power Cleave',
   [PowerStanceId]: 'Power Stance',
+  [TauntId]: 'Taunt',
 }

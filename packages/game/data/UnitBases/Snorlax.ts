@@ -1,6 +1,6 @@
 import { nanoid } from 'nanoid'
 import { UnitBase, UnitBaseConfig } from '../../types'
-import { BodySlam, FirePunch, PiercingStrike, Rest } from '../Actions'
+import { BodySlam, FirePunch, PiercingStrike, Rest, Taunt } from '../Actions'
 import { FlameShield } from '../Augments'
 import {
   BodySlamId,
@@ -8,6 +8,7 @@ import {
   FlameShieldId,
   PiercingStrikeId,
   RestId,
+  TauntId,
 } from '../Ids'
 import { BASE_UNIT } from '../Units/system/BASE_UNIT'
 
@@ -52,7 +53,17 @@ export const SnorlaxConfig: UnitBaseConfig = {
       id: RestId,
       make: (u) => new Rest(u.id, u.teamId),
     },
+    {
+      id: TauntId,
+      make: (u) => new Taunt(u.id, u.teamId),
+    },
   ],
   defaultAbilityId: FlameShieldId,
-  defaultActionIds: [BodySlamId, FirePunchId, PiercingStrikeId, RestId],
+  defaultActionIds: [
+    BodySlamId,
+    FirePunchId,
+    PiercingStrikeId,
+    RestId,
+    TauntId,
+  ],
 }

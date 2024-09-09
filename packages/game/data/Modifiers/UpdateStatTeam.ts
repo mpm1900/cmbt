@@ -7,7 +7,7 @@ import {
   StatKey,
   Unit,
 } from '../../types'
-import { UpdateStatParentId } from '../Ids'
+import { UpdateStatTeamId } from '../Ids'
 
 export class UpdateStatTeam extends Modifier {
   teamId: Id
@@ -29,7 +29,7 @@ export class UpdateStatTeam extends Modifier {
       percentage?: boolean
     }>
   ) {
-    super(UpdateStatParentId, props)
+    super(UpdateStatTeamId, props)
 
     this.teamId = props.teamId
     this.stat = props.stat

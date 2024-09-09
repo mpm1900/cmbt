@@ -20,7 +20,8 @@ export type ModifierHoverProps = PropsWithChildren<{
 
 export function ModifierHover(props: ModifierHoverProps) {
   const { modifier, side, children } = props
-  const renderer = ModifierRenderers[modifier.id]
+  const renderer =
+    ModifierRenderers[modifier.registryId] || ModifierRenderers[modifier.id]
   return (
     <TooltipProvider>
       <HoverCard openDelay={200} closeDelay={200}>

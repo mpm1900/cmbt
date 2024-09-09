@@ -12,8 +12,8 @@ import {
   getActionData,
   modifyRenderContext,
 } from '../../utils'
-import { HoldPersonId } from '../Ids'
-import { StunnedParent } from '../Modifiers'
+import { HoldPersonId, StunnedParentId } from '../Ids'
+import { UpdateFlagParent } from '../Modifiers'
 import { Identity } from '../Mutations'
 import { GetUnits } from '../Queries'
 
@@ -60,9 +60,12 @@ export class HoldPerson extends Action {
         onSuccess: {
           addedModifiers: modifiedTargets.map(
             (target) =>
-              new StunnedParent({
+              new UpdateFlagParent({
+                registryId: StunnedParentId,
                 sourceId: source.id,
                 parentId: target.id,
+                flagKey: 'isStunned',
+                value: true,
                 duration: this.duration,
               })
           ),

@@ -3,5 +3,7 @@ import { ModifierName } from './_helpers'
 
 export const InspectedAllRenderer: ModifierRenderer = {
   name: (mod) => <ModifierName>{MODIFIER_NAMES[mod.registryId]}</ModifierName>,
-  description: () => <div>Inspected units' stats are visible.</div>,
+  description: (mod) => (
+    <div>{MODIFIER_NAMES[mod.registryId]} units' stats are visible.</div>
+  ),
 }

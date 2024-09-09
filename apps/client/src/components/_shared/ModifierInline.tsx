@@ -11,7 +11,8 @@ export type ModifierInlineProps = {
 
 export function ModifierInline(props: ModifierInlineProps) {
   const { className, modifier, side } = props
-  const renderer = ModifierRenderers[modifier.id]
+  const renderer =
+    ModifierRenderers[modifier.registryId] || ModifierRenderers[modifier.id]
 
   return (
     <ModifierHover side={side} modifier={modifier}>

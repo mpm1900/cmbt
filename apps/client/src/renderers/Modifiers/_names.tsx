@@ -49,7 +49,7 @@ export const MODIFIER_NAMES: Record<string, string> = {
   [InspectedAllId]: 'Inspected',
   [FireDamageUpParentId]: 'Fire Damage Up',
   [FireNegationUpParentId]: 'Fire Damage Negation Up',
-  [StunnedParentId]: 'Stun',
+  [StunnedParentId]: 'Stunned',
   [InvertSpeedAllId]: 'Invert Speed',
   [AttackDownParentId]: 'Attack Down',
   [AttackUpParentId]: 'Attack Up',

@@ -7,7 +7,8 @@ export type ModifierDescriptionProps = {
 
 export function ModifierDescription(props: ModifierDescriptionProps) {
   const { modifier } = props
-  const renderer = ModifierRenderers[modifier.id]
+  const renderer =
+    ModifierRenderers[modifier.registryId] || ModifierRenderers[modifier.id]
 
   return (
     <div className="text-muted-foreground">

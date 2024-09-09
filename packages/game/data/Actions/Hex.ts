@@ -9,8 +9,8 @@ import {
 } from '../../types'
 import { buildActionResult, getActionData } from '../../utils'
 import { modifyRenderContext } from '../../utils/modifyRenderContext'
-import { HexId } from '../Ids'
-import { HexedParent } from '../Modifiers'
+import { HexedParentId, HexId } from '../Ids'
+import { UpdateFlagParent } from '../Modifiers'
 import { Identity } from '../Mutations'
 import { GetUnits } from '../Queries'
 
@@ -58,9 +58,12 @@ export class Hex extends Action {
         forceFailure: source.metadata.activeTurns > 1,
         onSuccess: {
           addedModifiers: modifiedTargets.flatMap((target) => [
-            new HexedParent({
+            new UpdateFlagParent({
+              registryId: HexedParentId,
               sourceId: source.id,
               parentId: target.id,
+              flagKey: 'isHexed',
+              value: true,
               maxInstances: 1,
               duration: 1,
             }),

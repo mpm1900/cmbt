@@ -9,8 +9,8 @@ import {
 } from '../../types'
 import { buildActionResult, getActionData } from '../../utils'
 import { modifyRenderContext } from '../../utils/modifyRenderContext'
-import { ProtectId } from '../Ids'
-import { ProtectedParent } from '../Modifiers'
+import { ProtectedParentId, ProtectId } from '../Ids'
+import { UpdateFlagParent } from '../Modifiers'
 import { Identity } from '../Mutations'
 import { EmptyArray } from '../Queries/EmptyArray'
 
@@ -48,10 +48,13 @@ export class Protect extends Action {
       forceFailure: source.metadata.lastUsedActionId === this.id,
       onSuccess: {
         addedModifiers: [
-          new ProtectedParent({
+          new UpdateFlagParent({
+            registryId: ProtectedParentId,
             sourceId: source.id,
             parentId: source.id,
             duration: this.duration,
+            flagKey: 'isProtected',
+            value: true,
           }),
         ],
       },

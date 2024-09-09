@@ -36,7 +36,6 @@ export function makeEnemyUnit(
   const base = bases[baseIndex]
   const builder = makeUnitBuilder(base.id, level)
   const unit = resolveUnitBuilder(builder, teamId)
-  const tUnit: Unit = { ...unit, flags: { ...unit.flags, isHidden: true } }
 
   const actions = [
     new PiercingStrike(unit.id, unit.teamId),
@@ -58,5 +57,5 @@ export function makeEnemyUnit(
     new Ward(unit.id, unit.teamId),
   ]
 
-  return rebuildUnit(tUnit)
+  return rebuildUnit(unit)
 }

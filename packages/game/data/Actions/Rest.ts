@@ -12,8 +12,8 @@ import {
   getActionData,
   modifyRenderContext,
 } from '../../utils'
-import { RestId } from '../Ids'
-import { StunnedParent } from '../Modifiers'
+import { RestId, StunnedParentId } from '../Ids'
+import { UpdateFlagParent } from '../Modifiers'
 import { HealParent, Identity } from '../Mutations'
 import { EmptyArray } from '../Queries'
 
@@ -64,9 +64,12 @@ export class Rest extends Action {
             }),
           ],
           addedModifiers: [
-            new StunnedParent({
+            new UpdateFlagParent({
+              registryId: StunnedParentId,
               sourceId: source.id,
               parentId: source.id,
+              flagKey: 'isStunned',
+              value: true,
               duration: this.duration,
             }),
           ],

@@ -46,7 +46,7 @@ import {
   PowerStanceId,
   PowerWordKillId,
   Protect,
-  ProtectedParent,
+  ProtectedParentId,
   ProtectId,
   QuickAttack,
   QuickAttackId,
@@ -60,13 +60,14 @@ import {
   SlashId,
   Spikes,
   SpikesId,
-  StunnedParent,
+  StunnedParentId,
   SwitchUnitId,
   SwordsDance,
   SwordsDanceId,
   TauntId,
   ThunderboltId,
   TrickRoomId,
+  UpdateFlagParent,
   UpdateStatParent,
   Ward,
   WardId,
@@ -331,7 +332,17 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
       return (
         <div>
           Applies{' '}
-          <ModifierInline side={props?.side} modifier={new StunnedParent({})} />{' '}
+          <ModifierInline
+            side={props?.side}
+            modifier={
+              new UpdateFlagParent({
+                registryId: StunnedParentId,
+                flagKey: 'isStunned',
+                value: true,
+                duration: holdperson.duration,
+              })
+            }
+          />{' '}
           to target enemy unit for {holdperson.duration - 1} turns.
         </div>
       )
@@ -355,7 +366,13 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
           stat to target enemy unit. Applies{' '}
           <ModifierInline
             side={props?.side}
-            modifier={new StunnedParent({ duration: hyperbeam.stunDuration })}
+            modifier={
+              new UpdateFlagParent({
+                flagKey: 'isStunned',
+                value: true,
+                duration: hyperbeam.stunDuration,
+              })
+            }
           />{' '}
           to this unit.
         </div>
@@ -432,7 +449,10 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
           <ModifierInline
             side={props?.side}
             modifier={
-              new ProtectedParent({
+              new UpdateFlagParent({
+                registryId: ProtectedParentId,
+                flagKey: 'isProtected',
+                value: true,
                 duration: protect.duration,
               })
             }
@@ -453,7 +473,10 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
           <ModifierInline
             side={props?.side}
             modifier={
-              new StunnedParent({
+              new UpdateFlagParent({
+                registryId: StunnedParentId,
+                flagKey: 'isStunned',
+                value: true,
                 duration: rest.duration,
               })
             }

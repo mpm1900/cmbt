@@ -1,24 +1,28 @@
 import {
   CombatContext,
+  FlagKey,
   Modifier,
   ModifierProps,
   MutationFilterArgs,
   Unit,
 } from '../../types'
-import { StunnedParentId } from '../Ids'
+import { UpdateFlagParentId } from '../Ids'
 
-export class StunnedParent extends Modifier {
-  private isStunned?: boolean
+export class UpdateFlagParent extends Modifier {
+  flagKey: FlagKey
+  value: boolean
 
-  constructor(props: ModifierProps & { isStunned?: boolean }) {
-    super(StunnedParentId, props)
-    this.isStunned = props.isStunned
+  constructor(props: ModifierProps & { flagKey: FlagKey; value: boolean }) {
+    super(UpdateFlagParentId, props)
+
+    this.flagKey = props.flagKey
+    this.value = props.value
   }
 
   resolve = (unit: Unit): Partial<Unit> => {
     return {
       flags: Modifier.setFlags(unit, (flags) => ({
-        isStunned: this.isStunned || true,
+        [this.flagKey]: this.value,
       })),
     }
   }

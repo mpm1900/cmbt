@@ -3,7 +3,9 @@ import { Action } from './Action'
 import { DamageType } from './Damage'
 import { Modifier } from './Modifier'
 
-export type AttackTypes = 'physical' | 'magic'
+export type AttackType = 'physical' | 'magic'
+
+export const ATTACK_TYPES: AttackType[] = ['magic', 'physical']
 
 export type StatKey =
   | 'accuracy'
@@ -19,6 +21,8 @@ export type StatKey =
   | 'attack'
   | 'magic'
   | 'xpMultiplier'
+  | `${AttackType}Negation`
+  | `${AttackType}Expansion`
   | `${DamageType}Negation`
   | `${DamageType}Expansion`
 
@@ -28,7 +32,7 @@ export type ValueKey =
   | 'devotion'
   | 'focus'
   | 'stamina'
-  | `${AttackTypes}Armor`
+  | `${AttackType}Armor`
 export type Values = Record<ValueKey, number>
 
 export type FlagKey =

@@ -23,6 +23,12 @@ export const ZERO_UNIT: Unit = {
     stamina: 0,
     devotion: 0,
 
+    physicalExpansion: 0,
+    magicExpansion: 0,
+
+    physicalNegation: 0,
+    magicNegation: 0,
+
     arcaneNegation: 0,
     blightNegation: 0,
     fireNegation: 0,

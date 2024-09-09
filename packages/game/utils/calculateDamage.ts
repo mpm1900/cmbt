@@ -1,5 +1,11 @@
 import random from 'random'
-import { ActionAccuracyResult, Damage, DamageType, Unit } from '../types'
+import {
+  ActionAccuracyResult,
+  AttackType,
+  Damage,
+  DamageType,
+  Unit,
+} from '../types'
 
 export function calculateBaseDamage(
   damage: Damage,
@@ -10,10 +16,12 @@ export function calculateBaseDamage(
 
   if (power && source) {
     let base = power
-    if (attackType === 'physical')
+    if (attackType === 'physical') {
       base = power * (source.stats.attack / target.stats.defense)
-    if (attackType === 'magic')
+    }
+    if (attackType === 'magic') {
       base = power * (source.stats.magic / target.stats.magic)
+    }
 
     const levelMod = (source.level * 2) / 5 + 2
     const final = (base * levelMod) / 50 + 2
@@ -46,7 +54,25 @@ export function getDamageExpansion(
   return typeExpansion / 100
 }
 
-export function getTypedDamage(
+export function getAttackTypeNegation(
+  type: AttackType | undefined,
+  target: Unit | undefined
+) {
+  if (!type || !target) return 1
+  const typeNegation = target.stats[`${type}Negation`]
+  return (100 - typeNegation) / 100
+}
+
+export function getAttackTypeExpansion(
+  type: AttackType | undefined,
+  target: Unit | undefined
+) {
+  if (!type || !target) return 1
+  const typeExpansion = target.stats[`${type}Expansion`]
+  return typeExpansion / 100
+}
+
+export function getDamageTypedDamage(
   type: DamageType | undefined,
   damage: number,
   source: Unit | undefined,
@@ -54,6 +80,19 @@ export function getTypedDamage(
 ) {
   return (
     damage * getDamageExpansion(type, source) * getDamageNegation(type, target)
+  )
+}
+
+export function getAttackTypeDamage(
+  type: AttackType | undefined,
+  damage: number,
+  source: Unit | undefined,
+  target: Unit
+) {
+  return (
+    damage *
+    getAttackTypeExpansion(type, source) *
+    getAttackTypeNegation(type, target)
   )
 }
 
@@ -77,7 +116,18 @@ export function calculateDamage(
   const base = calculateBaseDamage(damage, source, target)
   const evasionRoll = random.int(0, 100)
   const evasionSuccess = target.stats.evasion > evasionRoll
-  const typedDamage = getTypedDamage(damage.damageType, base, source, target)
+  const attackDamage = getAttackTypeDamage(
+    damage.attackType,
+    base,
+    source,
+    target
+  )
+  const typedDamage = getDamageTypedDamage(
+    damage.damageType,
+    attackDamage,
+    source,
+    target
+  )
 
   const criticalFactor = config.criticalSuccess
     ? (config.criticalFactor ?? 1)

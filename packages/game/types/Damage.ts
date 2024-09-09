@@ -1,4 +1,4 @@
-import { AttackTypes } from './Unit'
+import { AttackType } from './Unit'
 
 export type DamageType =
   | 'arcane'
@@ -20,7 +20,7 @@ export const DAMAGE_TYPES: DamageType[] = [
 ]
 
 export type Damage = {
-  attackType: AttackTypes
+  attackType: AttackType
   damageType?: DamageType
   power?: number
   factor?: number

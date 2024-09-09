@@ -5,6 +5,7 @@ import { StatRenderers } from '@/renderers/Stats'
 import { ElementProps } from '@/types'
 import { AspectRatio } from '@radix-ui/react-aspect-ratio'
 import {
+  ATTACK_TYPES,
   DAMAGE_TYPES,
   DamageType,
   Modifier,
@@ -110,7 +111,7 @@ export function UnitDetails(props: UnitDetailsProps) {
   return (
     <div className="space-y-2">
       <div className="flex space-x-4">
-        <div className="w-[160px]">
+        <div className="">
           <Title>Unit</Title>
           <Separator className="my-1" />
           <div className="space-y-2">
@@ -129,6 +130,19 @@ export function UnitDetails(props: UnitDetailsProps) {
             </div>
             <Separator />
             <AspectRatio ratio={1} className="bg-muted"></AspectRatio>
+            <Separator />
+            <div className="flex justify-around space-x-1 p-1">
+              <span className="">
+                ({remainingHealth} / {unit.stats.health})
+              </span>
+              <MagicArmor className="px-2">
+                <span>{unit.values.magicArmor}</span>
+              </MagicArmor>
+
+              <PhysicalArmor className="px-2">
+                <span>{unit.values.physicalArmor}</span>
+              </PhysicalArmor>
+            </div>
           </div>
         </div>
         <div className="w-[1px] bg-border" />
@@ -136,50 +150,35 @@ export function UnitDetails(props: UnitDetailsProps) {
           <div>
             <Title>Stats</Title>
             <Separator className="my-1" />
+            <UnitStat unit={unit} comp={comp} stat="health" />
             <UnitStat unit={unit} comp={comp} stat="attack" />
             <UnitStat unit={unit} comp={comp} stat="defense" />
             <UnitStat unit={unit} comp={comp} stat="magic" />
             <UnitStat unit={unit} comp={comp} stat="speed" />
 
             <Separator className="my-2" />
-            <div className="space-y-2">
-              <div>
-                <div className="flex justify-between space-x-2">
-                  <strong className="text-muted-foreground">HP</strong>
-                  <span className="">
-                    ({remainingHealth}/{unit.stats.health})
-                  </span>
-                </div>
-                <div className="flex justify-between space-x-2">
-                  <strong className="text-muted-foreground">FP</strong>
-                  <span className="">
-                    ({Math.max(unit.values.focus, 0)}/{unit.stats.focus})
-                  </span>
-                </div>
-                <div className="flex justify-between space-x-2">
-                  <strong className="text-muted-foreground">SP</strong>
-                  <span className="">
-                    ({Math.max(unit.values.stamina, 0)}/{unit.stats.stamina})
-                  </span>
-                </div>
-                <div className="flex justify-between space-x-2">
-                  <strong className="text-muted-foreground">DV</strong>
-                  <span className="">
-                    ({Math.max(unit.values.devotion, 0)}/{unit.stats.devotion})
-                  </span>
-                </div>
-              </div>
-
-              <div className="flex justify-around">
-                <MagicArmor className="px-2">
-                  <span>{unit.values.magicArmor}</span>
-                </MagicArmor>
-
-                <PhysicalArmor className="px-2">
-                  <span>{unit.values.physicalArmor}</span>
-                </PhysicalArmor>
-              </div>
-            </div>
+            <UnitStat unit={unit} comp={comp} stat="evasion" after="%" />
+            <UnitStat
+              stat="accuracy"
+              unit={unit}
+              comp={comp}
+              before="+"
+              after="%"
+            />
+            <UnitStat
+              stat="criticalChance"
+              unit={unit}
+              comp={comp}
+              before="+"
+              after="%"
+            />
+            <UnitStat
+              stat="criticalDamage"
+              unit={unit}
+              comp={comp}
+              before="+"
+              after="%"
+            />
           </div>
         </div>
         <div className="w-[1px] bg-border" />
@@ -207,6 +206,17 @@ export function UnitDetails(props: UnitDetailsProps) {
                   </div>
                 )
               })}
+              <Separator className="my-1" />
+              {ATTACK_TYPES.map((attackType) => {
+                return (
+                  <div key={attackType} className="flex items-center space-x-1">
+                    <strong className="text-muted-foreground">
+                      {attackType === 'magic' && 'Magic'}
+                      {attackType === 'physical' && 'Physical'}
+                    </strong>
+                  </div>
+                )
+              })}
             </div>
             <div>
               <Title>Dmg</Title>
@@ -219,6 +229,22 @@ export function UnitDetails(props: UnitDetailsProps) {
                   >
                     <StatValue
                       stat={`${damageType}Expansion`}
+                      unit={unit}
+                      comp={comp}
+                      after="%"
+                    />
+                  </div>
+                )
+              })}
+              <Separator className="my-1" />
+              {ATTACK_TYPES.map((attackType) => {
+                return (
+                  <div
+                    key={attackType}
+                    className="flex items-center justify-end space-x-1"
+                  >
+                    <StatValue
+                      stat={`${attackType}Expansion`}
                       unit={unit}
                       comp={comp}
                       after="%"
@@ -245,31 +271,24 @@ export function UnitDetails(props: UnitDetailsProps) {
                   </div>
                 )
               })}
+              <Separator className="my-1" />
+              {ATTACK_TYPES.map((attackType) => {
+                return (
+                  <div
+                    key={attackType}
+                    className="flex items-center justify-end space-x-1"
+                  >
+                    <StatValue
+                      stat={`${attackType}Negation`}
+                      unit={unit}
+                      comp={comp}
+                      after="%"
+                    />
+                  </div>
+                )
+              })}
             </div>
           </div>
-          <Separator className="my-2" />
-          <UnitStat unit={unit} comp={comp} stat="evasion" after="%" />
-          <UnitStat
-            stat="accuracy"
-            unit={unit}
-            comp={comp}
-            before="+"
-            after="%"
-          />
-          <UnitStat
-            stat="criticalChance"
-            unit={unit}
-            comp={comp}
-            before="+"
-            after="%"
-          />
-          <UnitStat
-            stat="criticalDamage"
-            unit={unit}
-            comp={comp}
-            before="+"
-            after="%"
-          />
         </div>
       </div>
       <Separator />

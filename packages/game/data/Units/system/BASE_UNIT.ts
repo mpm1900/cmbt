@@ -6,6 +6,9 @@ export const BASE_UNIT: Unit = {
   stats: {
     ...ZERO_UNIT.stats,
 
+    physicalExpansion: 100,
+    magicExpansion: 100,
+
     arcaneExpansion: 100,
     blightExpansion: 100,
     fireExpansion: 100,

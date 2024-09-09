@@ -26,8 +26,8 @@ export function DamageInline(props: ElementProps<DamageInlineProps>) {
       {damage && damage.power === Infinity && (
         <span className="text-xl">∞</span>
       )}
-      {damage && !!damage.power && damage.power !== Infinity && (
-        <span className="font-black">{damage?.power ?? '--'}</span>
+      {damage && !damage.factor && damage.power !== Infinity && (
+        <span className="font-black">{damage?.power || '--'}</span>
       )}
       {damage && damage.factor && (
         <span className="font-black">{(damage.factor * 100).toFixed(1)}%</span>

@@ -8,7 +8,7 @@ import {
   TriggerProps,
   Unit,
 } from '../../types'
-import { calculateBaseDamage, getTypedDamage } from '../../utils'
+import { calculateBaseDamage, getDamageTypedDamage } from '../../utils'
 import { DamageNewUnitsOnUnitEnterId } from '../Ids'
 
 export class DamageNewUnitsOnUnitEnter extends Trigger {
@@ -40,7 +40,7 @@ export class DamageNewUnitsOnUnitEnter extends Trigger {
           factor: this.factor,
         } as Damage
         const baseDamage = calculateBaseDamage(d, undefined, unit) + this.static
-        const damage = getTypedDamage(
+        const damage = getDamageTypedDamage(
           this.damageType,
           baseDamage,
           undefined,

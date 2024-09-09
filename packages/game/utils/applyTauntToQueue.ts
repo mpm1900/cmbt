@@ -10,7 +10,16 @@ export function applyTauntToQueue(source: Unit, ctx: CombatContext) {
       const hasAlly = item.targetIds.some(
         (id) => !!allies.find((u) => u.id === id)
       )
-      if (item.targetIds.length === 1 && hasAlly && !hasSource) {
+      const canTargetSource = item.action.targets
+        .resolve(ctx)
+        .some((u) => u.id === source.id)
+
+      if (
+        item.targetIds.length === 1 &&
+        hasAlly &&
+        !hasSource &&
+        canTargetSource
+      ) {
         return {
           ...item,
           targetIds: [source.id],

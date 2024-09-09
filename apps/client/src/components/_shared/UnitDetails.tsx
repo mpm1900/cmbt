@@ -129,7 +129,7 @@ export function UnitDetails(props: UnitDetailsProps) {
               <div className="text-muted-foreground">{base.base?.name}</div>
             </div>
             <Separator />
-            <AspectRatio ratio={1} className="bg-muted"></AspectRatio>
+            <AspectRatio ratio={4 / 3} className="bg-muted"></AspectRatio>
             <Separator />
             <div className="flex justify-around space-x-1 p-1">
               <span className="">
@@ -206,7 +206,7 @@ export function UnitDetails(props: UnitDetailsProps) {
                   </div>
                 )
               })}
-              <Separator className="my-1" />
+              <Separator className="my-2" />
               {ATTACK_TYPES.map((attackType) => {
                 return (
                   <div key={attackType} className="flex items-center space-x-1">
@@ -236,7 +236,7 @@ export function UnitDetails(props: UnitDetailsProps) {
                   </div>
                 )
               })}
-              <Separator className="my-1" />
+              <Separator className="my-2" />
               {ATTACK_TYPES.map((attackType) => {
                 return (
                   <div
@@ -271,7 +271,7 @@ export function UnitDetails(props: UnitDetailsProps) {
                   </div>
                 )
               })}
-              <Separator className="my-1" />
+              <Separator className="my-2" />
               {ATTACK_TYPES.map((attackType) => {
                 return (
                   <div

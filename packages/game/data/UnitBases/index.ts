@@ -20,12 +20,12 @@ export * from './Enemy'
 export const PLAYER_BASES: UnitBase[] = [
   // Wolf,
   Tyranitar,
-  TempestKnight,
-  Snorlax,
-  Salamence,
-  Blissy,
   Witch,
   Gengar,
+  Salamence,
+  Blissy,
+  Snorlax,
+  TempestKnight,
 ]
 
 export const ENEMY_BASES = [Celebi, RestlessSpirit, Wolf]

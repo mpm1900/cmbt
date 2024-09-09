@@ -11,12 +11,12 @@ export type DamageType =
 
 export const DAMAGE_TYPES: DamageType[] = [
   'arcane',
-  'blight',
-  'fire',
-  'force',
-  'holy',
   'psychic',
   'shock',
+  'blight',
+  'holy',
+  'fire',
+  'force',
 ]
 
 export type Damage = {

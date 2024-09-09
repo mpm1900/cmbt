@@ -32,7 +32,7 @@ import { BASE_UNIT } from '../Units/system/BASE_UNIT'
 
 export const Tyranitar: UnitBase = {
   id: nanoid(),
-  name: 'Flamestorm Knight',
+  name: 'Chaos Warrior',
   stats: {
     ...BASE_UNIT.stats,
     health: 100,

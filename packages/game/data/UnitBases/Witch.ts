@@ -1,6 +1,13 @@
 import { nanoid } from 'nanoid'
 import { UnitBase, UnitBaseConfig } from '../../types'
-import { Disable, Hex, PoisonSpray, Protect, TrickRoom } from '../Actions'
+import {
+  Disable,
+  Hex,
+  PoisonSpray,
+  Protect,
+  Taunt,
+  TrickRoom,
+} from '../Actions'
 import { HoldPerson } from '../Actions/HoldPerson'
 import { Regeneration } from '../Augments'
 import {
@@ -10,6 +17,7 @@ import {
   PoisonSprayId,
   ProtectId,
   RegenerationId,
+  TauntId,
   TrickRoomId,
 } from '../Ids'
 import { BASE_UNIT } from '../Units/system/BASE_UNIT'
@@ -60,6 +68,10 @@ export const WitchConfig: UnitBaseConfig = {
     {
       id: ProtectId,
       make: (u) => new Protect(u.id, u.teamId),
+    },
+    {
+      id: TauntId,
+      make: (u) => new Taunt(u.id, u.teamId),
     },
     {
       id: TrickRoomId,

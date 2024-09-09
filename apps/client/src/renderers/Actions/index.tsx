@@ -35,6 +35,7 @@ import {
   InspectedAll,
   InvertSpeedAll,
   MagicMissileId,
+  MindShatterId,
   NegateArmorId,
   PiercingStrike,
   PiercingStrikeId,
@@ -64,6 +65,7 @@ import {
   SwordsDance,
   SwordsDanceId,
   TauntId,
+  ThunderboltId,
   TrickRoomId,
   UpdateStatParent,
   Ward,
@@ -89,10 +91,12 @@ import { BattleStanceRenderer } from './BattleStance'
 import { BiteRenderer } from './Bite'
 import { DragonStanceRenderer } from './DragonStance'
 import { HexRenderer } from './Hex'
+import { MindShatterRenderer } from './MindShatter'
 import { NegateArmorRenderer } from './NegateArmor'
 import { PowerCleaveRenderer } from './PowerCleave'
 import { PowerStanceRenderer } from './PowerStance'
 import { TauntRenderer } from './Taunt'
+import { ThunderboltRenderer } from './Thunderbolt'
 
 export * from './_names'
 
@@ -122,10 +126,12 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
   [BiteId]: BiteRenderer,
   [DragonStanceId]: DragonStanceRenderer,
   [HexId]: HexRenderer,
+  [MindShatterId]: MindShatterRenderer,
   [NegateArmorId]: NegateArmorRenderer,
   [PowerCleaveId]: PowerCleaveRenderer,
   [PowerStanceId]: PowerStanceRenderer,
   [TauntId]: TauntRenderer,
+  [ThunderboltId]: ThunderboltRenderer,
   /// SYSTEM ACTIONS
   [SetIsActiveId]: {
     name: ACTION_NAMES[SetIsActiveId],

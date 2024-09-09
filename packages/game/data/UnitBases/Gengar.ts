@@ -1,12 +1,25 @@
 import { nanoid } from 'nanoid'
 import { UnitBase, UnitBaseConfig } from '../../types'
-import { Disable, MagicMissile, PowerWordKill, WillOWisp } from '../Actions'
+import {
+  Disable,
+  Fireball,
+  MagicMissile,
+  PowerWordKill,
+  Protect,
+  Thunderbolt,
+  WillOWisp,
+} from '../Actions'
+import { MindShatter } from '../Actions/MindShatter'
 import { Scholar } from '../Augments'
 import {
   DisableId,
+  FireballId,
   MagicMissileId,
+  MindShatterId,
   PowerWordKillId,
+  ProtectId,
   ScholarId,
+  ThunderboltId,
   WillOWispId,
 } from '../Ids'
 import { BASE_UNIT } from '../Units/system/BASE_UNIT'
@@ -29,24 +42,40 @@ export const Gengar: UnitBase = {
   augmentSlots: 3,
   affinities: [],
   resistances: [],
-  weaknesses: [],
+  weaknesses: [{ type: 'force', factor: 25 }],
 }
 
 export const GengarConfig: UnitBaseConfig = {
   abilities: [Scholar],
-  actionsCount: 4,
+  actionsCount: 6,
   actions: [
     {
       id: DisableId,
       make: (u) => new Disable(u.id, u.teamId),
     },
     {
+      id: FireballId,
+      make: (u) => new Fireball(u.id, u.teamId),
+    },
+    {
       id: MagicMissileId,
       make: (u) => new MagicMissile(u.id, u.teamId),
     },
     {
+      id: MindShatterId,
+      make: (u) => new MindShatter(u.id, u.teamId),
+    },
+    {
       id: PowerWordKillId,
       make: (u) => new PowerWordKill(u.id, u.teamId),
+    },
+    {
+      id: ProtectId,
+      make: (u) => new Protect(u.id, u.teamId),
+    },
+    {
+      id: ThunderboltId,
+      make: (u) => new Thunderbolt(u.id, u.teamId),
     },
     {
       id: WillOWispId,
@@ -54,5 +83,11 @@ export const GengarConfig: UnitBaseConfig = {
     },
   ],
   defaultAbilityId: ScholarId,
-  defaultActionIds: [DisableId, MagicMissileId, PowerWordKillId, WillOWispId],
+  defaultActionIds: [
+    FireballId,
+    MagicMissileId,
+    MindShatterId,
+    PowerWordKillId,
+    ThunderboltId,
+  ],
 }

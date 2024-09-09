@@ -1,3 +1,4 @@
+import random from 'random'
 import {
   Action,
   ActionAi,
@@ -9,7 +10,6 @@ import {
   Unit,
 } from '../../types'
 import {
-  applyModifiers,
   buildActionResult,
   calculateDamage,
   getActionData,
@@ -17,19 +17,18 @@ import {
   getMutationsFromDamageResult,
 } from '../../utils'
 import { modifyRenderContext } from '../../utils/modifyRenderContext'
-import { FireballId } from '../Ids'
+import { MindShatterId } from '../Ids'
 import { Identity } from '../Mutations'
 import { GetUnits } from '../Queries'
 
-export class Fireball extends Action {
+export class MindShatter extends Action {
   damage: Damage
-  splashDamage: Damage
 
   constructor(sourceId: Id, teamId: Id) {
-    super(FireballId, {
+    super(MindShatterId, {
       sourceId,
       teamId,
-      cost: new Identity({ sourceId }),
+      cost: new Identity({}),
       targets: new GetUnits({
         notTeamId: teamId,
         isActive: true,
@@ -37,24 +36,11 @@ export class Fireball extends Action {
       maxTargetCount: 1,
     })
 
-    const power = 80
     this.damage = {
-      power,
+      power: 100,
       attackType: 'magic',
-      damageType: 'fire',
+      damageType: 'psychic',
     }
-    this.splashDamage = {
-      power: Math.round(power / 2),
-      attackType: 'magic',
-      damageType: 'fire',
-    }
-  }
-
-  mapTargets = (targets: Unit[], ctx: CombatContext): Unit[] => {
-    const teamIds = targets.map((t) => t.teamId)
-    return ctx.units
-      .map((u) => applyModifiers(u, ctx).unit)
-      .filter((u) => u.flags.isActive && teamIds.includes(u.teamId))
   }
 
   threshold = (source: Unit): number | undefined => {
@@ -74,28 +60,27 @@ export class Fireball extends Action {
   ): ActionResult => {
     ctx = modifyRenderContext(options, ctx)
     const data = getActionData(source, this, ctx)
+    const applyModifierRoll = random.int(0, 100)
+
     return buildActionResult(
       this,
       data,
       source,
       targets,
       ctx,
-      (modifiedTargets) => {
-        return {
-          onSuccess: {
-            mutations: modifiedTargets.flatMap((target) => {
-              const isTarget = !!targets.find((t) => t.id === target.id)
-              const damage = calculateDamage(
-                isTarget ? this.damage : this.splashDamage,
-                data.source,
-                target,
-                data.accuracyRoll
-              )
-              return getMutationsFromDamageResult(source, target, damage)
-            }),
-          },
-        }
-      }
+      (modifiedTargets) => ({
+        onSuccess: {
+          mutations: modifiedTargets.flatMap((target) => {
+            const damage = calculateDamage(
+              this.damage,
+              data.source,
+              target,
+              data.accuracyRoll
+            )
+            return getMutationsFromDamageResult(source, target, damage)
+          }),
+        },
+      })
     )
   }
 }

@@ -31,7 +31,7 @@ export type InitializeProps = {
 }
 
 export type CombatLog = { id: Id; delay: number; node: ReactNode }
-export type CombatState = CombatContext & {
+export type CombatState = Omit<CombatContext, 'queue'> & {
   reward: CombatRewards
   logs: CombatLog[]
   log: CombatLogger

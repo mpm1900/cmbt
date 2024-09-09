@@ -1,3 +1,4 @@
+import { useCombatContext } from '@/hooks'
 import { useCombat } from '@/hooks/state'
 import { applyModifiers } from '@repo/game/utils'
 import { GiCreditsCurrency } from 'react-icons/gi'
@@ -7,10 +8,11 @@ export type CombatRewardsPreviewProps = {}
 
 export function CombatRewardsPreview(props: CombatRewardsPreviewProps) {
   const {} = props
+  const ctx = useCombatContext()
   const combat = useCombat()
-  const userUnits = combat.units
-    .filter((u) => u.teamId === combat.user)
-    .map((u) => applyModifiers(u, combat).unit)
+  const userUnits = ctx.units
+    .filter((u) => u.teamId === ctx.user)
+    .map((u) => applyModifiers(u, ctx).unit)
   const xpUnit = userUnits.find((u) => u.stats.xpMultiplier === 100)
   const nonStandardUnits = userUnits.filter((u) => u.stats.xpMultiplier !== 100)
 

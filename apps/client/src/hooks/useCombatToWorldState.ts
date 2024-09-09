@@ -4,10 +4,12 @@ import {
   rebuildUnit,
 } from '@repo/game/utils'
 import { useCombat, useGame } from './state'
+import { useCombatContext } from './useCombatContext'
 
 export function useCombatToWorldState() {
   const game = useGame()
   const combat = useCombat()
+  const ctx = useCombatContext()
 
   return () => {
     const reward = combat.reward
@@ -24,7 +26,7 @@ export function useCombatToWorldState() {
       const combatUnit = combat.units.find((u) => u.id === unit.id)
       if (!combatUnit) return unit
 
-      const modified = applyModifiers(combatUnit, combat).unit
+      const modified = applyModifiers(combatUnit, ctx).unit
       const result = getExperienceResult(
         unit.level,
         unit.xp,

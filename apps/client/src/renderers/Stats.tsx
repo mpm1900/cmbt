@@ -82,6 +82,18 @@ export const StatRenderers: Record<StatKey, StatRenderer> = {
     name: <>Magic</>,
     icon: <GiCursedStar className="h-full w-full" />,
   },
+  magicExpansion: {
+    name: <>Magic Damage</>,
+  },
+  magicNegation: {
+    name: <>Magic Negation</>,
+  },
+  physicalExpansion: {
+    name: <>Physical Damage</>,
+  },
+  physicalNegation: {
+    name: <>Physical Negation</>,
+  },
   attack: {
     name: <>Attack</>,
     icon: <GiBiceps className="h-full w-full" />,

@@ -1,4 +1,4 @@
-import { useCombatToWorldState } from '@/hooks'
+import { useCombatContext, useCombatToWorldState } from '@/hooks'
 import { useCombat } from '@/hooks/state'
 import { isUnitAliveCtx } from '@repo/game/utils'
 import { useNavigate } from '@tanstack/react-router'
@@ -14,11 +14,12 @@ import {
 import { CombatRewardsPreview } from './CombatRewardsPreview'
 
 export function CombatComplete() {
-  const combat = useCombat()
+  const { onSuccess } = useCombat()
+  const ctx = useCombatContext()
   const nav = useNavigate()
   const commit = useCombatToWorldState()
-  const aliveUserUnits = combat.units.filter(
-    (u) => u.teamId === combat.user && isUnitAliveCtx(u.id, combat)
+  const aliveUserUnits = ctx.units.filter(
+    (u) => u.teamId === ctx.user && isUnitAliveCtx(u.id, ctx)
   )
   if (aliveUserUnits.length === 0) {
     nav({ to: '/' })
@@ -36,7 +37,7 @@ export function CombatComplete() {
         <Button
           onClick={() => {
             commit()
-            combat.onSuccess()
+            onSuccess()
           }}
           className="space-x-2"
         >

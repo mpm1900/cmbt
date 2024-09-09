@@ -28,8 +28,10 @@ export function UnitBuilder() {
       {builder && (
         <Card className="w-full lg:w-[360px]">
           <CardHeader>
-            <CardTitle>{builder.name}</CardTitle>
-            <CardDescription>Set unit details</CardDescription>
+            <div>
+              <CardTitle>{builder.name}</CardTitle>
+              <CardDescription>Set unit details</CardDescription>
+            </div>
           </CardHeader>
 
           <CardContent>

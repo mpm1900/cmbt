@@ -34,6 +34,7 @@ export class FireBlast extends Action {
       targets: new GetUnits({
         notTeamId: teamId,
         isActive: true,
+        isHidden: false,
       }),
       maxTargetCount: 1,
     })

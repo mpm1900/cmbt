@@ -110,6 +110,39 @@ export const StatRenderers: Record<StatKey, StatRenderer> = {
   shockNegation: {
     name: <>Shock Negation</>,
   },
+  priority: {
+    name: <>Priority</>,
+  },
+  nonDamagePriority: {
+    name: <>Non-damage Priority</>,
+  },
+  magicPriority: {
+    name: <>Magic Priority</>,
+  },
+  physicalPriority: {
+    name: <>Physical Priority</>,
+  },
+  arcanePriority: {
+    name: <>Arcane Priority</>,
+  },
+  blightPriority: {
+    name: <>Blight Priority</>,
+  },
+  firePriority: {
+    name: <>Fire Priority</>,
+  },
+  forcePriority: {
+    name: <>Force Priority</>,
+  },
+  holyPriority: {
+    name: <>Holy Priority</>,
+  },
+  psychicPriority: {
+    name: <>Psychic Priority</>,
+  },
+  shockPriority: {
+    name: <>Shock Priority</>,
+  },
   speed: {
     name: <>Speed</>,
     icon: <GiSprint className="h-full w-full" />,

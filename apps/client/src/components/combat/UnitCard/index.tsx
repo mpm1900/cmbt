@@ -34,11 +34,14 @@ export function UnitCard(props: UnitCardProps) {
   )
   const modifiers = [...appliedModifiers, ...registeredTriggers]
   const stagedItem = queue.find((i) => i.action.sourceId === unit.id)
+  const targets =
+    ((result?.expandedTargets ?? []).length === 0
+      ? result?.targets
+      : result?.expandedTargets) ?? []
 
   const isTargeted =
     hoverTargetUnit?.id === unit.id ||
-    (status === 'combat' &&
-      !!result?.expandedTargets?.find((t) => t.id === unit.id))
+    (status === 'combat' && targets.some((t) => t.id === unit.id))
 
   const isActive =
     (status === 'combat'

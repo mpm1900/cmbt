@@ -1,5 +1,5 @@
 import { ActionsQueueItem, CombatContext } from '@repo/game/types'
-import { applyModifiers } from '@repo/game/utils'
+import { applyModifiers, getPriority } from '@repo/game/utils'
 import { create } from 'zustand'
 
 export type ActionsState = {
@@ -18,12 +18,15 @@ export type ActionStore = ActionsState & {
 
 export const queueComparator =
   (ctx: CombatContext) => (a: ActionsQueueItem, b: ActionsQueueItem) => {
-    if (a.action.priority === b.action.priority) {
-      const _aSource = ctx.units.find((u) => u.id === a.action.sourceId)
-      const aSource = _aSource ? applyModifiers(_aSource, ctx).unit : _aSource
-      const _bSource = ctx.units.find((u) => u.id === b.action.sourceId)
-      const bSource = _bSource ? applyModifiers(_bSource, ctx).unit : _bSource
+    const _aSource = ctx.units.find((u) => u.id === a.action.sourceId)
+    const aSource = _aSource ? applyModifiers(_aSource, ctx).unit : _aSource
+    const _bSource = ctx.units.find((u) => u.id === b.action.sourceId)
+    const bSource = _bSource ? applyModifiers(_bSource, ctx).unit : _bSource
 
+    const aPriority = getPriority(a.action, aSource)
+    const bPriority = getPriority(b.action, bSource)
+
+    if (aPriority === bPriority) {
       if (!aSource && !bSource) return 0
       if (!aSource) return -1
       if (!bSource) return 1
@@ -34,7 +37,7 @@ export const queueComparator =
 
       return bSource.stats.speed - aSource.stats.speed
     } else {
-      return b.action.priority - a.action.priority
+      return bPriority - aPriority
     }
   }
 

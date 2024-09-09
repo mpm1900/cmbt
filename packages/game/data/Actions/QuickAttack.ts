@@ -31,6 +31,7 @@ export class QuickAttack extends Action {
       targets: new GetUnits({
         notTeamId: teamId,
         isActive: true,
+        isHidden: false,
       }),
       priority: 1,
       maxTargetCount: 1,

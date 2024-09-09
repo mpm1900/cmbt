@@ -25,10 +25,8 @@ export const ZERO_UNIT: Unit = {
 
     physicalExpansion: 0,
     magicExpansion: 0,
-
     physicalNegation: 0,
     magicNegation: 0,
-
     arcaneNegation: 0,
     blightNegation: 0,
     fireNegation: 0,
@@ -36,7 +34,6 @@ export const ZERO_UNIT: Unit = {
     holyNegation: 0,
     psychicNegation: 0,
     shockNegation: 0,
-
     arcaneExpansion: 0,
     blightExpansion: 0,
     fireExpansion: 0,
@@ -44,6 +41,18 @@ export const ZERO_UNIT: Unit = {
     holyExpansion: 0,
     psychicExpansion: 0,
     shockExpansion: 0,
+
+    priority: 0,
+    nonDamagePriority: 0,
+    magicPriority: 0,
+    psychicPriority: 0,
+    arcanePriority: 0,
+    blightPriority: 0,
+    firePriority: 0,
+    forcePriority: 0,
+    holyPriority: 0,
+    physicalPriority: 0,
+    shockPriority: 0,
 
     xpMultiplier: 0,
   },
@@ -58,6 +67,7 @@ export const ZERO_UNIT: Unit = {
   flags: {
     isActive: false,
     isHexed: false,
+    isHidden: false,
     isProtected: false,
     isInspected: false,
     isStunned: false,

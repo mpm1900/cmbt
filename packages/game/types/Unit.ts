@@ -21,10 +21,14 @@ export type StatKey =
   | 'attack'
   | 'magic'
   | 'xpMultiplier'
-  | `${AttackType}Negation`
+  | 'priority'
+  | 'nonDamagePriority'
   | `${AttackType}Expansion`
-  | `${DamageType}Negation`
+  | `${AttackType}Negation`
+  | `${AttackType}Priority`
   | `${DamageType}Expansion`
+  | `${DamageType}Negation`
+  | `${DamageType}Priority`
 
 export type Stats = Record<StatKey, number>
 export type ValueKey =
@@ -38,6 +42,7 @@ export type Values = Record<ValueKey, number>
 export type FlagKey =
   | 'isActive'
   | 'isHexed'
+  | 'isHidden'
   | 'isInspected'
   | 'isProtected'
   | 'isStunned'

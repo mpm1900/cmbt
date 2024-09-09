@@ -12,7 +12,10 @@ export function RunningTurn() {
     user: s.user,
   }))
   const renderer = ActionRenderers[result?.action?.id ?? '']
-  const logTargets = result?.expandedTargets ?? result?.targets ?? []
+  const logTargets =
+    ((result?.expandedTargets ?? []).length === 0
+      ? result?.targets
+      : result?.expandedTargets) ?? []
   if (!result) return null
 
   if (renderer.log && result.action) {

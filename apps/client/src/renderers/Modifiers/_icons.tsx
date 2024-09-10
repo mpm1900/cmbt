@@ -1,8 +1,10 @@
 import {
   AttackDownParentId,
+  AttackStageDownParentId,
+  AttackStageUpParentId,
   AttackUpParentId,
-  AttackUpPlusParentId,
   DefenseDownParentId,
+  DefenseStageUpParentId,
   DefneseUpParentId,
   DisabledParentId,
   DivineHealingId,
@@ -10,10 +12,12 @@ import {
   FireNegationUpParentId,
   HealParentOnUnitSwitchId,
   HexedParentId,
+  HiddenParentId,
   InspectedAllId,
   PowerStanceId,
   ProtectedParentId,
   SandstormOnTurnEndId,
+  SpeedStageUpParentId,
   SpeedUpParentId,
   SpeedUpTeamId,
   StunnedParentId,
@@ -23,6 +27,7 @@ import { ReactNode } from 'react'
 import {
   AiFillCaretDown,
   AiFillCaretUp,
+  AiOutlineEyeInvisible,
   AiOutlineUserSwitch,
 } from 'react-icons/ai'
 import { BiSearch } from 'react-icons/bi'
@@ -60,6 +65,15 @@ export const MODIFIER_ICONS: Record<Id, ReactNode> = {
       />
     </div>
   ),
+  [DefenseStageUpParentId]: (
+    <div className="h-full w-full relative">
+      <GiCrenulatedShield className="fill-white h-full w-full" />
+      <AiFillCaretUp
+        className="absolute fill-green-400 h-[24px] w-[24px]"
+        style={{ bottom: -6, right: -6 }}
+      />
+    </div>
+  ),
   [FireDamageUpParentId]: (
     <div className="h-full w-full relative">
       <BsFire className="fill-white h-full w-full" />
@@ -87,6 +101,15 @@ export const MODIFIER_ICONS: Record<Id, ReactNode> = {
       />
     </div>
   ),
+  [AttackStageDownParentId]: (
+    <div className="h-full w-full relative">
+      <GiBiceps className="fill-white h-full w-full" />
+      <AiFillCaretDown
+        className="absolute fill-red-400 h-[24px] w-[24px]"
+        style={{ bottom: -6, right: -6 }}
+      />
+    </div>
+  ),
   [AttackUpParentId]: (
     <div className="h-full w-full relative">
       <GiBiceps className="fill-white h-full w-full" />
@@ -96,7 +119,7 @@ export const MODIFIER_ICONS: Record<Id, ReactNode> = {
       />
     </div>
   ),
-  [AttackUpPlusParentId]: (
+  [AttackStageUpParentId]: (
     <div className="h-full w-full relative">
       <GiBiceps className="fill-white h-full w-full" />
       <AiFillCaretUp
@@ -115,6 +138,15 @@ export const MODIFIER_ICONS: Record<Id, ReactNode> = {
   ),
   [StunnedParentId]: <TiSpiral className="fill-red-200 h-full w-full" />,
   [SpeedUpParentId]: (
+    <div className="h-full w-full relative">
+      <GiSprint className="fill-white h-full w-full" />
+      <AiFillCaretUp
+        className="absolute fill-green-400 h-[24px] w-[24px]"
+        style={{ bottom: -6, right: -6 }}
+      />
+    </div>
+  ),
+  [SpeedStageUpParentId]: (
     <div className="h-full w-full relative">
       <GiSprint className="fill-white h-full w-full" />
       <AiFillCaretUp
@@ -149,6 +181,11 @@ export const MODIFIER_ICONS: Record<Id, ReactNode> = {
   [HexedParentId]: (
     <div>
       <MdOutlineHexagon className="fill-white h-full w-full" />
+    </div>
+  ),
+  [HiddenParentId]: (
+    <div>
+      <AiOutlineEyeInvisible className="fill-white h-full w-full" />
     </div>
   ),
   [DivineHealingId]: (

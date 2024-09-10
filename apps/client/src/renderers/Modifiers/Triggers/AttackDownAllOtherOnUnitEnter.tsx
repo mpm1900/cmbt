@@ -1,4 +1,8 @@
-import { AttackDownParentId, UpdateStatParent } from '@repo/game/data'
+import {
+  AttackStageDownParentId,
+  UpdateStatParent,
+  UpdateStatStageParent,
+} from '@repo/game/data'
 import { ModifierInline } from '@shared/ModifierInline'
 import { MODIFIER_NAMES, ModifierRenderer } from '..'
 import { ModifierName, TriggerName } from '../_helpers'
@@ -14,10 +18,10 @@ export const AttackDownAllOtherOnUnitEnterRenderer: ModifierRenderer = {
           Applies{' '}
           <ModifierInline
             modifier={
-              new UpdateStatParent({
+              new UpdateStatStageParent({
                 stat: 'attack',
-                registryId: AttackDownParentId,
-                factor: modifier.factor * -1,
+                registryId: AttackStageDownParentId,
+                offset: -1,
               })
             }
           />{' '}

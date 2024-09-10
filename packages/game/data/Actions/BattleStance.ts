@@ -9,13 +9,17 @@ import {
 } from '../../types'
 import { buildActionResult, getActionData } from '../../utils'
 import { modifyRenderContext } from '../../utils/modifyRenderContext'
-import { AttackUpParentId, BattleStanceId, DefneseUpParentId } from '../Ids'
-import { UpdateStatParent } from '../Modifiers'
+import {
+  AttackStageUpParentId,
+  BattleStanceId,
+  DefenseStageUpParentId,
+} from '../Ids'
+import { UpdateStatStageParent } from '../Modifiers'
 import { Identity } from '../Mutations'
 import { EmptyArray } from '../Queries/EmptyArray'
 
 export class BattleStance extends Action {
-  factor: number = 0.5
+  offset = 1
 
   constructor(sourceId: Id, teamId: Id) {
     super(BattleStanceId, {
@@ -52,21 +56,19 @@ export class BattleStance extends Action {
       (modifiedTargets) => ({
         onSuccess: {
           addedModifiers: [
-            new UpdateStatParent({
-              registryId: AttackUpParentId,
+            new UpdateStatStageParent({
+              registryId: AttackStageUpParentId,
               stat: 'attack',
               sourceId: source.id,
               parentId: source.id,
-              factor: this.factor,
-              maxInstances: 1,
+              offset: this.offset,
             }),
-            new UpdateStatParent({
-              registryId: DefneseUpParentId,
+            new UpdateStatStageParent({
+              registryId: DefenseStageUpParentId,
               stat: 'defense',
               sourceId: source.id,
               parentId: source.id,
-              factor: this.factor,
-              maxInstances: 1,
+              offset: this.offset,
             }),
           ],
         },

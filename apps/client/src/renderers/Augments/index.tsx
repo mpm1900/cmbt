@@ -2,6 +2,7 @@ import {
   DamageAllOnTurnEnd,
   DivineHealingId,
   FlameShieldId,
+  HiddenId,
   IntimidateId,
   RegenerationId,
   RubyAugmentId,
@@ -27,6 +28,9 @@ export const AugmentRenderers: Record<Id, AugmentRenderer> = {
   },
   [FlameShieldId]: {
     name: <div className="text-white">{AUGMENT_NAMES[FlameShieldId]}</div>,
+  },
+  [HiddenId]: {
+    name: <div className="text-white">{AUGMENT_NAMES[HiddenId]}</div>,
   },
   [IntimidateId]: {
     name: <div className="text-white">{AUGMENT_NAMES[IntimidateId]}</div>,

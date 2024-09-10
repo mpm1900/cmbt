@@ -5,13 +5,16 @@ import {
   TriggerProps,
   Unit,
 } from '../../types'
-import { AttackDownAllOtherOnUnitEnterId, AttackDownParentId } from '../Ids'
-import { UpdateStatParent } from '../Modifiers'
+import {
+  AttackDownAllOtherOnUnitEnterId,
+  AttackStageDownParentId,
+} from '../Ids'
+import { UpdateStatStageParent } from '../Modifiers'
 
 export class AttackDownAllOtherOnUnitEnter extends Trigger {
-  private factor: number
+  private offset: number
 
-  constructor(props: TriggerProps<{ factor: number }>) {
+  constructor(props: TriggerProps<{ offset: number }>) {
     super(AttackDownAllOtherOnUnitEnterId, {
       ...props,
       events: ['on Unit Enter'],
@@ -21,16 +24,17 @@ export class AttackDownAllOtherOnUnitEnter extends Trigger {
           .filter((u) => super.filter(u, ctx, {}) && u.id !== props.sourceId)
           .map(
             (u) =>
-              new UpdateStatParent({
+              new UpdateStatStageParent({
                 stat: 'attack',
-                registryId: AttackDownParentId,
+                registryId: AttackStageDownParentId,
                 sourceId: props.sourceId,
                 parentId: u.id,
-                factor: this.factor * -1,
+                offset: props.offset,
               })
           ),
     })
-    this.factor = props.factor
+
+    this.offset = props.offset
   }
 
   filter = (

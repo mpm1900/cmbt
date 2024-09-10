@@ -1,6 +1,7 @@
 import {
   DivineHealingId,
   FlameShieldId,
+  HiddenId,
   IntimidateId,
   RegenerationId,
   RubyAugmentId,
@@ -14,6 +15,7 @@ export const AUGMENT_NAMES: Record<Id, string> = {
 
   [DivineHealingId]: 'Divine Healing',
   [FlameShieldId]: 'Flame Shield',
+  [HiddenId]: 'Hidden',
   [IntimidateId]: 'Intimidate',
   [RegenerationId]: 'Regeneration',
   [SandStreamId]: 'Sand Stream',

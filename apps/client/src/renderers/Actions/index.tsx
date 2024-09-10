@@ -2,7 +2,7 @@ import { LogUnit } from '@/components/ui/log'
 import {
   ArmorUp,
   ArmorUpId,
-  AttackUpPlusParentId,
+  AttackStageUpParentId,
   BattleStanceId,
   BiteId,
   BodySlam,
@@ -52,6 +52,7 @@ import {
   QuickAttackId,
   Rest,
   RestId,
+  RetreatingBlowId,
   Sandstorm,
   SandstormId,
   SandstormOnTurnEndId,
@@ -69,17 +70,12 @@ import {
   TrickRoomId,
   UpdateFlagParent,
   UpdateStatParent,
+  UpdateStatStageParent,
   Ward,
   WardId,
   WillOWispId,
 } from '@repo/game/data'
-import {
-  Action,
-  ActionResult,
-  CombatContext,
-  Damage,
-  Unit,
-} from '@repo/game/types'
+import { Action, ActionResult, CombatContext, Unit } from '@repo/game/types'
 import { DamageInline } from '@shared/DamageInline'
 import { MagicArmor } from '@shared/MagicArmor'
 import { ModifierInline } from '@shared/ModifierInline'
@@ -96,6 +92,7 @@ import { MindShatterRenderer } from './MindShatter'
 import { NegateArmorRenderer } from './NegateArmor'
 import { PowerCleaveRenderer } from './PowerCleave'
 import { PowerStanceRenderer } from './PowerStance'
+import { RetreatingBlowRenderer } from './RetreatingBlow'
 import { TauntRenderer } from './Taunt'
 import { ThunderboltRenderer } from './Thunderbolt'
 
@@ -131,6 +128,7 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
   [NegateArmorId]: NegateArmorRenderer,
   [PowerCleaveId]: PowerCleaveRenderer,
   [PowerStanceId]: PowerStanceRenderer,
+  [RetreatingBlowId]: RetreatingBlowRenderer,
   [TauntId]: TauntRenderer,
   [ThunderboltId]: ThunderboltRenderer,
   /// SYSTEM ACTIONS
@@ -355,19 +353,15 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
     costAlt: <span className="text-blue-300">30 FP</span>,
     description: (action, props) => {
       const hyperbeam = action as HyperBeam
-      const d: Damage = {
-        damageType: 'force',
-        attackType: 'magic',
-        power: 0,
-      }
       return (
         <div>
-          Deals <DamageInline damage={d} /> equal to twice this unit's magic
-          stat to target enemy unit. Applies{' '}
+          Deals <DamageInline damage={hyperbeam.damage} /> equal to twice this
+          unit's magic stat to target enemy unit. Applies{' '}
           <ModifierInline
             side={props?.side}
             modifier={
               new UpdateFlagParent({
+                registryId: StunnedParentId,
                 flagKey: 'isStunned',
                 value: true,
                 duration: hyperbeam.stunDuration,
@@ -388,7 +382,6 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
         {action.priority !== 0 && <> Priority {action.priority}.</>}
       </>
     ),
-    help: () => <>(The unit's speed stat is reduced by 10.)</>,
   },
   [MagicMissileId]: {
     name: 'Magic Missile',
@@ -554,10 +547,10 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
           <ModifierInline
             side={props?.side}
             modifier={
-              new UpdateStatParent({
-                registryId: AttackUpPlusParentId,
+              new UpdateStatStageParent({
+                registryId: AttackStageUpParentId,
                 stat: 'attack',
-                factor: swordsDance.factor,
+                offset: swordsDance.offset,
               })
             }
           />{' '}

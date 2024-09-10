@@ -1,9 +1,9 @@
 import {
-  AttackUpParentId,
+  AttackStageUpParentId,
   BattleStance,
   BattleStanceId,
-  DefneseUpParentId,
-  UpdateStatParent,
+  DefenseStageUpParentId,
+  UpdateStatStageParent,
 } from '@repo/game/data'
 import { ModifierInline } from '@shared/ModifierInline'
 import { ACTION_NAMES, ActionRenderer } from '.'
@@ -18,10 +18,10 @@ export const BattleStanceRenderer: ActionRenderer = {
         <ModifierInline
           side={props?.side}
           modifier={
-            new UpdateStatParent({
-              registryId: AttackUpParentId,
+            new UpdateStatStageParent({
+              registryId: AttackStageUpParentId,
               stat: 'attack',
-              factor: battlestance.factor,
+              offset: battlestance.offset,
             })
           }
         />
@@ -29,10 +29,10 @@ export const BattleStanceRenderer: ActionRenderer = {
         <ModifierInline
           side={props?.side}
           modifier={
-            new UpdateStatParent({
-              registryId: DefneseUpParentId,
+            new UpdateStatStageParent({
+              registryId: DefenseStageUpParentId,
               stat: 'defense',
-              factor: battlestance.factor,
+              offset: battlestance.offset,
             })
           }
         />{' '}

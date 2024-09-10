@@ -9,13 +9,13 @@ import {
 } from '../../types'
 import { buildActionResult, getActionData } from '../../utils'
 import { modifyRenderContext } from '../../utils/modifyRenderContext'
-import { AttackUpPlusParentId, SwordsDanceId } from '../Ids'
-import { UpdateStatParent } from '../Modifiers'
+import { AttackStageUpParentId, SwordsDanceId } from '../Ids'
+import { UpdateStatStageParent } from '../Modifiers'
 import { Identity } from '../Mutations'
 import { EmptyArray } from '../Queries/EmptyArray'
 
 export class SwordsDance extends Action {
-  factor: number = 1.0
+  offset = 2
 
   constructor(sourceId: Id, teamId: Id) {
     super(SwordsDanceId, {
@@ -52,13 +52,12 @@ export class SwordsDance extends Action {
       (modifiedTargets) => ({
         onSuccess: {
           addedModifiers: [
-            new UpdateStatParent({
-              registryId: AttackUpPlusParentId,
+            new UpdateStatStageParent({
+              registryId: AttackStageUpParentId,
               stat: 'attack',
               sourceId: source.id,
               parentId: source.id,
-              factor: this.factor,
-              maxInstances: 1,
+              offset: 2,
             }),
           ],
         },

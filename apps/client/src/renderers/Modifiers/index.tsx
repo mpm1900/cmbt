@@ -9,6 +9,7 @@ import {
   HealParentOnTurnEndId,
   HealParentOnUnitSwitchId,
   HexedParentId,
+  HiddenParentId,
   InspectAllOnUnitEnterId,
   InspectedAll,
   InspectedAllId,
@@ -16,6 +17,7 @@ import {
   ProtectedParentId,
   StunnedParentId,
   UpdateStatParentId,
+  UpdateStatStageParentId,
 } from '@repo/game/data'
 import { Modifier } from '@repo/game/types'
 import { ModifierInline } from '@shared/ModifierInline'
@@ -25,6 +27,7 @@ import { MODIFIER_NAMES } from './_names'
 import { AddActionParentRenderer } from './AddActionParent'
 import { DisabledParentRenderer } from './DisabledParent'
 import { HexedParentRenderer } from './HexedParent'
+import { HiddenParentRenderer } from './HiddenParent'
 import { InspectedAllRenderer } from './InspectedAll'
 import { InvertSpeedAllRenderer } from './InvertSpeedAll'
 import { ProtectedParentRenderer } from './ProtectedParent'
@@ -37,6 +40,7 @@ import { DamageParentOnTurnEndRenderer } from './Triggers/DamageParentOnTurnEnd'
 import { HealParentOnTurnEndRenderer } from './Triggers/HealParentOnTurnEnd'
 import { HealParentOnUnitSwitchRenderer } from './Triggers/HealParentOnUnitSwitch'
 import { UpdateStatParentRenderer } from './UpdateStatParent'
+import { UpdateStatStageParentRenderer } from './UpdateStatStageParent'
 
 export * from './_icons'
 export * from './_names'
@@ -50,11 +54,13 @@ export const ModifierRenderers: Record<string, ModifierRenderer> = {
   [AddActionParentId]: AddActionParentRenderer,
   [DisabledParentId]: DisabledParentRenderer,
   [HexedParentId]: HexedParentRenderer,
+  [HiddenParentId]: HiddenParentRenderer,
   [InspectedAllId]: InspectedAllRenderer,
   [InvertSpeedAllId]: InvertSpeedAllRenderer,
   [ProtectedParentId]: ProtectedParentRenderer,
   [StunnedParentId]: StunnedParentRenderer,
   [UpdateStatParentId]: UpdateStatParentRenderer,
+  [UpdateStatStageParentId]: UpdateStatStageParentRenderer,
 
   // Triggers
   [AttackDownAllOtherOnUnitEnterId]: AttackDownAllOtherOnUnitEnterRenderer,

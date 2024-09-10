@@ -1,21 +1,22 @@
 import { Augment, Modifier, Mutation, Unit } from '../../types'
-import { IntimidateId } from '../Ids'
-import { AttackDownAllOtherOnUnitEnter } from '../Triggers'
+import { HiddenId, HiddenParentId } from '../Ids'
+import { UpdateFlagParent } from '../Modifiers'
 
-export const Intimidate: Augment = {
-  id: IntimidateId,
-  name: 'Intimidate',
+export const Hidden: Augment = {
+  id: HiddenId,
+  name: 'Hidden',
 
   modifiers(unit: Unit): Modifier[] {
     return [
-      new AttackDownAllOtherOnUnitEnter({
+      new UpdateFlagParent({
+        registryId: HiddenParentId,
+        flagKey: 'isHidden',
+        value: true,
         sourceId: unit.id,
         parentId: unit.id,
         maxInstances: 1,
         persistOnCombatEnd: true,
         persistOnSwitch: true,
-        offset: -1,
-        duration: 0,
       }),
     ]
   },

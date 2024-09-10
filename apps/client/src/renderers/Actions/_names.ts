@@ -28,6 +28,7 @@ import {
   ProtectId,
   QuickAttackId,
   RestId,
+  RetreatingBlowId,
   SandstormId,
   SetIsActiveId,
   SlashId,
@@ -83,6 +84,7 @@ export const ACTION_NAMES: Record<string, string> = {
   [NegateArmorId]: 'Negate Armor',
   [PowerCleaveId]: 'Power Cleave',
   [PowerStanceId]: 'Power Stance',
+  [RetreatingBlowId]: 'Retreating Blow',
   [TauntId]: 'Taunt',
   [ThunderboltId]: 'Thunderbolt',
 }

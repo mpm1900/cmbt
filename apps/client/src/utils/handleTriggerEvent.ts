@@ -19,7 +19,7 @@ export function handleTriggerEvent(
 ): ActionResult {
   args = args ?? {}
   const triggers = validateModifiers(
-    getTriggersByEvent(ctx.modifiers, event),
+    getTriggersByEvent(ctx.modifiers, event, ctx, args),
     []
   ) as Trigger[]
   const result: ActionResult = {

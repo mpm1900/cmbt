@@ -1,7 +1,6 @@
 import { LogSecondary, LogUnit } from '@/components/ui/log'
 import { CombatLogger } from '@/hooks/state'
 import { CombatContext, Modifier, MutationFilterArgs } from '@repo/game/types'
-import { validateModifiers } from '@repo/game/utils'
 import { ModifierInline } from '@shared/ModifierInline'
 import { StatusInline } from '@shared/StatusInline'
 import { TextList } from '@shared/TextList'
@@ -19,14 +18,15 @@ export function logModifiers(
   )
   units.forEach((unit, index) => {
     const unitHasModifier = (modifier: Modifier) =>
-      !!unit.modifiers().find((m) => m.rtid === modifier.rtid)
+      unit.modifiers().some((m) => m.rtid === modifier.rtid)
 
-    const unitModifiers = validateModifiers(
-      modifiers.filter((m) => m.filter(unit, ctx, args) && !unitHasModifier(m)),
-      ctx.modifiers
+    // NOTE: this used to be wraped in a validatModifiers() call
+    const unitModifiers = modifiers.filter(
+      (m) => m.filter(unit, ctx, args) && !unitHasModifier(m)
     )
+
     const nonStatusModifiers = unitModifiers.filter((m) => !m.statusId)
-    const statuses = getStatusesFromModifiers(modifiers)
+    const statuses = getStatusesFromModifiers(unitModifiers)
 
     if (nonStatusModifiers.length > 0) {
       log(

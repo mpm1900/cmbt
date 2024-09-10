@@ -39,8 +39,8 @@ export abstract class Mutation {
     const isImmune =
       unit.registry.modifiers.includes(this.registryId) ||
       unit.registry.modifiers.includes(this.id)
-    const isActive = unit.flags.isActive
-    return isActive && !isImmune
+
+    return !isImmune
   }
 
   static setStats(unit: Unit, fn: (stats: Stats) => Partial<Stats>): Stats {

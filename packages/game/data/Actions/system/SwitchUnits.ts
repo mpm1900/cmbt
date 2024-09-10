@@ -67,17 +67,6 @@ export class SwitchUnit extends Action {
       addedModifiers: getModifiersFromUnit(target),
       addedUnits: [target],
       removedUnits: [source],
-      /* below is for baton pass
-      updateModifiers: (modifiers) => {
-        return modifiers
-          .map((modifier) => {
-            if (modifier.parentId === this.sourceId) {
-              modifier.parentId = target.id
-            }
-            return modifier
-          })
-      },
-       */
 
       // change targets from old unit to new unit
       updateActionQueue: (queue) => {

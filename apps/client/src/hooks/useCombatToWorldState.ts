@@ -26,6 +26,15 @@ export function useCombatToWorldState() {
       const combatUnit = combat.units.find((u) => u.id === unit.id)
       if (!combatUnit) return unit
 
+      if (combatUnit.flags.isActive) {
+        combatUnit.modifiers = () => [
+          ...unit.modifiers(),
+          ...ctx.modifiers.filter(
+            (m) => m.parentId === combatUnit.id && m.persistOnSwitch
+          ),
+        ]
+      }
+
       const modified = applyModifiers(combatUnit, ctx).unit
       const result = getExperienceResult(
         unit.level,
@@ -33,6 +42,9 @@ export function useCombatToWorldState() {
         (reward.xp * modified.stats.xpMultiplier) / 100
       )
       const isDead = modified.values.damage >= modified.stats.health
+      const modifiers =
+        combatUnit.modifiers().filter((m) => m.persistOnCombatEnd) ?? []
+
       const resultUnit = rebuildUnit({
         ...unit,
         level: result.level,
@@ -41,13 +53,13 @@ export function useCombatToWorldState() {
           ...combatUnit.values,
           damage: isDead ? combatUnit.stats.health : combatUnit.values.damage,
         },
-        modifiers: () =>
-          combatUnit?.modifiers().filter((m) => m.persistOnCombatEnd) ?? [],
+        modifiers: () => modifiers,
       })
       resultUnit.values = {
         ...resultUnit.values,
         damage: isDead ? resultUnit.stats.health : resultUnit.values.damage,
       }
+
       return resultUnit
     })
   }

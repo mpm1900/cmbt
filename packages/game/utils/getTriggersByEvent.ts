@@ -1,10 +1,23 @@
-import { Modifier, Trigger, TriggerEvent } from '../types'
+import {
+  CombatContext,
+  Modifier,
+  MutationFilterArgs,
+  Trigger,
+  TriggerEvent,
+} from '../types'
 
 export function getTriggersByEvent(
   modifiers: Modifier[],
-  event: TriggerEvent
+  event: TriggerEvent,
+  ctx: CombatContext,
+  args?: MutationFilterArgs
 ): Trigger[] {
+  args = args || {}
   return modifiers
     .filter((m) => m instanceof Trigger)
-    .filter((t) => t.events.includes(event))
+    .filter(
+      (t) =>
+        t.events.includes(event) &&
+        ctx.units.some((u) => t.filter(u, ctx, args))
+    )
 }

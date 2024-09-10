@@ -14,7 +14,7 @@ export function Sidebar() {
             </TabsList>
           </div>
           <div className="flex flex-1 overflow-auto w-full h-full">
-            <TabsContent value="log">
+            <TabsContent value="log" className="w-full">
               <CombatLog />
             </TabsContent>
             <TabsContent value="mods" className="w-full">

@@ -1,4 +1,4 @@
-import { Id, Unit } from '.'
+import { Id, MutationFilterArgs, Unit } from '.'
 import { CombatContext } from './CombatContext'
 import { Modifier, ModifierProps } from './Modifier'
 
@@ -38,5 +38,9 @@ export abstract class Trigger extends Modifier {
 
   resolve(unit: Unit): Partial<Unit> {
     return {}
+  }
+
+  filter(unit: Unit, ctx: CombatContext, args: MutationFilterArgs): boolean {
+    return super.filter(unit, ctx, args) && unit.flags.isActive
   }
 }

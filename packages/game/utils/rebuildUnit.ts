@@ -7,7 +7,6 @@ export function rebuildUnit(unit: Unit): Unit {
   if (!base) return unit
   return {
     ...unit,
-    // TODO : level exp stuff
     stats: {
       ...unit.stats,
       health: mapBaseStat('health', base.stats.health, unit.level),

@@ -42,6 +42,11 @@ export class AttackDownAllOtherOnUnitEnter extends Trigger {
     ctx: CombatContext,
     args: MutationFilterArgs
   ): boolean => {
-    return super.filter(unit, ctx, args) && unit.id === this.sourceId
+    const newUnits = args.units
+    return (
+      super.filter(unit, ctx, args) &&
+      !!newUnits?.find((u) => u.id === this.sourceId) &&
+      unit.id === this.sourceId
+    )
   }
 }

@@ -32,7 +32,7 @@ export function RunningTurn() {
         <div className="text-3xl text-muted-foreground">
           <LogUnit
             user={user}
-            teamId={result.data.source.teamId}
+            unit={result.data.source}
             className="font-thin opacity-60"
           >
             {result.data.source.name}
@@ -44,7 +44,7 @@ export function RunningTurn() {
             on{' '}
             <TextList>
               {logTargets.map((t) => (
-                <LogUnit key={t.id} teamId={t.teamId} user={user}>
+                <LogUnit key={t.id} unit={t} user={user}>
                   {t.name}
                 </LogUnit>
               ))}

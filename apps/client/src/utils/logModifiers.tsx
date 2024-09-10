@@ -31,7 +31,7 @@ export function logModifiers(
     if (nonStatusModifiers.length > 0) {
       log(
         <LogSecondary className="italic">
-          <LogUnit teamId={unit.teamId} user={ctx.user} className="opacity-70">
+          <LogUnit unit={unit} user={ctx.user} className="opacity-70">
             {unit.name}
           </LogUnit>{' '}
           gained{' '}
@@ -54,7 +54,7 @@ export function logModifiers(
     if (statuses.length > 0) {
       log(
         <LogSecondary className="italic">
-          <LogUnit teamId={unit.teamId} user={ctx.user} className="opacity-70">
+          <LogUnit unit={unit} user={ctx.user} className="opacity-70">
             {unit.name}
           </LogUnit>{' '}
           gained{' '}

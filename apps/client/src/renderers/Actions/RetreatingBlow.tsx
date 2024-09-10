@@ -12,4 +12,7 @@ export const RetreatingBlowRenderer: ActionRenderer = {
       </div>
     )
   },
+  failureLog: (result) => {
+    return <>Cannot retreat. Attack failed.</>
+  },
 }

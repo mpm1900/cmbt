@@ -14,6 +14,7 @@ import {
   getActionData,
   getDamageAi,
   getMutationsFromDamageResult,
+  isUnitAliveCtx,
   modifyRenderContext,
 } from '../../utils'
 import { RetreatingBlowId } from '../Ids'
@@ -72,26 +73,32 @@ export class RetreatingBlow extends Action {
       source,
       targets,
       ctx,
-      (modifiedTargets) => ({
-        onSuccess: {
-          mutations: modifiedTargets.flatMap((target) => {
-            const damage = calculateDamage(
-              this.damage,
-              data.source,
-              target,
-              data.accuracyRoll
-            )
-            return [
-              ...getMutationsFromDamageResult(source, target, damage),
-              new SetIsActiveParent({
-                sourceId: source.id,
-                parentId: source.id,
-                isActive: false,
-              }),
-            ]
-          }),
-        },
-      })
+      (modifiedTargets) => {
+        const inactiveLiveAllies = ctx.units.filter(
+          (u) => !u.flags.isActive && isUnitAliveCtx(u.id, ctx)
+        )
+        return {
+          forceFailure: inactiveLiveAllies.length === 0,
+          onSuccess: {
+            mutations: modifiedTargets.flatMap((target) => {
+              const damage = calculateDamage(
+                this.damage,
+                data.source,
+                target,
+                data.accuracyRoll
+              )
+              return [
+                ...getMutationsFromDamageResult(source, target, damage),
+                new SetIsActiveParent({
+                  sourceId: source.id,
+                  parentId: source.id,
+                  isActive: false,
+                }),
+              ]
+            }),
+          },
+        }
+      }
     )
   }
 }

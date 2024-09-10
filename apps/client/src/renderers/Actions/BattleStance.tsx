@@ -3,6 +3,7 @@ import {
   BattleStance,
   BattleStanceId,
   DefenseStageUpParentId,
+  SpeedStageDownParentId,
   UpdateStatStageParent,
 } from '@repo/game/data'
 import { ModifierInline } from '@shared/ModifierInline'
@@ -25,7 +26,7 @@ export const BattleStanceRenderer: ActionRenderer = {
             })
           }
         />
-        {' and '}
+        {', '}
         <ModifierInline
           side={props?.side}
           modifier={
@@ -33,6 +34,17 @@ export const BattleStanceRenderer: ActionRenderer = {
               registryId: DefenseStageUpParentId,
               stat: 'defense',
               offset: battlestance.offset,
+            })
+          }
+        />
+        {' and '}
+        <ModifierInline
+          side={props?.side}
+          modifier={
+            new UpdateStatStageParent({
+              registryId: SpeedStageDownParentId,
+              stat: 'speed',
+              offset: battlestance.offset * -1,
             })
           }
         />{' '}

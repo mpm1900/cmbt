@@ -30,7 +30,7 @@ export function logTriggers(
         <div className="text-muted-foreground">
           {parent && (
             <LogUnit
-              teamId={parent.teamId}
+              unit={parent}
               user={ctx.user}
               className="opacity-70 font-normal"
             >

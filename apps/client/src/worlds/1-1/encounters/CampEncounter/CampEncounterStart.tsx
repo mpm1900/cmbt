@@ -1,11 +1,10 @@
 import { ChoiceAttributes } from '@/components/encounter/ChoiceAttributes'
 import { Narration } from '@/components/encounter/Narration'
 import { Quote } from '@/components/encounter/Quote'
-import { check, choice } from '@/worlds/_utils'
+import { check, choice, initializeNpcCombat } from '@/worlds/_utils'
 import { Separator } from '@radix-ui/react-menubar'
-import { Celebi, TeamId } from '@repo/game/data'
-import { EncounterChoice, EncounterNode, Team } from '@repo/game/types'
-import { makeEnemyUnit } from '@repo/game/utils'
+import { Celebi } from '@repo/game/data'
+import { EncounterChoice, EncounterNode } from '@repo/game/types'
 import { nanoid } from 'nanoid'
 import { GiCreditsCurrency } from 'react-icons/gi'
 import { IoMdReturnLeft } from 'react-icons/io'
@@ -16,13 +15,6 @@ import { ChibleeId, ChibleeValues } from '../../npcs/Chiblee'
 import { CampEncounterActions } from './Actions'
 import { CampEncounterShopId } from './CampEncounterShop'
 import { CampEncounterTabs } from './Tabs'
-
-const enemyTeam: Team = {
-  id: TeamId(),
-  resources: { credits: 0 },
-  items: [],
-  maxActiveUnits: 2,
-}
 
 export const CampEncounterStartId = nanoid()
 export const CampEncounterStart: EncounterNode = {
@@ -120,31 +112,15 @@ export const CampEncounterStart: EncounterNode = {
         label: <>Attack {npc!.name}</>,
         action: true,
         resolve: (ctx) => {
-          ctx.initializeCombat({
-            enemyTeam,
-            enemyUnits: Array.from({ length: 1 }).map(() => {
-              const unit = makeEnemyUnit({ level: 40, teamId: enemyTeam.id }, [
-                Celebi,
-              ])
-              unit.name = npc?.name ?? unit.name
-              return unit
-            }),
-            reward: {
-              items: npc?.items ?? [],
-              resources: {
-                credits: 200,
+          initializeNpcCombat({
+            npcs: [npc!],
+            configs: {
+              [npc!.id]: {
+                bases: [Celebi],
               },
-              xp: 5555,
             },
-            onSuccess: () => {
-              ctx.updateActiveWorldNode((n) => ({
-                completed: true,
-                visited: true,
-                repeatable: false,
-              }))
-              ctx.nav('/world')
-            },
-            onFailure: () => {},
+            xp: 5555,
+            ctx,
           })
         },
       }),

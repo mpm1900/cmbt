@@ -59,7 +59,7 @@ export function logMutationDiffs(
   ) {
     log(
       <LogSecondary className="italic">
-        <LogUnit teamId={parent?.teamId} user={ctx.user} className="opacity-70">
+        <LogUnit unit={parent} user={ctx.user} className="opacity-70">
           {name}
         </LogUnit>{' '}
         resisted all damage.
@@ -70,7 +70,7 @@ export function logMutationDiffs(
   if (damageDiff !== 0) {
     log(
       <LogSecondary className="italic">
-        <LogUnit teamId={parent?.teamId} user={ctx.user} className="opacity-70">
+        <LogUnit unit={parent} user={ctx.user} className="opacity-70">
           {name}
         </LogUnit>{' '}
         {damageDiff > 0 ? 'lost' : 'healed'}{' '}
@@ -85,7 +85,7 @@ export function logMutationDiffs(
   if (pArmorDiff !== 0) {
     log(
       <LogSecondary className="italic">
-        <LogUnit teamId={parent?.teamId} user={ctx.user} className="opacity-70">
+        <LogUnit unit={parent} user={ctx.user} className="opacity-70">
           {name}
         </LogUnit>{' '}
         {pArmorDiff > 0 ? 'gained' : 'lost'} {Math.abs(pArmorDiff)} physical
@@ -97,7 +97,7 @@ export function logMutationDiffs(
   if (mArmorDiff !== 0) {
     log(
       <LogSecondary className="italic">
-        <LogUnit teamId={parent?.teamId} user={ctx.user} className="opacity-70">
+        <LogUnit unit={parent} user={ctx.user} className="opacity-70">
           {name}
         </LogUnit>{' '}
         {mArmorDiff > 0 ? 'gained' : 'lost'} {Math.abs(mArmorDiff)} magic armor.
@@ -108,7 +108,7 @@ export function logMutationDiffs(
   if (mutations.some((m) => (m as DamageParent).evasionSuccess)) {
     log(
       <LogSecondary className="italic">
-        <LogUnit teamId={parent?.teamId} user={ctx.user} className="opacity-70">
+        <LogUnit unit={parent} user={ctx.user} className="opacity-70">
           {name}
         </LogUnit>{' '}
         evaded the attack!

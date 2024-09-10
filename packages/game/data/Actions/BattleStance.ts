@@ -13,6 +13,7 @@ import {
   AttackStageUpParentId,
   BattleStanceId,
   DefenseStageUpParentId,
+  SpeedStageDownParentId,
 } from '../Ids'
 import { UpdateStatStageParent } from '../Modifiers'
 import { Identity } from '../Mutations'
@@ -69,6 +70,13 @@ export class BattleStance extends Action {
               sourceId: source.id,
               parentId: source.id,
               offset: this.offset,
+            }),
+            new UpdateStatStageParent({
+              registryId: SpeedStageDownParentId,
+              stat: 'speed',
+              sourceId: source.id,
+              parentId: source.id,
+              offset: this.offset * -1,
             }),
           ],
         },

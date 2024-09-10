@@ -1,7 +1,8 @@
+import { useCombatUi } from '@/hooks/state'
 import { cn } from '@/lib/utils'
 import { ActionRenderers } from '@/renderers'
 import { PropsWithClassname } from '@/types'
-import { Action, Id } from '@repo/game/types'
+import { Action, Id, Unit } from '@repo/game/types'
 import { ActionHover } from '@shared/ActionHover'
 import { PropsWithChildren } from 'react'
 
@@ -71,14 +72,22 @@ export function LogSecondary(props: ElementProps) {
   )
 }
 
-export function LogUnit(props: ElementProps<{ teamId?: Id; user: Id }>) {
+export function LogUnit(props: ElementProps<{ unit: Unit; user: Id }>) {
+  const { setHoverTargetUnit } = useCombatUi()
   return (
     <span
-      className={cn('font-normal', props.className, {
-        'text-muted-foreground font-bold': !props.teamId,
-        'text-orange-300': props.teamId && props.teamId !== props.user,
-        'text-cyan-300': props.teamId === props.user,
-      })}
+      onMouseEnter={() => setHoverTargetUnit(props.unit)}
+      onMouseLeave={() => setHoverTargetUnit(undefined)}
+      className={cn(
+        'font-normal hover:underline cursor-pointer',
+        props.className,
+        {
+          'text-muted-foreground font-bold': !props.unit.teamId,
+          'text-orange-300':
+            props.unit.teamId && props.unit.teamId !== props.user,
+          'text-cyan-300': props.unit.teamId === props.user,
+        }
+      )}
     >
       {props.children}
     </span>

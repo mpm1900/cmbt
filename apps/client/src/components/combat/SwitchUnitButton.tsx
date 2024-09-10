@@ -43,7 +43,7 @@ export function SwitchUnitButton(props: SwitchUnitButtonProps) {
     >
       <div className="flex w-full items-center">
         <span className="text-lg text-left flex-1 text-ellipsis overflow-hidden">
-          {unit.name} ({String(unit.metadata.inactiveTurns)})
+          {unit.name}
         </span>
         {unit.flags.isActive && (
           <Badge variant="default" className="p-1 py-0 0">

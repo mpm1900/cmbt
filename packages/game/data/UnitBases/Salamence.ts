@@ -65,5 +65,11 @@ export const SalamenceConfig: UnitBaseConfig = {
     },
   ],
   defaultAbilityId: IntimidateId,
-  defaultActionIds: [FireballId, FireBlastId, HyperBeamId, SlashId],
+  defaultActionIds: [
+    FireballId,
+    FireBlastId,
+    HyperBeamId,
+    RetreatingBlowId,
+    SlashId,
+  ],
 }

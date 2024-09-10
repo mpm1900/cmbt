@@ -16,7 +16,7 @@ export function logActionIntent(
   if (logTargets) {
     const baseLog = (
       <span className="">
-        <LogUnit teamId={source?.teamId} user={ctx.user}>
+        <LogUnit unit={source!} user={ctx.user}>
           {source?.name}
         </LogUnit>
         {' used '}
@@ -26,7 +26,7 @@ export function logActionIntent(
             {' on '}
             <TextList>
               {logTargets.map((t) => (
-                <LogUnit key={t.id} teamId={t.teamId} user={ctx.user}>
+                <LogUnit key={t.id} unit={t} user={ctx.user}>
                   {t.name}
                 </LogUnit>
               ))}

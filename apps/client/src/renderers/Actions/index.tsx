@@ -141,7 +141,7 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
       <span>
         <TextList>
           {targets.map((target, i) => (
-            <LogUnit key={target.id} teamId={target.teamId} user={ctx.user}>
+            <LogUnit key={target.id} unit={target} user={ctx.user}>
               {target.name}
             </LogUnit>
           ))}
@@ -155,11 +155,11 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
     description: () => <></>,
     log: (_, source, [target], ctx) => (
       <span>
-        <LogUnit teamId={target.teamId} user={ctx.user}>
+        <LogUnit unit={target} user={ctx.user}>
           {target.name}
         </LogUnit>{' '}
         is switched in for{' '}
-        <LogUnit teamId={source?.teamId} user={ctx.user}>
+        <LogUnit unit={source!} user={ctx.user}>
           {source?.name}
         </LogUnit>
       </span>

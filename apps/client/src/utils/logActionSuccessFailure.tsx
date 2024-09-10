@@ -19,7 +19,7 @@ export function logActionSuccessFailure(
     if (result.data?.source?.flags.isHexed) {
       log(
         <LogSecondary>
-          <LogUnit teamId={result.data.source.teamId} user={ctx.user}>
+          <LogUnit unit={result.data.source} user={ctx.user}>
             {result.data.source.name}
           </LogUnit>{' '}
           is hexed.

@@ -1,13 +1,18 @@
 import { ChoiceAttributes } from '@/components/encounter/ChoiceAttributes'
 import { ChoiceLabel } from '@/components/encounter/ChoiceLabel'
 import { ChoiceLog } from '@/components/encounter/ChoiceLog'
+import { TeamId } from '@repo/game/data'
 import {
   EncounterChoice,
   EncounterContext,
   Id,
+  Npc,
+  Team,
+  UnitBase,
   WorldEdge,
   WorldNode,
 } from '@repo/game/types'
+import { makeEnemyUnit } from '@repo/game/utils'
 import { nanoid } from 'nanoid'
 import random from 'random'
 import { ReactNode } from 'react'
@@ -84,7 +89,6 @@ export type CheckProps = {
   onFailure?: (ctx: EncounterContext) => void
   onSettled?: (ctx: EncounterContext) => void
 }
-
 export function check(props: CheckProps): EncounterChoice | undefined {
   if (!props.filter) return undefined
 
@@ -120,5 +124,61 @@ export function check(props: CheckProps): EncounterChoice | undefined {
         props.onSettled(ctx)
       }
     },
+  })
+}
+
+export type NpcConfigs = Record<
+  Id,
+  {
+    bases: UnitBase[]
+  }
+>
+
+export type InitializeNpcCombatProps = {
+  npcs: Npc[]
+  configs: NpcConfigs
+  xp: number
+  ctx: EncounterContext
+  onSuccess?: () => void
+  onFailure?: () => void
+}
+
+export function initializeNpcCombat(props: InitializeNpcCombatProps) {
+  const { npcs, configs, xp, ctx, onFailure, onSuccess } = props
+
+  const enemyTeam: Team = {
+    id: TeamId(),
+    resources: { credits: 0 },
+    items: [],
+    maxActiveUnits: Math.min(npcs.length, 2),
+  }
+
+  ctx.initializeCombat({
+    enemyTeam,
+    enemyUnits: npcs.map((npc) => {
+      const config = configs[npc.id]
+      const unit = makeEnemyUnit(
+        { level: 40, teamId: enemyTeam.id },
+        config.bases
+      )
+      unit.name = npc.name ?? unit.name
+      return unit
+    }),
+    reward: {
+      items: npcs.flatMap((npc) => npc.items),
+      resources: {
+        credits: npcs.reduce((sum, npc) => sum + npc.resources.credits, 0),
+      },
+      xp,
+    },
+    onSuccess: () => {
+      ctx.updateActiveWorldNode((n) => ({
+        completed: true,
+        visited: true,
+        repeatable: false,
+      }))
+      ctx.nav('/world')
+    },
+    onFailure: () => {},
   })
 }

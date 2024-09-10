@@ -1,6 +1,7 @@
 import {
   CombatContext,
   Modifier,
+  MODIFIER_PRIORITIES,
   ModifierProps,
   MutationFilterArgs,
   Unit,
@@ -14,7 +15,7 @@ export class InvertSpeedAll extends Modifier {
 
   constructor(props: ModifierProps) {
     super(InvertSpeedAllId, props)
-    this.priority = -1
+    this.priority = MODIFIER_PRIORITIES.SET
   }
 
   resolve = (unit: Unit): Partial<Unit> => {

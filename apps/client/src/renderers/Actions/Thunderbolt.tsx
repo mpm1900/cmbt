@@ -4,7 +4,6 @@ import { ACTION_NAMES, ActionRenderer } from '.'
 
 export const ThunderboltRenderer: ActionRenderer = {
   name: ACTION_NAMES[ThunderboltId],
-  baseDamage: (action) => `${action.damage?.power}`,
   description: (action, props) => {
     return (
       <div>

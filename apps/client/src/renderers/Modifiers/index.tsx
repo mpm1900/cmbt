@@ -11,7 +11,6 @@ import {
   HexedParentId,
   HiddenParentId,
   InspectAllOnUnitEnterId,
-  InspectedAll,
   InspectedAllId,
   InvertSpeedAllId,
   ProtectedParentId,
@@ -20,10 +19,7 @@ import {
   UpdateStatStageParentId,
 } from '@repo/game/data'
 import { Modifier } from '@repo/game/types'
-import { ModifierInline } from '@shared/ModifierInline'
 import { ReactNode } from 'react'
-import { ModifierName, TriggerName } from './_helpers'
-import { MODIFIER_NAMES } from './_names'
 import { AddActionParentRenderer } from './AddActionParent'
 import { DisabledParentRenderer } from './DisabledParent'
 import { HexedParentRenderer } from './HexedParent'
@@ -39,6 +35,7 @@ import { DamageNewUnitsOnUnitEnterRenderer } from './Triggers/DamageNewUnitsOnUn
 import { DamageParentOnTurnEndRenderer } from './Triggers/DamageParentOnTurnEnd'
 import { HealParentOnTurnEndRenderer } from './Triggers/HealParentOnTurnEnd'
 import { HealParentOnUnitSwitchRenderer } from './Triggers/HealParentOnUnitSwitch'
+import { InspectAllOnUnitEnterRenderer } from './Triggers/InspectAllOnUnitEnterI'
 import { UpdateStatParentRenderer } from './UpdateStatParent'
 import { UpdateStatStageParentRenderer } from './UpdateStatStageParent'
 
@@ -70,18 +67,5 @@ export const ModifierRenderers: Record<string, ModifierRenderer> = {
   [DamageParentOnTurnEndId]: DamageParentOnTurnEndRenderer,
   [HealParentOnTurnEndId]: HealParentOnTurnEndRenderer,
   [HealParentOnUnitSwitchId]: HealParentOnUnitSwitchRenderer,
-  [InspectAllOnUnitEnterId]: {
-    name: () => (
-      <ModifierName>{MODIFIER_NAMES[InspectAllOnUnitEnterId]}</ModifierName>
-    ),
-    description: (modifier: Modifier) => (
-      <div>
-        <TriggerName>On self enter:</TriggerName>
-        <span>
-          Applies <ModifierInline modifier={new InspectedAll({})} /> to all
-          units.
-        </span>
-      </div>
-    ),
-  },
+  [InspectAllOnUnitEnterId]: InspectAllOnUnitEnterRenderer,
 }

@@ -4,8 +4,6 @@ import { AttackDownAllOtherOnUnitEnter } from '../Triggers'
 
 export const Intimidate: Augment = {
   id: IntimidateId,
-  name: 'Intimidate',
-
   modifiers(unit: Unit): Modifier[] {
     return [
       new AttackDownAllOtherOnUnitEnter({

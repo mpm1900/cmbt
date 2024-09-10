@@ -18,15 +18,15 @@ import {
   ifArray,
   modifyRenderContext,
 } from '../../utils'
-import { DefenseDownParentId, PiercingStrikeId } from '../Ids'
-import { UpdateStatParent } from '../Modifiers'
+import { DefenseStageDownParentId, PiercingStrikeId } from '../Ids'
+import { UpdateStatStageParent } from '../Modifiers'
 import { Identity } from '../Mutations'
 import { GetUnits } from '../Queries'
 
 export class PiercingStrike extends Action {
   damage: Damage
   defenseDownChance: number = 20
-  defenseDownFactor: number = -0.25
+  defenseStage: number = -1
 
   constructor(sourceId: Id, teamId: Id) {
     super(PiercingStrikeId, {
@@ -94,12 +94,12 @@ export class PiercingStrike extends Action {
             applyDefenseDown,
             modifiedTargets.map(
               (target) =>
-                new UpdateStatParent({
-                  registryId: DefenseDownParentId,
+                new UpdateStatStageParent({
+                  registryId: DefenseStageDownParentId,
                   stat: 'defense',
                   sourceId: source.id,
                   parentId: target.id,
-                  factor: this.defenseDownFactor,
+                  offset: this.defenseStage,
                 })
             )
           ),

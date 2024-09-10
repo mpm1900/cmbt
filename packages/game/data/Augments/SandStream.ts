@@ -5,7 +5,6 @@ import { CreateSandstormOnUnitEnter } from '../Triggers'
 
 export const SandStream: Augment = {
   id: SandStreamId,
-  name: 'Sand Stream',
   modifiers(unit: Unit): Modifier[] {
     return [
       new CreateSandstormOnUnitEnter({

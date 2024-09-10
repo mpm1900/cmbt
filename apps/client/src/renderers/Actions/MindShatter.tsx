@@ -4,7 +4,6 @@ import { ACTION_NAMES, ActionRenderer } from '.'
 
 export const MindShatterRenderer: ActionRenderer = {
   name: ACTION_NAMES[MindShatterId],
-  baseDamage: (action) => `${action.damage?.power}`,
   description: (action, props) => {
     return (
       <div>

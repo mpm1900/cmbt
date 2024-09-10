@@ -4,8 +4,6 @@ import { UpdateStatParent } from '../Modifiers'
 
 export const FlameShield: Augment = {
   id: FlameShieldId,
-  name: 'Flame Shield',
-
   modifiers(unit: Unit): Modifier[] {
     return [
       new UpdateStatParent({

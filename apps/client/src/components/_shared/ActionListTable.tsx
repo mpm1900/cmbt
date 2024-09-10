@@ -132,7 +132,7 @@ function ActionListRow(props: ActionListRowProps) {
         </TableCell>
 
         <TableCell>
-          {renderer.baseDamage && renderer.baseDamage(action) ? (
+          {action.damage ? (
             <span className="inline-flex items-center space-x-1">
               <DamageInline damage={action.damage} children="" />
             </span>

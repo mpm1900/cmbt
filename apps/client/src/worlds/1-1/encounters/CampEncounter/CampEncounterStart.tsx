@@ -133,7 +133,7 @@ export const CampEncounterStart: EncounterNode = {
               return unit
             }),
             reward: {
-              items: [],
+              items: npc?.items ?? [],
               resources: {
                 credits: 200,
               },

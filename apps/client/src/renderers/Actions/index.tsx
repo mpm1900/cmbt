@@ -1,16 +1,13 @@
 import { LogUnit } from '@/components/ui/log'
 import {
-  ArmorUp,
   ArmorUpId,
   AttackStageUpParentId,
   BattleStanceId,
   BiteId,
-  BodySlam,
   BodySlamId,
   Burn,
   DamageAllOnTurnEnd,
   DamageNewUnitsOnUnitEnter,
-  DefenseDownParentId,
   Disable,
   DisabledParent,
   DisableId,
@@ -37,7 +34,6 @@ import {
   MagicMissileId,
   MindShatterId,
   NegateArmorId,
-  PiercingStrike,
   PiercingStrikeId,
   Poison,
   PoisonSprayId,
@@ -69,7 +65,6 @@ import {
   ThunderboltId,
   TrickRoomId,
   UpdateFlagParent,
-  UpdateStatParent,
   UpdateStatStageParent,
   Ward,
   WardId,
@@ -79,17 +74,19 @@ import { Action, ActionResult, CombatContext, Unit } from '@repo/game/types'
 import { DamageInline } from '@shared/DamageInline'
 import { MagicArmor } from '@shared/MagicArmor'
 import { ModifierInline } from '@shared/ModifierInline'
-import { PhysicalArmor } from '@shared/PhysicalArmor'
 import { StatusInline } from '@shared/StatusInline'
 import { TextList } from '@shared/TextList'
 import { ReactNode } from 'react'
 import { ACTION_NAMES } from './_names'
+import { ArmorUpRenderer } from './ArmorUp'
 import { BattleStanceRenderer } from './BattleStance'
 import { BiteRenderer } from './Bite'
+import { BodySlamRenderer } from './BodySlam'
 import { DragonStanceRenderer } from './DragonStance'
 import { HexRenderer } from './Hex'
 import { MindShatterRenderer } from './MindShatter'
 import { NegateArmorRenderer } from './NegateArmor'
+import { PiercingStrikeRenderer } from './PiercingStrike'
 import { PowerCleaveRenderer } from './PowerCleave'
 import { PowerStanceRenderer } from './PowerStance'
 import { RetreatingBlowRenderer } from './RetreatingBlow'
@@ -100,7 +97,6 @@ export * from './_names'
 
 export type ActionRenderer = {
   name: string
-  baseDamage?: (action: Action) => string
   cost?: (action: Action) => string
   costAlt?: ReactNode
   description: (
@@ -120,17 +116,21 @@ export type ActionRenderer = {
 }
 
 export const ActionRenderers: Record<string, ActionRenderer> = {
+  [ArmorUpId]: ArmorUpRenderer,
   [BattleStanceId]: BattleStanceRenderer,
   [BiteId]: BiteRenderer,
+  [BodySlamId]: BodySlamRenderer,
   [DragonStanceId]: DragonStanceRenderer,
   [HexId]: HexRenderer,
   [MindShatterId]: MindShatterRenderer,
   [NegateArmorId]: NegateArmorRenderer,
+  [PiercingStrikeId]: PiercingStrikeRenderer,
   [PowerCleaveId]: PowerCleaveRenderer,
   [PowerStanceId]: PowerStanceRenderer,
   [RetreatingBlowId]: RetreatingBlowRenderer,
   [TauntId]: TauntRenderer,
   [ThunderboltId]: ThunderboltRenderer,
+
   /// SYSTEM ACTIONS
   [SetIsActiveId]: {
     name: ACTION_NAMES[SetIsActiveId],
@@ -175,56 +175,6 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
   },
 
   /// OTHER ACTIONS
-  [ArmorUpId]: {
-    name: ACTION_NAMES[ArmorUpId],
-    description: (action) => {
-      const armorup = action as ArmorUp
-      return (
-        <div>
-          This unit gains <PhysicalArmor>{armorup.amount}</PhysicalArmor>
-        </div>
-      )
-    },
-  },
-  [BodySlamId]: {
-    name: ACTION_NAMES[BodySlamId],
-    baseDamage: (action) => `${action.damage?.power}`,
-    description: (action) => {
-      const bodyslam = action as BodySlam
-      return (
-        <div>
-          Deals <DamageInline damage={bodyslam.damage} /> to target enemey unit.
-          If this attack misses, deals{' '}
-          <DamageInline damage={bodyslam.missDamage} /> base damage to this unit
-          instead.
-        </div>
-      )
-    },
-  },
-  [PiercingStrikeId]: {
-    name: ACTION_NAMES[PiercingStrikeId],
-    baseDamage: (action) => `${action.damage?.power}`,
-    description: (action, props) => {
-      const crunch = action as PiercingStrike
-      return (
-        <div>
-          Deals <DamageInline damage={crunch.damage} /> to target enemy unit.{' '}
-          {crunch.defenseDownChance}% chance to apply{' '}
-          <ModifierInline
-            side={props?.side}
-            modifier={
-              new UpdateStatParent({
-                registryId: DefenseDownParentId,
-                stat: 'defense',
-                factor: crunch.defenseDownFactor,
-              })
-            }
-          />
-          .
-        </div>
-      )
-    },
-  },
   [DisableId]: {
     name: 'Disable',
     description: (action, props) => {
@@ -247,7 +197,6 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
   },
   [EarthquakeId]: {
     name: ACTION_NAMES[EarthquakeId],
-    baseDamage: (action) => `${action.damage?.power}`,
     description: (action) => (
       <>
         Deals <DamageInline damage={action.damage} /> to all other units.
@@ -256,7 +205,6 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
   },
   [ExplosionId]: {
     name: 'Explosion',
-    baseDamage: () => 'ƒx',
     description: (action) => (
       <>
         Deals damage equal to 4 times this unit's physical stat to all other
@@ -267,10 +215,6 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
 
   [FireballId]: {
     name: ACTION_NAMES[FireballId],
-    baseDamage: (action) => {
-      const fireball = action as Fireball
-      return `${fireball.damage.power} (${fireball.splashDamage.power})`
-    },
     description: (action) => {
       const fireball = action as Fireball
       return (
@@ -284,7 +228,6 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
   },
   [FireBlastId]: {
     name: ACTION_NAMES[FireBlastId],
-    baseDamage: (action) => `${action.damage?.power}`,
     description: (action, props) => {
       const fireblast = action as FireBlast
       return (
@@ -298,7 +241,6 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
   },
   [FirePunchId]: {
     name: ACTION_NAMES[FirePunchId],
-    baseDamage: (action) => `${action.damage?.power}`,
     description: (action, props) => {
       const firepunch = action as FirePunch
       return (
@@ -312,7 +254,6 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
   },
   [FurySwipesId]: {
     name: 'Fury Swipes',
-    baseDamage: (action) => `${action.damage?.power}`,
     description: (action) => {
       const furySwipes = action as any as FurySwipes
       return (
@@ -348,7 +289,6 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
   },
   [HyperBeamId]: {
     name: ACTION_NAMES[HyperBeamId],
-    baseDamage: () => 'ƒ(x)',
     cost: () => '30 FP',
     costAlt: <span className="text-blue-300">30 FP</span>,
     description: (action, props) => {
@@ -385,7 +325,6 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
   },
   [MagicMissileId]: {
     name: 'Magic Missile',
-    baseDamage: (action) => `${action.damage?.power}`,
     description: (action) => (
       <>
         Deals <DamageInline damage={action.damage} /> to 2 target enemy units.
@@ -395,7 +334,6 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
   },
   [QuickAttackId]: {
     name: 'Quick Attack',
-    baseDamage: (action) => `${action.damage?.power}`,
     description: (action) => {
       const quickAttack = action as QuickAttack
       return (
@@ -408,7 +346,6 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
   },
   [PoisonSprayId]: {
     name: ACTION_NAMES[PoisonSprayId],
-    baseDamage: (a) => `${a.damage?.power}`,
     description: (action, props) => {
       const poisionSpray = action as QuickAttack
       return (
@@ -421,7 +358,6 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
   },
   [PowerWordKillId]: {
     name: ACTION_NAMES[PowerWordKillId],
-    baseDamage: () => '∞',
     description: (action) => (
       <>
         Deals <DamageInline damage={action.damage} /> to target enemy unit.
@@ -503,7 +439,6 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
   },
   [SlashId]: {
     name: ACTION_NAMES[SlashId],
-    baseDamage: (a) => `${a.damage?.power}`,
     description: (action, props) => {
       const slash = action as Slash
       return (

@@ -1,5 +1,6 @@
 import { useUnitBuilders } from '@/hooks/state'
 import { useBuilderUi } from '@/hooks/state/useBuilderUi'
+import { AUGMENT_NAMES } from '@/renderers'
 import { PageHeader } from '@shared/PageHeader'
 import {
   Menubar,
@@ -26,25 +27,26 @@ export function BuilderHeader() {
                 value={ui.activeBuilderId}
                 onValueChange={(id) => ui.setActiveBuilderId(id)}
               >
-                {store.builders.map((builder) => (
-                  <MenubarRadioItem
-                    key={builder.id}
-                    value={builder.id}
-                    className="cursor-pointer"
-                  >
-                    <div>
-                      <div className="font-bold">{builder.name}</div>
-                      <div className="text-xs text-muted-foreground">
-                        {builder.base.name}{' '}
-                        {builder.ability && (
-                          <span className="opacity-40">
-                            ({builder.ability.name})
-                          </span>
-                        )}
+                {store.builders.map((builder) => {
+                  const name = AUGMENT_NAMES[builder.ability?.id ?? '']
+                  return (
+                    <MenubarRadioItem
+                      key={builder.id}
+                      value={builder.id}
+                      className="cursor-pointer"
+                    >
+                      <div>
+                        <div className="font-bold">{builder.name}</div>
+                        <div className="text-xs text-muted-foreground">
+                          {builder.base.name}{' '}
+                          {builder.ability && (
+                            <span className="opacity-40">({name})</span>
+                          )}
+                        </div>
                       </div>
-                    </div>
-                  </MenubarRadioItem>
-                ))}
+                    </MenubarRadioItem>
+                  )
+                })}
               </MenubarRadioGroup>
             </MenubarContent>
           </MenubarMenu>

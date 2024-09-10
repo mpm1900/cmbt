@@ -4,8 +4,6 @@ import { HealParentOnUnitSwitch } from '../Triggers'
 
 export const Regeneration: Augment = {
   id: RegenerationId,
-  name: 'Regeneration',
-
   modifiers(unit: Unit): Modifier[] {
     return [
       new HealParentOnUnitSwitch({

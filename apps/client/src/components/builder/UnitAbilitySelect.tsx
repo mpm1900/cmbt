@@ -31,11 +31,14 @@ export function UnitAbilitySelect(props: UnitAbilitySelectProps) {
         <SelectValue placeholder="Select an Ability" />
       </SelectTrigger>
       <SelectContent>
-        {options.map((ability) => (
-          <AugmentHover augment={ability} key={ability.id}>
-            <SelectItem value={ability.id}>{ability.name}</SelectItem>
-          </AugmentHover>
-        ))}
+        {options.map((ability) => {
+          const renderer = AugmentRenderers[ability.id]
+          return (
+            <AugmentHover augment={ability} key={ability.id}>
+              <SelectItem value={ability.id}>{renderer?.name}</SelectItem>
+            </AugmentHover>
+          )
+        })}
       </SelectContent>
     </Select>
   )

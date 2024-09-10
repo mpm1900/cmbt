@@ -4,7 +4,6 @@ import { ACTION_NAMES, ActionRenderer } from '.'
 
 export const RetreatingBlowRenderer: ActionRenderer = {
   name: ACTION_NAMES[RetreatingBlowId],
-  baseDamage: (action) => `${action.damage?.power}`,
   description: (action, props) => {
     return (
       <div>

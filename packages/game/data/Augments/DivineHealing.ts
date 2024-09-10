@@ -4,8 +4,6 @@ import { HealParentOnTurnEnd } from '../Triggers'
 
 export const DivineHealing: Augment = {
   id: DivineHealingId,
-  name: 'Divine Healing',
-
   modifiers(unit) {
     return [
       new HealParentOnTurnEnd({

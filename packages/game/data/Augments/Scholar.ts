@@ -4,8 +4,6 @@ import { InspectAllOnUnitEnter } from '../Triggers'
 
 export const Scholar: Augment = {
   id: ScholarId,
-  name: 'Scholar',
-
   modifiers(unit: Unit): Modifier[] {
     return [
       new InspectAllOnUnitEnter({

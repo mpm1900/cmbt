@@ -18,7 +18,6 @@ export const Ruby = (): Item => {
       id: RubyAugmentId,
       itemRtid: rtid,
       unitBaseIds: [Tyranitar.id],
-      name: 'Ruby',
       cost: 1,
       modifiers: (u) => [
         new UpdateStatParent({

@@ -47,7 +47,7 @@ export class RetreatingBlow extends Action {
     return 95 + source.stats.accuracy
   }
   criticalThreshold = (source: Unit): number | undefined => {
-    return 20 + source.stats.criticalChance
+    return 5 + source.stats.criticalChance
   }
   criticalFactor = (source: Unit): number | undefined =>
     1.5 + source.stats.criticalDamage

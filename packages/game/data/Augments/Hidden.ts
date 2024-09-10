@@ -4,8 +4,6 @@ import { UpdateFlagParent } from '../Modifiers'
 
 export const Hidden: Augment = {
   id: HiddenId,
-  name: 'Hidden',
-
   modifiers(unit: Unit): Modifier[] {
     return [
       new UpdateFlagParent({

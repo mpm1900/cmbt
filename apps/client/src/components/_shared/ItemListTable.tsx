@@ -47,7 +47,7 @@ export function ItemListTable(props: ItemListTableProps) {
                   className={cn('w-full')}
                   style={{ color: ItemRarityRenderers[item.rarity].color }}
                 >
-                  {item.name}
+                  {item.name} {item.rtid}
                 </TableCell>
 
                 <TableCell

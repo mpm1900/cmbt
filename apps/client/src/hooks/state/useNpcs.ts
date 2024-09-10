@@ -1,4 +1,4 @@
-import { Id, Npc } from '@repo/game/types'
+import { Id, Item, Npc } from '@repo/game/types'
 import { create } from 'zustand'
 
 export type NpcState = {
@@ -13,6 +13,7 @@ export type NpcStore = NpcState & {
     key: string,
     fn: (v: number | undefined) => number
   ) => void
+  updateNpcItems: (id: Id, fn: (items: Item[]) => Item[]) => void
 }
 
 export const useNpcs = create<NpcStore>((set) => ({
@@ -33,6 +34,18 @@ export const useNpcs = create<NpcStore>((set) => ({
                 ...npc.values,
                 [key]: fn(npc.values[key]),
               },
+            }
+          : npc
+      ),
+    }))
+  },
+  updateNpcItems: (id, fn) => {
+    set((s) => ({
+      npcs: s.npcs.map((npc) =>
+        npc.id === id
+          ? {
+              ...npc,
+              items: fn(npc.items),
             }
           : npc
       ),

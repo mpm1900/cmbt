@@ -52,6 +52,7 @@ export type EncounterContext = {
     key: T,
     fn: (v: number | undefined) => number
   ) => void
+  updateNpcItems: (id: Id, fn: (items: Item[]) => Item[]) => void
   addVisitedNodes: (...ids: Id[]) => void
 }
 

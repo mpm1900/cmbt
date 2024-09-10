@@ -1,10 +1,10 @@
 import { Narration } from '@/components/encounter/Narration'
 import { Quote } from '@/components/encounter/Quote'
-import { rebaseItem } from '@/utils'
+import { groupItemsById } from '@/utils'
 import { choice } from '@/worlds/_utils'
 import { Separator } from '@radix-ui/react-menubar'
-import { BASE_UNIT, Key01, Potion, Ruby } from '@repo/game/data'
-import { EncounterNode, GroupedItem, Item } from '@repo/game/types'
+import { BASE_UNIT } from '@repo/game/data'
+import { EncounterNode, Item } from '@repo/game/types'
 import { ItemListTables } from '@shared/ItemListTables'
 import { nanoid } from 'nanoid'
 import { BsArrowLeft } from 'react-icons/bs'
@@ -43,23 +43,27 @@ export const CampEncounterShop: EncounterNode = {
     const npc = ctx.npcs.find((c) => c.id === ChibleeId)
     const buyItem = (item: Item) => {
       if (npc) {
-        ctx.updateNpcValue(ChibleeId, item.id, (v) => v! - 1)
+        ctx.updateNpcItems(ChibleeId, (items) =>
+          items.filter((i) => i.rtid !== item.rtid)
+        )
         const cost = Math.round(item.cost * npc.values.costMultiplier)
         ctx.buyItem(item, cost)
       }
     }
+
+    const items = groupItemsById(npc!.items)
 
     return (
       <div className="space-y-4">
         {ctx.team && npc && (
           <ItemListTables
             unit={BASE_UNIT}
-            items={[Potion(), Key01(), Ruby()] as GroupedItem[]}
+            items={items}
             costMultiplier={npc.values.costMultiplier}
             resources={ctx.team.resources}
-            quantities={npc?.values}
+            quantities={Object.fromEntries(items.map((i) => [i.id, i.count]))}
             onClick={(item) => {
-              buyItem(rebaseItem(item))
+              buyItem(item)
             }}
           />
         )}

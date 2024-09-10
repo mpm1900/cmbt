@@ -106,6 +106,7 @@ export function NodeRenderer(props: NodeRendererProps) {
             <div className="flex w-full justify-end space-x-4">
               {footer(ctx, renderProps).map((choice) => (
                 <Button
+                  key={choice.id}
                   variant="secondary"
                   className="space-x-2"
                   onClick={() => choice.resolve(ctx)}

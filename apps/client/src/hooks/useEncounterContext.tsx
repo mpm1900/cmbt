@@ -69,6 +69,7 @@ export function useEncounterContext(): EncounterContext {
     buyItem: game.buyItem,
     addNpc: npcs.addNpc,
     updateNpcValue: npcs.updateNpcValue,
+    updateNpcItems: npcs.updateNpcItems,
     addVisitedNodes: game.addVisitedNodes,
   }
 }

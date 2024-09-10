@@ -1,7 +1,7 @@
 import { Narration } from '@/components/encounter/Narration'
 import { Quote } from '@/components/encounter/Quote'
 import { choice } from '@/worlds/_utils'
-import { Key01Id, PotionId, RubyId } from '@repo/game/data'
+import { Key01, Potion, Ruby } from '@repo/game/data'
 import { Encounter, EncounterNode, Npc } from '@repo/game/types'
 import { nanoid } from 'nanoid'
 import { IoMdReturnLeft } from 'react-icons/io'
@@ -35,12 +35,10 @@ const chiblee: Npc<ChibleeValues> = {
   attr: {
     alive: true,
   },
+  items: [Potion(), Potion(), Potion(), Potion(), Potion(), Key01(), Ruby()],
   values: {
     charmAttempts: 0,
     costMultiplier: 1.4,
-    [PotionId]: 5,
-    [Key01Id]: 1,
-    [RubyId]: 1,
   },
 }
 

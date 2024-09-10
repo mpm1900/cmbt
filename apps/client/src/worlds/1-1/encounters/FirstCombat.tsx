@@ -46,7 +46,6 @@ const IntroductionNode: EncounterNode = {
               const e = makeEnemyUnit({ level: 12, teamId: enemyTeam.id }, [
                 Wolf,
               ])
-              console.log(e, ctx.units)
               return e
             }),
             reward: {

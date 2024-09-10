@@ -9,7 +9,7 @@ export function handleCleanup(
   handleDone: () => void
 ) {
   const aliveTeams = ctx.teams.filter((team) =>
-    ctx.units.some((u) => u.teamId === team.id && isUnitAliveCtx(u.id, ctx))
+    ctx.units.some((u) => u.teamId === team.id && isUnitAliveCtx(u, ctx))
   )
 
   if (aliveTeams.length !== 2) {

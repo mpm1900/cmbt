@@ -38,7 +38,7 @@ export class GetUnits extends Query<Unit[]> {
         value = value && unit.flags.isActive === this.isActive
       }
       if (this.isAlive !== undefined) {
-        value = value && this.isAlive === isUnitAliveCtx(unit.id, ctx)
+        value = value && this.isAlive === isUnitAliveCtx(unit, ctx)
       }
       if (this.isHidden !== undefined) {
         value = value && this.isHidden === isUnitHiddenCtx(unit, ctx)

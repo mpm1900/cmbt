@@ -18,8 +18,9 @@ export function handleNextAction(
   const sorted = queue.queue.sort(queueComparator(ctx))
   const item = sorted[0]
   if (item) {
+    const source = ctx.units.find((u) => u.id === item.action.sourceId)
     const shouldCommitAction =
-      status === 'cleanup' || isUnitAliveCtx(item.action.sourceId, ctx)
+      status === 'cleanup' || isUnitAliveCtx(source, ctx)
 
     if (shouldCommitAction) {
       ctx = commitResult(

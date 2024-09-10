@@ -19,7 +19,7 @@ export function CombatComplete() {
   const nav = useNavigate()
   const commit = useCombatToWorldState()
   const aliveUserUnits = ctx.units.filter(
-    (u) => u.teamId === ctx.user && isUnitAliveCtx(u.id, ctx)
+    (u) => u.teamId === ctx.user && isUnitAliveCtx(u, ctx)
   )
   if (aliveUserUnits.length === 0) {
     nav({ to: '/' })

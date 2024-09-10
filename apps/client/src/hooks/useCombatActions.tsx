@@ -46,7 +46,7 @@ export function useCombatActions() {
 
   const cleanupResult: CleanupResult = (context) => {
     const deadActiveUnits = context.units.filter(
-      (u) => u.flags.isActive && !isUnitAliveCtx(u.id, context)
+      (u) => u.flags.isActive && !isUnitAliveCtx(u, context)
     )
     deadActiveUnits.forEach((u) => {
       combat.log(<LogCritical>{u.name} died.</LogCritical>)

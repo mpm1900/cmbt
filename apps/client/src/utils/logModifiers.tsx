@@ -1,6 +1,7 @@
 import { LogSecondary, LogUnit } from '@/components/ui/log'
 import { CombatLogger } from '@/hooks/state'
 import { CombatContext, Modifier, MutationFilterArgs } from '@repo/game/types'
+import { isUnitAliveCtx } from '@repo/game/utils'
 import { ModifierInline } from '@shared/ModifierInline'
 import { StatusInline } from '@shared/StatusInline'
 import { TextList } from '@shared/TextList'
@@ -13,8 +14,9 @@ export function logModifiers(
   args?: MutationFilterArgs
 ) {
   args = args ?? {}
-  const units = ctx.units.filter((u) =>
-    modifiers.some((m) => m.filter(u, ctx, args))
+  const units = ctx.units.filter(
+    (u) =>
+      isUnitAliveCtx(u, ctx) && modifiers.some((m) => m.filter(u, ctx, args))
   )
   units.forEach((unit, index) => {
     const unitHasModifier = (modifier: Modifier) =>

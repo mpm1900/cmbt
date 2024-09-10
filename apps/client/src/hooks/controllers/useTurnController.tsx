@@ -23,9 +23,7 @@ export function useTurnController() {
     setTimeout(
       () => {
         const aliveTeams = ctx.teams.filter((team) =>
-          ctx.units.some(
-            (u) => u.teamId === team.id && isUnitAliveCtx(u.id, ctx)
-          )
+          ctx.units.some((u) => u.teamId === team.id && isUnitAliveCtx(u, ctx))
         )
         if (aliveTeams.length === 2) {
           queue.dequeue()
@@ -73,7 +71,7 @@ export function useTurnController() {
           ctx = fns.commitResult(active, ctx, { enableLog: true })
 
           const deadActiveUnits = ctx.units.filter(
-            (u) => u.flags.isActive && !isUnitAliveCtx(u.id, ctx)
+            (u) => u.flags.isActive && !isUnitAliveCtx(u, ctx)
           )
           setTimeout(
             () => {

@@ -11,7 +11,7 @@ export function rollThreshold(
   const roll = random.int(0, 100)
   const success = (threshold === undefined ? 100 : threshold) >= roll
   const criticalSuccess =
-    (criticalThreshold === undefined ? 0 : criticalThreshold) >= roll
+    (criticalThreshold === undefined ? -1 : criticalThreshold) >= roll
 
   return {
     roll,

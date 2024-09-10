@@ -17,6 +17,6 @@ export class SetDeadAsInactive extends Mutation {
 
   filter = (unit: Unit, ctx: CombatContext): boolean => {
     const base = unit.flags.isActive
-    return base && !isUnitAliveCtx(unit.id, ctx)
+    return base && !isUnitAliveCtx(unit, ctx)
   }
 }

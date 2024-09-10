@@ -75,7 +75,7 @@ export class RetreatingBlow extends Action {
       ctx,
       (modifiedTargets) => {
         const inactiveLiveAllies = ctx.units.filter(
-          (u) => !u.flags.isActive && isUnitAliveCtx(u.id, ctx)
+          (u) => !u.flags.isActive && isUnitAliveCtx(u, ctx)
         )
         return {
           forceFailure: inactiveLiveAllies.length === 0,

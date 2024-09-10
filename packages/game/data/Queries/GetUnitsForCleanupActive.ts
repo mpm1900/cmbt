@@ -28,7 +28,7 @@ export class GetUnitsForCleanupActive extends Query<Unit[]> {
       if (this.notTeamId !== undefined) {
         value = value && unit.teamId !== this.notTeamId
       }
-      return value && !unit.flags.isActive && isUnitAliveCtx(unit.id, ctx)
+      return value && !unit.flags.isActive && isUnitAliveCtx(unit, ctx)
     })
 
     const newInactiveAllies = inactiveLiveAllies.filter((unit) => {

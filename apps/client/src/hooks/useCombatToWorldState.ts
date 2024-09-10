@@ -26,6 +26,7 @@ export function useCombatToWorldState() {
       const combatUnit = combat.units.find((u) => u.id === unit.id)
       if (!combatUnit) return unit
 
+      // this sets the modifier function to include context modifiers
       if (combatUnit.flags.isActive) {
         combatUnit.modifiers = () => [
           ...unit.modifiers(),

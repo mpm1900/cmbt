@@ -1,6 +1,6 @@
 import { useCombatContext } from '@/hooks'
 import { PropsWithClassname } from '@/types'
-import { Unit } from '@repo/game/types'
+import { Trigger, Unit } from '@repo/game/types'
 import { applyModifiers } from '@repo/game/utils'
 import { UnitModifiers } from './UnitModifiers'
 
@@ -17,7 +17,10 @@ export function UnitCombatModifiers(
     props.unit,
     ctx
   )
-  const list = [...appliedModifiers, ...registeredTriggers]
+  const triggers = ctx.modifiers.filter(
+    (m) => m instanceof Trigger && m.parentId === props.unit.id
+  )
+  const list = [...appliedModifiers, ...registeredTriggers, ...triggers]
   return (
     <UnitModifiers
       className={props.className}

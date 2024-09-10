@@ -11,7 +11,6 @@ export const Intimidate: Augment = {
         parentId: unit.id,
         maxInstances: 1,
         offset: -1,
-        duration: 0,
         persistOnCombatEnd: true,
       }),
     ]

@@ -98,12 +98,12 @@ function UnitDamageStat(props: UnitDamageStatProps) {
 
 export type UnitDetailsProps = {
   unit: Unit
-  comp: Unit
+  original: Unit
   modifiers?: Modifier[]
 }
 
 export function UnitDetails(props: UnitDetailsProps) {
-  const { unit, comp, modifiers } = props
+  const { unit, original, modifiers } = props
   const base = getUnitBase(unit.baseId)
   const remainingHealth = Math.max(unit.stats.health - unit.values.damage, 0)
   const mods = getModifiersFromUnit(unit)
@@ -150,32 +150,32 @@ export function UnitDetails(props: UnitDetailsProps) {
           <div>
             <Title>Stats</Title>
             <Separator className="my-1" />
-            <UnitStat unit={unit} comp={comp} stat="health" />
-            <UnitStat unit={unit} comp={comp} stat="attack" />
-            <UnitStat unit={unit} comp={comp} stat="defense" />
-            <UnitStat unit={unit} comp={comp} stat="magic" />
-            <UnitStat unit={unit} comp={comp} stat="speed" />
+            <UnitStat unit={unit} comp={original} stat="health" />
+            <UnitStat unit={unit} comp={original} stat="attack" />
+            <UnitStat unit={unit} comp={original} stat="defense" />
+            <UnitStat unit={unit} comp={original} stat="magic" />
+            <UnitStat unit={unit} comp={original} stat="speed" />
 
             <Separator className="my-2" />
-            <UnitStat unit={unit} comp={comp} stat="evasion" after="%" />
+            <UnitStat unit={unit} comp={original} stat="evasion" after="%" />
             <UnitStat
               stat="accuracy"
               unit={unit}
-              comp={comp}
+              comp={original}
               before="+"
               after="%"
             />
             <UnitStat
               stat="criticalChance"
               unit={unit}
-              comp={comp}
+              comp={original}
               before="+"
               after="%"
             />
             <UnitStat
               stat="criticalDamage"
               unit={unit}
-              comp={comp}
+              comp={original}
               before="+"
               after="%"
             />
@@ -230,7 +230,7 @@ export function UnitDetails(props: UnitDetailsProps) {
                     <StatValue
                       stat={`${damageType}Expansion`}
                       unit={unit}
-                      comp={comp}
+                      comp={original}
                       after="%"
                     />
                   </div>
@@ -246,7 +246,7 @@ export function UnitDetails(props: UnitDetailsProps) {
                     <StatValue
                       stat={`${attackType}Expansion`}
                       unit={unit}
-                      comp={comp}
+                      comp={original}
                       after="%"
                     />
                   </div>
@@ -265,7 +265,7 @@ export function UnitDetails(props: UnitDetailsProps) {
                     <StatValue
                       stat={`${damageType}Negation`}
                       unit={unit}
-                      comp={comp}
+                      comp={original}
                       after="%"
                     />
                   </div>
@@ -281,7 +281,7 @@ export function UnitDetails(props: UnitDetailsProps) {
                     <StatValue
                       stat={`${attackType}Negation`}
                       unit={unit}
-                      comp={comp}
+                      comp={original}
                       after="%"
                     />
                   </div>

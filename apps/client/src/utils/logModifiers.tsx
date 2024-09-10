@@ -26,7 +26,7 @@ export function logModifiers(
       ctx.modifiers
     )
     const nonStatusModifiers = unitModifiers.filter((m) => !m.statusId)
-    const statuses = getStatusesFromModifiers(unitModifiers)
+    const statuses = getStatusesFromModifiers(modifiers)
 
     if (nonStatusModifiers.length > 0) {
       log(

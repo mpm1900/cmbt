@@ -1,4 +1,4 @@
-import { ApplyStatStages } from '../data'
+import { ApplyStatStages, ApplyStatStagesId } from '../data'
 import { CombatContext, Modifier, Trigger, Unit } from '../types'
 import { Mutation, MutationFilterArgs } from '../types/Mutation'
 
@@ -49,7 +49,9 @@ export function applyModifiers(
           if (modifier instanceof Trigger) {
             result.registeredTriggers.push(modifier)
           } else {
-            result.appliedModifiers.push(modifier)
+            if (modifier.id !== ApplyStatStagesId) {
+              result.appliedModifiers.push(modifier)
+            }
             result.unit = applyMutation(result.unit, modifier)
           }
         }

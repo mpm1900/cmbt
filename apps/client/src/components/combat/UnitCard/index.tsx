@@ -119,7 +119,7 @@ export function UnitCard(props: UnitCardProps) {
                 >
                   <UnitDetails
                     unit={unit}
-                    comp={props.unit}
+                    original={props.unit}
                     modifiers={modifiers}
                   />
                 </PopoverContent>
@@ -134,7 +134,7 @@ export function UnitCard(props: UnitCardProps) {
       <UnitCombatModifiers
         unit={props.unit}
         side={reverse ? 'top' : 'bottom'}
-        className={cn({ 'mt-2': !reverse, 'mb-2': reverse })}
+        className={cn({ 'mt-0.5': !reverse, 'mb-0.5': reverse })}
       />
     </motion.div>
   )

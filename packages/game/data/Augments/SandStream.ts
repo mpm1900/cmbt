@@ -11,7 +11,6 @@ export const SandStream: Augment = {
         sourceId: unit.id,
         parentId: unit.id,
         maxInstances: 1,
-        duration: 0,
         persistOnCombatEnd: true,
       }),
     ]

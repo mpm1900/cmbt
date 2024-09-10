@@ -21,6 +21,7 @@ export function UnitCombatModifiers(
   return (
     <UnitModifiers
       className={props.className}
+      iconClassName="h-[24px] w-[24px]"
       side={props.side}
       modifiers={list}
     />

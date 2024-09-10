@@ -75,7 +75,7 @@ export function MenuUnit(props: SidebarUnitProps) {
             collisionPadding={32}
             sideOffset={8}
           >
-            <UnitDetails unit={unit} comp={props.unit} />
+            <UnitDetails unit={unit} original={props.unit} />
           </HoverCardContent>
         </HoverCard>
       </div>

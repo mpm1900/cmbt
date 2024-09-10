@@ -10,7 +10,7 @@ import {
 } from '../../../types'
 import { mapStageToMultiplier } from '../../../utils'
 
-const ApplyStatStagesId = nanoid()
+export const ApplyStatStagesId = nanoid()
 export class ApplyStatStages extends Modifier {
   constructor(props: ModifierProps) {
     super(ApplyStatStagesId, props)

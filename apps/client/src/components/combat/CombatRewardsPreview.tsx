@@ -29,7 +29,7 @@ export function CombatRewardsPreview(props: CombatRewardsPreviewProps) {
         </div>
       )}
       {nonStandardUnits.map((u) => (
-        <div>
+        <div key={u.id}>
           <div className="font-black">
             {u.name} ({u.stats.xpMultiplier}%)
           </div>

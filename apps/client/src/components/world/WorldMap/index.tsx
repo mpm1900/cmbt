@@ -4,7 +4,7 @@ import { Graph } from './Graph'
 
 export function WorldMap() {
   const game = useGame()
-  const { cy, set, fitActive } = useCy()
+  const { cy, set, centerActive } = useCy()
 
   return (
     <>
@@ -16,7 +16,7 @@ export function WorldMap() {
         cy={(core) => {
           if (!cy) {
             set(core)
-            fitActive(core)
+            centerActive(core)
           }
         }}
         nodes={game.world.nodes}

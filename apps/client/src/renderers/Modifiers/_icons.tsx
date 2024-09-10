@@ -1,8 +1,10 @@
 import {
+  AttackDownAllOtherOnUnitEnterId,
   AttackDownParentId,
   AttackStageDownParentId,
   AttackStageUpParentId,
   AttackUpParentId,
+  CreateSandstormOnUnitEnterId,
   DefenseDownParentId,
   DefenseStageUpParentId,
   DefneseUpParentId,
@@ -13,6 +15,7 @@ import {
   HealParentOnUnitSwitchId,
   HexedParentId,
   HiddenParentId,
+  InspectAllOnUnitEnterId,
   InspectedAllId,
   PowerStanceId,
   ProtectedParentId,
@@ -37,6 +40,7 @@ import { FaHeartCirclePlus } from 'react-icons/fa6'
 import {
   GiBiceps,
   GiCrenulatedShield,
+  GiDualityMask,
   GiSandstorm,
   GiSpinningBlades,
   GiSprint,
@@ -45,6 +49,7 @@ import {
 } from 'react-icons/gi'
 import { HiMiniNoSymbol } from 'react-icons/hi2'
 import { MdOutlineHexagon } from 'react-icons/md'
+import { PiScrollFill } from 'react-icons/pi'
 import { TiSpiral } from 'react-icons/ti'
 
 export const MODIFIER_ICONS: Record<Id, ReactNode> = {
@@ -93,6 +98,9 @@ export const MODIFIER_ICONS: Record<Id, ReactNode> = {
       />
     </div>
   ),
+  [AttackDownAllOtherOnUnitEnterId]: (
+    <GiDualityMask className="fill-white h-full w-full" />
+  ),
   [AttackDownParentId]: (
     <div className="h-full w-full relative">
       <GiBiceps className="fill-white h-full w-full" />
@@ -129,10 +137,14 @@ export const MODIFIER_ICONS: Record<Id, ReactNode> = {
       />
     </div>
   ),
-  [SandstormOnTurnEndId]: (
+  [CreateSandstormOnUnitEnterId]: (
     <GiSandstorm className="fill-amber-100 h-full w-full" />
   ),
+  [SandstormOnTurnEndId]: <GiSandstorm className="fill-white h-full w-full" />,
   [DisabledParentId]: <HiMiniNoSymbol className="fill-white h-full w-full" />,
+  [InspectAllOnUnitEnterId]: (
+    <PiScrollFill className="fill-white h-full w-full" />
+  ),
   [InspectedAllId]: <BiSearch className="fill-white h-full w-full" />,
   [ProtectedParentId]: (
     <GiVibratingShield className="fill-white h-full w-full" />

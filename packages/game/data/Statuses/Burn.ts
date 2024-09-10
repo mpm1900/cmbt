@@ -1,5 +1,5 @@
 import { Status } from '../../types'
-import { AttackDownParentId, BurnId } from '../Ids'
+import { AttackDownParentId, BurnDamageId, BurnId } from '../Ids'
 import { UpdateStatParent } from '../Modifiers'
 import { DamageParentOnTurnEnd } from '../Triggers'
 
@@ -20,6 +20,7 @@ export const Burn: Status = {
       persistOnSwitch: true,
     }),
     new DamageParentOnTurnEnd({
+      registryId: BurnDamageId,
       sourceId: source.id,
       parentId: parent.id,
       statusId: BurnId,

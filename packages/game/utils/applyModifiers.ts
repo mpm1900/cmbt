@@ -38,7 +38,7 @@ export function applyModifiers(
     new ApplyStatStages({ sourceId: unit.id, parentId: unit.id })
   )
   // this weird loop is so that modifiers can affect if later modifiers are applied
-  // one example is if a modifer grants an immunity in a prior layer
+  // one example is if a modifier grants an immunity in a prior layer
   // or if modifiers have stat requirements in their fns, things can change during
   // this functions's execution
   const result = modifiers

@@ -36,6 +36,6 @@ export class InspectAllOnUnitEnter extends Trigger {
     ctx: CombatContext,
     args: MutationFilterArgs
   ): boolean => {
-    return super.filter(unit, ctx, args)
+    return super.filter(unit, ctx, args) && unit.id === this.sourceId
   }
 }

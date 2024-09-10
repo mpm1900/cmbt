@@ -14,7 +14,6 @@ export const Hidden: Augment = {
         parentId: unit.id,
         maxInstances: 1,
         persistOnCombatEnd: true,
-        persistOnSwitch: true,
       }),
     ]
   },

@@ -13,9 +13,8 @@ export const FlameShield: Augment = {
         sourceId: unit.id,
         parentId: unit.id,
         maxInstances: 1,
-        persistOnCombatEnd: true,
-        persistOnSwitch: true,
         static: 50,
+        persistOnCombatEnd: true,
       }),
     ]
   },

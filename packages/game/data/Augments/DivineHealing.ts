@@ -13,7 +13,6 @@ export const DivineHealing: Augment = {
         factor: 0.1,
         maxInstances: 1,
         persistOnCombatEnd: true,
-        persistOnSwitch: true,
       }),
     ]
   },

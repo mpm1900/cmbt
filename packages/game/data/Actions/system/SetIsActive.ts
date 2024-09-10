@@ -53,19 +53,15 @@ export class SetIsActive extends Action {
       source,
       targets,
       mutations: targets.map(
-        (t) =>
+        (target) =>
           new SetIsActiveParent({
             sourceId: source?.id,
-            parentId: t.id,
+            parentId: target.id,
             isActive: true,
           })
       ),
-      addedModifiers: [],
+      addedModifiers: targets.flatMap((t) => getModifiersFromUnit(t)),
       addedUnits: targets,
-      updateModifiers: (modifiers) => {
-        const targetsModifiers = targets.flatMap((t) => getModifiersFromUnit(t))
-        return modifiers.concat(...targetsModifiers)
-      },
     }
   }
 }

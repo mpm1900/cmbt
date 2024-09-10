@@ -33,14 +33,14 @@ export function Team(props: TeamProps) {
         })}
       />
       <div
-        className={cn('flex flex-1 items-start justify-end', {
+        className={cn('flex flex-1 items-start justify-end space-x-4 p-4', {
           'justify-start items-end': reverse,
         })}
       >
         {units.map((unit) => (
           <motion.div
             key={unit.id}
-            className="text-left p-4 px-8 flex flex-1 max-w-[400px]"
+            className="text-left flex flex-1 max-w-[400px]"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}

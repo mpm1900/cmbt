@@ -10,9 +10,8 @@ export const Regeneration: Augment = {
         sourceId: unit.id,
         parentId: unit.id,
         maxInstances: 1,
-        persistOnCombatEnd: true,
-        persistOnSwitch: true,
         factor: 0.3,
+        persistOnCombatEnd: true,
       }),
     ]
   },

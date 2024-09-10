@@ -39,6 +39,7 @@ import {
   PotionActionId,
   PowerCleaveId,
   PowerStanceId,
+  PowerSwapId,
   PowerWordKillId,
   Protect,
   ProtectedParentId,
@@ -89,6 +90,7 @@ import { NegateArmorRenderer } from './NegateArmor'
 import { PiercingStrikeRenderer } from './PiercingStrike'
 import { PowerCleaveRenderer } from './PowerCleave'
 import { PowerStanceRenderer } from './PowerStance'
+import { PowerSwapRenderer } from './PowerSwap'
 import { RetreatingBlowRenderer } from './RetreatingBlow'
 import { TauntRenderer } from './Taunt'
 import { ThunderboltRenderer } from './Thunderbolt'
@@ -128,6 +130,7 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
   [PiercingStrikeId]: PiercingStrikeRenderer,
   [PowerCleaveId]: PowerCleaveRenderer,
   [PowerStanceId]: PowerStanceRenderer,
+  [PowerSwapId]: PowerSwapRenderer,
   [RetreatingBlowId]: RetreatingBlowRenderer,
   [TauntId]: TauntRenderer,
   [ThunderboltId]: ThunderboltRenderer,

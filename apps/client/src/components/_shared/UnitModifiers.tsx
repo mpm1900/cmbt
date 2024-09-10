@@ -28,7 +28,7 @@ export function UnitModifiers(props: UnitModifiersProps) {
     >
       {nonStatusModifiers.map((m) => {
         return (
-          <div key={m.rtid} className="flex items-center space-x-1">
+          <div key={m.rtid} className="flex items-center space-x-0.5">
             <ModifierIcon
               modifier={m}
               side={props.side}

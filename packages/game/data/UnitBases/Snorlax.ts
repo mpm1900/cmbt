@@ -1,12 +1,22 @@
 import { nanoid } from 'nanoid'
 import { UnitBase, UnitBaseConfig } from '../../types'
-import { BodySlam, FirePunch, PiercingStrike, Rest, Taunt } from '../Actions'
+import {
+  BattleStance,
+  BodySlam,
+  FirePunch,
+  PiercingStrike,
+  PowerSwap,
+  Rest,
+  Taunt,
+} from '../Actions'
 import { FlameShield } from '../Augments'
 import {
+  BattleStanceId,
   BodySlamId,
   FirePunchId,
   FlameShieldId,
   PiercingStrikeId,
+  PowerSwapId,
   RestId,
   TauntId,
 } from '../Ids'
@@ -38,16 +48,24 @@ export const SnorlaxConfig: UnitBaseConfig = {
   actionsCount: 5,
   actions: [
     {
+      id: BattleStanceId,
+      make: (u) => new BattleStance(u.id, u.teamId),
+    },
+    {
       id: BodySlamId,
       make: (u) => new BodySlam(u.id, u.teamId),
+    },
+    {
+      id: FirePunchId,
+      make: (u) => new FirePunch(u.id, u.teamId),
     },
     {
       id: PiercingStrikeId,
       make: (u) => new PiercingStrike(u.id, u.teamId),
     },
     {
-      id: FirePunchId,
-      make: (u) => new FirePunch(u.id, u.teamId),
+      id: PowerSwapId,
+      make: (u) => new PowerSwap(u.id, u.teamId),
     },
     {
       id: RestId,
@@ -59,11 +77,5 @@ export const SnorlaxConfig: UnitBaseConfig = {
     },
   ],
   defaultAbilityId: FlameShieldId,
-  defaultActionIds: [
-    BodySlamId,
-    FirePunchId,
-    PiercingStrikeId,
-    RestId,
-    TauntId,
-  ],
+  defaultActionIds: [BattleStanceId, BodySlamId, FirePunchId, RestId],
 }

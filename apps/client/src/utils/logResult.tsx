@@ -4,7 +4,6 @@ import { ActionResult, CombatContext } from '@repo/game/types'
 import { logActionSuccessFailure } from './logActionSuccessFailure'
 import { logCritical } from './logCritical'
 import { logMiss } from './logMiss'
-import { logModifiers } from './logModifiers'
 import { logMutations } from './logMutations'
 
 export function logResult(
@@ -19,9 +18,6 @@ export function logResult(
   logMiss(result, log, context)
   if (mutations?.length) {
     if (options?.enableLog) logMutations(mutations, log, context)
-  }
-  if (modifiers?.length) {
-    if (options?.enableLog) logModifiers(modifiers, log, context)
   }
   logCritical(result, log, context)
   logActionSuccessFailure(result, log, context)

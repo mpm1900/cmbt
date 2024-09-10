@@ -17,6 +17,7 @@ import {
   PowerStanceId,
   ProtectedParentId,
   SandstormOnTurnEndId,
+  SpeedStageDownParentId,
   SpeedStageUpParentId,
   SpeedUpParentId,
   SpeedUpTeamId,
@@ -151,6 +152,15 @@ export const MODIFIER_ICONS: Record<Id, ReactNode> = {
       <GiSprint className="fill-white h-full w-full" />
       <AiFillCaretUp
         className="absolute fill-green-400 h-[24px] w-[24px]"
+        style={{ bottom: -6, right: -6 }}
+      />
+    </div>
+  ),
+  [SpeedStageDownParentId]: (
+    <div className="h-full w-full relative">
+      <GiSprint className="fill-white h-full w-full" />
+      <AiFillCaretDown
+        className="absolute fill-red-400 h-[24px] w-[24px]"
         style={{ bottom: -6, right: -6 }}
       />
     </div>

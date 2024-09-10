@@ -1,5 +1,5 @@
 import { LogCritical, LogHeader } from '@/components/ui/log'
-import { getDamageFromMutations } from '@/utils'
+import { getDamageFromMutations, logModifiers } from '@/utils'
 import { handleCleanup } from '@/utils/handleCleanup'
 import { handleTriggerEvent } from '@/utils/handleTriggerEvent'
 import { logResult } from '@/utils/logResult'
@@ -107,6 +107,7 @@ export function useCombatActions() {
     }
     if (modifiers?.length) {
       context.modifiers = combat.add(modifiers)
+      if (options?.enableLog) logModifiers(modifiers, combat.log, context)
     }
     if (updateModifiers) {
       context.modifiers = combat.updateModifiers(updateModifiers)

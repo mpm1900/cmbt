@@ -477,7 +477,7 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
               new UpdateStatStageParent({
                 registryId: AttackStageUpParentId,
                 stat: 'attack',
-                offset: swordsDance.offset,
+                stages: swordsDance.offset,
               })
             }
           />{' '}

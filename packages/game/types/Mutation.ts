@@ -10,6 +10,7 @@ export type MutationFilterArgs = {
 export type MutationProps<T = {}> = T & {
   id?: Id
   registryId?: Id
+  rtid?: Id
   sourceId?: Id
   parentId?: Id
 }
@@ -29,7 +30,7 @@ export abstract class Mutation {
   constructor(id: Id, props: MutationProps) {
     this.id = id
     this.registryId = props.registryId ?? id
-    this.rtid = nanoid()
+    this.rtid = props.rtid ?? nanoid()
     this.sourceId = props.sourceId
     this.parentId = props.parentId
   }

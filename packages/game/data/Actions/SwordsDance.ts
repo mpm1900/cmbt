@@ -57,7 +57,7 @@ export class SwordsDance extends Action {
               stat: 'attack',
               sourceId: source.id,
               parentId: source.id,
-              offset: 2,
+              stages: 2,
             }),
           ],
         },

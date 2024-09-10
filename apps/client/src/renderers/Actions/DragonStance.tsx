@@ -21,7 +21,7 @@ export const DragonStanceRenderer: ActionRenderer = {
             new UpdateStatStageParent({
               registryId: AttackStageUpParentId,
               stat: 'attack',
-              offset: dragonstance.offset,
+              stages: dragonstance.offset,
             })
           }
         />
@@ -32,7 +32,7 @@ export const DragonStanceRenderer: ActionRenderer = {
             new UpdateStatStageParent({
               registryId: SpeedStageUpParentId,
               stat: 'speed',
-              offset: dragonstance.offset,
+              stages: dragonstance.offset,
             })
           }
         />{' '}

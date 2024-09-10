@@ -21,7 +21,7 @@ export const AttackDownAllOtherOnUnitEnterRenderer: ModifierRenderer = {
               new UpdateStatStageParent({
                 stat: 'attack',
                 registryId: AttackStageDownParentId,
-                offset: -1,
+                stages: -1,
               })
             }
           />{' '}

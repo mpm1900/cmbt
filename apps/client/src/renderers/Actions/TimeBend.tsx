@@ -22,7 +22,7 @@ export const TimeBendRenderer: ActionRenderer = {
               new UpdateStatStageParent({
                 registryId: SpeedStageUpParentId,
                 stat: 'speed',
-                offset: timebend.offset,
+                stages: timebend.offset,
               })
             }
           />{' '}
@@ -33,7 +33,7 @@ export const TimeBendRenderer: ActionRenderer = {
               new UpdateStatStageParent({
                 registryId: SpeedStageDownParentId,
                 stat: 'speed',
-                offset: timebend.offset * -1,
+                stages: timebend.offset * -1,
               })
             }
           />{' '}

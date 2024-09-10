@@ -11,8 +11,8 @@ export const UpdateStatStageParentRenderer: ModifierRenderer = {
     return (
       <div>
         <span>
-          {modifier.offset > 0 ? '+' : '-'}
-          {Math.abs(modifier.offset)} {renderer.name} Stage{' '}
+          {modifier.stages > 0 ? '+' : '-'}
+          {Math.abs(modifier.stages)} {renderer.name} Stage{' '}
         </span>
         {renderer?.icon && (
           <>

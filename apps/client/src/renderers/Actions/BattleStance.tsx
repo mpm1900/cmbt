@@ -22,7 +22,7 @@ export const BattleStanceRenderer: ActionRenderer = {
             new UpdateStatStageParent({
               registryId: AttackStageUpParentId,
               stat: 'attack',
-              offset: battlestance.offset,
+              stages: battlestance.offset,
             })
           }
         />
@@ -33,7 +33,7 @@ export const BattleStanceRenderer: ActionRenderer = {
             new UpdateStatStageParent({
               registryId: DefenseStageUpParentId,
               stat: 'defense',
-              offset: battlestance.offset,
+              stages: battlestance.offset,
             })
           }
         />
@@ -44,7 +44,7 @@ export const BattleStanceRenderer: ActionRenderer = {
             new UpdateStatStageParent({
               registryId: SpeedStageDownParentId,
               stat: 'speed',
-              offset: battlestance.offset * -1,
+              stages: battlestance.offset * -1,
             })
           }
         />{' '}

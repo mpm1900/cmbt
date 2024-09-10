@@ -1,7 +1,10 @@
 import { cn } from '@/lib/utils'
 import { PropsWithClassname } from '@/types'
 import { getStatusesFromModifiers } from '@/utils/getStatusesFromModifiers'
+import { UpdateStatStageParent } from '@repo/game/data'
 import { Modifier } from '@repo/game/types'
+import { combineStageModifiers, mapStageToMultiplier } from '@repo/game/utils'
+import { Badge } from '../ui/badge'
 import { ModifierIcon } from './ModifierIcon'
 import { StatusIcon } from './StatusIcon'
 
@@ -13,7 +16,10 @@ export type UnitModifiersProps = PropsWithClassname<{
 
 export function UnitModifiers(props: UnitModifiersProps) {
   const { modifiers, iconClassName } = props
-  const nonStatusModifiers = modifiers.filter((m) => !m.statusId)
+
+  const nonStatusModifiers = combineStageModifiers(
+    modifiers.filter((m) => !m.statusId).sort((a, b) => a.priority - b.priority)
+  )
   const statuses = getStatusesFromModifiers(modifiers)
 
   return (
@@ -22,13 +28,19 @@ export function UnitModifiers(props: UnitModifiersProps) {
     >
       {nonStatusModifiers.map((m) => {
         return (
-          <ModifierIcon
-            key={m.rtid}
-            modifier={m}
-            side={props.side}
-            fallback={null}
-            className={iconClassName}
-          />
+          <div key={m.rtid} className="flex items-center space-x-1">
+            <ModifierIcon
+              modifier={m}
+              side={props.side}
+              fallback={null}
+              className={iconClassName}
+            />
+            {m instanceof UpdateStatStageParent && (
+              <Badge className="p-0.5 py-0">
+                ×{mapStageToMultiplier(m.stages).toFixed(2)}
+              </Badge>
+            )}
+          </div>
         )
       })}
       {statuses.map((s) => {

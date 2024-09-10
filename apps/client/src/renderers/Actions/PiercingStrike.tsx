@@ -22,7 +22,7 @@ export const PiercingStrikeRenderer: ActionRenderer = {
             new UpdateStatStageParent({
               registryId: DefenseStageDownParentId,
               stat: 'defense',
-              offset: piercingstrike.defenseStage,
+              stages: piercingstrike.defenseStage,
             })
           }
         />

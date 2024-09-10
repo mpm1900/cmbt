@@ -1,6 +1,7 @@
 import {
   CombatContext,
   Modifier,
+  MODIFIER_PRIORITIES,
   ModifierProps,
   MutationFilterArgs,
   StatKey,
@@ -10,24 +11,25 @@ import { UpdateStatStageParentId } from '../Ids'
 
 export class UpdateStatStageParent extends Modifier {
   stat: StatKey
-  offset: number
+  stages: number
 
   get key(): string {
-    return `${this.id}.${this.parentId}${this.stat}`
+    return `${this.id}.${this.parentId}.${this.stat}`
   }
 
-  constructor(props: ModifierProps<{ stat: StatKey; offset: number }>) {
+  constructor(props: ModifierProps<{ stat: StatKey; stages: number }>) {
     super(UpdateStatStageParentId, props)
 
     this.stat = props.stat
-    this.offset = props.offset
+    this.stages = Math.min(Math.max(props.stages, -4), 4)
+    this.priority = MODIFIER_PRIORITIES.STAGE
   }
 
   resolve = (unit: Unit): Partial<Unit> => {
     return {
       stages: {
         ...unit.stages,
-        [this.stat]: (unit.stages[this.stat] ?? 0) + this.offset,
+        [this.stat]: (unit.stages[this.stat] ?? 0) + this.stages,
       },
     }
   }

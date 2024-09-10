@@ -71,7 +71,7 @@ export class TimeBend extends Action {
                 stat: 'speed',
                 sourceId: source.id,
                 parentId: target.id,
-                offset:
+                stages:
                   target.teamId === source.teamId
                     ? this.offset
                     : this.offset * -1,

@@ -99,7 +99,7 @@ export class PiercingStrike extends Action {
                   stat: 'defense',
                   sourceId: source.id,
                   parentId: target.id,
-                  offset: this.defenseStage,
+                  stages: this.defenseStage,
                 })
             )
           ),

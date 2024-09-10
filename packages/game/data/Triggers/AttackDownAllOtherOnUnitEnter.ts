@@ -29,7 +29,7 @@ export class AttackDownAllOtherOnUnitEnter extends Trigger {
                 registryId: AttackStageDownParentId,
                 sourceId: props.sourceId,
                 parentId: u.id,
-                offset: props.offset,
+                stages: props.offset,
               })
           ),
     })

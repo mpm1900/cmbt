@@ -2,12 +2,13 @@ import { Id } from '.'
 import { Mutation, MutationProps } from './Mutation'
 
 export const MODIFIER_PRIORITIES = {
-  PRE: 1,
+  PRE: -1,
   DEFAULT: 0,
-  STAGE: 1,
-  POST: 2,
-  WIPE: 3,
-  SET: 4,
+  STAGES: 1,
+  APPLY_STAGES: 2,
+  POST: 3,
+  WIPE: 4,
+  SET: 5,
 }
 
 export type ModifierProps<T = {}> = MutationProps<T> & {
@@ -20,8 +21,8 @@ export type ModifierProps<T = {}> = MutationProps<T> & {
 }
 
 export abstract class Modifier extends Mutation {
-  maxInstances: number | undefined
   duration: number | undefined
+  maxInstances: number | undefined
   priority: number
   persistOnSwitch: boolean
   persistOnCombatEnd: boolean

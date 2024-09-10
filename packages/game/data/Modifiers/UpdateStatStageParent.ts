@@ -22,7 +22,7 @@ export class UpdateStatStageParent extends Modifier {
 
     this.stat = props.stat
     this.stages = Math.min(Math.max(props.stages, -4), 4)
-    this.priority = MODIFIER_PRIORITIES.STAGE
+    this.priority = MODIFIER_PRIORITIES.STAGES
   }
 
   resolve = (unit: Unit): Partial<Unit> => {

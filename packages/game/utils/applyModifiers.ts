@@ -34,10 +34,9 @@ export function applyModifiers(
     ...(args ?? {}),
   }
 
-  const modifiers = [
-    ...ctx.modifiers,
-    new ApplyStatStages({ sourceId: unit.id, parentId: unit.id }),
-  ]
+  const modifiers = ctx.modifiers.concat(
+    new ApplyStatStages({ sourceId: unit.id, parentId: unit.id })
+  )
   // this weird loop is so that modifiers can affect if later modifiers are applied
   // one example is if a modifer grants an immunity in a prior layer
   // or if modifiers have stat requirements in their fns, things can change during

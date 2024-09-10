@@ -14,7 +14,7 @@ const ApplyStatStagesId = nanoid()
 export class ApplyStatStages extends Modifier {
   constructor(props: ModifierProps) {
     super(ApplyStatStagesId, props)
-    this.priority = MODIFIER_PRIORITIES.STAGE
+    this.priority = MODIFIER_PRIORITIES.APPLY_STAGES
     this.maxInstances = 1
   }
 

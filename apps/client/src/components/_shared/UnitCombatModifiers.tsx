@@ -17,10 +17,13 @@ export function UnitCombatModifiers(
     props.unit,
     ctx
   )
-  const triggers = ctx.modifiers.filter(
-    (m) => m instanceof Trigger && m.parentId === props.unit.id
+  const otherTriggers = ctx.modifiers.filter(
+    (m) =>
+      m instanceof Trigger &&
+      m.parentId === props.unit.id &&
+      !registeredTriggers.some((t) => t.rtid === m.rtid)
   )
-  const list = [...appliedModifiers, ...registeredTriggers, ...triggers]
+  const list = [...appliedModifiers, ...registeredTriggers, ...otherTriggers]
   return (
     <UnitModifiers
       className={props.className}

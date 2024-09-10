@@ -56,6 +56,7 @@ export type UnitMetadata = {
   modified: boolean
   hasBeenSeen: boolean
   activeTurns: number
+  inactiveTurns: number
 }
 
 export type UnitBaseAffinity = {

@@ -12,19 +12,24 @@ import {
   getActionData,
   modifyRenderContext,
 } from '../../utils'
-import { IcyWindId, SpeedDownParentId } from '../Ids'
-import { UpdateStatParent } from '../Modifiers'
+import {
+  SpeedStageDownParentId,
+  SpeedStageUpParentId,
+  TimeBendId,
+} from '../Ids'
+import { UpdateStatStageParent } from '../Modifiers'
 import { Identity } from '../Mutations'
 import { GetUnits } from '../Queries'
 
-export class IcyWind extends Action {
+export class TimeBend extends Action {
+  offset = 1
+
   constructor(sourceId: Id, teamId: Id) {
-    super(IcyWindId, {
+    super(TimeBendId, {
       sourceId,
       teamId,
       cost: new Identity({ sourceId }),
       targets: new GetUnits({
-        notTeamId: teamId,
         isActive: true,
         isHidden: false,
       }),
@@ -58,12 +63,18 @@ export class IcyWind extends Action {
         onSuccess: {
           addedModifiers: modifiedTargets.map(
             (target) =>
-              new UpdateStatParent({
-                registryId: SpeedDownParentId,
+              new UpdateStatStageParent({
+                registryId:
+                  target.teamId === source.teamId
+                    ? SpeedStageUpParentId
+                    : SpeedStageDownParentId,
                 stat: 'speed',
                 sourceId: source.id,
                 parentId: target.id,
-                static: -10,
+                offset:
+                  target.teamId === source.teamId
+                    ? this.offset
+                    : this.offset * -1,
               })
           ),
         },

@@ -1,10 +1,8 @@
 import { useActions, useCombatUi } from '@/hooks/state'
 import { SwitchUnitId } from '@repo/game/data'
 import { Action, Unit } from '@repo/game/types'
-import { applyModifiers, getUnitBase } from '@repo/game/utils'
 import { useState } from 'react'
 import { useCombatContext } from '../../hooks'
-import { Badge } from '../ui/badge'
 import { Button } from '../ui/button'
 import {
   Card,
@@ -13,6 +11,7 @@ import {
   CardHeader,
   CardTitle,
 } from '../ui/card'
+import { SwitchUnitButton } from './SwitchUnitButton'
 
 export type SwitchUnitsProps = {
   action: Action
@@ -28,8 +27,7 @@ export function SwitchUnits(props: SwitchUnitsProps) {
   const queuedSwitchActions = queue.filter(
     (i) => i.action.id === SwitchUnitId && action.teamId === ctx.user
   )
-
-  const targets = action.targets.resolve(ctx)
+  const possibleTargets = action.targets.resolve(ctx)
   const [selectedTargets, setSelectedTargets] = useState<Unit[]>([])
 
   return (
@@ -47,27 +45,15 @@ export function SwitchUnits(props: SwitchUnitsProps) {
         <div className="grid grid-cols-2 gap-2">
           {ctx.units
             .filter((u) => u.teamId === action.teamId)
-            .map((u) => {
-              const { unit } = applyModifiers(u, ctx)
-              const isSelected = !!selectedTargets.find((t) => t.id === u.id)
-              const remainingHealth = Math.max(
-                unit.stats.health - unit.values.damage,
-                0
-              )
-              const isPending = !!queuedSwitchActions.find((i) =>
-                i.targetIds.includes(u.id)
-              )
+            .map((unit) => {
               return (
-                <Button
-                  key={u.id}
-                  variant={isSelected ? 'default' : 'secondary'}
-                  disabled={
-                    !targets.find((t) => t.id === u.id) ||
-                    isPending ||
-                    (!isSelected &&
-                      selectedTargets.length === action.maxTargetCount)
-                  }
-                  className="items-start h-full flex-col"
+                <SwitchUnitButton
+                  key={unit.id}
+                  unit={unit}
+                  action={action}
+                  possibleTargets={possibleTargets}
+                  selectedTargets={selectedTargets}
+                  queuedSwitchActions={queuedSwitchActions}
                   onClick={() => {
                     if (selectedTargets.find((u) => u.id === unit.id)) {
                       setSelectedTargets((t) =>
@@ -76,41 +62,9 @@ export function SwitchUnits(props: SwitchUnitsProps) {
                     } else {
                       setSelectedTargets((t) => [...t, unit])
                     }
-                    onClick && onClick(u)
+                    onClick && onClick(unit)
                   }}
-                >
-                  <div className="flex w-full items-center">
-                    <span className="text-lg text-left flex-1 text-ellipsis overflow-hidden">
-                      {u.name}
-                    </span>
-                    {unit.flags.isActive && (
-                      <Badge variant="default" className="p-1 py-0 0">
-                        Active
-                      </Badge>
-                    )}
-                    {remainingHealth === 0 && (
-                      <Badge variant="destructive" className="p-1 py-0">
-                        Dead
-                      </Badge>
-                    )}
-                    {isPending && (
-                      <Badge
-                        variant="outline"
-                        className="p-1 py-0 bg-slate-950"
-                      >
-                        Pending
-                      </Badge>
-                    )}
-                  </div>
-                  <div className="flex justify-between w-full">
-                    <span className="text-xs text-muted-foreground">
-                      HP ({remainingHealth}/{unit.stats.health})
-                    </span>
-                    <span className="text-xs text-muted-foreground/40">
-                      {getUnitBase(unit.baseId).base?.name}
-                    </span>
-                  </div>
-                </Button>
+                />
               )
             })}
         </div>

@@ -67,7 +67,7 @@ export function useAiActions() {
           aiTeam.maxActiveUnits - aliveActiveUnits.length,
           aliveInactiveUnits.length
         )
-        const item = getBestAiAction(new SetIsActive('', aiTeam.id, count), ctx)
+        const item = getBestAiAction(new SetIsActive(aiTeam.id, count), ctx)
         fns.pushCleanupAction({
           id: nanoid(),
           action: item.action,

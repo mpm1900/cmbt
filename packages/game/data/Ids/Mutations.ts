@@ -2,6 +2,7 @@ import { MutationId } from './_base'
 
 export const AddModifiersToParentId = MutationId()
 export const IncrementActiveTurnsId = MutationId()
+export const IncrementInactiveTurnsId = MutationId()
 export const SetDeadAsInactiveId = MutationId()
 export const SetIsActiveParentId = MutationId()
 export const SetLastUsedActionId = MutationId()
@@ -18,3 +19,5 @@ export const UpdateDamageNegationParentId = MutationId()
 export const UpdateFocusParentId = MutationId()
 export const UpdateMagicArmorParentId = MutationId()
 export const UpdatePhysicalArmorParentId = MutationId()
+export const UpdateStatParentMutationId = MutationId()
+export const UpdateValueParentId = MutationId()

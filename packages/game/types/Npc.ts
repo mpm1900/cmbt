@@ -1,4 +1,4 @@
-import { Id, Item } from '.'
+import { Id, Item, TeamResources } from '.'
 
 type NpcValues = { [key: string]: number }
 
@@ -9,5 +9,6 @@ export type Npc<V extends NpcValues = {}> = {
     alive: boolean
   }
   items: Item[]
+  resources: TeamResources
   values: V & NpcValues
 }

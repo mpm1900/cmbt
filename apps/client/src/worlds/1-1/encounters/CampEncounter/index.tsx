@@ -1,11 +1,10 @@
 import { Narration } from '@/components/encounter/Narration'
 import { Quote } from '@/components/encounter/Quote'
-import { choice } from '@/worlds/_utils'
-import { Key01, Potion, Ruby } from '@repo/game/data'
-import { Encounter, EncounterNode, Npc } from '@repo/game/types'
+import { Encounter, EncounterNode } from '@repo/game/types'
 import { nanoid } from 'nanoid'
-import { IoMdReturnLeft } from 'react-icons/io'
 import { LuSwords } from 'react-icons/lu'
+import { Chiblee, ChibleeId } from '../../npcs/Chiblee'
+import { CampEncounterActions } from './Actions'
 import { CampEncounterShop } from './CampEncounterShop'
 import { CampEncounterStart, CampEncounterStartId } from './CampEncounterStart'
 import { CampEncounterTabs } from './Tabs'
@@ -15,31 +14,8 @@ const CombatTraining: EncounterNode = {
   id: CombatTrainingId,
   icon: <LuSwords />,
   title: 'Friendly Camp - Combat Training',
-  actions: (ctx) => [
-    choice({
-      label: <IoMdReturnLeft />,
-      back: true,
-    }),
-  ],
+  actions: (ctx) => CampEncounterActions(ctx),
   tabs: (ctx) => CampEncounterTabs(ctx),
-}
-
-export const ChibleeId = nanoid()
-export type ChibleeValues = {
-  charmAttempts: number
-  costMultiplier: number
-}
-const chiblee: Npc<ChibleeValues> = {
-  id: ChibleeId,
-  name: 'Chiblee',
-  attr: {
-    alive: true,
-  },
-  items: [Potion(), Potion(), Potion(), Potion(), Potion(), Key01(), Ruby()],
-  values: {
-    charmAttempts: 0,
-    costMultiplier: 1.4,
-  },
 }
 
 export const CampEncounterId = nanoid()
@@ -53,7 +29,7 @@ export const CampEncounter = (): Encounter => {
         visitedNodeIds: [],
       }))
       if (!ctx.npcs.find((c) => c.id === ChibleeId)) {
-        ctx.addNpc(chiblee)
+        ctx.addNpc(Chiblee)
       }
 
       if (props.encounterVisitCount === 1) {
@@ -65,7 +41,7 @@ export const CampEncounter = (): Encounter => {
           </Narration>
         )
       } else {
-        ctx.log(<Quote name={chiblee.name}>"Welcome back travelers!"</Quote>)
+        ctx.log(<Quote name={Chiblee.name}>"Welcome back travelers!"</Quote>)
       }
     },
     activeNodeId: CampEncounterStartId,

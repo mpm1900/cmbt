@@ -1,16 +1,15 @@
 import { Narration } from '@/components/encounter/Narration'
+import { NpcShop } from '@/components/encounter/NpcShop'
 import { Quote } from '@/components/encounter/Quote'
-import { groupItemsById } from '@/utils'
 import { choice } from '@/worlds/_utils'
 import { Separator } from '@radix-ui/react-menubar'
-import { BASE_UNIT } from '@repo/game/data'
-import { EncounterNode, Item } from '@repo/game/types'
-import { ItemListTables } from '@shared/ItemListTables'
+import { EncounterNode } from '@repo/game/types'
 import { nanoid } from 'nanoid'
 import { BsArrowLeft } from 'react-icons/bs'
-import { IoMdReturnLeft, IoMdReturnRight } from 'react-icons/io'
+import { IoMdReturnRight } from 'react-icons/io'
 import { LiaFortAwesome } from 'react-icons/lia'
-import { ChibleeId } from '.'
+import { ChibleeId } from '../../npcs/Chiblee'
+import { CampEncounterActions } from './Actions'
 import { CampEncounterStartId } from './CampEncounterStart'
 import { CampEncounterTabs } from './Tabs'
 
@@ -19,6 +18,8 @@ export const CampEncounterShop: EncounterNode = {
   id: CampEncounterShopId,
   icon: <LiaFortAwesome />,
   title: `Friendly Camp - Chiblee's Shop`,
+  actions: (ctx) => CampEncounterActions(ctx),
+  tabs: (ctx) => CampEncounterTabs(ctx),
 
   render: (ctx) => {
     ctx.log(
@@ -31,44 +32,10 @@ export const CampEncounterShop: EncounterNode = {
     )
     ctx.log(<Separator />)
   },
-  actions: (ctx) => [
-    choice({
-      label: <IoMdReturnLeft />,
-      back: true,
-    }),
-  ],
-  tabs: (ctx) => CampEncounterTabs(ctx),
   Component: (props) => {
     const { ctx } = props
     const npc = ctx.npcs.find((c) => c.id === ChibleeId)
-    const buyItem = (item: Item) => {
-      if (npc) {
-        ctx.updateNpcItems(ChibleeId, (items) =>
-          items.filter((i) => i.rtid !== item.rtid)
-        )
-        const cost = Math.round(item.cost * npc.values.costMultiplier)
-        ctx.buyItem(item, cost)
-      }
-    }
-
-    const items = groupItemsById(npc!.items)
-
-    return (
-      <div className="space-y-4">
-        {ctx.team && npc && (
-          <ItemListTables
-            unit={BASE_UNIT}
-            items={items}
-            costMultiplier={npc.values.costMultiplier}
-            resources={ctx.team.resources}
-            quantities={Object.fromEntries(items.map((i) => [i.id, i.count]))}
-            onClick={(item) => {
-              buyItem(item)
-            }}
-          />
-        )}
-      </div>
-    )
+    return <NpcShop ctx={ctx} npc={npc!} />
   },
   footer: (ctx) => [
     choice({

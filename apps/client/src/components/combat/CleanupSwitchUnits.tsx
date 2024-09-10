@@ -30,11 +30,11 @@ export function CleanupSwitchUnits(props: CleanupSwitchUnitsProps) {
       )}
       {team && (
         <SwitchUnits
-          action={new SetIsActive('', team.id, selectCount)}
+          action={new SetIsActive(team.id, selectCount)}
           onConfirm={(selectedTargets) => {
             fns.pushCleanupAction({
               id: nanoid(),
-              action: new SetIsActive('', team.id),
+              action: new SetIsActive(team.id, selectCount),
               targetIds: selectedTargets.map((u) => u.id),
             })
           }}

@@ -7,6 +7,7 @@ import {
   PowerWordKill,
   Protect,
   Thunderbolt,
+  TimeBend,
   WillOWisp,
 } from '../Actions'
 import { MindShatter } from '../Actions/MindShatter'
@@ -20,6 +21,7 @@ import {
   ProtectId,
   ScholarId,
   ThunderboltId,
+  TimeBendId,
   WillOWispId,
 } from '../Ids'
 import { BASE_UNIT } from '../Units/system/BASE_UNIT'
@@ -76,6 +78,10 @@ export const GengarConfig: UnitBaseConfig = {
     {
       id: ThunderboltId,
       make: (u) => new Thunderbolt(u.id, u.teamId),
+    },
+    {
+      id: TimeBendId,
+      make: (u) => new TimeBend(u.id, u.teamId),
     },
     {
       id: WillOWispId,

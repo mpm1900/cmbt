@@ -85,5 +85,6 @@ export const ZERO_UNIT: Unit = {
     modified: false,
     hasBeenSeen: false,
     activeTurns: 0,
+    inactiveTurns: 0,
   },
 }

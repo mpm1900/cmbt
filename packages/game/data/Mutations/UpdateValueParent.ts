@@ -4,27 +4,36 @@ import {
   MutationFilterArgs,
   MutationProps,
   Unit,
+  ValueKey,
 } from '../../types'
-import { UpdatePhysicalArmorParentId } from '../Ids'
+import { UpdateValueParentId } from '../Ids'
 
-export class UpdatePhysicalArmorParent extends Mutation {
+export class UpdateValueParent extends Mutation {
+  valueKey: ValueKey
   factor: number
   static: number
 
-  constructor(props: MutationProps<{ factor?: number; static?: number }>) {
-    super(UpdatePhysicalArmorParentId, props)
+  constructor(
+    props: MutationProps<{
+      factor?: number
+      static?: number
+      valueKey: ValueKey
+    }>
+  ) {
+    super(UpdateValueParentId, props)
 
     this.factor = props.factor ?? 0
     this.static = props.static ?? 0
+    this.valueKey = props.valueKey
   }
 
   resolve = (unit: Unit): Partial<Unit> => {
     return {
       values: Mutation.setValues(unit, (values) => ({
-        physicalArmor: Math.max(
+        [this.valueKey]: Math.max(
           Math.round(
-            values.physicalArmor +
-              values.physicalArmor * this.factor +
+            values[this.valueKey] +
+              values[this.valueKey] * this.factor +
               this.static
           ),
           0

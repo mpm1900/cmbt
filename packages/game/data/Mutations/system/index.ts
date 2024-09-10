@@ -1,5 +1,6 @@
 export * from './AddModifiersToParent'
 export * from './IncrementActiveTurns'
+export * from './IncrementInactiveTurns'
 export * from './SetDeadAsInactive'
 export * from './SetIsActiveParent'
 export * from './SetLastUsedAction'

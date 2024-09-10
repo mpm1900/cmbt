@@ -13,7 +13,7 @@ import {
   modifyRenderContext,
 } from '../../utils'
 import { ArmorUpId } from '../Ids'
-import { Identity, UpdatePhysicalArmorParent } from '../Mutations'
+import { Identity, UpdateValueParent } from '../Mutations'
 import { EmptyArray } from '../Queries'
 
 export class ArmorUp extends Action {
@@ -51,9 +51,10 @@ export class ArmorUp extends Action {
       (modifiedTargets) => ({
         onSuccess: {
           mutations: [
-            new UpdatePhysicalArmorParent({
+            new UpdateValueParent({
               sourceId: source.id,
               parentId: source.id,
+              valueKey: 'physicalArmor',
               static: this.amount,
             }),
           ],

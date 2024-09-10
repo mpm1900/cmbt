@@ -7,7 +7,7 @@ import {
   StatKey,
   Unit,
 } from '../../types'
-import { UpdateStatParentId } from '../Ids'
+import { UpdateStatParentMutationId } from '../Ids'
 
 export class UpdateStatParentMutate extends Mutation {
   stat: StatKey
@@ -27,7 +27,7 @@ export class UpdateStatParentMutate extends Mutation {
       percentage?: boolean
     }>
   ) {
-    super(UpdateStatParentId, props)
+    super(UpdateStatParentMutationId, props)
 
     this.stat = props.stat
     this.factor = props.factor ?? 0

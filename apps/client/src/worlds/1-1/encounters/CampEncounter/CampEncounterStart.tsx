@@ -12,7 +12,8 @@ import { IoMdReturnLeft } from 'react-icons/io'
 import { LiaFortAwesome } from 'react-icons/lia'
 import { LuSwords } from 'react-icons/lu'
 import { SlSpeech } from 'react-icons/sl'
-import { ChibleeId, ChibleeValues } from '.'
+import { ChibleeId, ChibleeValues } from '../../npcs/Chiblee'
+import { CampEncounterActions } from './Actions'
 import { CampEncounterShopId } from './CampEncounterShop'
 import { CampEncounterTabs } from './Tabs'
 
@@ -28,6 +29,9 @@ export const CampEncounterStart: EncounterNode = {
   id: CampEncounterStartId,
   icon: <LiaFortAwesome />,
   title: 'Friendly Camp',
+  actions: (ctx) => CampEncounterActions(ctx),
+  tabs: (ctx) => CampEncounterTabs(ctx),
+
   render: (ctx, props) => {
     const npc = ctx.npcs.find((c) => c.id === ChibleeId)
 
@@ -61,13 +65,6 @@ export const CampEncounterStart: EncounterNode = {
       ctx.log(<Separator />)
     }
   },
-  actions: (ctx) => [
-    choice({
-      label: <IoMdReturnLeft />,
-      back: true,
-    }),
-  ],
-  tabs: (ctx) => CampEncounterTabs(ctx),
   choices: (ctx) => {
     const npc = ctx.npcs.find((c) => c.id === ChibleeId)
     const charmAttempts = npc?.values.charmAttempts

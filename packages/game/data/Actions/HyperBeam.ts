@@ -18,7 +18,7 @@ import { getDamageAi } from '../../utils/getDamageAiAction'
 import { modifyRenderContext } from '../../utils/modifyRenderContext'
 import { HyperBeamId, StunnedParentId } from '../Ids'
 import { UpdateFlagParent } from '../Modifiers'
-import { UpdateFocusParent } from '../Mutations'
+import { UpdateValueParent } from '../Mutations'
 import { GetUnits } from '../Queries'
 
 export class HyperBeam extends Action {
@@ -28,9 +28,10 @@ export class HyperBeam extends Action {
     super(HyperBeamId, {
       sourceId,
       teamId,
-      cost: new UpdateFocusParent({
+      cost: new UpdateValueParent({
         sourceId: sourceId,
         parentId: sourceId,
+        valueKey: 'focus',
         static: -30,
       }),
       targets: new GetUnits({

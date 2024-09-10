@@ -34,6 +34,7 @@ export class RetreatingBlow extends Action {
         isHidden: false,
       }),
       maxTargetCount: 1,
+      priority: -1,
     })
 
     this.damage = {

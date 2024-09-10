@@ -10,15 +10,15 @@ import { applyModifiers, getModifiersFromUnit } from '../../../utils'
 import { SetIsActiveId } from '../../Ids'
 import { Identity } from '../../Mutations'
 import { SetIsActiveParent } from '../../Mutations/system'
-import { GetUnits } from '../../Queries'
+import { GetUnitsForCleanupActive } from '../../Queries/GetUnitsForCleanupActive'
 
 export class SetIsActive extends Action {
-  constructor(sourceId: Id, teamId: Id, maxTargetCount = 1) {
+  constructor(teamId: Id, maxTargetCount: number) {
     super(SetIsActiveId, {
-      sourceId,
+      sourceId: '',
       teamId,
       cost: new Identity(),
-      targets: new GetUnits({
+      targets: new GetUnitsForCleanupActive({
         teamId: teamId,
         isActive: false,
         isAlive: true,

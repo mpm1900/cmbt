@@ -13,11 +13,7 @@ import {
   modifyRenderContext,
 } from '../../utils'
 import { NegateArmorId } from '../Ids'
-import {
-  Identity,
-  UpdateMagicArmorParent,
-  UpdatePhysicalArmorParent,
-} from '../Mutations'
+import { Identity, UpdateValueParent } from '../Mutations'
 import { GetUnits } from '../Queries'
 
 export class NegateArmor extends Action {
@@ -57,14 +53,16 @@ export class NegateArmor extends Action {
       (modifiedTargets) => ({
         onSuccess: {
           mutations: modifiedTargets.flatMap((target) => [
-            new UpdatePhysicalArmorParent({
+            new UpdateValueParent({
               sourceId: source.id,
               parentId: target.id,
+              valueKey: 'physicalArmor',
               factor: -1,
             }),
-            new UpdateMagicArmorParent({
+            new UpdateValueParent({
               sourceId: source.id,
               parentId: target.id,
+              valueKey: 'magicArmor',
               factor: -1,
             }),
           ]),

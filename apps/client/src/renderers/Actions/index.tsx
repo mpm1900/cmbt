@@ -27,7 +27,6 @@ import {
   HoldPersonId,
   HyperBeam,
   HyperBeamId,
-  IcyWindId,
   InspectAllId,
   InspectedAll,
   InvertSpeedAll,
@@ -63,6 +62,7 @@ import {
   SwordsDanceId,
   TauntId,
   ThunderboltId,
+  TimeBendId,
   TrickRoomId,
   UpdateFlagParent,
   UpdateStatStageParent,
@@ -92,6 +92,7 @@ import { PowerStanceRenderer } from './PowerStance'
 import { RetreatingBlowRenderer } from './RetreatingBlow'
 import { TauntRenderer } from './Taunt'
 import { ThunderboltRenderer } from './Thunderbolt'
+import { TimeBendRenderer } from './TimeBend'
 
 export * from './_names'
 
@@ -130,6 +131,7 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
   [RetreatingBlowId]: RetreatingBlowRenderer,
   [TauntId]: TauntRenderer,
   [ThunderboltId]: ThunderboltRenderer,
+  [TimeBendId]: TimeBendRenderer,
 
   /// SYSTEM ACTIONS
   [SetIsActiveId]: {
@@ -312,16 +314,6 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
         </div>
       )
     },
-  },
-  [IcyWindId]: {
-    name: 'Icy Wind',
-    description: (action) => (
-      <>
-        Applies <span className="font-bold text-white">Speed Down</span> to
-        target enemy unit.
-        {action.priority !== 0 && <> Priority {action.priority}.</>}
-      </>
-    ),
   },
   [MagicMissileId]: {
     name: 'Magic Missile',

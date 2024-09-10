@@ -20,7 +20,7 @@ export function useCleanupController() {
         queue = queue.setQueue((items) => [
           {
             id: nanoid(),
-            action: new SetIsActive('', ''),
+            action: new SetIsActive('', 1),
             targetIds: items.flatMap((i) => i.targetIds),
           },
         ])

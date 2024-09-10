@@ -3,7 +3,11 @@ import { getDamageFromMutations } from '@/utils'
 import { handleCleanup } from '@/utils/handleCleanup'
 import { handleTriggerEvent } from '@/utils/handleTriggerEvent'
 import { logResult } from '@/utils/logResult'
-import { IncrementActiveTurns, SetDeadAsInactive } from '@repo/game/data'
+import {
+  IncrementActiveTurns,
+  IncrementInactiveTurns,
+  SetDeadAsInactive,
+} from '@repo/game/data'
 import {
   ActionResult,
   ActionsQueueItem,
@@ -142,7 +146,10 @@ export function useCombatActions() {
     } else {
       combat.setStatus('upkeep')
       combat.next()
-      combat.mutate([new IncrementActiveTurns({})], context)
+      combat.mutate(
+        [new IncrementActiveTurns({}), new IncrementInactiveTurns({})],
+        context
+      )
       combat.log(<LogHeader>turn {combat.turn.count + 1}</LogHeader>)
       activeUnit.setActiveUnit(
         context.units.find((u) => u.flags.isActive && u.teamId === context.user)

@@ -6,18 +6,18 @@ import { Separator } from '@radix-ui/react-menubar'
 import { EncounterNode } from '@repo/game/types'
 import { nanoid } from 'nanoid'
 import { BsArrowLeft } from 'react-icons/bs'
+import { GiVillage } from 'react-icons/gi'
 import { IoMdReturnRight } from 'react-icons/io'
-import { LiaFortAwesome } from 'react-icons/lia'
 import { ChibleeId } from '../../npcs/Chiblee'
 import { CampEncounterActions } from './Actions'
-import { CampEncounterStartId } from './CampEncounterStart'
+import { CampEncounterInnId } from './CampEncounterInn'
 import { CampEncounterTabs } from './Tabs'
 
 export const CampEncounterShopId = nanoid()
 export const CampEncounterShop: EncounterNode = {
   id: CampEncounterShopId,
-  icon: <LiaFortAwesome />,
-  title: `Friendly Camp - Chiblee's Shop`,
+  icon: <GiVillage />,
+  title: `Friendly Village - Inn`,
   actions: (ctx) => CampEncounterActions(ctx),
   tabs: (ctx) => CampEncounterTabs(ctx),
 
@@ -41,7 +41,7 @@ export const CampEncounterShop: EncounterNode = {
     choice({
       before: <BsArrowLeft />,
       label: <>Back</>,
-      to: CampEncounterStartId,
+      to: CampEncounterInnId,
     }),
     choice({
       label: <>Leave</>,

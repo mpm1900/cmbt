@@ -20,6 +20,7 @@ export function ChoiceButton(props: ChoiceButtonProps) {
     >
       <Button
         className="w-full justify-start flex items-center space-x-2 text-muted-foreground hover:text-white"
+        disabled={choice.disabled}
         variant={'ghost'}
         onClick={() => {
           choice.resolve(ctx)

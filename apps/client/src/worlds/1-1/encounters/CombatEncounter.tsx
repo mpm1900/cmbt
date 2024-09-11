@@ -11,6 +11,13 @@ import { IoMdReturnLeft, IoMdReturnRight } from 'react-icons/io'
 import { IoSkullSharp } from 'react-icons/io5'
 import { LuSwords } from 'react-icons/lu'
 
+const enemyTeam: Team = {
+  id: TeamId(),
+  resources: { credits: 0 },
+  items: [],
+  maxActiveUnits: 3,
+}
+
 const CombatIntroductionNode: EncounterNode = {
   id: nanoid(),
   icon: <BsQuestionLg />,
@@ -41,14 +48,7 @@ const CombatIntroductionNode: EncounterNode = {
         </ChoiceLabel>
       ),
       resolve: (ctx) => {
-        const enemyTeam: Team = {
-          id: TeamId(),
-          resources: { credits: 0 },
-          items: [],
-          maxActiveUnits: 3,
-        }
-        const unit = ctx.units.find((u) => true)
-        if (unit) {
+        if (ctx.team && ctx.units.length > 0) {
           ctx.initializeCombat({
             enemyTeam,
             enemyUnits: Array.from({ length: 3 }).map(() =>
@@ -64,7 +64,7 @@ const CombatIntroductionNode: EncounterNode = {
             modifiers: [
               new UpdateStatTeam({
                 registryId: SpeedUpTeamId,
-                teamId: unit.teamId,
+                teamId: ctx.team.id,
                 stat: 'speed',
                 factor: 0.5,
                 duration: 2,
@@ -191,7 +191,40 @@ export const CombatEncounterId = nanoid()
 export function CombatEncounter(): Encounter {
   return {
     id: CombatEncounterId,
-    setup: () => {},
+    setup: (ctx) => {
+      if (ctx.team && ctx.units.length > 0) {
+        ctx.initializeCombat({
+          enemyTeam,
+          enemyUnits: Array.from({ length: 3 }).map(() =>
+            makeEnemyUnit({ level: 12, teamId: enemyTeam.id })
+          ),
+          reward: {
+            items: [],
+            resources: {
+              credits: 200,
+            },
+            xp: 2024,
+          },
+          modifiers: [
+            new UpdateStatTeam({
+              registryId: SpeedUpTeamId,
+              teamId: ctx.team.id,
+              stat: 'speed',
+              factor: 0.5,
+              duration: 2,
+            }),
+          ],
+          onSuccess: () => {
+            ctx.updateActiveWorldNode((n) => ({
+              completed: true,
+              visited: true,
+            }))
+            ctx.nav('/world')
+          },
+          onFailure: () => {},
+        })
+      }
+    },
     nodes: [CombatIntroductionNode, CombatNode2],
     activeNodeId: CombatIntroductionNode.id,
     visitedNodeIds: [],

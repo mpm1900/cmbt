@@ -14,7 +14,7 @@ export type DamageRenderer = {
 
 export const DamageRenderers: Record<DamageType, DamageRenderer | undefined> = {
   arcane: {
-    color: '#f472b6',
+    color: '#fb7185',
     name: <>Arcane</>,
     icon: <RiMoonClearFill className="h-full w-full fill-inherit" />,
   },

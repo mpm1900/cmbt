@@ -26,6 +26,9 @@ export const PLAYER_BASES: UnitBase[] = [
   Blissy,
   Snorlax,
   TempestKnight,
+
+  Celebi,
+  RestlessSpirit,
 ]
 
 export const ENEMY_BASES = [Celebi, RestlessSpirit, Wolf]

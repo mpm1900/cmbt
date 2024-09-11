@@ -34,7 +34,7 @@ export function ModifierHover(props: ModifierHoverProps) {
           >
             <div className="space-y-2">
               <div className="flex items-start justify-between">
-                <div>{renderer.name(modifier)}</div>
+                <div>{renderer?.name(modifier)}</div>
                 <div className="font-black text-xs uppercase text-muted-foreground/40">
                   {modifier instanceof Trigger ? 'Trigger' : 'Modifier'}
                 </div>

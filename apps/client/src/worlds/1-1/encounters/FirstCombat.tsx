@@ -68,7 +68,8 @@ const IntroductionNode: EncounterNode = {
       },
     }),
     choice({
-      label: <>[DEBUG] Complete encounter</>,
+      before: <ChoiceAttributes>DEBUG</ChoiceAttributes>,
+      label: <>Complete encounter</>,
       after: <IoMdReturnLeft />,
       action: true,
       back: true,

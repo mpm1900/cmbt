@@ -34,6 +34,7 @@ export type ChoiceProps = Pick<
   Partial<EncounterChoice>,
   'active' | 'resolve'
 > & {
+  disabled?: boolean
   label: ReactNode
   before?: ReactNode
   after?: ReactNode
@@ -47,6 +48,7 @@ export function choice(props: ChoiceProps): EncounterChoice {
   return {
     id: nanoid(),
     active: props.active,
+    disabled: props.disabled,
     label: (
       <ChoiceLabel
         before={props.before}
@@ -95,8 +97,8 @@ export function check(props: CheckProps): EncounterChoice | undefined {
   return choice({
     before: (
       <ChoiceAttributes>
-        {props.icon}
-        {`, ${props.chance}%`}
+        <div>{props.icon}</div>
+        <div>{`, ${props.chance}%`}</div>
       </ChoiceAttributes>
     ),
     label: props.label,
@@ -108,9 +110,13 @@ export function check(props: CheckProps): EncounterChoice | undefined {
         <div className="flex items-center space-x-2">
           <ChoiceLog>{props.label}</ChoiceLog>
           {success ? (
-            <span className="text-green-400">[Success]</span>
+            <ChoiceAttributes className="text-green-400">
+              Success
+            </ChoiceAttributes>
           ) : (
-            <span className="text-red-400">[Failure]</span>
+            <ChoiceAttributes className="text-red-400">
+              Failure
+            </ChoiceAttributes>
           )}
         </div>
       )

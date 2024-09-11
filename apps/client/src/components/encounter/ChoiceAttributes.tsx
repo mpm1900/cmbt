@@ -5,7 +5,7 @@ export function ChoiceAttributes(props: ElementProps) {
   return (
     <div className={cn('flex items-center space-x-1', props.className)}>
       <div className="font-bold">[</div>
-      {props.children}
+      <div className="flex items-center space-x-1">{props.children}</div>
       <div className="font-bold">]</div>
     </div>
   )

@@ -118,6 +118,7 @@ export type EncounterNode = {
 export type EncounterChoice = {
   id: Id
   label: React.ReactNode
+  disabled?: boolean
   active?: boolean
   resolve: (ctx: EncounterContext) => void
 }

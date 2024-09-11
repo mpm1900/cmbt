@@ -7,7 +7,11 @@ import {
   StatKey,
   Unit,
 } from '../../types'
+import { clampStatStage } from '../../utils'
 import { UpdateStatStageParentId } from '../Ids'
+
+export const MAX_STAT_STAGE = 6
+export const MIN_STAT_STAGE = -6
 
 export class UpdateStatStageParent extends Modifier {
   stat: StatKey
@@ -21,7 +25,7 @@ export class UpdateStatStageParent extends Modifier {
     super(UpdateStatStageParentId, props)
 
     this.stat = props.stat
-    this.stages = Math.min(Math.max(props.stages, -4), 4)
+    this.stages = clampStatStage(props.stages)
     this.priority = MODIFIER_PRIORITIES.STAGES
   }
 
@@ -29,7 +33,9 @@ export class UpdateStatStageParent extends Modifier {
     return {
       stages: {
         ...unit.stages,
-        [this.stat]: (unit.stages[this.stat] ?? 0) + this.stages,
+        [this.stat]: clampStatStage(
+          (unit.stages[this.stat] ?? 0) + this.stages
+        ),
       },
     }
   }

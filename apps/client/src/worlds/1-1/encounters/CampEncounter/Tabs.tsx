@@ -1,21 +1,19 @@
 import { choice } from '@/worlds/_utils'
 import { EncounterContext } from '@repo/game/types'
-import { CombatTrainingId } from '.'
-import { CampEncounterShopId } from './CampEncounterShop'
+import { CampEncounterCombatTrainingId } from './CampEncounterCombatTraining'
+import { CampEncounterInnId } from './CampEncounterInn'
 
 export function CampEncounterTabs(ctx: EncounterContext) {
   return [
     choice({
-      label: <>Shop</>,
-      clearLog: ctx.activeNode.id !== CampEncounterShopId,
-      active: ctx.activeNode.id === CampEncounterShopId,
-      to: CampEncounterShopId,
+      label: <>Inn</>,
+      active: ctx.activeNode.id === CampEncounterInnId,
+      to: CampEncounterInnId,
     }),
     choice({
-      clearLog: ctx.activeNode.id !== CombatTrainingId,
-      active: ctx.activeNode.id === CombatTrainingId,
+      active: ctx.activeNode.id === CampEncounterCombatTrainingId,
       label: <>Combat Training</>,
-      to: CombatTrainingId,
+      to: CampEncounterCombatTrainingId,
     }),
   ]
 }

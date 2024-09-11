@@ -24,6 +24,7 @@ export function UnitCombatModifiers(
       !registeredTriggers.some((t) => t.rtid === m.rtid)
   )
   const list = [...appliedModifiers, ...registeredTriggers, ...otherTriggers]
+
   return (
     <UnitModifiers
       className={props.className}

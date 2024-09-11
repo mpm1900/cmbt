@@ -164,9 +164,10 @@ export const CampEncounterCombatTrainingCombatStart: EncounterNode = {
           ctx.initializeCombat({
             enemyTeam,
             enemyUnits: Array.from({ length: 4 }).map((_, i) => {
-              const e = makeEnemyUnit({ level: 16, teamId: enemyTeam.id }, [
-                Wolf,
-              ])
+              const e = makeEnemyUnit(
+                { level: i > 2 ? 2 : 4, teamId: enemyTeam.id },
+                [Wolf]
+              )
               e.name = 'Village Soldier'
               if (i === 0) e.name = 'Dan'
               if (i === 1) e.name = 'Ryab'

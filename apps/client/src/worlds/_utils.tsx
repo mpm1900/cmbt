@@ -68,7 +68,7 @@ export function choice(props: ChoiceProps): EncounterChoice {
           visited: true,
           encounter: ctx.encounter,
         }))
-        ctx.back()
+        ctx.back(true)
       }
       if (props.to) {
         ctx.log(<ChoiceLog>{props.label}</ChoiceLog>)
@@ -136,6 +136,7 @@ export function check(props: CheckProps): EncounterChoice | undefined {
 export type NpcConfigs = Record<
   Id,
   {
+    level: number
     bases: UnitBase[]
   }
 >
@@ -164,7 +165,7 @@ export function initializeNpcCombat(props: InitializeNpcCombatProps) {
     enemyUnits: npcs.map((npc) => {
       const config = configs[npc.id]
       const unit = makeEnemyUnit(
-        { level: 40, teamId: enemyTeam.id },
+        { level: config.level, teamId: enemyTeam.id },
         config.bases
       )
       unit.name = npc.name ?? unit.name

@@ -43,7 +43,7 @@ const IntroductionNode: EncounterNode = {
           ctx.initializeCombat({
             enemyTeam,
             enemyUnits: Array.from({ length: 3 }).map(() => {
-              const e = makeEnemyUnit({ level: 12, teamId: enemyTeam.id }, [
+              const e = makeEnemyUnit({ level: 2, teamId: enemyTeam.id }, [
                 Wolf,
               ])
               return e
@@ -54,7 +54,7 @@ const IntroductionNode: EncounterNode = {
               resources: {
                 credits: 200,
               },
-              xp: 2024,
+              xp: 15,
             },
             onSuccess: () => {
               ctx.updateActiveWorldNode((n) => ({

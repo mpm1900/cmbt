@@ -47,7 +47,7 @@ export const CampEncounterInn: EncounterNode = {
       ctx.log(
         <div>
           <Quote name={npc!.name}>
-            "It's refreshing to see a frindly face out here. I'm {npc!.name}.
+            "It's refreshing to see a friendly face out here. I'm {npc!.name}.
             This is my Inn. What can I do for you today?
           </Quote>
         </div>
@@ -178,10 +178,11 @@ export const CampEncounterInn: EncounterNode = {
             npcs: [npc!],
             configs: {
               [npc!.id]: {
+                level: 9,
                 bases: [Celebi],
               },
             },
-            xp: 5555,
+            xp: 55,
             ctx,
           })
         },

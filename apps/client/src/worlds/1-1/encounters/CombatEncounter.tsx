@@ -159,12 +159,12 @@ const CombatNode2: EncounterNode = {
           id: TeamId(),
           resources: { credits: 0 },
           items: [],
-          maxActiveUnits: 3,
+          maxActiveUnits: 2,
         }
         ctx.initializeCombat({
           enemyTeam,
           enemyUnits: Array.from({ length: 3 }).map(() =>
-            makeEnemyUnit({ level: 12, teamId: enemyTeam.id })
+            makeEnemyUnit({ level: 4, teamId: enemyTeam.id })
           ),
           commit: true,
           reward: {
@@ -172,7 +172,7 @@ const CombatNode2: EncounterNode = {
             resources: {
               credits: 200,
             },
-            xp: 2024,
+            xp: 100,
           },
           onSuccess: () => {
             ctx.updateActiveWorldNode((n) => ({
@@ -197,13 +197,13 @@ export function CombatEncounter(): Encounter {
         id: TeamId(),
         resources: { credits: 0 },
         items: [],
-        maxActiveUnits: 3,
+        maxActiveUnits: 2,
       }
       if (ctx.team && ctx.units.length > 0) {
         ctx.initializeCombat({
           enemyTeam,
           enemyUnits: Array.from({ length: 3 }).map(() =>
-            makeEnemyUnit({ level: 12, teamId: enemyTeam.id })
+            makeEnemyUnit({ level: 4, teamId: enemyTeam.id })
           ),
           commit: true,
           reward: {

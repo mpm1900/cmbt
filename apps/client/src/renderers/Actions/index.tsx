@@ -11,6 +11,7 @@ import {
   Disable,
   DisabledParent,
   DisableId,
+  DispelMagicId,
   DragonStanceId,
   EarthquakeId,
   ExplosionId,
@@ -83,6 +84,7 @@ import { ArmorUpRenderer } from './ArmorUp'
 import { BattleStanceRenderer } from './BattleStance'
 import { BiteRenderer } from './Bite'
 import { BodySlamRenderer } from './BodySlam'
+import { DispelMagicRenderer } from './DispelMagic'
 import { DragonStanceRenderer } from './DragonStance'
 import { HexRenderer } from './Hex'
 import { MindShatterRenderer } from './MindShatter'
@@ -123,6 +125,7 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
   [BattleStanceId]: BattleStanceRenderer,
   [BiteId]: BiteRenderer,
   [BodySlamId]: BodySlamRenderer,
+  [DispelMagicId]: DispelMagicRenderer,
   [DragonStanceId]: DragonStanceRenderer,
   [HexId]: HexRenderer,
   [MindShatterId]: MindShatterRenderer,

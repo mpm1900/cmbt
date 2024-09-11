@@ -1,6 +1,6 @@
 export * from './system'
 
-export * from './AddModifierRegistry'
+export * from './AddModifiersToRegistryParent'
 export * from './DamageAll'
 export * from './DamageParent'
 export * from './DamageTeam'

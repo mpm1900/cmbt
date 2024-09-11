@@ -4,6 +4,7 @@ import {
   BiteId,
   BodySlamId,
   DisableId,
+  DispelMagicId,
   DragonStanceId,
   EarthquakeId,
   ExplosionId,
@@ -78,6 +79,7 @@ export const ACTION_NAMES: Record<string, string> = {
 
   [BattleStanceId]: 'Battle Stance',
   [BiteId]: 'Bite',
+  [DispelMagicId]: 'Dispel Magic',
   [DragonStanceId]: 'Dragon Stance',
   [HexId]: 'Hex',
   [MindShatterId]: 'Mind Shatter',

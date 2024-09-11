@@ -1,4 +1,5 @@
 import {
+  AddStatModifiersImmunityAllId,
   AttackDownAllOtherOnUnitEnterId,
   AttackDownParentId,
   AttackStageDownParentId,
@@ -42,6 +43,7 @@ import {
   GiBiceps,
   GiCrenulatedShield,
   GiDualityMask,
+  GiMagicSwirl,
   GiSandstorm,
   GiSpinningBlades,
   GiSprint,
@@ -54,6 +56,9 @@ import { PiScrollFill } from 'react-icons/pi'
 import { TiSpiral } from 'react-icons/ti'
 
 export const MODIFIER_ICONS: Record<Id, ReactNode> = {
+  [AddStatModifiersImmunityAllId]: (
+    <GiMagicSwirl className="fill-white h-full w-full" />
+  ),
   [DefenseDownParentId]: (
     <div className="h-full w-full relative">
       <GiCrenulatedShield className="fill-white h-full w-full" />

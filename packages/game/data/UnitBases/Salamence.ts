@@ -1,6 +1,7 @@
 import { nanoid } from 'nanoid'
 import { UnitBase, UnitBaseConfig } from '../../types'
 import {
+  DispelMagic,
   DragonStance,
   Fireball,
   FireBlast,
@@ -10,6 +11,7 @@ import {
 } from '../Actions'
 import { Intimidate } from '../Augments'
 import {
+  DispelMagicId,
   DragonStanceId,
   FireballId,
   FireBlastId,
@@ -46,6 +48,10 @@ export const SalamenceConfig: UnitBaseConfig = {
   actionsCount: 5,
   actions: [
     {
+      id: DispelMagicId,
+      make: (unit) => new DispelMagic(unit.id, unit.teamId),
+    },
+    {
       id: DragonStanceId,
       make: (unit) => new DragonStance(unit.id, unit.teamId),
     },
@@ -72,9 +78,9 @@ export const SalamenceConfig: UnitBaseConfig = {
   ],
   defaultAbilityId: IntimidateId,
   defaultActionIds: [
+    DispelMagicId,
     FireballId,
     FireBlastId,
-    HyperBeamId,
     RetreatingBlowId,
     SlashId,
   ],

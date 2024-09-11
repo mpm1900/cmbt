@@ -1,4 +1,5 @@
 import {
+  AddStatModifiersImmunityAllId,
   AttackDownAllOtherOnUnitEnterId,
   AttackDownParentId,
   AttackStageDownParentId,
@@ -54,6 +55,7 @@ export const MODIFIER_NAMES: Record<string, string> = {
   [PoisonedDamageOnTurnEndId]: 'Poisoned',
   [SandstormOnTurnEndId]: 'Sandstorm',
 
+  [AddStatModifiersImmunityAllId]: 'Dispel Stat Changes',
   [AttackDownParentId]: 'Attack Down',
   [AttackStageDownParentId]: 'Attack Down',
   [AttackStageUpParentId]: 'Attack Up',

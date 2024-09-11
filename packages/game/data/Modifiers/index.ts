@@ -1,6 +1,8 @@
 export * from './system'
 
 export * from './AddActionParent'
+export * from './AddModifiersToRegistryAll'
+export * from './AddModifiersToRegistryParent'
 export * from './DisabledParent'
 export * from './InspectedAll'
 export * from './InvertSpeedAll'

@@ -1,5 +1,6 @@
 import {
   AddActionParentId,
+  AddStatModifiersImmunityAllId,
   AttackDownAllOtherOnUnitEnterId,
   CreateSandstormOnUnitEnterId,
   DamageAllOnTurnEndId,
@@ -22,6 +23,7 @@ import {
 import { Modifier } from '@repo/game/types'
 import { ReactNode } from 'react'
 import { AddActionParentRenderer } from './AddActionParent'
+import { AddStatModifiersImmunityAllRenderer } from './AddStatModifiersImmunityAll'
 import { DisabledParentRenderer } from './DisabledParent'
 import { HexedParentRenderer } from './HexedParent'
 import { HiddenParentRenderer } from './HiddenParent'
@@ -51,6 +53,7 @@ export type ModifierRenderer = {
 
 export const ModifierRenderers: Record<string, ModifierRenderer> = {
   [AddActionParentId]: AddActionParentRenderer,
+  [AddStatModifiersImmunityAllId]: AddStatModifiersImmunityAllRenderer,
   [DisabledParentId]: DisabledParentRenderer,
   [HexedParentId]: HexedParentRenderer,
   [HiddenParentId]: HiddenParentRenderer,

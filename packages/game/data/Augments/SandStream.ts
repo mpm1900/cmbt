@@ -1,6 +1,6 @@
 import { Augment, Modifier, Mutation, Unit } from '../../types'
 import { SandstormOnTurnEndId, SandStreamId } from '../Ids'
-import { AddModifierRegistry } from '../Mutations'
+import { AddModifiersToRegistryParentMutate } from '../Mutations'
 import { CreateSandstormOnUnitEnter } from '../Triggers'
 
 export const SandStream: Augment = {
@@ -17,10 +17,10 @@ export const SandStream: Augment = {
   },
   mutations(unit: Unit): Mutation[] {
     return [
-      new AddModifierRegistry({
+      new AddModifiersToRegistryParentMutate({
         sourceId: unit.id,
         parentId: unit.id,
-        modifierId: SandstormOnTurnEndId,
+        modifierIds: [SandstormOnTurnEndId],
       }),
     ]
   },

@@ -2,6 +2,7 @@ import { Id } from '.'
 import { Mutation, MutationProps } from './Mutation'
 
 export const MODIFIER_PRIORITIES = {
+  IMMUNITIES: -2,
   PRE: -1,
   DEFAULT: 0,
   STAGES: 1,

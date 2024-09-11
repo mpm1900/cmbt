@@ -1,7 +1,7 @@
 import { ChoiceAttributes } from '@/components/encounter/ChoiceAttributes'
 import { Narration } from '@/components/encounter/Narration'
 import { choice } from '@/worlds/_utils'
-import { RestlessSpirit, TeamId } from '@repo/game/data'
+import { TeamId, Wolf } from '@repo/game/data'
 import { Encounter, EncounterNode, Team } from '@repo/game/types'
 import { makeUnit } from '@repo/game/utils'
 import { nanoid } from 'nanoid'
@@ -43,9 +43,7 @@ const IntroductionNode: EncounterNode = {
           ctx.initializeCombat({
             enemyTeam,
             enemyUnits: Array.from({ length: 2 }).map(() => {
-              const e = makeUnit({ level: 4, teamId: enemyTeam.id }, [
-                RestlessSpirit,
-              ])
+              const e = makeUnit({ level: 4, teamId: enemyTeam.id }, [Wolf])
 
               return e
             }),

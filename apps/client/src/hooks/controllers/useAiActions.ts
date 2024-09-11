@@ -27,7 +27,10 @@ export function useAiActions() {
       const aiUnits = getActionableUnits(units).filter((u) => u.teamId !== user)
       const aiActions = aiUnits.map((unit) => {
         const aiActions = unit.actions
-          .filter((a) => checkActionCost(a, unit))
+          .filter((a) => {
+            const isDisabled = unit.registry.actions.includes(a.id)
+            return checkActionCost(a, unit) && !isDisabled
+          })
           .map((action) => {
             const ai = getBestAiAction(action, ctx)
             return ai

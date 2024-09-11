@@ -10,8 +10,14 @@ export function logActionIntent(
   log: CombatLogger,
   ctx: CombatContext
 ) {
-  const { source, targets, expandedTargets = [] } = result
-  const logTargets = expandedTargets.length === 0 ? targets : expandedTargets
+  const {
+    source,
+    targets,
+    expandedTargets = [],
+    protectedTargets = [],
+  } = result
+  const resultTargets = [...expandedTargets, ...protectedTargets]
+  const logTargets = resultTargets.length === 0 ? targets : resultTargets
   const renderer = ActionRenderers[action.id]
   if (logTargets) {
     const baseLog = (

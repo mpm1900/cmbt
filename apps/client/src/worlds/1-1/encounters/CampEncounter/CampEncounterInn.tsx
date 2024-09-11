@@ -28,21 +28,28 @@ export const CampEncounterInn: EncounterNode = {
   render: (ctx, props) => {
     const npc = ctx.npcs.find((c) => c.id === ChibleeId)
 
-    if (props.encounterVisitCount === 1) {
+    ctx.log(
+      <Narration>
+        You walk over to the building labeled "Chiblee's Inn" and go inside.
+      </Narration>
+    )
+
+    if (props.nodeVisitCount === 1) {
       ctx.log(
-        <div className="space-y-4">
-          <div>
-            <span>"Allied adventurers are few and far between out here." </span>
-            <Narration>
-              Says the woman sitting near the fire in front of you.
-            </Narration>
-          </div>
-          <div>
-            <Quote name={npc!.name}>
-              "It's refreshing to see a frindly face out here. I'm {npc!.name}.
-              This is my Inn. What can I do for you today?
-            </Quote>
-          </div>
+        <div>
+          <span>"Allied adventurers are few and far between out here." </span>
+          <Narration>
+            Says the woman sitting near the fire in front of you.
+          </Narration>
+        </div>
+      )
+
+      ctx.log(
+        <div>
+          <Quote name={npc!.name}>
+            "It's refreshing to see a frindly face out here. I'm {npc!.name}.
+            This is my Inn. What can I do for you today?
+          </Quote>
         </div>
       )
     } else {
@@ -61,7 +68,7 @@ export const CampEncounterInn: EncounterNode = {
       (sum, unit) => sum + unit.values.damage,
       0
     )
-    const cost = 500
+    const cost = Math.round(500 * (npc?.values.costMultiplier ?? 1))
     const credits = ctx.team?.resources.credits ?? 0
     const choices: (EncounterChoice | undefined)[] = [
       choice({

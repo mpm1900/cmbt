@@ -23,6 +23,7 @@ export type InitializeProps = {
   units: Unit[]
   user: Team
   enemy: Team
+  commit: boolean
   reward: CombatRewards
   mutations?: Mutation[]
   modifiers?: Modifier[]
@@ -32,6 +33,7 @@ export type InitializeProps = {
 
 export type CombatLog = { id: Id; delay: number; node: ReactNode }
 export type CombatState = Omit<CombatContext, 'queue'> & {
+  commit: boolean
   reward: CombatRewards
   logs: CombatLog[]
   log: CombatLogger
@@ -80,6 +82,7 @@ export const useCombat = create<CombatStore>((set, get) => {
         units,
         user,
         enemy,
+        commit,
         reward,
         modifiers = [],
         mutations = [],
@@ -98,6 +101,7 @@ export const useCombat = create<CombatStore>((set, get) => {
         units: units,
         teams: [user, enemy],
         user: user.id,
+        commit,
         reward,
         modifiers: validateModifiers(initialModifiers, []),
         turn: {
@@ -225,6 +229,7 @@ export const useCombat = create<CombatStore>((set, get) => {
         },
       })),
 
+    commit: false,
     reward: {
       items: [],
       resources: {

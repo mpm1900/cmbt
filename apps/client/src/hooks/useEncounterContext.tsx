@@ -26,6 +26,7 @@ export function useEncounterContext(): EncounterContext {
         mutations: props.mutations ?? [],
         enemyTeam: props.enemyTeam,
         enemyUnits: props.enemyUnits,
+        commit: props.commit,
         reward: props.reward,
         onFailure: props.onFailure,
         onSuccess: props.onSuccess,
@@ -44,12 +45,12 @@ export function useEncounterContext(): EncounterContext {
     units: game.units,
     npcs: npcs.npcs,
     visitedNodeIds: game.visitedNodeIds,
-    nav: (to) => {
-      store.clearLog()
+    nav: (to, clearLog) => {
+      if (clearLog) store.clearLog()
       return nav({ to })
     },
-    back: () => {
-      store.clearLog()
+    back: (clearLog) => {
+      if (clearLog) store.clearLog()
       nav({ to: '/world' })
     },
     log: store.log,

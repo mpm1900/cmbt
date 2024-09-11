@@ -21,6 +21,7 @@ export type InitializeCombatOptions = {
   userUnits?: Unit[]
   enemyTeam: Team
   enemyUnits: Unit[]
+  commit: boolean
   reward: CombatRewards
   modifiers?: Modifier[]
   mutations?: Mutation[]
@@ -36,7 +37,7 @@ export type EncounterContext = {
   visitedNodeIds: Id[]
   npcs: Npc[]
   nav: (to: string, clearLog?: boolean) => Promise<void>
-  back: () => void
+  back: (clearLog?: boolean) => void
   log: (item: React.ReactNode) => void
   clearLog: () => void
   initializeCombat: (props: InitializeCombatOptions) => void

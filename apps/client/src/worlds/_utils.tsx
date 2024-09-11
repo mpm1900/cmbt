@@ -170,6 +170,7 @@ export function initializeNpcCombat(props: InitializeNpcCombatProps) {
       unit.name = npc.name ?? unit.name
       return unit
     }),
+    commit: true,
     reward: {
       items: npcs.flatMap((npc) => npc.items),
       resources: {

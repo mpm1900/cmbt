@@ -48,6 +48,7 @@ const IntroductionNode: EncounterNode = {
               ])
               return e
             }),
+            commit: true,
             reward: {
               items: [],
               resources: {

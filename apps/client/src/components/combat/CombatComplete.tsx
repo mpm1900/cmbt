@@ -1,7 +1,6 @@
 import { useCombatContext, useCombatToWorldState } from '@/hooks'
 import { useCombat } from '@/hooks/state'
 import { isUnitAliveCtx } from '@repo/game/utils'
-import { useNavigate } from '@tanstack/react-router'
 import { IoMdReturnRight } from 'react-icons/io'
 import { Button } from '../ui/button'
 import {
@@ -14,16 +13,13 @@ import {
 import { CombatRewardsPreview } from './CombatRewardsPreview'
 
 export function CombatComplete() {
-  const { onSuccess } = useCombat()
+  const { commit: shouldCommit, onSuccess, onFailure } = useCombat()
   const ctx = useCombatContext()
-  const nav = useNavigate()
   const commit = useCombatToWorldState()
   const aliveUserUnits = ctx.units.filter(
     (u) => u.teamId === ctx.user && isUnitAliveCtx(u, ctx)
   )
-  if (aliveUserUnits.length === 0) {
-    nav({ to: '/' })
-  }
+  const success = aliveUserUnits.length !== 0
 
   return (
     <Card className="w-[360px]">
@@ -31,13 +27,21 @@ export function CombatComplete() {
         <CardTitle>Battle Complete</CardTitle>
       </CardHeader>
       <CardContent>
-        <CombatRewardsPreview />
+        {success && <CombatRewardsPreview />}
+        {!success && <div>You lose</div>}
       </CardContent>
       <CardFooter className="justify-end">
         <Button
           onClick={() => {
-            commit()
-            onSuccess()
+            if (shouldCommit) {
+              commit()
+            }
+            if (success) {
+              onSuccess()
+            }
+            if (!success) {
+              onFailure()
+            }
           }}
           className="space-x-2"
         >

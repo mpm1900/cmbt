@@ -11,13 +11,6 @@ import { IoMdReturnLeft, IoMdReturnRight } from 'react-icons/io'
 import { IoSkullSharp } from 'react-icons/io5'
 import { LuSwords } from 'react-icons/lu'
 
-const enemyTeam: Team = {
-  id: TeamId(),
-  resources: { credits: 0 },
-  items: [],
-  maxActiveUnits: 3,
-}
-
 const CombatIntroductionNode: EncounterNode = {
   id: nanoid(),
   icon: <BsQuestionLg />,
@@ -48,12 +41,19 @@ const CombatIntroductionNode: EncounterNode = {
         </ChoiceLabel>
       ),
       resolve: (ctx) => {
+        const enemyTeam: Team = {
+          id: TeamId(),
+          resources: { credits: 0 },
+          items: [],
+          maxActiveUnits: 3,
+        }
         if (ctx.team && ctx.units.length > 0) {
           ctx.initializeCombat({
             enemyTeam,
             enemyUnits: Array.from({ length: 3 }).map(() =>
               makeEnemyUnit({ level: 12, teamId: enemyTeam.id })
             ),
+            commit: true,
             reward: {
               items: [],
               resources: {
@@ -166,6 +166,7 @@ const CombatNode2: EncounterNode = {
           enemyUnits: Array.from({ length: 3 }).map(() =>
             makeEnemyUnit({ level: 12, teamId: enemyTeam.id })
           ),
+          commit: true,
           reward: {
             items: [],
             resources: {
@@ -192,12 +193,19 @@ export function CombatEncounter(): Encounter {
   return {
     id: CombatEncounterId,
     setup: (ctx) => {
+      const enemyTeam: Team = {
+        id: TeamId(),
+        resources: { credits: 0 },
+        items: [],
+        maxActiveUnits: 3,
+      }
       if (ctx.team && ctx.units.length > 0) {
         ctx.initializeCombat({
           enemyTeam,
           enemyUnits: Array.from({ length: 3 }).map(() =>
             makeEnemyUnit({ level: 12, teamId: enemyTeam.id })
           ),
+          commit: true,
           reward: {
             items: [],
             resources: {

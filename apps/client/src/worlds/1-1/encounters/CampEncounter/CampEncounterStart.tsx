@@ -6,7 +6,7 @@ import { nanoid } from 'nanoid'
 import { GiVillage } from 'react-icons/gi'
 import { IoMdReturnRight } from 'react-icons/io'
 import { CampEncounterActions } from './Actions'
-import { CampEncounterCombatTrainingId } from './CampEncounterCombatTraining'
+import { CampEncounterCombatTraining02Id } from './CampEncounterCombatTraining'
 import { CampEncounterInnId } from './CampEncounterInn'
 import { CampEncounterTabs } from './Tabs'
 
@@ -18,7 +18,7 @@ export const CampEncounterStart: EncounterNode = {
   actions: (ctx) => CampEncounterActions(ctx),
   tabs: (ctx) => CampEncounterTabs(ctx),
 
-  render: (ctx, props) => {
+  render(ctx, props) {
     ctx.log(
       <div className="space-y-4">
         <Narration>Where would you like to go?</Narration>
@@ -28,7 +28,7 @@ export const CampEncounterStart: EncounterNode = {
     ctx.log(<Separator />)
   },
 
-  choices: () => {
+  choices() {
     return [
       choice({
         label: 'Go to the Inn',
@@ -37,7 +37,7 @@ export const CampEncounterStart: EncounterNode = {
       }),
       choice({
         label: 'Go to combat training',
-        to: CampEncounterCombatTrainingId,
+        to: CampEncounterCombatTraining02Id,
         action: true,
       }),
       choice({

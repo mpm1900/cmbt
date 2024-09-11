@@ -49,7 +49,7 @@ export function useCombatActions() {
       (u) => u.flags.isActive && !isUnitAliveCtx(u, context)
     )
     deadActiveUnits.forEach((u) => {
-      combat.log(<LogCritical>{u.name} died.</LogCritical>)
+      combat.log(<LogCritical>{u.name} fell.</LogCritical>)
     })
 
     context.units = combat.mutate([new SetDeadAsInactive()], context)

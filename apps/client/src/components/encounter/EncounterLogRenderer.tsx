@@ -1,11 +1,9 @@
-import { useEncounterContext, useScrollToView } from '@/hooks'
+import { useScrollToView } from '@/hooks'
 import { useEncounter } from '@/hooks/state/useEncounter'
 import { useRef } from 'react'
 
 export function EncounterLogRenderer() {
   const { logs } = useEncounter()
-  const ctx = useEncounterContext()
-
   const containerRef = useRef<HTMLDivElement>(null)
   const ref = useScrollToView(containerRef.current, logs.length)
 

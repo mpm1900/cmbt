@@ -2,9 +2,14 @@ import { ChoiceAttributes } from '@/components/encounter/ChoiceAttributes'
 import { ChoiceLabel } from '@/components/encounter/ChoiceLabel'
 import { Narration } from '@/components/encounter/Narration'
 import { Separator } from '@/components/ui/separator'
-import { SpeedUpTeamId, TeamId, UpdateStatTeam } from '@repo/game/data'
+import {
+  ENEMY_BASES,
+  SpeedUpTeamId,
+  TeamId,
+  UpdateStatTeam,
+} from '@repo/game/data'
 import { Encounter, EncounterNode, Team } from '@repo/game/types'
-import { makeEnemyUnit } from '@repo/game/utils'
+import { makeUnit } from '@repo/game/utils'
 import { nanoid } from 'nanoid'
 import { BsQuestionLg } from 'react-icons/bs'
 import { IoMdReturnLeft, IoMdReturnRight } from 'react-icons/io'
@@ -51,7 +56,7 @@ const CombatIntroductionNode: EncounterNode = {
           ctx.initializeCombat({
             enemyTeam,
             enemyUnits: Array.from({ length: 3 }).map(() =>
-              makeEnemyUnit({ level: 12, teamId: enemyTeam.id })
+              makeUnit({ level: 12, teamId: enemyTeam.id }, ENEMY_BASES)
             ),
             commit: true,
             reward: {
@@ -164,7 +169,7 @@ const CombatNode2: EncounterNode = {
         ctx.initializeCombat({
           enemyTeam,
           enemyUnits: Array.from({ length: 3 }).map(() =>
-            makeEnemyUnit({ level: 4, teamId: enemyTeam.id })
+            makeUnit({ level: 4, teamId: enemyTeam.id }, ENEMY_BASES)
           ),
           commit: true,
           reward: {
@@ -203,7 +208,7 @@ export function CombatEncounter(): Encounter {
         ctx.initializeCombat({
           enemyTeam,
           enemyUnits: Array.from({ length: 3 }).map(() =>
-            makeEnemyUnit({ level: 4, teamId: enemyTeam.id })
+            makeUnit({ level: 4, teamId: enemyTeam.id }, ENEMY_BASES)
           ),
           commit: true,
           reward: {
@@ -211,7 +216,7 @@ export function CombatEncounter(): Encounter {
             resources: {
               credits: 200,
             },
-            xp: 2024,
+            xp: 120,
           },
           modifiers: [
             new UpdateStatTeam({

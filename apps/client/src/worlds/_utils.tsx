@@ -12,7 +12,7 @@ import {
   WorldEdge,
   WorldNode,
 } from '@repo/game/types'
-import { makeEnemyUnit } from '@repo/game/utils'
+import { makeUnit } from '@repo/game/utils'
 import { nanoid } from 'nanoid'
 import random from 'random'
 import { ReactNode } from 'react'
@@ -164,7 +164,7 @@ export function initializeNpcCombat(props: InitializeNpcCombatProps) {
     enemyTeam,
     enemyUnits: npcs.map((npc) => {
       const config = configs[npc.id]
-      const unit = makeEnemyUnit(
+      const unit = makeUnit(
         { level: config.level, teamId: enemyTeam.id },
         config.bases
       )

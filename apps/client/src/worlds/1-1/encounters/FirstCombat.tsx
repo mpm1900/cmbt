@@ -1,9 +1,9 @@
 import { ChoiceAttributes } from '@/components/encounter/ChoiceAttributes'
 import { Narration } from '@/components/encounter/Narration'
 import { choice } from '@/worlds/_utils'
-import { TeamId, Wolf } from '@repo/game/data'
+import { RestlessSpirit, TeamId } from '@repo/game/data'
 import { Encounter, EncounterNode, Team } from '@repo/game/types'
-import { makeEnemyUnit } from '@repo/game/utils'
+import { makeUnit } from '@repo/game/utils'
 import { nanoid } from 'nanoid'
 import { BsQuestionLg } from 'react-icons/bs'
 import { IoMdReturnLeft, IoMdReturnRight } from 'react-icons/io'
@@ -42,10 +42,11 @@ const IntroductionNode: EncounterNode = {
         if (unit) {
           ctx.initializeCombat({
             enemyTeam,
-            enemyUnits: Array.from({ length: 3 }).map(() => {
-              const e = makeEnemyUnit({ level: 2, teamId: enemyTeam.id }, [
-                Wolf,
+            enemyUnits: Array.from({ length: 2 }).map(() => {
+              const e = makeUnit({ level: 4, teamId: enemyTeam.id }, [
+                RestlessSpirit,
               ])
+
               return e
             }),
             commit: true,

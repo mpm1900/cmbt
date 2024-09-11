@@ -24,16 +24,14 @@ export function applyMutations(unit: Unit, mutations: Mutation[]): Unit {
 export function applyModifiers(
   unit: Unit,
   ctx: CombatContext,
-  args?: MutationFilterArgs
+  args?: MutationFilterArgs,
+  filter: (mod: Modifier) => boolean = () => true
 ): ApplyModifiersResult {
   if (unit.metadata.modified) {
     console.log('double modified', unit.name)
     return { unit, appliedModifiers: [], registeredTriggers: [] }
   }
-  const filterArgs: MutationFilterArgs = {
-    ...(args ?? {}),
-  }
-
+  const filterArgs: MutationFilterArgs = args ?? {}
   const modifiers = ctx.modifiers.concat(
     new ApplyStatStages({ sourceId: unit.id, parentId: unit.id })
   )
@@ -45,7 +43,7 @@ export function applyModifiers(
     .sort((a, b) => a.priority - b.priority)
     .reduce<ApplyModifiersResult>(
       (result, modifier) => {
-        if (modifier.filter(result.unit, ctx, filterArgs)) {
+        if (modifier.filter(result.unit, ctx, filterArgs) && filter(modifier)) {
           if (modifier instanceof Trigger) {
             result.registeredTriggers.push(modifier)
           } else {

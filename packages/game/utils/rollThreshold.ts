@@ -9,9 +9,9 @@ export function rollThreshold(
   const criticalThreshold = action.criticalThreshold(source)
   const criticalFactor = action.criticalFactor(source)
   const roll = random.int(0, 100)
-  const success = (threshold === undefined ? 100 : threshold) >= roll
+  const success = threshold !== undefined ? threshold >= roll : true
   const criticalSuccess =
-    (criticalThreshold === undefined ? -1 : criticalThreshold) >= roll
+    criticalThreshold !== undefined ? criticalThreshold >= roll : false
 
   return {
     roll,

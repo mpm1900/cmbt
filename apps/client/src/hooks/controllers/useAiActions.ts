@@ -29,7 +29,8 @@ export function useAiActions() {
         const aiActions = unit.actions
           .filter((a) => checkActionCost(a, unit))
           .map((action) => {
-            return getBestAiAction(action, ctx)
+            const ai = getBestAiAction(action, ctx)
+            return ai
           })
           .sort((a, b) => b.weight - a.weight)
 

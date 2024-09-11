@@ -3,6 +3,7 @@ import {
   ActionResolveData,
   ActionResult,
   CombatContext,
+  Modifier,
   Unit,
 } from '../types'
 import { applyModifiers } from './applyModifiers'
@@ -25,12 +26,18 @@ export function buildActionResult(
   }
 ): ActionResult {
   const { accuracyRoll, setLastUsed } = data
+  const modifierFilter = (mod: Modifier) => !accuracyRoll.criticalSuccess
   const modifiedTargets = targets.map(
-    (target) => applyModifiers(target, ctx).unit
+    (target) => applyModifiers(target, ctx, undefined, modifierFilter).unit
   )
-  const expandedTargets = action
-    .mapTargets(modifiedTargets, ctx)
-    .filter((target) => !target.flags.isProtected)
+
+  const baseTargets = action.mapTargets(modifiedTargets, ctx)
+  const protectedTargets = baseTargets.filter(
+    (target) => target.flags.isProtected
+  )
+  const expandedTargets = baseTargets.filter(
+    (target) => !target.flags.isProtected
+  )
 
   const {
     forceFailure,
@@ -48,6 +55,7 @@ export function buildActionResult(
       source,
       targets,
       expandedTargets,
+      protectedTargets,
       mutations: [setLastUsed, ...mutations],
     }
   }
@@ -61,6 +69,7 @@ export function buildActionResult(
       source,
       targets,
       expandedTargets,
+      protectedTargets,
       mutations: [setLastUsed, ...mutations],
     }
   }

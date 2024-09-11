@@ -29,6 +29,7 @@ export function SwitchUnits(props: SwitchUnitsProps) {
   )
   const possibleTargets = action.targets.resolve(ctx)
   const [selectedTargets, setSelectedTargets] = useState<Unit[]>([])
+  const confirmCount = Math.min(action.maxTargetCount, possibleTargets.length)
 
   return (
     <Card>
@@ -69,7 +70,7 @@ export function SwitchUnits(props: SwitchUnitsProps) {
             })}
         </div>
       </CardContent>
-      {selectedTargets.length === action.maxTargetCount && (
+      {selectedTargets.length >= confirmCount && (
         <CardFooter className="justify-end">
           <Button onClick={() => onConfirm(selectedTargets)}>
             {ctx.turn.count === 0

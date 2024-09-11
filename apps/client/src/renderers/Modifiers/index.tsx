@@ -17,6 +17,7 @@ import {
   StunnedParentId,
   UpdateStatParentId,
   UpdateStatStageParentId,
+  UpdateStatTeamId,
 } from '@repo/game/data'
 import { Modifier } from '@repo/game/types'
 import { ReactNode } from 'react'
@@ -38,6 +39,7 @@ import { HealParentOnUnitSwitchRenderer } from './Triggers/HealParentOnUnitSwitc
 import { InspectAllOnUnitEnterRenderer } from './Triggers/InspectAllOnUnitEnterI'
 import { UpdateStatParentRenderer } from './UpdateStatParent'
 import { UpdateStatStageParentRenderer } from './UpdateStatStageParent'
+import { UpdateStatTeamRenderer } from './UpdateStatTeam'
 
 export * from './_icons'
 export * from './_names'
@@ -58,6 +60,7 @@ export const ModifierRenderers: Record<string, ModifierRenderer> = {
   [StunnedParentId]: StunnedParentRenderer,
   [UpdateStatParentId]: UpdateStatParentRenderer,
   [UpdateStatStageParentId]: UpdateStatStageParentRenderer,
+  [UpdateStatTeamId]: UpdateStatTeamRenderer,
 
   // Triggers
   [AttackDownAllOtherOnUnitEnterId]: AttackDownAllOtherOnUnitEnterRenderer,

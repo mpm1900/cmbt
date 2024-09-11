@@ -39,6 +39,7 @@ export type ActionResult = {
   source?: Unit
   targets?: Unit[]
   expandedTargets?: Unit[]
+  protectedTargets?: Unit[]
   data?: ActionResolveData
   mutations?: Mutation[]
   addedModifiers?: Modifier[]

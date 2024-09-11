@@ -5,7 +5,7 @@ import { Separator } from '@/components/ui/separator'
 import { choice } from '@/worlds/_utils'
 import { TeamId, Wolf } from '@repo/game/data'
 import { EncounterNode, Team } from '@repo/game/types'
-import { makeEnemyUnit } from '@repo/game/utils'
+import { makeUnit } from '@repo/game/utils'
 import { nanoid } from 'nanoid'
 import { BsArrowLeft } from 'react-icons/bs'
 import { GiVillage } from 'react-icons/gi'
@@ -164,7 +164,7 @@ export const CampEncounterCombatTrainingCombatStart: EncounterNode = {
           ctx.initializeCombat({
             enemyTeam,
             enemyUnits: Array.from({ length: 4 }).map((_, i) => {
-              const e = makeEnemyUnit(
+              const e = makeUnit(
                 { level: i > 2 ? 2 : 4, teamId: enemyTeam.id },
                 [Wolf]
               )

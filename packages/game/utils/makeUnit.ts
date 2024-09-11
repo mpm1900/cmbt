@@ -1,18 +1,14 @@
-import { ENEMY_BASES } from '../data'
 import { Id, Unit, UnitBase } from '../types'
 import { makeUnitBuilder } from './makeUnitBuilder'
 import { rebuildUnit } from './rebuildUnit'
 import { resolveUnitBuilder } from './resolveUnitBuilder'
 
-export type MakeEnemeyUnitConfig = {
+export type MakeUnitConfig = {
   level: number
   teamId: Id
 }
 
-export function makeEnemyUnit(
-  config: MakeEnemeyUnitConfig,
-  bases: UnitBase[] = ENEMY_BASES
-): Unit {
+export function makeUnit(config: MakeUnitConfig, bases: UnitBase[]): Unit {
   const { level, teamId } = config
   const baseIndex = Math.floor(Math.random() * bases.length)
   const base = bases[baseIndex]

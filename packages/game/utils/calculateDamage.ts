@@ -23,7 +23,8 @@ export function calculateBaseDamage(
       base = power * (source.stats.magic / target.stats.magic)
     }
 
-    const levelMod = (source.level * 2) / 5 + 2
+    const level = source.level * 5
+    const levelMod = (level * 2) / 5 + 2
     const final = (base * levelMod) / 50 + 2
     return final
   }

@@ -29,9 +29,9 @@ import {
   StunnedParentId,
 } from '@repo/game/data'
 import { Id } from '@repo/game/types'
+import { StatModifierIcon } from '@shared/StatModifierIcon'
 import { ReactNode } from 'react'
 import {
-  AiFillCaretDown,
   AiFillCaretUp,
   AiOutlineEyeInvisible,
   AiOutlineUserSwitch,
@@ -40,13 +40,10 @@ import { BiSearch } from 'react-icons/bi'
 import { BsFire, BsShieldFillPlus } from 'react-icons/bs'
 import { FaHeartCirclePlus } from 'react-icons/fa6'
 import {
-  GiBiceps,
-  GiCrenulatedShield,
   GiDualityMask,
   GiMagicSwirl,
   GiSandstorm,
   GiSpinningBlades,
-  GiSprint,
   GiTemplarHeart,
   GiVibratingShield,
 } from 'react-icons/gi'
@@ -59,42 +56,18 @@ export const MODIFIER_ICONS: Record<Id, ReactNode> = {
   [AddStatModifiersImmunityAllId]: (
     <GiMagicSwirl className="fill-white h-full w-full" />
   ),
-  [DefenseDownParentId]: (
-    <div className="h-full w-full relative">
-      <GiCrenulatedShield className="fill-white h-full w-full" />
-      <AiFillCaretDown
-        className="absolute fill-red-400 h-[24px] w-[24px]"
-        style={{ bottom: -6, right: -6 }}
-      />
-    </div>
-  ),
-  [DefneseUpParentId]: (
-    <div className="h-full w-full relative">
-      <GiCrenulatedShield className="fill-white h-full w-full" />
-      <AiFillCaretUp
-        className="absolute fill-green-400 h-[24px] w-[24px]"
-        style={{ bottom: -6, right: -6 }}
-      />
-    </div>
-  ),
-  [DefenseStageDownParentId]: (
-    <div className="h-full w-full relative">
-      <GiCrenulatedShield className="fill-white h-full w-full" />
-      <AiFillCaretDown
-        className="absolute fill-red-400 h-[24px] w-[24px]"
-        style={{ bottom: -6, right: -6 }}
-      />
-    </div>
-  ),
-  [DefenseStageUpParentId]: (
-    <div className="h-full w-full relative">
-      <GiCrenulatedShield className="fill-white h-full w-full" />
-      <AiFillCaretUp
-        className="absolute fill-green-400 h-[24px] w-[24px]"
-        style={{ bottom: -6, right: -6 }}
-      />
-    </div>
-  ),
+  [AttackDownParentId]: <StatModifierIcon stat="attack" type="down" />,
+  [AttackStageDownParentId]: <StatModifierIcon stat="attack" type="down" />,
+  [AttackStageUpParentId]: <StatModifierIcon stat="attack" type="up" />,
+  [AttackUpParentId]: <StatModifierIcon stat="attack" type="up" />,
+  [DefenseDownParentId]: <StatModifierIcon stat="defense" type="down" />,
+  [DefenseStageDownParentId]: <StatModifierIcon stat="defense" type="down" />,
+  [DefenseStageUpParentId]: <StatModifierIcon stat="defense" type="up" />,
+  [DefneseUpParentId]: <StatModifierIcon stat="defense" type="up" />,
+  [SpeedStageDownParentId]: <StatModifierIcon stat="speed" type="down" />,
+  [SpeedStageUpParentId]: <StatModifierIcon stat="speed" type="up" />,
+  [SpeedUpParentId]: <StatModifierIcon stat="speed" type="up" />,
+  [SpeedUpTeamId]: <StatModifierIcon stat="speed" type="up" />,
   [FireDamageUpParentId]: (
     <div className="h-full w-full relative">
       <BsFire className="fill-white h-full w-full" />
@@ -116,42 +89,6 @@ export const MODIFIER_ICONS: Record<Id, ReactNode> = {
   [AttackDownAllOtherOnUnitEnterId]: (
     <GiDualityMask className="fill-white h-full w-full" />
   ),
-  [AttackDownParentId]: (
-    <div className="h-full w-full relative">
-      <GiBiceps className="fill-white h-full w-full" />
-      <AiFillCaretDown
-        className="absolute fill-red-400 h-[24px] w-[24px]"
-        style={{ bottom: -6, right: -6 }}
-      />
-    </div>
-  ),
-  [AttackStageDownParentId]: (
-    <div className="h-full w-full relative">
-      <GiBiceps className="fill-white h-full w-full" />
-      <AiFillCaretDown
-        className="absolute fill-red-400 h-[24px] w-[24px]"
-        style={{ bottom: -6, right: -6 }}
-      />
-    </div>
-  ),
-  [AttackUpParentId]: (
-    <div className="h-full w-full relative">
-      <GiBiceps className="fill-white h-full w-full" />
-      <AiFillCaretUp
-        className="absolute fill-green-400 h-[24px] w-[24px]"
-        style={{ bottom: -6, right: -6 }}
-      />
-    </div>
-  ),
-  [AttackStageUpParentId]: (
-    <div className="h-full w-full relative">
-      <GiBiceps className="fill-white h-full w-full" />
-      <AiFillCaretUp
-        className="absolute fill-green-400 h-[24px] w-[24px]"
-        style={{ bottom: -6, right: -6 }}
-      />
-    </div>
-  ),
   [CreateSandstormOnUnitEnterId]: (
     <GiSandstorm className="fill-amber-100 h-full w-full" />
   ),
@@ -165,42 +102,7 @@ export const MODIFIER_ICONS: Record<Id, ReactNode> = {
     <GiVibratingShield className="fill-white h-full w-full" />
   ),
   [StunnedParentId]: <TiSpiral className="fill-red-200 h-full w-full" />,
-  [SpeedUpParentId]: (
-    <div className="h-full w-full relative">
-      <GiSprint className="fill-white h-full w-full" />
-      <AiFillCaretUp
-        className="absolute fill-green-400 h-[24px] w-[24px]"
-        style={{ bottom: -6, right: -6 }}
-      />
-    </div>
-  ),
-  [SpeedStageUpParentId]: (
-    <div className="h-full w-full relative">
-      <GiSprint className="fill-white h-full w-full" />
-      <AiFillCaretUp
-        className="absolute fill-green-400 h-[24px] w-[24px]"
-        style={{ bottom: -6, right: -6 }}
-      />
-    </div>
-  ),
-  [SpeedStageDownParentId]: (
-    <div className="h-full w-full relative">
-      <GiSprint className="fill-white h-full w-full" />
-      <AiFillCaretDown
-        className="absolute fill-red-400 h-[24px] w-[24px]"
-        style={{ bottom: -6, right: -6 }}
-      />
-    </div>
-  ),
-  [SpeedUpTeamId]: (
-    <div className="h-full w-full relative">
-      <GiSprint className="fill-white h-full w-full" />
-      <AiFillCaretUp
-        className="absolute fill-green-400 h-[24px] w-[24px]"
-        style={{ bottom: -6, right: -6 }}
-      />
-    </div>
-  ),
+
   [HealParentOnUnitSwitchId]: (
     <div className="h-full w-full relative">
       <AiOutlineUserSwitch className="fill-white h-full w-full" />

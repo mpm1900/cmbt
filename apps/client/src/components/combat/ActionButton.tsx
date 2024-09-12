@@ -42,13 +42,15 @@ export function ActionButton(props: ActionButtonProps) {
         >
           {renderer?.name}
         </div>
-        <div className="flex flex-col items-end justify-end space-y-2 my-1 min-w-[56px]">
-          {action.damage && (
+        <div className="flex flex-col h-full items-end justify-between py-1 min-w-[56px]">
+          {action.damage ? (
             <DamageInline
               damage={action.damage}
               children=""
               color={isActive ? 'black' : undefined}
             />
+          ) : (
+            <span className="text-muted-foreground opacity-25">—</span>
           )}
           {renderer && (
             <div

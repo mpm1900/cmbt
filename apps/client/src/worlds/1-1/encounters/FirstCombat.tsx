@@ -36,14 +36,14 @@ const IntroductionNode: EncounterNode = {
           id: TeamId(),
           resources: { credits: 0 },
           items: [],
-          maxActiveUnits: 2,
+          maxActiveUnits: 3,
         }
         const unit = ctx.units.find((u) => true)
         if (unit) {
           ctx.initializeCombat({
             enemyTeam,
             enemyUnits: Array.from({ length: 3 }).map(() => {
-              const e = makeUnit({ level: 4, teamId: enemyTeam.id }, [Wolf])
+              const e = makeUnit({ level: 2, teamId: enemyTeam.id }, [Wolf])
 
               return e
             }),

@@ -304,7 +304,7 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
       return (
         <div>
           Deals <DamageInline damage={hyperbeam.damage} /> equal to twice this
-          unit's magic stat to target enemy unit. Applies{' '}
+          unit's base magic stat to target enemy unit. Applies{' '}
           <ModifierInline
             side={props?.side}
             modifier={

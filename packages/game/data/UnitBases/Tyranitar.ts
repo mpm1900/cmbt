@@ -6,6 +6,7 @@ import {
   Earthquake,
   Fireball,
   FireBlast,
+  FurySwipes,
   PiercingStrike,
   PowerStance,
   Protect,
@@ -20,6 +21,7 @@ import {
   EarthquakeId,
   FireballId,
   FireBlastId,
+  FurySwipesId,
   PiercingStrikeId,
   PowerStanceId,
   ProtectId,
@@ -74,6 +76,10 @@ export const TyranitarConfig: UnitBaseConfig = {
     {
       id: FireBlastId,
       make: (unit) => new FireBlast(unit.id, unit.teamId),
+    },
+    {
+      id: FurySwipesId,
+      make: (unit) => new FurySwipes(unit.id, unit.teamId),
     },
     {
       id: PiercingStrikeId,

@@ -45,71 +45,73 @@ export class PowerSwap extends Action {
     targets: Unit[],
     ctx: CombatContext,
     options: ActionResolveOptions
-  ): ActionResult => {
+  ): ActionResult[] => {
     ctx = modifyRenderContext(options, ctx)
     const data = getActionData(source, this, ctx)
 
-    return buildActionResult(
-      this,
-      data,
-      source,
-      targets,
-      ctx,
-      (modifiedTargets) => ({
-        forceFailure: source.metadata.lastUsedActionId === this.id,
-        onSuccess: {
-          mutations: [
-            new SetIsActiveParent({
-              sourceId: source.id,
-              parentId: source.id,
-              isActive: false,
-            }),
-            new AddModifiersToParent({
-              sourceId: source.id,
-              parentId: source.id,
-              modifiers: ctx.modifiers.filter(
-                (m) => m.parentId === source.id && m.persistOnSwitch
-              ),
-            }),
-            ...targets.flatMap((target) => [
+    return [
+      buildActionResult(
+        this,
+        data,
+        source,
+        targets,
+        ctx,
+        (modifiedTargets) => ({
+          forceFailure: source.metadata.lastUsedActionId === this.id,
+          onSuccess: {
+            mutations: [
               new SetIsActiveParent({
                 sourceId: source.id,
-                parentId: target.id,
-                isActive: true,
+                parentId: source.id,
+                isActive: false,
               }),
-            ]),
-          ],
-          addedModifiers: modifiedTargets.flatMap((target) => [
-            ...getModifiersFromUnit(target),
-            ...ctx.modifiers
-              .filter(
-                (m) =>
-                  m.parentId === source.id && m instanceof UpdateStatStageParent
-              )
-              .map((m) => m as UpdateStatStageParent)
-              .map(
-                (m) =>
-                  new UpdateStatStageParent({
-                    ...m,
-                    sourceId: source.id,
-                    parentId: target.id,
-                  })
-              ),
-          ]),
-          addedUnits: modifiedTargets,
-          removedUnits: [source],
-          updateActionQueue: (queue) => {
-            return queue.map((item) => {
-              const target = modifiedTargets[0]
-              if (item.targetIds.includes(this.sourceId)) {
-                item.targetIds = item.targetIds.map((id) =>
-                  id === this.sourceId ? target.id : id
+              new AddModifiersToParent({
+                sourceId: source.id,
+                parentId: source.id,
+                modifiers: ctx.modifiers.filter(
+                  (m) => m.parentId === source.id && m.persistOnSwitch
+                ),
+              }),
+              ...targets.flatMap((target) => [
+                new SetIsActiveParent({
+                  sourceId: source.id,
+                  parentId: target.id,
+                  isActive: true,
+                }),
+              ]),
+            ],
+            addedModifiers: modifiedTargets.flatMap((target) => [
+              ...getModifiersFromUnit(target),
+              ...ctx.modifiers
+                .filter(
+                  (m) =>
+                    m.parentId === source.id &&
+                    m instanceof UpdateStatStageParent
                 )
-              }
-              return item
-            })
-          },
-          /*
+                .map((m) => m as UpdateStatStageParent)
+                .map(
+                  (m) =>
+                    new UpdateStatStageParent({
+                      ...m,
+                      sourceId: source.id,
+                      parentId: target.id,
+                    })
+                ),
+            ]),
+            addedUnits: modifiedTargets,
+            removedUnits: [source],
+            updateActionQueue: (queue) => {
+              return queue.map((item) => {
+                const target = modifiedTargets[0]
+                if (item.targetIds.includes(this.sourceId)) {
+                  item.targetIds = item.targetIds.map((id) =>
+                    id === this.sourceId ? target.id : id
+                  )
+                }
+                return item
+              })
+            },
+            /*
           updateModifiers: (modifiers) => {
             return modifiers.map((modifier) => {
               const target = modifiedTargets[0]
@@ -119,8 +121,9 @@ export class PowerSwap extends Action {
               return modifier
             })
           } */
-        },
-      })
-    )
+          },
+        })
+      ),
+    ]
   }
 }

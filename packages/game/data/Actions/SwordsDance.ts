@@ -39,29 +39,31 @@ export class SwordsDance extends Action {
     targets: Unit[],
     ctx: CombatContext,
     options: ActionResolveOptions
-  ): ActionResult => {
+  ): ActionResult[] => {
     ctx = modifyRenderContext(options, ctx)
     const data = getActionData(source, this, ctx)
 
-    return buildActionResult(
-      this,
-      data,
-      source,
-      targets,
-      ctx,
-      (modifiedTargets) => ({
-        onSuccess: {
-          addedModifiers: [
-            new UpdateStatStageParent({
-              registryId: AttackStageUpParentId,
-              stat: 'attack',
-              sourceId: source.id,
-              parentId: source.id,
-              stages: 2,
-            }),
-          ],
-        },
-      })
-    )
+    return [
+      buildActionResult(
+        this,
+        data,
+        source,
+        targets,
+        ctx,
+        (modifiedTargets) => ({
+          onSuccess: {
+            addedModifiers: [
+              new UpdateStatStageParent({
+                registryId: AttackStageUpParentId,
+                stat: 'attack',
+                sourceId: source.id,
+                parentId: source.id,
+                stages: 2,
+              }),
+            ],
+          },
+        })
+      ),
+    ]
   }
 }

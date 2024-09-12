@@ -48,23 +48,25 @@ export class WillOWisp extends Action {
     targets: Unit[],
     ctx: CombatContext,
     options: ActionResolveOptions
-  ): ActionResult => {
+  ): ActionResult[] => {
     ctx = modifyRenderContext(options, ctx)
     const data = getActionData(source, this, ctx)
 
-    return buildActionResult(
-      this,
-      data,
-      source,
-      targets,
-      ctx,
-      (modifiedTargets) => ({
-        onSuccess: {
-          addedModifiers: modifiedTargets.flatMap((target) =>
-            Burn.modifiers(source, target)
-          ),
-        },
-      })
-    )
+    return [
+      buildActionResult(
+        this,
+        data,
+        source,
+        targets,
+        ctx,
+        (modifiedTargets) => ({
+          onSuccess: {
+            addedModifiers: modifiedTargets.flatMap((target) =>
+              Burn.modifiers(source, target)
+            ),
+          },
+        })
+      ),
+    ]
   }
 }

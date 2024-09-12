@@ -39,19 +39,21 @@ export class InspectAll extends Action {
     targets: Unit[],
     ctx: CombatContext,
     options: ActionResolveOptions
-  ): ActionResult => {
+  ): ActionResult[] => {
     ctx = modifyRenderContext(options, ctx)
     const data = getActionData(source, this, ctx)
 
-    return buildActionResult(this, data, source, targets, ctx, () => ({
-      onSuccess: {
-        addedModifiers: [
-          new InspectedAll({
-            sourceId: source.id,
-            maxInstances: 1,
-          }),
-        ],
-      },
-    }))
+    return [
+      buildActionResult(this, data, source, targets, ctx, () => ({
+        onSuccess: {
+          addedModifiers: [
+            new InspectedAll({
+              sourceId: source.id,
+              maxInstances: 1,
+            }),
+          ],
+        },
+      })),
+    ]
   }
 }

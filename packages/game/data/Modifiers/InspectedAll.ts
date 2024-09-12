@@ -28,6 +28,10 @@ export class InspectedAll extends Modifier {
     ctx: CombatContext,
     args: MutationFilterArgs
   ): boolean => {
-    return super.filter(unit, ctx, args) && unit.teamId !== ctx.user
+    return (
+      super.filter(unit, ctx, args) &&
+      unit.teamId !== ctx.user &&
+      unit.flags.isActive
+    )
   }
 }

@@ -42,20 +42,22 @@ export class Spikes extends Action {
     targets: Unit[],
     ctx: CombatContext,
     options: ActionResolveOptions
-  ): ActionResult => {
+  ): ActionResult[] => {
     ctx = modifyRenderContext(options, ctx)
     const data = getActionData(source, this, ctx)
 
-    return buildActionResult(this, data, source, targets, ctx, () => ({
-      onSuccess: {
-        addedModifiers: [
-          new DamageNewUnitsOnUnitEnter({
-            sourceId: source.id,
-            static: 20,
-            maxInstances: 3,
-          }),
-        ],
-      },
-    }))
+    return [
+      buildActionResult(this, data, source, targets, ctx, () => ({
+        onSuccess: {
+          addedModifiers: [
+            new DamageNewUnitsOnUnitEnter({
+              sourceId: source.id,
+              static: 20,
+              maxInstances: 3,
+            }),
+          ],
+        },
+      })),
+    ]
   }
 }

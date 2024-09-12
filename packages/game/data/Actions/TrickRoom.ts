@@ -40,23 +40,25 @@ export class TrickRoom extends Action {
     targets: Unit[],
     ctx: CombatContext,
     options: ActionResolveOptions
-  ): ActionResult => {
+  ): ActionResult[] => {
     ctx = modifyRenderContext(options, ctx)
     const data = getActionData(source, this, ctx)
 
-    return buildActionResult(
-      this,
-      data,
-      source,
-      targets,
-      ctx,
-      (modifiedTargets) => ({
-        onSuccess: {
-          addedModifiers: [
-            new InvertSpeedAll({ sourceId: source.id, duration: 5 }),
-          ],
-        },
-      })
-    )
+    return [
+      buildActionResult(
+        this,
+        data,
+        source,
+        targets,
+        ctx,
+        (modifiedTargets) => ({
+          onSuccess: {
+            addedModifiers: [
+              new InvertSpeedAll({ sourceId: source.id, duration: 5 }),
+            ],
+          },
+        })
+      ),
+    ]
   }
 }

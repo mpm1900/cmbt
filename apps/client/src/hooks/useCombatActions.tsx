@@ -1,28 +1,17 @@
-import { LogCritical, LogHeader } from '@/components/ui/log'
-import { getDamageFromMutations, logModifiers } from '@/utils'
-import { handleCleanup } from '@/utils/handleCleanup'
+import { LogCritical } from '@/components/ui/log'
+import { getDamageFromMutations } from '@/utils'
 import { handleTriggerEvent } from '@/utils/handleTriggerEvent'
 import { logResult } from '@/utils/logResult'
-import {
-  IncrementActiveTurns,
-  IncrementInactiveTurns,
-  SetDeadAsInactive,
-} from '@repo/game/data'
+import { SetDeadAsInactive } from '@repo/game/data'
 import {
   ActionResult,
-  ActionsQueueItem,
   CombatContext,
   MutationFilterArgs,
   TriggerEvent,
 } from '@repo/game/types'
 import { isUnitAliveCtx } from '@repo/game/utils'
-import {
-  useActions,
-  useCleanup,
-  useCombat,
-  useCombatSettings,
-  useCombatUi,
-} from './state'
+import { useActions, useCombat } from './state'
+import { useResults } from './state/useResults'
 
 export type CommitResultOptions = {
   enableLog?: boolean
@@ -31,7 +20,6 @@ export type CommitResultOptions = {
 export type CommitResult = (
   result: ActionResult,
   context: CombatContext,
-  options?: CommitResultOptions,
   args?: MutationFilterArgs
 ) => CombatContext
 
@@ -39,10 +27,8 @@ export type CleanupResult = (context: CombatContext) => CombatContext
 
 export function useCombatActions() {
   const combat = useCombat()
-  const activeUnit = useCombatUi()
-  const actionsStore = useActions()
-  const cleanupStore = useCleanup()
-  const settings = useCombatSettings()
+  const actionsQueue = useActions()
+  const results = useResults()
 
   const cleanupResult: CleanupResult = (context) => {
     const deadActiveUnits = context.units.filter(
@@ -55,7 +41,7 @@ export function useCombatActions() {
     context.units = combat.mutate([new SetDeadAsInactive()], context)
 
     if (deadActiveUnits.length > 0) {
-      context = runTriggers('on Unit Die', context, {
+      pushTriggers('on Unit Die', context, {
         units: deadActiveUnits,
       })
     }
@@ -64,12 +50,13 @@ export function useCombatActions() {
       const parent = context.units.find((u) => u.id === modifier.parentId)
       return !!parent && !parent?.flags.isActive
     })
-    context.modifiers = combat.removeZeroDurations()
+    // context.modifiers = combat.removeZeroDurations()
     return context
   }
 
-  const commitResult: CommitResult = (result, context, options, args) => {
+  const commitResult: CommitResult = (result, context, args) => {
     const {
+      action,
       addedModifiers: modifiers,
       mutations,
       addedUnits,
@@ -78,10 +65,10 @@ export function useCombatActions() {
       updateActionQueue,
     } = result
 
-    logResult(result, combat.log, context, options)
+    logResult(result, combat.log, context)
 
     if (removedUnits?.length) {
-      context = runTriggers('on Unit Switch Out', context, {
+      pushTriggers('on Unit Switch Out', context, {
         units: removedUnits,
       })
     }
@@ -93,12 +80,12 @@ export function useCombatActions() {
         if (damage > 0) {
           const target = context.units.find((u) => u.id === unitId)
           if (target) {
-            context = runTriggers('on Unit Take Damage', context, {
+            pushTriggers('on Unit Take Damage', context, {
               units: [target],
             })
           }
           if (result.source) {
-            context = runTriggers('on Unit Deal Damage', context, {
+            pushTriggers('on Unit Deal Damage', context, {
               units: [result.source],
             })
           }
@@ -107,85 +94,33 @@ export function useCombatActions() {
     }
     if (modifiers?.length) {
       context.modifiers = combat.add(modifiers)
-      if (options?.enableLog) logModifiers(modifiers, combat.log, context)
     }
     if (updateModifiers) {
       context.modifiers = combat.updateModifiers(updateModifiers)
     }
     if (updateActionQueue) {
-      actionsStore.setQueue(updateActionQueue)
+      actionsQueue.setQueue(updateActionQueue)
     }
     if (addedUnits?.length) {
-      context = runTriggers('on Unit Enter', context, {
+      pushTriggers('on Unit Enter', context, {
         units: addedUnits,
       })
     }
     return context
   }
 
-  function runTriggers(
+  function pushTriggers(
     event: TriggerEvent,
     context: CombatContext,
     args?: MutationFilterArgs
-  ): CombatContext {
+  ) {
     const result = handleTriggerEvent(event, combat.log, context, args)
-    context = commitResult(result, context, { enableLog: false }, args)
-    return cleanupResult(context)
-  }
-
-  function decrementModifierDurations() {
-    combat.decrementDurations()
-    return combat.removeZeroDurations()
-  }
-
-  function nextTurn(runEndOfTurnTriggers: boolean, context: CombatContext) {
-    if (runEndOfTurnTriggers && !context.turn.hasRanOnTurnEndTriggers) {
-      context = runTriggers('on Turn End', context)
-      context.modifiers = decrementModifierDurations()
-      context.turn = combat.setTurn((t) => ({ hasRanOnTurnEndTriggers: true }))
-      cleanup(false, context)
-    } else {
-      combat.setStatus('upkeep')
-      combat.next()
-      combat.mutate(
-        [new IncrementActiveTurns({}), new IncrementInactiveTurns({})],
-        context
-      )
-      combat.log(<LogHeader>turn {combat.turn.count + 1}</LogHeader>)
-      activeUnit.setActiveUnit(
-        context.units.find((u) => u.flags.isActive && u.teamId === context.user)
-      )
-      setTimeout(
-        () => {
-          combat.setStatus('main')
-        },
-        context.turn.count === 0 ? 0 : settings.gameSpeed
-      )
-    }
-  }
-
-  const cleanup = (runEndOfTurnTriggers: boolean, context: CombatContext) => {
-    handleCleanup(
-      context,
-      () => nextTurn(runEndOfTurnTriggers, context),
-      () => combat.setStatus('cleanup'),
-      () => combat.setStatus('done')
-    )
+    results.enqueue(result)
   }
 
   return {
     commitResult,
     cleanupResult,
-    cleanup,
-    decrementModifierDurations,
-    nextTurn,
-    runTriggers,
-    removeZeroDurations: combat.removeZeroDurations,
-    pushAction: (...items: ActionsQueueItem[]) => {
-      actionsStore.enqueue(...items)
-    },
-    pushCleanupAction: (...items: ActionsQueueItem[]) => {
-      cleanupStore.enqueue(...items)
-    },
+    pushTriggers,
   }
 }

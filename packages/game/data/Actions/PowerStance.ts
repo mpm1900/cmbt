@@ -40,30 +40,32 @@ export class PowerStance extends Action {
     targets: Unit[],
     ctx: CombatContext,
     options: ActionResolveOptions
-  ): ActionResult => {
+  ): ActionResult[] => {
     ctx = modifyRenderContext(options, ctx)
     const data = getActionData(source, this, ctx)
 
-    return buildActionResult(
-      this,
-      data,
-      source,
-      targets,
-      ctx,
-      (modifiedTargets) => ({
-        onSuccess: {
-          addedModifiers: [
-            new AddActionParent({
-              registryId: PowerStanceId,
-              sourceId: source.id,
-              parentId: source.id,
-              maxInstances: 1,
-              duration: 3,
-              action: (u) => new PowerCleave(u.id, u.teamId),
-            }),
-          ],
-        },
-      })
-    )
+    return [
+      buildActionResult(
+        this,
+        data,
+        source,
+        targets,
+        ctx,
+        (modifiedTargets) => ({
+          onSuccess: {
+            addedModifiers: [
+              new AddActionParent({
+                registryId: PowerStanceId,
+                sourceId: source.id,
+                parentId: source.id,
+                maxInstances: 1,
+                duration: 3,
+                action: (u) => new PowerCleave(u.id, u.teamId),
+              }),
+            ],
+          },
+        })
+      ),
+    ]
   }
 }

@@ -32,7 +32,7 @@ export const queueComparator =
       if (!bSource) return 1
 
       if (aSource.stats.speed === bSource.stats.speed) {
-        return [-1, 1][Math.round(Math.random())]
+        return aSource.id.localeCompare(bSource.id)
       }
 
       return bSource.stats.speed - aSource.stats.speed
@@ -74,4 +74,4 @@ const makeQueueHook = () =>
   }))
 
 export const useActions = makeQueueHook()
-export const useCleanup = useActions
+export const useCleanup = makeQueueHook()

@@ -72,16 +72,11 @@ export class Fireball extends Action {
     targets: Unit[],
     ctx: CombatContext,
     options: ActionResolveOptions
-  ): ActionResult => {
+  ): ActionResult[] => {
     ctx = modifyRenderContext(options, ctx)
     const data = getActionData(source, this, ctx)
-    return buildActionResult(
-      this,
-      data,
-      source,
-      targets,
-      ctx,
-      (modifiedTargets) => {
+    return [
+      buildActionResult(this, data, source, targets, ctx, (modifiedTargets) => {
         return {
           onSuccess: {
             mutations: modifiedTargets.flatMap((target) => {
@@ -96,7 +91,7 @@ export class Fireball extends Action {
             }),
           },
         }
-      }
-    )
+      }),
+    ]
   }
 }

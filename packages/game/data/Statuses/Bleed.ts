@@ -1,5 +1,5 @@
 import { Status } from '../../types'
-import { BleedId } from '../Ids'
+import { BleedDamageId, BleedId } from '../Ids'
 import { DamageParentOnTurnEnd } from '../Triggers'
 
 export const Bleed: Status = {
@@ -7,6 +7,7 @@ export const Bleed: Status = {
   duration: 5,
   modifiers: (source, parent) => [
     new DamageParentOnTurnEnd({
+      registryId: BleedDamageId,
       sourceId: source.id,
       parentId: parent.id,
       statusId: BleedId,

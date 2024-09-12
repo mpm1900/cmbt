@@ -1,6 +1,13 @@
 import { ActionResult } from './Action'
 
-export type TurnStatus = 'upkeep' | 'main' | 'combat' | 'cleanup' | 'done'
+export type TurnStatus =
+  | 'upkeep'
+  | 'main'
+  | 'combat'
+  | 'cleanup'
+  | 'cleanup-running'
+  | 'end'
+  | 'done'
 
 export type Turn = {
   count: number

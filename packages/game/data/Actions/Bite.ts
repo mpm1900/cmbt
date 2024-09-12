@@ -64,36 +64,38 @@ export class Bite extends Action {
     targets: Unit[],
     ctx: CombatContext,
     options: ActionResolveOptions
-  ): ActionResult => {
+  ): ActionResult[] => {
     ctx = modifyRenderContext(options, ctx)
     const data = getActionData(source, this, ctx)
     const applyModifierRoll = random.int(0, 100)
     const applyBleed = applyModifierRoll <= this.bleedChance
 
-    return buildActionResult(
-      this,
-      data,
-      source,
-      targets,
-      ctx,
-      (modifiedTargets) => ({
-        onSuccess: {
-          mutations: modifiedTargets.flatMap((target) => {
-            const damage = calculateDamage(
-              this.damage,
-              data.source,
-              target,
-              data.accuracyRoll
-            )
-            return getMutationsFromDamageResult(source, target, damage)
-          }),
-          addedModifiers: applyBleed
-            ? modifiedTargets.flatMap((target) =>
-                Bleed.modifiers(source, target)
+    return [
+      buildActionResult(
+        this,
+        data,
+        source,
+        targets,
+        ctx,
+        (modifiedTargets) => ({
+          onSuccess: {
+            mutations: modifiedTargets.flatMap((target) => {
+              const damage = calculateDamage(
+                this.damage,
+                data.source,
+                target,
+                data.accuracyRoll
               )
-            : [],
-        },
-      })
-    )
+              return getMutationsFromDamageResult(source, target, damage)
+            }),
+            addedModifiers: applyBleed
+              ? modifiedTargets.flatMap((target) =>
+                  Bleed.modifiers(source, target)
+                )
+              : [],
+          },
+        })
+      ),
+    ]
   }
 }

@@ -38,28 +38,30 @@ export class Ward extends Action {
     targets: Unit[],
     ctx: CombatContext,
     options: ActionResolveOptions
-  ): ActionResult => {
+  ): ActionResult[] => {
     ctx = modifyRenderContext(options, ctx)
     const data = getActionData(source, this, ctx)
 
-    return buildActionResult(
-      this,
-      data,
-      source,
-      targets,
-      ctx,
-      (modifiedTargets) => ({
-        onSuccess: {
-          mutations: [
-            new UpdateValueParent({
-              sourceId: source.id,
-              parentId: source.id,
-              valueKey: 'magicArmor',
-              static: this.amount,
-            }),
-          ],
-        },
-      })
-    )
+    return [
+      buildActionResult(
+        this,
+        data,
+        source,
+        targets,
+        ctx,
+        (modifiedTargets) => ({
+          onSuccess: {
+            mutations: [
+              new UpdateValueParent({
+                sourceId: source.id,
+                parentId: source.id,
+                valueKey: 'magicArmor',
+                static: this.amount,
+              }),
+            ],
+          },
+        })
+      ),
+    ]
   }
 }

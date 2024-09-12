@@ -1,15 +1,16 @@
+import { useCleanup } from '@/hooks/state'
 import { getTeamsWithSelectionRequired } from '@/utils'
 import { GetUnits, SetIsActive } from '@repo/game/data'
 import { nanoid } from 'nanoid/non-secure'
 import { LuSwords } from 'react-icons/lu'
-import { useCombatActions, useCombatContext } from '../../hooks'
+import { useCombatContext } from '../../hooks'
 import { SwitchUnits } from './SwitchUnits'
 
 export type CleanupSwitchUnitsProps = {}
 
 export function CleanupSwitchUnits(props: CleanupSwitchUnitsProps) {
   const ctx = useCombatContext()
-  const fns = useCombatActions()
+  const cleanup = useCleanup()
   const aliveActiveUnits = new GetUnits({
     teamId: ctx.user,
     isActive: true,
@@ -32,7 +33,7 @@ export function CleanupSwitchUnits(props: CleanupSwitchUnitsProps) {
         <SwitchUnits
           action={new SetIsActive(team.id, selectCount)}
           onConfirm={(selectedTargets) => {
-            fns.pushCleanupAction({
+            cleanup.enqueue({
               id: nanoid(),
               action: new SetIsActive(team.id, selectCount),
               targetIds: selectedTargets.map((u) => u.id),

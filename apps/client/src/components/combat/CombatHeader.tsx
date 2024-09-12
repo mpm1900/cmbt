@@ -29,8 +29,16 @@ export function CombatHeader() {
         <StatusBadge isActive={turn.status === 'upkeep'}>Upkeep</StatusBadge>
         <StatusBadge isActive={turn.status === 'main'}>Main</StatusBadge>
         <StatusBadge isActive={turn.status === 'combat'}>Combat</StatusBadge>
-        <StatusBadge isActive={turn.count > 0 && turn.status === 'cleanup'}>
+        <StatusBadge
+          isActive={
+            turn.count > 0 &&
+            (turn.status === 'cleanup' || turn.status === 'cleanup-running')
+          }
+        >
           Cleanup
+        </StatusBadge>
+        <StatusBadge isActive={turn.count > 0 && turn.status === 'end'}>
+          End
         </StatusBadge>
         <Separator orientation="vertical" />
         <StatusBadge isActive={turn.status === 'done'}>Done</StatusBadge>

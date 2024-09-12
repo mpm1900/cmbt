@@ -63,17 +63,12 @@ export class RetreatingBlow extends Action {
     targets: Unit[],
     ctx: CombatContext,
     options: ActionResolveOptions
-  ): ActionResult => {
+  ): ActionResult[] => {
     ctx = modifyRenderContext(options, ctx)
     const data = getActionData(source, this, ctx)
 
-    return buildActionResult(
-      this,
-      data,
-      source,
-      targets,
-      ctx,
-      (modifiedTargets) => {
+    return [
+      buildActionResult(this, data, source, targets, ctx, (modifiedTargets) => {
         const inactiveLiveAllies = ctx.units.filter(
           (u) => !u.flags.isActive && isUnitAliveCtx(u, ctx)
         )
@@ -98,7 +93,7 @@ export class RetreatingBlow extends Action {
             }),
           },
         }
-      }
-    )
+      }),
+    ]
   }
 }

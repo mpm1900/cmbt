@@ -40,34 +40,36 @@ export class NegateArmor extends Action {
     targets: Unit[],
     ctx: CombatContext,
     options: ActionResolveOptions
-  ): ActionResult => {
+  ): ActionResult[] => {
     ctx = modifyRenderContext(options, ctx)
     const data = getActionData(source, this, ctx)
 
-    return buildActionResult(
-      this,
-      data,
-      source,
-      targets,
-      ctx,
-      (modifiedTargets) => ({
-        onSuccess: {
-          mutations: modifiedTargets.flatMap((target) => [
-            new UpdateValueParent({
-              sourceId: source.id,
-              parentId: target.id,
-              valueKey: 'physicalArmor',
-              factor: -1,
-            }),
-            new UpdateValueParent({
-              sourceId: source.id,
-              parentId: target.id,
-              valueKey: 'magicArmor',
-              factor: -1,
-            }),
-          ]),
-        },
-      })
-    )
+    return [
+      buildActionResult(
+        this,
+        data,
+        source,
+        targets,
+        ctx,
+        (modifiedTargets) => ({
+          onSuccess: {
+            mutations: modifiedTargets.flatMap((target) => [
+              new UpdateValueParent({
+                sourceId: source.id,
+                parentId: target.id,
+                valueKey: 'physicalArmor',
+                factor: -1,
+              }),
+              new UpdateValueParent({
+                sourceId: source.id,
+                parentId: target.id,
+                valueKey: 'magicArmor',
+                factor: -1,
+              }),
+            ]),
+          },
+        })
+      ),
+    ]
   }
 }

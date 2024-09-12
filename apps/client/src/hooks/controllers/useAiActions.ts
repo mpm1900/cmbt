@@ -9,20 +9,18 @@ import {
 import { nanoid } from 'nanoid/non-secure'
 import { useEffect } from 'react'
 import { useActions, useCleanup, useCombat, useCombatSettings } from '../state'
-import { useCombatActions } from '../useCombatActions'
 import { useCombatContext } from '../useCombatContext'
 
 export function useAiActions() {
   const ctx = useCombatContext()
-  const fns = useCombatActions()
-  const queue = useActions((s) => s.queue)
-  const cleanup = useCleanup((s) => s.queue)
+  const actions = useActions()
+  const cleanup = useCleanup()
   const user = useCombat((t) => t.user)
   const debug = useCombatSettings()
 
   useEffect(() => {
     if (debug.isDebugMode) return
-    if (ctx.turn.status === 'main' && queue.length === 0) {
+    if (ctx.turn.status === 'main' && actions.queue.length === 0) {
       const units = ctx.units.map((u) => applyModifiers(u, ctx).unit)
       const aiUnits = getActionableUnits(units).filter((u) => u.teamId !== user)
       const aiActions = aiUnits.map((unit) => {
@@ -40,7 +38,8 @@ export function useAiActions() {
         const bestAiAction = aiActions[0]
         return bestAiAction
       })
-      fns.pushAction(
+
+      actions.enqueue(
         ...aiActions.map((aiAction) => ({
           id: nanoid(),
           action: aiAction.action,
@@ -48,36 +47,39 @@ export function useAiActions() {
         }))
       )
     }
-  }, [ctx.turn.status, queue.length])
+  }, [ctx.turn.status, actions.queue.length])
 
   useEffect(() => {
-    if (ctx.turn.status === 'cleanup' && cleanup.length === 0) {
-      const aiTeam = getTeamsWithSelectionRequired(ctx).find(
-        (t) => t.id !== ctx.user
-      )
-      if (aiTeam) {
-        const aliveActiveUnits = new GetUnits({
-          notTeamId: ctx.user,
-          isActive: true,
-          isAlive: true,
-        }).resolve(ctx)
-        const aliveInactiveUnits = new GetUnits({
-          notTeamId: ctx.user,
-          isActive: false,
-          isAlive: true,
-        }).resolve(ctx)
-
-        const count = Math.min(
-          aiTeam.maxActiveUnits - aliveActiveUnits.length,
-          aliveInactiveUnits.length
+    if (ctx.turn.status === 'cleanup') {
+      const teams = getTeamsWithSelectionRequired(ctx)
+      if (teams.length > 0 && cleanup.queue.length === 0) {
+        const aiTeam = getTeamsWithSelectionRequired(ctx).find(
+          (t) => t.id !== ctx.user
         )
-        const item = getBestAiAction(new SetIsActive(aiTeam.id, count), ctx)
-        fns.pushCleanupAction({
-          id: nanoid(),
-          action: item.action,
-          targetIds: item.targetIds,
-        })
+        if (aiTeam) {
+          const aliveActiveUnits = new GetUnits({
+            notTeamId: ctx.user,
+            isActive: true,
+            isAlive: true,
+          }).resolve(ctx)
+          const aliveInactiveUnits = new GetUnits({
+            notTeamId: ctx.user,
+            isActive: false,
+            isAlive: true,
+          }).resolve(ctx)
+
+          const count = Math.min(
+            aiTeam.maxActiveUnits - aliveActiveUnits.length,
+            aliveInactiveUnits.length
+          )
+          const item = getBestAiAction(new SetIsActive(aiTeam.id, count), ctx)
+          cleanup.enqueue({
+            id: nanoid(),
+            action: item.action,
+            targetIds: item.targetIds,
+          })
+        }
       }
     }
-  }, [ctx.turn.status, cleanup.length])
+  }, [ctx.turn.status, cleanup.queue.length])
 }

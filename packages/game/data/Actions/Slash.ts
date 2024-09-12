@@ -61,29 +61,31 @@ export class Slash extends Action {
     targets: Unit[],
     ctx: CombatContext,
     options: ActionResolveOptions
-  ): ActionResult => {
+  ): ActionResult[] => {
     ctx = modifyRenderContext(options, ctx)
     const data = getActionData(source, this, ctx)
 
-    return buildActionResult(
-      this,
-      data,
-      source,
-      targets,
-      ctx,
-      (modifiedTargets) => ({
-        onSuccess: {
-          mutations: modifiedTargets.flatMap((target) => {
-            const damage = calculateDamage(
-              this.damage,
-              data.source,
-              target,
-              data.accuracyRoll
-            )
-            return getMutationsFromDamageResult(source, target, damage)
-          }),
-        },
-      })
-    )
+    return [
+      buildActionResult(
+        this,
+        data,
+        source,
+        targets,
+        ctx,
+        (modifiedTargets) => ({
+          onSuccess: {
+            mutations: modifiedTargets.flatMap((target) => {
+              const damage = calculateDamage(
+                this.damage,
+                data.source,
+                target,
+                data.accuracyRoll
+              )
+              return getMutationsFromDamageResult(source, target, damage)
+            }),
+          },
+        })
+      ),
+    ]
   }
 }

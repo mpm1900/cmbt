@@ -66,45 +66,47 @@ export class PiercingStrike extends Action {
     targets: Unit[],
     ctx: CombatContext,
     options: ActionResolveOptions
-  ): ActionResult => {
+  ): ActionResult[] => {
     ctx = modifyRenderContext(options, ctx)
     const data = getActionData(source, this, ctx)
     const applyModifierRoll = random.int(0, 100)
     const applyDefenseDown = applyModifierRoll <= this.defenseDownChance
 
-    return buildActionResult(
-      this,
-      data,
-      source,
-      targets,
-      ctx,
-      (modifiedTargets) => ({
-        onSuccess: {
-          mutations: modifiedTargets.flatMap((target) => {
-            const damage = calculateDamage(
-              this.damage,
-              data.source,
-              target,
-              data.accuracyRoll
-            )
+    return [
+      buildActionResult(
+        this,
+        data,
+        source,
+        targets,
+        ctx,
+        (modifiedTargets) => ({
+          onSuccess: {
+            mutations: modifiedTargets.flatMap((target) => {
+              const damage = calculateDamage(
+                this.damage,
+                data.source,
+                target,
+                data.accuracyRoll
+              )
 
-            return getMutationsFromDamageResult(source, target, damage)
-          }),
-          addedModifiers: ifArray(
-            applyDefenseDown,
-            modifiedTargets.map(
-              (target) =>
-                new UpdateStatStageParent({
-                  registryId: DefenseStageDownParentId,
-                  stat: 'defense',
-                  sourceId: source.id,
-                  parentId: target.id,
-                  stages: this.defenseStage,
-                })
-            )
-          ),
-        },
-      })
-    )
+              return getMutationsFromDamageResult(source, target, damage)
+            }),
+            addedModifiers: ifArray(
+              applyDefenseDown,
+              modifiedTargets.map(
+                (target) =>
+                  new UpdateStatStageParent({
+                    registryId: DefenseStageDownParentId,
+                    stat: 'defense',
+                    sourceId: source.id,
+                    parentId: target.id,
+                    stages: this.defenseStage,
+                  })
+              )
+            ),
+          },
+        })
+      ),
+    ]
   }
 }

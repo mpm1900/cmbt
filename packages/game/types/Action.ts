@@ -45,6 +45,7 @@ export type ActionResult = {
   addedModifiers?: Modifier[]
   addedUnits?: Unit[]
   removedUnits?: Unit[]
+  shouldLog?: boolean
   updateModifiers?: (modifiers: Modifier[]) => Modifier[]
   updateActionQueue?: (queue: ActionsQueueItem[]) => ActionsQueueItem[]
 }
@@ -88,7 +89,7 @@ export abstract class Action {
     targets: Unit[],
     ctx: CombatContext,
     options?: ActionResolveOptions
-  ): ActionResult
+  ): ActionResult[]
 
   getAi(targets: Unit[], ctx: CombatContext): ActionAi {
     return { action: this, weight: 0, targetIds: [] }

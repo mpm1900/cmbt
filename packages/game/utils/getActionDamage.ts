@@ -8,11 +8,14 @@ export function getActionDamage(
   targets: Unit[],
   ctx: CombatContext
 ) {
-  const { mutations = [] } = action.resolve(source, targets, ctx, {
-    bypassAccuracyRolls: true,
-    disableLogging: true,
-    disableRandomness: true,
-  })
+  const mutations = action
+    .resolve(source, targets, ctx, {
+      bypassAccuracyRolls: true,
+      disableLogging: true,
+      disableRandomness: true,
+    })
+    .flatMap((r) => r.mutations ?? [])
+
   return mutations
     .map((m) => applyMutation(ZERO_UNIT, m))
     .flatMap((u) => u.values.damage)

@@ -1,46 +1,45 @@
-import { getTeamsWithSelectionRequired, handleNextAction } from '@/utils'
-import { SetIsActive } from '@repo/game/data'
-import { nanoid } from 'nanoid/non-secure'
+import {
+  getResultsFromActionItem,
+  getTeamsWithSelectionRequired,
+} from '@/utils'
 import { useEffect } from 'react'
-import { useCleanup, useCombat } from '../state'
-import { useCombatActions } from '../useCombatActions'
+import { useActions, useCleanup, useCombat } from '../state'
+import { useResults } from '../state/useResults'
 import { useCombatContext } from '../useCombatContext'
 
 export function useCleanupController() {
-  const fns = useCombatActions()
-  let queue = useCleanup()
-  let ctx = useCombatContext()
-  const log = useCombat((s) => s.log)
+  const actions = useActions()
+  const cleanup = useCleanup()
+  const combat = useCombat()
+  const results = useResults()
+  const ctx = useCombatContext()
+
+  const status = combat.turn.status
+  const teams = getTeamsWithSelectionRequired(ctx)
 
   useEffect(() => {
-    // return setStatus('done')
-    if (ctx.turn.status === 'cleanup') {
-      const teams = getTeamsWithSelectionRequired(ctx)
-      if (queue.queue.length === teams.length && teams.length > 0) {
-        queue = queue.setQueue((items) => [
-          {
-            id: nanoid(),
-            action: new SetIsActive('', 1),
-            targetIds: items.flatMap((i) => i.targetIds),
-          },
-        ])
-        handleNextAction(
-          'cleanup',
-          queue,
-          log,
-          ctx,
-          fns.commitResult,
-          (result, ctx) => {
-            if (result) {
-              ctx = fns.commitResult(result, ctx, { enableLog: true })
-              ctx = fns.cleanupResult(ctx)
-              queue.setQueue(() => [])
+    if (status === 'cleanup' || status === 'cleanup-running') {
+      if (status === 'cleanup') {
+        if (cleanup.queue.length === teams.length) {
+          combat.setStatus('cleanup-running')
+        }
+      }
 
-              fns.cleanup(ctx.turn.count > 0, ctx)
+      if (status === 'cleanup-running') {
+        const item = cleanup.dequeue(ctx)
+        if (item) {
+          const actionResults = getResultsFromActionItem(item, ctx)
+          results.enqueue(...actionResults)
+        } else {
+          if (results.queue.length === 0) {
+            if (actions.queue.length === 0) {
+              combat.setStatus('end')
+            } else {
+              combat.setStatus('combat')
             }
           }
-        )
+        }
       }
     }
-  }, [ctx.turn.status, queue.queue.length])
+  }, [status, cleanup.queue.length, results.queue.length, teams.length])
 }

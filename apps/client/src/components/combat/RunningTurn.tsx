@@ -6,18 +6,18 @@ import { LogUnit } from '../ui/log'
 
 export function RunningTurn() {
   const ctx = useCombatContext()
-  const { result, units, user } = useCombat((s) => ({
+  const { result, user } = useCombat((s) => ({
     result: s.turn.results[s.turn.results.length - 1],
-    units: s.units,
     user: s.user,
   }))
+
   const renderer = ActionRenderers[result?.action?.id ?? '']
   const logTargets =
     ((result?.expandedTargets ?? []).length === 0
       ? result?.targets
       : result?.expandedTargets) ?? []
-  if (!result) return null
 
+  if (!result) return null
   if (renderer.log && result.action) {
     return (
       <div className="text-3xl">

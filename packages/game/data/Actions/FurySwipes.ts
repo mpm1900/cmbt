@@ -38,17 +38,10 @@ export class FurySwipes extends Action {
     })
 
     this.damage = {
-      power: 4,
+      power: 15,
       attackType: 'physical',
       damageType: 'force',
     }
-  }
-
-  mapTargets = (targets: Unit[], ctx: CombatContext): Unit[] => {
-    return targets.reduce<Unit[]>((result, current) => {
-      const length = random.int(4, 6)
-      return [...result, ...Array(length).fill(current)]
-    }, [])
   }
 
   threshold = (source: Unit): number | undefined => {
@@ -65,29 +58,32 @@ export class FurySwipes extends Action {
     targets: Unit[],
     ctx: CombatContext,
     options: ActionResolveOptions
-  ): ActionResult => {
+  ): ActionResult[] => {
     ctx = modifyRenderContext(options, ctx)
     const data = getActionData(source, this, ctx)
+    const length = random.int(4, 6)
 
-    return buildActionResult(
-      this,
-      data,
-      source,
-      targets,
-      ctx,
-      (modifiedTargets) => ({
-        onSuccess: {
-          mutations: modifiedTargets.flatMap((target) => {
-            const damage = calculateDamage(
-              this.damage,
-              data.source,
-              target,
-              data.accuracyRoll
-            )
-            return getMutationsFromDamageResult(source, target, damage)
-          }),
-        },
-      })
+    return Array.from({ length }).map(() =>
+      buildActionResult(
+        this,
+        data,
+        source,
+        targets,
+        ctx,
+        (modifiedTargets) => ({
+          onSuccess: {
+            mutations: modifiedTargets.flatMap((target) => {
+              const damage = calculateDamage(
+                this.damage,
+                data.source,
+                target,
+                data.accuracyRoll
+              )
+              return getMutationsFromDamageResult(source, target, damage)
+            }),
+          },
+        })
+      )
     )
   }
 }

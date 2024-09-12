@@ -60,36 +60,38 @@ export class FireBlast extends Action {
     targets: Unit[],
     ctx: CombatContext,
     options: ActionResolveOptions
-  ): ActionResult => {
+  ): ActionResult[] => {
     ctx = modifyRenderContext(options, ctx)
     const data = getActionData(source, this, ctx)
     const applyModifierRoll = random.int(0, 100)
     const applyBurn = applyModifierRoll <= this.burnChance
 
-    return buildActionResult(
-      this,
-      data,
-      source,
-      targets,
-      ctx,
-      (modifiedTargets) => ({
-        onSuccess: {
-          mutations: modifiedTargets.flatMap((target) => {
-            const damage = calculateDamage(
-              this.damage,
-              data.source,
-              target,
-              data.accuracyRoll
-            )
-            return getMutationsFromDamageResult(source, target, damage)
-          }),
-          addedModifiers: applyBurn
-            ? modifiedTargets.flatMap((target) =>
-                Burn.modifiers(source, target)
+    return [
+      buildActionResult(
+        this,
+        data,
+        source,
+        targets,
+        ctx,
+        (modifiedTargets) => ({
+          onSuccess: {
+            mutations: modifiedTargets.flatMap((target) => {
+              const damage = calculateDamage(
+                this.damage,
+                data.source,
+                target,
+                data.accuracyRoll
               )
-            : [],
-        },
-      })
-    )
+              return getMutationsFromDamageResult(source, target, damage)
+            }),
+            addedModifiers: applyBurn
+              ? modifiedTargets.flatMap((target) =>
+                  Burn.modifiers(source, target)
+                )
+              : [],
+          },
+        })
+      ),
+    ]
   }
 }

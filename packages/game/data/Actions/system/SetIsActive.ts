@@ -47,21 +47,23 @@ export class SetIsActive extends Action {
     source: Unit | undefined,
     targets: Unit[],
     ctx: CombatContext
-  ): ActionResult => {
-    return {
-      action: this,
-      source,
-      targets,
-      mutations: targets.map(
-        (target) =>
-          new SetIsActiveParent({
-            sourceId: source?.id,
-            parentId: target.id,
-            isActive: true,
-          })
-      ),
-      addedModifiers: targets.flatMap((t) => getModifiersFromUnit(t)),
-      addedUnits: targets,
-    }
+  ): ActionResult[] => {
+    return [
+      {
+        action: this,
+        source,
+        targets,
+        mutations: targets.map(
+          (target) =>
+            new SetIsActiveParent({
+              sourceId: source?.id,
+              parentId: target.id,
+              isActive: true,
+            })
+        ),
+        addedModifiers: targets.flatMap((t) => getModifiersFromUnit(t)),
+        addedUnits: targets,
+      },
+    ]
   }
 }

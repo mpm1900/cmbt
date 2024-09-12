@@ -49,36 +49,38 @@ export class TimeBend extends Action {
     targets: Unit[],
     ctx: CombatContext,
     options: ActionResolveOptions
-  ): ActionResult => {
+  ): ActionResult[] => {
     ctx = modifyRenderContext(options, ctx)
     const data = getActionData(source, this, ctx)
 
-    return buildActionResult(
-      this,
-      data,
-      source,
-      targets,
-      ctx,
-      (modifiedTargets) => ({
-        onSuccess: {
-          addedModifiers: modifiedTargets.map(
-            (target) =>
-              new UpdateStatStageParent({
-                registryId:
-                  target.teamId === source.teamId
-                    ? SpeedStageUpParentId
-                    : SpeedStageDownParentId,
-                stat: 'speed',
-                sourceId: source.id,
-                parentId: target.id,
-                stages:
-                  target.teamId === source.teamId
-                    ? this.offset
-                    : this.offset * -1,
-              })
-          ),
-        },
-      })
-    )
+    return [
+      buildActionResult(
+        this,
+        data,
+        source,
+        targets,
+        ctx,
+        (modifiedTargets) => ({
+          onSuccess: {
+            addedModifiers: modifiedTargets.map(
+              (target) =>
+                new UpdateStatStageParent({
+                  registryId:
+                    target.teamId === source.teamId
+                      ? SpeedStageUpParentId
+                      : SpeedStageDownParentId,
+                  stat: 'speed',
+                  sourceId: source.id,
+                  parentId: target.id,
+                  stages:
+                    target.teamId === source.teamId
+                      ? this.offset
+                      : this.offset * -1,
+                })
+            ),
+          },
+        })
+      ),
+    ]
   }
 }

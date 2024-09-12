@@ -10,7 +10,12 @@ import { VantaContextProvider } from '@/hooks'
 import {
   useAiActions,
   useCleanupController,
-  useTurnController,
+  useCombatController,
+  useDoneController,
+  useEndController,
+  useMainController,
+  useResultsController,
+  useUpkeepController,
 } from '@/hooks/controllers'
 import { useCombat } from '@/hooks/state'
 import { useCombatSetup } from '@/hooks/useCombatSetup'
@@ -18,11 +23,19 @@ import { Navbar } from '@shared/Navbar'
 import { PageLayout } from '@shared/PageLayout'
 
 export function Combat() {
-  const { teams, user } = useCombat((s) => ({ teams: s.teams, user: s.user }))
+  const { teams, user } = useCombat((s) => ({
+    teams: s.teams,
+    user: s.user,
+  }))
 
   useCombatSetup()
-  useTurnController()
+  useResultsController()
+  useUpkeepController()
+  useMainController()
+  useCombatController()
   useCleanupController()
+  useEndController()
+  useDoneController()
   useAiActions()
 
   const userTeam = teams.find((t) => t.id === user)

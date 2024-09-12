@@ -44,32 +44,34 @@ export class Hex extends Action {
     targets: Unit[],
     ctx: CombatContext,
     options: ActionResolveOptions
-  ): ActionResult => {
+  ): ActionResult[] => {
     ctx = modifyRenderContext(options, ctx)
     const data = getActionData(source, this, ctx)
 
-    return buildActionResult(
-      this,
-      data,
-      source,
-      targets,
-      ctx,
-      (modifiedTargets) => ({
-        forceFailure: source.metadata.activeTurns > 1,
-        onSuccess: {
-          addedModifiers: modifiedTargets.flatMap((target) => [
-            new UpdateFlagParent({
-              registryId: HexedParentId,
-              sourceId: source.id,
-              parentId: target.id,
-              flagKey: 'isHexed',
-              value: true,
-              maxInstances: 1,
-              duration: 1,
-            }),
-          ]),
-        },
-      })
-    )
+    return [
+      buildActionResult(
+        this,
+        data,
+        source,
+        targets,
+        ctx,
+        (modifiedTargets) => ({
+          forceFailure: source.metadata.activeTurns > 1,
+          onSuccess: {
+            addedModifiers: modifiedTargets.flatMap((target) => [
+              new UpdateFlagParent({
+                registryId: HexedParentId,
+                sourceId: source.id,
+                parentId: target.id,
+                flagKey: 'isHexed',
+                value: true,
+                maxInstances: 1,
+                duration: 1,
+              }),
+            ]),
+          },
+        })
+      ),
+    ]
   }
 }

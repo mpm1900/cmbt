@@ -33,22 +33,24 @@ export class PotionAction extends Action {
     source: Unit,
     targets: Unit[],
     ctx: CombatContext
-  ): ActionResult => {
+  ): ActionResult[] => {
     const target = targets[0]
-    return {
-      action: this,
-      source,
-      targets,
-      expandedTargets: targets,
-      mutations: [
-        new HealParent({
-          sourceId: source.id,
-          parentId: target.id,
-          static: 20,
-        }),
-      ],
-      addedModifiers: [],
-    }
+    return [
+      {
+        action: this,
+        source,
+        targets,
+        expandedTargets: targets,
+        mutations: [
+          new HealParent({
+            sourceId: source.id,
+            parentId: target.id,
+            static: 20,
+          }),
+        ],
+        addedModifiers: [],
+      },
+    ]
   }
 }
 

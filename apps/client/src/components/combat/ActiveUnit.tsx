@@ -1,6 +1,6 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { useCombatActions, useCombatContext } from '@/hooks'
-import { useCombatUi } from '@/hooks/state'
+import { useCombatContext } from '@/hooks'
+import { useActions, useCombatUi } from '@/hooks/state'
 import { SwitchUnit } from '@repo/game/data'
 import { Action, Id } from '@repo/game/types'
 import { applyModifiers } from '@repo/game/utils'
@@ -14,7 +14,7 @@ export type ActiveUnitProps = {}
 
 export function ActiveUnit() {
   const ctx = useCombatContext()
-  const { pushAction } = useCombatActions()
+  const actions = useActions()
   const { activeUnit, setActiveUnit } = useCombatUi()
   const [activeTab, setActiveTab] = useState('actions')
   const switchAction = new SwitchUnit(
@@ -23,7 +23,7 @@ export function ActiveUnit() {
   )
 
   function commitAction(action: Action, targetIds: Id[]) {
-    pushAction({
+    actions.enqueue({
       id: nanoid(),
       action,
       targetIds,

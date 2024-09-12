@@ -14,6 +14,7 @@ export function makeUnit(config: MakeUnitConfig, bases: UnitBase[]): Unit {
   const base = bases[baseIndex]
   const builder = makeUnitBuilder(base.id, level)
   const unit = resolveUnitBuilder(builder, teamId)
+  // unit.values.damage = unit.stats.health - 2
 
   return rebuildUnit(unit)
 }

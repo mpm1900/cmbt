@@ -48,28 +48,30 @@ export class DispelMagic extends Action {
     targets: Unit[],
     ctx: CombatContext,
     options: ActionResolveOptions
-  ): ActionResult => {
+  ): ActionResult[] => {
     ctx = modifyRenderContext(options, ctx)
     const data = getActionData(source, this, ctx)
 
-    return buildActionResult(this, data, source, targets, ctx, () => ({
-      onSuccess: {
-        addedModifiers: [
-          new AddModifiersToRegistryAll({
-            registryId: AddStatModifiersImmunityAllId,
-            sourceId: source.id,
-            duration: this.duration,
-            modifierIds: [
-              UpdateStatAllId,
-              UpdateStatParentId,
-              UpdateStatStageAllId,
-              UpdateStatStageParentId,
-              UpdateStatStageTeamId,
-              UpdateStatTeamId,
-            ],
-          }),
-        ],
-      },
-    }))
+    return [
+      buildActionResult(this, data, source, targets, ctx, () => ({
+        onSuccess: {
+          addedModifiers: [
+            new AddModifiersToRegistryAll({
+              registryId: AddStatModifiersImmunityAllId,
+              sourceId: source.id,
+              duration: this.duration,
+              modifierIds: [
+                UpdateStatAllId,
+                UpdateStatParentId,
+                UpdateStatStageAllId,
+                UpdateStatStageParentId,
+                UpdateStatStageTeamId,
+                UpdateStatTeamId,
+              ],
+            }),
+          ],
+        },
+      })),
+    ]
   }
 }

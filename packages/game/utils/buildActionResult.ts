@@ -49,6 +49,7 @@ export function buildActionResult(
     const { mutations = [] } = onSuccess
     return {
       ...onSuccess,
+      shouldLog: true,
       success: true,
       action,
       data,
@@ -63,6 +64,7 @@ export function buildActionResult(
     const { mutations = [] } = onFailure
     return {
       ...onFailure,
+      shouldLog: true,
       success: false,
       action,
       data,

@@ -61,43 +61,45 @@ export class HyperBeam extends Action {
     targets: Unit[],
     ctx: CombatContext,
     options?: ActionResolveOptions
-  ): ActionResult => {
+  ): ActionResult[] => {
     ctx = modifyRenderContext(options, ctx)
     const data = getActionData(source, this, ctx)
 
-    return buildActionResult(
-      this,
-      data,
-      source,
-      targets,
-      ctx,
-      (modifiedTargets) => ({
-        onSuccess: {
-          mutations: modifiedTargets.flatMap((target) => {
-            const { base } = getUnitBase(source.baseId)
-            const damage = calculateDamage(
-              {
-                ...this.damage!,
-                power: (base?.stats.magic ?? 0) * 2,
-              },
-              data.source,
-              target,
-              data.accuracyRoll
-            )
-            return getMutationsFromDamageResult(source, target, damage)
-          }),
-          addedModifiers: [
-            new UpdateFlagParent({
-              registryId: StunnedParentId,
-              sourceId: source.id,
-              parentId: source.id,
-              flagKey: 'isStunned',
-              value: true,
-              duration: 2,
+    return [
+      buildActionResult(
+        this,
+        data,
+        source,
+        targets,
+        ctx,
+        (modifiedTargets) => ({
+          onSuccess: {
+            mutations: modifiedTargets.flatMap((target) => {
+              const { base } = getUnitBase(source.baseId)
+              const damage = calculateDamage(
+                {
+                  ...this.damage!,
+                  power: (base?.stats.magic ?? 0) * 2,
+                },
+                data.source,
+                target,
+                data.accuracyRoll
+              )
+              return getMutationsFromDamageResult(source, target, damage)
             }),
-          ],
-        },
-      })
-    )
+            addedModifiers: [
+              new UpdateFlagParent({
+                registryId: StunnedParentId,
+                sourceId: source.id,
+                parentId: source.id,
+                flagKey: 'isStunned',
+                value: true,
+                duration: 2,
+              }),
+            ],
+          },
+        })
+      ),
+    ]
   }
 }

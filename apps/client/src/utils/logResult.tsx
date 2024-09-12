@@ -1,25 +1,29 @@
 import { LogSecondary, LogUnit } from '@/components/ui/log'
-import { CommitResultOptions } from '@/hooks'
 import { CombatLogger } from '@/hooks/state'
 import { ActionResult, CombatContext } from '@repo/game/types'
 import { logActionSuccessFailure } from './logActionSuccessFailure'
 import { logCritical } from './logCritical'
 import { logMiss } from './logMiss'
+import { logModifiers } from './logModifiers'
 import { logMutations } from './logMutations'
 
 export function logResult(
   result: ActionResult,
   log: CombatLogger,
-  ctx: CombatContext,
-  options?: CommitResultOptions
+  ctx: CombatContext
 ) {
-  const { addedModifiers: modifiers, mutations } = result
-  if (!options?.enableLog) return
+  const { addedModifiers: modifiers, mutations, shouldLog } = result
+
+  if (!shouldLog) return
 
   logMiss(result, log, ctx)
   if (mutations?.length) {
-    if (options?.enableLog) logMutations(mutations, log, ctx)
+    logMutations(mutations, log, ctx)
   }
+  if (modifiers?.length) {
+    logModifiers(modifiers, log, ctx)
+  }
+
   logCritical(result, log, ctx)
   logActionSuccessFailure(result, log, ctx)
   if (result.protectedTargets) {

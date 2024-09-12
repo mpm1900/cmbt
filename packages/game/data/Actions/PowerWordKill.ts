@@ -48,27 +48,29 @@ export class PowerWordKill extends Action {
     targets: Unit[],
     ctx: CombatContext,
     options?: ActionResolveOptions
-  ): ActionResult => {
+  ): ActionResult[] => {
     ctx = modifyRenderContext(options, ctx)
     const data = getActionData(source, this, ctx)
-    return buildActionResult(
-      this,
-      data,
-      source,
-      targets,
-      ctx,
-      (modifiedTargets) => ({
-        onSuccess: {
-          mutations: modifiedTargets.map((target) => {
-            const damage = target.stats.health
-            return new DamageParent({
-              sourceId: source.id,
-              parentId: target.id,
-              static: damage,
-            })
-          }),
-        },
-      })
-    )
+    return [
+      buildActionResult(
+        this,
+        data,
+        source,
+        targets,
+        ctx,
+        (modifiedTargets) => ({
+          onSuccess: {
+            mutations: modifiedTargets.map((target) => {
+              const damage = target.stats.health
+              return new DamageParent({
+                sourceId: source.id,
+                parentId: target.id,
+                static: damage,
+              })
+            }),
+          },
+        })
+      ),
+    ]
   }
 }

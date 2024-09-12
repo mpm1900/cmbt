@@ -7,8 +7,6 @@ import {
   TriggerEvent,
 } from '@repo/game/types'
 import { getTriggersByEvent, validateModifiers } from '@repo/game/utils'
-import { logModifiers } from './logModifiers'
-import { logMutations } from './logMutations'
 import { logTriggers } from './logTriggers'
 
 export function handleTriggerEvent(
@@ -23,6 +21,7 @@ export function handleTriggerEvent(
     []
   ) as Trigger[]
   const result: ActionResult = {
+    shouldLog: true,
     addedModifiers: triggers
       .filter((trigger) => !!trigger.modifiers)
       .flatMap(
@@ -30,14 +29,8 @@ export function handleTriggerEvent(
       ),
     mutations: triggers.filter((trigger) => !trigger.modifiers),
   }
-  if ((result.addedModifiers?.length ?? 0 > 0) || result.mutations?.length) {
+  if (result.addedModifiers?.length || result.mutations?.length) {
     logTriggers(triggers, event, log, ctx, args)
-  }
-  if (result.addedModifiers?.length) {
-    logModifiers(result.addedModifiers, log, ctx, args)
-  }
-  if (result.mutations?.length) {
-    logMutations(result.mutations, log, ctx, args)
   }
 
   return result

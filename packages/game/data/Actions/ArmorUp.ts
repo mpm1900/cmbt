@@ -1,6 +1,5 @@
 import {
   Action,
-  ActionAi,
   ActionResolveOptions,
   ActionResult,
   CombatContext,
@@ -27,10 +26,6 @@ export class ArmorUp extends Action {
       maxTargetCount: 0,
     })
     this.amount = 50
-  }
-
-  getAi(targets: Unit[], ctx: CombatContext): ActionAi {
-    return { action: this, weight: 0, targetIds: [] }
   }
 
   resolve = (

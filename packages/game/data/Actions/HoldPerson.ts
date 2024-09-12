@@ -1,6 +1,5 @@
 import {
   Action,
-  ActionAi,
   ActionResolveOptions,
   ActionResult,
   CombatContext,
@@ -35,11 +34,6 @@ export class HoldPerson extends Action {
   }
 
   threshold = (source: Unit): number | undefined => 85 + source.stats.accuracy
-  criticalThreshold = (source: Unit): number | undefined => undefined
-  criticalFactor = (source: Unit): number | undefined => undefined
-  getAi(targets: Unit[], ctx: CombatContext): ActionAi {
-    return { action: this, weight: 0, targetIds: [] }
-  }
 
   resolve = (
     source: Unit,

@@ -6,12 +6,6 @@ import { Mutation } from './Mutation'
 import { Query } from './Query'
 import { Unit } from './Unit'
 
-export type ActionAi = {
-  action: Action
-  weight: number
-  targetIds: Id[]
-}
-
 export type ActionAccuracyResult = {
   roll: number
   success: boolean
@@ -30,7 +24,11 @@ export type ActionResolveData = {
 export type ActionsQueueItem = {
   id: string
   action: Action
-  targetIds: string[]
+  targetIds: Id[]
+}
+
+export type ActionAi = ActionsQueueItem & {
+  weight: number
 }
 
 export type ActionResult = {
@@ -92,7 +90,7 @@ export abstract class Action {
   ): ActionResult[]
 
   getAi(targets: Unit[], ctx: CombatContext): ActionAi {
-    return { action: this, weight: 0, targetIds: [] }
+    return { id: nanoid(), action: this, weight: 0, targetIds: [] }
   }
 
   mapTargets = (targets: Unit[], ctx: CombatContext): Unit[] => {

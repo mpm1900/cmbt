@@ -73,11 +73,11 @@ export function LogSecondary(props: ElementProps) {
 }
 
 export function LogUnit(props: ElementProps<{ unit: Unit; user: Id }>) {
-  const { setHoverTargetUnit } = useCombatUi()
+  const { setHoverTargetUnitIds } = useCombatUi()
   return (
     <span
-      onMouseEnter={() => setHoverTargetUnit(props.unit)}
-      onMouseLeave={() => setHoverTargetUnit(undefined)}
+      onMouseEnter={() => setHoverTargetUnitIds([props.unit.id])}
+      onMouseLeave={() => setHoverTargetUnitIds(undefined)}
       className={cn(
         'font-normal hover:underline cursor-pointer',
         props.className,

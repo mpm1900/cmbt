@@ -1,6 +1,5 @@
 import {
   Action,
-  ActionAi,
   ActionResolveOptions,
   ActionResult,
   CombatContext,
@@ -27,13 +26,6 @@ export class Taunt extends Action {
       priority: 3,
       maxTargetCount: 0,
     })
-  }
-
-  threshold = (source: Unit): number | undefined => undefined
-  criticalThreshold = (source: Unit): number | undefined => undefined
-  criticalFactor = (source: Unit): number | undefined => undefined
-  getAi(targets: Unit[], ctx: CombatContext): ActionAi {
-    return { action: this, weight: 0, targetIds: [] }
   }
 
   resolve = (

@@ -1,11 +1,4 @@
-import {
-  Action,
-  ActionAi,
-  ActionResult,
-  CombatContext,
-  Id,
-  Unit,
-} from '../../../types'
+import { Action, ActionResult, CombatContext, Id, Unit } from '../../../types'
 import { getModifiersFromUnit } from '../../../utils'
 import { SwitchUnitId } from '../../Ids'
 import { Identity } from '../../Mutations'
@@ -26,12 +19,6 @@ export class SwitchUnit extends Action {
       }),
       maxTargetCount: 1,
     })
-  }
-
-  threshold = (source: Unit): number | undefined => undefined
-  criticalThreshold = (source: Unit): number | undefined => undefined
-  getAi(targets: Unit[], ctx: CombatContext): ActionAi {
-    return { action: this, weight: 0, targetIds: [] }
   }
 
   resolve = (

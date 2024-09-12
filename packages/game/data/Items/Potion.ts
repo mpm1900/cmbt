@@ -1,7 +1,6 @@
 import { nanoid } from 'nanoid'
 import {
   Action,
-  ActionAi,
   ActionProps,
   ActionResult,
   CombatContext,
@@ -20,13 +19,6 @@ export class PotionAction extends Action {
         teamId: props.teamId,
       }),
     })
-  }
-
-  threshold = (source: Unit): number | undefined => undefined
-  criticalThreshold = (source: Unit): number | undefined => undefined
-  criticalFactor = (source: Unit): number | undefined => undefined
-  getAi(targets: Unit[], ctx: CombatContext): ActionAi {
-    return { action: this, weight: 0, targetIds: [] }
   }
 
   resolve = (

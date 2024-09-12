@@ -1,6 +1,5 @@
 import {
   Action,
-  ActionAi,
   ActionResolveOptions,
   ActionResult,
   CombatContext,
@@ -29,10 +28,6 @@ export class NegateArmor extends Action {
       }),
       maxTargetCount: 1,
     })
-  }
-
-  getAi(targets: Unit[], ctx: CombatContext): ActionAi {
-    return { action: this, weight: 0, targetIds: [] }
   }
 
   resolve = (

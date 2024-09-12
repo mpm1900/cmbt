@@ -1,6 +1,5 @@
 import {
   Action,
-  ActionAi,
   ActionResolveOptions,
   ActionResult,
   CombatContext,
@@ -30,13 +29,6 @@ export class BattleStance extends Action {
       targets: new EmptyArray(),
       maxTargetCount: 0,
     })
-  }
-
-  threshold = (source: Unit): number | undefined => undefined
-  criticalThreshold = (source: Unit): number | undefined => undefined
-  criticalFactor = (source: Unit): number | undefined => undefined
-  getAi(targets: Unit[], ctx: CombatContext): ActionAi {
-    return { action: this, weight: 0, targetIds: [] }
   }
 
   resolve = (

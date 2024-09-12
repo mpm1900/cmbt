@@ -1,3 +1,4 @@
+import { nanoid } from 'nanoid'
 import {
   Action,
   ActionAi,
@@ -27,9 +28,6 @@ export class SetIsActive extends Action {
     })
   }
 
-  threshold = (source: Unit): number | undefined => undefined
-  criticalThreshold = (source: Unit): number | undefined => undefined
-
   getAi = (targets: Unit[], ctx: CombatContext): ActionAi => {
     const modified = targets.map((target) => applyModifiers(target, ctx).unit)
     const remainingHealth = modified.map(
@@ -37,6 +35,7 @@ export class SetIsActive extends Action {
     )
 
     return {
+      id: nanoid(),
       action: this,
       targetIds: targets.map((t) => t.id),
       weight: remainingHealth.reduce((a, b) => a + b, 0),

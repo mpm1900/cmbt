@@ -14,7 +14,7 @@ export type UnitActionTargetsProps = {
 export function ActionTargets(props: UnitActionTargetsProps) {
   const { action, targets, onConfirmClick, onTargetClick } = props
   const ctx = useCombatContext()
-  const { setHoverTargetUnit } = useCombatUi()
+  const { setHoverTargetUnitIds } = useCombatUi()
   const possibleTargets = action.targets.resolve(ctx)
 
   useEffect(() => {
@@ -41,7 +41,16 @@ export function ActionTargets(props: UnitActionTargetsProps) {
               <Button
                 className="h-full px-8"
                 variant="outline"
-                onClick={() => onConfirmClick()}
+                onClick={() => {
+                  setHoverTargetUnitIds(undefined)
+                  onConfirmClick()
+                }}
+                onMouseOver={() =>
+                  setHoverTargetUnitIds(
+                    action.mapTargets([], ctx).map((t) => t.id)
+                  )
+                }
+                onMouseLeave={() => setHoverTargetUnitIds(undefined)}
               >
                 Confirm Action
               </Button>
@@ -59,11 +68,11 @@ export function ActionTargets(props: UnitActionTargetsProps) {
               className="h-full px-8 mb-2"
               variant={isSelected ? 'default' : 'outline'}
               onClick={() => {
-                setHoverTargetUnit(undefined)
+                setHoverTargetUnitIds(undefined)
                 onTargetClick(target, isSelected)
               }}
-              onMouseOver={() => setHoverTargetUnit(target)}
-              onMouseLeave={() => setHoverTargetUnit(undefined)}
+              onMouseOver={() => setHoverTargetUnitIds([target.id])}
+              onMouseLeave={() => setHoverTargetUnitIds(undefined)}
             >
               {target.name}
             </Button>

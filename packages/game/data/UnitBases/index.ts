@@ -22,10 +22,10 @@ export const PLAYER_BASES: UnitBase[] = [
   Snorlax,
   Witch,
   Gengar,
+  Tyranitar,
   Salamence,
   Blissy,
 
-  Tyranitar,
   TempestKnight,
 
   Celebi,

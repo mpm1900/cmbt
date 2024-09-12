@@ -27,7 +27,7 @@ export function UnitCard(props: UnitCardProps) {
   const status = ctx.turn.status
   const result = ctx.turn.results[ctx.turn.results.length - 1]
   const { queue } = useActions()
-  const { activeUnit, setActiveUnit, hoverTargetUnit } = useCombatUi()
+  const { activeUnit, setActiveUnit, hoverTargetUnitIds } = useCombatUi()
   const { unit, appliedModifiers, registeredTriggers } = applyModifiers(
     props.unit,
     ctx
@@ -40,7 +40,7 @@ export function UnitCard(props: UnitCardProps) {
       : result?.expandedTargets) ?? []
 
   const isTargeted =
-    hoverTargetUnit?.id === unit.id ||
+    hoverTargetUnitIds?.includes(unit.id) ||
     (status === 'combat' && targets.some((t) => t.id === unit.id))
 
   const isActive =

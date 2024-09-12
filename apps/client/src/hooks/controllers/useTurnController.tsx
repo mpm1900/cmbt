@@ -16,7 +16,6 @@ export function useTurnController() {
   function startTurn() {
     setStatus('combat')
     ctx = fns.runTriggers('on Turn Start', ctx)
-    queue.sort(ctx)
   }
 
   function nextAction() {
@@ -26,7 +25,7 @@ export function useTurnController() {
           ctx.units.some((u) => u.teamId === team.id && isUnitAliveCtx(u, ctx))
         )
         if (aliveTeams.length === 2) {
-          queue.dequeue()
+          queue.dequeue(ctx)
         } else {
           setStatus('done')
         }

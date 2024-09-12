@@ -1,5 +1,5 @@
 import { CommitResult } from '@/hooks'
-import { ActionStore, CombatLogger, queueComparator } from '@/hooks/state'
+import { ActionStore, CombatLogger } from '@/hooks/state'
 import { ActionResult, CombatContext, TurnStatus } from '@repo/game/types'
 import { isUnitAliveCtx } from '@repo/game/utils'
 import { getResultFromActionItem } from './getResultFromActionItem'
@@ -14,9 +14,7 @@ export function handleNextAction(
   handleResult: (result: ActionResult | undefined, ctx: CombatContext) => void,
   handleNext?: (ctx: CombatContext) => void
 ) {
-  queue.sort(ctx)
-  const sorted = queue.queue.sort(queueComparator(ctx))
-  const item = sorted[0]
+  const item = queue.first(ctx)
   if (item) {
     const source = ctx.units.find((u) => u.id === item.action.sourceId)
     const shouldCommitAction =

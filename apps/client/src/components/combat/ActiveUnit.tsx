@@ -15,30 +15,33 @@ export type ActiveUnitProps = {}
 export function ActiveUnit() {
   const ctx = useCombatContext()
   const { pushAction } = useCombatActions()
-  const { activeUnit: unit, setActiveUnit: setUnit } = useCombatUi()
+  const { activeUnit, setActiveUnit } = useCombatUi()
   const [activeTab, setActiveTab] = useState('actions')
-  const switchAction = new SwitchUnit(unit?.id ?? '', unit?.teamId ?? '')
+  const switchAction = new SwitchUnit(
+    activeUnit?.id ?? '',
+    activeUnit?.teamId ?? ''
+  )
 
   function commitAction(action: Action, targetIds: Id[]) {
-    if (action) {
-      pushAction({
-        id: nanoid(),
-        action,
-        targetIds,
-      })
+    pushAction({
+      id: nanoid(),
+      action,
+      targetIds,
+    })
 
-      setUnit(
-        ctx.units.find(
-          (u) =>
-            u.teamId === unit?.teamId && u.id !== unit.id && u.flags.isActive
-        )
+    setActiveUnit(
+      ctx.units.find(
+        (u) =>
+          u.teamId === activeUnit?.teamId &&
+          u.id !== activeUnit.id &&
+          u.flags.isActive
       )
-    }
+    )
   }
 
   useEffect(() => {
     setActiveTab('actions')
-  }, [unit?.id])
+  }, [activeUnit?.id])
 
   useEffect(() => {
     if (ctx.turn.status === 'main') {
@@ -47,11 +50,11 @@ export function ActiveUnit() {
         .map((u) => applyModifiers(u, ctx).unit)
         .find((u) => !u.flags.isStunned)
 
-      setUnit(ctx.units.find((u) => u.id === unit?.id))
+      setActiveUnit(ctx.units.find((u) => u.id === unit?.id))
     }
   }, [ctx.turn.status])
 
-  if (!unit) return null
+  if (!activeUnit) return null
   return (
     <Tabs
       value={activeTab}
@@ -65,7 +68,7 @@ export function ActiveUnit() {
       </TabsList>
       <TabsContent value="actions">
         <ActionsList
-          unit={unit}
+          unit={activeUnit}
           onConfirm={(action, targetIds) => commitAction(action, targetIds)}
         />
       </TabsContent>

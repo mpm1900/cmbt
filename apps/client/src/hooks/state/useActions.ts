@@ -8,12 +8,12 @@ export type ActionsState = {
 
 export type ActionStore = ActionsState & {
   enqueue: (...items: ActionsQueueItem[]) => void
-  dequeue: () => ActionsQueueItem | undefined
-  removeWhere: (filter: (item: ActionsQueueItem) => boolean) => void
+  dequeue: (ctx: CombatContext) => ActionsQueueItem | undefined
+  remove: (filter: (item: ActionsQueueItem) => boolean) => void
   setQueue: (
     setter: (items: ActionsQueueItem[]) => ActionsQueueItem[]
   ) => ActionStore
-  sort: (ctx: CombatContext) => ActionsQueueItem[]
+  first: (ctx: CombatContext) => ActionsQueueItem | undefined
 }
 
 export const queueComparator =
@@ -48,14 +48,14 @@ const makeQueueHook = () =>
       set((s) => ({
         queue: [...s.queue, ...items],
       })),
-    dequeue: () => {
-      const [first, ...rest] = get().queue
+    dequeue: (ctx) => {
+      const [first, ...rest] = get().queue.sort(queueComparator(ctx))
       set({
         queue: rest,
       })
       return first
     },
-    removeWhere: (filter) => {
+    remove: (filter) => {
       set((s) => ({
         queue: s.queue.filter((item) => !filter(item)),
       }))
@@ -66,13 +66,12 @@ const makeQueueHook = () =>
       }))
       return get()
     },
-    sort: (ctx: CombatContext) => {
-      set((s) => ({
-        queue: s.queue.sort(queueComparator(ctx)),
-      }))
-      return get().queue
+    first: (ctx) => {
+      const { queue } = get()
+      const first = queue.sort(queueComparator(ctx))[0]
+      return first
     },
   }))
 
 export const useActions = makeQueueHook()
-export const useCleanup = makeQueueHook()
+export const useCleanup = useActions

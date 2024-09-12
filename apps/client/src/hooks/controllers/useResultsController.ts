@@ -20,7 +20,6 @@ export function useResultsController() {
 
   useEffect(() => {
     if (first) {
-      console.log('first', first)
       if (first.action && first.shouldLog) {
         logActionIntent(first.action, first, log, ctx)
         setTurn((t) => ({
@@ -31,10 +30,8 @@ export function useResultsController() {
         ctx = fns.commitResult(first, ctx)
         setTimeout(() => {
           ctx = fns.cleanupResult(ctx)
-          if (first.action) {
-          }
           results.dequeue()
-        }, speed)
+        }, speed * 1.5)
       }, speed)
     }
   }, [first, combat.turn.status])

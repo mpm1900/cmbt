@@ -29,6 +29,7 @@ export function useCombatActions() {
   const combat = useCombat()
   const actionsQueue = useActions()
   const results = useResults()
+  const actions = useActions()
 
   const cleanupResult: CleanupResult = (context) => {
     const deadActiveUnits = context.units.filter(
@@ -39,6 +40,16 @@ export function useCombatActions() {
     })
 
     context.units = combat.mutate([new SetDeadAsInactive()], context)
+    actions.setQueue((items) =>
+      items.map((item) => {
+        return {
+          ...item,
+          targetIds: item.targetIds.map((tid) =>
+            deadActiveUnits.some((u) => u.id === tid) ? '' : tid
+          ),
+        }
+      })
+    )
 
     if (deadActiveUnits.length > 0) {
       pushTriggers('on Unit Die', context, {

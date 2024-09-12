@@ -73,11 +73,7 @@ export function SwitchUnits(props: SwitchUnitsProps) {
       {selectedTargets.length >= confirmCount && (
         <CardFooter className="justify-end">
           <Button onClick={() => onConfirm(selectedTargets)}>
-            {ctx.turn.count === 0
-              ? 'Start Combat'
-              : ui.activeUnit
-                ? `Switch with ${ui.activeUnit.name}`
-                : 'Switch In'}
+            {ctx.turn.count === 0 ? 'Start Combat' : 'Switch In'}
           </Button>
         </CardFooter>
       )}

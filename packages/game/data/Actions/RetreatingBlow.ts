@@ -35,7 +35,7 @@ export class RetreatingBlow extends Action {
         isHidden: false,
       }),
       maxTargetCount: 1,
-      priority: -1,
+      // priority: -1,
     })
 
     this.damage = {
@@ -103,6 +103,16 @@ export class RetreatingBlow extends Action {
                 isActive: false,
               }),
             ],
+            updateActionQueue: (queue) => {
+              return queue.map((item) => {
+                return {
+                  ...item,
+                  targetIds: item.targetIds.map((tid) =>
+                    tid === source.id ? '' : tid
+                  ),
+                }
+              })
+            },
           },
         }
       }),

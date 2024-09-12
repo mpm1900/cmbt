@@ -10,11 +10,13 @@ export function useDoneController() {
   const results = useResults()
 
   useEffect(() => {
-    const aliveTeams = ctx.teams.filter((team) =>
-      ctx.units.some((u) => u.teamId === team.id && isUnitAliveCtx(u, ctx))
-    )
-    if (aliveTeams.length !== ctx.teams.length) {
-      combat.setStatus('done')
+    if (results.queue.length) {
+      const aliveTeams = ctx.teams.filter((team) =>
+        ctx.units.some((u) => u.teamId === team.id && isUnitAliveCtx(u, ctx))
+      )
+      if (aliveTeams.length !== ctx.teams.length) {
+        combat.setStatus('done')
+      }
     }
   }, [results.queue.length])
 }

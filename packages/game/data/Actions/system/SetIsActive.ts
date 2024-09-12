@@ -64,6 +64,17 @@ export class SetIsActive extends Action {
         ),
         addedModifiers: targets.flatMap((t) => getModifiersFromUnit(t)),
         addedUnits: targets,
+        updateActionQueue: (queue) => {
+          const target = targets[0]
+          return queue.map((item) => {
+            return {
+              ...item,
+              targetIds: item.targetIds.map((tid) =>
+                tid === '' ? target.id : tid
+              ),
+            }
+          })
+        },
       },
     ]
   }

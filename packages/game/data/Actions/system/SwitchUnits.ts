@@ -44,6 +44,7 @@ export class SwitchUnit extends Action {
     return [
       {
         action: this,
+        shouldLog: true,
         source,
         targets,
         mutations: [

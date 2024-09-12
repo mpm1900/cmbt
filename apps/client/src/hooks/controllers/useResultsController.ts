@@ -20,7 +20,8 @@ export function useResultsController() {
 
   useEffect(() => {
     if (first) {
-      if (first.action) {
+      console.log('first', first)
+      if (first.action && first.shouldLog) {
         logActionIntent(first.action, first, log, ctx)
         setTurn((t) => ({
           results: t.results.concat(first),

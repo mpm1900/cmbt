@@ -21,6 +21,7 @@ export function buildActionResult(
   ctx: CombatContext,
   config: (targets: Unit[]) => {
     forceFailure?: boolean
+    shouldLog?: boolean
     onSuccess?: ParseActionResult
     onFailure?: ParseActionResult
   }
@@ -41,15 +42,16 @@ export function buildActionResult(
 
   const {
     forceFailure,
+    shouldLog = true,
     onSuccess = {},
     onFailure = {},
   } = config(expandedTargets)
 
   if (accuracyRoll.success && !forceFailure && !data.source.flags.isHexed) {
-    const { mutations = [] } = onSuccess
+    const { mutations = [], ...rest } = onSuccess
     return {
-      ...onSuccess,
-      shouldLog: true,
+      ...rest,
+      shouldLog,
       success: true,
       action,
       data,
@@ -61,10 +63,10 @@ export function buildActionResult(
     }
   }
   if (!accuracyRoll.success || forceFailure || data.source.flags.isHexed) {
-    const { mutations = [] } = onFailure
+    const { mutations = [], ...rest } = onFailure
     return {
-      ...onFailure,
-      shouldLog: true,
+      ...rest,
+      shouldLog,
       success: false,
       action,
       data,

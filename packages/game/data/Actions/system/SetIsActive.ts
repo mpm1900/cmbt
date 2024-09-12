@@ -51,6 +51,7 @@ export class SetIsActive extends Action {
     return [
       {
         action: this,
+        shouldLog: true,
         source,
         targets,
         mutations: targets.map(

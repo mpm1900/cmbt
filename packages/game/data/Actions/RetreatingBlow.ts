@@ -82,15 +82,27 @@ export class RetreatingBlow extends Action {
                 target,
                 data.accuracyRoll
               )
-              return [
-                ...getMutationsFromDamageResult(source, target, damage),
-                new SetIsActiveParent({
-                  sourceId: source.id,
-                  parentId: source.id,
-                  isActive: false,
-                }),
-              ]
+              return getMutationsFromDamageResult(source, target, damage)
             }),
+          },
+        }
+      }),
+      buildActionResult(this, data, source, targets, ctx, (modifiedTargets) => {
+        const inactiveLiveAllies = ctx.units.filter(
+          (u) => !u.flags.isActive && isUnitAliveCtx(u, ctx)
+        )
+        return {
+          name: 'second',
+          forceFailure: inactiveLiveAllies.length === 0,
+          shouldLog: false,
+          onSuccess: {
+            mutations: [
+              new SetIsActiveParent({
+                sourceId: source.id,
+                parentId: source.id,
+                isActive: false,
+              }),
+            ],
           },
         }
       }),

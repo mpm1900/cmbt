@@ -47,7 +47,13 @@ export function buildActionResult(
     onFailure = {},
   } = config(expandedTargets)
 
-  if (accuracyRoll.success && !forceFailure && !data.source.flags.isDisrupted) {
+  const success =
+    accuracyRoll.success &&
+    !forceFailure &&
+    !data.source.flags.isDisrupted &&
+    action.filter(data.source, ctx)
+
+  if (success) {
     const { mutations = [], ...rest } = onSuccess
     return {
       ...rest,
@@ -62,7 +68,7 @@ export function buildActionResult(
       mutations: [setLastUsed, ...mutations],
     }
   }
-  if (!accuracyRoll.success || forceFailure || data.source.flags.isDisrupted) {
+  if (!success) {
     const { mutations = [], ...rest } = onFailure
     return {
       ...rest,

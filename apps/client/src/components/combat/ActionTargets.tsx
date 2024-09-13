@@ -1,21 +1,29 @@
 import { useCombatUi } from '@/hooks/state'
+import { cn } from '@/lib/utils'
 import { Action, Unit } from '@repo/game/types'
+import { checkActionCost } from '@repo/game/utils'
 import { useEffect } from 'react'
 import { useCombatContext } from '../../hooks'
 import { Button } from '../ui/button'
 
 export type UnitActionTargetsProps = {
   action: Action
+  source: Unit
   targets: Unit[]
   onTargetClick: (unit: Unit, isSelected: boolean) => void
   onConfirmClick: () => void
 }
 
 export function ActionTargets(props: UnitActionTargetsProps) {
-  const { action, targets, onConfirmClick, onTargetClick } = props
+  const { action, source, targets, onConfirmClick, onTargetClick } = props
   const ctx = useCombatContext()
   const { setHoverTargetUnitIds } = useCombatUi()
   const possibleTargets = action.targets.resolve(ctx)
+  const costCheck = checkActionCost(action, source)
+  const isDisabled =
+    !costCheck ||
+    source.registry.actions.includes(action.id) ||
+    !action.filter(source, ctx)
 
   useEffect(() => {
     if (
@@ -39,8 +47,11 @@ export function ActionTargets(props: UnitActionTargetsProps) {
             </div>
             {action.maxTargetCount === 0 && (
               <Button
-                className="h-full px-8"
+                className={cn('h-full px-8', {
+                  isDisabled: 'cursor-not-allowed',
+                })}
                 variant="outline"
+                disabled={isDisabled}
                 onClick={() => {
                   setHoverTargetUnitIds(undefined)
                   onConfirmClick()
@@ -65,7 +76,10 @@ export function ActionTargets(props: UnitActionTargetsProps) {
           return (
             <Button
               key={target.id}
-              className="h-full px-8 mb-2"
+              className={cn('h-full px-8 mb-2', {
+                isDisabled: 'cursor-not-allowed',
+              })}
+              disabled={isDisabled}
               variant={isSelected ? 'default' : 'outline'}
               onClick={() => {
                 setHoverTargetUnitIds(undefined)

@@ -21,13 +21,15 @@ export function ActionButton(props: ActionButtonProps) {
   const baseAccuracy = action.threshold(source)
   const accuracy = action.threshold(modified.unit)
   const costCheck = checkActionCost(action, source)
-  const isDisabled = modified.unit.registry.actions.includes(action.id)
+  const isDisabled =
+    !costCheck ||
+    modified.unit.registry.actions.includes(action.id) ||
+    !action.filter(modified.unit, ctx)
 
   return (
     <Button
       variant={isActive ? 'default' : 'secondary'}
       className="items-start h-full flex-col"
-      disabled={!costCheck || isDisabled}
       onClick={onClick}
     >
       <div className="flex flex-1 w-full items-start justify-between min-h-[52px]">

@@ -1,4 +1,5 @@
 import { logActionIntent } from '@/utils'
+import { isUnitAlive } from '@repo/game/utils'
 import { useEffect } from 'react'
 import { useCombat, useCombatSettings } from '../state'
 import { useResults } from '../state/useResults'
@@ -20,19 +21,31 @@ export function useResultsController() {
 
   useEffect(() => {
     if (first) {
-      if (first.action && first.shouldLog) {
+      const shouldCommitResult =
+        !first.action ||
+        !first.expandedTargets ||
+        first.expandedTargets.length === 0 ||
+        first.expandedTargets?.some((t) =>
+          isUnitAlive(ctx.units.find((u) => u.id === t.id))
+        )
+
+      if (first.action && first.shouldLog && shouldCommitResult) {
         logActionIntent(first.action, first, log, ctx)
         setTurn((t) => ({
           results: t.results.concat(first),
         }))
       }
-      setTimeout(() => {
-        ctx = fns.commitResult(first, ctx)
+      if (shouldCommitResult) {
         setTimeout(() => {
-          ctx = fns.cleanupResult(ctx)
-          results.dequeue()
-        }, speed * 1.5)
-      }, speed)
+          ctx = fns.commitResult(first, ctx)
+          setTimeout(() => {
+            ctx = fns.cleanupResult(ctx)
+            results.dequeue()
+          }, speed * 1.5)
+        }, speed)
+      } else {
+        results.dequeue()
+      }
     }
   }, [first, combat.turn.status])
 }

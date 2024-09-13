@@ -33,6 +33,10 @@ export class Bane extends Action {
     return 90 + source.stats.accuracy
   }
 
+  filter = (source: Unit, ctx: CombatContext) => {
+    return source.metadata.activeTurns === 1
+  }
+
   resolve = (
     source: Unit,
     targets: Unit[],

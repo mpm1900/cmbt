@@ -51,7 +51,12 @@ export function ModifierHover(props: ModifierHoverProps) {
                   </Tooltip>
                 )}
                 {!modifier.persistOnCombatEnd && modifier.persistOnSwitch && (
-                  <SiPersistent />
+                  <Tooltip delayDuration={200}>
+                    <TooltipTrigger>
+                      <SiPersistent />
+                    </TooltipTrigger>
+                    <TooltipContent>Persists after switch out</TooltipContent>
+                  </Tooltip>
                 )}
                 {!!modifier.duration && (
                   <div className="flex items-center space-x-1">
@@ -61,7 +66,7 @@ export function ModifierHover(props: ModifierHoverProps) {
                     </span>
                   </div>
                 )}
-                {modifier.delay !== undefined && (
+                {!!modifier.delay && (
                   <div className="flex items-center space-x-1">
                     <RxLapTimer />
                     <span>

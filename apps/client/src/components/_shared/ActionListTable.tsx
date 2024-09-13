@@ -41,8 +41,8 @@ export function ActionListTable(props: ActionListTableProps) {
       <TableHeader>
         <TableRow>
           {onSelect && <TableHead></TableHead>}
-          <TableHead>Name</TableHead>
           <TableHead>Req</TableHead>
+          <TableHead>Name</TableHead>
           <TableHead>Type</TableHead>
           <TableHead>Base Damage</TableHead>
           <TableHead>Accuracy</TableHead>
@@ -111,8 +111,8 @@ function ActionListRow(props: ActionListRowProps) {
             />
           </TableCell>
         )}
-        <TableCell>{renderer.name}</TableCell>
         <TableCell>{maker.level ? `Lv.${maker.level}` : '—'}</TableCell>
+        <TableCell>{renderer.name}</TableCell>
         <TableCell>
           {action.damage?.attackType ? (
             <Badge

@@ -120,6 +120,7 @@ export function ActiveAction(props: ActiveActionProps) {
         </div>
         <ActionTargets
           action={action}
+          source={modified.unit}
           targets={targets}
           onTargetClick={onTargetClick}
           onConfirmClick={onConfirmClick}

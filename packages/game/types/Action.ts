@@ -79,6 +79,7 @@ export abstract class Action {
   readonly cost: Mutation
   readonly targets: Query<Unit[]>
   damage?: Damage
+
   threshold = (source: Unit): number | undefined => undefined
   criticalThreshold = (source: Unit): number | undefined => undefined
   criticalFactor = (source: Unit): number | undefined => undefined
@@ -95,6 +96,10 @@ export abstract class Action {
 
   mapTargets = (targets: Unit[], ctx: CombatContext): Unit[] => {
     return targets
+  }
+
+  filter = (source: Unit, ctx: CombatContext): boolean => {
+    return true
   }
 
   constructor(id: Id, props: ActionProps) {

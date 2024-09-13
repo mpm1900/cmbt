@@ -31,11 +31,11 @@ export const Wizard: UnitBase = {
   name: 'Wizard',
   stats: {
     ...BASE_UNIT.stats,
-    health: 60,
-    attack: 55,
-    defense: 55,
+    health: 50,
+    attack: 50,
+    defense: 80,
     magic: 140,
-    speed: 135,
+    speed: 100,
 
     focus: 40,
     stamina: 30,

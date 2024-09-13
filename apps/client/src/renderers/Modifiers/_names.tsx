@@ -26,6 +26,7 @@ import {
   InspectAllOnUnitEnterId,
   InspectedAllId,
   InvertSpeedAllId,
+  KillParentOnTurnEndId,
   MagicDownParentId,
   MagicStageDownParentId,
   MagicStageUpParentId,
@@ -57,6 +58,7 @@ export const MODIFIER_NAMES: Record<string, string> = {
   [InspectAllOnUnitEnterId]: 'Scholar',
   [PoisonedDamageOnTurnEndId]: 'Poisoned',
   [SandstormOnTurnEndId]: 'Sandstorm',
+  [KillParentOnTurnEndId]: 'Destined Death',
 
   [AddStatModifiersImmunityAllId]: 'Dispel Stat Changes',
   [AttackDownParentId]: 'Attack Down',

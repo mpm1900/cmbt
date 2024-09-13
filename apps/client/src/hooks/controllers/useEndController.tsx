@@ -14,11 +14,6 @@ export function useEndController() {
   let ctx = useCombatContext()
   const isEnd = combat.turn.status === 'end'
 
-  function decrementModifierDurations() {
-    combat.decrementDurations()
-    return combat.removeZeroDurations()
-  }
-
   useEffect(() => {
     if (isEnd) {
       if (results.queue.length === 0) {
@@ -31,7 +26,8 @@ export function useEndController() {
             setTimeout(
               () => {
                 if (combat.turn.count > 0) {
-                  decrementModifierDurations()
+                  combat.decrementModifiers()
+                  combat.removeZeroModifiers()
                 }
                 combat.next()
                 combat.mutate(

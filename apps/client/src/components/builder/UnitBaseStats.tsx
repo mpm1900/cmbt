@@ -36,6 +36,16 @@ export function UnitBaseStats(props: UnitBaseStatsProps) {
         <Label className="w-[100px]">Speed</Label>
         <StatBar ratio={base.stats.speed / 255}>{base.stats.speed}</StatBar>
       </div>
+      <div className="flex items-center justify-end space-x-2">
+        <div className="pr-2">
+          Total:{' '}
+          {base.stats.health +
+            base.stats.attack +
+            base.stats.defense +
+            base.stats.magic +
+            base.stats.speed}
+        </div>
+      </div>
     </div>
   )
 }

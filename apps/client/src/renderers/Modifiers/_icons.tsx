@@ -19,6 +19,7 @@ import {
   HiddenParentId,
   InspectAllOnUnitEnterId,
   InspectedAllId,
+  KillParentOnTurnEndId,
   MaxAttackParentId,
   PowerStanceId,
   ProtectedParentId,
@@ -41,6 +42,7 @@ import { BiSearch } from 'react-icons/bi'
 import { BsFire, BsShieldFillPlus } from 'react-icons/bs'
 import { FaHeartCirclePlus } from 'react-icons/fa6'
 import {
+  GiDeathNote,
   GiDualityMask,
   GiMagicSwirl,
   GiSandstorm,
@@ -133,5 +135,8 @@ export const MODIFIER_ICONS: Record<Id, ReactNode> = {
     <div className="p-0.5">
       <GiTemplarHeart className="fill-amber-200 h-full w-full" />
     </div>
+  ),
+  [KillParentOnTurnEndId]: (
+    <GiDeathNote className="fill-teal-400 h-full w-full" />
   ),
 }

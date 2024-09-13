@@ -1,4 +1,3 @@
-import random from 'random'
 import {
   Action,
   ActionResolveOptions,
@@ -7,22 +6,21 @@ import {
   Id,
   Unit,
 } from '../../types'
-import {
-  buildActionResult,
-  getActionData,
-  modifyRenderContext,
-} from '../../utils'
-import { HoldPersonId, StunnedParentId } from '../Ids'
-import { UpdateFlagParent } from '../Modifiers'
+import { buildActionResult, getActionData } from '../../utils'
+import { modifyRenderContext } from '../../utils/modifyRenderContext'
+import { DeathRitesId } from '../Ids'
 import { Identity } from '../Mutations'
 import { GetUnits } from '../Queries'
+import { KillParentOnTurnEnd } from '../Triggers'
 
-export class HoldPerson extends Action {
+export class DeathRites extends Action {
+  delay = 2
+
   constructor(sourceId: Id, teamId: Id) {
-    super(HoldPersonId, {
+    super(DeathRitesId, {
       sourceId,
       teamId,
-      cost: new Identity({ sourceId }),
+      cost: new Identity(),
       targets: new GetUnits({
         notTeamId: teamId,
         isActive: true,
@@ -32,7 +30,9 @@ export class HoldPerson extends Action {
     })
   }
 
-  threshold = (source: Unit): number | undefined => 85 + source.stats.accuracy
+  threshold = (source: Unit): number | undefined => {
+    return 90 + source.stats.accuracy
+  }
 
   resolve = (
     source: Unit,
@@ -42,7 +42,6 @@ export class HoldPerson extends Action {
   ): ActionResult[] => {
     ctx = modifyRenderContext(options, ctx)
     const data = getActionData(source, this, ctx)
-    const duration = random.int(2, 4)
 
     return [
       buildActionResult(
@@ -55,13 +54,10 @@ export class HoldPerson extends Action {
           onSuccess: {
             addedModifiers: modifiedTargets.map(
               (target) =>
-                new UpdateFlagParent({
-                  registryId: StunnedParentId,
+                new KillParentOnTurnEnd({
                   sourceId: source.id,
                   parentId: target.id,
-                  flagKey: 'isStunned',
-                  value: true,
-                  duration: duration,
+                  delay: this.delay,
                 })
             ),
           },

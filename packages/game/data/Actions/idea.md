@@ -20,3 +20,6 @@ tormenting voice
 seething song
 pyroblast
 blast of chaos
+
+// characters (units)
+rillaboom = druid

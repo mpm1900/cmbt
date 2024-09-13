@@ -54,8 +54,8 @@ export type CombatStore = CombatState & {
   add(modifiers: Modifier[]): Modifier[]
   removeWhere(filter: (modifier: Modifier) => boolean): Modifier[]
   updateModifiers: (setter: (modifiers: Modifier[]) => Modifier[]) => Modifier[]
-  removeZeroDurations(): Modifier[]
-  decrementDurations(): Modifier[]
+  removeZeroModifiers(): Modifier[]
+  decrementModifiers(): Modifier[]
 
   // teams
   setTeams: (teams: Team[]) => void
@@ -160,15 +160,15 @@ export const useCombat = create<CombatStore>((set, get) => {
       }))
       return get().modifiers
     },
-    removeZeroDurations() {
+    removeZeroModifiers() {
       set(({ modifiers }) => ({
         modifiers: modifiers.filter((modifier) => modifier.duration !== 0),
       }))
       return get().modifiers
     },
-    decrementDurations() {
+    decrementModifiers() {
       set(({ modifiers }) => ({
-        modifiers: modifiers.map((modifier) => modifier.decrementDuration()),
+        modifiers: modifiers.map((modifier) => modifier.decrement()),
       }))
       return get().modifiers
     },

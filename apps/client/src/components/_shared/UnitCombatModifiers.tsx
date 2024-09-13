@@ -13,17 +13,22 @@ export function UnitCombatModifiers(
   props: PropsWithClassname<UnitCombatModifiersProps>
 ) {
   const ctx = useCombatContext()
-  const { appliedModifiers, registeredTriggers } = applyModifiers(
-    props.unit,
-    ctx
-  )
+  const { appliedModifiers, delayedModifiers, registeredTriggers } =
+    applyModifiers(props.unit, ctx)
+
   const otherTriggers = ctx.modifiers.filter(
     (m) =>
       m instanceof Trigger &&
       m.parentId === props.unit.id &&
-      !registeredTriggers.some((t) => t.rtid === m.rtid)
+      !registeredTriggers.some((t) => t.rtid === m.rtid) &&
+      !delayedModifiers.some((t) => t.rtid === m.rtid)
   )
-  const list = [...appliedModifiers, ...registeredTriggers, ...otherTriggers]
+  const list = [
+    ...appliedModifiers,
+    ...delayedModifiers,
+    ...registeredTriggers,
+    ...otherTriggers,
+  ]
 
   return (
     <UnitModifiers

@@ -2,6 +2,7 @@ import { nanoid } from 'nanoid'
 import { UnitBase, UnitBaseConfig } from '../../types'
 import {
   Bane,
+  DeathRites,
   Disable,
   DispelMagic,
   PoisonSpray,
@@ -13,6 +14,7 @@ import { HoldPerson } from '../Actions/HoldPerson'
 import { Regeneration } from '../Augments'
 import {
   BaneId,
+  DeathRitesId,
   DisableId,
   DispelMagicId,
   HoldPersonId,
@@ -26,14 +28,14 @@ import { BASE_UNIT } from '../Units/system/BASE_UNIT'
 
 export const Witch: UnitBase = {
   id: nanoid(),
-  name: 'Witch',
+  name: 'Hexbound Shaman',
   stats: {
     ...BASE_UNIT.stats,
-    health: 120,
-    attack: 50,
+    health: 130,
+    attack: 40,
     defense: 70,
-    magic: 100,
-    speed: 30,
+    magic: 85,
+    speed: 50,
 
     focus: 40,
     stamina: 30,
@@ -54,6 +56,10 @@ export const WitchConfig: UnitBaseConfig = {
     {
       id: BaneId,
       make: (u) => new Bane(u.id, u.teamId),
+    },
+    {
+      id: DeathRitesId,
+      make: (u) => new DeathRites(u.id, u.teamId),
     },
     {
       id: DisableId,

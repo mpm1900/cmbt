@@ -18,6 +18,7 @@ export function getTriggersByEvent(
     .filter(
       (t) =>
         t.events.includes(event) &&
+        !t.delay &&
         ctx.units.some((u) => t.filter(u, ctx, args))
     )
 }

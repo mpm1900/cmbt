@@ -3,6 +3,7 @@ import { HoverCardPortal } from '@radix-ui/react-hover-card'
 import { Modifier, Trigger } from '@repo/game/types'
 import { PropsWithChildren } from 'react'
 import { FaHourglassStart } from 'react-icons/fa6'
+import { RxLapTimer } from 'react-icons/rx'
 import { SiPersistent } from 'react-icons/si'
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '../ui/hover-card'
 import {
@@ -57,6 +58,14 @@ export function ModifierHover(props: ModifierHoverProps) {
                     <FaHourglassStart />
                     <span>
                       {modifier.duration} turn{modifier.duration > 1 && 's'}
+                    </span>
+                  </div>
+                )}
+                {modifier.delay !== undefined && (
+                  <div className="flex items-center space-x-1">
+                    <RxLapTimer />
+                    <span>
+                      {modifier.delay} turn{modifier.delay > 1 && 's'}
                     </span>
                   </div>
                 )}

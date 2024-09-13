@@ -5,6 +5,7 @@ import { Mutation, MutationFilterArgs } from '../types/Mutation'
 export type ApplyModifiersResult = {
   unit: Unit
   appliedModifiers: Modifier[]
+  delayedModifiers: Modifier[]
   registeredTriggers: Trigger[]
 }
 
@@ -29,7 +30,12 @@ export function applyModifiers(
 ): ApplyModifiersResult {
   if (unit.metadata.modified) {
     console.log('double modified', unit.name)
-    return { unit, appliedModifiers: [], registeredTriggers: [] }
+    return {
+      unit,
+      appliedModifiers: [],
+      delayedModifiers: [],
+      registeredTriggers: [],
+    }
   }
   const filterArgs: MutationFilterArgs = args ?? {}
   const modifiers = ctx.modifiers.concat(
@@ -44,18 +50,27 @@ export function applyModifiers(
     .reduce<ApplyModifiersResult>(
       (result, modifier) => {
         if (modifier.filter(result.unit, ctx, filterArgs) && filter(modifier)) {
-          if (modifier instanceof Trigger) {
-            result.registeredTriggers.push(modifier)
-          } else {
-            if (modifier.id !== ApplyStatStagesId) {
-              result.appliedModifiers.push(modifier)
+          if (modifier.delay === undefined || modifier.delay === 0) {
+            if (modifier instanceof Trigger) {
+              result.registeredTriggers.push(modifier)
+            } else {
+              if (modifier.id !== ApplyStatStagesId) {
+                result.appliedModifiers.push(modifier)
+              }
+              result.unit = applyMutation(result.unit, modifier)
             }
-            result.unit = applyMutation(result.unit, modifier)
+          } else {
+            result.delayedModifiers.push(modifier)
           }
         }
         return result
       },
-      { unit, appliedModifiers: [], registeredTriggers: [] }
+      {
+        unit,
+        appliedModifiers: [],
+        delayedModifiers: [],
+        registeredTriggers: [],
+      }
     )
 
   return {

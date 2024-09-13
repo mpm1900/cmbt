@@ -31,7 +31,7 @@ export function Builder() {
               <div className="flex flex-col items-start w-full p-12 space-y-4">
                 <div className="text-7xl font-black">Who are you?</div>
                 <div className="text-lg text-muted-foreground">
-                  Change up your units if you want and then hit "Start!" to
+                  Change up your party if you want and then hit "Start!" to
                   begin your journey.
                 </div>
               </div>

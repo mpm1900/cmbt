@@ -8,6 +8,7 @@ import {
   Burn,
   DamageAllOnTurnEnd,
   DamageNewUnitsOnUnitEnter,
+  DeathRitesId,
   Disable,
   DisabledParent,
   DisableId,
@@ -86,6 +87,7 @@ import { ArmorUpRenderer } from './ArmorUp'
 import { BaneRenderer } from './Bane'
 import { BiteRenderer } from './Bite'
 import { BodySlamRenderer } from './BodySlam'
+import { DeathRitesRenderer } from './DeathRites'
 import { DispelMagicRenderer } from './DispelMagic'
 import { DragonBreathRenderer } from './DragonBreath'
 import { DragonStanceRenderer } from './DragonStance'
@@ -132,6 +134,7 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
   [BaneId]: BaneRenderer,
   [BiteId]: BiteRenderer,
   [BodySlamId]: BodySlamRenderer,
+  [DeathRitesId]: DeathRitesRenderer,
   [DispelMagicId]: DispelMagicRenderer,
   [DragonBreathId]: DragonBreathRenderer,
   [DragonStanceId]: DragonStanceRenderer,
@@ -285,11 +288,10 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
                 registryId: StunnedParentId,
                 flagKey: 'isStunned',
                 value: true,
-                duration: holdperson.duration,
               })
             }
           />{' '}
-          to target enemy unit for {holdperson.duration - 1} turns.
+          to target enemy unit for 1-3 turns.
         </div>
       )
     },

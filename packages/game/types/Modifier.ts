@@ -13,6 +13,7 @@ export const MODIFIER_PRIORITIES = {
 }
 
 export type ModifierProps<T = {}> = MutationProps<T> & {
+  delay?: number
   duration?: number
   maxInstances?: number
   priority?: number
@@ -22,6 +23,7 @@ export type ModifierProps<T = {}> = MutationProps<T> & {
 }
 
 export abstract class Modifier extends Mutation {
+  delay?: number | undefined
   duration: number | undefined
   maxInstances: number | undefined
   priority: number
@@ -36,6 +38,7 @@ export abstract class Modifier extends Mutation {
   constructor(id: Id, props: ModifierProps) {
     super(id, props)
     this.priority = props.priority ?? MODIFIER_PRIORITIES.DEFAULT
+    this.delay = props.delay
     this.duration = props.duration
     this.maxInstances = props.maxInstances
     this.persistOnSwitch = props.persistOnSwitch || false
@@ -43,9 +46,12 @@ export abstract class Modifier extends Mutation {
     this.statusId = props.statusId
   }
 
-  decrementDuration() {
+  decrement() {
     if (this.duration !== undefined) {
       this.duration -= 1
+    }
+    if (this.delay !== undefined && this.delay > 0) {
+      this.delay -= 1
     }
     return this
   }

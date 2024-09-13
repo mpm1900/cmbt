@@ -4,6 +4,7 @@ import {
   LightningBolt,
   PiercingStrike,
   QuickAttack,
+  RetreatingBlow,
   Slash,
   SwordsDance,
 } from '../Actions'
@@ -11,14 +12,15 @@ import {
   LightningBoltId,
   PiercingStrikeId,
   QuickAttackId,
+  RetreatingBlowId,
   SlashId,
   SwordsDanceId,
 } from '../Ids'
 import { BASE_UNIT } from '../Units/system/BASE_UNIT'
 
-export const SpellDancer: UnitBase = {
+export const Stormwalker: UnitBase = {
   id: nanoid(),
-  name: 'Spell Dancer',
+  name: 'Stormwalker',
   stats: {
     ...BASE_UNIT.stats,
     health: 88,
@@ -42,12 +44,20 @@ export const TempestKnightConfig: UnitBaseConfig = {
   actionsCount: 5,
   actions: [
     {
+      id: LightningBoltId,
+      make: (unit) => new LightningBolt(unit.id, unit.teamId),
+    },
+    {
       id: PiercingStrikeId,
       make: (unit) => new PiercingStrike(unit.id, unit.teamId),
     },
     {
       id: QuickAttackId,
       make: (unit) => new QuickAttack(unit.id, unit.teamId),
+    },
+    {
+      id: RetreatingBlowId,
+      make: (u) => new RetreatingBlow(u.id, u.teamId),
     },
     {
       id: SlashId,
@@ -57,11 +67,13 @@ export const TempestKnightConfig: UnitBaseConfig = {
       id: SwordsDanceId,
       make: (unit) => new SwordsDance(unit.id, unit.teamId),
     },
-    {
-      id: LightningBoltId,
-      make: (unit) => new LightningBolt(unit.id, unit.teamId),
-    },
   ],
   defaultAbilityId: undefined,
-  defaultActionIds: [PiercingStrikeId, SlashId, SwordsDanceId, LightningBoltId],
+  defaultActionIds: [
+    LightningBoltId,
+    PiercingStrikeId,
+    RetreatingBlowId,
+    SlashId,
+    SwordsDanceId,
+  ],
 }

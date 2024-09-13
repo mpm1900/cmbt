@@ -61,14 +61,13 @@ export function useCombatActions() {
       const parent = context.units.find((u) => u.id === modifier.parentId)
       return !!parent && !parent?.flags.isActive
     })
-    // context.modifiers = combat.removeZeroDurations()
+
     return context
   }
 
   const commitResult: CommitResult = (result, context, args) => {
     const {
-      action,
-      addedModifiers: modifiers,
+      addedModifiers,
       mutations,
       addedUnits,
       removedUnits,
@@ -103,8 +102,8 @@ export function useCombatActions() {
         }
       })
     }
-    if (modifiers?.length) {
-      context.modifiers = combat.add(modifiers)
+    if (addedModifiers?.length) {
+      context.modifiers = combat.add(addedModifiers)
     }
     if (updateModifiers) {
       context.modifiers = combat.updateModifiers(updateModifiers)

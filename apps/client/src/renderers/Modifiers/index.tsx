@@ -14,6 +14,7 @@ import {
   InspectAllOnUnitEnterId,
   InspectedAllId,
   InvertSpeedAllId,
+  KillParentOnTurnEndId,
   ProtectedParentId,
   StunnedParentId,
   UpdateStatParentId,
@@ -38,7 +39,8 @@ import { DamageNewUnitsOnUnitEnterRenderer } from './Triggers/DamageNewUnitsOnUn
 import { DamageParentOnTurnEndRenderer } from './Triggers/DamageParentOnTurnEnd'
 import { HealParentOnTurnEndRenderer } from './Triggers/HealParentOnTurnEnd'
 import { HealParentOnUnitSwitchRenderer } from './Triggers/HealParentOnUnitSwitch'
-import { InspectAllOnUnitEnterRenderer } from './Triggers/InspectAllOnUnitEnterI'
+import { InspectAllOnUnitEnterRenderer } from './Triggers/InspectAllOnUnitEnter'
+import { KillParentOnTurnEndRenderer } from './Triggers/KillParentOnTurnEnd'
 import { UpdateStatParentRenderer } from './UpdateStatParent'
 import { UpdateStatStageParentRenderer } from './UpdateStatStageParent'
 import { UpdateStatTeamRenderer } from './UpdateStatTeam'
@@ -74,4 +76,5 @@ export const ModifierRenderers: Record<string, ModifierRenderer> = {
   [HealParentOnTurnEndId]: HealParentOnTurnEndRenderer,
   [HealParentOnUnitSwitchId]: HealParentOnUnitSwitchRenderer,
   [InspectAllOnUnitEnterId]: InspectAllOnUnitEnterRenderer,
+  [KillParentOnTurnEndId]: KillParentOnTurnEndRenderer,
 }

@@ -97,6 +97,30 @@ export function getAttackTypeDamage(
   )
 }
 
+export function getDamageResult(props: {
+  attackType: AttackType | undefined
+  damage: number
+  evasionSuccess: boolean
+  target: Unit
+}) {
+  const { attackType, damage, evasionSuccess, target } = props
+  const physicalArmor =
+    attackType === 'physical' && !evasionSuccess
+      ? Math.max(Math.min(target.values.physicalArmor, damage), 0)
+      : 0
+  const magicArmor =
+    attackType === 'magic' && !evasionSuccess
+      ? Math.max(Math.min(target.values.magicArmor, damage), 0)
+      : 0
+
+  return {
+    damage: evasionSuccess ? 0 : damage - physicalArmor - magicArmor,
+    evasionSuccess,
+    physicalArmor,
+    magicArmor,
+  }
+}
+
 export type CalculateDamageConfig = ActionAccuracyResult & {
   randomFactor?: number
 }
@@ -136,21 +160,16 @@ export function calculateDamage(
   const randomFactor =
     config.randomFactor !== undefined ? config.randomFactor : 1
 
-  const damageAmount = Math.round(typedDamage * criticalFactor * randomFactor)
+  const remainingHealth = target.stats.health - target.values.damage
+  const damageAmount = Math.min(
+    remainingHealth,
+    Math.round(typedDamage * criticalFactor * randomFactor)
+  )
 
-  const physicalArmor =
-    damage.attackType === 'physical' && !evasionSuccess
-      ? Math.max(Math.min(target.values.physicalArmor, damageAmount), 0)
-      : 0
-  const magicArmor =
-    damage.attackType === 'magic' && !evasionSuccess
-      ? Math.max(Math.min(target.values.magicArmor, damageAmount), 0)
-      : 0
-
-  return {
-    damage: evasionSuccess ? 0 : damageAmount - physicalArmor - magicArmor,
+  return getDamageResult({
+    attackType: damage.attackType,
+    damage: damageAmount,
     evasionSuccess,
-    physicalArmor,
-    magicArmor,
-  }
+    target,
+  })
 }

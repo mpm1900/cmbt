@@ -30,7 +30,7 @@ export class PowerWordKill extends Action {
     this.damage = {
       power: Infinity,
       attackType: 'magic',
-      damageType: 'blight',
+      damageType: 'arcane',
     }
   }
 

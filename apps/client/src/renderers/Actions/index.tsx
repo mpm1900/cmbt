@@ -2,7 +2,7 @@ import { LogUnit } from '@/components/ui/log'
 import {
   ArmorUpId,
   AttackStageUpParentId,
-  BattleStanceId,
+  BaneId,
   BiteId,
   BodySlamId,
   Burn,
@@ -12,25 +12,28 @@ import {
   DisabledParent,
   DisableId,
   DispelMagicId,
+  DragonBreathId,
   DragonStanceId,
   EarthquakeId,
+  ElixirOfPowerId,
   ExplosionId,
   Fireball,
   FireballId,
-  FireBlast,
-  FireBlastId,
   FirePunch,
   FirePunchId,
   FurySwipes,
   FurySwipesId,
-  HexId,
+  GhostFlameId,
   HoldPerson,
   HoldPersonId,
   HyperBeam,
   HyperBeamId,
+  InfernalBlastId,
   InspectAllId,
   InspectedAll,
+  IntoxicateId,
   InvertSpeedAll,
+  LightningBoltId,
   MagicMissileId,
   MindShatterId,
   NegateArmorId,
@@ -45,6 +48,7 @@ import {
   Protect,
   ProtectedParentId,
   ProtectId,
+  PyroclashId,
   QuickAttack,
   QuickAttackId,
   Rest,
@@ -63,14 +67,12 @@ import {
   SwordsDance,
   SwordsDanceId,
   TauntId,
-  ThunderboltId,
   TimeBendId,
   TrickRoomId,
   UpdateFlagParent,
   UpdateStatStageParent,
   Ward,
   WardId,
-  WillOWispId,
 } from '@repo/game/data'
 import { Action, ActionResult, CombatContext, Unit } from '@repo/game/types'
 import { DamageInline } from '@shared/DamageInline'
@@ -81,21 +83,26 @@ import { TextList } from '@shared/TextList'
 import { ReactNode } from 'react'
 import { ACTION_NAMES } from './_names'
 import { ArmorUpRenderer } from './ArmorUp'
-import { BattleStanceRenderer } from './BattleStance'
+import { BaneRenderer } from './Bane'
 import { BiteRenderer } from './Bite'
 import { BodySlamRenderer } from './BodySlam'
 import { DispelMagicRenderer } from './DispelMagic'
+import { DragonBreathRenderer } from './DragonBreath'
 import { DragonStanceRenderer } from './DragonStance'
-import { HexRenderer } from './Hex'
+import { ElixirOfPowerRenderer } from './ElixirOfPower'
+import { GhostFlameRenderer } from './GhostFlame'
+import { InfernalBlastRenderer } from './InfernalBlast'
+import { IntoxicateRenderer } from './Intoxicate'
+import { LightningBoltRenderer } from './LightningBolt'
 import { MindShatterRenderer } from './MindShatter'
 import { NegateArmorRenderer } from './NegateArmor'
 import { PiercingStrikeRenderer } from './PiercingStrike'
 import { PowerCleaveRenderer } from './PowerCleave'
 import { PowerStanceRenderer } from './PowerStance'
 import { PowerSwapRenderer } from './PowerSwap'
+import { PyroclashRenderer } from './Pyroclash'
 import { RetreatingBlowRenderer } from './RetreatingBlow'
 import { TauntRenderer } from './Taunt'
-import { ThunderboltRenderer } from './Thunderbolt'
 import { TimeBendRenderer } from './TimeBend'
 
 export * from './_names'
@@ -122,21 +129,26 @@ export type ActionRenderer = {
 
 export const ActionRenderers: Record<string, ActionRenderer> = {
   [ArmorUpId]: ArmorUpRenderer,
-  [BattleStanceId]: BattleStanceRenderer,
+  [BaneId]: BaneRenderer,
   [BiteId]: BiteRenderer,
   [BodySlamId]: BodySlamRenderer,
   [DispelMagicId]: DispelMagicRenderer,
+  [DragonBreathId]: DragonBreathRenderer,
   [DragonStanceId]: DragonStanceRenderer,
-  [HexId]: HexRenderer,
+  [ElixirOfPowerId]: ElixirOfPowerRenderer,
+  [GhostFlameId]: GhostFlameRenderer,
+  [InfernalBlastId]: InfernalBlastRenderer,
+  [IntoxicateId]: IntoxicateRenderer,
+  [LightningBoltId]: LightningBoltRenderer,
   [MindShatterId]: MindShatterRenderer,
   [NegateArmorId]: NegateArmorRenderer,
   [PiercingStrikeId]: PiercingStrikeRenderer,
   [PowerCleaveId]: PowerCleaveRenderer,
   [PowerStanceId]: PowerStanceRenderer,
   [PowerSwapId]: PowerSwapRenderer,
+  [PyroclashId]: PyroclashRenderer,
   [RetreatingBlowId]: RetreatingBlowRenderer,
   [TauntId]: TauntRenderer,
-  [ThunderboltId]: ThunderboltRenderer,
   [TimeBendId]: TimeBendRenderer,
 
   /// SYSTEM ACTIONS
@@ -231,19 +243,6 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
           Deals <DamageInline damage={fireball.splashDamage} /> to all other
           active enemy units.
         </>
-      )
-    },
-  },
-  [FireBlastId]: {
-    name: ACTION_NAMES[FireBlastId],
-    description: (action, props) => {
-      const fireblast = action as FireBlast
-      return (
-        <div>
-          Deals <DamageInline damage={action.damage} /> to target enemy unit.{' '}
-          {fireblast.burnChance}% chance to apply{' '}
-          <StatusInline status={Burn} side={props?.side} />.
-        </div>
       )
     },
   },
@@ -512,23 +511,6 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
         </>
       )
     },
-  },
-  [WillOWispId]: {
-    name: 'Will-O-Wisp',
-    cost: () => '20 FP',
-    costAlt: <span className="text-blue-300">20 FP</span>,
-    description: (action, props) => (
-      <div>
-        Applies <StatusInline status={Burn} side={props?.side} /> to target
-        enemy unit.
-      </div>
-    ),
-    lore: () => (
-      <>
-        The user shoots a sinister, bluish-white flame at the target. Said to
-        harbor the power of death.
-      </>
-    ),
   },
   [PotionActionId]: {
     name: ACTION_NAMES[PotionActionId],

@@ -1,3 +1,4 @@
+import random from 'random'
 import {
   Action,
   ActionAi,
@@ -14,20 +15,22 @@ import {
   getActionData,
   getDamageAi,
   getMutationsFromDamageResult,
-  modifyRenderContext,
 } from '../../utils'
-import { SlashId } from '../Ids'
+import { modifyRenderContext } from '../../utils/modifyRenderContext'
+import { DragonBreathId } from '../Ids'
 import { Identity } from '../Mutations'
 import { GetUnits } from '../Queries'
+import { Burn } from '../Statuses/Burn'
 
-export class Slash extends Action {
+export class DragonBreath extends Action {
   damage: Damage
+  burnChance: number = 10
 
   constructor(sourceId: Id, teamId: Id) {
-    super(SlashId, {
+    super(DragonBreathId, {
       sourceId,
       teamId,
-      cost: new Identity({ sourceId }),
+      cost: new Identity({}),
       targets: new GetUnits({
         notTeamId: teamId,
         isActive: true,
@@ -37,21 +40,17 @@ export class Slash extends Action {
     })
 
     this.damage = {
-      power: 75,
-      attackType: 'physical',
-      damageType: 'force',
+      power: 95,
+      attackType: 'magic',
+      damageType: 'fire',
     }
   }
 
   threshold = (source: Unit): number | undefined => {
-    return 90 + source.stats.accuracy
+    return 95 + source.stats.accuracy
   }
-  criticalThreshold = (source: Unit): number | undefined => {
-    return 20 + source.stats.criticalChance
-  }
-  criticalFactor = (source: Unit): number | undefined =>
-    1.5 + source.stats.criticalDamage
-
+  criticalThreshold = (source: Unit): number | undefined => undefined
+  criticalFactor = (source: Unit): number | undefined => undefined
   getAi(targets: Unit[], ctx: CombatContext): ActionAi {
     return getDamageAi(this, targets, ctx)
   }
@@ -64,6 +63,8 @@ export class Slash extends Action {
   ): ActionResult[] => {
     ctx = modifyRenderContext(options, ctx)
     const data = getActionData(source, this, ctx)
+    const applyModifierRoll = random.int(0, 100)
+    const applyBurn = applyModifierRoll <= this.burnChance
 
     return [
       buildActionResult(
@@ -83,6 +84,11 @@ export class Slash extends Action {
               )
               return getMutationsFromDamageResult(source, target, damage)
             }),
+            addedModifiers: applyBurn
+              ? modifiedTargets.flatMap((target) =>
+                  Burn.modifiers(source, target)
+                )
+              : [],
           },
         })
       ),

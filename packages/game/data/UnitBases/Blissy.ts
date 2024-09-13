@@ -25,11 +25,11 @@ export const Blissy: UnitBase = {
   name: 'Prophet',
   stats: {
     ...BASE_UNIT.stats,
-    health: 250,
-    attack: 7,
-    defense: 7,
-    magic: 105,
-    speed: 50,
+    health: 255,
+    attack: 10,
+    defense: 10,
+    magic: 100,
+    speed: 55,
 
     focus: 40,
     stamina: 30,
@@ -37,7 +37,11 @@ export const Blissy: UnitBase = {
   },
   augmentSlots: 3,
   affinities: [],
-  resistances: [],
+  resistances: [
+    { type: 'arcane', factor: 100 / 3 },
+    { type: 'psychic', factor: 100 / 3 },
+    { type: 'holy', factor: 100 / 2 },
+  ],
   weaknesses: [],
 }
 

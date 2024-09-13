@@ -1,9 +1,9 @@
 import {
   DamageAllOnTurnEnd,
   DivineHealingId,
-  FlameShieldId,
+  DraconicAuraId,
   HiddenId,
-  IntimidateId,
+  InsulatedId,
   RegenerationId,
   RubyAugmentId,
   SandstormOnTurnEndId,
@@ -26,14 +26,14 @@ export const AugmentRenderers: Record<Id, AugmentRenderer> = {
   [DivineHealingId]: {
     name: <div className="text-white">{AUGMENT_NAMES[DivineHealingId]}</div>,
   },
-  [FlameShieldId]: {
-    name: <div className="text-white">{AUGMENT_NAMES[FlameShieldId]}</div>,
+  [DraconicAuraId]: {
+    name: <div className="text-white">{AUGMENT_NAMES[DraconicAuraId]}</div>,
   },
   [HiddenId]: {
     name: <div className="text-white">{AUGMENT_NAMES[HiddenId]}</div>,
   },
-  [IntimidateId]: {
-    name: <div className="text-white">{AUGMENT_NAMES[IntimidateId]}</div>,
+  [InsulatedId]: {
+    name: <div className="text-white">{AUGMENT_NAMES[InsulatedId]}</div>,
   },
   [RegenerationId]: {
     name: <div className="text-white">{AUGMENT_NAMES[RegenerationId]}</div>,

@@ -3,30 +3,30 @@ import { UnitBase, UnitBaseConfig } from '../../types'
 import {
   Disable,
   Fireball,
+  GhostFlame,
+  LightningBolt,
   MagicMissile,
   PowerWordKill,
   Protect,
-  Thunderbolt,
   TimeBend,
-  WillOWisp,
 } from '../Actions'
 import { MindShatter } from '../Actions/MindShatter'
 import { Scholar } from '../Augments'
 import {
   DisableId,
   FireballId,
+  GhostFlameId,
+  LightningBoltId,
   MagicMissileId,
   MindShatterId,
   PowerWordKillId,
   ProtectId,
   ScholarId,
-  ThunderboltId,
   TimeBendId,
-  WillOWispId,
 } from '../Ids'
 import { BASE_UNIT } from '../Units/system/BASE_UNIT'
 
-export const Gengar: UnitBase = {
+export const Wizard: UnitBase = {
   id: nanoid(),
   name: 'Wizard',
   stats: {
@@ -47,7 +47,7 @@ export const Gengar: UnitBase = {
   weaknesses: [{ type: 'force', factor: 25 }],
 }
 
-export const GengarConfig: UnitBaseConfig = {
+export const WizardConfig: UnitBaseConfig = {
   abilities: [Scholar],
   actionsCount: 6,
   actions: [
@@ -76,16 +76,16 @@ export const GengarConfig: UnitBaseConfig = {
       make: (u) => new Protect(u.id, u.teamId),
     },
     {
-      id: ThunderboltId,
-      make: (u) => new Thunderbolt(u.id, u.teamId),
+      id: LightningBoltId,
+      make: (u) => new LightningBolt(u.id, u.teamId),
     },
     {
       id: TimeBendId,
       make: (u) => new TimeBend(u.id, u.teamId),
     },
     {
-      id: WillOWispId,
-      make: (u) => new WillOWisp(u.id, u.teamId),
+      id: GhostFlameId,
+      make: (u) => new GhostFlame(u.id, u.teamId),
     },
   ],
   defaultAbilityId: ScholarId,
@@ -94,6 +94,6 @@ export const GengarConfig: UnitBaseConfig = {
     MagicMissileId,
     MindShatterId,
     PowerWordKillId,
-    ThunderboltId,
+    LightningBoltId,
   ],
 }

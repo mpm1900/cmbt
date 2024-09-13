@@ -8,14 +8,14 @@ import {
 } from '../../types'
 import { buildActionResult, getActionData } from '../../utils'
 import { modifyRenderContext } from '../../utils/modifyRenderContext'
-import { HexedParentId, HexId } from '../Ids'
+import { BaneId, DisruptedParentId } from '../Ids'
 import { UpdateFlagParent } from '../Modifiers'
 import { Identity } from '../Mutations'
 import { GetUnits } from '../Queries'
 
-export class Hex extends Action {
+export class Bane extends Action {
   constructor(sourceId: Id, teamId: Id) {
-    super(HexId, {
+    super(BaneId, {
       sourceId,
       teamId,
       cost: new Identity({}),
@@ -54,10 +54,10 @@ export class Hex extends Action {
           onSuccess: {
             addedModifiers: modifiedTargets.flatMap((target) => [
               new UpdateFlagParent({
-                registryId: HexedParentId,
+                registryId: DisruptedParentId,
                 sourceId: source.id,
                 parentId: target.id,
-                flagKey: 'isHexed',
+                flagKey: 'isDisrupted',
                 value: true,
                 maxInstances: 1,
                 duration: 1,

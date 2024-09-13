@@ -7,9 +7,9 @@ import {
   DamageNewUnitsOnUnitEnterId,
   DamageParentOnTurnEndId,
   DisabledParentId,
+  DisruptedParentId,
   HealParentOnTurnEndId,
   HealParentOnUnitSwitchId,
-  HexedParentId,
   HiddenParentId,
   InspectAllOnUnitEnterId,
   InspectedAllId,
@@ -25,7 +25,7 @@ import { ReactNode } from 'react'
 import { AddActionParentRenderer } from './AddActionParent'
 import { AddStatModifiersImmunityAllRenderer } from './AddStatModifiersImmunityAll'
 import { DisabledParentRenderer } from './DisabledParent'
-import { HexedParentRenderer } from './HexedParent'
+import { DisruptedParentRenderer } from './DisruptedParent'
 import { HiddenParentRenderer } from './HiddenParent'
 import { InspectedAllRenderer } from './InspectedAll'
 import { InvertSpeedAllRenderer } from './InvertSpeedAll'
@@ -55,7 +55,7 @@ export const ModifierRenderers: Record<string, ModifierRenderer> = {
   [AddActionParentId]: AddActionParentRenderer,
   [AddStatModifiersImmunityAllId]: AddStatModifiersImmunityAllRenderer,
   [DisabledParentId]: DisabledParentRenderer,
-  [HexedParentId]: HexedParentRenderer,
+  [DisruptedParentId]: DisruptedParentRenderer,
   [HiddenParentId]: HiddenParentRenderer,
   [InspectedAllId]: InspectedAllRenderer,
   [InvertSpeedAllId]: InvertSpeedAllRenderer,

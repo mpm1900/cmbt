@@ -1,9 +1,9 @@
 import { Augment, Modifier, Mutation, Unit } from '../../types'
-import { IntimidateId } from '../Ids'
+import { DraconicAuraId } from '../Ids'
 import { AttackDownAllOtherOnUnitEnter } from '../Triggers'
 
-export const Intimidate: Augment = {
-  id: IntimidateId,
+export const DraconicAura: Augment = {
+  id: DraconicAuraId,
   modifiers(unit: Unit): Modifier[] {
     return [
       new AttackDownAllOtherOnUnitEnter({

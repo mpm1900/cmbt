@@ -1,9 +1,9 @@
 import { Augment, Modifier, Mutation, Unit } from '../../types'
-import { FireNegationUpParentId, FlameShieldId } from '../Ids'
+import { FireNegationUpParentId, InsulatedId } from '../Ids'
 import { UpdateStatParent } from '../Modifiers'
 
-export const FlameShield: Augment = {
-  id: FlameShieldId,
+export const Insulated: Augment = {
+  id: InsulatedId,
   modifiers(unit: Unit): Modifier[] {
     return [
       new UpdateStatParent({

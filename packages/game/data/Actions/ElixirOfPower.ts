@@ -10,8 +10,8 @@ import { buildActionResult, getActionData } from '../../utils'
 import { modifyRenderContext } from '../../utils/modifyRenderContext'
 import {
   AttackStageUpParentId,
-  BattleStanceId,
   DefenseStageUpParentId,
+  ElixirOfPowerId,
   SpeedStageDownParentId,
 } from '../Ids'
 import { UpdateStatStageParent } from '../Modifiers'
@@ -22,7 +22,7 @@ export class BattleStance extends Action {
   offset = 1
 
   constructor(sourceId: Id, teamId: Id) {
-    super(BattleStanceId, {
+    super(ElixirOfPowerId, {
       sourceId,
       teamId,
       cost: new Identity({ sourceId }),

@@ -17,17 +17,15 @@ import {
   getMutationsFromDamageResult,
 } from '../../utils'
 import { modifyRenderContext } from '../../utils/modifyRenderContext'
-import { FireBlastId } from '../Ids'
+import { LightningBoltId } from '../Ids'
 import { Identity } from '../Mutations'
 import { GetUnits } from '../Queries'
-import { Burn } from '../Statuses/Burn'
 
-export class FireBlast extends Action {
+export class LightningBolt extends Action {
   damage: Damage
-  burnChance: number = 10
 
   constructor(sourceId: Id, teamId: Id) {
-    super(FireBlastId, {
+    super(LightningBoltId, {
       sourceId,
       teamId,
       cost: new Identity({}),
@@ -40,14 +38,14 @@ export class FireBlast extends Action {
     })
 
     this.damage = {
-      power: 120,
+      power: 95,
       attackType: 'magic',
-      damageType: 'fire',
+      damageType: 'shock',
     }
   }
 
   threshold = (source: Unit): number | undefined => {
-    return 75 + source.stats.accuracy
+    return 95 + source.stats.accuracy
   }
   criticalThreshold = (source: Unit): number | undefined => undefined
   criticalFactor = (source: Unit): number | undefined => undefined
@@ -64,7 +62,6 @@ export class FireBlast extends Action {
     ctx = modifyRenderContext(options, ctx)
     const data = getActionData(source, this, ctx)
     const applyModifierRoll = random.int(0, 100)
-    const applyBurn = applyModifierRoll <= this.burnChance
 
     return [
       buildActionResult(
@@ -84,11 +81,6 @@ export class FireBlast extends Action {
               )
               return getMutationsFromDamageResult(source, target, damage)
             }),
-            addedModifiers: applyBurn
-              ? modifiedTargets.flatMap((target) =>
-                  Burn.modifiers(source, target)
-                )
-              : [],
           },
         })
       ),

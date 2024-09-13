@@ -38,14 +38,14 @@ export class Fireball extends Action {
       maxTargetCount: 1,
     })
 
-    const power = 80
+    const power = 60
     this.damage = {
       power,
       attackType: 'magic',
       damageType: 'fire',
     }
     this.splashDamage = {
-      power: Math.round(power / 2),
+      power: 35,
       attackType: 'magic',
       damageType: 'fire',
     }

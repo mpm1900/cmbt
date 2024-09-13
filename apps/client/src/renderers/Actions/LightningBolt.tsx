@@ -1,9 +1,9 @@
-import { ThunderboltId } from '@repo/game/data'
+import { LightningBoltId } from '@repo/game/data'
 import { DamageInline } from '@shared/DamageInline'
 import { ACTION_NAMES, ActionRenderer } from '.'
 
-export const ThunderboltRenderer: ActionRenderer = {
-  name: ACTION_NAMES[ThunderboltId],
+export const LightningBoltRenderer: ActionRenderer = {
+  name: ACTION_NAMES[LightningBoltId],
   description: (action, props) => {
     return (
       <div>

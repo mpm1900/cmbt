@@ -101,7 +101,7 @@ export function UnitBuilder() {
                         <div key={i} className="flex space-x-1">
                           <DamageIcon damageType={affinity.type} />
                           <div className="text-green-200">
-                            {affinity.factor}%
+                            {affinity.factor.toFixed()}%
                           </div>
                         </div>
                       ))}
@@ -116,7 +116,7 @@ export function UnitBuilder() {
                         <div key={i} className="flex space-x-1">
                           <DamageIcon damageType={affinity.type} />
                           <div className="text-green-200">
-                            {affinity.factor}%
+                            {affinity.factor.toFixed()}%
                           </div>
                         </div>
                       ))}
@@ -130,7 +130,9 @@ export function UnitBuilder() {
                       {builder.base.weaknesses.map((affinity, i) => (
                         <div key={i} className="flex space-x-1">
                           <DamageIcon damageType={affinity.type} />
-                          <div className="text-red-200">{affinity.factor}%</div>
+                          <div className="text-red-200">
+                            {affinity.factor.toFixed()}%
+                          </div>
                         </div>
                       ))}
                     </div>

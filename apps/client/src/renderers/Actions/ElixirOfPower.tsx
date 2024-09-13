@@ -1,16 +1,16 @@
 import {
   AttackStageUpParentId,
   BattleStance,
-  BattleStanceId,
   DefenseStageUpParentId,
+  ElixirOfPowerId,
   SpeedStageDownParentId,
   UpdateStatStageParent,
 } from '@repo/game/data'
 import { ModifierInline } from '@shared/ModifierInline'
 import { ACTION_NAMES, ActionRenderer } from '.'
 
-export const BattleStanceRenderer: ActionRenderer = {
-  name: ACTION_NAMES[BattleStanceId],
+export const ElixirOfPowerRenderer: ActionRenderer = {
+  name: ACTION_NAMES[ElixirOfPowerId],
   description: (action, props) => {
     const battlestance = action as BattleStance
     return (

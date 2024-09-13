@@ -11,14 +11,15 @@ import {
   DefenseStageUpParentId,
   DefneseUpParentId,
   DisabledParentId,
+  DisruptedParentId,
   DivineHealingId,
   FireDamageUpParentId,
   FireNegationUpParentId,
   HealParentOnUnitSwitchId,
-  HexedParentId,
   HiddenParentId,
   InspectAllOnUnitEnterId,
   InspectedAllId,
+  MaxAttackParentId,
   PowerStanceId,
   ProtectedParentId,
   SandstormOnTurnEndId,
@@ -48,7 +49,7 @@ import {
   GiVibratingShield,
 } from 'react-icons/gi'
 import { HiMiniNoSymbol } from 'react-icons/hi2'
-import { MdOutlineHexagon } from 'react-icons/md'
+import { MdFrontHand } from 'react-icons/md'
 import { PiScrollFill } from 'react-icons/pi'
 import { TiSpiral } from 'react-icons/ti'
 
@@ -60,6 +61,7 @@ export const MODIFIER_ICONS: Record<Id, ReactNode> = {
   [AttackStageDownParentId]: <StatModifierIcon stat="attack" type="down" />,
   [AttackStageUpParentId]: <StatModifierIcon stat="attack" type="up" />,
   [AttackUpParentId]: <StatModifierIcon stat="attack" type="up" />,
+  [MaxAttackParentId]: <StatModifierIcon stat="attack" type="up" />,
   [DefenseDownParentId]: <StatModifierIcon stat="defense" type="down" />,
   [DefenseStageDownParentId]: <StatModifierIcon stat="defense" type="down" />,
   [DefenseStageUpParentId]: <StatModifierIcon stat="defense" type="up" />,
@@ -117,9 +119,9 @@ export const MODIFIER_ICONS: Record<Id, ReactNode> = {
       <GiSpinningBlades className="fill-white h-full w-full" />
     </div>
   ),
-  [HexedParentId]: (
+  [DisruptedParentId]: (
     <div>
-      <MdOutlineHexagon className="fill-white h-full w-full" />
+      <MdFrontHand className="fill-white h-full w-full" />
     </div>
   ),
   [HiddenParentId]: (

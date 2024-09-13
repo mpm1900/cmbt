@@ -5,8 +5,8 @@ import {
   DragonStance,
   Earthquake,
   Fireball,
-  FireBlast,
   FurySwipes,
+  InfernalBlast,
   PiercingStrike,
   PowerStance,
   Protect,
@@ -16,12 +16,12 @@ import {
 import { Spikes } from '../Actions/Spikes'
 import { SandStream } from '../Augments'
 import {
-  BattleStanceId,
   DragonStanceId,
   EarthquakeId,
+  ElixirOfPowerId,
   FireballId,
-  FireBlastId,
   FurySwipesId,
+  InfernalBlastId,
   PiercingStrikeId,
   PowerStanceId,
   ProtectId,
@@ -34,7 +34,7 @@ import { BASE_UNIT } from '../Units/system/BASE_UNIT'
 
 export const Tyranitar: UnitBase = {
   id: nanoid(),
-  name: 'Chaos Warrior',
+  name: 'Hellknight',
   stats: {
     ...BASE_UNIT.stats,
     health: 100,
@@ -48,19 +48,26 @@ export const Tyranitar: UnitBase = {
     devotion: 20,
   },
   augmentSlots: 3,
-  affinities: [{ type: 'fire', factor: 25 }],
-  resistances: [{ type: 'fire', factor: 30 }],
-  weaknesses: [{ type: 'arcane', factor: 25 }],
+  affinities: [
+    { type: 'fire', factor: 25 },
+    { type: 'force', factor: 25 },
+  ],
+  resistances: [
+    { type: 'blight', factor: 25 },
+    { type: 'fire', factor: 25 },
+    { type: 'force', factor: 10 },
+  ],
+  weaknesses: [
+    { type: 'arcane', factor: 25 },
+    { type: 'psychic', factor: 25 },
+    { type: 'holy', factor: 25 },
+  ],
 }
 
 export const TyranitarConfig: UnitBaseConfig = {
   abilities: [SandStream],
   actionsCount: 4,
   actions: [
-    {
-      id: BattleStanceId,
-      make: (unit) => new BattleStance(unit.id, unit.teamId),
-    },
     {
       id: DragonStanceId,
       make: (unit) => new DragonStance(unit.id, unit.teamId),
@@ -70,12 +77,16 @@ export const TyranitarConfig: UnitBaseConfig = {
       make: (unit) => new Earthquake(unit.id, unit.teamId),
     },
     {
+      id: ElixirOfPowerId,
+      make: (unit) => new BattleStance(unit.id, unit.teamId),
+    },
+    {
       id: FireballId,
       make: (unit) => new Fireball(unit.id, unit.teamId),
     },
     {
-      id: FireBlastId,
-      make: (unit) => new FireBlast(unit.id, unit.teamId),
+      id: InfernalBlastId,
+      make: (unit) => new InfernalBlast(unit.id, unit.teamId),
     },
     {
       id: FurySwipesId,
@@ -108,5 +119,10 @@ export const TyranitarConfig: UnitBaseConfig = {
     },
   ],
   defaultAbilityId: SandStreamId,
-  defaultActionIds: [PiercingStrikeId, EarthquakeId, FireBlastId, ProtectId],
+  defaultActionIds: [
+    PiercingStrikeId,
+    EarthquakeId,
+    InfernalBlastId,
+    ProtectId,
+  ],
 }

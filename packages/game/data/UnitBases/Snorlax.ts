@@ -6,17 +6,21 @@ import {
   FirePunch,
   PiercingStrike,
   PowerSwap,
+  Protect,
   Rest,
   Taunt,
 } from '../Actions'
-import { FlameShield } from '../Augments'
+import { Intoxicate } from '../Actions/Intoxicate'
+import { Insulated } from '../Augments'
 import {
-  BattleStanceId,
   BodySlamId,
+  ElixirOfPowerId,
   FirePunchId,
-  FlameShieldId,
+  InsulatedId,
+  IntoxicateId,
   PiercingStrikeId,
   PowerSwapId,
+  ProtectId,
   RestId,
   TauntId,
 } from '../Ids'
@@ -24,14 +28,14 @@ import { BASE_UNIT } from '../Units/system/BASE_UNIT'
 
 export const Snorlax: UnitBase = {
   id: nanoid(),
-  name: 'Tavern Master',
+  name: 'Drunken Juggernaut',
   stats: {
     ...BASE_UNIT.stats,
     health: 160,
     attack: 110,
-    defense: 84,
+    defense: 95,
     magic: 80,
-    speed: 60,
+    speed: 50,
 
     focus: 40,
     stamina: 30,
@@ -44,11 +48,11 @@ export const Snorlax: UnitBase = {
 }
 
 export const SnorlaxConfig: UnitBaseConfig = {
-  abilities: [FlameShield],
+  abilities: [Insulated],
   actionsCount: 5,
   actions: [
     {
-      id: BattleStanceId,
+      id: ElixirOfPowerId,
       make: (u) => new BattleStance(u.id, u.teamId),
     },
     {
@@ -60,12 +64,20 @@ export const SnorlaxConfig: UnitBaseConfig = {
       make: (u) => new FirePunch(u.id, u.teamId),
     },
     {
+      id: IntoxicateId,
+      make: (u) => new Intoxicate(u.id, u.teamId),
+    },
+    {
       id: PiercingStrikeId,
       make: (u) => new PiercingStrike(u.id, u.teamId),
     },
     {
       id: PowerSwapId,
       make: (u) => new PowerSwap(u.id, u.teamId),
+    },
+    {
+      id: ProtectId,
+      make: (u) => new Protect(u.id, u.teamId),
     },
     {
       id: RestId,
@@ -76,6 +88,6 @@ export const SnorlaxConfig: UnitBaseConfig = {
       make: (u) => new Taunt(u.id, u.teamId),
     },
   ],
-  defaultAbilityId: FlameShieldId,
-  defaultActionIds: [BattleStanceId, BodySlamId, FirePunchId, RestId],
+  defaultAbilityId: InsulatedId,
+  defaultActionIds: [BodySlamId, FirePunchId, IntoxicateId, ProtectId, RestId],
 }

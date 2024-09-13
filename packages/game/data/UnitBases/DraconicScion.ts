@@ -1,55 +1,63 @@
 import { nanoid } from 'nanoid'
 import { UnitBase, UnitBaseConfig } from '../../types'
 import {
-  DispelMagic,
+  Bane,
+  DragonBreath,
   DragonStance,
   Fireball,
-  FireBlast,
-  HyperBeam,
+  GhostFlame,
+  Pyroclash,
   RetreatingBlow,
   Slash,
+  Taunt,
 } from '../Actions'
-import { Intimidate } from '../Augments'
+import { DraconicAura } from '../Augments'
 import {
-  DispelMagicId,
+  BaneId,
+  DraconicAuraId,
+  DragonBreathId,
   DragonStanceId,
   FireballId,
-  FireBlastId,
-  HyperBeamId,
-  IntimidateId,
+  GhostFlameId,
+  PyroclashId,
   RetreatingBlowId,
   SlashId,
+  TauntId,
 } from '../Ids'
 import { BASE_UNIT } from '../Units/system/BASE_UNIT'
 
-export const Salamence: UnitBase = {
+export const DraconicScion: UnitBase = {
   id: nanoid(),
-  name: 'Battlemage',
+  name: 'Draconic Scion',
   stats: {
     ...BASE_UNIT.stats,
     health: 95,
     attack: 115,
-    defense: 70,
-    magic: 115,
-    speed: 100,
+    defense: 90,
+    magic: 80,
+    speed: 60,
 
     focus: 40,
     stamina: 30,
     devotion: 20,
   },
   augmentSlots: 3,
-  affinities: [],
-  resistances: [],
+  affinities: [{ type: 'fire', factor: 50 }],
+  resistances: [{ type: 'fire', factor: 50 }],
   weaknesses: [],
 }
 
-export const SalamenceConfig: UnitBaseConfig = {
-  abilities: [Intimidate],
+export const DraconicDiscipleConfig: UnitBaseConfig = {
+  abilities: [DraconicAura],
   actionsCount: 5,
   actions: [
     {
-      id: DispelMagicId,
-      make: (unit) => new DispelMagic(unit.id, unit.teamId),
+      id: BaneId,
+      make: (unit) => new Bane(unit.id, unit.teamId),
+    },
+    {
+      id: DragonBreathId,
+      make: (unit) => new DragonBreath(unit.id, unit.teamId),
     },
     {
       id: DragonStanceId,
@@ -60,12 +68,12 @@ export const SalamenceConfig: UnitBaseConfig = {
       make: (unit) => new Fireball(unit.id, unit.teamId),
     },
     {
-      id: FireBlastId,
-      make: (unit) => new FireBlast(unit.id, unit.teamId),
+      id: GhostFlameId,
+      make: (unit) => new GhostFlame(unit.id, unit.teamId),
     },
     {
-      id: HyperBeamId,
-      make: (unit) => new HyperBeam(unit.id, unit.teamId),
+      id: PyroclashId,
+      make: (unit) => new Pyroclash(unit.id, unit.teamId),
     },
     {
       id: RetreatingBlowId,
@@ -75,13 +83,17 @@ export const SalamenceConfig: UnitBaseConfig = {
       id: SlashId,
       make: (unit) => new Slash(unit.id, unit.teamId),
     },
+    {
+      id: TauntId,
+      make: (unit) => new Taunt(unit.id, unit.teamId),
+    },
   ],
-  defaultAbilityId: IntimidateId,
+  defaultAbilityId: DraconicAuraId,
   defaultActionIds: [
-    DispelMagicId,
-    FireballId,
-    FireBlastId,
+    BaneId,
+    DragonBreathId,
+    PyroclashId,
     RetreatingBlowId,
-    SlashId,
+    TauntId,
   ],
 }

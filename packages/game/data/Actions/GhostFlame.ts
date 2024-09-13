@@ -8,14 +8,14 @@ import {
 } from '../../types'
 import { buildActionResult, getActionData } from '../../utils'
 import { modifyRenderContext } from '../../utils/modifyRenderContext'
-import { WillOWispId } from '../Ids'
+import { GhostFlameId } from '../Ids'
 import { UpdateValueParent } from '../Mutations'
 import { GetUnits } from '../Queries'
 import { Burn } from '../Statuses/Burn'
 
-export class WillOWisp extends Action {
+export class GhostFlame extends Action {
   constructor(sourceId: Id, teamId: Id) {
-    super(WillOWispId, {
+    super(GhostFlameId, {
       sourceId,
       teamId,
       cost: new UpdateValueParent({

@@ -25,7 +25,7 @@ export function Builder() {
         header={<BuilderHeader />}
         className="overflow-auto"
       >
-        <div className="flex flex-col flex-1 items-center p-8">
+        <div className="flex flex-col flex-1 items-center p-8 pt-0">
           <div className="space-y-4">
             <div className="flex">
               <div className="flex flex-col items-start w-full p-12 space-y-4">
@@ -44,10 +44,17 @@ export function Builder() {
                 value={ui.activeBuilderId}
                 onValueChange={(id) => ui.setActiveBuilderId(id)}
               >
-                <TabsList>
+                <TabsList className="h-full">
                   {store.builders.map((b) => (
-                    <TabsTrigger key={b.id} value={b.id}>
-                      {b.name}
+                    <TabsTrigger
+                      key={b.id}
+                      value={b.id}
+                      className="flex-col items-start min-w-[120px]"
+                    >
+                      <div>{b.name}</div>
+                      <div className="text-xs text-muted-foreground/40">
+                        {b.base.name}
+                      </div>
                     </TabsTrigger>
                   ))}
                 </TabsList>

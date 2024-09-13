@@ -14,21 +14,25 @@ import {
   calculateDamage,
   getActionData,
   getDamageAi,
+  getDamageResult,
   getMutationsFromDamageResult,
 } from '../../utils'
 import { modifyRenderContext } from '../../utils/modifyRenderContext'
-import { ThunderboltId } from '../Ids'
+import { PyroclashId } from '../Ids'
 import { Identity } from '../Mutations'
 import { GetUnits } from '../Queries'
+import { Burn } from '../Statuses'
 
-export class Thunderbolt extends Action {
+export class Pyroclash extends Action {
   damage: Damage
+  recoilFactor: number = 1 / 3
+  burnChance: number = 10
 
   constructor(sourceId: Id, teamId: Id) {
-    super(ThunderboltId, {
+    super(PyroclashId, {
       sourceId,
       teamId,
-      cost: new Identity({}),
+      cost: new Identity({ sourceId }),
       targets: new GetUnits({
         notTeamId: teamId,
         isActive: true,
@@ -37,10 +41,11 @@ export class Thunderbolt extends Action {
       maxTargetCount: 1,
     })
 
+    const power = 120
     this.damage = {
-      power: 95,
-      attackType: 'magic',
-      damageType: 'shock',
+      power,
+      attackType: 'physical',
+      damageType: 'fire',
     }
   }
 
@@ -62,15 +67,11 @@ export class Thunderbolt extends Action {
     ctx = modifyRenderContext(options, ctx)
     const data = getActionData(source, this, ctx)
     const applyModifierRoll = random.int(0, 100)
+    const applyBurn = applyModifierRoll <= this.burnChance
 
     return [
-      buildActionResult(
-        this,
-        data,
-        source,
-        targets,
-        ctx,
-        (modifiedTargets) => ({
+      buildActionResult(this, data, source, targets, ctx, (modifiedTargets) => {
+        return {
           onSuccess: {
             mutations: modifiedTargets.flatMap((target) => {
               const damage = calculateDamage(
@@ -79,11 +80,25 @@ export class Thunderbolt extends Action {
                 target,
                 data.accuracyRoll
               )
-              return getMutationsFromDamageResult(source, target, damage)
+              const recoil = getDamageResult({
+                attackType: this.damage.attackType,
+                damage: Math.round(damage.damage * this.recoilFactor),
+                evasionSuccess: damage.evasionSuccess,
+                target: data.source,
+              })
+              return [
+                ...getMutationsFromDamageResult(source, target, damage),
+                ...getMutationsFromDamageResult(source, source, recoil),
+              ]
             }),
+            addedModifiers: applyBurn
+              ? modifiedTargets.flatMap((target) =>
+                  Burn.modifiers(source, target)
+                )
+              : [],
           },
-        })
-      ),
+        }
+      }),
     ]
   }
 }

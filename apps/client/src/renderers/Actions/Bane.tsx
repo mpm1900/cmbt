@@ -1,11 +1,16 @@
-import { Hex, HexedParentId, HexId, UpdateFlagParent } from '@repo/game/data'
+import {
+  Bane,
+  BaneId,
+  DisruptedParentId,
+  UpdateFlagParent,
+} from '@repo/game/data'
 import { ModifierInline } from '@shared/ModifierInline'
 import { ACTION_NAMES, ActionRenderer } from '.'
 
-export const HexRenderer: ActionRenderer = {
-  name: ACTION_NAMES[HexId],
+export const BaneRenderer: ActionRenderer = {
+  name: ACTION_NAMES[BaneId],
   description: (action, props) => {
-    const hex = action as Hex
+    const hex = action as Bane
     return (
       <div>
         Applies{' '}
@@ -13,8 +18,8 @@ export const HexRenderer: ActionRenderer = {
           side={props?.side}
           modifier={
             new UpdateFlagParent({
-              registryId: HexedParentId,
-              flagKey: 'isHexed',
+              registryId: DisruptedParentId,
+              flagKey: 'isDisrupted',
               value: true,
               duration: 1,
             })
@@ -24,5 +29,5 @@ export const HexRenderer: ActionRenderer = {
       </div>
     )
   },
-  failureLog: (result) => <>{ACTION_NAMES[HexId]} failed.</>,
+  failureLog: (result) => <>{ACTION_NAMES[BaneId]} failed.</>,
 }

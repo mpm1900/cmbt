@@ -2,7 +2,6 @@ import { getTeamsWithSelectionRequired } from '@/utils'
 import { GetUnits, SetIsActive } from '@repo/game/data'
 import {
   applyModifiers,
-  checkActionCost,
   getActionableUnits,
   getBestAiAction,
 } from '@repo/game/utils'
@@ -26,10 +25,7 @@ export function useAiActions() {
       )
       const aiActions = aiUnits.map((unit) => {
         const aiActions = unit.actions
-          .filter((a) => {
-            const isDisabled = unit.registry.actions.includes(a.id)
-            return checkActionCost(a, unit) && !isDisabled
-          })
+          .filter((a) => a.filter(unit, ctx))
           .map((action) => getBestAiAction(action, ctx))
           .sort((a, b) => b.weight - a.weight)
 

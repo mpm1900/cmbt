@@ -43,6 +43,7 @@ export const Witch: UnitBase = {
 
     xpMultiplier: 70,
   },
+  tags: [],
   augmentSlots: 3,
   affinities: [],
   resistances: [],

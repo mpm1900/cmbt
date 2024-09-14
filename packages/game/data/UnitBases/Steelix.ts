@@ -17,6 +17,7 @@ export const Steelix: UnitBase = {
     stamina: 30,
     devotion: 20,
   },
+  tags: [],
   augmentSlots: 3,
   affinities: [],
   resistances: [],

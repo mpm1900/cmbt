@@ -42,6 +42,7 @@ export type Values = Record<ValueKey, number>
 export type FlagKey =
   | 'isActive'
   | 'isBlessed'
+  | 'isChoiceLocked'
   | 'isDisrupted'
   | 'isHidden'
   | 'isInspected'
@@ -60,6 +61,11 @@ export type UnitMetadata = {
   inactiveTurns: number
 }
 
+export type UnitTag = {
+  id: Id
+  label: string
+}
+
 export type UnitBaseAffinity = {
   type: DamageType
   factor: number
@@ -69,6 +75,7 @@ export type UnitBase = {
   id: Id
   name: string
   stats: Stats
+  tags: UnitTag[]
   augmentSlots: number
   affinities: UnitBaseAffinity[]
   resistances: UnitBaseAffinity[]
@@ -99,6 +106,7 @@ export type Unit = {
   modifiers(): Modifier[]
   actions: Action[]
   metadata: UnitMetadata
+  tags: UnitTag[]
 }
 
 export type UnitBuilder = {

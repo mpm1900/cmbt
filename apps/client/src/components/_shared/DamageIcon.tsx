@@ -3,12 +3,7 @@ import { DamageRenderers } from '@/renderers/Damage'
 import { PropsWithClassname } from '@/types'
 import { TooltipPortal } from '@radix-ui/react-tooltip'
 import { DamageType } from '@repo/game/types'
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from '../ui/tooltip'
+import { Tooltip, TooltipContent, TooltipTrigger } from '../ui/tooltip'
 
 export type DamageIconProps = PropsWithClassname<{
   color?: string
@@ -20,20 +15,18 @@ export function DamageIcon(props: DamageIconProps) {
   const renderer = damageType ? DamageRenderers[damageType] : undefined
   const icon = renderer?.icon
   return (
-    <TooltipProvider>
-      <Tooltip delayDuration={200}>
-        <TooltipTrigger asChild>
-          <div
-            className={cn(className)}
-            style={{ fill: color || renderer?.color }}
-          >
-            {icon}
-          </div>
-        </TooltipTrigger>
-        <TooltipPortal>
-          <TooltipContent>{renderer?.name}</TooltipContent>
-        </TooltipPortal>
-      </Tooltip>
-    </TooltipProvider>
+    <Tooltip delayDuration={200}>
+      <TooltipTrigger asChild>
+        <div
+          className={cn(className)}
+          style={{ fill: color || renderer?.color }}
+        >
+          {icon}
+        </div>
+      </TooltipTrigger>
+      <TooltipPortal>
+        <TooltipContent>{renderer?.name}</TooltipContent>
+      </TooltipPortal>
+    </Tooltip>
   )
 }

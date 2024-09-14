@@ -2,7 +2,10 @@ import { useBuilderUi } from '@/hooks/state/useBuilderUi'
 import { useUnitBuilders } from '@/hooks/state/useUnitBuilders'
 import { BASE_CONFIGS } from '@repo/game/data'
 import { DamageIcon } from '@shared/DamageIcon'
+import { useState } from 'react'
 import { FaRegSquareFull, FaSquare } from 'react-icons/fa6'
+import { MdEdit } from 'react-icons/md'
+import { Button } from '../ui/button'
 import {
   Card,
   CardContent,
@@ -22,22 +25,17 @@ export function UnitBuilder() {
   const ui = useBuilderUi()
   const store = useUnitBuilders()
   const builder = store.builders.find((b) => b.id === ui.activeBuilderId)
+  const [showNameEdit, setShowNameEdit] = useState(false)
 
   return (
     <div className="flex space-y-4 lg:space-y-0 lg:space-x-4 items-start justify-center flex-col lg:flex-row">
       {builder && (
         <Card className="w-full lg:w-[360px]">
           <CardHeader>
-            <div>
-              <CardTitle>{builder.name}</CardTitle>
-              <CardDescription>Set unit details</CardDescription>
-            </div>
-          </CardHeader>
-
-          <CardContent>
-            <div className="space-y-2">
-              <div>
+            <div className="flex space-x-2">
+              {showNameEdit ? (
                 <Input
+                  className="flex-1"
                   value={builder.name}
                   onChange={(e) => {
                     const name = e.target.value
@@ -48,8 +46,24 @@ export function UnitBuilder() {
                     }
                   }}
                 />
-              </div>
+              ) : (
+                <div className="flex-1">
+                  <CardTitle>{builder.name}</CardTitle>
+                  <CardDescription>Set unit details</CardDescription>
+                </div>
+              )}
 
+              <Button
+                variant="ghost"
+                onClick={() => setShowNameEdit((v) => !v)}
+              >
+                <MdEdit />
+              </Button>
+            </div>
+          </CardHeader>
+
+          <CardContent>
+            <div className="space-y-2">
               <div>
                 <Label
                   htmlFor="base"

@@ -1,4 +1,10 @@
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from '@/components/ui/tooltip'
 import { cn } from '@/lib/utils'
+import { TAG_ICONS } from '@/renderers/Tags'
 import { SwitchUnitId } from '@repo/game/data'
 import { Unit } from '@repo/game/types'
 import { applyModifiers } from '@repo/game/utils'
@@ -76,7 +82,7 @@ export function UnitCard(props: UnitCardProps) {
           }
         }}
       >
-        <div className="p-2 pb-1 flex flex-row items-end justify-between">
+        <div className="space-x-2 p-2 pb-1 flex flex-row items-center justify-between">
           <div
             className={cn('font-semibold space-x-2', {
               'text-slate-900': isActive,
@@ -92,6 +98,21 @@ export function UnitCard(props: UnitCardProps) {
               {unit.name}
               {stagedItem && '*'}
             </span>
+          </div>
+          <div className="flex flex-1 justify-start">
+            {unit.tags.map((tag, i) => {
+              const icon = TAG_ICONS[tag.id]
+              return (
+                icon && (
+                  <Tooltip key={i} delayDuration={200}>
+                    <TooltipTrigger>
+                      <div className="opacity-20 h-[24px]">{icon}</div>
+                    </TooltipTrigger>
+                    <TooltipContent>{tag.label}</TooltipContent>
+                  </Tooltip>
+                )
+              )
+            })}
           </div>
           <div className="flex items-center space-x-2">
             {unit.values.physicalArmor > 0 && (

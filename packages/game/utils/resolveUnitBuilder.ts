@@ -66,6 +66,7 @@ export function resolveUnitBuilder(builder: UnitBuilder, teamId: Id): Unit {
       magic: mapBaseStat('magic', builder.base.stats.magic, builder.level),
       speed: mapBaseStat('speed', builder.base.stats.speed, builder.level),
     },
+    tags: builder.base.tags,
   }
 
   unit.stats = {

@@ -46,7 +46,7 @@ import {
 } from '@repo/game/data'
 
 export const MODIFIER_NAMES: Record<string, string> = {
-  [AttackDownAllOtherOnUnitEnterId]: 'Intimidate',
+  [AttackDownAllOtherOnUnitEnterId]: 'Draconic Aura',
   [CreateSandstormOnUnitEnterId]: 'Sand Stream',
   [DamageAllOnTurnEndId]: 'Damage All on Turn End',
   [BleedDamageId]: 'Bleed Damage',

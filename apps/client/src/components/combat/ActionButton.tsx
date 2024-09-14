@@ -21,10 +21,6 @@ export function ActionButton(props: ActionButtonProps) {
   const baseAccuracy = action.threshold(source)
   const accuracy = action.threshold(modified.unit)
   const costCheck = checkActionCost(action, source)
-  const isDisabled =
-    !costCheck ||
-    modified.unit.registry.actions.includes(action.id) ||
-    !action.filter(modified.unit, ctx)
 
   return (
     <Button

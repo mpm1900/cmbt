@@ -1,4 +1,5 @@
 import { nanoid } from 'nanoid'
+import { checkActionCost } from '../utils'
 import { Damage, Id } from './'
 import { CombatContext } from './CombatContext'
 import { Modifier } from './Modifier'
@@ -98,8 +99,17 @@ export abstract class Action {
     return targets
   }
 
-  filter = (source: Unit, ctx: CombatContext): boolean => {
-    return true
+  filter(source: Unit, ctx: CombatContext): boolean {
+    const isDisabled = source.registry.actions.includes(this.id)
+    const canPayCost = checkActionCost(this, source)
+    const isChoiceLocked =
+      source.flags.isChoiceLocked && source.metadata.lastUsedActionId
+    const isEnabled =
+      !isDisabled &&
+      canPayCost &&
+      (isChoiceLocked ? source.metadata.lastUsedActionId === this.id : true)
+
+    return isEnabled
   }
 
   constructor(id: Id, props: ActionProps) {

@@ -68,6 +68,7 @@ export const ZERO_UNIT: Unit = {
   flags: {
     isActive: false,
     isBlessed: false,
+    isChoiceLocked: false,
     isDisrupted: false,
     isHidden: false,
     isProtected: false,
@@ -88,4 +89,5 @@ export const ZERO_UNIT: Unit = {
     activeTurns: 0,
     inactiveTurns: 0,
   },
+  tags: [],
 }

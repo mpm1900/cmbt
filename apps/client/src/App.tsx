@@ -1,4 +1,5 @@
 import { createRouter, RouterProvider } from '@tanstack/react-router'
+import { TooltipProvider } from './components/ui/tooltip'
 import { routeTree } from './routeTree.gen'
 
 const router = createRouter({ routeTree })
@@ -10,7 +11,11 @@ declare module '@tanstack/react-router' {
 }
 
 function App() {
-  return <RouterProvider basepath="/cmbt/" router={router} />
+  return (
+    <TooltipProvider>
+      <RouterProvider basepath="/cmbt/" router={router} />
+    </TooltipProvider>
+  )
 }
 
 export default App

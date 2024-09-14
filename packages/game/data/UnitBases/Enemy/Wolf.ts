@@ -2,6 +2,7 @@ import { nanoid } from 'nanoid'
 import { UnitBase, UnitBaseConfig } from '../../../types'
 import { Bite, GhostFlame } from '../../Actions'
 import { BiteId, GhostFlameId } from '../../Ids'
+import { Beast } from '../../Tags'
 import { BASE_UNIT } from '../../Units/system/BASE_UNIT'
 
 export const WolfId = nanoid()
@@ -20,6 +21,7 @@ export const Wolf: UnitBase = {
     stamina: 0,
     devotion: 0,
   },
+  tags: [Beast],
   augmentSlots: 3,
   affinities: [],
   resistances: [],

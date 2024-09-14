@@ -41,6 +41,7 @@ export const DraconicScion: UnitBase = {
     stamina: 30,
     devotion: 20,
   },
+  tags: [],
   augmentSlots: 3,
   affinities: [{ type: 'fire', factor: 50 }],
   resistances: [{ type: 'fire', factor: 50 }],

@@ -1,7 +1,6 @@
 import { useCombatUi } from '@/hooks/state'
 import { cn } from '@/lib/utils'
 import { Action, Unit } from '@repo/game/types'
-import { checkActionCost } from '@repo/game/utils'
 import { useEffect } from 'react'
 import { useCombatContext } from '../../hooks'
 import { Button } from '../ui/button'
@@ -19,11 +18,7 @@ export function ActionTargets(props: UnitActionTargetsProps) {
   const ctx = useCombatContext()
   const { setHoverTargetUnitIds } = useCombatUi()
   const possibleTargets = action.targets.resolve(ctx)
-  const costCheck = checkActionCost(action, source)
-  const isDisabled =
-    !costCheck ||
-    source.registry.actions.includes(action.id) ||
-    !action.filter(source, ctx)
+  const isDisabled = !action.filter(source, ctx)
 
   useEffect(() => {
     if (

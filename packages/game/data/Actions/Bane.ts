@@ -34,7 +34,7 @@ export class Bane extends Action {
   }
 
   filter = (source: Unit, ctx: CombatContext) => {
-    return source.metadata.activeTurns === 1
+    return super.filter(source, ctx) && source.metadata.activeTurns === 1
   }
 
   resolve = (

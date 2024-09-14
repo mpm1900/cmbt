@@ -1,11 +1,11 @@
 import { nanoid } from 'nanoid'
 import { UnitBase, UnitBaseConfig } from '../../types'
 import {
-  Disable,
   Fireball,
   GhostFlame,
   LightningBolt,
   MagicMissile,
+  MemoryLeak,
   MindBlast,
   PowerWordKill,
   Protect,
@@ -14,11 +14,11 @@ import {
 import { MindTwist } from '../Actions/MindTwist'
 import { Scholar } from '../Augments'
 import {
-  DisableId,
   FireballId,
   GhostFlameId,
   LightningBoltId,
   MagicMissileId,
+  MemoryLeakId,
   MindBlastId,
   MindTwistId,
   PowerWordKillId,
@@ -54,16 +54,16 @@ export const WizardConfig: UnitBaseConfig = {
   actionsCount: 6,
   actions: [
     {
-      id: DisableId,
-      make: (u) => new Disable(u.id, u.teamId),
-    },
-    {
       id: FireballId,
       make: (u) => new Fireball(u.id, u.teamId),
     },
     {
       id: MagicMissileId,
       make: (u) => new MagicMissile(u.id, u.teamId),
+    },
+    {
+      id: MemoryLeakId,
+      make: (u) => new MemoryLeak(u.id, u.teamId),
     },
     {
       id: MindBlastId,

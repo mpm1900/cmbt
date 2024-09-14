@@ -21,6 +21,7 @@ export function buildActionResult(
   ctx: CombatContext,
   config: (targets: Unit[]) => {
     forceFailure?: boolean
+    forceSuccess?: boolean
     shouldLog?: boolean
     onSuccess?: ParseActionResult
     onFailure?: ParseActionResult
@@ -42,16 +43,18 @@ export function buildActionResult(
 
   const {
     forceFailure,
+    forceSuccess,
     shouldLog = true,
     onSuccess = {},
     onFailure = {},
   } = config(expandedTargets)
 
   const success =
-    accuracyRoll.success &&
-    !forceFailure &&
-    !data.source.flags.isDisrupted &&
-    action.filter(data.source, ctx)
+    forceSuccess ||
+    (accuracyRoll.success &&
+      !forceFailure &&
+      !data.source.flags.isDisrupted &&
+      action.filter(data.source, ctx))
 
   if (success) {
     const { mutations = [], ...rest } = onSuccess

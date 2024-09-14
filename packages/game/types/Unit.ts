@@ -41,6 +41,7 @@ export type Values = Record<ValueKey, number>
 
 export type FlagKey =
   | 'isActive'
+  | 'isBlessed'
   | 'isDisrupted'
   | 'isHidden'
   | 'isInspected'

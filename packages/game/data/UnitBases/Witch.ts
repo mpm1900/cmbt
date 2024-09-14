@@ -3,8 +3,8 @@ import { UnitBase, UnitBaseConfig } from '../../types'
 import {
   Bane,
   DeathRites,
-  Disable,
   DispelMagic,
+  MemoryLeak,
   PoisonSpray,
   Protect,
   Taunt,
@@ -15,9 +15,9 @@ import { Regeneration } from '../Augments'
 import {
   BaneId,
   DeathRitesId,
-  DisableId,
   DispelMagicId,
   HoldPersonId,
+  MemoryLeakId,
   PoisonSprayId,
   ProtectId,
   RegenerationId,
@@ -62,16 +62,16 @@ export const WitchConfig: UnitBaseConfig = {
       make: (u) => new DeathRites(u.id, u.teamId),
     },
     {
-      id: DisableId,
-      make: (u) => new Disable(u.id, u.teamId),
-    },
-    {
       id: DispelMagicId,
       make: (u) => new DispelMagic(u.id, u.teamId),
     },
     {
       id: HoldPersonId,
       make: (u) => new HoldPerson(u.id, u.teamId),
+    },
+    {
+      id: MemoryLeakId,
+      make: (u) => new MemoryLeak(u.id, u.teamId),
     },
     {
       id: PoisonSprayId,
@@ -91,5 +91,11 @@ export const WitchConfig: UnitBaseConfig = {
     },
   ],
   defaultAbilityId: RegenerationId,
-  defaultActionIds: [BaneId, DisableId, HoldPersonId, PoisonSprayId, ProtectId],
+  defaultActionIds: [
+    BaneId,
+    MemoryLeakId,
+    HoldPersonId,
+    PoisonSprayId,
+    ProtectId,
+  ],
 }

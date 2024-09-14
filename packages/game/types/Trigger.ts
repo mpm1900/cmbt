@@ -1,4 +1,4 @@
-import { Id, MutationFilterArgs, Unit } from '.'
+import { Id, Mutation, MutationFilterArgs, Unit } from '.'
 import { CombatContext } from './CombatContext'
 import { Modifier, ModifierProps } from './Modifier'
 
@@ -23,16 +23,19 @@ export const AllTriggerEvents: TriggerEvent[] = [
 
 export type TriggerProps<T = {}> = ModifierProps<T> & {
   modifiers?: (ctx: CombatContext) => Modifier[]
+  mutations?: (ctx: CombatContext) => Mutation[]
 }
 
 export abstract class Trigger extends Modifier {
   readonly events: TriggerEvent[]
   modifiers?: (ctx: CombatContext) => Modifier[]
+  mutations?: (ctx: CombatContext) => Mutation[]
 
   constructor(id: Id, props: TriggerProps & { events: TriggerEvent[] }) {
     super(id, props)
 
     this.modifiers = props.modifiers
+    this.mutations = props.mutations
     this.events = props.events ?? []
   }
 

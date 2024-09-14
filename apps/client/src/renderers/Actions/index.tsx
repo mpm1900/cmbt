@@ -4,14 +4,13 @@ import {
   AttackStageUpParentId,
   BaneId,
   BiteId,
+  BlessId,
   BodySlamId,
   Burn,
   DamageAllOnTurnEnd,
   DamageNewUnitsOnUnitEnter,
   DeathRitesId,
-  Disable,
   DisabledParent,
-  DisableId,
   DispelMagicId,
   DragonBreathId,
   DragonStanceId,
@@ -36,6 +35,8 @@ import {
   InvertSpeedAll,
   LightningBoltId,
   MagicMissileId,
+  MemoryLeak,
+  MemoryLeakId,
   MindBlastId,
   MindTwistId,
   NegateArmorId,
@@ -87,6 +88,7 @@ import { ACTION_NAMES } from './_names'
 import { ArmorUpRenderer } from './ArmorUp'
 import { BaneRenderer } from './Bane'
 import { BiteRenderer } from './Bite'
+import { BlessRenderer } from './Bless'
 import { BodySlamRenderer } from './BodySlam'
 import { DeathRitesRenderer } from './DeathRites'
 import { DispelMagicRenderer } from './DispelMagic'
@@ -135,6 +137,7 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
   [ArmorUpId]: ArmorUpRenderer,
   [BaneId]: BaneRenderer,
   [BiteId]: BiteRenderer,
+  [BlessId]: BlessRenderer,
   [BodySlamId]: BodySlamRenderer,
   [DeathRitesId]: DeathRitesRenderer,
   [DispelMagicId]: DispelMagicRenderer,
@@ -201,10 +204,10 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
   },
 
   /// OTHER ACTIONS
-  [DisableId]: {
-    name: 'Disable',
+  [MemoryLeakId]: {
+    name: ACTION_NAMES[MemoryLeakId],
     description: (action, props) => {
-      const disable = action as Disable
+      const disable = action as MemoryLeak
       return (
         <div>
           Applies{' '}

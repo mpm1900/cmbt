@@ -34,7 +34,7 @@ export class MindBlast extends Action {
     })
 
     this.damage = {
-      power: 80,
+      power: 60,
       attackType: 'magic',
       damageType: 'psychic',
     }

@@ -1,16 +1,16 @@
 import {
-  Bane,
-  BaneId,
-  DisruptedParentId,
+  Bless,
+  BlessedParentId,
+  BlessId,
   UpdateFlagParent,
 } from '@repo/game/data'
 import { ModifierInline } from '@shared/ModifierInline'
 import { ACTION_NAMES, ActionRenderer } from '.'
 
-export const BaneRenderer: ActionRenderer = {
-  name: ACTION_NAMES[BaneId],
+export const BlessRenderer: ActionRenderer = {
+  name: ACTION_NAMES[BlessId],
   description: (action, props) => {
-    const bane = action as Bane
+    const bless = action as Bless
     return (
       <div>
         Applies{' '}
@@ -18,17 +18,15 @@ export const BaneRenderer: ActionRenderer = {
           side={props?.side}
           modifier={
             new UpdateFlagParent({
-              registryId: DisruptedParentId,
-              flagKey: 'isDisrupted',
+              registryId: BlessedParentId,
+              flagKey: 'isBlessed',
               value: true,
               duration: 1,
             })
           }
         />{' '}
-        to target enemy unit until end of turn. Usable only on the first turn
-        after switching in.
+        to target ally unit until end of turn.
       </div>
     )
   },
-  failureLog: (result) => <>{ACTION_NAMES[BaneId]} failed.</>,
 }

@@ -2,6 +2,7 @@ import {
   AddActionParentId,
   AddStatModifiersImmunityAllId,
   AttackDownAllOtherOnUnitEnterId,
+  BlessedParentId,
   CreateSandstormOnUnitEnterId,
   DamageAllOnTurnEndId,
   DamageNewUnitsOnUnitEnterId,
@@ -25,6 +26,7 @@ import { Modifier } from '@repo/game/types'
 import { ReactNode } from 'react'
 import { AddActionParentRenderer } from './AddActionParent'
 import { AddStatModifiersImmunityAllRenderer } from './AddStatModifiersImmunityAll'
+import { BlessedParentRenderer } from './BlessedParent'
 import { DisabledParentRenderer } from './DisabledParent'
 import { DisruptedParentRenderer } from './DisruptedParent'
 import { HiddenParentRenderer } from './HiddenParent'
@@ -56,6 +58,7 @@ export type ModifierRenderer = {
 export const ModifierRenderers: Record<string, ModifierRenderer> = {
   [AddActionParentId]: AddActionParentRenderer,
   [AddStatModifiersImmunityAllId]: AddStatModifiersImmunityAllRenderer,
+  [BlessedParentId]: BlessedParentRenderer,
   [DisabledParentId]: DisabledParentRenderer,
   [DisruptedParentId]: DisruptedParentRenderer,
   [HiddenParentId]: HiddenParentRenderer,

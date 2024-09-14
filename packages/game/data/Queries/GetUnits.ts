@@ -2,6 +2,7 @@ import { CombatContext, Id, Query, Unit } from '../../types'
 import { isUnitAliveCtx, isUnitHiddenCtx } from '../../utils'
 
 export type GetUnitsProps = {
+  notId?: Id
   teamId?: Id
   notTeamId?: Id
   isActive?: boolean
@@ -10,6 +11,7 @@ export type GetUnitsProps = {
 }
 
 export class GetUnits extends Query<Unit[]> {
+  notId?: Id
   teamId?: Id
   notTeamId?: Id
   isActive?: boolean
@@ -18,6 +20,7 @@ export class GetUnits extends Query<Unit[]> {
 
   constructor(props: GetUnitsProps) {
     super()
+    this.notId = props.notId
     this.teamId = props.teamId
     this.notTeamId = props.notTeamId
     this.isActive = props.isActive
@@ -28,6 +31,9 @@ export class GetUnits extends Query<Unit[]> {
   resolve(ctx: CombatContext) {
     return ctx.units.filter((unit) => {
       let value = true
+      if (this.notId !== undefined) {
+        value = value && unit.id !== this.notId
+      }
       if (this.teamId !== undefined) {
         value = value && unit.teamId === this.teamId
       }

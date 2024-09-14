@@ -5,6 +5,7 @@ import {
   AttackStageDownParentId,
   AttackStageUpParentId,
   AttackUpParentId,
+  BlessedParentId,
   CreateSandstormOnUnitEnterId,
   DefenseDownParentId,
   DefenseStageDownParentId,
@@ -50,6 +51,7 @@ import {
   GiDualityMask,
   GiMagicSwirl,
   GiSandstorm,
+  GiSpikedHalo,
   GiSpinningBlades,
   GiTemplarHeart,
   GiVibratingShield,
@@ -127,6 +129,11 @@ export const MODIFIER_ICONS: Record<Id, ReactNode> = {
   [PowerStanceId]: (
     <div>
       <GiSpinningBlades className="fill-white h-full w-full" />
+    </div>
+  ),
+  [BlessedParentId]: (
+    <div>
+      <GiSpikedHalo className="fill-white h-full w-full" />
     </div>
   ),
   [DisruptedParentId]: (

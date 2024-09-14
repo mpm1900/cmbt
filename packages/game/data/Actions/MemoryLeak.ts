@@ -11,16 +11,16 @@ import {
   getActionData,
   modifyRenderContext,
 } from '../../utils'
-import { DisableId } from '../Ids'
+import { MemoryLeakId } from '../Ids'
 import { DisabledParent } from '../Modifiers'
 import { Identity } from '../Mutations'
 import { GetUnits } from '../Queries'
 
-export class Disable extends Action {
+export class MemoryLeak extends Action {
   duration: number = 2
 
   constructor(sourceId: Id, teamId: Id) {
-    super(DisableId, {
+    super(MemoryLeakId, {
       sourceId,
       teamId,
       cost: new Identity({ sourceId }),

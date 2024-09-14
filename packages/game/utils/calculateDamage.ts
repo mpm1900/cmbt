@@ -7,6 +7,23 @@ import {
   Unit,
 } from '../types'
 
+export function getAttackDefenseRatio(
+  power: number,
+  attackType: AttackType,
+  source: Unit,
+  target: Unit
+) {
+  if (attackType === 'physical') {
+    return power * (source.stats.attack / target.stats.defense)
+  }
+
+  if (attackType === 'magic') {
+    return power * (source.stats.magic / target.stats.magic)
+  }
+
+  return power
+}
+
 export function calculateBaseDamage(
   damage: Damage,
   source: Unit | undefined,
@@ -15,14 +32,7 @@ export function calculateBaseDamage(
   const { power, factor, attackType } = damage
 
   if (power && source) {
-    let base = power
-    if (attackType === 'physical') {
-      base = power * (source.stats.attack / target.stats.defense)
-    }
-    if (attackType === 'magic') {
-      base = power * (source.stats.magic / target.stats.magic)
-    }
-
+    const base = getAttackDefenseRatio(power, attackType, source, target)
     const level = source.level * 5
     const levelMod = (level * 2) / 5 + 2
     const final = (base * levelMod) / 50 + 2
@@ -103,18 +113,29 @@ export function getDamageResult(props: {
   evasionSuccess: boolean
   target: Unit
 }) {
-  const { attackType, damage, evasionSuccess, target } = props
+  const { attackType, evasionSuccess, target } = props
+
+  if (evasionSuccess) {
+    return {
+      evasionSuccess,
+      damage: 0,
+      physicalArmor: 0,
+      magicArmor: 0,
+    }
+  }
+
   const physicalArmor =
-    attackType === 'physical' && !evasionSuccess
-      ? Math.max(Math.min(target.values.physicalArmor, damage), 0)
+    attackType === 'physical'
+      ? Math.max(Math.min(target.values.physicalArmor, props.damage), 0)
       : 0
   const magicArmor =
-    attackType === 'magic' && !evasionSuccess
-      ? Math.max(Math.min(target.values.magicArmor, damage), 0)
+    attackType === 'magic'
+      ? Math.max(Math.min(target.values.magicArmor, props.damage), 0)
       : 0
+  const damage = props.damage - physicalArmor - magicArmor
 
   return {
-    damage: evasionSuccess ? 0 : damage - physicalArmor - magicArmor,
+    damage,
     evasionSuccess,
     physicalArmor,
     magicArmor,
@@ -153,12 +174,10 @@ export function calculateDamage(
     source,
     target
   )
-
   const criticalFactor = config.criticalSuccess
     ? (config.criticalFactor ?? 1)
     : 1
-  const randomFactor =
-    config.randomFactor !== undefined ? config.randomFactor : 1
+  const randomFactor = config.randomFactor ?? 1
 
   const remainingHealth = target.stats.health - target.values.damage
   const damageAmount = Math.min(

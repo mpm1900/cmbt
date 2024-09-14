@@ -55,6 +55,7 @@ module.exports = {
           bleed: '#dc2626',
           burn: 'orange',
           poison: 'plum',
+          stasis: '#60a5fa',
         },
         log: {
           enemy: 'orange',

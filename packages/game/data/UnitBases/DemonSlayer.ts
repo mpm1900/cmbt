@@ -18,16 +18,16 @@ import {
 } from '../Ids'
 import { BASE_UNIT } from '../Units/system/BASE_UNIT'
 
-export const Stormwalker: UnitBase = {
+export const DemonSlayer: UnitBase = {
   id: nanoid(),
-  name: 'Stormwalker',
+  name: 'Demon Slayer',
   stats: {
     ...BASE_UNIT.stats,
-    health: 88,
+    health: 80,
     attack: 120,
-    defense: 70,
+    defense: 60,
     magic: 75,
-    speed: 142,
+    speed: 145,
 
     focus: 40,
     stamina: 30,

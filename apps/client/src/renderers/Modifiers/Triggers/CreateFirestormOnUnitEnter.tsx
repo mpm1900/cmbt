@@ -1,7 +1,7 @@
 import {
-  CreateSandstormOnUnitEnter,
+  CreateFirestormOnUnitEnter,
   DamageAllOnTurnEnd,
-  SandstormOnTurnEndId,
+  FirestormOnTurnEndId,
 } from '@repo/game/data'
 import { ModifierInline } from '@shared/ModifierInline'
 import { MODIFIER_NAMES, ModifierRenderer } from '..'
@@ -10,7 +10,7 @@ import { ModifierName, TriggerName } from '../_helpers'
 export const CreateSandstormOnUnitEnterRenderer: ModifierRenderer = {
   name: (mod) => <ModifierName>{MODIFIER_NAMES[mod.registryId]}</ModifierName>,
   description: (mod) => {
-    const modifier = mod as CreateSandstormOnUnitEnter
+    const modifier = mod as CreateFirestormOnUnitEnter
     return (
       <div>
         <TriggerName>On self enter:</TriggerName>
@@ -19,10 +19,10 @@ export const CreateSandstormOnUnitEnterRenderer: ModifierRenderer = {
           <ModifierInline
             modifier={
               new DamageAllOnTurnEnd({
-                registryId: SandstormOnTurnEndId,
+                registryId: FirestormOnTurnEndId,
                 factor: modifier.damageFactor,
                 duration: modifier.damageDuration,
-                damageType: 'force',
+                damageType: 'fire',
               })
             }
           />{' '}

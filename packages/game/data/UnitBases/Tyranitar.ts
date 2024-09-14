@@ -5,28 +5,28 @@ import {
   DragonStance,
   Earthquake,
   Fireball,
+  Firestorm,
   FurySwipes,
   InfernalBlast,
   PiercingStrike,
   PowerStance,
   Protect,
-  Sandstorm,
   Slash,
 } from '../Actions'
 import { Spikes } from '../Actions/Spikes'
-import { SandStream } from '../Augments'
+import { Inferno } from '../Augments'
 import {
   DragonStanceId,
   EarthquakeId,
   ElixirOfPowerId,
   FireballId,
+  FirestormId,
   FurySwipesId,
   InfernalBlastId,
+  InfernoId,
   PiercingStrikeId,
   PowerStanceId,
   ProtectId,
-  SandstormId,
-  SandStreamId,
   SlashId,
   SpikesId,
 } from '../Ids'
@@ -65,7 +65,7 @@ export const Hellknight: UnitBase = {
 }
 
 export const TyranitarConfig: UnitBaseConfig = {
-  abilities: [SandStream],
+  abilities: [Inferno],
   actionsCount: 4,
   actions: [
     {
@@ -106,8 +106,8 @@ export const TyranitarConfig: UnitBaseConfig = {
       make: (unit) => new Protect(unit.id, unit.teamId),
     },
     {
-      id: SandstormId,
-      make: (unit) => new Sandstorm(unit.id, unit.teamId),
+      id: FirestormId,
+      make: (unit) => new Firestorm(unit.id, unit.teamId),
     },
     {
       id: SlashId,
@@ -118,7 +118,7 @@ export const TyranitarConfig: UnitBaseConfig = {
       make: (unit) => new Spikes(unit.id, unit.teamId),
     },
   ],
-  defaultAbilityId: SandStreamId,
+  defaultAbilityId: InfernoId,
   defaultActionIds: [
     PiercingStrikeId,
     EarthquakeId,

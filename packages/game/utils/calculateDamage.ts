@@ -29,7 +29,7 @@ export function calculateBaseDamage(
   source: Unit | undefined,
   target: Unit
 ): number {
-  const { power, factor, attackType } = damage
+  const { power, factor, raw, attackType } = damage
 
   if (power && source) {
     const base = getAttackDefenseRatio(power, attackType, source, target)
@@ -42,6 +42,10 @@ export function calculateBaseDamage(
   if (factor) {
     const base = target.stats.health * factor
     return base
+  }
+
+  if (raw) {
+    return raw
   }
 
   return 0
@@ -151,6 +155,32 @@ export type CalculateDamageResult = {
   evasionSuccess: boolean
   physicalArmor: number
   magicArmor: number
+}
+
+export function calculatePureDamage(damage: Damage, target: Unit) {
+  const base = calculateBaseDamage(damage, undefined, target)
+  const attackDamage = getAttackTypeDamage(
+    damage.attackType,
+    base,
+    undefined,
+    target
+  )
+  const typedDamage = getDamageTypedDamage(
+    damage.damageType,
+    attackDamage,
+    undefined,
+    target
+  )
+
+  const remainingHealth = target.stats.health - target.values.damage
+  const damageAmount = Math.min(remainingHealth, Math.round(typedDamage))
+
+  return getDamageResult({
+    attackType: damage.attackType,
+    damage: damageAmount,
+    evasionSuccess: false,
+    target,
+  })
 }
 
 export function calculateDamage(

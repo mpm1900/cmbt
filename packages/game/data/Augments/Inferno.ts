@@ -1,13 +1,13 @@
 import { Augment, Modifier, Mutation, Unit } from '../../types'
-import { SandstormOnTurnEndId, SandStreamId } from '../Ids'
+import { FirestormOnTurnEndId, InfernoId } from '../Ids'
 import { AddModifiersToRegistryParentMutate } from '../Mutations'
-import { CreateSandstormOnUnitEnter } from '../Triggers'
+import { CreateFirestormOnUnitEnter } from '../Triggers'
 
-export const SandStream: Augment = {
-  id: SandStreamId,
+export const Inferno: Augment = {
+  id: InfernoId,
   modifiers(unit: Unit): Modifier[] {
     return [
-      new CreateSandstormOnUnitEnter({
+      new CreateFirestormOnUnitEnter({
         sourceId: unit.id,
         parentId: unit.id,
         maxInstances: 1,
@@ -20,7 +20,7 @@ export const SandStream: Augment = {
       new AddModifiersToRegistryParentMutate({
         sourceId: unit.id,
         parentId: unit.id,
-        modifierIds: [SandstormOnTurnEndId],
+        modifierIds: [FirestormOnTurnEndId],
       }),
     ]
   },

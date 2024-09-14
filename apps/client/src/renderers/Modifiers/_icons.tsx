@@ -6,7 +6,7 @@ import {
   AttackStageUpParentId,
   AttackUpParentId,
   BlessedParentId,
-  CreateSandstormOnUnitEnterId,
+  CreateFirestormOnUnitEnterId,
   DefenseDownParentId,
   DefenseStageDownParentId,
   DefenseStageUpParentId,
@@ -16,6 +16,7 @@ import {
   DivineHealingId,
   FireDamageUpParentId,
   FireNegationUpParentId,
+  FirestormOnTurnEndId,
   HealParentOnUnitSwitchId,
   HiddenParentId,
   InspectAllOnUnitEnterId,
@@ -28,7 +29,6 @@ import {
   MaxAttackParentId,
   PowerStanceId,
   ProtectedParentId,
-  SandstormOnTurnEndId,
   SpeedStageDownParentId,
   SpeedStageUpParentId,
   SpeedUpParentId,
@@ -49,8 +49,8 @@ import { FaHeartCirclePlus } from 'react-icons/fa6'
 import {
   GiDeathNote,
   GiDualityMask,
+  GiFireRing,
   GiMagicSwirl,
-  GiSandstorm,
   GiSpikedHalo,
   GiSpinningBlades,
   GiTemplarHeart,
@@ -103,10 +103,10 @@ export const MODIFIER_ICONS: Record<Id, ReactNode> = {
   [AttackDownAllOtherOnUnitEnterId]: (
     <GiDualityMask className="fill-white h-full w-full" />
   ),
-  [CreateSandstormOnUnitEnterId]: (
-    <GiSandstorm className="fill-amber-100 h-full w-full" />
+  [CreateFirestormOnUnitEnterId]: (
+    <GiFireRing className="fill-orange-300 h-full w-full" />
   ),
-  [SandstormOnTurnEndId]: <GiSandstorm className="fill-white h-full w-full" />,
+  [FirestormOnTurnEndId]: <GiFireRing className="fill-white h-full w-full" />,
   [DisabledParentId]: <HiMiniNoSymbol className="fill-white h-full w-full" />,
   [InspectAllOnUnitEnterId]: (
     <PiScrollFill className="fill-white h-full w-full" />

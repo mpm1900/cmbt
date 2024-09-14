@@ -2,12 +2,12 @@ import {
   DamageAllOnTurnEnd,
   DivineHealingId,
   DraconicAuraId,
+  FirestormOnTurnEndId,
   HiddenId,
+  InfernoId,
   InsulatedId,
   RegenerationId,
   RubyAugmentId,
-  SandstormOnTurnEndId,
-  SandStreamId,
   ScholarId,
 } from '@repo/game/data'
 import { Id } from '@repo/game/types'
@@ -41,18 +41,18 @@ export const AugmentRenderers: Record<Id, AugmentRenderer> = {
   [RubyAugmentId]: {
     name: <div className="text-white">{AUGMENT_NAMES[RubyAugmentId]}</div>,
   },
-  [SandStreamId]: {
-    name: <div className="text-white">{AUGMENT_NAMES[SandStreamId]}</div>,
+  [InfernoId]: {
+    name: <div className="text-white">{AUGMENT_NAMES[InfernoId]}</div>,
     description: () => (
       <div>
         This unit gains immunity from{' '}
         <ModifierInline
           modifier={
             new DamageAllOnTurnEnd({
-              registryId: SandstormOnTurnEndId,
+              registryId: FirestormOnTurnEndId,
               factor: 0.1,
               duration: 5,
-              damageType: 'force',
+              damageType: 'fire',
             })
           }
         />

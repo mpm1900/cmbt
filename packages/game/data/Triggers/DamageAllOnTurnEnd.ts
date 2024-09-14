@@ -1,19 +1,24 @@
 import {
+  AttackType,
   CombatContext,
   Damage,
   DamageType,
-  Modifier,
   MutationFilterArgs,
   Trigger,
   TriggerProps,
   Unit,
 } from '../../types'
-import { calculateBaseDamage, getDamageTypedDamage } from '../../utils'
+import {
+  applyModifiers,
+  calculatePureDamage,
+  getMutationsFromDamageResult,
+} from '../../utils'
 import { DamageAllOnTurnEndId } from '../Ids'
 
 export class DamageAllOnTurnEnd extends Trigger {
   factor: number
   static: number
+  attackType?: AttackType
   damageType?: DamageType
 
   get key() {
@@ -24,6 +29,7 @@ export class DamageAllOnTurnEnd extends Trigger {
     props: TriggerProps<{
       factor?: number
       static?: number
+      attackType?: AttackType
       damageType?: DamageType
     }>
   ) {
@@ -34,27 +40,23 @@ export class DamageAllOnTurnEnd extends Trigger {
 
     this.factor = props.factor ?? 0
     this.static = props.static ?? 0
+    this.attackType = props.attackType
     this.damageType = props.damageType
   }
 
-  resolve = (unit: Unit): Partial<Unit> => {
-    return {
-      values: Modifier.setValues(unit, (values) => {
-        const d = {
-          damageType: this.damageType,
-          factor: this.factor,
-        } as Damage
-        const baseDamage = calculateBaseDamage(d, undefined, unit) + this.static
-        const damage = getDamageTypedDamage(
-          this.damageType,
-          baseDamage,
-          undefined,
-          unit
-        )
-
-        return { damage: values.damage + Math.round(damage) }
-      }),
-    }
+  mutations = (ctx: CombatContext, args: MutationFilterArgs) => {
+    const source = ctx.units.find((u) => u.id === this.sourceId)!
+    const units = ctx.units.filter((u) => this.filter(u, ctx, args))
+    return units.flatMap((unit) => {
+      const modified = applyModifiers(unit, ctx, args).unit
+      const damage = {
+        attackType: this.attackType,
+        damageType: this.damageType,
+        factor: this.factor,
+      } as Damage
+      const result = calculatePureDamage(damage, modified)
+      return getMutationsFromDamageResult(source, unit, result)
+    })
   }
 
   filter = (

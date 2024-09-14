@@ -1,0 +1,53 @@
+import {
+  Action,
+  ActionResolveOptions,
+  ActionResult,
+  CombatContext,
+  Id,
+  Unit,
+} from '../../types'
+import {
+  buildActionResult,
+  getActionData,
+  modifyRenderContext,
+} from '../../utils'
+import { ChillingGraspId } from '../Ids'
+import { Identity } from '../Mutations'
+import { GetUnits } from '../Queries'
+
+export class ChillingGrasp extends Action {
+  duration: number = 5
+  damageFactor: number = 0.125
+
+  constructor(sourceId: Id, teamId: Id) {
+    super(ChillingGraspId, {
+      sourceId,
+      teamId,
+      cost: new Identity({ sourceId }),
+      targets: new GetUnits({
+        notTeamId: teamId,
+        isActive: true,
+        isHidden: false,
+      }),
+      maxTargetCount: 1,
+    })
+  }
+
+  resolve = (
+    source: Unit,
+    targets: Unit[],
+    ctx: CombatContext,
+    options: ActionResolveOptions
+  ): ActionResult[] => {
+    ctx = modifyRenderContext(options, ctx)
+    const data = getActionData(source, this, ctx)
+
+    return [
+      buildActionResult(this, data, source, targets, ctx, () => ({
+        onSuccess: {
+          addedModifiers: [],
+        },
+      })),
+    ]
+  }
+}

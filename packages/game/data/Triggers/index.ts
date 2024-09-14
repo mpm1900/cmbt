@@ -1,5 +1,5 @@
 export * from './AttackDownAllOtherOnUnitEnter'
-export * from './CreateSandstormOnUnitEnter'
+export * from './CreateFirestormOnUnitEnter'
 export * from './DamageAllOnTurnEnd'
 export * from './DamageNewUnitsOnUnitEnter'
 export * from './DamageParentOnTurnEnd'

@@ -5,10 +5,10 @@ import {
   TriggerProps,
   Unit,
 } from '../../types'
-import { CreateSandstormOnUnitEnterId, SandstormOnTurnEndId } from '../Ids'
+import { CreateFirestormOnUnitEnterId, FirestormOnTurnEndId } from '../Ids'
 import { DamageAllOnTurnEnd } from './DamageAllOnTurnEnd'
 
-export class CreateSandstormOnUnitEnter extends Trigger {
+export class CreateFirestormOnUnitEnter extends Trigger {
   damageDuration: number = 5
   damageFactor: number = 0.1
 
@@ -17,15 +17,17 @@ export class CreateSandstormOnUnitEnter extends Trigger {
   }
 
   constructor(props: TriggerProps) {
-    super(CreateSandstormOnUnitEnterId, {
+    super(CreateFirestormOnUnitEnterId, {
       ...props,
       events: ['on Unit Enter'],
       maxInstances: 1,
       modifiers: (ctx) => [
         new DamageAllOnTurnEnd({
-          registryId: SandstormOnTurnEndId,
+          sourceId: props.sourceId,
+          registryId: FirestormOnTurnEndId,
           factor: this.damageFactor,
-          damageType: 'force',
+          attackType: 'magic',
+          damageType: 'fire',
           duration: this.damageDuration,
           maxInstances: 1,
         }),

@@ -7,7 +7,6 @@ import {
   BlessId,
   BodySlamId,
   Burn,
-  DamageAllOnTurnEnd,
   DamageNewUnitsOnUnitEnter,
   DeathRitesId,
   DisabledParent,
@@ -21,6 +20,7 @@ import {
   FireballId,
   FirePunch,
   FirePunchId,
+  FirestormId,
   FurySwipes,
   FurySwipesId,
   GhostFlameId,
@@ -58,9 +58,6 @@ import {
   Rest,
   RestId,
   RetreatingBlowId,
-  Sandstorm,
-  SandstormId,
-  SandstormOnTurnEndId,
   SearingLightId,
   SetIsActiveId,
   Slash,
@@ -98,6 +95,7 @@ import { DispelMagicRenderer } from './DispelMagic'
 import { DragonBreathRenderer } from './DragonBreath'
 import { DragonStanceRenderer } from './DragonStance'
 import { ElixirOfPowerRenderer } from './ElixirOfPower'
+import { FirestormRenderer } from './Firestorm'
 import { GhostFlameRenderer } from './GhostFlame'
 import { InfernalBlastRenderer } from './InfernalBlast'
 import { IntoxicateRenderer } from './Intoxicate'
@@ -150,6 +148,7 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
   [DragonBreathId]: DragonBreathRenderer,
   [DragonStanceId]: DragonStanceRenderer,
   [ElixirOfPowerId]: ElixirOfPowerRenderer,
+  [FirestormId]: FirestormRenderer,
   [GhostFlameId]: GhostFlameRenderer,
   [InfernalBlastId]: InfernalBlastRenderer,
   [IntoxicateId]: IntoxicateRenderer,
@@ -425,28 +424,6 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
             }
           />{' '}
           to this unit.
-        </div>
-      )
-    },
-  },
-  [SandstormId]: {
-    name: ACTION_NAMES[SandstormId],
-    description: (action) => {
-      const sandstorm = action as Sandstorm
-      return (
-        <div>
-          Applies{' '}
-          <ModifierInline
-            modifier={
-              new DamageAllOnTurnEnd({
-                registryId: SandstormOnTurnEndId,
-                factor: sandstorm.damageFactor,
-                damageType: 'force',
-                duration: sandstorm.duration,
-              })
-            }
-          />{' '}
-          to the battlefield.
         </div>
       )
     },

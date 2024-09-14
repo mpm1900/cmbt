@@ -11,17 +11,17 @@ import {
   getActionData,
   modifyRenderContext,
 } from '../../utils'
-import { SandstormId, SandstormOnTurnEndId } from '../Ids'
+import { FirestormId, FirestormOnTurnEndId } from '../Ids'
 import { Identity } from '../Mutations'
 import { EmptyArray } from '../Queries/EmptyArray'
 import { DamageAllOnTurnEnd } from '../Triggers'
 
-export class Sandstorm extends Action {
+export class Firestorm extends Action {
   duration: number = 5
   damageFactor = 0.1
 
   constructor(sourceId: Id, teamId: Id) {
-    super(SandstormId, {
+    super(FirestormId, {
       sourceId,
       teamId,
       cost: new Identity({ sourceId }),
@@ -44,8 +44,9 @@ export class Sandstorm extends Action {
         onSuccess: {
           addedModifiers: [
             new DamageAllOnTurnEnd({
-              registryId: SandstormOnTurnEndId,
+              registryId: FirestormOnTurnEndId,
               sourceId: source.id,
+              damageType: 'fire',
               factor: this.damageFactor,
               duration: this.duration,
               maxInstances: 1,

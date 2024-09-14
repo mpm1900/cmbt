@@ -3,7 +3,7 @@ import {
   AddStatModifiersImmunityAllId,
   AttackDownAllOtherOnUnitEnterId,
   BlessedParentId,
-  CreateSandstormOnUnitEnterId,
+  CreateFirestormOnUnitEnterId,
   DamageAllOnTurnEndId,
   DamageNewUnitsOnUnitEnterId,
   DamageParentOnTurnEndId,
@@ -35,7 +35,7 @@ import { InvertSpeedAllRenderer } from './InvertSpeedAll'
 import { ProtectedParentRenderer } from './ProtectedParent'
 import { StunnedParentRenderer } from './StunnedParent'
 import { AttackDownAllOtherOnUnitEnterRenderer } from './Triggers/AttackDownAllOtherOnUnitEnter'
-import { CreateSandstormOnUnitEnterRenderer } from './Triggers/CreateSandstormOnUnitEnter'
+import { CreateSandstormOnUnitEnterRenderer } from './Triggers/CreateFirestormOnUnitEnter'
 import { DamageAllOnTurnEndRenderer } from './Triggers/DamageAllOnTurnEnd'
 import { DamageNewUnitsOnUnitEnterRenderer } from './Triggers/DamageNewUnitsOnUnitEnter'
 import { DamageParentOnTurnEndRenderer } from './Triggers/DamageParentOnTurnEnd'
@@ -72,7 +72,7 @@ export const ModifierRenderers: Record<string, ModifierRenderer> = {
 
   // Triggers
   [AttackDownAllOtherOnUnitEnterId]: AttackDownAllOtherOnUnitEnterRenderer,
-  [CreateSandstormOnUnitEnterId]: CreateSandstormOnUnitEnterRenderer,
+  [CreateFirestormOnUnitEnterId]: CreateSandstormOnUnitEnterRenderer,
   [DamageAllOnTurnEndId]: DamageAllOnTurnEndRenderer,
   [DamageNewUnitsOnUnitEnterId]: DamageNewUnitsOnUnitEnterRenderer,
   [DamageParentOnTurnEndId]: DamageParentOnTurnEndRenderer,

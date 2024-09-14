@@ -8,7 +8,7 @@ import {
   BleedDamageId,
   BlessedParentId,
   BurnDamageId,
-  CreateSandstormOnUnitEnterId,
+  CreateFirestormOnUnitEnterId,
   DamageAllOnTurnEndId,
   DamageNewUnitsOnUnitEnterId,
   DamageParentOnTurnEndId,
@@ -21,6 +21,7 @@ import {
   DivineHealingId,
   FireDamageUpParentId,
   FireNegationUpParentId,
+  FirestormOnTurnEndId,
   HealParentOnTurnEndId,
   HealParentOnUnitSwitchId,
   HiddenParentId,
@@ -36,7 +37,6 @@ import {
   PoisonedDamageOnTurnEndId,
   PowerStanceId,
   ProtectedParentId,
-  SandstormOnTurnEndId,
   SpeedDownParentId,
   SpeedStageDownParentId,
   SpeedStageUpParentId,
@@ -47,7 +47,7 @@ import {
 
 export const MODIFIER_NAMES: Record<string, string> = {
   [AttackDownAllOtherOnUnitEnterId]: 'Draconic Aura',
-  [CreateSandstormOnUnitEnterId]: 'Sand Stream',
+  [CreateFirestormOnUnitEnterId]: 'Inferno',
   [DamageAllOnTurnEndId]: 'Damage All on Turn End',
   [BleedDamageId]: 'Bleed Damage',
   [BurnDamageId]: 'Burn Damage',
@@ -58,7 +58,7 @@ export const MODIFIER_NAMES: Record<string, string> = {
   [HealParentOnUnitSwitchId]: 'Regenerate',
   [InspectAllOnUnitEnterId]: 'Scholar',
   [PoisonedDamageOnTurnEndId]: 'Poisoned',
-  [SandstormOnTurnEndId]: 'Sandstorm',
+  [FirestormOnTurnEndId]: 'Firestorm',
   [KillParentOnTurnEndId]: 'Destined Death',
 
   [AddStatModifiersImmunityAllId]: 'Dispel Stat Changes',

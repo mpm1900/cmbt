@@ -25,12 +25,12 @@ export function handleTriggerEvent(
     addedModifiers: triggers
       .filter((trigger) => !!trigger.modifiers)
       .flatMap(
-        (trigger) => (trigger.modifiers && trigger.modifiers(ctx)) ?? []
+        (trigger) => (trigger.modifiers && trigger.modifiers(ctx, args)) ?? []
       ),
     mutations: triggers
       .filter((trigger) => !trigger.modifiers)
       .flatMap((trigger) =>
-        trigger.mutations ? trigger.mutations(ctx) : [trigger]
+        trigger.mutations ? trigger.mutations(ctx, args) : [trigger]
       ),
   }
   if (result.addedModifiers?.length || result.mutations?.length) {

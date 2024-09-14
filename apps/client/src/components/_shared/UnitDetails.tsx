@@ -2,7 +2,7 @@ import { Separator } from '@/components/ui/separator'
 import { cn } from '@/lib/utils'
 import { DamageRenderers } from '@/renderers/Damage'
 import { StatRenderers } from '@/renderers/Stats'
-import { ElementProps } from '@/types'
+import { ElementProps, PropsWithClassname } from '@/types'
 import { AspectRatio } from '@radix-ui/react-aspect-ratio'
 import {
   ATTACK_TYPES,
@@ -19,14 +19,14 @@ import { PhysicalArmor } from './PhysicalArmor'
 import { StatValue } from './StatValue'
 import { UnitModifiers } from './UnitModifiers'
 
-type UnitStatProps = {
+type UnitStatProps = PropsWithClassname<{
   unit: Unit
   comp: Unit
   stat: StatKey
   before?: ReactNode
   after?: ReactNode
   map?: (value: number) => number
-}
+}>
 
 function Title(props: ElementProps) {
   return (
@@ -44,7 +44,7 @@ function Title(props: ElementProps) {
 function UnitStat(props: UnitStatProps) {
   const { unit, comp, stat, before, after, map } = props
   return (
-    <div className="flex justify-between space-x-2">
+    <div className="flex justify-between space-x-4">
       <div className="flex items-center space-x-1">
         <div className="h-[20px] w-[20px]">{StatRenderers[stat]?.icon}</div>
         <span className="text-muted-foreground font-bold whitespace-nowrap">
@@ -57,6 +57,7 @@ function UnitStat(props: UnitStatProps) {
         comp={comp}
         before={before}
         after={after}
+        className={props.className}
         map={map}
       />
     </div>
@@ -124,13 +125,24 @@ export function UnitDetails(props: UnitDetailsProps) {
             <UnitStat unit={unit} comp={original} stat="speed" />
 
             <Separator className="my-2" />
-            <UnitStat unit={unit} comp={original} stat="evasion" after="%" />
+            <UnitStat
+              unit={unit}
+              comp={original}
+              stat="evasion"
+              after="%"
+              className={cn({
+                'text-muted-foreground/60': original.stats.evasion === 0,
+              })}
+            />
             <UnitStat
               stat="accuracy"
               unit={unit}
               comp={original}
               before="+"
               after="%"
+              className={cn({
+                'text-muted-foreground/60': original.stats.accuracy === 0,
+              })}
             />
             <UnitStat
               stat="criticalChance"
@@ -138,6 +150,9 @@ export function UnitDetails(props: UnitDetailsProps) {
               comp={original}
               before="+"
               after="%"
+              className={cn({
+                'text-muted-foreground/60': original.stats.criticalChance === 0,
+              })}
             />
             <UnitStat
               stat="criticalDamage"
@@ -145,6 +160,9 @@ export function UnitDetails(props: UnitDetailsProps) {
               comp={original}
               before="+"
               after="%"
+              className={cn({
+                'text-muted-foreground/60': original.stats.criticalDamage === 0,
+              })}
             />
           </div>
         </div>
@@ -189,13 +207,17 @@ export function UnitDetails(props: UnitDetailsProps) {
               <Title>Dmg</Title>
               <Separator className="my-1" />
               {DAMAGE_TYPES.map((damageType) => {
+                const stat: StatKey = `${damageType}Expansion`
                 return (
                   <div
                     key={damageType}
                     className="flex items-center justify-end space-x-1"
                   >
                     <StatValue
-                      stat={`${damageType}Expansion`}
+                      stat={stat}
+                      className={cn({
+                        'text-muted-foreground/60': unit.stats[stat] === 100,
+                      })}
                       unit={unit}
                       comp={original}
                       after="%"
@@ -205,13 +227,17 @@ export function UnitDetails(props: UnitDetailsProps) {
               })}
               <Separator className="my-2" />
               {ATTACK_TYPES.map((attackType) => {
+                const stat: StatKey = `${attackType}Expansion`
                 return (
                   <div
                     key={attackType}
                     className="flex items-center justify-end space-x-1"
                   >
                     <StatValue
-                      stat={`${attackType}Expansion`}
+                      stat={stat}
+                      className={cn({
+                        'text-muted-foreground/60': unit.stats[stat] === 100,
+                      })}
                       unit={unit}
                       comp={original}
                       after="%"
@@ -224,13 +250,17 @@ export function UnitDetails(props: UnitDetailsProps) {
               <Title>Res</Title>
               <Separator className="my-1" />
               {DAMAGE_TYPES.map((damageType) => {
+                const stat: StatKey = `${damageType}Negation`
                 return (
                   <div
                     key={damageType}
                     className="flex items-center justify-end space-x-1"
                   >
                     <StatValue
-                      stat={`${damageType}Negation`}
+                      stat={stat}
+                      className={cn({
+                        'text-muted-foreground/60': unit.stats[stat] === 0,
+                      })}
                       unit={unit}
                       comp={original}
                       after="%"
@@ -240,13 +270,17 @@ export function UnitDetails(props: UnitDetailsProps) {
               })}
               <Separator className="my-2" />
               {ATTACK_TYPES.map((attackType) => {
+                const stat: StatKey = `${attackType}Negation`
                 return (
                   <div
                     key={attackType}
                     className="flex items-center justify-end space-x-1"
                   >
                     <StatValue
-                      stat={`${attackType}Negation`}
+                      stat={stat}
+                      className={cn({
+                        'text-muted-foreground/60': unit.stats[stat] === 0,
+                      })}
                       unit={unit}
                       comp={original}
                       after="%"

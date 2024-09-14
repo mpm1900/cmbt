@@ -61,7 +61,7 @@ export class FurySwipes extends Action {
   ): ActionResult[] => {
     ctx = modifyRenderContext(options, ctx)
     const data = getActionData(source, this, ctx)
-    const length = random.int(4, 6)
+    const length = random.int(2, 6)
 
     return Array.from({ length }).map(() =>
       buildActionResult(

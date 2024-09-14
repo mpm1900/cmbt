@@ -286,7 +286,7 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
       return (
         <div>
           Deals <DamageInline damage={furySwipes.damage} /> to target enemy
-          unit. Repeats 4-6 times.
+          unit. Repeats 2-6 times.
         </div>
       )
     },

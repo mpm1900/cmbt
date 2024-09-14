@@ -17,11 +17,7 @@ export function StatValue(props: StatDebugProps) {
   const value = unit.stats[stat]
   const compValue = comp.stats[stat]
   const color =
-    value > compValue
-      ? 'lightgreen'
-      : value < compValue
-        ? 'lightcoral'
-        : 'inherit'
+    value > compValue ? 'lightgreen' : value < compValue ? 'lightcoral' : ''
 
   return (
     <span className={cn('num', className)} style={{ color }}>

@@ -5,6 +5,7 @@ import { Flags, Stats, Unit, Values } from './Unit'
 
 export type MutationFilterArgs = {
   units?: Unit[]
+  damage?: number
 }
 
 export type MutationProps<T = {}> = T & {

@@ -8,7 +8,7 @@ export const HealParentOnUnitSwitchRenderer: ModifierRenderer = {
   description: (modifier: Modifier) => (
     <div>
       <TriggerName>On self switch out:</TriggerName>
-      This unit heals{' '}
+      This unit heals up to{' '}
       {(modifier as unknown as HealParentOnUnitSwitch).factor * 100}% of their
       max health.
     </div>

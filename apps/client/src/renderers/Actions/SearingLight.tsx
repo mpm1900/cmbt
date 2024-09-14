@@ -9,8 +9,8 @@ export const SearingLightRenderer: ActionRenderer = {
     return (
       <div>
         Deals <DamageInline damage={action.damage} /> to target unit, if target
-        is an enemy. Heals for {action.healthFactor * 100}% of Max Health if
-        target is an ally.
+        is an enemy. Heals for up to {action.healthFactor * 100}% of their max
+        health if target is an ally.
       </div>
     )
   },

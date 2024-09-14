@@ -87,18 +87,18 @@ export function useCombatActions() {
       const damages = getDamageFromMutations(targets, mutations, context, args)
       context.units = combat.mutate(mutations, context, args)
       Object.entries(damages).forEach(([unitId, damage]) => {
-        if (damage > 0) {
-          const target = context.units.find((u) => u.id === unitId)
-          if (target) {
-            pushTriggers('on Unit Take Damage', context, {
-              units: [target],
-            })
-          }
-          if (result.source) {
-            pushTriggers('on Unit Deal Damage', context, {
-              units: [result.source],
-            })
-          }
+        const target = context.units.find((u) => u.id === unitId)
+        if (target) {
+          pushTriggers('on Unit Take Damage', context, {
+            units: [target],
+            damage,
+          })
+        }
+        if (result.source) {
+          pushTriggers('on Unit Deal Damage', context, {
+            units: [result.source],
+            damage,
+          })
         }
       })
     }

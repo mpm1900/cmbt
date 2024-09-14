@@ -8,7 +8,7 @@ export const HealParentOnTurnEndRenderer: ModifierRenderer = {
   description: (modifier: Modifier) => (
     <div>
       <TriggerName>On turn end:</TriggerName>
-      This unit heals{' '}
+      This unit heals up to{' '}
       {(modifier as unknown as HealParentOnTurnEnd).factor * 100}% of their max
       health.
     </div>

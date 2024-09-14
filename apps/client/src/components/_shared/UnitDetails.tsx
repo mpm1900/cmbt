@@ -194,11 +194,22 @@ export function UnitDetails(props: UnitDetailsProps) {
               <Separator className="my-2" />
               {ATTACK_TYPES.map((attackType) => {
                 return (
-                  <div key={attackType} className="flex items-center space-x-1">
-                    <strong className="text-muted-foreground">
+                  <div
+                    key={attackType}
+                    className="flex items-center space-x-1 h-[24px]"
+                  >
+                    <div
+                      className={cn(
+                        'font-bold text-xs px-2 py-0 rounded h-[18px] leading-[18px] text-white/60 uppercase',
+                        {
+                          'bg-blue-600': attackType === 'magic',
+                          'bg-green-600': attackType === 'physical',
+                        }
+                      )}
+                    >
                       {attackType === 'magic' && 'Magic'}
                       {attackType === 'physical' && 'Physical'}
-                    </strong>
+                    </div>
                   </div>
                 )
               })}

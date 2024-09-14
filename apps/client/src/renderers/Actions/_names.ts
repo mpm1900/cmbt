@@ -39,6 +39,7 @@ import {
   RestId,
   RetreatingBlowId,
   SandstormId,
+  SearingLightId,
   SetIsActiveId,
   SlashId,
   SpikesId,
@@ -101,6 +102,7 @@ export const ACTION_NAMES: Record<string, string> = {
   [PowerSwapId]: 'Power Swap',
   [PyroclashId]: 'Pyroclash',
   [RetreatingBlowId]: 'Retreating Blow',
+  [SearingLightId]: 'Searing Light',
   [TauntId]: 'Taunt',
   [TimeBendId]: 'Time Bend',
 }

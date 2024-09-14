@@ -60,6 +60,7 @@ import {
   Sandstorm,
   SandstormId,
   SandstormOnTurnEndId,
+  SearingLightId,
   SetIsActiveId,
   Slash,
   SlashId,
@@ -108,6 +109,7 @@ import { PowerStanceRenderer } from './PowerStance'
 import { PowerSwapRenderer } from './PowerSwap'
 import { PyroclashRenderer } from './Pyroclash'
 import { RetreatingBlowRenderer } from './RetreatingBlow'
+import { SearingLightRenderer } from './SearingLight'
 import { TauntRenderer } from './Taunt'
 import { TimeBendRenderer } from './TimeBend'
 
@@ -157,6 +159,7 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
   [PowerSwapId]: PowerSwapRenderer,
   [PyroclashId]: PyroclashRenderer,
   [RetreatingBlowId]: RetreatingBlowRenderer,
+  [SearingLightId]: SearingLightRenderer,
   [TauntId]: TauntRenderer,
   [TimeBendId]: TimeBendRenderer,
 

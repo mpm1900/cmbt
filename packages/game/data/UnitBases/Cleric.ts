@@ -1,6 +1,6 @@
 import { nanoid } from 'nanoid'
 import { UnitBase, UnitBaseConfig } from '../../types'
-import { Bane, Bless, Protect, Taunt } from '../Actions'
+import { Bane, Bless, Protect, SearingLight, Taunt } from '../Actions'
 import { HoldPerson } from '../Actions/HoldPerson'
 import { DivineHealing } from '../Augments'
 import {
@@ -9,6 +9,7 @@ import {
   DivineHealingId,
   HoldPersonId,
   ProtectId,
+  SearingLightId,
   TauntId,
 } from '../Ids'
 import { BASE_UNIT } from '../Units/system/BASE_UNIT'
@@ -56,6 +57,10 @@ export const ClericConfig: UnitBaseConfig = {
     {
       id: ProtectId,
       make: (u) => new Protect(u.id, u.teamId),
+    },
+    {
+      id: SearingLightId,
+      make: (u) => new SearingLight(u.id, u.teamId),
     },
     {
       id: TauntId,

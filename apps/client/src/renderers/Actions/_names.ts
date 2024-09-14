@@ -49,6 +49,7 @@ import {
   TauntId,
   TimeBendId,
   TrickRoomId,
+  VampiricTouchId,
   WardId,
 } from '@repo/game/data'
 
@@ -107,4 +108,5 @@ export const ACTION_NAMES: Record<string, string> = {
   [SearingLightId]: 'Searing Light',
   [TauntId]: 'Taunt',
   [TimeBendId]: 'Time Bend',
+  [VampiricTouchId]: 'Vampiric Touch',
 }

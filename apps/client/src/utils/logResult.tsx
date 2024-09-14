@@ -14,8 +14,6 @@ export function logResult(
 ) {
   const { addedModifiers: modifiers, mutations, shouldLog } = result
 
-  if (!shouldLog) return
-
   logMiss(result, log, ctx)
   if (mutations?.length) {
     logMutations(mutations, log, ctx)

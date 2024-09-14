@@ -25,6 +25,7 @@ export function buildActionResult(
     shouldLog?: boolean
     onSuccess?: ParseActionResult
     onFailure?: ParseActionResult
+    expandedTargets?: Unit[]
   }
 ): ActionResult {
   const { accuracyRoll, setLastUsed } = data
@@ -47,6 +48,7 @@ export function buildActionResult(
     shouldLog = true,
     onSuccess = {},
     onFailure = {},
+    expandedTargets: targetsOverride,
   } = config(expandedTargets)
 
   const success =
@@ -66,7 +68,7 @@ export function buildActionResult(
       data,
       source,
       targets,
-      expandedTargets,
+      expandedTargets: targetsOverride ?? expandedTargets,
       protectedTargets,
       mutations: [setLastUsed, ...mutations],
     }
@@ -81,7 +83,7 @@ export function buildActionResult(
       data,
       source,
       targets,
-      expandedTargets,
+      expandedTargets: targetsOverride ?? expandedTargets,
       protectedTargets,
       mutations: [setLastUsed, ...mutations],
     }

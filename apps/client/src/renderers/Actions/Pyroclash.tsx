@@ -10,7 +10,7 @@ export const PyroclashRenderer: ActionRenderer = {
     return (
       <div>
         Deals <DamageInline damage={action.damage} /> to target enemy unit. This
-        unit takes {(pyroclash.recoilFactor * 100).toFixed()}% of damage dealth
+        unit takes {(pyroclash.recoilFactor * 100).toFixed()}% of damage dealt
         as recoil. {pyroclash.burnChance}% chance to apply{' '}
         <StatusInline status={Burn} side={props?.side} />.
       </div>

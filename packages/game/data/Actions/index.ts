@@ -50,6 +50,7 @@ export * from './SwordsDance'
 export * from './Taunt'
 export * from './TimeBend'
 export * from './TrickRoom'
+export * from './VampiricTouch'
 export * from './Ward'
 
 export const GLOBAL_ACTIONS: ActionMaker[] = [

@@ -30,7 +30,15 @@ export function StartButton(props: PropsWithClassname) {
     const world = makeWorld1_1()
     game.initialize({
       team,
-      units: store.builders.map((b) => resolveUnitBuilder(b, team.id)),
+      units: store.builders
+        .map((b) => resolveUnitBuilder(b, team.id))
+        .map((u) => ({
+          ...u,
+          values: {
+            ...u.values,
+            damage: u.stats.health - 10,
+          },
+        })),
       world,
     })
   }

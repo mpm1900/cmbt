@@ -1,0 +1,17 @@
+import { VampiricTouch, VampiricTouchId } from '@repo/game/data'
+import { DamageInline } from '@shared/DamageInline'
+import { ACTION_NAMES, ActionRenderer } from '.'
+
+export const VampiricTouchRenderer: ActionRenderer = {
+  name: ACTION_NAMES[VampiricTouchId],
+  description: (a, props) => {
+    const action = a as VampiricTouch
+    return (
+      <div>
+        Deals <DamageInline damage={action.damage} /> to target enemy unit. This
+        unit heals for up to {(action.drainFactor * 100).toFixed()}% of damage
+        dealt.
+      </div>
+    )
+  },
+}

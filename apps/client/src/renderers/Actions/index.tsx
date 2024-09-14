@@ -76,6 +76,7 @@ import {
   TrickRoomId,
   UpdateFlagParent,
   UpdateStatStageParent,
+  VampiricTouchId,
   Ward,
   WardId,
 } from '@repo/game/data'
@@ -114,6 +115,7 @@ import { RetreatingBlowRenderer } from './RetreatingBlow'
 import { SearingLightRenderer } from './SearingLight'
 import { TauntRenderer } from './Taunt'
 import { TimeBendRenderer } from './TimeBend'
+import { VampiricTouchRenderer } from './VampiricTouch'
 
 export * from './_names'
 
@@ -165,6 +167,7 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
   [SearingLightId]: SearingLightRenderer,
   [TauntId]: TauntRenderer,
   [TimeBendId]: TimeBendRenderer,
+  [VampiricTouchId]: VampiricTouchRenderer,
 
   /// SYSTEM ACTIONS
   [SetIsActiveId]: {

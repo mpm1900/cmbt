@@ -1,6 +1,13 @@
 import { nanoid } from 'nanoid'
 import { UnitBase, UnitBaseConfig } from '../../types'
-import { Bane, Bless, Protect, SearingLight, Taunt } from '../Actions'
+import {
+  Bane,
+  Bless,
+  Protect,
+  SearingLight,
+  Taunt,
+  VampiricTouch,
+} from '../Actions'
 import { HoldPerson } from '../Actions/HoldPerson'
 import { DivineHealing } from '../Augments'
 import {
@@ -11,6 +18,7 @@ import {
   ProtectId,
   SearingLightId,
   TauntId,
+  VampiricTouchId,
 } from '../Ids'
 import { BASE_UNIT } from '../Units/system/BASE_UNIT'
 
@@ -65,6 +73,10 @@ export const ClericConfig: UnitBaseConfig = {
     {
       id: TauntId,
       make: (u) => new Taunt(u.id, u.teamId),
+    },
+    {
+      id: VampiricTouchId,
+      make: (u) => new VampiricTouch(u.id, u.teamId),
     },
   ],
   defaultAbilityId: DivineHealingId,

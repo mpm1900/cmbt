@@ -1,7 +1,5 @@
-import random from 'random'
 import {
   Action,
-  ActionAi,
   ActionResolveOptions,
   ActionResult,
   CombatContext,
@@ -15,23 +13,19 @@ import {
   buildActionResult,
   calculateDamage,
   getActionData,
-  getDamageAi,
-  getDamageResult,
   getMutationsFromDamageResult,
+  modifyRenderContext,
 } from '../../utils'
-import { modifyRenderContext } from '../../utils/modifyRenderContext'
-import { PyroclashId } from '../Ids'
-import { Identity } from '../Mutations'
+import { VampiricTouchId } from '../Ids'
+import { HealParent, Identity } from '../Mutations'
 import { GetUnits } from '../Queries'
-import { Burn } from '../Statuses'
 
-export class Pyroclash extends Action {
+export class VampiricTouch extends Action {
   damage: Damage
-  recoilFactor: number = 1 / 3
-  burnChance: number = 10
+  drainFactor = 0.5
 
   constructor(sourceId: Id, teamId: Id) {
-    super(PyroclashId, {
+    super(VampiricTouchId, {
       sourceId,
       teamId,
       cost: new Identity({ sourceId }),
@@ -43,21 +37,15 @@ export class Pyroclash extends Action {
       maxTargetCount: 1,
     })
 
-    const power = 120
     this.damage = {
-      power,
-      attackType: 'physical',
-      damageType: 'fire',
+      power: 55,
+      attackType: 'magic',
+      damageType: 'blight',
     }
   }
 
   threshold = (source: Unit): number | undefined => {
     return 95 + source.stats.accuracy
-  }
-  criticalThreshold = (source: Unit): number | undefined => undefined
-  criticalFactor = (source: Unit): number | undefined => undefined
-  getAi(targets: Unit[], ctx: CombatContext): ActionAi {
-    return getDamageAi(this, targets, ctx)
   }
 
   resolve = (
@@ -68,49 +56,52 @@ export class Pyroclash extends Action {
   ): ActionResult[] => {
     ctx = modifyRenderContext(options, ctx)
     const data = getActionData(source, this, ctx)
-    const applyModifierRoll = random.int(0, 100)
-    const applyBurn = applyModifierRoll <= this.burnChance
 
     const modifierFilter = (mod: Modifier) => !data.accuracyRoll.criticalSuccess
     const modifiedTargets = targets.map(
       (target) => applyModifiers(target, ctx, undefined, modifierFilter).unit
     )
 
-    const damages = modifiedTargets.map((target) =>
-      calculateDamage(this.damage, data.source, target, data.accuracyRoll)
-    )
-    const recoils = damages.map((damage) =>
-      getDamageResult({
-        attackType: this.damage.attackType,
-        damage: Math.round(damage.damage * this.recoilFactor),
-        evasionSuccess: damage.evasionSuccess,
-        target: data.source,
-      })
+    const damages = modifiedTargets.map((target) => ({
+      target,
+      damage: calculateDamage(
+        this.damage,
+        data.source,
+        target,
+        data.accuracyRoll
+      ),
+    }))
+
+    const drains = damages.map(
+      ({ target, damage }) =>
+        (Math.min(damage.damage, target.stats.health) +
+          damage.magicArmor +
+          damage.physicalArmor) *
+        this.drainFactor
     )
 
     return [
       buildActionResult(this, data, source, targets, ctx, (modifiedTargets) => {
         return {
           onSuccess: {
-            mutations: modifiedTargets.flatMap((target, i) => {
-              const damage = damages[i]
+            mutations: damages.flatMap(({ damage, target }, i) => {
               return getMutationsFromDamageResult(source, target, damage)
             }),
-            addedModifiers: applyBurn
-              ? modifiedTargets.flatMap((target) =>
-                  Burn.modifiers(source, target)
-                )
-              : [],
           },
         }
       }),
+
       buildActionResult(this, data, source, targets, ctx, (modifiedTargets) => {
         return {
           shouldLog: false,
           expandedTargets: [data.source],
           onSuccess: {
-            mutations: recoils.flatMap((recoil) => {
-              return getMutationsFromDamageResult(source, source, recoil)
+            mutations: drains.map((drain) => {
+              return new HealParent({
+                sourceId: source.id,
+                parentId: source.id,
+                static: drain,
+              })
             }),
           },
         }

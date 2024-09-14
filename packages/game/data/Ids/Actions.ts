@@ -46,6 +46,7 @@ export const SwordsDanceId = ActionId()
 export const TauntId = ActionId()
 export const TimeBendId = ActionId()
 export const TrickRoomId = ActionId()
+export const VampiricTouchId = ActionId()
 export const WardId = ActionId()
 
 export const InspectAllId = ActionId()

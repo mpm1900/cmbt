@@ -116,13 +116,13 @@ function ActionListRow(props: ActionListRowProps) {
         <TableCell>
           {action.damage?.attackType ? (
             <Badge
-              className={cn('border-none uppercase  hover:text-white', {
+              className={cn('border-none uppercase py-0 hover:text-white', {
                 'bg-blue-600 text-blue-200':
                   action.damage?.attackType === 'magic',
                 'bg-green-600 text-green-100':
                   action.damage?.attackType === 'physical',
               })}
-              style={{ fontSize: '0.6rem' }}
+              style={{ fontSize: '0.5rem' }}
               variant="outline"
             >
               {action.damage?.attackType}

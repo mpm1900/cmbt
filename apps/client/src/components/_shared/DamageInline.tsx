@@ -24,7 +24,7 @@ export function DamageInline(props: ElementProps<DamageInlineProps>) {
       style={{ color: color || renderer?.color }}
     >
       {damage && damage.power === Infinity && (
-        <span className="text-2xl">∞</span>
+        <div className="text-2xl leading-[20px] max-h-[20px]">∞</div>
       )}
       {damage && !damage.factor && damage.power !== Infinity && (
         <span className="font-black text-lg leading-[20px] num">

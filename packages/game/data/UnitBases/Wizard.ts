@@ -7,6 +7,7 @@ import {
   MagicMissile,
   MemoryLeak,
   MindBlast,
+  MindShatter,
   PowerWordKill,
   Protect,
   TimeBend,
@@ -20,6 +21,7 @@ import {
   MagicMissileId,
   MemoryLeakId,
   MindBlastId,
+  MindShatterId,
   MindTwistId,
   PowerWordKillId,
   ProtectId,
@@ -69,6 +71,10 @@ export const WizardConfig: UnitBaseConfig = {
     {
       id: MindBlastId,
       make: (u) => new MindBlast(u.id, u.teamId),
+    },
+    {
+      id: MindShatterId,
+      make: (u) => new MindShatter(u.id, u.teamId),
     },
     {
       id: MindTwistId,

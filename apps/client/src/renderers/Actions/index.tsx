@@ -38,6 +38,7 @@ import {
   MemoryLeak,
   MemoryLeakId,
   MindBlastId,
+  MindShatterId,
   MindTwistId,
   NegateArmorId,
   PiercingStrikeId,
@@ -101,7 +102,8 @@ import { InfernalBlastRenderer } from './InfernalBlast'
 import { IntoxicateRenderer } from './Intoxicate'
 import { LightningBoltRenderer } from './LightningBolt'
 import { MindBlastRenderer } from './MindBlast'
-import { MindShatterRenderer } from './MindTwist'
+import { MindShatterRenderer } from './MindShatter'
+import { MindTwistRenderer } from './MindTwist'
 import { NegateArmorRenderer } from './NegateArmor'
 import { PiercingStrikeRenderer } from './PiercingStrike'
 import { PowerCleaveRenderer } from './PowerCleave'
@@ -151,7 +153,8 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
   [IntoxicateId]: IntoxicateRenderer,
   [LightningBoltId]: LightningBoltRenderer,
   [MindBlastId]: MindBlastRenderer,
-  [MindTwistId]: MindShatterRenderer,
+  [MindShatterId]: MindShatterRenderer,
+  [MindTwistId]: MindTwistRenderer,
   [NegateArmorId]: NegateArmorRenderer,
   [PiercingStrikeId]: PiercingStrikeRenderer,
   [PowerCleaveId]: PowerCleaveRenderer,

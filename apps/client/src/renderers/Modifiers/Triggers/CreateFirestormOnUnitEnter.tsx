@@ -20,9 +20,12 @@ export const CreateSandstormOnUnitEnterRenderer: ModifierRenderer = {
             modifier={
               new DamageAllOnTurnEnd({
                 registryId: FirestormOnTurnEndId,
-                factor: modifier.damageFactor,
                 duration: modifier.damageDuration,
-                damageType: 'fire',
+                damage: {
+                  factor: modifier.damageFactor,
+                  attackType: 'magic',
+                  damageType: 'fire',
+                },
               })
             }
           />{' '}

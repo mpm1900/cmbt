@@ -1,8 +1,6 @@
 import {
-  AttackType,
   CombatContext,
   Damage,
-  DamageType,
   MutationFilterArgs,
   Trigger,
   TriggerProps,
@@ -16,10 +14,7 @@ import {
 import { DamageAllOnTurnEndId } from '../Ids'
 
 export class DamageAllOnTurnEnd extends Trigger {
-  factor: number
-  static: number
-  attackType?: AttackType
-  damageType?: DamageType
+  damage: Damage
 
   get key() {
     return this.registryId
@@ -27,10 +22,7 @@ export class DamageAllOnTurnEnd extends Trigger {
 
   constructor(
     props: TriggerProps<{
-      factor?: number
-      static?: number
-      attackType?: AttackType
-      damageType?: DamageType
+      damage: Damage
     }>
   ) {
     super(DamageAllOnTurnEndId, {
@@ -38,24 +30,16 @@ export class DamageAllOnTurnEnd extends Trigger {
       events: ['on Turn End'],
     })
 
-    this.factor = props.factor ?? 0
-    this.static = props.static ?? 0
-    this.attackType = props.attackType
-    this.damageType = props.damageType
+    this.damage = props.damage
   }
 
   mutations = (ctx: CombatContext, args: MutationFilterArgs) => {
     const source = ctx.units.find((u) => u.id === this.sourceId)!
     const units = ctx.units.filter((u) => this.filter(u, ctx, args))
-    return units.flatMap((unit) => {
-      const modified = applyModifiers(unit, ctx, args).unit
-      const damage = {
-        attackType: this.attackType,
-        damageType: this.damageType,
-        factor: this.factor,
-      } as Damage
-      const result = calculatePureDamage(damage, modified)
-      return getMutationsFromDamageResult(source, unit, result)
+    return units.flatMap((parent) => {
+      const target = applyModifiers(parent, ctx, args).unit
+      const result = calculatePureDamage(this.damage, target)
+      return getMutationsFromDamageResult(source, parent, result)
     })
   }
 

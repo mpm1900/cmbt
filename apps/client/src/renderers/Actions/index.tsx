@@ -450,7 +450,14 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
           <ModifierInline
             side={props?.side}
             modifier={
-              new DamageNewUnitsOnUnitEnter({ static: spikes.enterDamage })
+              new DamageNewUnitsOnUnitEnter({
+                maxInstances: 3,
+                damage: {
+                  attackType: 'physical',
+                  damageType: 'force',
+                  raw: spikes.enterDamage,
+                },
+              })
             }
           />{' '}
           to the battlefield.

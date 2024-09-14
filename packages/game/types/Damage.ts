@@ -20,7 +20,7 @@ export const DAMAGE_TYPES: DamageType[] = [
 ]
 
 export type Damage = {
-  attackType: AttackType
+  attackType?: AttackType
   damageType?: DamageType
   power?: number
   factor?: number

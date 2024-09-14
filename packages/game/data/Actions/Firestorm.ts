@@ -46,8 +46,11 @@ export class Firestorm extends Action {
             new DamageAllOnTurnEnd({
               registryId: FirestormOnTurnEndId,
               sourceId: source.id,
-              damageType: 'fire',
-              factor: this.damageFactor,
+              damage: {
+                factor: this.damageFactor,
+                attackType: 'magic',
+                damageType: 'fire',
+              },
               duration: this.duration,
               maxInstances: 1,
             }),

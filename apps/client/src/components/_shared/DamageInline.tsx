@@ -36,6 +36,9 @@ export function DamageInline(props: ElementProps<DamageInlineProps>) {
           {(damage.factor * 100).toFixed(1)}%
         </span>
       )}
+      {damage && damage.raw && (
+        <span className="font-bold num">{damage.raw}</span>
+      )}
       <DamageIcon
         color={color}
         damageType={damage?.damageType}

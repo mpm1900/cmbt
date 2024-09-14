@@ -50,9 +50,12 @@ export const AugmentRenderers: Record<Id, AugmentRenderer> = {
           modifier={
             new DamageAllOnTurnEnd({
               registryId: FirestormOnTurnEndId,
-              factor: 0.1,
               duration: 5,
-              damageType: 'fire',
+              damage: {
+                factor: 0.1,
+                attackType: 'magic',
+                damageType: 'fire',
+              },
             })
           }
         />

@@ -7,26 +7,13 @@ export const DamageParentOnTurnEndRenderer: ModifierRenderer = {
   name: (mod) => <ModifierName>{MODIFIER_NAMES[mod.registryId]}</ModifierName>,
   description: (mod) => {
     const modifier = mod as DamageParentOnTurnEnd
-    const value = modifier.factor
-      ? (modifier.factor * 100).toFixed(1) + '%'
-      : modifier.static
 
     return (
       <div>
         <TriggerName>On turn end:</TriggerName>
         <div>
           Unit takes{' '}
-          {modifier.damageType ? (
-            <DamageInline
-              damage={{
-                damageType: modifier.damageType,
-                power: modifier.static,
-                factor: modifier.factor,
-              }}
-            />
-          ) : (
-            <>{value} damage.</>
-          )}
+          {modifier.damage && <DamageInline damage={modifier.damage} />}
         </div>
       </div>
     )

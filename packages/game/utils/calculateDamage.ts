@@ -9,7 +9,7 @@ import {
 
 export function getAttackDefenseRatio(
   power: number,
-  attackType: AttackType,
+  attackType: AttackType | undefined,
   source: Unit,
   target: Unit
 ) {

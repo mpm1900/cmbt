@@ -44,8 +44,12 @@ export class Spikes extends Action {
           addedModifiers: [
             new DamageNewUnitsOnUnitEnter({
               sourceId: source.id,
-              static: 20,
               maxInstances: 3,
+              damage: {
+                attackType: 'physical',
+                damageType: 'force',
+                raw: this.enterDamage,
+              },
             }),
           ],
         },

@@ -25,9 +25,11 @@ export class CreateFirestormOnUnitEnter extends Trigger {
         new DamageAllOnTurnEnd({
           sourceId: props.sourceId,
           registryId: FirestormOnTurnEndId,
-          factor: this.damageFactor,
-          attackType: 'magic',
-          damageType: 'fire',
+          damage: {
+            factor: this.damageFactor,
+            attackType: 'magic',
+            damageType: 'fire',
+          },
           duration: this.damageDuration,
           maxInstances: 1,
         }),

@@ -10,8 +10,10 @@ export const Poison: Status = {
       parentId: parent.id,
       statusId: PoisonId,
       registryId: PoisonedDamageOnTurnEndId,
-      factor: 1 / 8,
-      damageType: 'blight',
+      damage: {
+        factor: 1 / 8,
+        damageType: 'blight',
+      },
       maxInstances: 1,
       persistOnSwitch: true,
       persistOnCombatEnd: true,

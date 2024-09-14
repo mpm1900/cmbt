@@ -6,7 +6,8 @@ export const ProtectedParentRenderer: ModifierRenderer = {
   description: (mod) => {
     return (
       <div>
-        {MODIFIER_NAMES[mod.registryId]} units cannot be affected by actions.
+        {MODIFIER_NAMES[mod.registryId]} units cannot be affected by all
+        actions.
       </div>
     )
   },

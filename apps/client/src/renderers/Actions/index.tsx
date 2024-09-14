@@ -7,6 +7,7 @@ import {
   BlessId,
   BodySlamId,
   Burn,
+  ChillingGraspId,
   DamageNewUnitsOnUnitEnter,
   DeathRitesId,
   DisabledParent,
@@ -90,6 +91,7 @@ import { BaneRenderer } from './Bane'
 import { BiteRenderer } from './Bite'
 import { BlessRenderer } from './Bless'
 import { BodySlamRenderer } from './BodySlam'
+import { ChillingGraspRenderer } from './ChillingGrasp'
 import { DeathRitesRenderer } from './DeathRites'
 import { DispelMagicRenderer } from './DispelMagic'
 import { DragonBreathRenderer } from './DragonBreath'
@@ -143,6 +145,7 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
   [BiteId]: BiteRenderer,
   [BlessId]: BlessRenderer,
   [BodySlamId]: BodySlamRenderer,
+  [ChillingGraspId]: ChillingGraspRenderer,
   [DeathRitesId]: DeathRitesRenderer,
   [DispelMagicId]: DispelMagicRenderer,
   [DragonBreathId]: DragonBreathRenderer,

@@ -14,6 +14,7 @@ import {
   DisabledParentId,
   DisruptedParentId,
   DivineHealingId,
+  DrainLifeParentOnTurnEndId,
   FireDamageUpParentId,
   FireNegationUpParentId,
   FirestormOnTurnEndId,
@@ -47,6 +48,7 @@ import { BiSearch } from 'react-icons/bi'
 import { BsFire, BsShieldFillPlus } from 'react-icons/bs'
 import { FaHeartCirclePlus } from 'react-icons/fa6'
 import {
+  GiDeathJuice,
   GiDeathNote,
   GiDualityMask,
   GiFireRing,
@@ -153,5 +155,8 @@ export const MODIFIER_ICONS: Record<Id, ReactNode> = {
   ),
   [KillParentOnTurnEndId]: (
     <GiDeathNote className="fill-teal-400 h-full w-full" />
+  ),
+  [DrainLifeParentOnTurnEndId]: (
+    <GiDeathJuice className="fill-white h-full w-full" />
   ),
 }

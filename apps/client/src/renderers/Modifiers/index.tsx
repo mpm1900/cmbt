@@ -9,6 +9,7 @@ import {
   DamageParentOnTurnEndId,
   DisabledParentId,
   DisruptedParentId,
+  DrainLifeParentOnTurnEndId,
   HealParentOnTurnEndId,
   HealParentOnUnitSwitchId,
   HiddenParentId,
@@ -39,6 +40,7 @@ import { CreateSandstormOnUnitEnterRenderer } from './Triggers/CreateFirestormOn
 import { DamageAllOnTurnEndRenderer } from './Triggers/DamageAllOnTurnEnd'
 import { DamageNewUnitsOnUnitEnterRenderer } from './Triggers/DamageNewUnitsOnUnitEnter'
 import { DamageParentOnTurnEndRenderer } from './Triggers/DamageParentOnTurnEnd'
+import { DrainLifeParentOnTurnEndRenderer } from './Triggers/DrainLifeParentOnTurnEnd'
 import { HealParentOnTurnEndRenderer } from './Triggers/HealParentOnTurnEnd'
 import { HealParentOnUnitSwitchRenderer } from './Triggers/HealParentOnUnitSwitch'
 import { InspectAllOnUnitEnterRenderer } from './Triggers/InspectAllOnUnitEnter'
@@ -76,6 +78,7 @@ export const ModifierRenderers: Record<string, ModifierRenderer> = {
   [DamageAllOnTurnEndId]: DamageAllOnTurnEndRenderer,
   [DamageNewUnitsOnUnitEnterId]: DamageNewUnitsOnUnitEnterRenderer,
   [DamageParentOnTurnEndId]: DamageParentOnTurnEndRenderer,
+  [DrainLifeParentOnTurnEndId]: DrainLifeParentOnTurnEndRenderer,
   [HealParentOnTurnEndId]: HealParentOnTurnEndRenderer,
   [HealParentOnUnitSwitchId]: HealParentOnUnitSwitchRenderer,
   [InspectAllOnUnitEnterId]: InspectAllOnUnitEnterRenderer,

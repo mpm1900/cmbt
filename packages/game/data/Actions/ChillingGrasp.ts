@@ -14,6 +14,7 @@ import {
 import { ChillingGraspId } from '../Ids'
 import { Identity } from '../Mutations'
 import { GetUnits } from '../Queries'
+import { DrainLifeParentOnTurnEnd } from '../Triggers'
 
 export class ChillingGrasp extends Action {
   duration: number = 5
@@ -43,11 +44,30 @@ export class ChillingGrasp extends Action {
     const data = getActionData(source, this, ctx)
 
     return [
-      buildActionResult(this, data, source, targets, ctx, () => ({
-        onSuccess: {
-          addedModifiers: [],
-        },
-      })),
+      buildActionResult(
+        this,
+        data,
+        source,
+        targets,
+        ctx,
+        (modifiedTargets) => ({
+          onSuccess: {
+            addedModifiers: modifiedTargets.map(
+              (target) =>
+                new DrainLifeParentOnTurnEnd({
+                  sourceId: source.id,
+                  parentId: target.id,
+                  duration: this.duration,
+                  damage: {
+                    attackType: 'magic',
+                    damageType: 'blight',
+                    factor: this.damageFactor,
+                  },
+                })
+            ),
+          },
+        })
+      ),
     ]
   }
 }

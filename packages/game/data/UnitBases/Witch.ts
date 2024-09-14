@@ -2,6 +2,7 @@ import { nanoid } from 'nanoid'
 import { UnitBase, UnitBaseConfig } from '../../types'
 import {
   Bane,
+  ChillingGrasp,
   DeathRites,
   DispelMagic,
   MemoryLeak,
@@ -14,6 +15,7 @@ import { HoldPerson } from '../Actions/HoldPerson'
 import { Regeneration } from '../Augments'
 import {
   BaneId,
+  ChillingGraspId,
   DeathRitesId,
   DispelMagicId,
   HoldPersonId,
@@ -57,6 +59,10 @@ export const WitchConfig: UnitBaseConfig = {
     {
       id: BaneId,
       make: (u) => new Bane(u.id, u.teamId),
+    },
+    {
+      id: ChillingGraspId,
+      make: (u) => new ChillingGrasp(u.id, u.teamId),
     },
     {
       id: DeathRitesId,

@@ -1,7 +1,6 @@
 import {
   CombatContext,
   Damage,
-  DamageType,
   MutationFilterArgs,
   Trigger,
   TriggerProps,
@@ -13,17 +12,15 @@ import {
   getMutationsFromDamageResult,
 } from '../../utils'
 import { DrainLifeParentOnTurnEndId } from '../Ids'
+import { HealParent } from '../Mutations'
 
 export class DrainLifeParentOnTurnEnd extends Trigger {
-  damageFactor: number
-  damageType: DamageType = 'blight'
-  drainFactor: number
+  damage: Damage
+  drainFactor = 1
 
   constructor(
     props: TriggerProps<{
-      damageFactor?: number
-      damageType?: DamageType
-      drainFactor?: number
+      damage: Damage
     }>
   ) {
     super(DrainLifeParentOnTurnEndId, {
@@ -31,22 +28,27 @@ export class DrainLifeParentOnTurnEnd extends Trigger {
       events: ['on Turn End'],
     })
 
-    this.damageFactor = props.damageFactor ?? 0
-    this.damageType = props.damageType ?? this.damageType
-    this.drainFactor = props.drainFactor ?? 0
+    this.damage = props.damage
   }
 
-  mutations = (ctx: CombatContext) => {
+  mutations = (ctx: CombatContext, args: MutationFilterArgs) => {
     const source = ctx.units.find((u) => u.id === this.sourceId)!
-    const parent = ctx.units.find((u) => u.id === this.parentId)!
-    const mSource = applyModifiers(source, ctx).unit
-    const mParent = applyModifiers(parent, ctx).unit
-    const damage = {
-      damageType: this.damageType,
-      factor: this.damageFactor,
-    } as Damage
-    const result = calculatePureDamage(damage, mParent)
-    return getMutationsFromDamageResult(source, parent, result)
+    const units = ctx.units.filter((u) => this.filter(u, ctx, args))
+    let totalDamage = 0
+    return units
+      .flatMap((unit) => {
+        const modified = applyModifiers(unit, ctx, args).unit
+        const result = calculatePureDamage(this.damage, modified)
+        totalDamage += result.damage + result.magicArmor + result.physicalArmor
+        return getMutationsFromDamageResult(source, unit, result)
+      })
+      .concat(
+        new HealParent({
+          sourceId: source.id,
+          parentId: source.id,
+          static: totalDamage,
+        })
+      )
   }
 
   filter = (

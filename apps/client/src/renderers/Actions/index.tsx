@@ -511,7 +511,8 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
       const ward = action as Ward
       return (
         <>
-          This unit gains <MagicArmor>{ward.amount}</MagicArmor>
+          This unit gains <MagicArmor>Magic Armor</MagicArmor> equal to{' '}
+          {ward.factor * 100}% of their max mealth.
         </>
       )
     },

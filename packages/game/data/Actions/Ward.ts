@@ -16,7 +16,8 @@ import { Identity, UpdateValueParent } from '../Mutations'
 import { EmptyArray } from '../Queries'
 
 export class Ward extends Action {
-  amount: number
+  factor: number
+
   constructor(sourceId: Id, teamId: Id) {
     super(WardId, {
       sourceId,
@@ -25,7 +26,7 @@ export class Ward extends Action {
       targets: new EmptyArray(),
       maxTargetCount: 0,
     })
-    this.amount = 50
+    this.factor = 0.25
   }
 
   resolve = (
@@ -51,7 +52,7 @@ export class Ward extends Action {
                 sourceId: source.id,
                 parentId: source.id,
                 valueKey: 'magicArmor',
-                static: this.amount,
+                static: Math.round(this.factor * data.source.stats.health),
               }),
             ],
           },

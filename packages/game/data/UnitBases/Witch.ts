@@ -28,7 +28,7 @@ import { BASE_UNIT } from '../Units/system/BASE_UNIT'
 
 export const Witch: UnitBase = {
   id: nanoid(),
-  name: 'Hexbound Shaman',
+  name: 'Shaman',
   stats: {
     ...BASE_UNIT.stats,
     health: 130,

@@ -36,7 +36,8 @@ import {
   InvertSpeedAll,
   LightningBoltId,
   MagicMissileId,
-  MindShatterId,
+  MindBlastId,
+  MindTwistId,
   NegateArmorId,
   PiercingStrikeId,
   Poison,
@@ -96,7 +97,8 @@ import { GhostFlameRenderer } from './GhostFlame'
 import { InfernalBlastRenderer } from './InfernalBlast'
 import { IntoxicateRenderer } from './Intoxicate'
 import { LightningBoltRenderer } from './LightningBolt'
-import { MindShatterRenderer } from './MindShatter'
+import { MindBlastRenderer } from './MindBlast'
+import { MindShatterRenderer } from './MindTwist'
 import { NegateArmorRenderer } from './NegateArmor'
 import { PiercingStrikeRenderer } from './PiercingStrike'
 import { PowerCleaveRenderer } from './PowerCleave'
@@ -143,7 +145,8 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
   [InfernalBlastId]: InfernalBlastRenderer,
   [IntoxicateId]: IntoxicateRenderer,
   [LightningBoltId]: LightningBoltRenderer,
-  [MindShatterId]: MindShatterRenderer,
+  [MindBlastId]: MindBlastRenderer,
+  [MindTwistId]: MindShatterRenderer,
   [NegateArmorId]: NegateArmorRenderer,
   [PiercingStrikeId]: PiercingStrikeRenderer,
   [PowerCleaveId]: PowerCleaveRenderer,

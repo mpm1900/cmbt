@@ -10,6 +10,7 @@ import {
 } from './Enemy'
 import { Wolf, WolfConfig } from './Enemy/Wolf'
 import { Snorlax, SnorlaxConfig } from './Snorlax'
+import { Sorcerer, SorcererConfig } from './Sorcerer'
 import { Steelix, SteelixConfig } from './Steelix'
 import { Tyranitar, TyranitarConfig } from './Tyranitar'
 import { Witch, WitchConfig } from './Witch'
@@ -25,6 +26,7 @@ export const PLAYER_BASES: UnitBase[] = [
   DraconicScion,
   Tyranitar,
   DemonSlayer,
+  Sorcerer,
 
   // Celebi,
   // RestlessSpirit,
@@ -44,6 +46,7 @@ export const BASE_CONFIGS: Record<Id, UnitBaseConfig> = {
   [Steelix.id]: SteelixConfig,
   [Tyranitar.id]: TyranitarConfig,
   [Witch.id]: WitchConfig,
+  [Sorcerer.id]: SorcererConfig,
 
   [RestlessSpirit.id]: RestlessSpiritConfig,
   [Wolf.id]: WolfConfig,

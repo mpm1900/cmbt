@@ -36,10 +36,7 @@ export function UnitBuilder() {
 
           <CardContent>
             <div className="space-y-2">
-              <div className="flex items-center space-x-2">
-                <Label htmlFor="name" className="min-w-[86px]">
-                  Name
-                </Label>
+              <div>
                 <Input
                   value={builder.name}
                   onChange={(e) => {
@@ -53,8 +50,11 @@ export function UnitBuilder() {
                 />
               </div>
 
-              <div className="flex items-center space-x-2">
-                <Label htmlFor="base" className="min-w-[86px]">
+              <div>
+                <Label
+                  htmlFor="base"
+                  className="min-w-[86px] text-muted-foreground"
+                >
                   Class
                 </Label>
                 <UnitBaseSelect
@@ -75,8 +75,11 @@ export function UnitBuilder() {
                 />
               </div>
 
-              <div className="flex items-center space-x-2">
-                <Label htmlFor="name" className="min-w-[86px]">
+              <div>
+                <Label
+                  htmlFor="name"
+                  className="min-w-[86px] text-muted-foreground"
+                >
                   Ability
                 </Label>
                 <UnitAbilitySelect

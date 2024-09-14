@@ -1,43 +1,40 @@
 import { nanoid } from 'nanoid'
 import { UnitBase, UnitBaseConfig } from '../../types'
 import {
-  Disable,
+  DragonBreath,
   Fireball,
   GhostFlame,
+  InfernalBlast,
   LightningBolt,
   MagicMissile,
-  MindBlast,
   PowerWordKill,
   Protect,
-  TimeBend,
 } from '../Actions'
-import { MindTwist } from '../Actions/MindTwist'
 import { Scholar } from '../Augments'
 import {
-  DisableId,
+  DragonBreathId,
   FireballId,
   GhostFlameId,
+  InfernalBlastId,
   LightningBoltId,
   MagicMissileId,
-  MindBlastId,
   MindTwistId,
   PowerWordKillId,
   ProtectId,
   ScholarId,
-  TimeBendId,
 } from '../Ids'
 import { BASE_UNIT } from '../Units/system/BASE_UNIT'
 
-export const Wizard: UnitBase = {
+export const Sorcerer: UnitBase = {
   id: nanoid(),
-  name: 'Wizard',
+  name: 'Sorcerer',
   stats: {
     ...BASE_UNIT.stats,
-    health: 50,
-    attack: 50,
-    defense: 80,
-    magic: 140,
-    speed: 100,
+    health: 55,
+    attack: 55,
+    defense: 55,
+    magic: 135,
+    speed: 135,
 
     focus: 40,
     stamina: 30,
@@ -46,32 +43,28 @@ export const Wizard: UnitBase = {
   augmentSlots: 3,
   affinities: [],
   resistances: [],
-  weaknesses: [{ type: 'force', factor: 25 }],
+  weaknesses: [{ type: 'psychic', factor: 50 }],
 }
 
-export const WizardConfig: UnitBaseConfig = {
+export const SorcererConfig: UnitBaseConfig = {
   abilities: [Scholar],
   actionsCount: 6,
   actions: [
     {
-      id: DisableId,
-      make: (u) => new Disable(u.id, u.teamId),
+      id: DragonBreathId,
+      make: (u) => new DragonBreath(u.id, u.teamId),
     },
     {
       id: FireballId,
       make: (u) => new Fireball(u.id, u.teamId),
     },
     {
+      id: InfernalBlastId,
+      make: (u) => new InfernalBlast(u.id, u.teamId),
+    },
+    {
       id: MagicMissileId,
       make: (u) => new MagicMissile(u.id, u.teamId),
-    },
-    {
-      id: MindBlastId,
-      make: (u) => new MindBlast(u.id, u.teamId),
-    },
-    {
-      id: MindTwistId,
-      make: (u) => new MindTwist(u.id, u.teamId),
     },
     {
       id: PowerWordKillId,
@@ -84,10 +77,6 @@ export const WizardConfig: UnitBaseConfig = {
     {
       id: LightningBoltId,
       make: (u) => new LightningBolt(u.id, u.teamId),
-    },
-    {
-      id: TimeBendId,
-      make: (u) => new TimeBend(u.id, u.teamId),
     },
     {
       id: GhostFlameId,

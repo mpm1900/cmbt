@@ -1,4 +1,3 @@
-import random from 'random'
 import {
   Action,
   ActionAi,
@@ -10,58 +9,60 @@ import {
   Unit,
 } from '../../types'
 import {
+  applyModifiers,
   buildActionResult,
   calculateDamage,
   getActionData,
-  getDamageAi,
   getMutationsFromDamageResult,
 } from '../../utils'
+import { getDamageAi } from '../../utils/getDamageAiAction'
 import { modifyRenderContext } from '../../utils/modifyRenderContext'
-import { MindShatterId } from '../Ids'
+import { MindBlastId } from '../Ids'
 import { Identity } from '../Mutations'
-import { GetUnits } from '../Queries'
+import { EmptyArray } from '../Queries'
 
-export class MindShatter extends Action {
+export class MindBlast extends Action {
   damage: Damage
 
   constructor(sourceId: Id, teamId: Id) {
-    super(MindShatterId, {
+    super(MindBlastId, {
       sourceId,
       teamId,
       cost: new Identity({}),
-      targets: new GetUnits({
-        notTeamId: teamId,
-        isActive: true,
-        isHidden: false,
-      }),
-      maxTargetCount: 1,
+      targets: new EmptyArray(),
+      maxTargetCount: 0,
     })
 
     this.damage = {
-      power: 100,
+      power: 80,
       attackType: 'magic',
       damageType: 'psychic',
     }
   }
 
-  threshold = (source: Unit): number | undefined => {
-    return 95 + source.stats.accuracy
-  }
+  threshold = (source: Unit): number | undefined => 95 + source.stats.accuracy
   criticalThreshold = (source: Unit): number | undefined => undefined
   criticalFactor = (source: Unit): number | undefined => undefined
+
   getAi(targets: Unit[], ctx: CombatContext): ActionAi {
     return getDamageAi(this, targets, ctx)
+  }
+
+  mapTargets = (targets: Unit[], ctx: CombatContext): Unit[] => {
+    const source = ctx.units.find((u) => u.id === this.sourceId)
+    return ctx.units
+      .map((u) => applyModifiers(u, ctx).unit)
+      .filter((u) => u.flags.isActive && u.teamId !== source?.teamId)
   }
 
   resolve = (
     source: Unit,
     targets: Unit[],
     ctx: CombatContext,
-    options: ActionResolveOptions
+    options?: ActionResolveOptions
   ): ActionResult[] => {
     ctx = modifyRenderContext(options, ctx)
     const data = getActionData(source, this, ctx)
-    const applyModifierRoll = random.int(0, 100)
 
     return [
       buildActionResult(

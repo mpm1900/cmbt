@@ -9,12 +9,17 @@ import {
 import { getTriggersByEvent, validateModifiers } from '@repo/game/utils'
 import { logTriggers } from './logTriggers'
 
+export type HandleTriggerEventResult = {
+  result: ActionResult
+  triggers: Trigger[]
+}
+
 export function handleTriggerEvent(
   event: TriggerEvent,
   log: CombatLogger,
   ctx: CombatContext,
   args?: MutationFilterArgs
-): ActionResult {
+): HandleTriggerEventResult {
   args = args ?? {}
   const triggers = validateModifiers(
     getTriggersByEvent(ctx.modifiers, event, ctx, args),
@@ -37,5 +42,5 @@ export function handleTriggerEvent(
     logTriggers(triggers, event, log, ctx, args)
   }
 
-  return result
+  return { result, triggers }
 }

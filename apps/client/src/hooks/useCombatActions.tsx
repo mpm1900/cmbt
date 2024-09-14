@@ -7,6 +7,7 @@ import {
   ActionResult,
   CombatContext,
   MutationFilterArgs,
+  Trigger,
   TriggerEvent,
 } from '@repo/game/types'
 import { isUnitAliveCtx } from '@repo/game/utils'
@@ -124,7 +125,23 @@ export function useCombatActions() {
     context: CombatContext,
     args?: MutationFilterArgs
   ) {
-    const result = handleTriggerEvent(event, combat.log, context, args)
+    const { result, triggers } = handleTriggerEvent(
+      event,
+      combat.log,
+      context,
+      args
+    )
+    combat.updateModifiers((mods) =>
+      mods
+        .map((mod) =>
+          triggers.some((t) => t.rtid === mod.rtid)
+            ? (mod as Trigger).decrementUses()
+            : mod
+        )
+        .filter(
+          (m) => (m as Trigger).uses === undefined || (m as Trigger).uses !== 0
+        )
+    )
     results.enqueue(result)
   }
 

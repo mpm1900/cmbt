@@ -1,5 +1,6 @@
 import { useCombatContext } from '@/hooks'
 import { cn } from '@/lib/utils'
+import { ActionRenderers } from '@/renderers'
 import { GLOBAL_ACTIONS } from '@repo/game/data'
 import { Action, Id, Unit } from '@repo/game/types'
 import { applyModifiers } from '@repo/game/utils'
@@ -30,7 +31,11 @@ export function ActionsList(props: ActionsListProps) {
 
   const modified = applyModifiers(unit, ctx).unit
   const actions = [
-    ...modified.actions,
+    ...modified.actions.sort((a, b) => {
+      const ar = ActionRenderers[a.id]
+      const br = ActionRenderers[b.id]
+      return ar.name.localeCompare(br.name)
+    }),
     ...GLOBAL_ACTIONS.map((m) => m.make(unit)),
   ]
 

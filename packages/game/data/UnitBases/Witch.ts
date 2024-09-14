@@ -10,6 +10,7 @@ import {
   Protect,
   Taunt,
   TrickRoom,
+  VampiricTouch,
 } from '../Actions'
 import { HoldPerson } from '../Actions/HoldPerson'
 import { Regeneration } from '../Augments'
@@ -25,6 +26,7 @@ import {
   RegenerationId,
   TauntId,
   TrickRoomId,
+  VampiricTouchId,
 } from '../Ids'
 import { BASE_UNIT } from '../Units/system/BASE_UNIT'
 
@@ -95,6 +97,10 @@ export const WitchConfig: UnitBaseConfig = {
     {
       id: TrickRoomId,
       make: (u) => new TrickRoom(u.id, u.teamId),
+    },
+    {
+      id: VampiricTouchId,
+      make: (u) => new VampiricTouch(u.id, u.teamId),
     },
   ],
   defaultAbilityId: RegenerationId,

@@ -98,7 +98,7 @@ export function check(props: CheckProps): EncounterChoice | undefined {
     before: (
       <ChoiceAttributes>
         <div>{props.icon}</div>
-        <div>{`, ${props.chance}%`}</div>
+        <div className="num">{`,${props.chance}%`}</div>
       </ChoiceAttributes>
     ),
     label: props.label,

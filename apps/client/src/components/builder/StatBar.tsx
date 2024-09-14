@@ -14,7 +14,7 @@ export function StatBar(props: StatBarProps) {
         className="h-full bg-slate-500/60 transition-all ease-in-out"
         style={{ width: `${ratio * 100}%` }}
       />
-      <div className="absolute top-0 right-0 bottom-0 left-0 text-right px-2 opacity-40">
+      <div className="absolute top-0 right-0 bottom-0 left-0 text-right px-2 opacity-40 num">
         {children}
       </div>
     </div>

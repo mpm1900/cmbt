@@ -31,13 +31,14 @@ export function ActiveAction(props: ActiveActionProps) {
         <div className="flex space-x-2">
           {action.damage?.attackType && (
             <Badge
-              className={cn('border-none hover:text-white mb-4', {
+              className={cn('border-none uppercase hover:text-white mb-4', {
                 'bg-blue-600 text-blue-200':
                   action.damage?.attackType === 'magic',
                 'bg-green-600 text-green-100':
                   action.damage?.attackType === 'physical',
               })}
               variant="outline"
+              style={{ fontSize: '0.6rem' }}
             >
               {action.damage?.attackType}
             </Badge>
@@ -54,7 +55,7 @@ export function ActiveAction(props: ActiveActionProps) {
           {accuracy !== undefined && baseAccuracy !== undefined && (
             <Badge
               variant="outline"
-              className="bg-slate-950 text-muted-foreground mb-4"
+              className="bg-slate-950 text-muted-foreground mb-4 space-x-1 items-center"
             >
               <span
                 className={cn({
@@ -66,23 +67,24 @@ export function ActiveAction(props: ActiveActionProps) {
                 {accuracy}%
               </span>
 
-              <span className="pl-1">Accuracy</span>
+              <span>Accuracy</span>
             </Badge>
           )}
           {critChance > 0 && (
             <Badge
               variant="outline"
-              className="bg-slate-950 text-muted-foreground mb-4"
+              className="bg-slate-950 text-muted-foreground mb-4 space-x-1 items-center"
             >
-              {critChance}% Crit
+              <span>{critChance}%</span> <span>Crit</span>
             </Badge>
           )}
           {critFactor && (
             <Badge
               variant="outline"
-              className="bg-slate-950 text-muted-foreground mb-4"
+              className="bg-slate-950 text-muted-foreground mb-4 space-x-1 items-center"
             >
-              {critFactor * 100}% Crit Damage
+              <span>{critFactor * 100}%</span>
+              <span>Crit Damage</span>
             </Badge>
           )}
           {action.priority !== 0 && (

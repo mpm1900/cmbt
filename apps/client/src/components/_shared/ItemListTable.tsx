@@ -51,7 +51,7 @@ export function ItemListTable(props: ItemListTableProps) {
                 </TableCell>
 
                 <TableCell
-                  className={cn('flex items-center justify-end', {
+                  className={cn('flex items-center justify-end num', {
                     'text-red-400':
                       !!onClick && (resources.credits ?? 0) < cost,
                   })}
@@ -62,7 +62,7 @@ export function ItemListTable(props: ItemListTableProps) {
 
                 <TableCell
                   width={32}
-                  className={cn({
+                  className={cn('num', {
                     'text-red-400': quantities[item.id] <= 0,
                   })}
                 >

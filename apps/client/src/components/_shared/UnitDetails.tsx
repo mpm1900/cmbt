@@ -7,13 +7,13 @@ import { AspectRatio } from '@radix-ui/react-aspect-ratio'
 import {
   ATTACK_TYPES,
   DAMAGE_TYPES,
-  DamageType,
   Modifier,
   StatKey,
   Unit,
 } from '@repo/game/types'
 import { getModifiersFromUnit, getUnitBase } from '@repo/game/utils'
 import { ReactNode } from '@tanstack/react-router'
+import { HealthBadge } from './HealthBadge'
 import { MagicArmor } from './MagicArmor'
 import { PhysicalArmor } from './PhysicalArmor'
 import { StatValue } from './StatValue'
@@ -63,39 +63,6 @@ function UnitStat(props: UnitStatProps) {
   )
 }
 
-type UnitDamageStatProps = UnitStatProps & { damageType: DamageType }
-function UnitDamageStat(props: UnitDamageStatProps) {
-  const renderer = DamageRenderers[props.damageType]
-  return (
-    <div className="flex space-x-4 justify-between">
-      <div className="flex items-center space-x-1">
-        <div
-          className={cn('h-[20px] w-[20px]')}
-          style={{ fill: renderer?.color }}
-        >
-          {renderer?.icon}
-        </div>
-        <strong
-          className="text-muted-foreground"
-          style={{ color: renderer?.color }}
-        >
-          {renderer?.name}
-        </strong>
-      </div>
-      <span>
-        <StatValue
-          stat={props.stat}
-          unit={props.unit}
-          comp={props.comp}
-          before={props.before}
-          after={props.after}
-          map={props.map}
-        />
-      </span>
-    </div>
-  )
-}
-
 export type UnitDetailsProps = {
   unit: Unit
   original: Unit
@@ -131,10 +98,10 @@ export function UnitDetails(props: UnitDetailsProps) {
             <Separator />
             <AspectRatio ratio={4 / 3} className="bg-muted"></AspectRatio>
             <Separator />
-            <div className="flex justify-around space-x-1 p-1">
-              <span className="">
-                ({remainingHealth} / {unit.stats.health})
-              </span>
+            <div className="flex justify-around items-center space-x-1 p-1">
+              <HealthBadge className="px-2">
+                {remainingHealth}/{unit.stats.health}
+              </HealthBadge>
               <MagicArmor className="px-2">
                 <span>{unit.values.magicArmor}</span>
               </MagicArmor>

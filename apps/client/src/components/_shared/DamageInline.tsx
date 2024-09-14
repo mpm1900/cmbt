@@ -18,26 +18,30 @@ export function DamageInline(props: ElementProps<DamageInlineProps>) {
   return (
     <span
       className={cn(
-        'text-white space-x-1 inline-flex items-center flex-wrap',
+        'text-white space-x-1 inline-flex items-baseline',
         className
       )}
       style={{ color: color || renderer?.color }}
     >
       {damage && damage.power === Infinity && (
-        <span className="text-xl">∞</span>
+        <span className="text-2xl">∞</span>
       )}
       {damage && !damage.factor && damage.power !== Infinity && (
-        <span className="font-black">{damage?.power || '--'}</span>
+        <span className="font-bold text-lg leading-[20px] num">
+          {damage?.power || '--'}
+        </span>
       )}
       {damage && damage.factor && (
-        <span className="font-black">{(damage.factor * 100).toFixed(1)}%</span>
+        <span className="font-bold num">
+          {(damage.factor * 100).toFixed(1)}%
+        </span>
       )}
       <DamageIcon
         color={color}
         damageType={damage?.damageType}
         className="h-[20px] w-[20px] self-center"
       />
-      <span className="self-end">{children}</span>
+      <span>{children}</span>
     </span>
   )
 }

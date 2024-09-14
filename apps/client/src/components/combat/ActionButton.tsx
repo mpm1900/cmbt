@@ -57,7 +57,7 @@ export function ActionButton(props: ActionButtonProps) {
           {renderer && (
             <div
               className={cn(
-                'text-xs text-muted-foreground flex w-full space-x-2 items-center justify-end',
+                'text-sm text-muted-foreground flex w-full space-x-2 items-center justify-end',
                 {
                   'text-slate-700': isActive,
                 }
@@ -65,7 +65,7 @@ export function ActionButton(props: ActionButtonProps) {
             >
               {accuracy !== undefined && baseAccuracy !== undefined ? (
                 <span
-                  className={cn({
+                  className={cn('num', {
                     '': accuracy === baseAccuracy,
                     'text-green-300': accuracy > baseAccuracy,
                     'text-red-300': accuracy < baseAccuracy,

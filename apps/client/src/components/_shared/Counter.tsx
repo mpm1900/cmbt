@@ -13,5 +13,5 @@ export function Counter(props: CounterProps) {
     return controls.stop
   }, [from, to])
 
-  return <motion.span>{rounded}</motion.span>
+  return <motion.span className="num">{rounded}</motion.span>
 }

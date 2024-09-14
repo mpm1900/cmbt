@@ -28,7 +28,7 @@ import { BASE_UNIT } from '../Units/system/BASE_UNIT'
 
 export const Snorlax: UnitBase = {
   id: nanoid(),
-  name: 'Drunken Juggernaut',
+  name: 'Juggernaut',
   stats: {
     ...BASE_UNIT.stats,
     health: 160,

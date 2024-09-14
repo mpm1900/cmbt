@@ -53,7 +53,6 @@ export const Tyranitar: UnitBase = {
     { type: 'force', factor: 25 },
   ],
   resistances: [
-    { type: 'blight', factor: 25 },
     { type: 'fire', factor: 25 },
     { type: 'force', factor: 10 },
   ],

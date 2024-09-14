@@ -68,6 +68,15 @@
   }
 }
 
+@layer components {
+  /*
+  .num {
+    @apply font-mono;
+    @apply font-light;
+  }
+    */
+}
+
 html,
 body,
 #root {

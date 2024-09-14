@@ -9,6 +9,9 @@ module.exports = {
   ],
   prefix: '',
   theme: {
+    fontFamily: {
+      mono: ['Courier Prime', 'monospace'],
+    },
     container: {
       center: 'true',
       padding: '2rem',

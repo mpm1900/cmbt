@@ -116,12 +116,13 @@ function ActionListRow(props: ActionListRowProps) {
         <TableCell>
           {action.damage?.attackType ? (
             <Badge
-              className={cn('border-none hover:text-white', {
+              className={cn('border-none uppercase  hover:text-white', {
                 'bg-blue-600 text-blue-200':
                   action.damage?.attackType === 'magic',
                 'bg-green-600 text-green-100':
                   action.damage?.attackType === 'physical',
               })}
+              style={{ fontSize: '0.6rem' }}
               variant="outline"
             >
               {action.damage?.attackType}
@@ -131,7 +132,7 @@ function ActionListRow(props: ActionListRowProps) {
           )}
         </TableCell>
 
-        <TableCell>
+        <TableCell className="num">
           {action.damage ? (
             <span className="inline-flex items-center space-x-1">
               <DamageInline damage={action.damage} children="" />
@@ -140,12 +141,14 @@ function ActionListRow(props: ActionListRowProps) {
             '—'
           )}
         </TableCell>
-        <TableCell>{accuracy !== undefined ? `${accuracy}%` : '—'}</TableCell>
+        <TableCell className="num">
+          {accuracy !== undefined ? `${accuracy}%` : '—'}
+        </TableCell>
         <TableCell>{(renderer.cost && renderer.cost(action)) || '—'}</TableCell>
         {action.criticalFactor(ZERO_UNIT) ? (
-          <TableCell>
-            {action.criticalThreshold(ZERO_UNIT)}%{', '}x
-            {action.criticalFactor(ZERO_UNIT)}
+          <TableCell className="num">
+            {action.criticalThreshold(ZERO_UNIT)}%{', '}
+            {action.criticalFactor(ZERO_UNIT)}x
           </TableCell>
         ) : (
           <TableCell>—</TableCell>

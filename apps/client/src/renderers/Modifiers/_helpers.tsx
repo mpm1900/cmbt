@@ -17,15 +17,21 @@ export function ModifierValues(
     <div>
       {props.factor !== 0 && (
         <div>
-          {props.factor > 0 ? '+' : '-'}
-          {Math.abs(props.factor) * 100}%{props.after} {props.children}
+          <span className="num">
+            {props.factor > 0 ? '+' : '-'}
+            {Math.abs(props.factor) * 100}%{props.after}
+          </span>{' '}
+          {props.children}
         </div>
       )}
       {props.static !== 0 && (
         <div>
-          {props.static > 0 ? '+' : '-'}
-          {Math.abs(props.static)}
-          {props.after} {props.children}
+          <span className="num">
+            {props.static > 0 ? '+' : '-'}
+            {Math.abs(props.static)}
+            {props.after}
+          </span>{' '}
+          {props.children}
         </div>
       )}
     </div>

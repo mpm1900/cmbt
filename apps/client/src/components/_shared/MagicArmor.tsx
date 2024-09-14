@@ -20,7 +20,10 @@ export function MagicArmor({
         <TooltipTrigger>
           <Badge
             variant="outline"
-            className={cn('space-x-1 px-1 bg-blue-600 text-white', className)}
+            className={cn(
+              'space-x-1 px-1 bg-blue-600 text-white num',
+              className
+            )}
           >
             <FaShieldHalved />
             {children && <span>{children}</span>}

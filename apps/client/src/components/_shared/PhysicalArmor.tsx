@@ -20,7 +20,10 @@ export function PhysicalArmor({
         <TooltipTrigger>
           <Badge
             variant="outline"
-            className={cn('space-x-1 px-1 bg-green-600 text-white', className)}
+            className={cn(
+              'space-x-1 px-1 bg-green-600 text-white num',
+              className
+            )}
           >
             <FaShieldHalved />
             {children && <span>{children}</span>}

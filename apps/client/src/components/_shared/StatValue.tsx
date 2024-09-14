@@ -24,7 +24,7 @@ export function StatValue(props: StatDebugProps) {
         : 'inherit'
 
   return (
-    <span className={cn(className)} style={{ color }}>
+    <span className={cn('num', className)} style={{ color }}>
       {before}
       {parseFloat((map ? map(value) : value).toFixed(1))}
       {after}

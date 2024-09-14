@@ -26,7 +26,7 @@ import {
 } from '../Ids'
 import { BASE_UNIT } from '../Units/system/BASE_UNIT'
 
-export const Snorlax: UnitBase = {
+export const Juggernaut: UnitBase = {
   id: nanoid(),
   name: 'Juggernaut',
   stats: {

@@ -32,7 +32,7 @@ import {
 } from '../Ids'
 import { BASE_UNIT } from '../Units/system/BASE_UNIT'
 
-export const Tyranitar: UnitBase = {
+export const Hellknight: UnitBase = {
   id: nanoid(),
   name: 'Hellknight',
   stats: {

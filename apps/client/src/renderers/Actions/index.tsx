@@ -85,6 +85,7 @@ import {
 } from '@repo/game/data'
 import { Action, ActionResult, CombatContext, Unit } from '@repo/game/types'
 import { DamageInline } from '@shared/DamageInline'
+import { DamageListInline } from '@shared/DamageListInline'
 import { MagicArmor } from '@shared/MagicArmor'
 import { ModifierInline } from '@shared/ModifierInline'
 import { StatusInline } from '@shared/StatusInline'
@@ -252,7 +253,7 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
     name: ACTION_NAMES[EarthquakeId],
     description: (action) => (
       <>
-        Deals <DamageInline damage={action.damage} /> to all other units.
+        Deals <DamageListInline damages={action.damages} /> to all other units.
       </>
     ),
   },
@@ -272,9 +273,9 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
       const fireball = action as Fireball
       return (
         <>
-          Deals <DamageInline damage={fireball.damage} /> to target enemy unit.
-          Deals <DamageInline damage={fireball.splashDamage} /> to all other
-          active enemy units.
+          Deals <DamageListInline damages={action.damages} /> to target enemy
+          unit. Deals <DamageInline damage={fireball.splashDamage} /> to all
+          other active enemy units.
         </>
       )
     },
@@ -285,8 +286,8 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
       const firepunch = action as FirePunch
       return (
         <div>
-          Deals <DamageInline damage={action.damage} /> to target enemy unit.{' '}
-          {firepunch.burnChance}% chance to apply{' '}
+          Deals <DamageListInline damages={action.damages} /> to target enemy
+          unit. {firepunch.burnChance}% chance to apply{' '}
           <StatusInline status={Burn} side={props?.side} />.
         </div>
       )
@@ -298,7 +299,7 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
       const furySwipes = action as WildStrikes
       return (
         <div>
-          Deals <DamageInline damage={furySwipes.damage} /> to target enemy
+          Deals <DamageListInline damages={action.damages} /> to target enemy
           unit. Repeats 2-6 times.
         </div>
       )
@@ -334,8 +335,8 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
       const hyperbeam = action as HyperBeam
       return (
         <div>
-          Deals <DamageInline damage={hyperbeam.damage} /> equal to twice this
-          unit's base magic stat to target enemy unit. Applies{' '}
+          Deals <DamageListInline damages={action.damages} /> equal to twice
+          this unit's base magic stat to target enemy unit. Applies{' '}
           <ModifierInline
             side={props?.side}
             modifier={
@@ -356,8 +357,8 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
     name: 'Magic Missile',
     description: (action) => (
       <>
-        Deals <DamageInline damage={action.damage} /> to 2 target enemy units.
-        This action cannot miss.
+        Deals <DamageListInline damages={action.damages} /> to 2 target enemy
+        units. This action cannot miss.
       </>
     ),
   },
@@ -367,7 +368,7 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
       const quickAttack = action as QuickAttack
       return (
         <>
-          Deals <DamageInline damage={quickAttack.damage} /> to target enemy
+          Deals <DamageListInline damages={action.damages} /> to target enemy
           unit. Usually goes first.
         </>
       )
@@ -379,7 +380,7 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
       const poisionSpray = action as QuickAttack
       return (
         <>
-          Deals <DamageInline damage={poisionSpray.damage} /> to target enemy
+          Deals <DamageListInline damages={action.damages} /> to target enemy
           unit and applies <StatusInline side={props?.side} status={Poison} />.
         </>
       )
@@ -389,8 +390,8 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
     name: ACTION_NAMES[PowerWordKillId],
     description: (action) => (
       <>
-        Deals <DamageInline damage={action.damage} /> to target enemy unit.
-        Ignores all damage negation.
+        Deals <DamageListInline damages={action.damages} /> to target enemy
+        unit. Ignores all damage negation.
       </>
     ),
     lore: () => (
@@ -450,8 +451,8 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
       const slash = action as Slash
       return (
         <>
-          Deals <DamageInline damage={slash.damage} /> to target enemy unit.
-          High critical chance.
+          Deals <DamageListInline damages={action.damages} /> to target enemy
+          unit. High critical chance.
         </>
       )
     },

@@ -1,5 +1,5 @@
 import { SearingLight, SearingLightId } from '@repo/game/data'
-import { DamageInline } from '@shared/DamageInline'
+import { DamageListInline } from '@shared/DamageListInline'
 import { ACTION_NAMES, ActionRenderer } from '.'
 
 export const SearingLightRenderer: ActionRenderer = {
@@ -8,9 +8,9 @@ export const SearingLightRenderer: ActionRenderer = {
     const action = a as SearingLight
     return (
       <div>
-        Deals <DamageInline damage={action.damage} /> to target unit, if target
-        is an enemy. Heals for up to {action.healthFactor * 100}% of their max
-        health if target is an ally.
+        Deals <DamageListInline damages={action.damages} /> to target unit, if
+        target is an enemy. Heals for up to {action.healthFactor * 100}% of
+        their max health if target is an ally.
       </div>
     )
   },

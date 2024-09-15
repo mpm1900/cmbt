@@ -4,14 +4,13 @@ import {
   ActionResolveOptions,
   ActionResult,
   CombatContext,
-  Damage,
   Id,
   Unit,
 } from '../../types'
 import {
   applyModifiers,
   buildActionResult,
-  calculateDamage,
+  calculateDamages,
   getActionData,
   getMutationsFromDamageResult,
 } from '../../utils'
@@ -22,8 +21,6 @@ import { Identity } from '../Mutations'
 import { EmptyArray } from '../Queries'
 
 export class Earthquake extends Action {
-  damage: Damage
-
   constructor(sourceId: Id, teamId: Id) {
     super(EarthquakeId, {
       sourceId,
@@ -33,11 +30,13 @@ export class Earthquake extends Action {
       maxTargetCount: 0,
     })
 
-    this.damage = {
-      power: 100,
-      attackType: 'physical',
-      damageType: 'force',
-    }
+    this.damages = [
+      {
+        power: 100,
+        attackType: 'physical',
+        damageType: 'force',
+      },
+    ]
   }
 
   threshold = (source: Unit): number | undefined => 95 + source.stats.accuracy
@@ -75,8 +74,8 @@ export class Earthquake extends Action {
         (modifiedTargets) => ({
           onSuccess: {
             mutations: modifiedTargets.flatMap((target) => {
-              const damage = calculateDamage(
-                this.damage,
+              const damage = calculateDamages(
+                this.damages,
                 data.source,
                 target,
                 data.accuracyRoll

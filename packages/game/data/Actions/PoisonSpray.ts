@@ -4,13 +4,12 @@ import {
   ActionResolveOptions,
   ActionResult,
   CombatContext,
-  Damage,
   Id,
   Unit,
 } from '../../types'
 import {
   buildActionResult,
-  calculateDamage,
+  calculateDamages,
   getActionData,
   getDamageAi,
   getMutationsFromDamageResult,
@@ -22,8 +21,6 @@ import { GetUnits } from '../Queries'
 import { Poison } from '../Statuses'
 
 export class PoisonSpray extends Action {
-  damage: Damage
-
   constructor(sourceId: Id, teamId: Id) {
     super(PoisonSprayId, {
       sourceId,
@@ -37,11 +34,13 @@ export class PoisonSpray extends Action {
       maxTargetCount: 1,
     })
 
-    this.damage = {
-      power: 20,
-      attackType: 'magic',
-      damageType: 'blight',
-    }
+    this.damages = [
+      {
+        power: 20,
+        attackType: 'magic',
+        damageType: 'blight',
+      },
+    ]
   }
 
   threshold = (source: Unit): number | undefined => {
@@ -73,8 +72,8 @@ export class PoisonSpray extends Action {
         (modifiedTargets) => ({
           onSuccess: {
             mutations: modifiedTargets.flatMap((target) => {
-              const damage = calculateDamage(
-                this.damage,
+              const damage = calculateDamages(
+                this.damages,
                 data.source,
                 target,
                 data.accuracyRoll

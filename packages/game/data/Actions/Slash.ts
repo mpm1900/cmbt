@@ -4,13 +4,12 @@ import {
   ActionResolveOptions,
   ActionResult,
   CombatContext,
-  Damage,
   Id,
   Unit,
 } from '../../types'
 import {
   buildActionResult,
-  calculateDamage,
+  calculateDamages,
   getActionData,
   getDamageAi,
   getMutationsFromDamageResult,
@@ -21,8 +20,6 @@ import { Identity } from '../Mutations'
 import { GetUnits } from '../Queries'
 
 export class Slash extends Action {
-  damage: Damage
-
   constructor(sourceId: Id, teamId: Id) {
     super(SlashId, {
       sourceId,
@@ -36,11 +33,13 @@ export class Slash extends Action {
       maxTargetCount: 1,
     })
 
-    this.damage = {
-      power: 75,
-      attackType: 'physical',
-      damageType: 'force',
-    }
+    this.damages = [
+      {
+        power: 75,
+        attackType: 'physical',
+        damageType: 'force',
+      },
+    ]
   }
 
   threshold = (source: Unit): number | undefined => {
@@ -75,8 +74,8 @@ export class Slash extends Action {
         (modifiedTargets) => ({
           onSuccess: {
             mutations: modifiedTargets.flatMap((target) => {
-              const damage = calculateDamage(
-                this.damage,
+              const damage = calculateDamages(
+                this.damages,
                 data.source,
                 target,
                 data.accuracyRoll

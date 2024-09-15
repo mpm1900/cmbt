@@ -31,11 +31,13 @@ export class Explosion extends Action {
       maxTargetCount: 0,
     })
 
-    this.damage = {
-      power: 0,
-      attackType: 'physical',
-      damageType: 'force',
-    }
+    this.damages = [
+      {
+        power: 0,
+        attackType: 'physical',
+        damageType: 'force',
+      },
+    ]
   }
 
   getDamage = (source: Unit, targets: Unit[], ctx: CombatContext): number[] => {
@@ -88,7 +90,7 @@ export class Explosion extends Action {
               ...modifiedTargets.flatMap((target) => {
                 const damage = calculateDamage(
                   {
-                    ...this.damage!,
+                    ...this.damages[0]!,
                     power: data.source.stats.attack * 4,
                   },
                   data.source,

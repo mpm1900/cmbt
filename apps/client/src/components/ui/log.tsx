@@ -28,8 +28,8 @@ export function LogActionName(props: { action: Action }) {
     <ActionHover action={action} side="left">
       <span
         className={cn('hover:underline cursor-pointer text-white', {
-          'text-blue-300': action.damage?.attackType === 'magic',
-          'text-green-300': action.damage?.attackType === 'physical',
+          'text-blue-300': action.damages[0]?.attackType === 'magic',
+          'text-green-300': action.damages[0]?.attackType === 'physical',
         })}
       >
         {renderer?.name ?? action.id}

@@ -1,5 +1,5 @@
 import { Burn, DragonBreath, DragonBreathId } from '@repo/game/data'
-import { DamageInline } from '@shared/DamageInline'
+import { DamageListInline } from '@shared/DamageListInline'
 import { StatusInline } from '@shared/StatusInline'
 import { ACTION_NAMES, ActionRenderer } from '.'
 
@@ -9,8 +9,8 @@ export const DragonBreathRenderer: ActionRenderer = {
     const dragonbreath = action as DragonBreath
     return (
       <div>
-        Deals <DamageInline damage={action.damage} /> to target enemy unit.{' '}
-        {dragonbreath.burnChance}% chance to apply{' '}
+        Deals <DamageListInline damages={action.damages} /> to target enemy
+        unit. {dragonbreath.burnChance}% chance to apply{' '}
         <StatusInline status={Burn} side={props?.side} />.
       </div>
     )

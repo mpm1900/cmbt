@@ -3,13 +3,12 @@ import {
   ActionResolveOptions,
   ActionResult,
   CombatContext,
-  Damage,
   Id,
   Unit,
 } from '../../types'
 import {
   buildActionResult,
-  calculateDamage,
+  calculateDamages,
   getActionData,
   getMutationsFromDamageResult,
   modifyRenderContext,
@@ -20,8 +19,6 @@ import { GetUnits } from '../Queries'
 import { Guidance } from '../Statuses/Guidance'
 
 export class GuidingRay extends Action {
-  damage: Damage
-
   constructor(sourceId: Id, teamId: Id) {
     super(GuidingRayId, {
       sourceId,
@@ -35,11 +32,13 @@ export class GuidingRay extends Action {
       maxTargetCount: 1,
     })
 
-    this.damage = {
-      power: 75,
-      attackType: 'magic',
-      damageType: 'holy',
-    }
+    this.damages = [
+      {
+        power: 75,
+        attackType: 'magic',
+        damageType: 'holy',
+      },
+    ]
   }
 
   resolve(
@@ -58,8 +57,8 @@ export class GuidingRay extends Action {
             mutations: modifiedTargets.flatMap((target) => {
               const isAlly = target.teamId === source.teamId
               if (!isAlly) {
-                const damage = calculateDamage(
-                  this.damage,
+                const damage = calculateDamages(
+                  this.damages,
                   data.source,
                   target,
                   data.accuracyRoll

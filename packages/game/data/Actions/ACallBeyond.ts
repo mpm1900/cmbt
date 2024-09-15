@@ -4,14 +4,13 @@ import {
   ActionResolveOptions,
   ActionResult,
   CombatContext,
-  Damage,
   Id,
   Unit,
 } from '../../types'
 import {
   applyModifiers,
   buildActionResult,
-  calculateDamage,
+  calculateDamages,
   getActionData,
   getMutationsFromDamageResult,
 } from '../../utils'
@@ -23,7 +22,6 @@ import { Identity } from '../Mutations'
 import { EmptyArray } from '../Queries'
 
 export class ACallBeyond extends Action {
-  damage: Damage
   magicDownStages = -2
 
   constructor(sourceId: Id, teamId: Id) {
@@ -35,11 +33,13 @@ export class ACallBeyond extends Action {
       maxTargetCount: 0,
     })
 
-    this.damage = {
-      power: 140,
-      attackType: 'magic',
-      damageType: 'arcane',
-    }
+    this.damages = [
+      {
+        power: 140,
+        attackType: 'magic',
+        damageType: 'arcane',
+      },
+    ]
   }
 
   threshold = (source: Unit): number | undefined => 90 + source.stats.accuracy
@@ -77,8 +77,8 @@ export class ACallBeyond extends Action {
           onSuccess: {
             mutations: modifiedTargets
               .flatMap((target) => {
-                const damage = calculateDamage(
-                  this.damage,
+                const damage = calculateDamages(
+                  this.damages,
                   data.source,
                   target,
                   data.accuracyRoll

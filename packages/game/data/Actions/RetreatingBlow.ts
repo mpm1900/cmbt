@@ -4,13 +4,12 @@ import {
   ActionResolveOptions,
   ActionResult,
   CombatContext,
-  Damage,
   Id,
   Unit,
 } from '../../types'
 import {
   buildActionResult,
-  calculateDamage,
+  calculateDamages,
   getActionData,
   getDamageAi,
   getMutationsFromDamageResult,
@@ -22,8 +21,6 @@ import { Identity, SetIsActiveParent } from '../Mutations'
 import { GetUnits } from '../Queries'
 
 export class RetreatingBlow extends Action {
-  damage: Damage
-
   constructor(sourceId: Id, teamId: Id) {
     super(RetreatingBlowId, {
       sourceId,
@@ -35,14 +32,15 @@ export class RetreatingBlow extends Action {
         isHidden: false,
       }),
       maxTargetCount: 1,
-      // priority: -1,
     })
 
-    this.damage = {
-      power: 70,
-      attackType: 'physical',
-      damageType: 'force',
-    }
+    this.damages = [
+      {
+        power: 70,
+        attackType: 'physical',
+        damageType: 'force',
+      },
+    ]
   }
 
   threshold = (source: Unit): number | undefined => {
@@ -76,8 +74,8 @@ export class RetreatingBlow extends Action {
           forceFailure: inactiveLiveAllies.length === 0,
           onSuccess: {
             mutations: modifiedTargets.flatMap((target) => {
-              const damage = calculateDamage(
-                this.damage,
+              const damage = calculateDamages(
+                this.damages,
                 data.source,
                 target,
                 data.accuracyRoll

@@ -42,11 +42,13 @@ export class HyperBeam extends Action {
       maxTargetCount: 1,
     })
 
-    this.damage = {
-      power: 0,
-      attackType: 'magic',
-      damageType: 'force',
-    }
+    this.damages = [
+      {
+        power: 0,
+        attackType: 'magic',
+        damageType: 'force',
+      },
+    ]
   }
 
   threshold = (source: Unit): number | undefined => 95 + source.stats.accuracy
@@ -78,7 +80,7 @@ export class HyperBeam extends Action {
               const { base } = getUnitBase(source.baseId)
               const damage = calculateDamage(
                 {
-                  ...this.damage!,
+                  ...this.damages[0]!,
                   power: (base?.stats.magic ?? 0) * 2,
                 },
                 data.source,

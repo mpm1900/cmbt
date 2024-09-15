@@ -5,13 +5,12 @@ import {
   ActionResolveOptions,
   ActionResult,
   CombatContext,
-  Damage,
   Id,
   Unit,
 } from '../../types'
 import {
   buildActionResult,
-  calculateDamage,
+  calculateDamages,
   getActionData,
   getMutationsFromDamageResult,
   modifyRenderContext,
@@ -22,8 +21,6 @@ import { Identity } from '../Mutations'
 import { GetUnits } from '../Queries'
 
 export class WildStrikes extends Action {
-  damage: Damage
-
   constructor(sourceId: Id, teamId: Id) {
     super(WildStrikesId, {
       sourceId,
@@ -37,11 +34,13 @@ export class WildStrikes extends Action {
       maxTargetCount: 1,
     })
 
-    this.damage = {
-      power: 15,
-      attackType: 'physical',
-      damageType: 'force',
-    }
+    this.damages = [
+      {
+        power: 15,
+        attackType: 'physical',
+        damageType: 'force',
+      },
+    ]
   }
 
   threshold = (source: Unit): number | undefined => {
@@ -73,8 +72,8 @@ export class WildStrikes extends Action {
         (modifiedTargets) => ({
           onSuccess: {
             mutations: modifiedTargets.flatMap((target) => {
-              const damage = calculateDamage(
-                this.damage,
+              const damage = calculateDamages(
+                this.damages,
                 data.source,
                 target,
                 data.accuracyRoll

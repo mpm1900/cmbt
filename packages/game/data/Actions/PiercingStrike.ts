@@ -5,13 +5,12 @@ import {
   ActionResolveOptions,
   ActionResult,
   CombatContext,
-  Damage,
   Id,
   Unit,
 } from '../../types'
 import {
   buildActionResult,
-  calculateDamage,
+  calculateDamages,
   getActionData,
   getDamageAi,
   getMutationsFromDamageResult,
@@ -24,7 +23,6 @@ import { Identity } from '../Mutations'
 import { GetUnits } from '../Queries'
 
 export class PiercingStrike extends Action {
-  damage: Damage
   defenseDownChance: number = 20
   defenseStage: number = -1
 
@@ -41,11 +39,13 @@ export class PiercingStrike extends Action {
       maxTargetCount: 1,
     })
 
-    this.damage = {
-      power: 80,
-      attackType: 'physical',
-      damageType: 'force',
-    }
+    this.damages = [
+      {
+        power: 80,
+        attackType: 'physical',
+        damageType: 'force',
+      },
+    ]
   }
 
   threshold = (source: Unit): number | undefined => {
@@ -82,8 +82,8 @@ export class PiercingStrike extends Action {
         (modifiedTargets) => ({
           onSuccess: {
             mutations: modifiedTargets.flatMap((target) => {
-              const damage = calculateDamage(
-                this.damage,
+              const damage = calculateDamages(
+                this.damages,
                 data.source,
                 target,
                 data.accuracyRoll

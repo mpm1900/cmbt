@@ -4,13 +4,12 @@ import {
   ActionResolveOptions,
   ActionResult,
   CombatContext,
-  Damage,
   Id,
   Unit,
 } from '../../types'
 import {
   buildActionResult,
-  calculateDamage,
+  calculateDamages,
   getActionData,
   getDamageAi,
   getMutationsFromDamageResult,
@@ -21,8 +20,6 @@ import { Identity } from '../Mutations'
 import { GetUnits } from '../Queries'
 
 export class MagicMissile extends Action {
-  damage: Damage
-
   constructor(sourceId: Id, teamId: Id) {
     super(MagicMissileId, {
       sourceId,
@@ -36,11 +33,13 @@ export class MagicMissile extends Action {
       maxTargetCount: 2,
     })
 
-    this.damage = {
-      power: 60,
-      damageType: 'arcane',
-      attackType: 'magic',
-    }
+    this.damages = [
+      {
+        power: 60,
+        damageType: 'arcane',
+        attackType: 'magic',
+      },
+    ]
   }
 
   threshold = (source: Unit): number | undefined => undefined
@@ -69,8 +68,8 @@ export class MagicMissile extends Action {
         (modifiedTargets) => ({
           onSuccess: {
             mutations: modifiedTargets.flatMap((target) => {
-              const damage = calculateDamage(
-                this.damage,
+              const damage = calculateDamages(
+                this.damages,
                 data.source,
                 target,
                 data.accuracyRoll

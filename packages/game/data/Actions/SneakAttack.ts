@@ -4,7 +4,6 @@ import {
   ActionResolveOptions,
   ActionResult,
   CombatContext,
-  Damage,
   Id,
   Unit,
 } from '../../types'
@@ -21,7 +20,6 @@ import { Identity } from '../Mutations'
 import { GetUnits } from '../Queries'
 
 export class SneakAttack extends Action {
-  damage: Damage
   hiddenPower = 100
 
   constructor(sourceId: Id, teamId: Id) {
@@ -38,11 +36,13 @@ export class SneakAttack extends Action {
       priority: 1,
     })
 
-    this.damage = {
-      power: 40,
-      attackType: 'physical',
-      damageType: 'force',
-    }
+    this.damages = [
+      {
+        power: 40,
+        attackType: 'physical',
+        damageType: 'force',
+      },
+    ]
   }
 
   threshold = (source: Unit): number | undefined => {
@@ -80,10 +80,10 @@ export class SneakAttack extends Action {
             mutations: modifiedTargets.flatMap((target) => {
               const damage = calculateDamage(
                 {
-                  ...this.damage,
+                  ...this.damages[0],
                   power: data.source.flags.isHidden
                     ? this.hiddenPower
-                    : this.damage.power,
+                    : this.damages[0].power,
                 },
                 data.source,
                 target,

@@ -27,11 +27,13 @@ export class PowerWordKill extends Action {
       maxTargetCount: 1,
     })
 
-    this.damage = {
-      power: Infinity,
-      attackType: 'magic',
-      damageType: 'arcane',
-    }
+    this.damages = [
+      {
+        power: Infinity,
+        attackType: 'magic',
+        damageType: 'arcane',
+      },
+    ]
   }
 
   threshold = (source: Unit): number | undefined => {

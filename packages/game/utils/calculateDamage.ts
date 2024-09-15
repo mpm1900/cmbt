@@ -112,31 +112,45 @@ export function getAttackTypeDamage(
 }
 
 export function getDamageResult(props: {
-  attackType: AttackType | undefined
-  damage: number
-  evasionSuccess: boolean
   target: Unit
+  evasionSuccess: boolean
+  damages: {
+    attackType: AttackType | undefined
+    damage: number
+  }[]
 }) {
-  const { attackType, evasionSuccess, target } = props
+  const { evasionSuccess, target, damages } = props
+
+  let damage = 0
+  let physicalArmor = 0
+  let magicArmor = 0
+
+  let unitPhysicalArmor = target.values.physicalArmor
+  let unitMagicArmor = target.values.magicArmor
 
   if (evasionSuccess) {
     return {
       evasionSuccess,
-      damage: 0,
-      physicalArmor: 0,
-      magicArmor: 0,
+      damage,
+      physicalArmor,
+      magicArmor,
     }
   }
 
-  const physicalArmor =
-    attackType === 'physical'
-      ? Math.max(Math.min(target.values.physicalArmor, props.damage), 0)
-      : 0
-  const magicArmor =
-    attackType === 'magic'
-      ? Math.max(Math.min(target.values.magicArmor, props.damage), 0)
-      : 0
-  const damage = props.damage - physicalArmor - magicArmor
+  damages.forEach((value) => {
+    if (value.attackType === 'physical') {
+      const removedArmor = Math.max(Math.min(unitPhysicalArmor, value.damage))
+      physicalArmor += removedArmor
+      unitPhysicalArmor -= removedArmor
+    }
+    if (value.attackType === 'magic') {
+      const removedArmor = Math.max(Math.min(unitMagicArmor, value.damage), 0)
+      magicArmor += removedArmor
+      unitPhysicalArmor -= removedArmor
+    }
+
+    damage += value.damage - (physicalArmor + magicArmor)
+  })
 
   return {
     damage,
@@ -176,22 +190,24 @@ export function calculatePureDamage(damage: Damage, target: Unit) {
   const damageAmount = Math.min(remainingHealth, Math.round(typedDamage))
 
   return getDamageResult({
-    attackType: damage.attackType,
-    damage: damageAmount,
-    evasionSuccess: false,
     target,
+    evasionSuccess: false,
+    damages: [
+      {
+        attackType: damage.attackType,
+        damage: damageAmount,
+      },
+    ],
   })
 }
 
-export function calculateDamage(
+export function calculateDamageAmount(
   damage: Damage,
   source: Unit,
   target: Unit,
   config: CalculateDamageConfig
-): CalculateDamageResult {
+) {
   const base = calculateBaseDamage(damage, source, target)
-  const evasionRoll = random.int(0, 100)
-  const evasionSuccess = target.stats.evasion > evasionRoll
   const attackDamage = getAttackTypeDamage(
     damage.attackType,
     base,
@@ -215,10 +231,46 @@ export function calculateDamage(
     Math.round(typedDamage * criticalFactor * randomFactor)
   )
 
+  return damageAmount
+}
+
+export function calculateDamage(
+  damage: Damage,
+  source: Unit,
+  target: Unit,
+  config: CalculateDamageConfig
+): CalculateDamageResult {
+  const evasionRoll = random.int(0, 100)
+  const evasionSuccess = target.stats.evasion > evasionRoll
+  const damageAmount = calculateDamageAmount(damage, source, target, config)
+
   return getDamageResult({
-    attackType: damage.attackType,
-    damage: damageAmount,
-    evasionSuccess,
     target,
+    evasionSuccess,
+    damages: [
+      {
+        attackType: damage.attackType,
+        damage: damageAmount,
+      },
+    ],
+  })
+}
+
+export function calculateDamages(
+  damages: Damage[],
+  source: Unit,
+  target: Unit,
+  config: CalculateDamageConfig
+): CalculateDamageResult {
+  const evasionRoll = random.int(0, 100)
+  const evasionSuccess = target.stats.evasion > evasionRoll
+
+  return getDamageResult({
+    target,
+    evasionSuccess,
+    damages: damages.map((damage) => ({
+      damage: calculateDamageAmount(damage, source, target, config),
+      attackType: damage.attackType,
+    })),
   })
 }

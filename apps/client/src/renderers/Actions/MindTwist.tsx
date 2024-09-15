@@ -4,7 +4,7 @@ import {
   MindTwistId,
   UpdateStatStageParent,
 } from '@repo/game/data'
-import { DamageInline } from '@shared/DamageInline'
+import { DamageListInline } from '@shared/DamageListInline'
 import { ModifierInline } from '@shared/ModifierInline'
 import { ACTION_NAMES, ActionRenderer } from '.'
 
@@ -14,8 +14,8 @@ export const MindTwistRenderer: ActionRenderer = {
     const mindtwist = action as MindTwist
     return (
       <div>
-        Deals <DamageInline damage={action.damage} /> to target enemy unit.{' '}
-        {mindtwist.magicDownChance}% to apply{' '}
+        Deals <DamageListInline damages={action.damages} /> to target enemy
+        unit. {mindtwist.magicDownChance}% to apply{' '}
         <ModifierInline
           modifier={
             new UpdateStatStageParent({

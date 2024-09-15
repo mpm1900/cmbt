@@ -81,10 +81,14 @@ export class Pyroclash extends Action {
     )
     const recoils = damages.map((damage) =>
       getDamageResult({
-        attackType: this.damage.attackType,
-        damage: Math.round(damage.damage * this.recoilFactor),
-        evasionSuccess: damage.evasionSuccess,
         target: data.source,
+        evasionSuccess: damage.evasionSuccess,
+        damages: [
+          {
+            attackType: this.damage.attackType,
+            damage: Math.round(damage.damage * this.recoilFactor),
+          },
+        ],
       })
     )
 

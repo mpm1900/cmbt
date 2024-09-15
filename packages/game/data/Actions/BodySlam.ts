@@ -11,6 +11,7 @@ import {
 import {
   buildActionResult,
   calculateDamage,
+  calculateDamages,
   getActionData,
   getDamageAi,
   getMutationsFromDamageResult,
@@ -21,7 +22,6 @@ import { Identity } from '../Mutations'
 import { GetUnits } from '../Queries'
 
 export class BodySlam extends Action {
-  damage: Damage
   missDamage: Damage
 
   constructor(sourceId: Id, teamId: Id) {
@@ -37,11 +37,13 @@ export class BodySlam extends Action {
       maxTargetCount: 1,
     })
 
-    this.damage = {
-      power: 100,
-      attackType: 'physical',
-      damageType: 'force',
-    }
+    this.damages = [
+      {
+        power: 100,
+        attackType: 'physical',
+        damageType: 'force',
+      },
+    ]
     this.missDamage = {
       power: 30,
       attackType: 'physical',
@@ -77,8 +79,8 @@ export class BodySlam extends Action {
         (modifiedTargets) => ({
           onSuccess: {
             mutations: modifiedTargets.flatMap((target) => {
-              const damage = calculateDamage(
-                this.damage,
+              const damage = calculateDamages(
+                this.damages,
                 data.source,
                 target,
                 data.accuracyRoll

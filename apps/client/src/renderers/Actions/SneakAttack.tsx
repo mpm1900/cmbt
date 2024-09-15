@@ -5,6 +5,7 @@ import {
   UpdateFlagParent,
 } from '@repo/game/data'
 import { DamageInline } from '@shared/DamageInline'
+import { DamageListInline } from '@shared/DamageListInline'
 import { ModifierInline } from '@shared/ModifierInline'
 import { ACTION_NAMES, ActionRenderer } from '.'
 
@@ -14,8 +15,8 @@ export const SneakAttackRenderer: ActionRenderer = {
     const action = a as SneakAttack
     return (
       <>
-        Deals <DamageInline damage={action.damage} /> to target enemy unit. If
-        this unit is{' '}
+        Deals <DamageListInline damages={action.damages} /> to target enemy
+        unit. If this unit is{' '}
         <ModifierInline
           side={props?.side}
           modifier={
@@ -28,7 +29,7 @@ export const SneakAttackRenderer: ActionRenderer = {
         />
         , deals{' '}
         <DamageInline
-          damage={{ ...action.damage, power: action.hiddenPower }}
+          damage={{ ...action.damages[0], power: action.hiddenPower }}
         />{' '}
         instead. High critical chance. Usually goes first.
       </>

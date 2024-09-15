@@ -4,12 +4,12 @@ import { ElementProps } from '@/types'
 import { Damage } from '@repo/game/types'
 import { DamageIcon } from './DamageIcon'
 
-export type DamageInlineProps = {
+export type DamageInlineProps = ElementProps<{
   color?: string
   damage: Omit<Damage, 'attackType'> | undefined
-}
+}>
 
-export function DamageInline(props: ElementProps<DamageInlineProps>) {
+export function DamageInline(props: DamageInlineProps) {
   const { damage, color, children = 'damage', className } = props
   const renderer = damage?.damageType
     ? DamageRenderers[damage.damageType]
@@ -39,7 +39,7 @@ export function DamageInline(props: ElementProps<DamageInlineProps>) {
       {damage && damage.raw && (
         <span className="font-bold num">{damage.raw}</span>
       )}
-      {damage?.raw && <span>{` pure `}</span>}
+      {damage?.raw && <span>{` raw `}</span>}
       <DamageIcon
         color={color}
         damageType={damage?.damageType}

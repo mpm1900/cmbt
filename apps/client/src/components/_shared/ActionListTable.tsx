@@ -2,7 +2,6 @@ import { cn } from '@/lib/utils'
 import { ActionRenderers } from '@/renderers'
 import { BASE_UNIT, ZERO_UNIT } from '@repo/game/data'
 import { ActionMaker, Id, Unit } from '@repo/game/types'
-import { Badge } from '../ui/badge'
 import { Checkbox } from '../ui/checkbox'
 import {
   Table,
@@ -13,7 +12,8 @@ import {
   TableRow,
 } from '../ui/table'
 import { ActionHover } from './ActionHover'
-import { DamageInline } from './DamageInline'
+import { DamageListInline } from './DamageListInline'
+import { DamagesAttackTypes } from './DamagesAttackTypes'
 
 export type ActionListTableProps = {
   unit?: Unit
@@ -114,30 +114,13 @@ function ActionListRow(props: ActionListRowProps) {
         <TableCell>{maker.level ? `Lv.${maker.level}` : '—'}</TableCell>
         <TableCell>{renderer.name}</TableCell>
         <TableCell>
-          <div className="flex items-center">
-            {action.damage?.attackType ? (
-              <Badge
-                className={cn('border-none uppercase py-0 hover:text-white', {
-                  'bg-blue-600 text-blue-200':
-                    action.damage?.attackType === 'magic',
-                  'bg-green-600 text-green-100':
-                    action.damage?.attackType === 'physical',
-                })}
-                style={{ fontSize: '0.5rem' }}
-                variant="outline"
-              >
-                {action.damage?.attackType}
-              </Badge>
-            ) : (
-              '—'
-            )}
-          </div>
+          <DamagesAttackTypes damages={action.damages} />
         </TableCell>
 
         <TableCell className="num">
-          {action.damage ? (
+          {action.damages.length > 0 ? (
             <span className="inline-flex items-center space-x-1">
-              <DamageInline damage={action.damage} children="" />
+              <DamageListInline damages={action.damages} children="" />
             </span>
           ) : (
             '—'

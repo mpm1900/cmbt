@@ -3,13 +3,12 @@ import {
   ActionResolveOptions,
   ActionResult,
   CombatContext,
-  Damage,
   Id,
   Unit,
 } from '../../types'
 import {
   buildActionResult,
-  calculateDamage,
+  calculateDamages,
   getActionData,
   getMutationsFromDamageResult,
   modifyRenderContext,
@@ -20,7 +19,6 @@ import { GetUnits } from '../Queries'
 
 export class SearingLight extends Action {
   healthFactor = 0.5
-  damage: Damage
 
   constructor(sourceId: Id, teamId: Id) {
     super(SearingLightId, {
@@ -35,11 +33,13 @@ export class SearingLight extends Action {
       maxTargetCount: 1,
     })
 
-    this.damage = {
-      power: 70,
-      attackType: 'magic',
-      damageType: 'holy',
-    }
+    this.damages = [
+      {
+        power: 70,
+        attackType: 'magic',
+        damageType: 'holy',
+      },
+    ]
   }
 
   resolve(
@@ -66,8 +66,8 @@ export class SearingLight extends Action {
                   }),
                 ]
               } else {
-                const damage = calculateDamage(
-                  this.damage,
+                const damage = calculateDamages(
+                  this.damages,
                   data.source,
                   target,
                   data.accuracyRoll

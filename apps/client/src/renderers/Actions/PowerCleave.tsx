@@ -1,5 +1,5 @@
 import { PowerCleave, PowerCleaveId } from '@repo/game/data'
-import { DamageInline } from '@shared/DamageInline'
+import { DamageListInline } from '@shared/DamageListInline'
 import { ACTION_NAMES, ActionRenderer } from '.'
 
 export const PowerCleaveRenderer: ActionRenderer = {
@@ -8,8 +8,8 @@ export const PowerCleaveRenderer: ActionRenderer = {
     const powercleave = action as PowerCleave
     return (
       <>
-        Deals <DamageInline damage={powercleave.damage} /> to target enemy unit.
-        High critical chance.
+        Deals <DamageListInline damages={action.damages} /> to target enemy
+        unit. High critical chance.
       </>
     )
   },

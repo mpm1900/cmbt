@@ -5,13 +5,12 @@ import {
   ActionResolveOptions,
   ActionResult,
   CombatContext,
-  Damage,
   Id,
   Unit,
 } from '../../types'
 import {
   buildActionResult,
-  calculateDamage,
+  calculateDamages,
   getActionData,
   getDamageAi,
   getMutationsFromDamageResult,
@@ -23,7 +22,6 @@ import { GetUnits } from '../Queries'
 import { Burn } from '../Statuses/Burn'
 
 export class InfernalBlast extends Action {
-  damage: Damage
   burnChance: number = 10
 
   constructor(sourceId: Id, teamId: Id) {
@@ -39,11 +37,13 @@ export class InfernalBlast extends Action {
       maxTargetCount: 1,
     })
 
-    this.damage = {
-      power: 110,
-      attackType: 'magic',
-      damageType: 'fire',
-    }
+    this.damages = [
+      {
+        power: 110,
+        attackType: 'magic',
+        damageType: 'fire',
+      },
+    ]
   }
 
   threshold = (source: Unit): number | undefined => {
@@ -76,8 +76,8 @@ export class InfernalBlast extends Action {
         (modifiedTargets) => ({
           onSuccess: {
             mutations: modifiedTargets.flatMap((target) => {
-              const damage = calculateDamage(
-                this.damage,
+              const damage = calculateDamages(
+                this.damages,
                 data.source,
                 target,
                 data.accuracyRoll

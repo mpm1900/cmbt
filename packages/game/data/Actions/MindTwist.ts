@@ -5,13 +5,12 @@ import {
   ActionResolveOptions,
   ActionResult,
   CombatContext,
-  Damage,
   Id,
   Unit,
 } from '../../types'
 import {
   buildActionResult,
-  calculateDamage,
+  calculateDamages,
   getActionData,
   getDamageAi,
   getMutationsFromDamageResult,
@@ -24,7 +23,6 @@ import { Identity } from '../Mutations'
 import { GetUnits } from '../Queries'
 
 export class MindTwist extends Action {
-  damage: Damage
   magicDownChance = 20
   magicStage = -1
 
@@ -41,11 +39,13 @@ export class MindTwist extends Action {
       maxTargetCount: 1,
     })
 
-    this.damage = {
-      power: 90,
-      attackType: 'magic',
-      damageType: 'psychic',
-    }
+    this.damages = [
+      {
+        power: 90,
+        attackType: 'magic',
+        damageType: 'psychic',
+      },
+    ]
   }
 
   threshold = (source: Unit): number | undefined => {
@@ -78,8 +78,8 @@ export class MindTwist extends Action {
         (modifiedTargets) => ({
           onSuccess: {
             mutations: modifiedTargets.flatMap((target) => {
-              const damage = calculateDamage(
-                this.damage,
+              const damage = calculateDamages(
+                this.damages,
                 data.source,
                 target,
                 data.accuracyRoll

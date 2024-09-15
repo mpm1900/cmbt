@@ -2,8 +2,12 @@ import { useCombatContext } from '@/hooks'
 import { cn } from '@/lib/utils'
 import { ActionRenderers } from '@/renderers'
 import { Action, Unit } from '@repo/game/types'
-import { applyModifiers, checkActionCost } from '@repo/game/utils'
-import { DamageInline } from '@shared/DamageInline'
+import {
+  applyModifiers,
+  checkActionCost,
+  getAttackTypesFromDamages,
+} from '@repo/game/utils'
+import { DamageListInline } from '@shared/DamageListInline'
 import { Button } from '../ui/button'
 
 export type ActionButtonProps = {
@@ -21,6 +25,7 @@ export function ActionButton(props: ActionButtonProps) {
   const baseAccuracy = action.threshold(source)
   const accuracy = action.threshold(modified.unit)
   const costCheck = checkActionCost(action, source)
+  const attackTypes = getAttackTypesFromDamages(action.damages)
 
   return (
     <Button
@@ -31,21 +36,20 @@ export function ActionButton(props: ActionButtonProps) {
       <div className="flex flex-1 w-full items-start justify-between min-h-[52px]">
         <div
           className={cn('text-lg text-wrap text-left', {
-            'text-green-100': action.damage?.attackType === 'physical',
-            'text-green-950':
-              action.damage?.attackType === 'physical' && isActive,
-            'text-blue-200': action.damage?.attackType === 'magic',
-            'text-blue-950': action.damage?.attackType === 'magic' && isActive,
+            'text-green-100': attackTypes.includes('physical'),
+            'text-green-950': attackTypes.includes('physical') && isActive,
+            'text-blue-200': attackTypes.includes('magic'),
+            'text-blue-950': attackTypes.includes('magic') && isActive,
           })}
         >
           {renderer?.name}
         </div>
         <div className="flex flex-col h-full items-end justify-between py-1 min-w-[56px]">
-          {action.damage ? (
-            <DamageInline
-              damage={action.damage}
-              children=""
+          {action.damages.length > 0 ? (
+            <DamageListInline
+              damages={action.damages}
               color={isActive ? 'black' : undefined}
+              children=""
             />
           ) : (
             <span className="text-muted-foreground opacity-25">—</span>

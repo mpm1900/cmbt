@@ -21,7 +21,7 @@ export const StatDownStaticAllOnUnitEnterRenderer: ModifierRenderer = {
               })
             }
           />{' '}
-          to all other units.
+          to all units.
         </span>
       </div>
     )

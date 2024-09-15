@@ -5,13 +5,12 @@ import {
   ActionResolveOptions,
   ActionResult,
   CombatContext,
-  Damage,
   Id,
   Unit,
 } from '../../types'
 import {
   buildActionResult,
-  calculateDamage,
+  calculateDamages,
   getActionData,
   getDamageAi,
   getMutationsFromDamageResult,
@@ -23,7 +22,6 @@ import { GetUnits } from '../Queries'
 import { Charged } from '../Statuses'
 
 export class LightningBolt extends Action {
-  damage: Damage
   chargeChance: number = 20
 
   constructor(sourceId: Id, teamId: Id) {
@@ -39,11 +37,13 @@ export class LightningBolt extends Action {
       maxTargetCount: 1,
     })
 
-    this.damage = {
-      power: 90,
-      attackType: 'magic',
-      damageType: 'shock',
-    }
+    this.damages = [
+      {
+        power: 90,
+        attackType: 'magic',
+        damageType: 'shock',
+      },
+    ]
   }
 
   threshold = (source: Unit): number | undefined => {
@@ -76,8 +76,8 @@ export class LightningBolt extends Action {
         (modifiedTargets) => ({
           onSuccess: {
             mutations: modifiedTargets.flatMap((target) => {
-              const damage = calculateDamage(
-                this.damage,
+              const damage = calculateDamages(
+                this.damages,
                 data.source,
                 target,
                 data.accuracyRoll

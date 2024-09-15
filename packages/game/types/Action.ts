@@ -79,7 +79,7 @@ export abstract class Action {
   readonly maxTargetCount: number
   readonly cost: Mutation
   readonly targets: Query<Unit[]>
-  damage?: Damage
+  damages: Damage[] = []
 
   threshold = (source: Unit): number | undefined => undefined
   criticalThreshold = (source: Unit): number | undefined => undefined

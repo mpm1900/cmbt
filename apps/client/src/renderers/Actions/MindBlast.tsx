@@ -1,5 +1,5 @@
 import { MindBlast, MindBlastId } from '@repo/game/data'
-import { DamageInline } from '@shared/DamageInline'
+import { DamageListInline } from '@shared/DamageListInline'
 import { ACTION_NAMES, ActionRenderer } from '.'
 
 export const MindBlastRenderer: ActionRenderer = {
@@ -8,7 +8,7 @@ export const MindBlastRenderer: ActionRenderer = {
     const mindblast = action as MindBlast
     return (
       <div>
-        Deals <DamageInline damage={mindblast.damage} /> to all active enemy
+        Deals <DamageListInline damages={action.damages} /> to all active enemy
         units.
       </div>
     )

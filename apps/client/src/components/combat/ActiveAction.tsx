@@ -3,6 +3,7 @@ import { cn } from '@/lib/utils'
 import { ActionRenderers } from '@/renderers'
 import { Action, Unit } from '@repo/game/types'
 import { applyModifiers } from '@repo/game/utils'
+import { DamagesAttackTypes } from '@shared/DamagesAttackTypes'
 import { Badge } from '../ui/badge'
 import { Card, CardContent } from '../ui/card'
 import { ActionTargets } from './ActionTargets'
@@ -29,20 +30,7 @@ export function ActiveAction(props: ActiveActionProps) {
     <Card className="dark:bg-muted/40 space-y-2">
       <CardContent className="p-4 pt-6">
         <div className="flex space-x-2 mb-4 items-center">
-          {action.damage?.attackType && (
-            <Badge
-              className={cn('border-none uppercase hover:text-white py-0', {
-                'bg-blue-600 text-blue-200':
-                  action.damage?.attackType === 'magic',
-                'bg-green-600 text-green-100':
-                  action.damage?.attackType === 'physical',
-              })}
-              variant="outline"
-              style={{ fontSize: '0.6rem' }}
-            >
-              {action.damage?.attackType}
-            </Badge>
-          )}
+          <DamagesAttackTypes damages={action.damages} />
           {renderer.cost && (
             <Badge
               variant="outline"

@@ -92,8 +92,8 @@ export class RetreatingBlow extends Action {
           (u) => !u.flags.isActive && isUnitAliveCtx(u, ctx)
         )
         return {
-          name: 'second',
           forceFailure: inactiveLiveAllies.length === 0,
+          expandedTargets: [source],
           shouldLog: false,
           onSuccess: {
             mutations: [

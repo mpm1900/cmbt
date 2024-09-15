@@ -9,6 +9,7 @@ export function logCritical(
 ) {
   if (
     result.success &&
+    result.shouldLog &&
     result.data &&
     result.data.accuracyRoll.success &&
     result.data.accuracyRoll.criticalSuccess

@@ -53,6 +53,7 @@ export function buildActionResult(
 
   const success =
     forceSuccess ||
+    data.source.flags.isBlessed ||
     (accuracyRoll.success &&
       !forceFailure &&
       !data.source.flags.isBaned &&

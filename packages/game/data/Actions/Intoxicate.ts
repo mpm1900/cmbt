@@ -13,7 +13,7 @@ import {
 } from '../../utils'
 import { AttackStageUpParentId, IntoxicateId } from '../Ids'
 import { UpdateStatStageParent } from '../Modifiers'
-import { DamageParent, Identity } from '../Mutations'
+import { DamageParent } from '../Mutations'
 import { EmptyArray } from '../Queries'
 
 export class Intoxicate extends Action {
@@ -24,7 +24,11 @@ export class Intoxicate extends Action {
     super(IntoxicateId, {
       sourceId,
       teamId,
-      cost: new Identity({ sourceId }),
+      cost: new DamageParent({
+        sourceId,
+        parentId: sourceId,
+        factor: 0.5,
+      }),
       targets: new EmptyArray(),
       maxTargetCount: 0,
     })
@@ -47,13 +51,6 @@ export class Intoxicate extends Action {
         return {
           forceFailure: ratio <= 0.5,
           onSuccess: {
-            mutations: [
-              new DamageParent({
-                sourceId: this.sourceId,
-                parentId: this.sourceId,
-                factor: this.factor,
-              }),
-            ],
             addedModifiers: [
               new UpdateStatStageParent({
                 registryId: AttackStageUpParentId,

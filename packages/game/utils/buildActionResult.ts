@@ -55,7 +55,7 @@ export function buildActionResult(
     forceSuccess ||
     (accuracyRoll.success &&
       !forceFailure &&
-      !data.source.flags.isDisrupted &&
+      !data.source.flags.isBaned &&
       action.filter(data.source, ctx))
 
   if (success) {

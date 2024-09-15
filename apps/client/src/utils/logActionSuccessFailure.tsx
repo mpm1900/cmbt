@@ -16,13 +16,13 @@ export function logActionSuccessFailure(
     if (renderer?.failureLog) {
       log(<LogSecondary>{renderer.failureLog(result)}</LogSecondary>)
     }
-    if (result.data?.source?.flags.isDisrupted) {
+    if (result.data?.source?.flags.isBaned) {
       log(
         <LogSecondary>
           <LogUnit unit={result.data.source} user={ctx.user}>
             {result.data.source.name}
           </LogUnit>{' '}
-          is disrupted.
+          is baned.
         </LogSecondary>
       )
     }

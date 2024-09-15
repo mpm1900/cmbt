@@ -25,7 +25,7 @@ export class HealParentOnTurnEnd extends Trigger {
     return {
       values: Mutation.setValues(unit, (values) => ({
         damage: Math.max(
-          Math.round(
+          Math.floor(
             values.damage - this.factor * unit.stats.health - this.offset
           ),
           0

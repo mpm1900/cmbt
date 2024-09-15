@@ -73,7 +73,7 @@ export const ACTION_NAMES: Record<string, string> = {
   [PoisonSprayId]: 'Poison Spray',
   [PowerWordKillId]: 'Power Word Kill',
   [ProtectId]: 'Protect',
-  [QuickAttackId]: 'Quick Attack',
+  [QuickAttackId]: 'Rapid Strike',
   [RestId]: 'Rest',
   [SlashId]: 'Slash',
   [SpikesId]: 'Spikes',

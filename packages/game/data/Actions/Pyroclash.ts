@@ -43,7 +43,7 @@ export class Pyroclash extends Action {
       maxTargetCount: 1,
     })
 
-    const power = 120
+    const power = 110
     this.damage = {
       power,
       attackType: 'physical',

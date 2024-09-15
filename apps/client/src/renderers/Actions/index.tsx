@@ -352,13 +352,13 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
     ),
   },
   [QuickAttackId]: {
-    name: 'Quick Attack',
+    name: ACTION_NAMES[QuickAttackId],
     description: (action) => {
       const quickAttack = action as QuickAttack
       return (
         <>
           Deals <DamageInline damage={quickAttack.damage} /> to target enemy
-          unit.
+          unit. Usually goes first.
         </>
       )
     },

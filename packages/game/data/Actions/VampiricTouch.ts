@@ -3,7 +3,6 @@ import {
   ActionResolveOptions,
   ActionResult,
   CombatContext,
-  Damage,
   Id,
   Modifier,
   Unit,
@@ -11,7 +10,7 @@ import {
 import {
   applyModifiers,
   buildActionResult,
-  calculateDamage,
+  calculateDamages,
   getActionData,
   getMutationsFromDamageResult,
   modifyRenderContext,
@@ -21,7 +20,6 @@ import { HealParent, Identity } from '../Mutations'
 import { GetUnits } from '../Queries'
 
 export class VampiricTouch extends Action {
-  damage: Damage
   drainFactor = 0.5
 
   constructor(sourceId: Id, teamId: Id) {
@@ -37,11 +35,13 @@ export class VampiricTouch extends Action {
       maxTargetCount: 1,
     })
 
-    this.damage = {
-      power: 55,
-      attackType: 'magic',
-      damageType: 'blight',
-    }
+    this.damages = [
+      {
+        power: 55,
+        attackType: 'magic',
+        damageType: 'blight',
+      },
+    ]
   }
 
   threshold = (source: Unit): number | undefined => {
@@ -64,8 +64,8 @@ export class VampiricTouch extends Action {
 
     const damages = modifiedTargets.map((target) => ({
       target,
-      damage: calculateDamage(
-        this.damage,
+      damage: calculateDamages(
+        this.damages,
         data.source,
         target,
         data.accuracyRoll

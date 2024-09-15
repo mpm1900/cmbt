@@ -67,6 +67,7 @@ import {
   SleepingParentId,
   SmiteId,
   SneakAttackId,
+  SongOfRuinId,
   Spikes,
   SpikesId,
   StunnedParentId,
@@ -125,6 +126,7 @@ import { RetreatingBlowRenderer } from './RetreatingBlow'
 import { SearingLightRenderer } from './SearingLight'
 import { SmiteRenderer } from './Smite'
 import { SneakAttackRenderer } from './SneakAttack'
+import { SongOfRuinRenderer } from './SongOfRuin'
 import { TauntRenderer } from './Taunt'
 import { TimeBendRenderer } from './TimeBend'
 import { VampiricTouchRenderer } from './VampiricTouch'
@@ -184,6 +186,7 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
   [SearingLightId]: SearingLightRenderer,
   [SmiteId]: SmiteRenderer,
   [SneakAttackId]: SneakAttackRenderer,
+  [SongOfRuinId]: SongOfRuinRenderer,
   [TauntId]: TauntRenderer,
   [TimeBendId]: TimeBendRenderer,
   [VampiricTouchId]: VampiricTouchRenderer,

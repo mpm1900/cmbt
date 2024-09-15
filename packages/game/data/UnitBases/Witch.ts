@@ -8,6 +8,7 @@ import {
   MemoryLeak,
   PoisonSpray,
   Protect,
+  SongOfRuin,
   Taunt,
   TrickRoom,
   VampiricTouch,
@@ -24,6 +25,7 @@ import {
   PoisonSprayId,
   ProtectId,
   RegenerationId,
+  SongOfRuinId,
   TauntId,
   TrickRoomId,
   VampiricTouchId,
@@ -89,6 +91,10 @@ export const WitchConfig: UnitBaseConfig = {
     {
       id: ProtectId,
       make: (u) => new Protect(u.id, u.teamId),
+    },
+    {
+      id: SongOfRuinId,
+      make: (u) => new SongOfRuin(u.id, u.teamId),
     },
     {
       id: TauntId,

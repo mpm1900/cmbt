@@ -176,7 +176,7 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
     name: ACTION_NAMES[SetIsActiveId],
     description: () => <></>,
     log: (_, __, targets, ctx) => (
-      <span>
+      <span className="text-muted-foreground">
         <TextList>
           {targets.map((target, i) => (
             <LogUnit key={target.id} unit={target} user={ctx.user}>
@@ -192,7 +192,7 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
     name: ACTION_NAMES[SwitchUnitId],
     description: () => <></>,
     log: (_, source, [target], ctx) => (
-      <span>
+      <span className="text-muted-foreground">
         <LogUnit unit={target} user={ctx.user}>
           {target.name}
         </LogUnit>{' '}
@@ -511,7 +511,7 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
       const ward = action as Ward
       return (
         <>
-          This unit gains <MagicArmor>Magic Armor</MagicArmor> equal to{' '}
+          This unit gains <MagicArmor>magic armor</MagicArmor> equal to{' '}
           {ward.factor * 100}% of their max mealth.
         </>
       )

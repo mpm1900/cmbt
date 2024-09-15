@@ -4,7 +4,15 @@ import { StatRenderers } from '../Stats'
 import { ModifierName } from './_helpers'
 
 export const UpdateStatStageParentRenderer: ModifierRenderer = {
-  name: (mod) => <ModifierName>{MODIFIER_NAMES[mod.registryId]}</ModifierName>,
+  name: (mod) => {
+    const modifier = mod as UpdateStatStageParent
+    return (
+      <ModifierName>
+        {MODIFIER_NAMES[mod.registryId]}
+        {Math.abs(modifier.stages) > 1 && ` [${Math.abs(modifier.stages)}]`}
+      </ModifierName>
+    )
+  },
   description: (mod) => {
     const modifier = mod as UpdateStatStageParent
     const renderer = StatRenderers[modifier.stat]

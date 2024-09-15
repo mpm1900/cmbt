@@ -21,7 +21,7 @@ export function logActionIntent(
   const renderer = ActionRenderers[action.id]
   if (logTargets) {
     const baseLog = (
-      <span className="">
+      <span className="text-muted-foreground">
         <LogUnit unit={source!} user={ctx.user}>
           {source?.name}
         </LogUnit>

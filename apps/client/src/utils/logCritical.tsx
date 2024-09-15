@@ -8,6 +8,7 @@ export function logCritical(
   ctx: CombatContext
 ) {
   if (
+    result.success &&
     result.data &&
     result.data.accuracyRoll.success &&
     result.data.accuracyRoll.criticalSuccess

@@ -48,8 +48,16 @@ export const Wizard: UnitBase = {
   tags: [],
   augmentSlots: 3,
   affinities: [],
-  resistances: [],
-  weaknesses: [{ type: 'force', factor: 25 }],
+  resistances: [
+    {
+      type: 'arcane',
+      factor: 25,
+    },
+  ],
+  weaknesses: [
+    { type: 'force', factor: 25 },
+    { type: 'psychic', factor: 50 },
+  ],
 }
 
 export const WizardConfig: UnitBaseConfig = {

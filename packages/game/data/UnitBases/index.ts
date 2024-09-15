@@ -25,10 +25,10 @@ export const PLAYER_BASES: UnitBase[] = [
   Cleric,
   DraconicScion,
   Hellknight,
+  Wizard,
   Juggernaut,
   Sorcerer,
   Witch,
-  Wizard,
 
   DemonSlayer,
 

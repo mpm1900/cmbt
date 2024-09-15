@@ -1,8 +1,7 @@
-import { GuidingRay, GuidingRayId } from '@repo/game/data'
+import { Guidance, GuidingRay, GuidingRayId } from '@repo/game/data'
 import { DamageInline } from '@shared/DamageInline'
 import { StatusInline } from '@shared/StatusInline'
 import { ACTION_NAMES, ActionRenderer } from '.'
-import { Guidance } from '../../../../../packages/game/data/Statuses/Guidance'
 
 export const GuidingrayRenderer: ActionRenderer = {
   name: ACTION_NAMES[GuidingRayId],

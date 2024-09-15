@@ -62,7 +62,7 @@ export function logMutationDiffs(
         <LogUnit unit={parent} user={ctx.user} className="opacity-70">
           {name}
         </LogUnit>{' '}
-        resisted all damage.
+        took no damage.
       </LogSecondary>,
       (index + 1) * 0.1
     )

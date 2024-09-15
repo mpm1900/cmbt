@@ -3,6 +3,7 @@ import { cn } from '@/lib/utils'
 import { ActionRenderers } from '@/renderers'
 import { PropsWithClassname } from '@/types'
 import { Action, Id, Unit } from '@repo/game/types'
+import { getAttackTypesFromDamages } from '@repo/game/utils'
 import { ActionHover } from '@shared/ActionHover'
 import { PropsWithChildren } from 'react'
 
@@ -24,12 +25,13 @@ export function LogTriggerName(props: ElementProps) {
 export function LogActionName(props: { action: Action }) {
   const { action } = props
   const renderer = ActionRenderers[action.id]
+  const attackTypes = getAttackTypesFromDamages(action.damages)
   return (
     <ActionHover action={action} side="left">
       <span
         className={cn('hover:underline cursor-pointer text-white', {
-          'text-blue-300': action.damages[0]?.attackType === 'magic',
-          'text-green-300': action.damages[0]?.attackType === 'physical',
+          'text-blue-300': attackTypes.includes('magic'),
+          'text-green-300': attackTypes.includes('physical'),
         })}
       >
         {renderer?.name ?? action.id}

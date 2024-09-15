@@ -114,7 +114,11 @@ function ActionListRow(props: ActionListRowProps) {
         <TableCell>{maker.level ? `Lv.${maker.level}` : '—'}</TableCell>
         <TableCell>{renderer.name}</TableCell>
         <TableCell>
-          <DamagesAttackTypes damages={action.damages} />
+          {action.damages.length > 0 ? (
+            <DamagesAttackTypes damages={action.damages} />
+          ) : (
+            '—'
+          )}
         </TableCell>
 
         <TableCell className="num">

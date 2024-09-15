@@ -9,6 +9,7 @@ import { ACTION_NAMES, ActionRenderer } from '.'
 
 export const IntoxicateRenderer: ActionRenderer = {
   name: ACTION_NAMES[IntoxicateId],
+  cost: () => `50% HP`,
   description: (action, props) => {
     const intoxicate = action as Intoxicate
     return (

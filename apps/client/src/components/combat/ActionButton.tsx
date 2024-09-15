@@ -66,6 +66,11 @@ export function ActionButton(props: ActionButtonProps) {
                 }
               )}
             >
+              {renderer.cost && (
+                <span className={cn({ 'text-red-300': !costCheck })}>
+                  {renderer.cost(action)}
+                </span>
+              )}
               {accuracy !== undefined && baseAccuracy !== undefined ? (
                 <span
                   className={cn('num', {
@@ -78,12 +83,7 @@ export function ActionButton(props: ActionButtonProps) {
                   {accuracy}%
                 </span>
               ) : (
-                <span className="opacity-25">—</span>
-              )}
-              {renderer.cost && (
-                <span className={cn({ 'text-red-300': !costCheck })}>
-                  {renderer.cost(action)}
-                </span>
+                !renderer.cost && <span className="opacity-25">—</span>
               )}
             </div>
           )}

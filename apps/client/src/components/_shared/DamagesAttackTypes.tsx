@@ -11,11 +11,9 @@ export function DamagesAttackTypes(props: DamagesAttackTypesProps) {
   const attackTypes = getAttackTypesFromDamages(damages)
   return (
     <div className="flex items-center">
-      {damages.length > 0
-        ? attackTypes.map((attackType) => (
-            <AttackTypeBadge key={attackType} attackType={attackType} />
-          ))
-        : '—'}
+      {attackTypes.map((attackType) => (
+        <AttackTypeBadge key={attackType} attackType={attackType} />
+      ))}
     </div>
   )
 }

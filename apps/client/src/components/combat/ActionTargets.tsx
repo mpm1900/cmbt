@@ -1,6 +1,7 @@
 import { useCombatUi } from '@/hooks/state'
 import { cn } from '@/lib/utils'
 import { Action, Unit } from '@repo/game/types'
+import { checkActionCost } from '@repo/game/utils'
 import { useEffect } from 'react'
 import { useCombatContext } from '../../hooks'
 import { Button } from '../ui/button'
@@ -18,6 +19,7 @@ export function ActionTargets(props: UnitActionTargetsProps) {
   const ctx = useCombatContext()
   const { setHoverTargetUnitIds } = useCombatUi()
   const possibleTargets = action.targets.resolve(ctx)
+  const costFail = !checkActionCost(action, source)
   const isDisabled = !action.filter(source, ctx)
 
   useEffect(() => {
@@ -31,7 +33,7 @@ export function ActionTargets(props: UnitActionTargetsProps) {
   }, [targets.length])
 
   return (
-    <div>
+    <div className="space-y-0">
       <div className="text-sm text-center italic">
         {possibleTargets.length === 0 && (
           <div className="space-y-4">
@@ -88,6 +90,9 @@ export function ActionTargets(props: UnitActionTargetsProps) {
           )
         })}
       </div>
+      {costFail && (
+        <div className="text-red-300 text-center text-xs">Cannot pay costs</div>
+      )}
     </div>
   )
 }

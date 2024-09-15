@@ -24,9 +24,8 @@ export const RestlessSpirit: UnitBase = {
   augmentSlots: 3,
   affinities: [],
   resistances: [
-    { type: 'blight', factor: 50 },
+    { type: 'blight', factor: 100 },
     { type: 'force', factor: 100 },
-    { type: 'psychic', factor: 50 },
   ],
   weaknesses: [
     { type: 'holy', factor: 100 },

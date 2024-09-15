@@ -8,33 +8,22 @@ import {
 } from '../../types'
 import { buildActionResult, getActionData } from '../../utils'
 import { modifyRenderContext } from '../../utils/modifyRenderContext'
-import { BaneId, BanedParentId } from '../Ids'
+import { HiddenParentId, HideId } from '../Ids'
 import { UpdateFlagParent } from '../Modifiers'
 import { Identity } from '../Mutations'
-import { GetUnits } from '../Queries'
+import { EmptyArray } from '../Queries/EmptyArray'
 
-export class Bane extends Action {
+export class Hide extends Action {
+  duration = 2
+
   constructor(sourceId: Id, teamId: Id) {
-    super(BaneId, {
+    super(HideId, {
       sourceId,
       teamId,
       cost: new Identity({}),
-      targets: new GetUnits({
-        notTeamId: teamId,
-        isActive: true,
-        isHidden: false,
-      }),
-      maxTargetCount: 1,
-      priority: 2,
+      targets: new EmptyArray(),
+      maxTargetCount: 0,
     })
-  }
-
-  threshold = (source: Unit): number | undefined => {
-    return 90 + source.stats.accuracy
-  }
-
-  filter = (source: Unit, ctx: CombatContext) => {
-    return super.filter(source, ctx) && source.metadata.activeTurns === 1
   }
 
   resolve = (
@@ -54,19 +43,17 @@ export class Bane extends Action {
         targets,
         ctx,
         (modifiedTargets) => ({
-          forceFailure: source.metadata.activeTurns > 1,
           onSuccess: {
-            addedModifiers: modifiedTargets.flatMap((target) => [
+            addedModifiers: [
               new UpdateFlagParent({
-                registryId: BanedParentId,
+                registryId: HiddenParentId,
                 sourceId: source.id,
-                parentId: target.id,
-                flagKey: 'isBaned',
+                parentId: source.id,
+                flagKey: 'isHidden',
                 value: true,
-                maxInstances: 1,
-                duration: 1,
+                duration: this.duration,
               }),
-            ]),
+            ],
           },
         })
       ),

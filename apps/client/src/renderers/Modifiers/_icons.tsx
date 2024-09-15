@@ -5,6 +5,7 @@ import {
   AttackStageDownParentId,
   AttackStageUpParentId,
   AttackUpParentId,
+  BanedParentId,
   BlessedParentId,
   CreateFirestormOnUnitEnterId,
   DefenseDownParentId,
@@ -12,7 +13,6 @@ import {
   DefenseStageUpParentId,
   DefneseUpParentId,
   DisabledParentId,
-  DisruptedParentId,
   DivineHealingId,
   DrainLifeParentOnTurnEndId,
   FireDamageUpParentId,
@@ -142,7 +142,7 @@ export const MODIFIER_ICONS: Record<Id, ReactNode> = {
       <GiSpikedHalo className="fill-white h-full w-full" />
     </div>
   ),
-  [DisruptedParentId]: (
+  [BanedParentId]: (
     <div>
       <MdFrontHand className="fill-white h-full w-full" />
     </div>

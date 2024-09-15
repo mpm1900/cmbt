@@ -67,7 +67,7 @@ export function ActiveAction(props: ActiveActionProps) {
                 {accuracy}%
               </span>
 
-              <span>Accuracy</span>
+              <span>Acc.</span>
             </Badge>
           )}
           {critChance > 0 && (

@@ -24,6 +24,7 @@ import {
   FirePunchId,
   FirestormId,
   GhostFlameId,
+  HideId,
   HoldPerson,
   HoldPersonId,
   HyperBeam,
@@ -62,6 +63,7 @@ import {
   SetIsActiveId,
   Slash,
   SlashId,
+  SneakAttackId,
   Spikes,
   SpikesId,
   StunnedParentId,
@@ -101,6 +103,7 @@ import { DragonStanceRenderer } from './DragonStance'
 import { ElixirOfPowerRenderer } from './ElixirOfPower'
 import { FirestormRenderer } from './Firestorm'
 import { GhostFlameRenderer } from './GhostFlame'
+import { HideRenderer } from './Hide'
 import { InfernalBlastRenderer } from './InfernalBlast'
 import { IntoxicateRenderer } from './Intoxicate'
 import { LightningBoltRenderer } from './LightningBolt'
@@ -115,6 +118,7 @@ import { PowerSwapRenderer } from './PowerSwap'
 import { PyroclashRenderer } from './Pyroclash'
 import { RetreatingBlowRenderer } from './RetreatingBlow'
 import { SearingLightRenderer } from './SearingLight'
+import { SneakAttackRenderer } from './SneakAttack'
 import { TauntRenderer } from './Taunt'
 import { TimeBendRenderer } from './TimeBend'
 import { VampiricTouchRenderer } from './VampiricTouch'
@@ -156,6 +160,7 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
   [ElixirOfPowerId]: ElixirOfPowerRenderer,
   [FirestormId]: FirestormRenderer,
   [GhostFlameId]: GhostFlameRenderer,
+  [HideId]: HideRenderer,
   [InfernalBlastId]: InfernalBlastRenderer,
   [IntoxicateId]: IntoxicateRenderer,
   [LightningBoltId]: LightningBoltRenderer,
@@ -170,6 +175,7 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
   [PyroclashId]: PyroclashRenderer,
   [RetreatingBlowId]: RetreatingBlowRenderer,
   [SearingLightId]: SearingLightRenderer,
+  [SneakAttackId]: SneakAttackRenderer,
   [TauntId]: TauntRenderer,
   [TimeBendId]: TimeBendRenderer,
   [VampiricTouchId]: VampiricTouchRenderer,

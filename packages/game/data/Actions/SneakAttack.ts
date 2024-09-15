@@ -16,15 +16,16 @@ import {
   getMutationsFromDamageResult,
   modifyRenderContext,
 } from '../../utils'
-import { QuickAttackId } from '../Ids'
+import { SneakAttackId } from '../Ids'
 import { Identity } from '../Mutations'
 import { GetUnits } from '../Queries'
 
-export class QuickAttack extends Action {
+export class SneakAttack extends Action {
   damage: Damage
+  hiddenPower = 100
 
   constructor(sourceId: Id, teamId: Id) {
-    super(QuickAttackId, {
+    super(SneakAttackId, {
       sourceId,
       teamId,
       cost: new Identity({ sourceId }),
@@ -33,22 +34,23 @@ export class QuickAttack extends Action {
         isActive: true,
         isHidden: false,
       }),
-      priority: 1,
       maxTargetCount: 1,
+      priority: 1,
     })
 
     this.damage = {
-      power: 45,
+      power: 40,
       attackType: 'physical',
       damageType: 'force',
     }
   }
 
   threshold = (source: Unit): number | undefined => {
-    return 95 + source.stats.accuracy
+    return 100 + source.stats.accuracy
   }
   criticalThreshold = (source: Unit): number | undefined => {
-    return 5 + source.stats.criticalChance
+    console.log(source.name, source.metadata.modified)
+    return 20 + source.stats.criticalChance
   }
   criticalFactor = (source: Unit): number | undefined =>
     1.5 + source.stats.criticalDamage
@@ -77,7 +79,12 @@ export class QuickAttack extends Action {
           onSuccess: {
             mutations: modifiedTargets.flatMap((target) => {
               const damage = calculateDamage(
-                this.damage,
+                {
+                  ...this.damage,
+                  power: data.source.flags.isHidden
+                    ? this.hiddenPower
+                    : this.damage.power,
+                },
                 data.source,
                 target,
                 data.accuracyRoll

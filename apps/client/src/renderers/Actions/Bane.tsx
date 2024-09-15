@@ -1,9 +1,4 @@
-import {
-  Bane,
-  BaneId,
-  DisruptedParentId,
-  UpdateFlagParent,
-} from '@repo/game/data'
+import { Bane, BaneId, BanedParentId, UpdateFlagParent } from '@repo/game/data'
 import { ModifierInline } from '@shared/ModifierInline'
 import { ACTION_NAMES, ActionRenderer } from '.'
 
@@ -18,8 +13,8 @@ export const BaneRenderer: ActionRenderer = {
           side={props?.side}
           modifier={
             new UpdateFlagParent({
-              registryId: DisruptedParentId,
-              flagKey: 'isDisrupted',
+              registryId: BanedParentId,
+              flagKey: 'isBaned',
               value: true,
               duration: 1,
             })

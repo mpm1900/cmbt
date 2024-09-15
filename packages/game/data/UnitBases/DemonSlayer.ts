@@ -1,19 +1,23 @@
 import { nanoid } from 'nanoid'
 import { UnitBase, UnitBaseConfig } from '../../types'
 import {
+  Hide,
   LightningBolt,
   PiercingStrike,
   QuickAttack,
   RetreatingBlow,
   Slash,
+  SneakAttack,
   SwordsDance,
 } from '../Actions'
 import {
+  HideId,
   LightningBoltId,
   PiercingStrikeId,
   QuickAttackId,
   RetreatingBlowId,
   SlashId,
+  SneakAttackId,
   SwordsDanceId,
 } from '../Ids'
 import { BASE_UNIT } from '../Units/system/BASE_UNIT'
@@ -26,7 +30,7 @@ export const DemonSlayer: UnitBase = {
     health: 80,
     attack: 120,
     defense: 60,
-    magic: 75,
+    magic: 60,
     speed: 145,
 
     focus: 40,
@@ -44,6 +48,10 @@ export const TempestKnightConfig: UnitBaseConfig = {
   abilities: [],
   actionsCount: 5,
   actions: [
+    {
+      id: HideId,
+      make: (u) => new Hide(u.id, u.teamId),
+    },
     {
       id: LightningBoltId,
       make: (unit) => new LightningBolt(unit.id, unit.teamId),
@@ -63,6 +71,10 @@ export const TempestKnightConfig: UnitBaseConfig = {
     {
       id: SlashId,
       make: (unit) => new Slash(unit.id, unit.teamId),
+    },
+    {
+      id: SneakAttackId,
+      make: (u) => new SneakAttack(u.id, u.teamId),
     },
     {
       id: SwordsDanceId,

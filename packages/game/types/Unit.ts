@@ -43,7 +43,7 @@ export type FlagKey =
   | 'isActive'
   | 'isBlessed'
   | 'isChoiceLocked'
-  | 'isDisrupted'
+  | 'isBaned'
   | 'isHidden'
   | 'isInspected'
   | 'isProtected'

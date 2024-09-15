@@ -2,13 +2,13 @@ import {
   AddActionParentId,
   AddStatModifiersImmunityAllId,
   AttackDownAllOtherOnUnitEnterId,
+  BanedParentId,
   BlessedParentId,
   CreateFirestormOnUnitEnterId,
   DamageAllOnTurnEndId,
   DamageNewUnitsOnUnitEnterId,
   DamageParentOnTurnEndId,
   DisabledParentId,
-  DisruptedParentId,
   DrainLifeParentOnTurnEndId,
   HealParentOnTurnEndId,
   HealParentOnUnitSwitchId,
@@ -27,9 +27,9 @@ import { Modifier } from '@repo/game/types'
 import { ReactNode } from 'react'
 import { AddActionParentRenderer } from './AddActionParent'
 import { AddStatModifiersImmunityAllRenderer } from './AddStatModifiersImmunityAll'
+import { BanedParentRenderer } from './BanedParent'
 import { BlessedParentRenderer } from './BlessedParent'
 import { DisabledParentRenderer } from './DisabledParent'
-import { DisruptedParentRenderer } from './DisruptedParent'
 import { HiddenParentRenderer } from './HiddenParent'
 import { InspectedAllRenderer } from './InspectedAll'
 import { InvertSpeedAllRenderer } from './InvertSpeedAll'
@@ -62,7 +62,7 @@ export const ModifierRenderers: Record<string, ModifierRenderer> = {
   [AddStatModifiersImmunityAllId]: AddStatModifiersImmunityAllRenderer,
   [BlessedParentId]: BlessedParentRenderer,
   [DisabledParentId]: DisabledParentRenderer,
-  [DisruptedParentId]: DisruptedParentRenderer,
+  [BanedParentId]: BanedParentRenderer,
   [HiddenParentId]: HiddenParentRenderer,
   [InspectedAllId]: InspectedAllRenderer,
   [InvertSpeedAllId]: InvertSpeedAllRenderer,

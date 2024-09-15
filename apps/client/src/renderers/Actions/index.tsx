@@ -24,6 +24,7 @@ import {
   FirePunchId,
   FirestormId,
   GhostFlameId,
+  GuidingRayId,
   HideId,
   HoldPerson,
   HoldPersonId,
@@ -63,6 +64,7 @@ import {
   SetIsActiveId,
   Slash,
   SlashId,
+  SleepingParentId,
   SneakAttackId,
   Spikes,
   SpikesId,
@@ -103,6 +105,7 @@ import { DragonStanceRenderer } from './DragonStance'
 import { ElixirOfPowerRenderer } from './ElixirOfPower'
 import { FirestormRenderer } from './Firestorm'
 import { GhostFlameRenderer } from './GhostFlame'
+import { GuidingrayRenderer } from './GuidingRay'
 import { HideRenderer } from './Hide'
 import { InfernalBlastRenderer } from './InfernalBlast'
 import { IntoxicateRenderer } from './Intoxicate'
@@ -160,6 +163,7 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
   [ElixirOfPowerId]: ElixirOfPowerRenderer,
   [FirestormId]: FirestormRenderer,
   [GhostFlameId]: GhostFlameRenderer,
+  [GuidingRayId]: GuidingrayRenderer,
   [HideId]: HideRenderer,
   [InfernalBlastId]: InfernalBlastRenderer,
   [IntoxicateId]: IntoxicateRenderer,
@@ -428,7 +432,7 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
             side={props?.side}
             modifier={
               new UpdateFlagParent({
-                registryId: StunnedParentId,
+                registryId: SleepingParentId,
                 flagKey: 'isStunned',
                 value: true,
                 duration: rest.duration,

@@ -14,16 +14,16 @@ import {
   getMutationsFromDamageResult,
   modifyRenderContext,
 } from '../../utils'
-import { SearingLightId } from '../Ids'
-import { HealParent, Identity } from '../Mutations'
+import { GuidingRayId } from '../Ids'
+import { Identity } from '../Mutations'
 import { GetUnits } from '../Queries'
+import { Guidance } from '../Statuses/Guidance'
 
-export class SearingLight extends Action {
-  healthFactor = 0.5
+export class GuidingRay extends Action {
   damage: Damage
 
   constructor(sourceId: Id, teamId: Id) {
-    super(SearingLightId, {
+    super(GuidingRayId, {
       sourceId,
       teamId,
       cost: new Identity({}),
@@ -36,7 +36,7 @@ export class SearingLight extends Action {
     })
 
     this.damage = {
-      power: 70,
+      power: 75,
       attackType: 'magic',
       damageType: 'holy',
     }
@@ -57,15 +57,7 @@ export class SearingLight extends Action {
           onSuccess: {
             mutations: modifiedTargets.flatMap((target) => {
               const isAlly = target.teamId === source.teamId
-              if (isAlly) {
-                return [
-                  new HealParent({
-                    sourceId: source.id,
-                    parentId: target.id,
-                    healthFactor: this.healthFactor,
-                  }),
-                ]
-              } else {
+              if (!isAlly) {
                 const damage = calculateDamage(
                   this.damage,
                   data.source,
@@ -75,6 +67,15 @@ export class SearingLight extends Action {
 
                 return getMutationsFromDamageResult(source, target, damage)
               }
+              return []
+            }),
+            addedModifiers: modifiedTargets.flatMap((target) => {
+              const isAlly = target.teamId === source.teamId
+              if (isAlly) {
+                console.log('is ally', Guidance.modifiers(source, target))
+                return Guidance.modifiers(source, target)
+              }
+              return []
             }),
           },
         }

@@ -3,6 +3,7 @@ import { UnitBase, UnitBaseConfig } from '../../types'
 import {
   Bane,
   Bless,
+  GuidingRay,
   Protect,
   SearingLight,
   Taunt,
@@ -15,6 +16,7 @@ import {
   BaneId,
   BlessId,
   DivineHealingId,
+  GuidingRayId,
   HoldPersonId,
   ProtectId,
   SearingLightId,
@@ -59,6 +61,10 @@ export const ClericConfig: UnitBaseConfig = {
     {
       id: BlessId,
       make: (u) => new Bless(u.id, u.teamId),
+    },
+    {
+      id: GuidingRayId,
+      make: (u) => new GuidingRay(u.id, u.teamId),
     },
     {
       id: HoldPersonId,

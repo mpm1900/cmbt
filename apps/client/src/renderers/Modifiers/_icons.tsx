@@ -1,4 +1,6 @@
 import {
+  AccuracyDownParentId,
+  AccuracyUpParentId,
   AddStatModifiersImmunityAllId,
   AttackDownAllOtherOnUnitEnterId,
   AttackDownParentId,
@@ -8,6 +10,10 @@ import {
   BanedParentId,
   BlessedParentId,
   CreateFirestormOnUnitEnterId,
+  CriticalChanceDownParentId,
+  CriticalChanceUpParentId,
+  CriticalDamageDownParentId,
+  CriticalDamageUpParentId,
   DefenseDownParentId,
   DefenseStageDownParentId,
   DefenseStageUpParentId,
@@ -15,6 +21,8 @@ import {
   DisabledParentId,
   DivineHealingId,
   DrainLifeParentOnTurnEndId,
+  EvasionDownParentId,
+  EvasionUpParentId,
   FireDamageUpParentId,
   FireNegationUpParentId,
   FirestormOnTurnEndId,
@@ -31,6 +39,7 @@ import {
   MaxAttackParentId,
   PowerStanceId,
   ProtectedParentId,
+  SleepingParentId,
   SpeedStageDownParentId,
   SpeedStageUpParentId,
   SpeedUpParentId,
@@ -62,9 +71,12 @@ import {
 import { HiMiniNoSymbol } from 'react-icons/hi2'
 import { MdFrontHand } from 'react-icons/md'
 import { PiScrollFill } from 'react-icons/pi'
+import { RiZzzFill } from 'react-icons/ri'
 import { TiSpiral } from 'react-icons/ti'
 
 export const MODIFIER_ICONS: Record<Id, ReactNode> = {
+  [AccuracyDownParentId]: <StatModifierIcon stat="accuracy" type="down" />,
+  [AccuracyUpParentId]: <StatModifierIcon stat="accuracy" type="up" />,
   [AddStatModifiersImmunityAllId]: (
     <GiMagicSwirl className="fill-white h-full w-full" />
   ),
@@ -73,10 +85,24 @@ export const MODIFIER_ICONS: Record<Id, ReactNode> = {
   [AttackStageUpParentId]: <StatModifierIcon stat="attack" type="up" />,
   [AttackUpParentId]: <StatModifierIcon stat="attack" type="up" />,
   [MaxAttackParentId]: <StatModifierIcon stat="attack" type="up" />,
+  [CriticalChanceDownParentId]: (
+    <StatModifierIcon stat="criticalChance" type="down" />
+  ),
+  [CriticalChanceUpParentId]: (
+    <StatModifierIcon stat="criticalChance" type="up" />
+  ),
+  [CriticalDamageDownParentId]: (
+    <StatModifierIcon stat="criticalDamage" type="down" />
+  ),
+  [CriticalDamageUpParentId]: (
+    <StatModifierIcon stat="criticalDamage" type="up" />
+  ),
   [DefenseDownParentId]: <StatModifierIcon stat="defense" type="down" />,
   [DefenseStageDownParentId]: <StatModifierIcon stat="defense" type="down" />,
   [DefenseStageUpParentId]: <StatModifierIcon stat="defense" type="up" />,
   [DefneseUpParentId]: <StatModifierIcon stat="defense" type="up" />,
+  [EvasionDownParentId]: <StatModifierIcon stat="evasion" type="down" />,
+  [EvasionUpParentId]: <StatModifierIcon stat="evasion" type="up" />,
   [MagicDownParentId]: <StatModifierIcon stat="magic" type="down" />,
   [MagicStageDownParentId]: <StatModifierIcon stat="magic" type="down" />,
   [MagicStageUpParentId]: <StatModifierIcon stat="magic" type="up" />,
@@ -122,6 +148,7 @@ export const MODIFIER_ICONS: Record<Id, ReactNode> = {
     <GiVibratingShield className="fill-white h-full w-full" />
   ),
   [StunnedParentId]: <TiSpiral className="fill-red-200 h-full w-full" />,
+  [SleepingParentId]: <RiZzzFill className="fill-violet-300 h-full w-full" />,
 
   [HealParentOnUnitSwitchId]: (
     <div className="h-full w-full relative">

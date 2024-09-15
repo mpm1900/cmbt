@@ -35,7 +35,7 @@ export function StatusHover(props: StatusHoverProps) {
             </div>
             <div className="space-y-1">
               {modifiers.map((modifier) => (
-                <ModifierDescription key={modifier.id} modifier={modifier} />
+                <ModifierDescription key={modifier.rtid} modifier={modifier} />
               ))}
             </div>
             <div className="text-xs font-bold text-muted-foreground/60 text-right space-x-4 flex flex-row justify-end items-center">

@@ -11,7 +11,7 @@ import {
   getActionData,
   modifyRenderContext,
 } from '../../utils'
-import { RestId, StunnedParentId } from '../Ids'
+import { RestId, SleepingParentId } from '../Ids'
 import { UpdateFlagParent } from '../Modifiers'
 import { HealParent, Identity } from '../Mutations'
 import { EmptyArray } from '../Queries'
@@ -56,7 +56,7 @@ export class Rest extends Action {
             ],
             addedModifiers: [
               new UpdateFlagParent({
-                registryId: StunnedParentId,
+                registryId: SleepingParentId,
                 sourceId: source.id,
                 parentId: source.id,
                 flagKey: 'isStunned',

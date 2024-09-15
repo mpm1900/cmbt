@@ -1,4 +1,10 @@
-import { BleedId, BurnId, ChargeId, PoisonId } from '@repo/game/data'
+import {
+  BleedId,
+  BurnId,
+  ChargeId,
+  GuidanceId,
+  PoisonId,
+} from '@repo/game/data'
 import { Id } from '@repo/game/types'
 import { ReactNode } from '@tanstack/react-router'
 import { STATUS_NAMES } from './_names'
@@ -16,10 +22,15 @@ export const StatusRenderers: Record<Id, StatusRenderer> = {
   [BurnId]: {
     name: <span className="text-status-burn">{STATUS_NAMES[BurnId]}</span>,
   },
-  [PoisonId]: {
-    name: <span className="text-status-poison">{STATUS_NAMES[PoisonId]}</span>,
-  },
   [ChargeId]: {
     name: <span className="text-status-charge">{STATUS_NAMES[ChargeId]}</span>,
+  },
+  [GuidanceId]: {
+    name: (
+      <span className="text-status-guidance">{STATUS_NAMES[GuidanceId]}</span>
+    ),
+  },
+  [PoisonId]: {
+    name: <span className="text-status-poison">{STATUS_NAMES[PoisonId]}</span>,
   },
 }

@@ -1,23 +1,42 @@
 import { ElementProps } from '@/types'
 import { Damage } from '@repo/game/types'
-import { Fragment } from 'react/jsx-runtime'
 import { DamageInline } from './DamageInline'
 
 export type DamageListInlineProps = ElementProps<{
+  conjunction?: string
   color?: string
+  seporator?: string
   damages: Damage[]
+  damageClassName?: string
 }>
 
 export function DamageListInline(props: DamageListInlineProps) {
-  const { color, damages, ...rest } = props
+  const {
+    conjunction = 'and',
+    color,
+    damages,
+    className,
+    damageClassName,
+    children = 'damage',
+    seporator = ', ',
+  } = props
   return (
-    <span>
+    <span className={className}>
       {damages.map((damage, i) => (
-        <Fragment key={i}>
-          {i === damages.length - 1 && i !== 0 && `,`}
-          <DamageInline damage={damage} color={color} {...rest} />
-        </Fragment>
-      ))}
+        <span key={i}>
+          {seporator && i > 0 && seporator}
+          {conjunction &&
+            i > 0 &&
+            i === damages.length - 1 &&
+            `${conjunction} `}
+          <DamageInline
+            damage={damage}
+            color={color}
+            className={damageClassName}
+          />
+        </span>
+      ))}{' '}
+      {children}
     </span>
   )
 }

@@ -120,7 +120,13 @@ function ActionListRow(props: ActionListRowProps) {
         <TableCell className="num">
           {action.damages.length > 0 ? (
             <span className="inline-flex items-center space-x-1">
-              <DamageListInline damages={action.damages} children="" />
+              <DamageListInline
+                className="space-x-2"
+                damages={action.damages}
+                children=""
+                conjunction=""
+                seporator=""
+              />
             </span>
           ) : (
             '—'

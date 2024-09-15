@@ -65,6 +65,7 @@ import {
   Slash,
   SlashId,
   SleepingParentId,
+  SmiteId,
   SneakAttackId,
   Spikes,
   SpikesId,
@@ -122,6 +123,7 @@ import { PowerSwapRenderer } from './PowerSwap'
 import { PyroclashRenderer } from './Pyroclash'
 import { RetreatingBlowRenderer } from './RetreatingBlow'
 import { SearingLightRenderer } from './SearingLight'
+import { SmiteRenderer } from './Smite'
 import { SneakAttackRenderer } from './SneakAttack'
 import { TauntRenderer } from './Taunt'
 import { TimeBendRenderer } from './TimeBend'
@@ -180,6 +182,7 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
   [PyroclashId]: PyroclashRenderer,
   [RetreatingBlowId]: RetreatingBlowRenderer,
   [SearingLightId]: SearingLightRenderer,
+  [SmiteId]: SmiteRenderer,
   [SneakAttackId]: SneakAttackRenderer,
   [TauntId]: TauntRenderer,
   [TimeBendId]: TimeBendRenderer,

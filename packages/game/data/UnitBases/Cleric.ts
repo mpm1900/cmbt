@@ -6,6 +6,7 @@ import {
   GuidingRay,
   Protect,
   SearingLight,
+  Smite,
   Taunt,
   VampiricTouch,
   Ward,
@@ -20,6 +21,7 @@ import {
   HoldPersonId,
   ProtectId,
   SearingLightId,
+  SmiteId,
   TauntId,
   VampiricTouchId,
   WardId,
@@ -79,6 +81,10 @@ export const ClericConfig: UnitBaseConfig = {
       make: (u) => new SearingLight(u.id, u.teamId),
     },
     {
+      id: SmiteId,
+      make: (u) => new Smite(u.id, u.teamId),
+    },
+    {
       id: TauntId,
       make: (u) => new Taunt(u.id, u.teamId),
     },
@@ -92,5 +98,5 @@ export const ClericConfig: UnitBaseConfig = {
     },
   ],
   defaultAbilityId: DivineHealingId,
-  defaultActionIds: [BaneId, BlessId, HoldPersonId, GuidingRayId],
+  defaultActionIds: [BaneId, BlessId, HoldPersonId, GuidingRayId, SmiteId],
 }

@@ -10,7 +10,7 @@ export type DamageInlineProps = ElementProps<{
 }>
 
 export function DamageInline(props: DamageInlineProps) {
-  const { damage, color, children = 'damage', className } = props
+  const { damage, color, className } = props
   const renderer = damage?.damageType
     ? DamageRenderers[damage.damageType]
     : undefined
@@ -45,7 +45,6 @@ export function DamageInline(props: DamageInlineProps) {
         damageType={damage?.damageType}
         className="h-[20px] w-[20px] self-center"
       />
-      <span>{children}</span>
     </span>
   )
 }

@@ -49,7 +49,10 @@ export function ActionButton(props: ActionButtonProps) {
             <DamageListInline
               damages={action.damages}
               color={isActive ? 'black' : undefined}
+              className="space-x-2"
               children=""
+              seporator=""
+              conjunction=""
             />
           ) : (
             <span className="text-muted-foreground opacity-25">—</span>

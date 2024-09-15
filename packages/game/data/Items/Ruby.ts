@@ -2,7 +2,7 @@ import { nanoid } from 'nanoid'
 import { Item } from '../../types'
 import { FireDamageUpParentId } from '../Ids'
 import { UpdateStatParent } from '../Modifiers'
-import { Hellknight } from '../UnitBases/Tyranitar'
+import { Hellknight } from '../UnitBases/Hellknight'
 
 export const RubyId = nanoid()
 export const RubyAugmentId = nanoid()

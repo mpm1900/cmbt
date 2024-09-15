@@ -1,11 +1,24 @@
 import { Status } from '../../types'
-import { BleedDamageId, BleedId } from '../Ids'
+import { AttackDownParentId, BleedDamageId, BleedId } from '../Ids'
+import { UpdateStatParent } from '../Modifiers'
 import { DamageParentOnTurnEnd } from '../Triggers'
 
 export const Bleed: Status = {
   id: BleedId,
   duration: 5,
   modifiers: (source, parent) => [
+    new UpdateStatParent({
+      stat: 'attack',
+      registryId: AttackDownParentId,
+      sourceId: source.id,
+      parentId: parent.id,
+      statusId: BleedId,
+      factor: -0.5,
+      duration: 5,
+      maxInstances: 1,
+      persistOnCombatEnd: true,
+      persistOnSwitch: true,
+    }),
     new DamageParentOnTurnEnd({
       registryId: BleedDamageId,
       sourceId: source.id,
@@ -14,7 +27,7 @@ export const Bleed: Status = {
       damage: {
         attackType: 'physical',
         damageType: 'blight',
-        factor: 0.1,
+        factor: 0.08,
       },
       duration: 5,
       maxInstances: 1,

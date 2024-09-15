@@ -17,15 +17,15 @@ import {
   modifyRenderContext,
 } from '../../utils'
 import { getDamageAi } from '../../utils/getDamageAiAction'
-import { FurySwipesId } from '../Ids'
+import { WildStrikesId } from '../Ids'
 import { Identity } from '../Mutations'
 import { GetUnits } from '../Queries'
 
-export class FurySwipes extends Action {
+export class WildStrikes extends Action {
   damage: Damage
 
   constructor(sourceId: Id, teamId: Id) {
-    super(FurySwipesId, {
+    super(WildStrikesId, {
       sourceId,
       teamId,
       cost: new Identity({ sourceId }),

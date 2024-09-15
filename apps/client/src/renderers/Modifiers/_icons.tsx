@@ -24,6 +24,7 @@ import {
   InspectedAllId,
   KillParentOnTurnEndId,
   MagicDownParentId,
+  MagicExpansionUpParentId,
   MagicStageDownParentId,
   MagicStageUpParentId,
   MagicUpParentId,
@@ -46,7 +47,7 @@ import {
 } from 'react-icons/ai'
 import { BiSearch } from 'react-icons/bi'
 import { BsFire, BsShieldFillPlus } from 'react-icons/bs'
-import { FaHeartCirclePlus } from 'react-icons/fa6'
+import { FaHeartCirclePlus, FaShieldHalved } from 'react-icons/fa6'
 import {
   GiDeathJuice,
   GiDeathNote,
@@ -79,6 +80,9 @@ export const MODIFIER_ICONS: Record<Id, ReactNode> = {
   [MagicDownParentId]: <StatModifierIcon stat="magic" type="down" />,
   [MagicStageDownParentId]: <StatModifierIcon stat="magic" type="down" />,
   [MagicStageUpParentId]: <StatModifierIcon stat="magic" type="up" />,
+  [MagicExpansionUpParentId]: (
+    <FaShieldHalved className="fill-white h-full w-full" />
+  ),
   [MagicUpParentId]: <StatModifierIcon stat="magic" type="up" />,
   [SpeedStageDownParentId]: <StatModifierIcon stat="speed" type="down" />,
   [SpeedStageUpParentId]: <StatModifierIcon stat="speed" type="up" />,

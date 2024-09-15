@@ -4,6 +4,9 @@ import { ModifierName } from './_helpers'
 export const HiddenParentRenderer: ModifierRenderer = {
   name: (mod) => <ModifierName>{MODIFIER_NAMES[mod.registryId]}</ModifierName>,
   description: (mod) => (
-    <div>{MODIFIER_NAMES[mod.registryId]} cannot be chosen as targets.</div>
+    <div>
+      {MODIFIER_NAMES[mod.registryId]} units cannot be chosen as targets for
+      actions.
+    </div>
   ),
 }

@@ -45,7 +45,7 @@ export class Fireball extends Action {
       damageType: 'fire',
     }
     this.splashDamage = {
-      power: 35,
+      power: 30,
       attackType: 'magic',
       damageType: 'fire',
     }

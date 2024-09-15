@@ -1,4 +1,5 @@
 import {
+  ACallBeyondId,
   ArmorUpId,
   BaneId,
   BiteId,
@@ -15,7 +16,6 @@ import {
   FireballId,
   FirePunchId,
   FirestormId,
-  FurySwipesId,
   GhostFlameId,
   HoldPersonId,
   HyperBeamId,
@@ -52,6 +52,7 @@ import {
   TrickRoomId,
   VampiricTouchId,
   WardId,
+  WildStrikesId,
 } from '@repo/game/data'
 
 export const ACTION_NAMES: Record<string, string> = {
@@ -64,7 +65,7 @@ export const ACTION_NAMES: Record<string, string> = {
   [ExplosionId]: 'Explosion',
   [FireballId]: 'Fireball',
   [FirePunchId]: 'Fire Punch',
-  [FurySwipesId]: 'Fury Swipes',
+  [WildStrikesId]: 'Wild Strikes',
   [HoldPersonId]: 'Hold Person',
   [HyperBeamId]: 'Hyper Beam',
   [MagicMissileId]: 'Magic Missile',
@@ -82,6 +83,7 @@ export const ACTION_NAMES: Record<string, string> = {
 
   [PotionActionId]: 'Potion',
 
+  [ACallBeyondId]: 'A Call Beyond',
   [ArmorUpId]: 'Armor Up',
   [BaneId]: 'Bane',
   [BiteId]: 'Bite',

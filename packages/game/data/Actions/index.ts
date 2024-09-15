@@ -4,6 +4,7 @@ import { InspectAll } from './system'
 
 export * from './system'
 
+export * from './ACallBeyond'
 export * from './ArmorUp'
 export * from './Bane'
 export * from './Bite'
@@ -20,7 +21,6 @@ export * from './Explosion'
 export * from './Fireball'
 export * from './FirePunch'
 export * from './Firestorm'
-export * from './FurySwipes'
 export * from './GhostFlame'
 export * from './HoldPerson'
 export * from './HyperBeam'
@@ -53,6 +53,7 @@ export * from './TimeBend'
 export * from './TrickRoom'
 export * from './VampiricTouch'
 export * from './Ward'
+export * from './WildStrikes'
 
 export const GLOBAL_ACTIONS: ActionMaker[] = [
   {

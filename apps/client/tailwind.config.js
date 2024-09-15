@@ -56,9 +56,9 @@ module.exports = {
         },
         status: {
           bleed: '#dc2626',
-          burn: 'orange',
+          burn: '#fdba74',
           poison: 'plum',
-          stasis: '#60a5fa',
+          charge: '#7dd3fc',
         },
         log: {
           enemy: 'orange',

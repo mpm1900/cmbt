@@ -1,6 +1,7 @@
 import { nanoid } from 'nanoid'
 import { UnitBase, UnitBaseConfig } from '../../types'
 import {
+  ACallBeyond,
   Fireball,
   GhostFlame,
   LightningBolt,
@@ -15,6 +16,7 @@ import {
 import { MindTwist } from '../Actions/MindTwist'
 import { Scholar } from '../Augments'
 import {
+  ACallBeyondId,
   FireballId,
   GhostFlameId,
   LightningBoltId,
@@ -64,6 +66,10 @@ export const WizardConfig: UnitBaseConfig = {
   abilities: [Scholar],
   actionsCount: 6,
   actions: [
+    {
+      id: ACallBeyondId,
+      make: (u) => new ACallBeyond(u.id, u.teamId),
+    },
     {
       id: FireballId,
       make: (u) => new Fireball(u.id, u.teamId),

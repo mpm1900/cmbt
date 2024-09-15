@@ -4,9 +4,12 @@ import { Narration } from '@/components/encounter/Narration'
 import { Separator } from '@/components/ui/separator'
 import {
   ENEMY_BASES,
+  RestlessSpirit,
+  Snake,
   SpeedUpTeamId,
   TeamId,
   UpdateStatTeam,
+  Wolf,
 } from '@repo/game/data'
 import { Encounter, EncounterNode, Team } from '@repo/game/types'
 import { makeUnit } from '@repo/game/utils'
@@ -56,7 +59,11 @@ const CombatIntroductionNode: EncounterNode = {
           ctx.initializeCombat({
             enemyTeam,
             enemyUnits: Array.from({ length: 3 }).map(() =>
-              makeUnit({ level: 12, teamId: enemyTeam.id }, ENEMY_BASES)
+              makeUnit({ level: 12, teamId: enemyTeam.id }, [
+                Wolf,
+                Snake,
+                RestlessSpirit,
+              ])
             ),
             commit: true,
             reward: {
@@ -208,7 +215,11 @@ export function CombatEncounter(): Encounter {
         ctx.initializeCombat({
           enemyTeam,
           enemyUnits: Array.from({ length: 3 }).map(() =>
-            makeUnit({ level: 4, teamId: enemyTeam.id }, ENEMY_BASES)
+            makeUnit({ level: 4, teamId: enemyTeam.id }, [
+              Wolf,
+              Snake,
+              RestlessSpirit,
+            ])
           ),
           commit: true,
           reward: {

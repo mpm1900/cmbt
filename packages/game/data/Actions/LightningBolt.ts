@@ -17,15 +17,14 @@ import {
   getMutationsFromDamageResult,
 } from '../../utils'
 import { modifyRenderContext } from '../../utils/modifyRenderContext'
-import { LightningBoltId, StunnedParentId } from '../Ids'
-import { UpdateFlagParent } from '../Modifiers'
+import { LightningBoltId } from '../Ids'
 import { Identity } from '../Mutations'
 import { GetUnits } from '../Queries'
-import { Stasis } from '../Statuses'
+import { Charged } from '../Statuses'
 
 export class LightningBolt extends Action {
   damage: Damage
-  stasisChance: number = 20
+  chargeChance: number = 20
 
   constructor(sourceId: Id, teamId: Id) {
     super(LightningBoltId, {
@@ -41,7 +40,7 @@ export class LightningBolt extends Action {
     })
 
     this.damage = {
-      power: 95,
+      power: 90,
       attackType: 'magic',
       damageType: 'shock',
     }
@@ -65,7 +64,7 @@ export class LightningBolt extends Action {
     ctx = modifyRenderContext(options, ctx)
     const data = getActionData(source, this, ctx)
     const applyModifierRoll = random.int(0, 100)
-    const applyStasis = applyModifierRoll <= this.stasisChance
+    const applyCharge = applyModifierRoll <= this.chargeChance
 
     return [
       buildActionResult(
@@ -85,19 +84,8 @@ export class LightningBolt extends Action {
               )
               return getMutationsFromDamageResult(source, target, damage)
             }),
-            addedModifiers: applyStasis
-              ? modifiedTargets.flatMap((target) =>
-                  Stasis.modifiers(source, target).concat(
-                    new UpdateFlagParent({
-                      sourceId: source.id,
-                      parentId: target.id,
-                      registryId: StunnedParentId,
-                      flagKey: 'isStunned',
-                      value: true,
-                      duration: 2,
-                    })
-                  )
-                )
+            addedModifiers: applyCharge
+              ? Charged.modifiers(source, source)
               : [],
           },
         })

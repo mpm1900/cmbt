@@ -1,5 +1,6 @@
 import { ActionId } from './_base'
 
+export const ACallBeyondId = ActionId()
 export const ArmorUpId = ActionId()
 export const BaneId = ActionId()
 export const BiteId = ActionId()
@@ -18,7 +19,6 @@ export const ExplosionId = ActionId()
 export const FireballId = ActionId()
 export const FirePunchId = ActionId()
 export const FirestormId = ActionId()
-export const FurySwipesId = ActionId()
 export const GhostFlameId = ActionId()
 export const HoldPersonId = ActionId()
 export const HyperBeamId = ActionId()
@@ -50,6 +50,7 @@ export const TimeBendId = ActionId()
 export const TrickRoomId = ActionId()
 export const VampiricTouchId = ActionId()
 export const WardId = ActionId()
+export const WildStrikesId = ActionId()
 
 export const InspectAllId = ActionId()
 export const SetIsActiveId = ActionId()

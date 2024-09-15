@@ -43,7 +43,10 @@ const IntroductionNode: EncounterNode = {
           ctx.initializeCombat({
             enemyTeam,
             enemyUnits: Array.from({ length: 3 }).map(() => {
-              const e = makeUnit({ level: 2, teamId: enemyTeam.id }, [Wolf])
+              const e = makeUnit({ level: 2, teamId: enemyTeam.id }, [
+                Wolf,
+                // Snake,
+              ])
 
               return e
             }),

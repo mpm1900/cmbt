@@ -1,5 +1,6 @@
 import { LogUnit } from '@/components/ui/log'
 import {
+  ACallBeyondId,
   ArmorUpId,
   AttackStageUpParentId,
   BaneId,
@@ -22,8 +23,6 @@ import {
   FirePunch,
   FirePunchId,
   FirestormId,
-  FurySwipes,
-  FurySwipesId,
   GhostFlameId,
   HoldPerson,
   HoldPersonId,
@@ -77,6 +76,8 @@ import {
   VampiricTouchId,
   Ward,
   WardId,
+  WildStrikes,
+  WildStrikesId,
 } from '@repo/game/data'
 import { Action, ActionResult, CombatContext, Unit } from '@repo/game/types'
 import { DamageInline } from '@shared/DamageInline'
@@ -86,6 +87,7 @@ import { StatusInline } from '@shared/StatusInline'
 import { TextList } from '@shared/TextList'
 import { ReactNode } from 'react'
 import { ACTION_NAMES } from './_names'
+import { ACallBeyondRenderer } from './ACallBeyond'
 import { ArmorUpRenderer } from './ArmorUp'
 import { BaneRenderer } from './Bane'
 import { BiteRenderer } from './Bite'
@@ -140,6 +142,7 @@ export type ActionRenderer = {
 }
 
 export const ActionRenderers: Record<string, ActionRenderer> = {
+  [ACallBeyondId]: ACallBeyondRenderer,
   [ArmorUpId]: ArmorUpRenderer,
   [BaneId]: BaneRenderer,
   [BiteId]: BiteRenderer,
@@ -279,10 +282,10 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
       )
     },
   },
-  [FurySwipesId]: {
-    name: 'Fury Swipes',
+  [WildStrikesId]: {
+    name: ACTION_NAMES[WildStrikesId],
     description: (action) => {
-      const furySwipes = action as any as FurySwipes
+      const furySwipes = action as WildStrikes
       return (
         <div>
           Deals <DamageInline damage={furySwipes.damage} /> to target enemy

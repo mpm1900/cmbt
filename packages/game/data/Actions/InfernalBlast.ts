@@ -40,7 +40,7 @@ export class InfernalBlast extends Action {
     })
 
     this.damage = {
-      power: 120,
+      power: 110,
       attackType: 'magic',
       damageType: 'fire',
     }

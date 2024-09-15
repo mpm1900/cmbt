@@ -17,17 +17,17 @@ import {
 } from '../../utils'
 import { getDamageAi } from '../../utils/getDamageAiAction'
 import { modifyRenderContext } from '../../utils/modifyRenderContext'
-import { MagicStageDownParentId, MindShatterId } from '../Ids'
+import { ACallBeyondId, MagicStageDownParentId } from '../Ids'
 import { UpdateStatStageParent } from '../Modifiers'
 import { Identity } from '../Mutations'
 import { EmptyArray } from '../Queries'
 
-export class MindShatter extends Action {
+export class ACallBeyond extends Action {
   damage: Damage
   magicDownStages = -2
 
   constructor(sourceId: Id, teamId: Id) {
-    super(MindShatterId, {
+    super(ACallBeyondId, {
       sourceId,
       teamId,
       cost: new Identity({}),
@@ -36,9 +36,9 @@ export class MindShatter extends Action {
     })
 
     this.damage = {
-      power: 130,
+      power: 140,
       attackType: 'magic',
-      damageType: 'psychic',
+      damageType: 'arcane',
     }
   }
 

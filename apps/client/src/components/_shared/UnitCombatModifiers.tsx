@@ -1,7 +1,7 @@
 import { useCombatContext } from '@/hooks'
 import { PropsWithClassname } from '@/types'
-import { Trigger, Unit } from '@repo/game/types'
-import { applyModifiers } from '@repo/game/utils'
+import { getUnitModifierRenderList } from '@/utils'
+import { Unit } from '@repo/game/types'
 import { UnitModifiers } from './UnitModifiers'
 
 export type UnitCombatModifiersProps = {
@@ -13,29 +13,14 @@ export function UnitCombatModifiers(
   props: PropsWithClassname<UnitCombatModifiersProps>
 ) {
   const ctx = useCombatContext()
-  const { appliedModifiers, delayedModifiers, registeredTriggers } =
-    applyModifiers(props.unit, ctx)
-
-  const otherTriggers = ctx.modifiers.filter(
-    (m) =>
-      m instanceof Trigger &&
-      m.parentId === props.unit.id &&
-      !registeredTriggers.some((t) => t.rtid === m.rtid) &&
-      !delayedModifiers.some((t) => t.rtid === m.rtid)
-  )
-  const list = [
-    ...appliedModifiers,
-    ...delayedModifiers,
-    ...registeredTriggers,
-    ...otherTriggers,
-  ]
+  const modifiers = getUnitModifierRenderList(props.unit, ctx)
 
   return (
     <UnitModifiers
       className={props.className}
       iconClassName="h-[24px] w-[24px]"
       side={props.side}
-      modifiers={list}
+      modifiers={modifiers}
     />
   )
 }

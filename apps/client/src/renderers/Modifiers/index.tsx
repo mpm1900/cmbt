@@ -1,7 +1,6 @@
 import {
   AddActionParentId,
   AddStatModifiersImmunityAllId,
-  AttackDownAllOtherOnUnitEnterId,
   BanedParentId,
   BlessedParentId,
   CreateFirestormOnUnitEnterId,
@@ -19,7 +18,10 @@ import {
   KillParentOnTurnEndId,
   ProtectedParentId,
   SleepingParentId,
+  StatDownStaticAllOnUnitEnterId,
+  StatStageDownAllOtherOnUnitEnterId,
   StunnedParentId,
+  UpdateStatAllId,
   UpdateStatParentId,
   UpdateStatStageParentId,
   UpdateStatTeamId,
@@ -36,7 +38,6 @@ import { InspectedAllRenderer } from './InspectedAll'
 import { InvertSpeedAllRenderer } from './InvertSpeedAll'
 import { ProtectedParentRenderer } from './ProtectedParent'
 import { StunnedParentRenderer } from './StunnedParent'
-import { AttackDownAllOtherOnUnitEnterRenderer } from './Triggers/AttackDownAllOtherOnUnitEnter'
 import { CreateSandstormOnUnitEnterRenderer } from './Triggers/CreateFirestormOnUnitEnter'
 import { DamageAllOnTurnEndRenderer } from './Triggers/DamageAllOnTurnEnd'
 import { DamageNewUnitsOnUnitEnterRenderer } from './Triggers/DamageNewUnitsOnUnitEnter'
@@ -46,6 +47,9 @@ import { HealParentOnTurnEndRenderer } from './Triggers/HealParentOnTurnEnd'
 import { HealParentOnUnitSwitchRenderer } from './Triggers/HealParentOnUnitSwitch'
 import { InspectAllOnUnitEnterRenderer } from './Triggers/InspectAllOnUnitEnter'
 import { KillParentOnTurnEndRenderer } from './Triggers/KillParentOnTurnEnd'
+import { StatDownStaticAllOnUnitEnterRenderer } from './Triggers/StatDownStaticAllOnUnitEnterId'
+import { StatStageDownAllOtherOnUnitEnterRenderer } from './Triggers/StatStageDownAllOtherOnUnitEnter'
+import { UpdateStatAllRenderer } from './UpdateStatAll'
 import { UpdateStatParentRenderer } from './UpdateStatParent'
 import { UpdateStatStageParentRenderer } from './UpdateStatStageParent'
 import { UpdateStatTeamRenderer } from './UpdateStatTeam'
@@ -70,12 +74,13 @@ export const ModifierRenderers: Record<string, ModifierRenderer> = {
   [ProtectedParentId]: ProtectedParentRenderer,
   [StunnedParentId]: StunnedParentRenderer,
   [SleepingParentId]: StunnedParentRenderer,
+  [UpdateStatAllId]: UpdateStatAllRenderer,
   [UpdateStatParentId]: UpdateStatParentRenderer,
   [UpdateStatStageParentId]: UpdateStatStageParentRenderer,
   [UpdateStatTeamId]: UpdateStatTeamRenderer,
 
   // Triggers
-  [AttackDownAllOtherOnUnitEnterId]: AttackDownAllOtherOnUnitEnterRenderer,
+
   [CreateFirestormOnUnitEnterId]: CreateSandstormOnUnitEnterRenderer,
   [DamageAllOnTurnEndId]: DamageAllOnTurnEndRenderer,
   [DamageNewUnitsOnUnitEnterId]: DamageNewUnitsOnUnitEnterRenderer,
@@ -85,4 +90,7 @@ export const ModifierRenderers: Record<string, ModifierRenderer> = {
   [HealParentOnUnitSwitchId]: HealParentOnUnitSwitchRenderer,
   [InspectAllOnUnitEnterId]: InspectAllOnUnitEnterRenderer,
   [KillParentOnTurnEndId]: KillParentOnTurnEndRenderer,
+  [StatDownStaticAllOnUnitEnterId]: StatDownStaticAllOnUnitEnterRenderer,
+  [StatStageDownAllOtherOnUnitEnterId]:
+    StatStageDownAllOtherOnUnitEnterRenderer,
 }

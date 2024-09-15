@@ -1,21 +1,23 @@
 import {
   CombatContext,
   MutationFilterArgs,
+  StatKey,
   Trigger,
   TriggerProps,
   Unit,
 } from '../../types'
 import {
-  AttackDownAllOtherOnUnitEnterId,
   AttackStageDownParentId,
+  StatStageDownAllOtherOnUnitEnterId,
 } from '../Ids'
 import { UpdateStatStageParent } from '../Modifiers'
 
-export class AttackDownAllOtherOnUnitEnter extends Trigger {
-  private offset: number
+export class StatStageDownAllOtherOnUnitEnter extends Trigger {
+  stages: number
+  stat: StatKey
 
-  constructor(props: TriggerProps<{ offset: number }>) {
-    super(AttackDownAllOtherOnUnitEnterId, {
+  constructor(props: TriggerProps<{ stages: number; stat: StatKey }>) {
+    super(StatStageDownAllOtherOnUnitEnterId, {
       ...props,
       events: ['on Unit Enter'],
       maxInstances: 1,
@@ -25,16 +27,17 @@ export class AttackDownAllOtherOnUnitEnter extends Trigger {
           .map(
             (u) =>
               new UpdateStatStageParent({
-                stat: 'attack',
                 registryId: AttackStageDownParentId,
                 sourceId: props.sourceId,
                 parentId: u.id,
-                stages: props.offset,
+                stat: props.stat,
+                stages: props.stages,
               })
           ),
     })
 
-    this.offset = props.offset
+    this.stages = props.stages
+    this.stat = props.stat
   }
 
   filter = (

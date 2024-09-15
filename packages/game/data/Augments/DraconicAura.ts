@@ -1,16 +1,18 @@
 import { Augment, Modifier, Mutation, Unit } from '../../types'
 import { DraconicAuraId } from '../Ids'
-import { AttackDownAllOtherOnUnitEnter } from '../Triggers'
+import { StatStageDownAllOtherOnUnitEnter } from '../Triggers'
 
 export const DraconicAura: Augment = {
   id: DraconicAuraId,
   modifiers(unit: Unit): Modifier[] {
     return [
-      new AttackDownAllOtherOnUnitEnter({
+      new StatStageDownAllOtherOnUnitEnter({
+        registryId: DraconicAuraId,
         sourceId: unit.id,
         parentId: unit.id,
         maxInstances: 1,
-        offset: -1,
+        stat: 'attack',
+        stages: -1,
         persistOnCombatEnd: true,
       }),
     ]

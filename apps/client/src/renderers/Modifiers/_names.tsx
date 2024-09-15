@@ -2,7 +2,7 @@ import {
   AccuracyDownParentId,
   AccuracyUpParentId,
   AddStatModifiersImmunityAllId,
-  AttackDownAllOtherOnUnitEnterId,
+  AttackDownAllId,
   AttackDownParentId,
   AttackStageDownParentId,
   AttackStageUpParentId,
@@ -25,6 +25,7 @@ import {
   DefneseUpParentId,
   DisabledParentId,
   DivineHealingId,
+  DraconicAuraId,
   DrainLifeParentOnTurnEndId,
   EvasionDownParentId,
   EvasionUpParentId,
@@ -54,10 +55,11 @@ import {
   SpeedUpParentId,
   SpeedUpTeamId,
   StunnedParentId,
+  WitheringAuraId,
 } from '@repo/game/data'
 
 export const MODIFIER_NAMES: Record<string, string> = {
-  [AttackDownAllOtherOnUnitEnterId]: 'Draconic Aura',
+  [DraconicAuraId]: 'Draconic Aura',
   [CreateFirestormOnUnitEnterId]: 'Inferno',
   [DamageAllOnTurnEndId]: 'Damage All on Turn End',
   [BleedDamageId]: 'Bleed Damage',
@@ -72,10 +74,12 @@ export const MODIFIER_NAMES: Record<string, string> = {
   [PoisonedDamageOnTurnEndId]: 'Poisoned',
   [FirestormOnTurnEndId]: 'Firestorm',
   [KillParentOnTurnEndId]: 'Destined Death',
+  [WitheringAuraId]: 'Withering Aura',
 
   [AccuracyDownParentId]: 'Accuracy Down',
   [AccuracyUpParentId]: 'Accuracy Up',
   [AddStatModifiersImmunityAllId]: 'Dispel Stat Changes',
+  [AttackDownAllId]: 'Attack Down',
   [AttackDownParentId]: 'Attack Down',
   [AttackStageDownParentId]: 'Attack Down',
   [AttackStageUpParentId]: 'Attack Up',

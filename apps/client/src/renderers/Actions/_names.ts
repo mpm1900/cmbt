@@ -102,7 +102,7 @@ export const ACTION_NAMES: Record<string, string> = {
   [GhostFlameId]: 'Ghost Flame',
   [GuidingRayId]: 'Guiding Ray',
   [HideId]: 'Hide',
-  [InfernalBlastId]: 'Internal Blast',
+  [InfernalBlastId]: 'Infernal Blast',
   [IntoxicateId]: 'Intoxicate',
   [LightningBoltId]: 'Lightning Bolt',
   [MindBlastId]: 'Mind Blast',

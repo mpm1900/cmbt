@@ -11,6 +11,7 @@ import {
   Snake,
   SnakeConfig,
 } from './Enemy'
+import { Revenant, RevenantConfig } from './Enemy/Revenant'
 import { Wolf, WolfConfig } from './Enemy/Wolf'
 import { Hellknight, TyranitarConfig } from './Hellknight'
 import { Juggernaut, SnorlaxConfig } from './Juggernaut'
@@ -37,7 +38,7 @@ export const PLAYER_BASES: UnitBase[] = [
   // RestlessSpirit,
 ]
 
-export const ENEMY_BASES = [Celebi, RestlessSpirit, Snake, Wolf]
+export const ENEMY_BASES = [Celebi, RestlessSpirit, Revenant, Snake, Wolf]
 
 export const ALL_BASES: UnitBase[] = [...PLAYER_BASES, ...ENEMY_BASES]
 
@@ -54,6 +55,7 @@ export const BASE_CONFIGS: Record<Id, UnitBaseConfig> = {
   [Sorcerer.id]: SorcererConfig,
 
   [RestlessSpirit.id]: RestlessSpiritConfig,
+  [Revenant.id]: RevenantConfig,
   [Snake.id]: SnakeConfig,
   [Wolf.id]: WolfConfig,
 }

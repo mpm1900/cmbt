@@ -7,6 +7,7 @@ import {
   RegenerationId,
   RubyAugmentId,
   ScholarId,
+  WitheringAuraId,
 } from '@repo/game/data'
 import { Id } from '@repo/game/types'
 
@@ -20,4 +21,5 @@ export const AUGMENT_NAMES: Record<Id, string> = {
   [RegenerationId]: 'Regeneration',
   [InfernoId]: 'Inferno',
   [ScholarId]: 'Scholar',
+  [WitheringAuraId]: 'Withering Aura',
 }

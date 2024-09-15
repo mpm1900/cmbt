@@ -58,7 +58,7 @@ module.exports = {
           bleed: '#dc2626',
           burn: '#fdba74',
           charge: '#7dd3fc',
-          guidance: '#fde68a',
+          guidance: '#fef3c7',
           poison: 'plum',
         },
         log: {

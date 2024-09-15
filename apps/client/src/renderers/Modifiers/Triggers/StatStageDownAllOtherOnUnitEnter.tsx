@@ -1,16 +1,12 @@
-import {
-  AttackStageDownParentId,
-  UpdateStatParent,
-  UpdateStatStageParent,
-} from '@repo/game/data'
+import { AttackStageDownParentId, UpdateStatStageParent } from '@repo/game/data'
 import { ModifierInline } from '@shared/ModifierInline'
 import { MODIFIER_NAMES, ModifierRenderer } from '..'
 import { ModifierName, TriggerName } from '../_helpers'
 
-export const AttackDownAllOtherOnUnitEnterRenderer: ModifierRenderer = {
+export const StatStageDownAllOtherOnUnitEnterRenderer: ModifierRenderer = {
   name: (mod) => <ModifierName>{MODIFIER_NAMES[mod.registryId]}</ModifierName>,
   description: (mod) => {
-    const modifier = mod as UpdateStatParent
+    const modifier = mod as UpdateStatStageParent
     return (
       <div>
         <TriggerName>On self enter:</TriggerName>
@@ -19,9 +15,9 @@ export const AttackDownAllOtherOnUnitEnterRenderer: ModifierRenderer = {
           <ModifierInline
             modifier={
               new UpdateStatStageParent({
-                stat: 'attack',
                 registryId: AttackStageDownParentId,
-                stages: -1,
+                stat: modifier.stat,
+                stages: modifier.stages,
               })
             }
           />{' '}

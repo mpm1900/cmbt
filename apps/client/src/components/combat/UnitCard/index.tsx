@@ -5,6 +5,7 @@ import {
 } from '@/components/ui/tooltip'
 import { cn } from '@/lib/utils'
 import { TAG_ICONS } from '@/renderers/Tags'
+import { getUnitModifierRenderList } from '@/utils'
 import { SwitchUnitId } from '@repo/game/data'
 import { Unit } from '@repo/game/types'
 import { applyModifiers } from '@repo/game/utils'
@@ -34,11 +35,8 @@ export function UnitCard(props: UnitCardProps) {
   const result = ctx.turn.results[ctx.turn.results.length - 1]
   const { queue } = useActions()
   const { activeUnit, setActiveUnit, hoverTargetUnitIds } = useCombatUi()
-  const { unit, appliedModifiers, registeredTriggers } = applyModifiers(
-    props.unit,
-    ctx
-  )
-  const modifiers = [...appliedModifiers, ...registeredTriggers]
+  const { unit } = applyModifiers(props.unit, ctx)
+  const modifiers = getUnitModifierRenderList(props.unit, ctx)
   const stagedItem = queue.find((i) => i.action.sourceId === unit.id)
   const targets =
     ((result?.expandedTargets ?? []).length === 0

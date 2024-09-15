@@ -1,5 +1,5 @@
 import { Status } from '../../types'
-import { AttackDownParentId, BleedDamageId, BleedId } from '../Ids'
+import { BleedDamageId, BleedId, SpeedDownParentId } from '../Ids'
 import { UpdateStatParent } from '../Modifiers'
 import { DamageParentOnTurnEnd } from '../Triggers'
 
@@ -8,8 +8,8 @@ export const Bleed: Status = {
   duration: 5,
   modifiers: (source, parent) => [
     new UpdateStatParent({
-      stat: 'attack',
-      registryId: AttackDownParentId,
+      stat: 'speed',
+      registryId: SpeedDownParentId,
       sourceId: source.id,
       parentId: parent.id,
       statusId: BleedId,

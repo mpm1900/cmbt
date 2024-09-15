@@ -92,5 +92,5 @@ export const ClericConfig: UnitBaseConfig = {
     },
   ],
   defaultAbilityId: DivineHealingId,
-  defaultActionIds: [BaneId, BlessId, HoldPersonId, ProtectId],
+  defaultActionIds: [BaneId, BlessId, HoldPersonId, GuidingRayId],
 }

@@ -19,9 +19,7 @@ export function UnitModifiers(props: UnitModifiersProps) {
   const { modifiers, iconClassName } = props
 
   const nonStatusModifiers = combineStageModifiers(
-    modifiers
-      .filter((m) => !m.statusId && m.id !== InspectedAllId)
-      .sort((a, b) => a.priority - b.priority)
+    modifiers.filter((m) => !m.statusId && m.id !== InspectedAllId)
   )
   const statuses = getStatusesFromModifiers(modifiers)
 

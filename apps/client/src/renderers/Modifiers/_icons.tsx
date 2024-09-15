@@ -2,7 +2,7 @@ import {
   AccuracyDownParentId,
   AccuracyUpParentId,
   AddStatModifiersImmunityAllId,
-  AttackDownAllOtherOnUnitEnterId,
+  AttackDownAllId,
   AttackDownParentId,
   AttackStageDownParentId,
   AttackStageUpParentId,
@@ -20,6 +20,7 @@ import {
   DefneseUpParentId,
   DisabledParentId,
   DivineHealingId,
+  DraconicAuraId,
   DrainLifeParentOnTurnEndId,
   EvasionDownParentId,
   EvasionUpParentId,
@@ -45,6 +46,7 @@ import {
   SpeedUpParentId,
   SpeedUpTeamId,
   StunnedParentId,
+  WitheringAuraId,
 } from '@repo/game/data'
 import { Id } from '@repo/game/types'
 import { StatModifierIcon } from '@shared/StatModifierIcon'
@@ -60,9 +62,10 @@ import { FaHeartCirclePlus, FaShieldHalved } from 'react-icons/fa6'
 import {
   GiDeathJuice,
   GiDeathNote,
-  GiDualityMask,
+  GiDragonSpiral,
   GiFireRing,
   GiMagicSwirl,
+  GiPoisonGas,
   GiSpikedHalo,
   GiSpinningBlades,
   GiTemplarHeart,
@@ -80,6 +83,7 @@ export const MODIFIER_ICONS: Record<Id, ReactNode> = {
   [AddStatModifiersImmunityAllId]: (
     <GiMagicSwirl className="fill-white h-full w-full" />
   ),
+  [AttackDownAllId]: <StatModifierIcon stat="attack" type="down" />,
   [AttackDownParentId]: <StatModifierIcon stat="attack" type="down" />,
   [AttackStageDownParentId]: <StatModifierIcon stat="attack" type="down" />,
   [AttackStageUpParentId]: <StatModifierIcon stat="attack" type="up" />,
@@ -132,9 +136,8 @@ export const MODIFIER_ICONS: Record<Id, ReactNode> = {
       />
     </div>
   ),
-  [AttackDownAllOtherOnUnitEnterId]: (
-    <GiDualityMask className="fill-white h-full w-full" />
-  ),
+  [DraconicAuraId]: <GiDragonSpiral className="fill-white h-full w-full" />,
+  [WitheringAuraId]: <GiPoisonGas className="fill-white h-full w-full" />,
   [CreateFirestormOnUnitEnterId]: (
     <GiFireRing className="fill-orange-300 h-full w-full" />
   ),

@@ -9,6 +9,7 @@ import {
   RegenerationId,
   RubyAugmentId,
   ScholarId,
+  WitheringAuraId,
 } from '@repo/game/data'
 import { Id } from '@repo/game/types'
 import { ModifierInline } from '@shared/ModifierInline'
@@ -20,6 +21,7 @@ export * from './_names'
 export type AugmentRenderer = {
   name: ReactNode
   description?: () => ReactNode
+  list?: boolean
 }
 
 export const AugmentRenderers: Record<Id, AugmentRenderer> = {
@@ -64,5 +66,8 @@ export const AugmentRenderers: Record<Id, AugmentRenderer> = {
   },
   [ScholarId]: {
     name: <div className="text-white">{AUGMENT_NAMES[ScholarId]}</div>,
+  },
+  [WitheringAuraId]: {
+    name: <div className="text-white">{AUGMENT_NAMES[WitheringAuraId]}</div>,
   },
 }

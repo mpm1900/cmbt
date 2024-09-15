@@ -13,6 +13,7 @@ import {
 } from '@repo/game/types'
 import { getModifiersFromUnit, getUnitBase } from '@repo/game/utils'
 import { ReactNode } from '@tanstack/react-router'
+import { AttackTypeBadge } from './AttackTypeBadge'
 import { HealthBadge } from './HealthBadge'
 import { MagicArmor } from './MagicArmor'
 import { PhysicalArmor } from './PhysicalArmor'
@@ -198,18 +199,7 @@ export function UnitDetails(props: UnitDetailsProps) {
                     key={attackType}
                     className="flex items-center space-x-1 h-[24px]"
                   >
-                    <div
-                      className={cn(
-                        'font-bold text-xs px-2 py-0 rounded h-[18px] leading-[18px] text-white/60 uppercase',
-                        {
-                          'bg-blue-600': attackType === 'magic',
-                          'bg-green-600': attackType === 'physical',
-                        }
-                      )}
-                    >
-                      {attackType === 'magic' && 'Magic'}
-                      {attackType === 'physical' && 'Physical'}
-                    </div>
+                    <AttackTypeBadge attackType={attackType} />
                   </div>
                 )
               })}

@@ -23,8 +23,8 @@ export const queueComparator =
     const _bSource = ctx.units.find((u) => u.id === b.action.sourceId)
     const bSource = _bSource ? applyModifiers(_bSource, ctx).unit : _bSource
 
-    const aPriority = getPriority(a.action, aSource)
-    const bPriority = getPriority(b.action, bSource)
+    const aPriority = getPriority(a.action, aSource, ctx)
+    const bPriority = getPriority(b.action, bSource, ctx)
 
     if (aPriority === bPriority) {
       if (!aSource && !bSource) return 0

@@ -5,6 +5,7 @@ import {
   Bless,
   GuidingRay,
   Protect,
+  QuickAttack,
   SearingLight,
   Smite,
   Taunt,
@@ -20,6 +21,7 @@ import {
   GuidingRayId,
   HoldPersonId,
   ProtectId,
+  QuickAttackId,
   SearingLightId,
   SmiteId,
   TauntId,
@@ -75,6 +77,10 @@ export const ClericConfig: UnitBaseConfig = {
     {
       id: ProtectId,
       make: (u) => new Protect(u.id, u.teamId),
+    },
+    {
+      id: QuickAttackId,
+      make: (u) => new QuickAttack(u.id, u.teamId),
     },
     {
       id: SearingLightId,

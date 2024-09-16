@@ -31,7 +31,7 @@ export const SneakAttackRenderer: ActionRenderer = {
         <DamageInline
           damage={{ ...action.damages[0], power: action.hiddenPower }}
         />{' '}
-        instead. High critical chance. Usually goes first.
+        with +1 priority instead. High critical chance.
       </>
     )
   },

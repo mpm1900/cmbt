@@ -25,6 +25,7 @@ export function ActiveAction(props: ActiveActionProps) {
   const accuracy = action.threshold(modified.unit)
   const critChance = action.criticalThreshold(modified.unit) ?? 0
   const critFactor = action.criticalFactor(modified.unit)
+  const priority = action.getPriority(ctx)
 
   return (
     <Card className="dark:bg-muted/40 space-y-2">
@@ -75,12 +76,12 @@ export function ActiveAction(props: ActiveActionProps) {
               <span>Crit Damage</span>
             </Badge>
           )}
-          {action.priority !== 0 && (
+          {priority !== 0 && (
             <Badge
               variant="outline"
               className="bg-slate-950 text-muted-foreground"
             >
-              Priority {action.priority}
+              Priority {priority}
             </Badge>
           )}
         </div>

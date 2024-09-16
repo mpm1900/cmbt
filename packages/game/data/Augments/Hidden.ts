@@ -13,6 +13,10 @@ export const Hidden: Augment = {
         sourceId: unit.id,
         parentId: unit.id,
         maxInstances: 1,
+        // This duration setting means that
+        //  this augment should only be used
+        //  on enemy units
+        duration: 2,
         persistOnCombatEnd: true,
       }),
     ]

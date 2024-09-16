@@ -99,6 +99,10 @@ export abstract class Action {
     return targets
   }
 
+  getPriority(ctx: CombatContext): number {
+    return this.priority
+  }
+
   filter(source: Unit, ctx: CombatContext): boolean {
     const isDisabled = source.registry.actions.includes(this.id)
     const canPayCost = checkActionCost(this, source)

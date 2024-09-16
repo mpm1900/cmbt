@@ -8,6 +8,7 @@ import {
   Unit,
 } from '../../types'
 import {
+  applyModifiers,
   buildActionResult,
   calculateDamage,
   getActionData,
@@ -57,6 +58,13 @@ export class SneakAttack extends Action {
 
   getAi(targets: Unit[], ctx: CombatContext): ActionAi {
     return getDamageAi(this, targets, ctx)
+  }
+
+  getPriority(ctx: CombatContext): number {
+    const source = ctx.units.find((u) => u.id === this.sourceId)!
+    const modified = applyModifiers(source, ctx).unit
+    if (modified.flags.isHidden) return 1
+    return 0
   }
 
   resolve = (

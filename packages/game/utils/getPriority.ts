@@ -1,8 +1,12 @@
-import { Action, Unit } from '../types'
+import { Action, CombatContext, Unit } from '../types'
 import { getAttackTypesFromDamages } from './getAttackTypesFromDamages'
 import { getDamageTypesFromDamages } from './getDamageTypesFromDamages'
 
-export function getPriority(action: Action, unit: Unit | undefined): number {
+export function getPriority(
+  action: Action,
+  unit: Unit | undefined,
+  ctx: CombatContext
+): number {
   if (!unit) return action.priority
   const attackTypes = getAttackTypesFromDamages(action.damages)
   const damageTypes = getDamageTypesFromDamages(action.damages)
@@ -24,7 +28,7 @@ export function getPriority(action: Action, unit: Unit | undefined): number {
       : 0
 
   return (
-    action.priority +
+    action.getPriority(ctx) +
     unit.stats.priority +
     attackTypeOffset +
     damageTypeOffset +

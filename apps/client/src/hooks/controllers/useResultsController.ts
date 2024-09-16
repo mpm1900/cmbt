@@ -1,7 +1,7 @@
 import { logActionIntent } from '@/utils'
-import { isUnitAlive, isUnitAliveCtx } from '@repo/game/utils'
+import { getTeamsWithLiveUnits, isUnitAlive } from '@repo/game/utils'
 import { useEffect } from 'react'
-import { useActions, useCombat, useCombatSettings } from '../state'
+import { useCombat, useCombatSettings } from '../state'
 import { useResults } from '../state/useResults'
 import { useCombatActions } from '../useCombatActions'
 import { useCombatContext } from '../useCombatContext'
@@ -9,7 +9,6 @@ import { useCombatContext } from '../useCombatContext'
 export function useResultsController() {
   const results = useResults()
   const combat = useCombat()
-  const actions = useActions()
   const fns = useCombatActions()
   const settings = useCombatSettings()
   let ctx = useCombatContext()
@@ -22,46 +21,42 @@ export function useResultsController() {
 
   useEffect(() => {
     if (first) {
-      const aliveTeams = ctx.teams.filter((team) =>
-        ctx.units.some((u) => u.teamId === team.id && isUnitAliveCtx(u, ctx))
-      )
+      const aliveTeams = getTeamsWithLiveUnits(ctx)
+      if (aliveTeams.length === ctx.teams.length) {
+        const shouldCommitResult =
+          (!first.action ||
+            !first.expandedTargets ||
+            first.expandedTargets.length === 0 ||
+            first.expandedTargets?.some((t) =>
+              isUnitAlive(ctx.units.find((u) => u.id === t.id))
+            )) &&
+          aliveTeams.length === ctx.teams.length
 
-      const shouldCommitResult =
-        (!first.action ||
-          !first.expandedTargets ||
-          first.expandedTargets.length === 0 ||
-          first.expandedTargets?.some((t) =>
-            isUnitAlive(ctx.units.find((u) => u.id === t.id))
-          )) &&
-        aliveTeams.length === ctx.teams.length
+        if (
+          first.action &&
+          first.shouldLog &&
+          shouldCommitResult &&
+          aliveTeams.length > 0
+        ) {
+          logActionIntent(first.action, first, log, ctx)
+          setTurn((t) => ({
+            results: t.results.concat(first),
+          }))
+        }
 
-      if (
-        first.action &&
-        first.shouldLog &&
-        shouldCommitResult &&
-        aliveTeams.length > 0
-      ) {
-        logActionIntent(first.action, first, log, ctx)
-        setTurn((t) => ({
-          results: t.results.concat(first),
-        }))
-      }
-
-      if (aliveTeams.length !== ctx.teams.length) {
-        actions.setQueue(() => [])
-        combat.setStatus('done')
-      }
-
-      if (shouldCommitResult) {
-        setTimeout(() => {
-          ctx = fns.commitResult(first, ctx)
+        if (shouldCommitResult) {
           setTimeout(() => {
-            ctx = fns.cleanupResult(ctx)
-            results.dequeue()
-          }, speed * 1.5)
-        }, speed)
+            ctx = fns.commitResult(first, ctx)
+            setTimeout(() => {
+              ctx = fns.cleanupResult(ctx)
+              results.dequeue()
+            }, speed * 1.5)
+          }, speed)
+        } else {
+          results.dequeue()
+        }
       } else {
-        results.dequeue()
+        combat.setStatus('done')
       }
     }
   }, [first, combat.turn.status])

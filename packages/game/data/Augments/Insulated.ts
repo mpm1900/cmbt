@@ -14,6 +14,7 @@ export const Insulated: Augment = {
         parentId: unit.id,
         maxInstances: 1,
         static: 50,
+        persistOnSwitch: true,
       }),
     ]
   },

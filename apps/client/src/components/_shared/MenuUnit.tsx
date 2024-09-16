@@ -3,7 +3,7 @@ import { useGame } from '@/hooks/state'
 import { Trigger, Unit } from '@repo/game/types'
 import {
   applyMutations,
-  getModifiersFromUnit,
+  getAllModifiersFromUnit,
   getUnitBase,
   validateModifiers,
 } from '@repo/game/utils'
@@ -28,7 +28,7 @@ export function MenuUnit(props: SidebarUnitProps) {
   const unit = applyMutations(
     props.unit,
     validateModifiers(
-      getModifiersFromUnit(mock).filter(
+      getAllModifiersFromUnit(mock).filter(
         (m) => !(m instanceof Trigger) && m.filter(mock, ctx, {})
       ),
       []

@@ -12,6 +12,7 @@ export const DivineHealing: Augment = {
         parentId: unit.id,
         factor: 0.1,
         maxInstances: 1,
+        persistOnSwitch: true,
       }),
     ]
   },

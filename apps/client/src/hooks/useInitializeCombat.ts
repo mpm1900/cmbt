@@ -1,4 +1,5 @@
 import { InitializeCombatOptions } from '@repo/game/types'
+import { getAllModifiersFromUnit } from '@repo/game/utils'
 import { useNavigate } from '@tanstack/react-router'
 import { useActions, useCleanup, useCombat } from './state'
 
@@ -26,7 +27,10 @@ export function useInitializeCombat() {
     actions.setQueue(() => [])
     cleanup.setQueue(() => [])
     combat.initialize({
-      units,
+      units: units.map((u) => ({
+        ...u,
+        modifiers: () => getAllModifiersFromUnit(u),
+      })),
       user: userTeam,
       enemy: enemyTeam,
       commit,

@@ -11,7 +11,7 @@ import {
   StatKey,
   Unit,
 } from '@repo/game/types'
-import { getModifiersFromUnit, getUnitBase } from '@repo/game/utils'
+import { getAllModifiersFromUnit, getUnitBase } from '@repo/game/utils'
 import { ReactNode } from '@tanstack/react-router'
 import { AttackTypeBadge } from './AttackTypeBadge'
 import { HealthBadge } from './HealthBadge'
@@ -75,7 +75,7 @@ export function UnitDetails(props: UnitDetailsProps) {
   const { unit, original, modifiers } = props
   const base = getUnitBase(unit.baseId)
   const remainingHealth = Math.max(unit.stats.health - unit.values.damage, 0)
-  const mods = getModifiersFromUnit(unit)
+  const mods = getAllModifiersFromUnit(unit)
 
   return (
     <div className="space-y-2">

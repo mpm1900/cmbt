@@ -1,6 +1,10 @@
 import { Modifier, Unit } from '../types'
 
 export function getModifiersFromUnit(unit: Unit): Modifier[] {
+  return unit.modifiers().sort((a, b) => a.priority - b.priority)
+}
+
+export function getAllModifiersFromUnit(unit: Unit): Modifier[] {
   return [
     ...unit.modifiers(),
     ...unit.abilities.flatMap((a) => a.modifiers(unit)),

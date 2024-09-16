@@ -19,6 +19,7 @@ export class SetIsActiveParent extends Mutation {
         lastUsedActionId: undefined,
         hasBeenSeen: this.isActive ?? unit.metadata.hasBeenSeen,
         activeTurns: 0,
+        inactiveTurns: 0,
       },
     }
   }

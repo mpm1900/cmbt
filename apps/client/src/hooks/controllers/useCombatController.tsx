@@ -2,7 +2,7 @@ import {
   getResultsFromActionItem,
   getTeamsWithSelectionRequired,
 } from '@/utils'
-import { isUnitAliveCtx } from '@repo/game/utils'
+import { getTeamsWithLiveUnits, isUnitAliveCtx } from '@repo/game/utils'
 import { useEffect } from 'react'
 import { useActions, useCleanup, useCombat } from '../state'
 import { useResults } from '../state/useResults'
@@ -20,19 +20,25 @@ export function useCombatController() {
 
   useEffect(() => {
     if (isCombat && results.queue.length === 0 && cleanup.queue.length === 0) {
-      const item = actions.first(ctx)
-      const teams = getTeamsWithSelectionRequired(ctx)
-      if (item && teams.length === 0) {
-        const source = ctx.units.find((u) => u.id === item.action.sourceId)
-        const shouldCommitAction = isUnitAliveCtx(source, ctx)
+      const liveTeams = getTeamsWithLiveUnits(ctx)
+      if (liveTeams.length === ctx.teams.length) {
+        const item = actions.first(ctx)
+        const teams = getTeamsWithSelectionRequired(ctx)
+        if (item && teams.length === 0) {
+          const source = ctx.units.find((u) => u.id === item.action.sourceId)
+          const shouldCommitAction = isUnitAliveCtx(source, ctx)
 
-        if (shouldCommitAction) {
-          const actionResults = getResultsFromActionItem(item, ctx)
-          results.enqueue({ mutations: [item.action.cost] }, ...actionResults)
+          if (shouldCommitAction) {
+            const actionResults = getResultsFromActionItem(item, ctx)
+            results.enqueue({ mutations: [item.action.cost] }, ...actionResults)
+          }
+          actions.remove((i) => i.id === item.id)
+        } else {
+          combat.setStatus('cleanup')
         }
-        actions.remove((i) => i.id === item.id)
       } else {
-        combat.setStatus('cleanup')
+        actions.setQueue(() => [])
+        combat.setStatus('done')
       }
     }
   }, [isCombat, actions.queue.length, results.queue.length])

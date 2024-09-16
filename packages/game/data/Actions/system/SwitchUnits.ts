@@ -9,7 +9,8 @@ import {
 import { getModifiersFromUnit } from '../../../utils'
 import { SwitchUnitId } from '../../Ids'
 import { Identity } from '../../Mutations'
-import { AddModifiersToParent, SetIsActiveParent } from '../../Mutations/system'
+import { SetIsActiveParent } from '../../Mutations/system'
+import { SetModifiersParent } from '../../Mutations/system/SetModifiersParent'
 import { GetUnits } from '../../Queries'
 
 export class SwitchUnit extends Action {
@@ -52,7 +53,7 @@ export class SwitchUnit extends Action {
             parentId: target.id,
             isActive: true,
           }),
-          new AddModifiersToParent({
+          new SetModifiersParent({
             sourceId: source.id,
             parentId: source.id,
             modifiers: ctx.modifiers.filter(

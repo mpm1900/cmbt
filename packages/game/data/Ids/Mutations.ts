@@ -6,6 +6,7 @@ export const IncrementInactiveTurnsId = MutationId()
 export const SetDeadAsInactiveId = MutationId()
 export const SetIsActiveParentId = MutationId()
 export const SetLastUsedActionId = MutationId()
+export const SetModifiersParentId = MutationId()
 
 export const AddModifiersToRegistryParentMutateId = MutationId()
 export const DamageAllId = MutationId()

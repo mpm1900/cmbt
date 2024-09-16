@@ -79,6 +79,7 @@ export const ZERO_UNIT: Unit = {
     actions: [],
     modifiers: [],
   },
+  abilities: [],
   augments: [],
   modifiers: () => [],
   actions: [],

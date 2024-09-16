@@ -11,6 +11,7 @@ export const Inferno: Augment = {
         sourceId: unit.id,
         parentId: unit.id,
         maxInstances: 1,
+        persistOnSwitch: true,
       }),
     ]
   },

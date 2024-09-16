@@ -13,6 +13,7 @@ export const DraconicAura: Augment = {
         maxInstances: 1,
         stat: 'attack',
         stages: -1,
+        persistOnSwitch: true,
       }),
     ]
   },

@@ -8,7 +8,7 @@ import {
   EncounterNode,
   Trigger,
 } from '@repo/game/types'
-import { applyMutations, getModifiersFromUnit } from '@repo/game/utils'
+import { applyMutations, getAllModifiersFromUnit } from '@repo/game/utils'
 import { nanoid } from 'nanoid/non-secure'
 import { GiWaterfall } from 'react-icons/gi'
 import { IoMdReturnLeft, IoMdReturnRight } from 'react-icons/io'
@@ -31,7 +31,7 @@ const HealingIntroductionNode: EncounterNode = {
       .map((u) => {
         return applyMutations(
           u,
-          getModifiersFromUnit(u).filter((m) => !(m instanceof Trigger))
+          getAllModifiersFromUnit(u).filter((m) => !(m instanceof Trigger))
         )
       })
       .filter((u) => u.stats.health > u.values.damage)

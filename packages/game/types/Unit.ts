@@ -102,6 +102,7 @@ export type Unit = {
   values: Values
   flags: Flags
   registry: UnitRegistry
+  abilities: Augment[]
   augments: Augment[]
   modifiers(): Modifier[]
   actions: Action[]

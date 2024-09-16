@@ -41,7 +41,7 @@ function getMutationsFromBuilder(builder: UnitBuilder, unit: Unit): Mutation[] {
 }
 
 function getModifiersFromBuilder(builder: UnitBuilder, unit: Unit): Modifier[] {
-  const abilityModifiers = builder.ability?.modifiers(unit) ?? []
+  const abilityModifiers: Modifier[] = []
   return abilityModifiers
 }
 
@@ -81,6 +81,7 @@ export function resolveUnitBuilder(builder: UnitBuilder, teamId: Id): Unit {
   }
 
   unit.actions = [...builder.actions.map((a) => a.make(unit))]
+  unit.abilities = builder.ability ? [builder.ability] : []
 
   const mutations = getMutationsFromBuilder(builder, unit)
   const modifiers = getModifiersFromBuilder(builder, unit)

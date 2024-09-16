@@ -12,7 +12,6 @@ export const CursedMiasma: Augment = {
         parentId: unit.id,
         stat: 'attack',
         factor: -0.5,
-        persistOnCombatEnd: true,
       }),
     ]
   },

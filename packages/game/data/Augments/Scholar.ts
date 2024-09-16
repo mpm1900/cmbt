@@ -10,7 +10,6 @@ export const Scholar: Augment = {
         sourceId: unit.id,
         parentId: unit.id,
         maxInstances: 1,
-        persistOnCombatEnd: true,
       }),
     ]
   },

@@ -11,7 +11,6 @@ export const Regeneration: Augment = {
         parentId: unit.id,
         maxInstances: 1,
         factor: 0.3,
-        persistOnCombatEnd: true,
       }),
     ]
   },

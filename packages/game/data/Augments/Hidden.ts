@@ -17,7 +17,6 @@ export const Hidden: Augment = {
         //  this augment should only be used
         //  on enemy units
         duration: 2,
-        persistOnCombatEnd: true,
       }),
     ]
   },

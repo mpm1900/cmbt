@@ -1,7 +1,7 @@
 import { logActionIntent } from '@/utils'
-import { isUnitAlive } from '@repo/game/utils'
+import { isUnitAlive, isUnitAliveCtx } from '@repo/game/utils'
 import { useEffect } from 'react'
-import { useCombat, useCombatSettings } from '../state'
+import { useActions, useCombat, useCombatSettings } from '../state'
 import { useResults } from '../state/useResults'
 import { useCombatActions } from '../useCombatActions'
 import { useCombatContext } from '../useCombatContext'
@@ -9,6 +9,7 @@ import { useCombatContext } from '../useCombatContext'
 export function useResultsController() {
   const results = useResults()
   const combat = useCombat()
+  const actions = useActions()
   const fns = useCombatActions()
   const settings = useCombatSettings()
   let ctx = useCombatContext()
@@ -21,20 +22,36 @@ export function useResultsController() {
 
   useEffect(() => {
     if (first) {
-      const shouldCommitResult =
-        !first.action ||
-        !first.expandedTargets ||
-        first.expandedTargets.length === 0 ||
-        first.expandedTargets?.some((t) =>
-          isUnitAlive(ctx.units.find((u) => u.id === t.id))
-        )
+      const aliveTeams = ctx.teams.filter((team) =>
+        ctx.units.some((u) => u.teamId === team.id && isUnitAliveCtx(u, ctx))
+      )
 
-      if (first.action && first.shouldLog && shouldCommitResult) {
+      const shouldCommitResult =
+        (!first.action ||
+          !first.expandedTargets ||
+          first.expandedTargets.length === 0 ||
+          first.expandedTargets?.some((t) =>
+            isUnitAlive(ctx.units.find((u) => u.id === t.id))
+          )) &&
+        aliveTeams.length === ctx.teams.length
+
+      if (
+        first.action &&
+        first.shouldLog &&
+        shouldCommitResult &&
+        aliveTeams.length > 0
+      ) {
         logActionIntent(first.action, first, log, ctx)
         setTurn((t) => ({
           results: t.results.concat(first),
         }))
       }
+
+      if (aliveTeams.length !== ctx.teams.length) {
+        actions.setQueue(() => [])
+        combat.setStatus('done')
+      }
+
       if (shouldCommitResult) {
         setTimeout(() => {
           ctx = fns.commitResult(first, ctx)

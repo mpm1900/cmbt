@@ -98,7 +98,15 @@ export const CampEncounterInn: EncounterNode = {
         ),
         label: `"Id like to book a room"`,
         resolve: (ctx) => {
-          ctx.log(<ChoiceLog>"Id like to book a room"</ChoiceLog>)
+          ctx.log(
+            <div className="flex items-center space-x-2">
+              <ChoiceLog>"Id like to book a room"</ChoiceLog>
+              <ChoiceAttributes>
+                -{cost}
+                <GiCreditsCurrency />
+              </ChoiceAttributes>
+            </div>
+          )
           ctx.log(
             <Quote name={npc!.name}>
               Sure thing! Room is right back over there.
@@ -107,12 +115,10 @@ export const CampEncounterInn: EncounterNode = {
           ctx.log(
             <div>
               <ChoiceAttributes>
-                -{cost}
-                <GiCreditsCurrency />
+                <span className="text-muted-foreground/40">
+                  Your party's health has been refreshed.
+                </span>
               </ChoiceAttributes>
-              <div className="text-green-100">
-                [ Your party's health has been refreshed. ]
-              </div>
             </div>
           )
 
@@ -129,6 +135,7 @@ export const CampEncounterInn: EncounterNode = {
                 ...u.values,
                 damage: 0,
               },
+              modifiers: () => unit.modifiers().filter((m) => !m.statusId),
             }))
           })
         },

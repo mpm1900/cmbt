@@ -11,7 +11,6 @@ import {
   useAiActions,
   useCleanupController,
   useCombatController,
-  useDoneController,
   useEndController,
   useMainController,
   useResultsController,
@@ -35,7 +34,6 @@ export function Combat() {
   useCombatController()
   useCleanupController()
   useEndController()
-  useDoneController()
   useAiActions()
 
   const userTeam = teams.find((t) => t.id === user)

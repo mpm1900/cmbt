@@ -1,7 +1,6 @@
 export * from './useAiActions'
 export * from './useCleanupController'
 export * from './useCombatController'
-export * from './useDoneController'
 export * from './useEndController'
 export * from './useMainController'
 export * from './useResultsController'

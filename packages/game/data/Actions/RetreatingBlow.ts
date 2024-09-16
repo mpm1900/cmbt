@@ -1,7 +1,6 @@
 import {
   Action,
   ActionAi,
-  ActionResolveOptions,
   ActionResult,
   CombatContext,
   Id,
@@ -11,10 +10,9 @@ import {
   buildActionResult,
   calculateDamages,
   getActionData,
-  getDamageAi,
+  getDamageAiRating,
   getMutationsFromDamageResult,
   isUnitAliveCtx,
-  modifyRenderContext,
 } from '../../utils'
 import { RetreatingBlowId } from '../Ids'
 import { Identity, SetIsActiveParent } from '../Mutations'
@@ -53,16 +51,14 @@ export class RetreatingBlow extends Action {
     1.5 + source.stats.criticalDamage
 
   getAi(targets: Unit[], ctx: CombatContext): ActionAi {
-    return getDamageAi(this, targets, ctx)
+    return getDamageAiRating(this, targets, ctx)
   }
 
   resolve = (
     source: Unit,
     targets: Unit[],
-    ctx: CombatContext,
-    options: ActionResolveOptions
+    ctx: CombatContext
   ): ActionResult[] => {
-    ctx = modifyRenderContext(options, ctx)
     const data = getActionData(source, this, ctx)
 
     return [

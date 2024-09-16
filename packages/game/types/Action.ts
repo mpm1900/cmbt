@@ -67,12 +67,6 @@ export type ActionMaker = {
   make: (source: Unit) => Action
 }
 
-export type ActionResolveOptions = {
-  disableLogging?: boolean
-  disableRandomness?: boolean
-  bypassAccuracyRolls?: boolean
-}
-
 export type ActionProps = {
   sourceId: Id
   teamId: Id
@@ -99,8 +93,7 @@ export abstract class Action {
   abstract resolve(
     source: Unit,
     targets: Unit[],
-    ctx: CombatContext,
-    options?: ActionResolveOptions
+    ctx: CombatContext
   ): ActionResult[]
 
   getAi(targets: Unit[], ctx: CombatContext): ActionAi {

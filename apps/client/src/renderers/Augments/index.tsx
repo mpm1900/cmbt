@@ -1,4 +1,5 @@
 import {
+  CursedMiasmaId,
   DamageAllOnTurnEnd,
   DivineHealingId,
   DraconicAuraId,
@@ -9,7 +10,6 @@ import {
   RegenerationId,
   RubyAugmentId,
   ScholarId,
-  WitheringAuraId,
 } from '@repo/game/data'
 import { Id } from '@repo/game/types'
 import { ModifierInline } from '@shared/ModifierInline'
@@ -67,7 +67,7 @@ export const AugmentRenderers: Record<Id, AugmentRenderer> = {
   [ScholarId]: {
     name: <div className="text-white">{AUGMENT_NAMES[ScholarId]}</div>,
   },
-  [WitheringAuraId]: {
-    name: <div className="text-white">{AUGMENT_NAMES[WitheringAuraId]}</div>,
+  [CursedMiasmaId]: {
+    name: <div className="text-white">{AUGMENT_NAMES[CursedMiasmaId]}</div>,
   },
 }

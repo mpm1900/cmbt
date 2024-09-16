@@ -1,8 +1,8 @@
 import { nanoid } from 'nanoid'
 import { UnitBase, UnitBaseConfig } from '../../../types'
-import { PiercingStrike, Protect } from '../../Actions'
-import { WitheringAura } from '../../Augments/WitheringAura'
-import { PiercingStrikeId, ProtectId } from '../../Ids'
+import { GhostFlame, PiercingStrike, Protect } from '../../Actions'
+import { CursedMiasma } from '../../Augments/CursedMiasma'
+import { GhostFlameId, PiercingStrikeId, ProtectId } from '../../Ids'
 import { BASE_UNIT } from '../../Units/system/BASE_UNIT'
 
 export const RevenantId = nanoid()
@@ -29,9 +29,13 @@ export const Revenant: UnitBase = {
 }
 
 export const RevenantConfig: UnitBaseConfig = {
-  abilities: [WitheringAura],
+  abilities: [CursedMiasma],
   actionsCount: 5,
   actions: [
+    {
+      id: GhostFlameId,
+      make: (u) => new GhostFlame(u.id, u.teamId),
+    },
     {
       id: PiercingStrikeId,
       make: (u) => new PiercingStrike(u.id, u.teamId),
@@ -41,6 +45,6 @@ export const RevenantConfig: UnitBaseConfig = {
       make: (u) => new Protect(u.id, u.teamId),
     },
   ],
-  defaultAbilityId: WitheringAura.id,
+  defaultAbilityId: CursedMiasma.id,
   defaultActionIds: [PiercingStrikeId, ProtectId],
 }

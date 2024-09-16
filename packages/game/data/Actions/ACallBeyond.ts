@@ -1,7 +1,6 @@
 import {
   Action,
   ActionAi,
-  ActionResolveOptions,
   ActionResult,
   CombatContext,
   Id,
@@ -14,8 +13,7 @@ import {
   getActionData,
   getMutationsFromDamageResult,
 } from '../../utils'
-import { getDamageAi } from '../../utils/getDamageAiAction'
-import { modifyRenderContext } from '../../utils/modifyRenderContext'
+import { getDamageAiRating } from '../../utils/getDamageAiRating'
 import { ACallBeyondId, MagicStageDownParentId } from '../Ids'
 import { UpdateStatStageParent } from '../Modifiers'
 import { Identity } from '../Mutations'
@@ -47,7 +45,7 @@ export class ACallBeyond extends Action {
   criticalFactor = (source: Unit): number | undefined => 1.5
 
   getAi(targets: Unit[], ctx: CombatContext): ActionAi {
-    return getDamageAi(this, targets, ctx)
+    return getDamageAiRating(this, targets, ctx)
   }
 
   mapTargets = (targets: Unit[], ctx: CombatContext): Unit[] => {
@@ -60,10 +58,8 @@ export class ACallBeyond extends Action {
   resolve = (
     source: Unit,
     targets: Unit[],
-    ctx: CombatContext,
-    options?: ActionResolveOptions
+    ctx: CombatContext
   ): ActionResult[] => {
-    ctx = modifyRenderContext(options, ctx)
     const data = getActionData(source, this, ctx)
 
     return [

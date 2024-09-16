@@ -1,17 +1,6 @@
 import random from 'random'
-import {
-  Action,
-  ActionResolveOptions,
-  ActionResult,
-  CombatContext,
-  Id,
-  Unit,
-} from '../../types'
-import {
-  buildActionResult,
-  getActionData,
-  modifyRenderContext,
-} from '../../utils'
+import { Action, ActionResult, CombatContext, Id, Unit } from '../../types'
+import { buildActionResult, getActionData } from '../../utils'
 import { HoldPersonId, StunnedParentId } from '../Ids'
 import { UpdateFlagParent } from '../Modifiers'
 import { Identity } from '../Mutations'
@@ -37,10 +26,8 @@ export class HoldPerson extends Action {
   resolve = (
     source: Unit,
     targets: Unit[],
-    ctx: CombatContext,
-    options: ActionResolveOptions
+    ctx: CombatContext
   ): ActionResult[] => {
-    ctx = modifyRenderContext(options, ctx)
     const data = getActionData(source, this, ctx)
     const duration = random.int(2, 4)
 

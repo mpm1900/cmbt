@@ -2,7 +2,6 @@ import random from 'random'
 import {
   Action,
   ActionAi,
-  ActionResolveOptions,
   ActionResult,
   CombatContext,
   Id,
@@ -12,11 +11,10 @@ import {
   buildActionResult,
   calculateDamages,
   getActionData,
-  getDamageAi,
+  getDamageAiRating,
   getMutationsFromDamageResult,
   ifArray,
 } from '../../utils'
-import { modifyRenderContext } from '../../utils/modifyRenderContext'
 import { MagicStageDownParentId, MindTwistId } from '../Ids'
 import { UpdateStatStageParent } from '../Modifiers'
 import { Identity } from '../Mutations'
@@ -54,16 +52,14 @@ export class MindTwist extends Action {
   criticalThreshold = (source: Unit): number | undefined => undefined
   criticalFactor = (source: Unit): number | undefined => undefined
   getAi(targets: Unit[], ctx: CombatContext): ActionAi {
-    return getDamageAi(this, targets, ctx)
+    return getDamageAiRating(this, targets, ctx)
   }
 
   resolve = (
     source: Unit,
     targets: Unit[],
-    ctx: CombatContext,
-    options: ActionResolveOptions
+    ctx: CombatContext
   ): ActionResult[] => {
-    ctx = modifyRenderContext(options, ctx)
     const data = getActionData(source, this, ctx)
     const applyModifierRoll = random.int(0, 100)
     const applyMagicDown = applyModifierRoll <= this.magicDownChance

@@ -1,6 +1,5 @@
 import {
   Action,
-  ActionResolveOptions,
   ActionResult,
   CombatContext,
   Id,
@@ -13,7 +12,6 @@ import {
   calculateDamages,
   getActionData,
   getMutationsFromDamageResult,
-  modifyRenderContext,
 } from '../../utils'
 import { VampiricTouchId } from '../Ids'
 import { HealParent, Identity } from '../Mutations'
@@ -51,10 +49,8 @@ export class VampiricTouch extends Action {
   resolve = (
     source: Unit,
     targets: Unit[],
-    ctx: CombatContext,
-    options: ActionResolveOptions
+    ctx: CombatContext
   ): ActionResult[] => {
-    ctx = modifyRenderContext(options, ctx)
     const data = getActionData(source, this, ctx)
 
     const modifierFilter = (mod: Modifier) => !data.accuracyRoll.criticalSuccess

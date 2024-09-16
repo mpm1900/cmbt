@@ -1,16 +1,5 @@
-import {
-  Action,
-  ActionResolveOptions,
-  ActionResult,
-  CombatContext,
-  Id,
-  Unit,
-} from '../../types'
-import {
-  buildActionResult,
-  getActionData,
-  modifyRenderContext,
-} from '../../utils'
+import { Action, ActionResult, CombatContext, Id, Unit } from '../../types'
+import { buildActionResult, getActionData } from '../../utils'
 import { AttackStageUpParentId, IntoxicateId } from '../Ids'
 import { UpdateStatStageParent } from '../Modifiers'
 import { DamageParent } from '../Mutations'
@@ -37,10 +26,8 @@ export class Intoxicate extends Action {
   resolve = (
     source: Unit,
     targets: Unit[],
-    ctx: CombatContext,
-    options: ActionResolveOptions
+    ctx: CombatContext
   ): ActionResult[] => {
-    ctx = modifyRenderContext(options, ctx)
     const data = getActionData(source, this, ctx)
 
     return [

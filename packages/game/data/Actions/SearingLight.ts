@@ -1,17 +1,9 @@
-import {
-  Action,
-  ActionResolveOptions,
-  ActionResult,
-  CombatContext,
-  Id,
-  Unit,
-} from '../../types'
+import { Action, ActionResult, CombatContext, Id, Unit } from '../../types'
 import {
   buildActionResult,
   calculateDamages,
   getActionData,
   getMutationsFromDamageResult,
-  modifyRenderContext,
 } from '../../utils'
 import { SearingLightId } from '../Ids'
 import { HealParent, Identity } from '../Mutations'
@@ -42,13 +34,7 @@ export class SearingLight extends Action {
     ]
   }
 
-  resolve(
-    source: Unit,
-    targets: Unit[],
-    ctx: CombatContext,
-    options?: ActionResolveOptions
-  ): ActionResult[] {
-    ctx = modifyRenderContext(options, ctx)
+  resolve(source: Unit, targets: Unit[], ctx: CombatContext): ActionResult[] {
     const data = getActionData(source, this, ctx)
 
     return [

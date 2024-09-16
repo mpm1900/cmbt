@@ -1,7 +1,6 @@
 import {
   Action,
   ActionAi,
-  ActionResolveOptions,
   ActionResult,
   CombatContext,
   Id,
@@ -14,8 +13,7 @@ import {
   getActionData,
   getMutationsFromDamageResult,
 } from '../../utils'
-import { getDamageAi } from '../../utils/getDamageAiAction'
-import { modifyRenderContext } from '../../utils/modifyRenderContext'
+import { getDamageAiRating } from '../../utils/getDamageAiRating'
 import { MindBlastId } from '../Ids'
 import { Identity } from '../Mutations'
 import { EmptyArray } from '../Queries'
@@ -44,7 +42,7 @@ export class MindBlast extends Action {
   criticalFactor = (source: Unit): number | undefined => undefined
 
   getAi(targets: Unit[], ctx: CombatContext): ActionAi {
-    return getDamageAi(this, targets, ctx)
+    return getDamageAiRating(this, targets, ctx)
   }
 
   mapTargets = (targets: Unit[], ctx: CombatContext): Unit[] => {
@@ -57,10 +55,8 @@ export class MindBlast extends Action {
   resolve = (
     source: Unit,
     targets: Unit[],
-    ctx: CombatContext,
-    options?: ActionResolveOptions
+    ctx: CombatContext
   ): ActionResult[] => {
-    ctx = modifyRenderContext(options, ctx)
     const data = getActionData(source, this, ctx)
 
     return [

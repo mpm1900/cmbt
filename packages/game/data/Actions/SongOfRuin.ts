@@ -2,7 +2,6 @@ import random from 'random'
 import {
   Action,
   ActionAi,
-  ActionResolveOptions,
   ActionResult,
   CombatContext,
   Id,
@@ -11,8 +10,7 @@ import {
 import {
   buildActionResult,
   getActionData,
-  getDamageAi,
-  modifyRenderContext,
+  getDamageAiRating,
 } from '../../utils'
 import { SongOfRuinId } from '../Ids'
 import { DamageParent, Identity } from '../Mutations'
@@ -46,16 +44,14 @@ export class SongOfRuin extends Action {
   }
 
   getAi(targets: Unit[], ctx: CombatContext): ActionAi {
-    return getDamageAi(this, targets, ctx)
+    return getDamageAiRating(this, targets, ctx)
   }
 
   resolve = (
     source: Unit,
     targets: Unit[],
-    ctx: CombatContext,
-    options: ActionResolveOptions
+    ctx: CombatContext
   ): ActionResult[] => {
-    ctx = modifyRenderContext(options, ctx)
     const data = getActionData(source, this, ctx)
 
     return [

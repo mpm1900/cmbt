@@ -14,6 +14,7 @@ import {
   CriticalChanceUpParentId,
   CriticalDamageDownParentId,
   CriticalDamageUpParentId,
+  CursedMiasmaId,
   DefenseDownParentId,
   DefenseStageDownParentId,
   DefenseStageUpParentId,
@@ -46,7 +47,6 @@ import {
   SpeedUpParentId,
   SpeedUpTeamId,
   StunnedParentId,
-  WitheringAuraId,
 } from '@repo/game/data'
 import { Id } from '@repo/game/types'
 import { StatModifierIcon } from '@shared/StatModifierIcon'
@@ -137,7 +137,7 @@ export const MODIFIER_ICONS: Record<Id, ReactNode> = {
     </div>
   ),
   [DraconicAuraId]: <GiDragonSpiral className="fill-white h-full w-full" />,
-  [WitheringAuraId]: <GiPoisonGas className="fill-white h-full w-full" />,
+  [CursedMiasmaId]: <GiPoisonGas className="fill-white h-full w-full" />,
   [CreateFirestormOnUnitEnterId]: (
     <GiFireRing className="fill-orange-300 h-full w-full" />
   ),

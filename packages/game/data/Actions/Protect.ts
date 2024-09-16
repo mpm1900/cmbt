@@ -1,14 +1,12 @@
 import {
   Action,
   ACTION_PRIORITIES,
-  ActionResolveOptions,
   ActionResult,
   CombatContext,
   Id,
   Unit,
 } from '../../types'
 import { buildActionResult, getActionData } from '../../utils'
-import { modifyRenderContext } from '../../utils/modifyRenderContext'
 import { ProtectedParentId, ProtectId } from '../Ids'
 import { UpdateFlagParent } from '../Modifiers'
 import { Identity } from '../Mutations'
@@ -31,10 +29,8 @@ export class Protect extends Action {
   resolve = (
     source: Unit,
     targets: Unit[],
-    ctx: CombatContext,
-    options: ActionResolveOptions
+    ctx: CombatContext
   ): ActionResult[] => {
-    ctx = modifyRenderContext(options, ctx)
     const data = getActionData(source, this, ctx)
 
     return [

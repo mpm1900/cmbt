@@ -2,7 +2,6 @@ import random from 'random'
 import {
   Action,
   ActionAi,
-  ActionResolveOptions,
   ActionResult,
   CombatContext,
   Id,
@@ -13,9 +12,8 @@ import {
   calculateDamages,
   getActionData,
   getMutationsFromDamageResult,
-  modifyRenderContext,
 } from '../../utils'
-import { getDamageAi } from '../../utils/getDamageAiAction'
+import { getDamageAiRating } from '../../utils/getDamageAiRating'
 import { WildStrikesId } from '../Ids'
 import { Identity } from '../Mutations'
 import { GetUnits } from '../Queries'
@@ -49,16 +47,14 @@ export class WildStrikes extends Action {
   criticalThreshold = (source: Unit): number | undefined => undefined
   criticalFactor = (source: Unit): number | undefined => undefined
   getAi(targets: Unit[], ctx: CombatContext): ActionAi {
-    return getDamageAi(this, targets, ctx)
+    return getDamageAiRating(this, targets, ctx)
   }
 
   resolve = (
     source: Unit,
     targets: Unit[],
-    ctx: CombatContext,
-    options: ActionResolveOptions
+    ctx: CombatContext
   ): ActionResult[] => {
-    ctx = modifyRenderContext(options, ctx)
     const data = getActionData(source, this, ctx)
     const length = random.int(2, 6)
 

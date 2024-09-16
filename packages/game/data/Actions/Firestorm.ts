@@ -1,16 +1,5 @@
-import {
-  Action,
-  ActionResolveOptions,
-  ActionResult,
-  CombatContext,
-  Id,
-  Unit,
-} from '../../types'
-import {
-  buildActionResult,
-  getActionData,
-  modifyRenderContext,
-} from '../../utils'
+import { Action, ActionResult, CombatContext, Id, Unit } from '../../types'
+import { buildActionResult, getActionData } from '../../utils'
 import { FirestormId, FirestormOnTurnEndId } from '../Ids'
 import { Identity } from '../Mutations'
 import { EmptyArray } from '../Queries/EmptyArray'
@@ -33,10 +22,8 @@ export class Firestorm extends Action {
   resolve = (
     source: Unit,
     targets: Unit[],
-    ctx: CombatContext,
-    options: ActionResolveOptions
+    ctx: CombatContext
   ): ActionResult[] => {
-    ctx = modifyRenderContext(options, ctx)
     const data = getActionData(source, this, ctx)
 
     return [

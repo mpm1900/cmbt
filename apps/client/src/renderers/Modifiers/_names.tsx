@@ -16,6 +16,7 @@ import {
   CriticalChanceUpParentId,
   CriticalDamageDownParentId,
   CriticalDamageUpParentId,
+  CursedMiasmaId,
   DamageAllOnTurnEndId,
   DamageNewUnitsOnUnitEnterId,
   DamageParentOnTurnEndId,
@@ -55,7 +56,6 @@ import {
   SpeedUpParentId,
   SpeedUpTeamId,
   StunnedParentId,
-  WitheringAuraId,
 } from '@repo/game/data'
 
 export const MODIFIER_NAMES: Record<string, string> = {
@@ -74,7 +74,7 @@ export const MODIFIER_NAMES: Record<string, string> = {
   [PoisonedDamageOnTurnEndId]: 'Poisoned',
   [FirestormOnTurnEndId]: 'Firestorm',
   [KillParentOnTurnEndId]: 'Destined Death',
-  [WitheringAuraId]: 'Withering Aura',
+  [CursedMiasmaId]: 'Cursed Miasma',
 
   [AccuracyDownParentId]: 'Accuracy Down',
   [AccuracyUpParentId]: 'Accuracy Up',

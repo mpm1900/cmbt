@@ -1,13 +1,5 @@
-import {
-  Action,
-  ActionResolveOptions,
-  ActionResult,
-  CombatContext,
-  Id,
-  Unit,
-} from '../../types'
+import { Action, ActionResult, CombatContext, Id, Unit } from '../../types'
 import { buildActionResult, getActionData } from '../../utils'
-import { modifyRenderContext } from '../../utils/modifyRenderContext'
 import { DeathRitesId } from '../Ids'
 import { Identity } from '../Mutations'
 import { GetUnits } from '../Queries'
@@ -37,10 +29,8 @@ export class DeathRites extends Action {
   resolve = (
     source: Unit,
     targets: Unit[],
-    ctx: CombatContext,
-    options: ActionResolveOptions
+    ctx: CombatContext
   ): ActionResult[] => {
-    ctx = modifyRenderContext(options, ctx)
     const data = getActionData(source, this, ctx)
 
     return [

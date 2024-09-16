@@ -1,7 +1,6 @@
 import {
   Action,
   ActionAi,
-  ActionResolveOptions,
   ActionResult,
   CombatContext,
   Damage,
@@ -13,10 +12,9 @@ import {
   buildActionResult,
   calculateDamage,
   getActionData,
-  getDamageAi,
+  getDamageAiRating,
   getMutationsFromDamageResult,
 } from '../../utils'
-import { modifyRenderContext } from '../../utils/modifyRenderContext'
 import { FireballId } from '../Ids'
 import { Identity } from '../Mutations'
 import { GetUnits } from '../Queries'
@@ -65,16 +63,14 @@ export class Fireball extends Action {
   criticalThreshold = (source: Unit): number | undefined => undefined
   criticalFactor = (source: Unit): number | undefined => undefined
   getAi(targets: Unit[], ctx: CombatContext): ActionAi {
-    return getDamageAi(this, targets, ctx)
+    return getDamageAiRating(this, targets, ctx)
   }
 
   resolve = (
     source: Unit,
     targets: Unit[],
-    ctx: CombatContext,
-    options: ActionResolveOptions
+    ctx: CombatContext
   ): ActionResult[] => {
-    ctx = modifyRenderContext(options, ctx)
     const data = getActionData(source, this, ctx)
     return [
       buildActionResult(this, data, source, targets, ctx, (modifiedTargets) => {

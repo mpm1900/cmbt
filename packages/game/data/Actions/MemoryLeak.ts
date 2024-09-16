@@ -1,17 +1,12 @@
 import {
   Action,
   ACTION_PRIORITIES,
-  ActionResolveOptions,
   ActionResult,
   CombatContext,
   Id,
   Unit,
 } from '../../types'
-import {
-  buildActionResult,
-  getActionData,
-  modifyRenderContext,
-} from '../../utils'
+import { buildActionResult, getActionData } from '../../utils'
 import { MemoryLeakId } from '../Ids'
 import { DisabledParent } from '../Modifiers'
 import { Identity } from '../Mutations'
@@ -38,10 +33,8 @@ export class MemoryLeak extends Action {
   resolve = (
     source: Unit,
     targets: Unit[],
-    ctx: CombatContext,
-    options: ActionResolveOptions
+    ctx: CombatContext
   ): ActionResult[] => {
-    ctx = modifyRenderContext(options, ctx)
     const data = getActionData(source, this, ctx)
 
     return [

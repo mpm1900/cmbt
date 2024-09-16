@@ -2,7 +2,6 @@ import {
   Action,
   ACTION_PRIORITIES,
   ActionAi,
-  ActionResolveOptions,
   ActionResult,
   CombatContext,
   Id,
@@ -13,9 +12,8 @@ import {
   buildActionResult,
   calculateDamage,
   getActionData,
-  getDamageAi,
+  getDamageAiRating,
   getMutationsFromDamageResult,
-  modifyRenderContext,
 } from '../../utils'
 import { SneakAttackId } from '../Ids'
 import { Identity } from '../Mutations'
@@ -58,7 +56,7 @@ export class SneakAttack extends Action {
     1.5 + source.stats.criticalDamage
 
   getAi(targets: Unit[], ctx: CombatContext): ActionAi {
-    return getDamageAi(this, targets, ctx)
+    return getDamageAiRating(this, targets, ctx)
   }
 
   getPriority(ctx: CombatContext): number {
@@ -71,10 +69,8 @@ export class SneakAttack extends Action {
   resolve = (
     source: Unit,
     targets: Unit[],
-    ctx: CombatContext,
-    options: ActionResolveOptions
+    ctx: CombatContext
   ): ActionResult[] => {
-    ctx = modifyRenderContext(options, ctx)
     const data = getActionData(source, this, ctx)
 
     return [

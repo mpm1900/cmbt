@@ -1,7 +1,6 @@
 import {
   Action,
   ActionAi,
-  ActionResolveOptions,
   ActionResult,
   CombatContext,
   Id,
@@ -14,8 +13,7 @@ import {
   getActionData,
   getMutationsFromDamageResult,
 } from '../../utils'
-import { getDamageAi } from '../../utils/getDamageAiAction'
-import { modifyRenderContext } from '../../utils/modifyRenderContext'
+import { getDamageAiRating } from '../../utils/getDamageAiRating'
 import { EarthquakeId } from '../Ids'
 import { Identity } from '../Mutations'
 import { EmptyArray } from '../Queries'
@@ -46,7 +44,7 @@ export class Earthquake extends Action {
     1.2 + source.stats.criticalDamage
 
   getAi(targets: Unit[], ctx: CombatContext): ActionAi {
-    return getDamageAi(this, targets, ctx)
+    return getDamageAiRating(this, targets, ctx)
   }
 
   mapTargets = (targets: Unit[], ctx: CombatContext): Unit[] => {
@@ -58,10 +56,8 @@ export class Earthquake extends Action {
   resolve = (
     source: Unit,
     targets: Unit[],
-    ctx: CombatContext,
-    options?: ActionResolveOptions
+    ctx: CombatContext
   ): ActionResult[] => {
-    ctx = modifyRenderContext(options, ctx)
     const data = getActionData(source, this, ctx)
 
     return [

@@ -1,20 +1,12 @@
-import {
-  ActionAi,
-  ActionResolveOptions,
-  ActionResult,
-  CombatContext,
-  Id,
-  Unit,
-} from '../../types'
+import { ActionAi, ActionResult, CombatContext, Id, Unit } from '../../types'
 import { Action } from '../../types/Action'
 import {
   applyMutation,
   buildActionResult,
   calculateDamage,
   getActionData,
-  getDamageAi,
+  getDamageAiRating,
   getMutationsFromDamageResult,
-  modifyRenderContext,
 } from '../../utils'
 import { ExplosionId } from '../Ids'
 import { DamageParent, Identity } from '../Mutations'
@@ -41,7 +33,7 @@ export class Explosion extends Action {
   }
 
   getDamage = (source: Unit, targets: Unit[], ctx: CombatContext): number[] => {
-    const mutations = this.resolve(source, targets, ctx, {}).flatMap(
+    const mutations = this.resolve(source, targets, ctx).flatMap(
       (r) => r.mutations ?? []
     )
     return mutations
@@ -55,7 +47,7 @@ export class Explosion extends Action {
   criticalFactor = (source: Unit): number | undefined => undefined
 
   getAi(targets: Unit[], ctx: CombatContext): ActionAi {
-    return getDamageAi(this, targets, ctx)
+    return getDamageAiRating(this, targets, ctx)
   }
 
   mapTargets = (targets: Unit[], ctx: CombatContext): Unit[] => {
@@ -65,10 +57,8 @@ export class Explosion extends Action {
   resolve = (
     source: Unit,
     targets: Unit[],
-    ctx: CombatContext,
-    options: ActionResolveOptions
+    ctx: CombatContext
   ): ActionResult[] => {
-    ctx = modifyRenderContext(options, ctx)
     const data = getActionData(source, this, ctx)
     const remainingHealth = data.source.stats.health - data.source.values.damage
 

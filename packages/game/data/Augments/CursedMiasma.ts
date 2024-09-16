@@ -1,13 +1,13 @@
 import { Augment, Modifier, Mutation, Unit } from '../../types'
-import { WitheringAuraId } from '../Ids'
+import { CursedMiasmaId } from '../Ids'
 import { StatDownStaticAllOnUnitEnter } from '../Triggers'
 
-export const WitheringAura: Augment = {
-  id: WitheringAuraId,
+export const CursedMiasma: Augment = {
+  id: CursedMiasmaId,
   modifiers: (unit: Unit): Modifier[] => {
     return [
       new StatDownStaticAllOnUnitEnter({
-        registryId: WitheringAuraId,
+        registryId: CursedMiasmaId,
         sourceId: unit.id,
         parentId: unit.id,
         stat: 'attack',

@@ -1,7 +1,6 @@
 import {
   Action,
   ActionAi,
-  ActionResolveOptions,
   ActionResult,
   CombatContext,
   Id,
@@ -14,8 +13,7 @@ import {
   getMutationsFromDamageResult,
   getUnitBase,
 } from '../../utils'
-import { getDamageAi } from '../../utils/getDamageAiAction'
-import { modifyRenderContext } from '../../utils/modifyRenderContext'
+import { getDamageAiRating } from '../../utils/getDamageAiRating'
 import { HyperBeamId, StunnedParentId } from '../Ids'
 import { UpdateFlagParent } from '../Modifiers'
 import { UpdateValueParent } from '../Mutations'
@@ -55,16 +53,14 @@ export class HyperBeam extends Action {
   criticalThreshold = (source: Unit): number | undefined => 5
   criticalFactor = (source: Unit): number | undefined => 1.25
   getAi(targets: Unit[], ctx: CombatContext): ActionAi {
-    return getDamageAi(this, targets, ctx)
+    return getDamageAiRating(this, targets, ctx)
   }
 
   resolve = (
     source: Unit,
     targets: Unit[],
-    ctx: CombatContext,
-    options?: ActionResolveOptions
+    ctx: CombatContext
   ): ActionResult[] => {
-    ctx = modifyRenderContext(options, ctx)
     const data = getActionData(source, this, ctx)
 
     return [

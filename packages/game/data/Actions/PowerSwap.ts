@@ -1,7 +1,6 @@
 import {
   Action,
   ACTION_PRIORITIES,
-  ActionResolveOptions,
   ActionResult,
   CombatContext,
   Id,
@@ -11,7 +10,6 @@ import {
   buildActionResult,
   getActionData,
   getModifiersFromUnit,
-  modifyRenderContext,
 } from '../../utils'
 import { PowerSwapId } from '../Ids'
 import { UpdateStatStageParent } from '../Modifiers'
@@ -37,10 +35,8 @@ export class PowerSwap extends Action {
   resolve = (
     source: Unit,
     targets: Unit[],
-    ctx: CombatContext,
-    options: ActionResolveOptions
+    ctx: CombatContext
   ): ActionResult[] => {
-    ctx = modifyRenderContext(options, ctx)
     const data = getActionData(source, this, ctx)
 
     return [

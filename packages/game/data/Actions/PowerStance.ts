@@ -1,13 +1,5 @@
-import {
-  Action,
-  ActionResolveOptions,
-  ActionResult,
-  CombatContext,
-  Id,
-  Unit,
-} from '../../types'
+import { Action, ActionResult, CombatContext, Id, Unit } from '../../types'
 import { buildActionResult, getActionData } from '../../utils'
-import { modifyRenderContext } from '../../utils/modifyRenderContext'
 import { PowerStanceId } from '../Ids'
 import { AddActionParent } from '../Modifiers'
 import { Identity } from '../Mutations'
@@ -30,10 +22,8 @@ export class PowerStance extends Action {
   resolve = (
     source: Unit,
     targets: Unit[],
-    ctx: CombatContext,
-    options: ActionResolveOptions
+    ctx: CombatContext
   ): ActionResult[] => {
-    ctx = modifyRenderContext(options, ctx)
     const data = getActionData(source, this, ctx)
 
     return [

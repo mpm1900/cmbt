@@ -9,7 +9,7 @@ export const SongOfRuinRenderer: ActionRenderer = {
     return (
       <div>
         Deals <DamageListInline damages={action.damages} /> to target enemy unit
-        equal to 50% their remaining Heath.
+        equal to 50% their remaining heath.
       </div>
     )
   },

@@ -29,7 +29,7 @@ export function calculateBaseDamage(
   source: Unit | undefined,
   target: Unit
 ): number {
-  const { power, factor, raw, attackType } = damage
+  const { power, factor, attackType } = damage
 
   if (power && source) {
     const base = getAttackDefenseRatio(power, attackType, source, target)
@@ -42,10 +42,6 @@ export function calculateBaseDamage(
   if (factor) {
     const base = target.stats.health * factor
     return base
-  }
-
-  if (raw) {
-    return raw
   }
 
   return 0

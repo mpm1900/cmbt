@@ -478,7 +478,7 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
                 damage: {
                   attackType: 'physical',
                   damageType: 'force',
-                  raw: spikes.enterDamage,
+                  factor: 1 / 8,
                 },
               })
             }

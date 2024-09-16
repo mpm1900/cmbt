@@ -26,7 +26,7 @@ export function DamageInline(props: DamageInlineProps) {
       {damage && damage.power === Infinity && (
         <div className="text-2xl leading-[20px] max-h-[20px]">∞</div>
       )}
-      {damage && !damage.factor && !damage.raw && damage.power !== Infinity && (
+      {damage && !damage.factor && damage.power !== Infinity && (
         <span className="font-black text-lg leading-[20px] num">
           {damage?.power || '--'}
         </span>
@@ -36,10 +36,6 @@ export function DamageInline(props: DamageInlineProps) {
           {(damage.factor * 100).toFixed(1)}%
         </span>
       )}
-      {damage && damage.raw && (
-        <span className="font-bold num">{damage.raw}</span>
-      )}
-      {damage?.raw && <span>{` raw `}</span>}
       <DamageIcon
         color={color}
         damageType={damage?.damageType}

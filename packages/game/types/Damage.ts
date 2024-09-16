@@ -24,5 +24,4 @@ export type Damage = {
   damageType?: DamageType
   power?: number
   factor?: number
-  raw?: number
 }

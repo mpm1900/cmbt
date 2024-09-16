@@ -48,7 +48,7 @@ export class Spikes extends Action {
               damage: {
                 attackType: 'physical',
                 damageType: 'force',
-                raw: this.enterDamage,
+                factor: 1 / 8,
               },
             }),
           ],

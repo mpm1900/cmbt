@@ -76,11 +76,12 @@ export function ActionButton(props: ActionButtonProps) {
                   className={cn('num', {
                     '': accuracy === baseAccuracy,
                     'text-green-300': accuracy > baseAccuracy,
+                    'text-green-800': accuracy > baseAccuracy && isActive,
                     'text-red-300': accuracy < baseAccuracy,
                     'text-red-800': accuracy < baseAccuracy && isActive,
                   })}
                 >
-                  {accuracy}%
+                  {Math.min(accuracy, 100)}%
                 </span>
               ) : (
                 !renderer.cost && <span className="opacity-25">—</span>

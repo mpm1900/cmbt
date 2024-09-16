@@ -52,7 +52,7 @@ export function ActiveAction(props: ActiveActionProps) {
                   'text-red-300': accuracy < baseAccuracy,
                 })}
               >
-                {accuracy}%
+                {Math.min(accuracy, 100)}%
               </span>
 
               <span>Acc.</span>

@@ -1,5 +1,6 @@
 import {
   Action,
+  ACTION_PRIORITIES,
   ActionAi,
   ActionResolveOptions,
   ActionResult,
@@ -34,7 +35,7 @@ export class SneakAttack extends Action {
         isHidden: false,
       }),
       maxTargetCount: 1,
-      priority: 1,
+      priority: ACTION_PRIORITIES.DEFAULT,
     })
 
     this.damages = [
@@ -63,8 +64,8 @@ export class SneakAttack extends Action {
   getPriority(ctx: CombatContext): number {
     const source = ctx.units.find((u) => u.id === this.sourceId)!
     const modified = applyModifiers(source, ctx).unit
-    if (modified.flags.isHidden) return 1
-    return 0
+    if (modified.flags.isHidden) return ACTION_PRIORITIES.FAST
+    return ACTION_PRIORITIES.DEFAULT
   }
 
   resolve = (

@@ -1,5 +1,6 @@
 import {
   Action,
+  ACTION_PRIORITIES,
   ActionResolveOptions,
   ActionResult,
   CombatContext,
@@ -22,7 +23,7 @@ export class PowerSwap extends Action {
     super(PowerSwapId, {
       sourceId,
       teamId,
-      priority: -1,
+      priority: ACTION_PRIORITIES.SLOW,
       cost: new Identity(),
       targets: new GetUnits({
         teamId: teamId,

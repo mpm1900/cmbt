@@ -7,6 +7,18 @@ import { Mutation } from './Mutation'
 import { Query } from './Query'
 import { Unit } from './Unit'
 
+export const ACTION_PRIORITIES = {
+  PRE_ITEM: 6,
+  ITEM: 5,
+  PROTECT: 4,
+  AFTER_PROTECT: 3,
+  SUPER_FAST: 2,
+  FAST: 1,
+  DEFAULT: 0,
+  SLOW: -1,
+  LAST: -7,
+}
+
 export type ActionAccuracyResult = {
   roll: number
   success: boolean
@@ -123,7 +135,7 @@ export abstract class Action {
     this.teamId = props.teamId
     this.cost = props.cost
     this.targets = props.targets
-    this.priority = props.priority ?? 0
+    this.priority = props.priority ?? ACTION_PRIORITIES.DEFAULT
     this.maxTargetCount = props.maxTargetCount
   }
 }

@@ -1,4 +1,11 @@
-import { Action, ActionResult, CombatContext, Id, Unit } from '../../../types'
+import {
+  Action,
+  ACTION_PRIORITIES,
+  ActionResult,
+  CombatContext,
+  Id,
+  Unit,
+} from '../../../types'
 import { getModifiersFromUnit } from '../../../utils'
 import { SwitchUnitId } from '../../Ids'
 import { Identity } from '../../Mutations'
@@ -10,7 +17,7 @@ export class SwitchUnit extends Action {
     super(SwitchUnitId, {
       sourceId,
       teamId,
-      priority: 2,
+      priority: ACTION_PRIORITIES.ITEM,
       cost: new Identity(),
       targets: new GetUnits({
         teamId: teamId,

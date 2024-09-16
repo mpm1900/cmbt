@@ -1,5 +1,6 @@
 import {
   Action,
+  ACTION_PRIORITIES,
   ActionResolveOptions,
   ActionResult,
   CombatContext,
@@ -8,7 +9,7 @@ import {
 } from '../../types'
 import { buildActionResult, getActionData } from '../../utils'
 import { modifyRenderContext } from '../../utils/modifyRenderContext'
-import { BaneId, BanedParentId } from '../Ids'
+import { BanedParentId, BaneId } from '../Ids'
 import { UpdateFlagParent } from '../Modifiers'
 import { Identity } from '../Mutations'
 import { GetUnits } from '../Queries'
@@ -25,7 +26,7 @@ export class Bane extends Action {
         isHidden: false,
       }),
       maxTargetCount: 1,
-      priority: 2,
+      priority: ACTION_PRIORITIES.SUPER_FAST,
     })
   }
 

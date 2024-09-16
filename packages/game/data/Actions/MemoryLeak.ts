@@ -1,5 +1,6 @@
 import {
   Action,
+  ACTION_PRIORITIES,
   ActionResolveOptions,
   ActionResult,
   CombatContext,
@@ -25,7 +26,7 @@ export class MemoryLeak extends Action {
       teamId,
       cost: new Identity({ sourceId }),
       targets: new GetUnits({ isActive: true, notTeamId: teamId }),
-      priority: -1,
+      priority: ACTION_PRIORITIES.SLOW,
       maxTargetCount: 1,
     })
   }

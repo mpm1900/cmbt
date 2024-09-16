@@ -1,6 +1,7 @@
 import { nanoid } from 'nanoid'
 import {
   Action,
+  ACTION_PRIORITIES,
   ActionProps,
   ActionResult,
   CombatContext,
@@ -57,7 +58,7 @@ export const Potion = (): Item => ({
       sourceId: u.id,
       teamId: u.teamId,
       maxTargetCount: 1,
-      priority: 5,
+      priority: ACTION_PRIORITIES.ITEM,
       cost: new Identity({}),
     }),
   cost: 150,

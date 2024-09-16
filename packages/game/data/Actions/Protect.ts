@@ -1,5 +1,6 @@
 import {
   Action,
+  ACTION_PRIORITIES,
   ActionResolveOptions,
   ActionResult,
   CombatContext,
@@ -23,7 +24,7 @@ export class Protect extends Action {
       cost: new Identity({}),
       targets: new EmptyArray(),
       maxTargetCount: 0,
-      priority: 4,
+      priority: ACTION_PRIORITIES.PROTECT,
     })
   }
 

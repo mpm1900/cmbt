@@ -1,5 +1,6 @@
 import {
   Action,
+  ACTION_PRIORITIES,
   ActionResolveOptions,
   ActionResult,
   CombatContext,
@@ -23,7 +24,7 @@ export class Taunt extends Action {
       teamId,
       cost: new Identity({}),
       targets: new EmptyArray(),
-      priority: 3,
+      priority: ACTION_PRIORITIES.AFTER_PROTECT,
       maxTargetCount: 0,
     })
   }

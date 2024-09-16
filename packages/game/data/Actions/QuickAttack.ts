@@ -1,5 +1,6 @@
 import {
   Action,
+  ACTION_PRIORITIES,
   ActionAi,
   ActionResolveOptions,
   ActionResult,
@@ -30,7 +31,7 @@ export class QuickAttack extends Action {
         isActive: true,
         isHidden: false,
       }),
-      priority: 1,
+      priority: ACTION_PRIORITIES.FAST,
       maxTargetCount: 1,
     })
 

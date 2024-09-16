@@ -4,12 +4,12 @@ import {
   DivineHealingId,
   DraconicAuraId,
   FirestormOnTurnEndId,
-  HiddenId,
   InfernoId,
   InsulatedId,
   RegenerationId,
   RubyAugmentId,
   ScholarId,
+  TallGrassId,
 } from '@repo/game/data'
 import { Id } from '@repo/game/types'
 import { ModifierInline } from '@shared/ModifierInline'
@@ -31,8 +31,14 @@ export const AugmentRenderers: Record<Id, AugmentRenderer> = {
   [DraconicAuraId]: {
     name: <div className="text-white">{AUGMENT_NAMES[DraconicAuraId]}</div>,
   },
-  [HiddenId]: {
-    name: <div className="text-white">{AUGMENT_NAMES[HiddenId]}</div>,
+  [TallGrassId]: {
+    name: <div className="text-white">{AUGMENT_NAMES[TallGrassId]}</div>,
+    list: true,
+    description: () => (
+      <div>
+        This unit gains the following for their first 2 turns of combat:
+      </div>
+    ),
   },
   [InsulatedId]: {
     name: <div className="text-white">{AUGMENT_NAMES[InsulatedId]}</div>,

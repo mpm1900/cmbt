@@ -12,7 +12,7 @@ import {
 import {
   applyModifiers,
   buildActionResult,
-  calculateDamage,
+  calculateDamages,
   getActionData,
   getDamageAiRating,
   getDamageResult,
@@ -73,7 +73,7 @@ export class Pyroclash extends Action {
     )
 
     const damages = modifiedTargets.map((target) =>
-      calculateDamage(this.damage, data.source, target, data.accuracyRoll)
+      calculateDamages([this.damage], data.source, target, data.accuracyRoll)
     )
     const recoils = damages.map((damage) =>
       getDamageResult({

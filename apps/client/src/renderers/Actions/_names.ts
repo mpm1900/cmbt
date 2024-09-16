@@ -12,7 +12,6 @@ import {
   DragonStanceId,
   EarthquakeId,
   ElixirOfPowerId,
-  ExplosionId,
   FireballId,
   FirePunchId,
   FirestormId,
@@ -67,7 +66,6 @@ export const ACTION_NAMES: Record<string, string> = {
 
   [PiercingStrikeId]: 'Piercing Strike',
   [EarthquakeId]: 'Earthquake',
-  [ExplosionId]: 'Explosion',
   [FireballId]: 'Fireball',
   [FirePunchId]: 'Fire Punch',
   [WildStrikesId]: 'Wild Strikes',

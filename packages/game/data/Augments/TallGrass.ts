@@ -1,9 +1,9 @@
 import { Augment, Modifier, Mutation, Unit } from '../../types'
-import { HiddenId, HiddenParentId } from '../Ids'
+import { HiddenParentId, TallGrassId } from '../Ids'
 import { UpdateFlagParent } from '../Modifiers'
 
-export const Hidden: Augment = {
-  id: HiddenId,
+export const TallGrass: Augment = {
+  id: TallGrassId,
   modifiers(unit: Unit): Modifier[] {
     return [
       new UpdateFlagParent({

@@ -17,7 +17,6 @@ import {
   DragonStanceId,
   EarthquakeId,
   ElixirOfPowerId,
-  ExplosionId,
   Fireball,
   FireballId,
   FirePunch,
@@ -263,16 +262,6 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
       </>
     ),
   },
-  [ExplosionId]: {
-    name: 'Explosion',
-    description: (action) => (
-      <>
-        Deals damage equal to 4 times this unit's physical stat to all other
-        units. This unit's health becomes zero.
-      </>
-    ),
-  },
-
   [FireballId]: {
     name: ACTION_NAMES[FireballId],
     description: (action) => {

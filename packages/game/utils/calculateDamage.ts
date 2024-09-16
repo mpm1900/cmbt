@@ -4,6 +4,7 @@ import {
   AttackType,
   Damage,
   DamageType,
+  Id,
   Unit,
 } from '../types'
 
@@ -104,10 +105,12 @@ export function getDamageResult(props: {
   damages: {
     attackType: AttackType | undefined
     damage: number
+    result?: CalculateDamageAmountResult
   }[]
 }) {
   const { evasionSuccess, target, damages } = props
 
+  let results: CalculateDamageAmountResult[] = []
   let damage = 0
   let physicalArmor = 0
   let magicArmor = 0
@@ -117,6 +120,7 @@ export function getDamageResult(props: {
 
   if (evasionSuccess) {
     return {
+      results,
       evasionSuccess,
       damage,
       physicalArmor,
@@ -137,6 +141,9 @@ export function getDamageResult(props: {
     }
 
     damage += value.damage - (physicalArmor + magicArmor)
+    if (value.result) {
+      results.push(value.result)
+    }
   })
 
   return {
@@ -144,14 +151,18 @@ export function getDamageResult(props: {
     evasionSuccess,
     physicalArmor,
     magicArmor,
+    results,
   }
 }
 
-export type CalculateDamageConfig = ActionAccuracyResult & {
+export type CalculateDamageConfig = Partial<ActionAccuracyResult> & {
   randomFactor?: number
+  evasionSuccess?: boolean
 }
 
 export type CalculateDamageAmountResult = {
+  sourceId?: Id
+  targetId: Id
   base: number
   attackTypeFactor: number
   damageTypeFactor: number
@@ -189,6 +200,8 @@ export function calculateDamageAmount(
   const final = Math.min(remainingHealth, Math.round(raw))
 
   return {
+    sourceId: source?.id,
+    targetId: target.id,
     base,
     attackTypeFactor,
     damageTypeFactor,
@@ -204,63 +217,31 @@ export type CalculateDamageResult = {
   evasionSuccess: boolean
   physicalArmor: number
   magicArmor: number
-}
-
-export function calculatePureDamage(
-  damage: Damage,
-  target: Unit
-): CalculateDamageResult {
-  const result = calculateDamageAmount(damage, undefined, target)
-
-  return getDamageResult({
-    target,
-    evasionSuccess: false,
-    damages: [
-      {
-        attackType: damage.attackType,
-        damage: result.final,
-      },
-    ],
-  })
-}
-
-export function calculateDamage(
-  damage: Damage,
-  source: Unit,
-  target: Unit,
-  config: CalculateDamageConfig
-): CalculateDamageResult {
-  const evasionRoll = random.int(0, 100)
-  const evasionSuccess = target.stats.evasion > evasionRoll
-  const result = calculateDamageAmount(damage, source, target, config)
-
-  return getDamageResult({
-    target,
-    evasionSuccess,
-    damages: [
-      {
-        attackType: damage.attackType,
-        damage: result.final,
-      },
-    ],
-  })
+  results: CalculateDamageAmountResult[]
 }
 
 export function calculateDamages(
   damages: Damage[],
-  source: Unit,
+  source: Unit | undefined,
   target: Unit,
   config: CalculateDamageConfig
 ): CalculateDamageResult {
   const evasionRoll = random.int(0, 100)
-  const evasionSuccess = target.stats.evasion > evasionRoll
+  const evasionSuccess =
+    config.evasionSuccess === undefined
+      ? target.stats.evasion > evasionRoll
+      : config.evasionSuccess
 
   return getDamageResult({
     target,
     evasionSuccess,
-    damages: damages.map((damage) => ({
-      damage: calculateDamageAmount(damage, source, target, config).final,
-      attackType: damage.attackType,
-    })),
+    damages: damages.map((damage) => {
+      const result = calculateDamageAmount(damage, source, target, config)
+      return {
+        damage: result.final,
+        attackType: damage.attackType,
+        result,
+      }
+    }),
   })
 }

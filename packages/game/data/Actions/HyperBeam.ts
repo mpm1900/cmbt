@@ -8,7 +8,7 @@ import {
 } from '../../types'
 import {
   buildActionResult,
-  calculateDamage,
+  calculateDamages,
   getActionData,
   getMutationsFromDamageResult,
   getUnitBase,
@@ -74,11 +74,13 @@ export class HyperBeam extends Action {
           onSuccess: {
             mutations: modifiedTargets.flatMap((target) => {
               const { base } = getUnitBase(source.baseId)
-              const damage = calculateDamage(
-                {
-                  ...this.damages[0]!,
-                  power: (base?.stats.magic ?? 0) * 2,
-                },
+              const damage = calculateDamages(
+                [
+                  {
+                    ...this.damages[0]!,
+                    power: base!.stats.magic * 2,
+                  },
+                ],
                 data.source,
                 target,
                 data.accuracyRoll

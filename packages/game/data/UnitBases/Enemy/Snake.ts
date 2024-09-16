@@ -1,7 +1,7 @@
 import { nanoid } from 'nanoid'
 import { UnitBase, UnitBaseConfig } from '../../../types'
 import { Bite } from '../../Actions'
-import { Hidden } from '../../Augments'
+import { TallGrass } from '../../Augments'
 import { BiteId } from '../../Ids'
 import { BASE_UNIT } from '../../Units/system/BASE_UNIT'
 
@@ -29,7 +29,7 @@ export const Snake: UnitBase = {
 }
 
 export const SnakeConfig: UnitBaseConfig = {
-  abilities: [Hidden],
+  abilities: [TallGrass],
   actionsCount: 5,
   actions: [
     {
@@ -37,6 +37,6 @@ export const SnakeConfig: UnitBaseConfig = {
       make: (u) => new Bite(u.id, u.teamId),
     },
   ],
-  defaultAbilityId: Hidden.id,
+  defaultAbilityId: TallGrass.id,
   defaultActionIds: [BiteId],
 }

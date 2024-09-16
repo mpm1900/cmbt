@@ -10,7 +10,7 @@ import {
 import {
   applyModifiers,
   buildActionResult,
-  calculateDamage,
+  calculateDamages,
   getActionData,
   getDamageAiRating,
   getMutationsFromDamageResult,
@@ -78,8 +78,8 @@ export class Fireball extends Action {
           onSuccess: {
             mutations: modifiedTargets.flatMap((target) => {
               const isTarget = !!targets.find((t) => t.id === target.id)
-              const damage = calculateDamage(
-                isTarget ? this.damages[0] : this.splashDamage,
+              const damage = calculateDamages(
+                [isTarget ? this.damages[0] : this.splashDamage],
                 data.source,
                 target,
                 data.accuracyRoll

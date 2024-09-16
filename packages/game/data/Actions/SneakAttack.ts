@@ -10,7 +10,7 @@ import {
 import {
   applyModifiers,
   buildActionResult,
-  calculateDamage,
+  calculateDamages,
   getActionData,
   getDamageAiRating,
   getMutationsFromDamageResult,
@@ -83,13 +83,16 @@ export class SneakAttack extends Action {
         (modifiedTargets) => ({
           onSuccess: {
             mutations: modifiedTargets.flatMap((target) => {
-              const damage = calculateDamage(
-                {
-                  ...this.damages[0],
-                  power: data.source.flags.isHidden
-                    ? this.hiddenPower
-                    : this.damages[0].power,
-                },
+              const power = data.source.flags.isHidden
+                ? this.hiddenPower
+                : this.damages[0].power
+              const damage = calculateDamages(
+                [
+                  {
+                    ...this.damages[0],
+                    power,
+                  },
+                ],
                 data.source,
                 target,
                 data.accuracyRoll

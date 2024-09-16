@@ -8,7 +8,7 @@ import {
 } from '../../types'
 import {
   applyModifiers,
-  calculatePureDamage,
+  calculateDamages,
   getMutationsFromDamageResult,
 } from '../../utils'
 import { DamageAllOnTurnEndId } from '../Ids'
@@ -38,7 +38,9 @@ export class DamageAllOnTurnEnd extends Trigger {
     const units = ctx.units.filter((u) => this.filter(u, ctx, args))
     return units.flatMap((parent) => {
       const target = applyModifiers(parent, ctx, args).unit
-      const result = calculatePureDamage(this.damage, target)
+      const result = calculateDamages([this.damage], undefined, target, {
+        evasionSuccess: false,
+      })
       return getMutationsFromDamageResult(source, parent, result)
     })
   }

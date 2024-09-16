@@ -9,7 +9,6 @@ import {
 } from '../../types'
 import {
   buildActionResult,
-  calculateDamage,
   calculateDamages,
   getActionData,
   getDamageAiRating,
@@ -86,8 +85,8 @@ export class BodySlam extends Action {
           },
           onFailure: {
             mutations: (() => {
-              const damage = calculateDamage(
-                this.missDamage,
+              const damage = calculateDamages(
+                [this.missDamage],
                 data.source,
                 source,
                 data.accuracyRoll

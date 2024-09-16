@@ -28,7 +28,7 @@ export function Builder() {
         <div className="flex flex-col flex-1 items-center p-8 pt-0">
           <div className="space-y-4">
             <div className="flex">
-              <div className="flex flex-col items-start w-full p-12 space-y-4">
+              <div className="flex flex-col items-start w-full p-12 pb-2 space-y-4">
                 <div className="text-7xl font-black">Who are you?</div>
                 <div className="text-lg text-muted-foreground">
                   Change up your party if you want and then hit "Start!" to

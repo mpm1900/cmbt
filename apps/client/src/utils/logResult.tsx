@@ -15,6 +15,8 @@ export function logResult(
   const { addedModifiers: modifiers, mutations, shouldLog } = result
 
   logMiss(result, log, ctx)
+  logCritical(result, log, ctx)
+
   if (mutations?.length) {
     logMutations(mutations, log, ctx)
   }
@@ -22,7 +24,6 @@ export function logResult(
     logModifiers(modifiers, log, ctx)
   }
 
-  logCritical(result, log, ctx)
   logActionSuccessFailure(result, log, ctx)
   if (result.protectedTargets) {
     result.protectedTargets.forEach((unit) => {

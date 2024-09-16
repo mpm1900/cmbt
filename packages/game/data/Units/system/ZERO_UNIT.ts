@@ -71,6 +71,7 @@ export const ZERO_UNIT: Unit = {
     isChoiceLocked: false,
     isBaned: false,
     isHidden: false,
+    isLocked: false,
     isProtected: false,
     isInspected: false,
     isStunned: false,

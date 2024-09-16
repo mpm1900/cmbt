@@ -41,11 +41,12 @@ export type Values = Record<ValueKey, number>
 
 export type FlagKey =
   | 'isActive'
+  | 'isBaned'
   | 'isBlessed'
   | 'isChoiceLocked'
-  | 'isBaned'
   | 'isHidden'
   | 'isInspected'
+  | 'isLocked'
   | 'isProtected'
   | 'isStunned'
 export type Flags = Record<FlagKey, boolean>

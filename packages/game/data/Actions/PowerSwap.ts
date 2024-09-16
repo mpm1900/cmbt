@@ -13,7 +13,8 @@ import {
 } from '../../utils'
 import { PowerSwapId } from '../Ids'
 import { UpdateStatStageParent } from '../Modifiers'
-import { AddModifiersToParent, Identity, SetIsActiveParent } from '../Mutations'
+import { Identity, SetIsActiveParent } from '../Mutations'
+import { SetModifiersParent } from '../Mutations/system/SetModifiersParent'
 import { GetUnits } from '../Queries'
 
 export class PowerSwap extends Action {
@@ -55,7 +56,7 @@ export class PowerSwap extends Action {
                 parentId: source.id,
                 isActive: false,
               }),
-              new AddModifiersToParent({
+              new SetModifiersParent({
                 sourceId: source.id,
                 parentId: source.id,
                 modifiers: ctx.modifiers.filter(
@@ -101,16 +102,6 @@ export class PowerSwap extends Action {
                 return item
               })
             },
-            /*
-          updateModifiers: (modifiers) => {
-            return modifiers.map((modifier) => {
-              const target = modifiedTargets[0]
-              if (modifier.parentId === this.sourceId) {
-                modifier.parentId = target.id
-              }
-              return modifier
-            })
-          } */
           },
         })
       ),

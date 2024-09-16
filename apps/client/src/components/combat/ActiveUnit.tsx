@@ -16,6 +16,7 @@ export function ActiveUnit() {
   const ctx = useCombatContext()
   const actions = useActions()
   const { activeUnit, setActiveUnit } = useCombatUi()
+  const modified = activeUnit ? applyModifiers(activeUnit, ctx).unit : undefined
   const [activeTab, setActiveTab] = useState('actions')
   const switchAction = new SwitchUnit(
     activeUnit?.id ?? '',
@@ -54,7 +55,7 @@ export function ActiveUnit() {
     }
   }, [ctx.turn.status])
 
-  if (!activeUnit) return null
+  if (!activeUnit || !modified) return null
   return (
     <Tabs
       value={activeTab}
@@ -63,7 +64,9 @@ export function ActiveUnit() {
     >
       <TabsList className="grid w-full grid-cols-3">
         <TabsTrigger value="actions">Actions</TabsTrigger>
-        <TabsTrigger value="units">Units</TabsTrigger>
+        <TabsTrigger value="units" disabled={modified.flags.isLocked}>
+          Units
+        </TabsTrigger>
         <TabsTrigger value="items">Items</TabsTrigger>
       </TabsList>
       <TabsContent value="actions">

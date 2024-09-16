@@ -55,7 +55,6 @@ export function getDamageNegation(
   const typeNegation = target.stats[`${type}Negation`]
   return (100 - typeNegation) / 100
 }
-
 export function getDamageExpansion(
   type: DamageType | undefined,
   source: Unit | undefined
@@ -73,7 +72,6 @@ export function getAttackTypeNegation(
   const typeNegation = target.stats[`${type}Negation`]
   return (100 - typeNegation) / 100
 }
-
 export function getAttackTypeExpansion(
   type: AttackType | undefined,
   target: Unit | undefined
@@ -83,27 +81,20 @@ export function getAttackTypeExpansion(
   return typeExpansion / 100
 }
 
-export function getDamageTypedDamage(
+export function getDamageTypeMultiplier(
   type: DamageType | undefined,
-  damage: number,
   source: Unit | undefined,
   target: Unit
 ) {
-  return (
-    damage * getDamageExpansion(type, source) * getDamageNegation(type, target)
-  )
+  return getDamageExpansion(type, source) * getDamageNegation(type, target)
 }
-
-export function getAttackTypeDamage(
+export function getAttackTypeMultiplier(
   type: AttackType | undefined,
-  damage: number,
   source: Unit | undefined,
   target: Unit
 ) {
   return (
-    damage *
-    getAttackTypeExpansion(type, source) *
-    getAttackTypeNegation(type, target)
+    getAttackTypeExpansion(type, source) * getAttackTypeNegation(type, target)
   )
 }
 
@@ -160,6 +151,54 @@ export type CalculateDamageConfig = ActionAccuracyResult & {
   randomFactor?: number
 }
 
+export type CalculateDamageAmountResult = {
+  base: number
+  attackTypeFactor: number
+  damageTypeFactor: number
+  criticalFactor: number
+  randomFactor: number
+  raw: number
+  final: number
+}
+
+export function calculateDamageAmount(
+  damage: Damage,
+  source: Unit | undefined,
+  target: Unit,
+  config?: CalculateDamageConfig
+): CalculateDamageAmountResult {
+  const base = calculateBaseDamage(damage, source, target)
+  const attackTypeFactor = getAttackTypeMultiplier(
+    damage.attackType,
+    source,
+    target
+  )
+  const damageTypeFactor = getDamageTypeMultiplier(
+    damage.damageType,
+    source,
+    target
+  )
+  const criticalFactor = config?.criticalSuccess
+    ? (config?.criticalFactor ?? 1)
+    : 1
+  const randomFactor = config?.randomFactor ?? 1
+
+  const raw =
+    base * attackTypeFactor * damageTypeFactor * criticalFactor * randomFactor
+  const remainingHealth = target.stats.health - target.values.damage
+  const final = Math.min(remainingHealth, Math.round(raw))
+
+  return {
+    base,
+    attackTypeFactor,
+    damageTypeFactor,
+    criticalFactor,
+    randomFactor,
+    raw,
+    final,
+  }
+}
+
 export type CalculateDamageResult = {
   damage: number
   evasionSuccess: boolean
@@ -167,23 +206,11 @@ export type CalculateDamageResult = {
   magicArmor: number
 }
 
-export function calculatePureDamage(damage: Damage, target: Unit) {
-  const base = calculateBaseDamage(damage, undefined, target)
-  const attackDamage = getAttackTypeDamage(
-    damage.attackType,
-    base,
-    undefined,
-    target
-  )
-  const typedDamage = getDamageTypedDamage(
-    damage.damageType,
-    attackDamage,
-    undefined,
-    target
-  )
-
-  const remainingHealth = target.stats.health - target.values.damage
-  const damageAmount = Math.min(remainingHealth, Math.round(typedDamage))
+export function calculatePureDamage(
+  damage: Damage,
+  target: Unit
+): CalculateDamageResult {
+  const result = calculateDamageAmount(damage, undefined, target)
 
   return getDamageResult({
     target,
@@ -191,43 +218,10 @@ export function calculatePureDamage(damage: Damage, target: Unit) {
     damages: [
       {
         attackType: damage.attackType,
-        damage: damageAmount,
+        damage: result.final,
       },
     ],
   })
-}
-
-export function calculateDamageAmount(
-  damage: Damage,
-  source: Unit,
-  target: Unit,
-  config: CalculateDamageConfig
-) {
-  const base = calculateBaseDamage(damage, source, target)
-  const attackDamage = getAttackTypeDamage(
-    damage.attackType,
-    base,
-    source,
-    target
-  )
-  const typedDamage = getDamageTypedDamage(
-    damage.damageType,
-    attackDamage,
-    source,
-    target
-  )
-  const criticalFactor = config.criticalSuccess
-    ? (config.criticalFactor ?? 1)
-    : 1
-  const randomFactor = config.randomFactor ?? 1
-
-  const remainingHealth = target.stats.health - target.values.damage
-  const damageAmount = Math.min(
-    remainingHealth,
-    Math.round(typedDamage * criticalFactor * randomFactor)
-  )
-
-  return damageAmount
 }
 
 export function calculateDamage(
@@ -238,7 +232,7 @@ export function calculateDamage(
 ): CalculateDamageResult {
   const evasionRoll = random.int(0, 100)
   const evasionSuccess = target.stats.evasion > evasionRoll
-  const damageAmount = calculateDamageAmount(damage, source, target, config)
+  const result = calculateDamageAmount(damage, source, target, config)
 
   return getDamageResult({
     target,
@@ -246,7 +240,7 @@ export function calculateDamage(
     damages: [
       {
         attackType: damage.attackType,
-        damage: damageAmount,
+        damage: result.final,
       },
     ],
   })
@@ -265,7 +259,7 @@ export function calculateDamages(
     target,
     evasionSuccess,
     damages: damages.map((damage) => ({
-      damage: calculateDamageAmount(damage, source, target, config),
+      damage: calculateDamageAmount(damage, source, target, config).final,
       attackType: damage.attackType,
     })),
   })

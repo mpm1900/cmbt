@@ -9,6 +9,7 @@ import {
   DamageParentOnTurnEndId,
   DisabledParentId,
   DrainLifeParentOnTurnEndId,
+  EnragedParentId,
   HealParentOnTurnEndId,
   HealParentOnUnitSwitchId,
   HiddenParentId,
@@ -33,6 +34,7 @@ import { AddStatModifiersImmunityAllRenderer } from './AddStatModifiersImmunityA
 import { BanedParentRenderer } from './BanedParent'
 import { BlessedParentRenderer } from './BlessedParent'
 import { DisabledParentRenderer } from './DisabledParent'
+import { EnragedParentRenderer } from './EnragedParent'
 import { HiddenParentRenderer } from './HiddenParent'
 import { InspectedAllRenderer } from './InspectedAll'
 import { InvertSpeedAllRenderer } from './InvertSpeedAll'
@@ -65,9 +67,10 @@ export type ModifierRenderer = {
 export const ModifierRenderers: Record<string, ModifierRenderer> = {
   [AddActionParentId]: AddActionParentRenderer,
   [AddStatModifiersImmunityAllId]: AddStatModifiersImmunityAllRenderer,
+  [BanedParentId]: BanedParentRenderer,
   [BlessedParentId]: BlessedParentRenderer,
   [DisabledParentId]: DisabledParentRenderer,
-  [BanedParentId]: BanedParentRenderer,
+  [EnragedParentId]: EnragedParentRenderer,
   [HiddenParentId]: HiddenParentRenderer,
   [InspectedAllId]: InspectedAllRenderer,
   [InvertSpeedAllId]: InvertSpeedAllRenderer,

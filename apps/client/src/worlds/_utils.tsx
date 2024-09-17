@@ -16,6 +16,7 @@ import { makeUnit } from '@repo/game/utils'
 import { nanoid } from 'nanoid'
 import random from 'random'
 import { ReactNode } from 'react'
+import { BsQuestionLg } from 'react-icons/bs'
 
 export function edge(target: Id): WorldEdge {
   return {
@@ -98,7 +99,10 @@ export function check(props: CheckProps): EncounterChoice | undefined {
     before: (
       <ChoiceAttributes>
         <div>{props.icon}</div>
-        <div className="num">{`,${props.chance}%`}</div>
+        <div>,</div>
+        <div>
+          <BsQuestionLg />
+        </div>
       </ChoiceAttributes>
     ),
     label: props.label,

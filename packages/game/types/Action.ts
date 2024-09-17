@@ -113,9 +113,12 @@ export abstract class Action {
     const canPayCost = checkActionCost(this, source)
     const isChoiceLocked =
       source.flags.isChoiceLocked && source.metadata.lastUsedActionId
+    const isDamageLocked =
+      source.flags.isDamageLocked && this.damages.length === 0
     const isEnabled =
       !isDisabled &&
       canPayCost &&
+      !isDamageLocked &&
       (isChoiceLocked ? source.metadata.lastUsedActionId === this.id : true)
 
     return isEnabled

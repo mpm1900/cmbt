@@ -6,6 +6,7 @@ import {
   BaneId,
   BiteId,
   BlessId,
+  BoastId,
   BodySlamId,
   Burn,
   ChillingGraspId,
@@ -53,6 +54,7 @@ import {
   Protect,
   ProtectedParentId,
   ProtectId,
+  ProvokeId,
   PyroclashId,
   QuickAttack,
   QuickAttackId,
@@ -73,7 +75,6 @@ import {
   SwitchUnitId,
   SwordsDance,
   SwordsDanceId,
-  TauntId,
   TimeBendId,
   TrickRoomId,
   UpdateFlagParent,
@@ -98,6 +99,7 @@ import { ArmorUpRenderer } from './ArmorUp'
 import { BaneRenderer } from './Bane'
 import { BiteRenderer } from './Bite'
 import { BlessRenderer } from './Bless'
+import { TauntRenderer } from './Boast'
 import { BodySlamRenderer } from './BodySlam'
 import { ChillingGraspRenderer } from './ChillingGrasp'
 import { DeathRitesRenderer } from './DeathRites'
@@ -120,13 +122,13 @@ import { PiercingStrikeRenderer } from './PiercingStrike'
 import { PowerCleaveRenderer } from './PowerCleave'
 import { PowerStanceRenderer } from './PowerStance'
 import { PowerSwapRenderer } from './PowerSwap'
+import { ProvokeRenderer } from './Provoke'
 import { PyroclashRenderer } from './Pyroclash'
 import { RetreatingBlowRenderer } from './RetreatingBlow'
 import { SearingLightRenderer } from './SearingLight'
 import { SmiteRenderer } from './Smite'
 import { SneakAttackRenderer } from './SneakAttack'
 import { SongOfRuinRenderer } from './SongOfRuin'
-import { TauntRenderer } from './Taunt'
 import { TimeBendRenderer } from './TimeBend'
 import { VampiricTouchRenderer } from './VampiricTouch'
 
@@ -180,13 +182,14 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
   [PowerCleaveId]: PowerCleaveRenderer,
   [PowerStanceId]: PowerStanceRenderer,
   [PowerSwapId]: PowerSwapRenderer,
+  [ProvokeId]: ProvokeRenderer,
   [PyroclashId]: PyroclashRenderer,
   [RetreatingBlowId]: RetreatingBlowRenderer,
   [SearingLightId]: SearingLightRenderer,
   [SmiteId]: SmiteRenderer,
   [SneakAttackId]: SneakAttackRenderer,
   [SongOfRuinId]: SongOfRuinRenderer,
-  [TauntId]: TauntRenderer,
+  [BoastId]: TauntRenderer,
   [TimeBendId]: TimeBendRenderer,
   [VampiricTouchId]: VampiricTouchRenderer,
 

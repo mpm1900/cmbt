@@ -3,12 +3,12 @@ import { UnitBase, UnitBaseConfig } from '../../types'
 import {
   Bane,
   Bless,
+  Boast,
   GuidingRay,
   Protect,
   QuickAttack,
   SearingLight,
   Smite,
-  Taunt,
   VampiricTouch,
   Ward,
 } from '../Actions'
@@ -17,6 +17,7 @@ import { DivineHealing } from '../Augments'
 import {
   BaneId,
   BlessId,
+  BoastId,
   DivineHealingId,
   GuidingRayId,
   HoldPersonId,
@@ -24,7 +25,6 @@ import {
   QuickAttackId,
   SearingLightId,
   SmiteId,
-  TauntId,
   VampiricTouchId,
   WardId,
 } from '../Ids'
@@ -91,8 +91,8 @@ export const ClericConfig: UnitBaseConfig = {
       make: (u) => new Smite(u.id, u.teamId),
     },
     {
-      id: TauntId,
-      make: (u) => new Taunt(u.id, u.teamId),
+      id: BoastId,
+      make: (u) => new Boast(u.id, u.teamId),
     },
     {
       id: VampiricTouchId,

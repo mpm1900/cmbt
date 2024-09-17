@@ -4,7 +4,6 @@ import {
   ActionAi,
   ActionResult,
   CombatContext,
-  Damage,
   Id,
   Modifier,
   Unit,
@@ -24,7 +23,6 @@ import { GetUnits } from '../Queries'
 import { Burn } from '../Statuses'
 
 export class Pyroclash extends Action {
-  damage: Damage
   recoilFactor: number = 1 / 3
   burnChance: number = 10
 
@@ -42,11 +40,13 @@ export class Pyroclash extends Action {
     })
 
     const power = 110
-    this.damage = {
-      power,
-      attackType: 'physical',
-      damageType: 'fire',
-    }
+    this.damages = [
+      {
+        power,
+        attackType: 'physical',
+        damageType: 'fire',
+      },
+    ]
   }
 
   threshold = (source: Unit): number | undefined => {
@@ -73,7 +73,7 @@ export class Pyroclash extends Action {
     )
 
     const damages = modifiedTargets.map((target) =>
-      calculateDamages([this.damage], data.source, target, data.accuracyRoll)
+      calculateDamages(this.damages, data.source, target, data.accuracyRoll)
     )
     const recoils = damages.map((damage) =>
       getDamageResult({
@@ -81,7 +81,7 @@ export class Pyroclash extends Action {
         evasionSuccess: damage.evasionSuccess,
         damages: [
           {
-            attackType: this.damage.attackType,
+            attackType: this.damages[0].attackType,
             damage: Math.round(damage.damage * this.recoilFactor),
           },
         ],

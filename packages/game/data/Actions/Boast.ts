@@ -8,13 +8,13 @@ import {
 } from '../../types'
 import { buildActionResult, getActionData } from '../../utils'
 import { applyTauntToQueue } from '../../utils/applyTauntToQueue'
-import { TauntId } from '../Ids'
+import { BoastId } from '../Ids'
 import { Identity } from '../Mutations'
 import { EmptyArray } from '../Queries/EmptyArray'
 
-export class Taunt extends Action {
+export class Boast extends Action {
   constructor(sourceId: Id, teamId: Id) {
-    super(TauntId, {
+    super(BoastId, {
       sourceId,
       teamId,
       cost: new Identity({}),

@@ -1,8 +1,8 @@
-import { TauntId } from '@repo/game/data'
+import { BoastId } from '@repo/game/data'
 import { ACTION_NAMES, ActionRenderer } from '.'
 
 export const TauntRenderer: ActionRenderer = {
-  name: ACTION_NAMES[TauntId],
+  name: ACTION_NAMES[BoastId],
   description: () => (
     <div>
       Single-target actions that would target allied units this turn target this

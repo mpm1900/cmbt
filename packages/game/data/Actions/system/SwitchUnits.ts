@@ -6,7 +6,7 @@ import {
   Id,
   Unit,
 } from '../../../types'
-import { applyModifiers, getModifiersFromUnit } from '../../../utils'
+import { getModifiersFromUnit } from '../../../utils'
 import { SwitchUnitId } from '../../Ids'
 import { Identity } from '../../Mutations'
 import { SetIsActiveParent } from '../../Mutations/system'
@@ -30,8 +30,7 @@ export class SwitchUnit extends Action {
   }
 
   filter = (source: Unit, ctx: CombatContext) => {
-    const modified = applyModifiers(source, ctx).unit
-    return super.filter(source, ctx) && !modified.flags.isLocked
+    return super.filter(source, ctx) && !source.flags.isLocked
   }
 
   resolve = (

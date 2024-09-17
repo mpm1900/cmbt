@@ -2,6 +2,7 @@ import { nanoid } from 'nanoid'
 import { UnitBase, UnitBaseConfig } from '../../types'
 import {
   Bane,
+  Boast,
   ChillingGrasp,
   DeathRites,
   DispelMagic,
@@ -9,7 +10,6 @@ import {
   PoisonSpray,
   Protect,
   SongOfRuin,
-  Taunt,
   TrickRoom,
   VampiricTouch,
 } from '../Actions'
@@ -17,6 +17,7 @@ import { HoldPerson } from '../Actions/HoldPerson'
 import { Regeneration } from '../Augments'
 import {
   BaneId,
+  BoastId,
   ChillingGraspId,
   DeathRitesId,
   DispelMagicId,
@@ -26,7 +27,6 @@ import {
   ProtectId,
   RegenerationId,
   SongOfRuinId,
-  TauntId,
   TrickRoomId,
   VampiricTouchId,
 } from '../Ids'
@@ -97,8 +97,8 @@ export const WitchConfig: UnitBaseConfig = {
       make: (u) => new SongOfRuin(u.id, u.teamId),
     },
     {
-      id: TauntId,
-      make: (u) => new Taunt(u.id, u.teamId),
+      id: BoastId,
+      make: (u) => new Boast(u.id, u.teamId),
     },
     {
       id: TrickRoomId,

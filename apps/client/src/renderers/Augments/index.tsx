@@ -35,9 +35,7 @@ export const AugmentRenderers: Record<Id, AugmentRenderer> = {
     name: <div className="text-white">{AUGMENT_NAMES[TallGrassId]}</div>,
     list: true,
     description: () => (
-      <div>
-        This unit gains the following for their first 2 turns of combat:
-      </div>
+      <div>This unit gains the following for their first turn of combat:</div>
     ),
   },
   [InsulatedId]: {

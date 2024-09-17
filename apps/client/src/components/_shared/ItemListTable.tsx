@@ -1,6 +1,7 @@
 import { cn } from '@/lib/utils'
 import { ItemRarityRenderers } from '@/renderers/ItemRarity'
 import { GroupedItem, Id, Item, TeamResources, Unit } from '@repo/game/types'
+import { ReactNode } from 'react'
 import { GiCreditsCurrency } from 'react-icons/gi'
 import { Button } from '../ui/button'
 import {
@@ -19,11 +20,20 @@ export type ItemListTableProps = {
   costMultiplier: number
   quantities: Record<Id, number>
   resources: TeamResources
+  action?: (item: Item) => ReactNode
   onClick?: (item: Item) => void
 }
 
 export function ItemListTable(props: ItemListTableProps) {
-  const { unit, items, costMultiplier, quantities, resources, onClick } = props
+  const {
+    unit,
+    items,
+    costMultiplier,
+    quantities,
+    resources,
+    onClick,
+    action,
+  } = props
 
   return (
     <Table>
@@ -35,6 +45,7 @@ export function ItemListTable(props: ItemListTableProps) {
           {onClick && (
             <TableHead className="flex justify-end items-center"></TableHead>
           )}
+          {action && <TableHead>action</TableHead>}
         </TableRow>
       </TableHeader>
       <TableBody>
@@ -51,13 +62,15 @@ export function ItemListTable(props: ItemListTableProps) {
                 </TableCell>
 
                 <TableCell
-                  className={cn('flex items-center justify-end num', {
+                  className={cn('', {
                     'text-red-400':
                       !!onClick && (resources.credits ?? 0) < cost,
                   })}
                 >
-                  <span>{cost}</span>
-                  <GiCreditsCurrency />
+                  <div className="flex items-center">
+                    <span>{cost}</span>
+                    <GiCreditsCurrency />
+                  </div>
                 </TableCell>
 
                 <TableCell
@@ -89,6 +102,7 @@ export function ItemListTable(props: ItemListTableProps) {
                     </Button>
                   </TableCell>
                 )}
+                {action && action(item)}
               </TableRow>
             </ItemHover>
           )

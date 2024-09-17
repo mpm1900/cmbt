@@ -2,17 +2,18 @@ import { nanoid } from 'nanoid'
 import { UnitBase, UnitBaseConfig } from '../../types'
 import {
   BattleStance,
+  Boast,
   BodySlam,
   FirePunch,
   PiercingStrike,
   PowerSwap,
   Protect,
   Rest,
-  Taunt,
 } from '../Actions'
 import { Intoxicate } from '../Actions/Intoxicate'
 import { Insulated } from '../Augments'
 import {
+  BoastId,
   BodySlamId,
   ElixirOfPowerId,
   FirePunchId,
@@ -22,7 +23,6 @@ import {
   PowerSwapId,
   ProtectId,
   RestId,
-  TauntId,
 } from '../Ids'
 import { BASE_UNIT } from '../Units/system/BASE_UNIT'
 
@@ -85,8 +85,8 @@ export const SnorlaxConfig: UnitBaseConfig = {
       make: (u) => new Rest(u.id, u.teamId),
     },
     {
-      id: TauntId,
-      make: (u) => new Taunt(u.id, u.teamId),
+      id: BoastId,
+      make: (u) => new Boast(u.id, u.teamId),
     },
   ],
   defaultAbilityId: InsulatedId,

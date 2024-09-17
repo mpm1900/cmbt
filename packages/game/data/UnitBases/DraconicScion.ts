@@ -2,27 +2,29 @@ import { nanoid } from 'nanoid'
 import { UnitBase, UnitBaseConfig } from '../../types'
 import {
   Bane,
+  Boast,
   DragonBreath,
   DragonStance,
   Fireball,
   GhostFlame,
+  Provoke,
   Pyroclash,
   RetreatingBlow,
   Slash,
-  Taunt,
 } from '../Actions'
 import { DraconicAura } from '../Augments'
 import {
   BaneId,
+  BoastId,
   DraconicAuraId,
   DragonBreathId,
   DragonStanceId,
   FireballId,
   GhostFlameId,
+  ProvokeId,
   PyroclashId,
   RetreatingBlowId,
   SlashId,
-  TauntId,
 } from '../Ids'
 import { BASE_UNIT } from '../Units/system/BASE_UNIT'
 
@@ -57,6 +59,10 @@ export const DraconicDiscipleConfig: UnitBaseConfig = {
       make: (unit) => new Bane(unit.id, unit.teamId),
     },
     {
+      id: BoastId,
+      make: (unit) => new Boast(unit.id, unit.teamId),
+    },
+    {
       id: DragonBreathId,
       make: (unit) => new DragonBreath(unit.id, unit.teamId),
     },
@@ -73,6 +79,10 @@ export const DraconicDiscipleConfig: UnitBaseConfig = {
       make: (unit) => new GhostFlame(unit.id, unit.teamId),
     },
     {
+      id: ProvokeId,
+      make: (u) => new Provoke(u.id, u.teamId),
+    },
+    {
       id: PyroclashId,
       make: (unit) => new Pyroclash(unit.id, unit.teamId),
     },
@@ -84,10 +94,6 @@ export const DraconicDiscipleConfig: UnitBaseConfig = {
       id: SlashId,
       make: (unit) => new Slash(unit.id, unit.teamId),
     },
-    {
-      id: TauntId,
-      make: (unit) => new Taunt(unit.id, unit.teamId),
-    },
   ],
   defaultAbilityId: DraconicAuraId,
   defaultActionIds: [
@@ -95,6 +101,6 @@ export const DraconicDiscipleConfig: UnitBaseConfig = {
     DragonBreathId,
     PyroclashId,
     RetreatingBlowId,
-    TauntId,
+    BoastId,
   ],
 }

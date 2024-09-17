@@ -1,11 +1,6 @@
 import { useBuilderUi } from '@/hooks/state/useBuilderUi'
 import { useUnitBuilders } from '@/hooks/state/useUnitBuilders'
-import { BASE_CONFIGS } from '@repo/game/data'
-import { DamageIcon } from '@shared/DamageIcon'
-import { useState } from 'react'
 import { FaRegSquareFull, FaSquare } from 'react-icons/fa6'
-import { MdEdit } from 'react-icons/md'
-import { Button } from '../ui/button'
 import {
   Card,
   CardContent,
@@ -13,149 +8,33 @@ import {
   CardHeader,
   CardTitle,
 } from '../ui/card'
-import { Input } from '../ui/input'
-import { Label } from '../ui/label'
 import { Separator } from '../ui/separator'
 import { ActionsTable } from './ActionsTable'
-import { UnitAbilitySelect } from './UnitAbilitySelect'
-import { UnitBaseSelect } from './UnitBaseSelect'
 import { UnitBaseStats } from './UnitBaseStats'
+import { UnitBuilderAffinities } from './UnitBuilderAffinities'
+import { UnitBuilderHeader } from './UnitBuilderHeader'
+import { UnitBuilderSelects } from './UnitBuilderSelects'
 
 export function UnitBuilder() {
   const ui = useBuilderUi()
   const store = useUnitBuilders()
   const builder = store.builders.find((b) => b.id === ui.activeBuilderId)
-  const [showNameEdit, setShowNameEdit] = useState(false)
 
   return (
     <div className="flex space-y-4 lg:space-y-0 lg:space-x-4 items-start justify-center flex-col lg:flex-row">
       {builder && (
         <Card className="w-full lg:w-[360px]">
           <CardHeader>
-            <div className="flex space-x-2">
-              {showNameEdit ? (
-                <Input
-                  className="flex-1"
-                  value={builder.name}
-                  onChange={(e) => {
-                    const name = e.target.value
-                    if (name) {
-                      store.updateBuilder(builder.id, (b) => ({
-                        name,
-                      }))
-                    }
-                  }}
-                />
-              ) : (
-                <div className="flex-1">
-                  <CardTitle>{builder.name}</CardTitle>
-                  <CardDescription>Set unit details</CardDescription>
-                </div>
-              )}
-
-              <Button
-                variant="ghost"
-                onClick={() => setShowNameEdit((v) => !v)}
-              >
-                <MdEdit />
-              </Button>
-            </div>
+            <UnitBuilderHeader />
           </CardHeader>
 
           <CardContent>
             <div className="space-y-2">
-              <div>
-                <Label
-                  htmlFor="base"
-                  className="min-w-[86px] text-muted-foreground"
-                >
-                  Class
-                </Label>
-                <UnitBaseSelect
-                  value={builder.base}
-                  onChange={(base) => {
-                    const config = BASE_CONFIGS[base.id]
-                    store.updateBuilder(builder.id, (b) => ({
-                      base,
-                      config,
-                      ability: config.abilities.find(
-                        (a) => a.id === config.defaultAbilityId
-                      ),
-                      actions: config.actions.filter((m) =>
-                        config.defaultActionIds.includes(m.id)
-                      ),
-                    }))
-                  }}
-                />
-              </div>
-
-              <div>
-                <Label
-                  htmlFor="name"
-                  className="min-w-[86px] text-muted-foreground"
-                >
-                  Ability
-                </Label>
-                <UnitAbilitySelect
-                  options={builder.config.abilities}
-                  value={builder.ability}
-                  onChnage={(ability) =>
-                    store.updateBuilder(builder.id, (b) => ({
-                      ability,
-                    }))
-                  }
-                />
-              </div>
+              <UnitBuilderSelects />
               <Separator />
               <UnitBaseStats base={builder.base} />
               <Separator />
-              <div>
-                {builder.base.affinities.length > 0 && (
-                  <div className="flex space-x-4 justify-between">
-                    <div className="text-muted-foreground">Affinities</div>
-                    <div className="flex space-x-2">
-                      {builder.base.affinities.map((affinity, i) => (
-                        <div key={i} className="flex space-x-1">
-                          <DamageIcon damageType={affinity.type} />
-                          <div className="text-green-200 num">
-                            {affinity.factor.toFixed()}%
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
-                {builder.base.resistances.length > 0 && (
-                  <div className="flex space-x-4 justify-between">
-                    <div className="text-muted-foreground">Resistances</div>
-                    <div className="flex space-x-2">
-                      {builder.base.resistances.map((affinity, i) => (
-                        <div key={i} className="flex space-x-1">
-                          <DamageIcon damageType={affinity.type} />
-                          <div className="text-green-200 num">
-                            {affinity.factor.toFixed()}%
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
-                {builder.base.weaknesses.length > 0 && (
-                  <div className="flex space-x-4 justify-between">
-                    <div className="text-muted-foreground"> Weaknesses</div>
-                    <div className="flex space-x-2">
-                      {builder.base.weaknesses.map((affinity, i) => (
-                        <div key={i} className="flex space-x-1">
-                          <DamageIcon damageType={affinity.type} />
-                          <div className="text-red-200 num">
-                            {affinity.factor.toFixed()}%
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
-              </div>
+              <UnitBuilderAffinities />
             </div>
           </CardContent>
         </Card>

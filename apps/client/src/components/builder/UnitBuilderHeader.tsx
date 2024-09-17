@@ -1,10 +1,10 @@
 import { useUnitBuilders } from '@/hooks/state'
 import { useBuilderUi } from '@/hooks/state/useBuilderUi'
-import { Toggle } from '@radix-ui/react-toggle'
 import { useState } from 'react'
 import { MdEdit } from 'react-icons/md'
 import { CardDescription, CardTitle } from '../ui/card'
 import { Input } from '../ui/input'
+import { Toggle } from '../ui/toggle'
 
 export function UnitBuilderHeader() {
   const ui = useBuilderUi()

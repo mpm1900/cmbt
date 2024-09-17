@@ -49,7 +49,6 @@ export class SneakAttack extends Action {
     return 100 + source.stats.accuracy
   }
   criticalThreshold = (source: Unit): number | undefined => {
-    console.log(source.name, source.metadata.modified)
     return 20 + source.stats.criticalChance
   }
   criticalFactor = (source: Unit): number | undefined =>

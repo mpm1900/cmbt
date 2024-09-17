@@ -40,6 +40,9 @@ export function CombatHeader() {
         <StatusBadge isActive={turn.count > 0 && turn.status === 'end'}>
           End
         </StatusBadge>
+        <StatusBadge isActive={turn.count > 0 && turn.status === 'next'}>
+          Next
+        </StatusBadge>
         <Separator orientation="vertical" />
         <StatusBadge isActive={turn.status === 'done'}>Done</StatusBadge>
       </div>

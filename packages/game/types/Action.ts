@@ -38,6 +38,10 @@ export type ActionsQueueItem = {
   id: string
   action: Action
   targetIds: Id[]
+  indexTarget?: {
+    teamId: Id
+    indexes: number[]
+  }
 }
 
 export type ActionAi = ActionsQueueItem & {
@@ -56,6 +60,7 @@ export type ActionResult = {
   addedModifiers?: Modifier[]
   addedUnits?: Unit[]
   removedUnits?: Unit[]
+  stagedActions?: ActionsQueueItem[]
   shouldLog?: boolean
   updateModifiers?: (modifiers: Modifier[]) => Modifier[]
   updateActionQueue?: (queue: ActionsQueueItem[]) => ActionsQueueItem[]
@@ -97,7 +102,12 @@ export abstract class Action {
   ): ActionResult[]
 
   getAi(targets: Unit[], ctx: CombatContext): ActionAi {
-    return { id: nanoid(), action: this, weight: 0, targetIds: [] }
+    return {
+      id: nanoid(),
+      action: this,
+      weight: 0,
+      targetIds: [],
+    }
   }
 
   mapTargets = (targets: Unit[], ctx: CombatContext): Unit[] => {

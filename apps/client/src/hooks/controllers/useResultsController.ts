@@ -22,6 +22,7 @@ export function useResultsController() {
   useEffect(() => {
     if (first) {
       const aliveTeams = getTeamsWithLiveUnits(ctx)
+
       if (aliveTeams.length === ctx.teams.length) {
         const shouldCommitResult =
           (!first.action ||

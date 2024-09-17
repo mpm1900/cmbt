@@ -43,6 +43,8 @@ import {
   MindShatterId,
   MindTwistId,
   NegateArmorId,
+  PhantomSlashId,
+  PhantomSlashStagedId,
   PiercingStrikeId,
   Poison,
   PoisonSprayId,
@@ -118,6 +120,7 @@ import { MindBlastRenderer } from './MindBlast'
 import { MindShatterRenderer } from './MindShatter'
 import { MindTwistRenderer } from './MindTwist'
 import { NegateArmorRenderer } from './NegateArmor'
+import { PhantomSlashRender } from './PhantomSlash'
 import { PiercingStrikeRenderer } from './PiercingStrike'
 import { PowerCleaveRenderer } from './PowerCleave'
 import { PowerStanceRenderer } from './PowerStance'
@@ -178,6 +181,8 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
   [MindShatterId]: MindShatterRenderer,
   [MindTwistId]: MindTwistRenderer,
   [NegateArmorId]: NegateArmorRenderer,
+  [PhantomSlashId]: PhantomSlashRender,
+  [PhantomSlashStagedId]: PhantomSlashRender,
   [PiercingStrikeId]: PiercingStrikeRenderer,
   [PowerCleaveId]: PowerCleaveRenderer,
   [PowerStanceId]: PowerStanceRenderer,

@@ -7,6 +7,7 @@ export type TurnStatus =
   | 'cleanup'
   | 'cleanup-running'
   | 'end'
+  | 'next'
   | 'done'
 
 export type Turn = {

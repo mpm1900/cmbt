@@ -57,7 +57,6 @@ export class GuidingRay extends Action {
             addedModifiers: modifiedTargets.flatMap((target) => {
               const isAlly = target.teamId === source.teamId
               if (isAlly) {
-                console.log('is ally', Guidance.modifiers(source, target))
                 return Guidance.modifiers(source, target)
               }
               return []

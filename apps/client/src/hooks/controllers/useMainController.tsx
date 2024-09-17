@@ -16,7 +16,6 @@ export function useMainController() {
   useEffect(() => {
     if (isMain) {
       const actionableUnits = getActionableUnitsCtx(ctx)
-
       const checkLength = isDebugMode ? 1 : actionableUnits.length
       //const checkLength = actionableUnits.length
       if (actions.queue.length === checkLength && actions.queue.length > 0) {

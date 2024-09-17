@@ -1,5 +1,6 @@
 import {
   ActionResult,
+  ActionsQueueItem,
   CombatContext,
   CombatRewards,
   Id,
@@ -36,6 +37,7 @@ export type CombatState = Omit<CombatContext, 'queue'> & {
   commit: boolean
   reward: CombatRewards
   logs: CombatLog[]
+  stagedActions: Record<Id, ActionsQueueItem[] | undefined>
   log: CombatLogger
   updateLog: (id: Id, fn: (log: CombatLog) => Partial<CombatLog>) => void
 }
@@ -73,6 +75,8 @@ export type CombatStore = CombatState & {
   // encounter link back
   onSuccess: () => void
   onFailure: () => void
+
+  stageAction: (unitId: Id, action: ActionsQueueItem | undefined) => void
 }
 
 export const useCombat = create<CombatStore>((set, get) => {
@@ -248,5 +252,19 @@ export const useCombat = create<CombatStore>((set, get) => {
 
     onSuccess: () => {},
     onFailure: () => {},
+
+    stagedActions: {},
+    stageAction: (unitId, action) => {
+      set((s) => ({
+        stagedActions: {
+          ...s.stagedActions,
+          [unitId]: !action
+            ? undefined
+            : s.stagedActions[unitId]
+              ? s.stagedActions[unitId].concat(action)
+              : [action],
+        },
+      }))
+    },
   }
 })

@@ -1,11 +1,13 @@
 import { LogHeader } from '@/components/ui/log'
+import { applyModifiers } from '@repo/game/utils'
 import { useEffect } from 'react'
-import { useCombat, useCombatUi } from '../state'
+import { useActions, useCombat, useCombatUi } from '../state'
 import { useCombatActions } from '../useCombatActions'
 import { useCombatContext } from '../useCombatContext'
 
 export function useUpkeepController() {
   const combat = useCombat()
+  const actions = useActions()
   const ui = useCombatUi()
   const ctx = useCombatContext()
   const fns = useCombatActions()
@@ -16,9 +18,23 @@ export function useUpkeepController() {
       if (combat.turn.count > 0) {
         combat.log(<LogHeader>turn {combat.turn.count}</LogHeader>)
       }
-      ui.setActiveUnit(
-        combat.units.find((u) => u.flags.isActive && u.teamId === combat.user)
+
+      const stagedEntries = Object.entries(combat.stagedActions)
+      const stagedUnitIds = stagedEntries.map((v) => v[0])
+      stagedEntries.forEach(([id, stagedActions]) => {
+        if (stagedActions) {
+          actions.enqueue(...stagedActions)
+          combat.stageAction(id, undefined)
+        }
+      })
+      const foundUnit = combat.units.find(
+        (u) =>
+          u.flags.isActive &&
+          u.teamId === combat.user &&
+          !stagedUnitIds.includes(u.id) &&
+          !applyModifiers(u, ctx).unit.flags.isStunned
       )
+      ui.setActiveUnit(foundUnit)
       fns.pushTriggers('on Turn Start', ctx)
       combat.setStatus('main')
     }

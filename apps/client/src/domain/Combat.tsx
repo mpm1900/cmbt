@@ -16,15 +16,18 @@ import {
   useResultsController,
   useUpkeepController,
 } from '@/hooks/controllers'
+import { useNextController } from '@/hooks/controllers/useNextController'
 import { useCombat } from '@/hooks/state'
 import { useCombatSetup } from '@/hooks/useCombatSetup'
 import { Navbar } from '@shared/Navbar'
 import { PageLayout } from '@shared/PageLayout'
+import { useEffect } from 'react'
 
 export function Combat() {
-  const { teams, user } = useCombat((s) => ({
+  const { teams, user, status } = useCombat((s) => ({
     teams: s.teams,
     user: s.user,
+    status: s.turn.status,
   }))
 
   useCombatSetup()
@@ -34,7 +37,12 @@ export function Combat() {
   useCombatController()
   useCleanupController()
   useEndController()
+  useNextController()
   useAiActions()
+
+  useEffect(() => {
+    console.log(status)
+  }, [status])
 
   const userTeam = teams.find((t) => t.id === user)
   const aiTeam = teams.find((t) => t.id !== user)

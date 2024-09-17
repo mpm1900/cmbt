@@ -72,6 +72,7 @@ export function useCombatActions() {
       mutations,
       addedUnits,
       removedUnits,
+      stagedActions,
       updateModifiers,
       updateActionQueue,
     } = result
@@ -117,6 +118,11 @@ export function useCombatActions() {
         units: addedUnits,
       })
     }
+
+    if (result.data?.source && stagedActions && stagedActions[0]) {
+      combat.stageAction(result.data.source.id, stagedActions[0])
+    }
+
     return context
   }
 

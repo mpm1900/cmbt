@@ -14,7 +14,7 @@ import { PhysicalArmor } from '@shared/PhysicalArmor'
 import { motion } from 'framer-motion'
 import { CgDetailsMore } from 'react-icons/cg'
 import { useCombatContext } from '../../../hooks'
-import { useActions, useCombatUi } from '../../../hooks/state'
+import { useActions, useCombat, useCombatUi } from '../../../hooks/state'
 import { UnitBars } from '../../_shared/UnitBars'
 import { UnitCombatModifiers } from '../../_shared/UnitCombatModifiers'
 import { UnitDetails } from '../../_shared/UnitDetails'
@@ -31,6 +31,7 @@ export type UnitCardProps = {
 export function UnitCard(props: UnitCardProps) {
   const { reverse, isEnemy } = props
   const ctx = useCombatContext()
+  const combat = useCombat()
   const status = ctx.turn.status
   const result = ctx.turn.results[ctx.turn.results.length - 1]
   const { queue } = useActions()
@@ -60,6 +61,10 @@ export function UnitCard(props: UnitCardProps) {
       layout
       className={cn('flex flex-1 flex-col', {
         'flex-col-reverse': reverse,
+        'opacity-40':
+          unit.flags.isProtected &&
+          unit.flags.isHidden &&
+          combat.stagedActions[unit.id],
       })}
     >
       <div

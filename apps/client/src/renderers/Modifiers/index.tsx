@@ -15,6 +15,7 @@ import {
   HiddenParentId,
   InspectAllOnUnitEnterId,
   InspectedAllId,
+  IntangibleParentId,
   InvertSpeedAllId,
   KillParentOnTurnEndId,
   ProtectedParentId,
@@ -37,6 +38,7 @@ import { DisabledParentRenderer } from './DisabledParent'
 import { EnragedParentRenderer } from './EnragedParent'
 import { HiddenParentRenderer } from './HiddenParent'
 import { InspectedAllRenderer } from './InspectedAll'
+import { IntangibleParentRenderer } from './IntangibleParent'
 import { InvertSpeedAllRenderer } from './InvertSpeedAll'
 import { ProtectedParentRenderer } from './ProtectedParent'
 import { StunnedParentRenderer } from './StunnedParent'
@@ -91,6 +93,7 @@ export const ModifierRenderers: Record<string, ModifierRenderer> = {
   [DrainLifeParentOnTurnEndId]: DrainLifeParentOnTurnEndRenderer,
   [HealParentOnTurnEndId]: HealParentOnTurnEndRenderer,
   [HealParentOnUnitSwitchId]: HealParentOnUnitSwitchRenderer,
+  [IntangibleParentId]: IntangibleParentRenderer,
   [InspectAllOnUnitEnterId]: InspectAllOnUnitEnterRenderer,
   [KillParentOnTurnEndId]: KillParentOnTurnEndRenderer,
   [StatDownStaticAllOnUnitEnterId]: StatDownStaticAllOnUnitEnterRenderer,

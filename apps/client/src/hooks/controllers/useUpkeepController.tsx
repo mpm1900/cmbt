@@ -20,21 +20,23 @@ export function useUpkeepController() {
       }
 
       const stagedEntries = Object.entries(combat.stagedActions)
-      const stagedUnitIds = stagedEntries.map((v) => v[0])
+      const stagedUnitIds = stagedEntries.filter((e) => !!e[1]).map((v) => v[0])
       stagedEntries.forEach(([id, stagedActions]) => {
         if (stagedActions) {
           actions.enqueue(...stagedActions)
-          combat.stageAction(id, undefined)
         }
       })
-      const foundUnit = combat.units.find(
+
+      const userUnits = combat.units.filter(
+        (u) => u.flags.isActive && u.teamId == combat.user
+      )
+      const foundUnit = userUnits.find(
         (u) =>
-          u.flags.isActive &&
-          u.teamId === combat.user &&
           !stagedUnitIds.includes(u.id) &&
           !applyModifiers(u, ctx).unit.flags.isStunned
       )
       ui.setActiveUnit(foundUnit)
+
       fns.pushTriggers('on Turn Start', ctx)
       combat.setStatus('main')
     }

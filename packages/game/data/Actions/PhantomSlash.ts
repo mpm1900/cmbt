@@ -6,7 +6,12 @@ import {
   getActionData,
   getMutationsFromDamageResult,
 } from '../../utils'
-import { PhantomSlashId, PhantomSlashStagedId } from '../Ids'
+import {
+  IntangibleParentId,
+  PhantomSlashId,
+  PhantomSlashStagedId,
+} from '../Ids'
+import { AddModifiersToRegistryParent, IntangibleParent } from '../Modifiers'
 import { Identity } from '../Mutations'
 import { GetUnits } from '../Queries'
 
@@ -23,6 +28,19 @@ export class PhantomSlash extends Action {
       }),
       maxTargetCount: 1,
     })
+
+    this.damages = [
+      {
+        power: 60,
+        attackType: 'physical',
+        damageType: 'force',
+      },
+      {
+        power: 60,
+        attackType: 'physical',
+        damageType: 'blight',
+      },
+    ]
   }
 
   resolve(source: Unit, targets: Unit[], ctx: CombatContext): ActionResult[] {
@@ -37,6 +55,13 @@ export class PhantomSlash extends Action {
         ctx,
         (modifiedTargets) => ({
           onSuccess: {
+            addedModifiers: [
+              new IntangibleParent({
+                sourceId: this.sourceId,
+                parentId: this.sourceId,
+                duration: 2,
+              }),
+            ],
             stagedActions: modifiedTargets.flatMap((target) => {
               const index = ctx.units
                 .filter((u) => u.teamId === target.teamId && u.flags.isActive)
@@ -83,9 +108,14 @@ export class PhantomSlashStaged extends Action {
 
     this.damages = [
       {
-        power: 75,
+        power: 60,
         attackType: 'physical',
         damageType: 'force',
+      },
+      {
+        power: 60,
+        attackType: 'physical',
+        damageType: 'blight',
       },
     ]
   }
@@ -110,6 +140,14 @@ export class PhantomSlashStaged extends Action {
               )
               return getMutationsFromDamageResult(source, target, damage)
             }),
+            addedModifiers: [
+              new AddModifiersToRegistryParent({
+                sourceId: source.id,
+                parentId: source.id,
+                duration: 1,
+                modifierIds: [IntangibleParentId],
+              }),
+            ],
           },
         })
       ),

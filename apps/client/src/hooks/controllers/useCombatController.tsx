@@ -32,6 +32,7 @@ export function useCombatController() {
             const actionResults = getResultsFromActionItem(item, ctx)
             results.enqueue({ mutations: [item.action.cost] }, ...actionResults)
           }
+          combat.stageAction(item.action.sourceId, undefined)
           actions.remove((i) => i.id === item.id)
         } else {
           combat.setStatus('cleanup')

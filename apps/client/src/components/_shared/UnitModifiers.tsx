@@ -34,7 +34,8 @@ export function UnitModifiers(props: UnitModifiersProps) {
             <ModifierIcon
               modifier={m}
               side={props.side}
-              fallback={r?.name(m) ?? m.id}
+              // fallback={r?.name(m) ?? m.id}
+              fallback={<></>}
               className={iconClassName}
             />
             {m instanceof UpdateStatStageParent && (

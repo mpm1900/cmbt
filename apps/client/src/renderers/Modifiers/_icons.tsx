@@ -33,6 +33,7 @@ import {
   HiddenParentId,
   InspectAllOnUnitEnterId,
   InspectedAllId,
+  IntangibleParentId,
   KillParentOnTurnEndId,
   MagicDownParentId,
   MagicExpansionUpParentId,
@@ -65,6 +66,7 @@ import {
   GiDeathNote,
   GiDragonSpiral,
   GiFireRing,
+  GiGhostAlly,
   GiMagicSwirl,
   GiOverkill,
   GiPoisonGas,
@@ -146,6 +148,7 @@ export const MODIFIER_ICONS: Record<Id, ReactNode> = {
   ),
   [FirestormOnTurnEndId]: <GiFireRing className="fill-white h-full w-full" />,
   [DisabledParentId]: <HiMiniNoSymbol className="fill-white h-full w-full" />,
+  [IntangibleParentId]: <GiGhostAlly className="fill-white h-full w-full" />,
   [InspectAllOnUnitEnterId]: (
     <PiScrollFill className="fill-white h-full w-full" />
   ),

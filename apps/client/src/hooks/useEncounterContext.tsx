@@ -1,13 +1,16 @@
+import { BASE_UNIT } from '@repo/game/data'
 import {
   EncounterContext,
   EncounterNode,
   Id,
   InitializeCombatOptions,
+  Item,
   Unit,
 } from '@repo/game/types'
 import { useNavigate } from '@tanstack/react-router'
 import { useGame, useNpcs } from './state'
 import { useEncounter } from './state/useEncounter'
+import { useCombatContext } from './useCombatContext'
 import { useInitializeCombat } from './useInitializeCombat'
 
 export function useEncounterContext(): EncounterContext {
@@ -16,6 +19,7 @@ export function useEncounterContext(): EncounterContext {
   const init = useInitializeCombat()
   const nav = useNavigate()
   const npcs = useNpcs()
+  const ctx = useCombatContext()
 
   function initializeCombat(props: InitializeCombatOptions) {
     if (game.team) {
@@ -36,6 +40,18 @@ export function useEncounterContext(): EncounterContext {
 
   function updateUnit(id: Id, fn: (unit: Unit) => Partial<Unit>) {
     game.updateUnits((u) => (u.id === id ? fn(u) : u))
+  }
+
+  function useItem(item: Item, target: Unit) {
+    game.updateTeam((t) => ({
+      items: t.items.filter((i) => i.rtid !== item.rtid),
+    }))
+
+    if (item.action) {
+      const action = item.action(BASE_UNIT)
+      const result = action.resolve(BASE_UNIT, [target], ctx)
+      console.log(result)
+    }
   }
 
   return {
@@ -68,6 +84,7 @@ export function useEncounterContext(): EncounterContext {
     updateTeam: game.updateTeam,
     updateUnit: updateUnit,
     buyItem: game.buyItem,
+    useItem,
     addNpc: npcs.addNpc,
     updateNpcValue: npcs.updateNpcValue,
     updateNpcItems: npcs.updateNpcItems,

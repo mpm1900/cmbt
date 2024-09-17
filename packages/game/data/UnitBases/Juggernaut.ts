@@ -53,6 +53,10 @@ export const SnorlaxConfig: UnitBaseConfig = {
   actionsCount: 5,
   actions: [
     {
+      id: BoastId,
+      make: (u) => new Boast(u.id, u.teamId),
+    },
+    {
       id: ElixirOfPowerId,
       make: (u) => new BattleStance(u.id, u.teamId),
     },
@@ -83,10 +87,6 @@ export const SnorlaxConfig: UnitBaseConfig = {
     {
       id: RestId,
       make: (u) => new Rest(u.id, u.teamId),
-    },
-    {
-      id: BoastId,
-      make: (u) => new Boast(u.id, u.teamId),
     },
   ],
   defaultAbilityId: InsulatedId,

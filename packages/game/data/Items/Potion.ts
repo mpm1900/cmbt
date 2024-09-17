@@ -22,6 +22,10 @@ export class PotionAction extends Action {
     })
   }
 
+  filter = (unit: Unit, ctx: CombatContext) => {
+    return super.filter(unit, ctx) && unit.values.damage > 0
+  }
+
   resolve = (
     source: Unit,
     targets: Unit[],

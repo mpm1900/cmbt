@@ -45,7 +45,7 @@ export function ItemListTable(props: ItemListTableProps) {
           {onClick && (
             <TableHead className="flex justify-end items-center"></TableHead>
           )}
-          {action && <TableHead>action</TableHead>}
+          {action && <TableHead></TableHead>}
         </TableRow>
       </TableHeader>
       <TableBody>
@@ -102,7 +102,7 @@ export function ItemListTable(props: ItemListTableProps) {
                     </Button>
                   </TableCell>
                 )}
-                {action && action(item)}
+                {action && <TableCell>{action(item)}</TableCell>}
               </TableRow>
             </ItemHover>
           )

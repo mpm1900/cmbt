@@ -10,4 +10,5 @@ export type CombatContext = {
   teams: Team[]
   turn: Turn
   user: Id
+  actionCooldowns: { [key: Id]: { [key: Id]: number } }
 }

@@ -23,6 +23,7 @@ export class Protect extends Action {
       targets: new EmptyArray(),
       maxTargetCount: 0,
       priority: ACTION_PRIORITIES.PROTECT,
+      cooldown: 2,
     })
   }
 
@@ -35,7 +36,6 @@ export class Protect extends Action {
 
     return [
       buildActionResult(this, data, source, targets, ctx, () => ({
-        forceFailure: source.metadata.lastUsedActionId === this.id,
         onSuccess: {
           addedModifiers: [
             new UpdateFlagParent({

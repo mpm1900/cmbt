@@ -19,6 +19,7 @@ export function useNextController() {
             if (combat.turn.count > 0) {
               combat.decrementModifiers()
               combat.removeZeroModifiers()
+              combat.decrementActionCooldowns()
             }
             combat.next()
             combat.mutate(

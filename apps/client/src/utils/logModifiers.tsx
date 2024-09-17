@@ -1,5 +1,6 @@
 import { LogSecondary, LogUnit } from '@/components/ui/log'
 import { CombatLogger } from '@/hooks/state'
+import { ModifierRenderers } from '@/renderers'
 import { CombatContext, Modifier, MutationFilterArgs } from '@repo/game/types'
 import { isUnitAliveCtx } from '@repo/game/utils'
 import { ModifierInline } from '@shared/ModifierInline'
@@ -27,7 +28,13 @@ export function logModifiers(
       (m) => m.filter(unit, ctx, args) && !unitHasModifier(m)
     )
 
-    const nonStatusModifiers = unitModifiers.filter((m) => !m.statusId)
+    const nonStatusModifiers = unitModifiers
+      .filter((m) => !m.statusId)
+      .filter((m) => {
+        const renderer = ModifierRenderers[m.registryId]
+        const name = renderer?.name(m)
+        return !!name
+      })
     const statuses = getStatusesFromModifiers(unitModifiers)
 
     if (nonStatusModifiers.length > 0) {
@@ -38,16 +45,14 @@ export function logModifiers(
           </LogUnit>{' '}
           gained{' '}
           <TextList>
-            {unitModifiers
-              .filter((m) => !m.statusId)
-              .map((mod) => (
-                <ModifierInline
-                  key={mod.rtid}
-                  modifier={mod}
-                  side="left"
-                  className="font-normal"
-                />
-              ))}
+            {nonStatusModifiers.map((mod) => (
+              <ModifierInline
+                key={mod.rtid}
+                modifier={mod}
+                side="left"
+                className="font-normal"
+              />
+            ))}
           </TextList>
         </LogSecondary>,
         (index + 1) * 0.1

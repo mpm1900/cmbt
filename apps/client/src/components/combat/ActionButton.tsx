@@ -26,6 +26,7 @@ export function ActionButton(props: ActionButtonProps) {
   const accuracy = action.threshold(modified.unit)
   const costCheck = checkActionCost(action, source)
   const attackTypes = getAttackTypesFromDamages(action.damages)
+  const isDisabled = !action.filter(modified.unit, ctx)
 
   return (
     <Button
@@ -40,6 +41,8 @@ export function ActionButton(props: ActionButtonProps) {
             'text-green-950': attackTypes.includes('physical') && isActive,
             'text-blue-200': attackTypes.includes('magic'),
             'text-blue-950': attackTypes.includes('magic') && isActive,
+            'text-red-300': isDisabled,
+            'text-red-900': isDisabled && isActive,
           })}
         >
           {renderer?.name}

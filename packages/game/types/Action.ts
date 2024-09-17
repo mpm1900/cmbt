@@ -79,6 +79,7 @@ export type ActionProps = {
   targets: Query<Unit[]>
   priority?: number
   maxTargetCount: number
+  cooldown?: number
 }
 
 export abstract class Action {
@@ -89,6 +90,7 @@ export abstract class Action {
   readonly priority: number
   readonly maxTargetCount: number
   readonly cost: Mutation
+  readonly cooldown: number
   readonly targets: Query<Unit[]>
   damages: Damage[] = []
 
@@ -125,11 +127,15 @@ export abstract class Action {
       source.flags.isChoiceLocked && source.metadata.lastUsedActionId
     const isDamageLocked =
       source.flags.isDamageLocked && this.damages.length === 0
+    const unitCooldowns = ctx.actionCooldowns[this.sourceId]
+    const cooldown = unitCooldowns ? (unitCooldowns[this.id] ?? 0) : 0
+    const isOnCooldown = cooldown > 0
     const isEnabled =
       !isDisabled &&
       canPayCost &&
       !isDamageLocked &&
-      (isChoiceLocked ? source.metadata.lastUsedActionId === this.id : true)
+      (isChoiceLocked ? source.metadata.lastUsedActionId === this.id : true) &&
+      !isOnCooldown
 
     return isEnabled
   }
@@ -143,5 +149,6 @@ export abstract class Action {
     this.targets = props.targets
     this.priority = props.priority ?? ACTION_PRIORITIES.DEFAULT
     this.maxTargetCount = props.maxTargetCount
+    this.cooldown = props.cooldown ?? 0
   }
 }

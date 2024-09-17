@@ -9,6 +9,7 @@ export function useCombatContext(): CombatContext {
     turn: s.turn,
     units: s.units,
     user: s.user,
+    actionCooldowns: s.actionCooldowns,
   }))
 
   return {

@@ -77,6 +77,8 @@ export type CombatStore = CombatState & {
   onFailure: () => void
 
   stageAction: (unitId: Id, action: ActionsQueueItem | undefined) => void
+  setActionCooldown: (unitId: Id, actionId: Id, cooldown: number) => void
+  decrementActionCooldowns: () => void
 }
 
 export const useCombat = create<CombatStore>((set, get) => {
@@ -264,6 +266,34 @@ export const useCombat = create<CombatStore>((set, get) => {
               ? s.stagedActions[unitId].concat(action)
               : [action],
         },
+      }))
+    },
+
+    actionCooldowns: {},
+    setActionCooldown: (unitId, actionId, cooldown) => {
+      set((s) => ({
+        actionCooldowns: {
+          ...s.actionCooldowns,
+          [unitId]: {
+            ...s.actionCooldowns[unitId],
+            [actionId]: cooldown,
+          },
+        },
+      }))
+    },
+    decrementActionCooldowns: () => {
+      set((s) => ({
+        actionCooldowns: Object.fromEntries(
+          Object.entries(s.actionCooldowns).map(([unitId, cooldowns]) => [
+            unitId,
+            Object.fromEntries(
+              Object.entries(cooldowns).map(([actionId, cooldown]) => [
+                actionId,
+                cooldown - 1,
+              ])
+            ),
+          ])
+        ),
       }))
     },
   }

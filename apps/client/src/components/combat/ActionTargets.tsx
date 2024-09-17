@@ -20,6 +20,7 @@ export function ActionTargets(props: UnitActionTargetsProps) {
   const { setHoverTargetUnitIds } = useCombatUi()
   const possibleTargets = action.targets.resolve(ctx)
   const costFail = !checkActionCost(action, source)
+  const cooldown = (ctx.actionCooldowns[action.sourceId] ?? {})[action.id] ?? 0
   const isDisabled = !action.filter(source, ctx)
 
   useEffect(() => {
@@ -33,7 +34,7 @@ export function ActionTargets(props: UnitActionTargetsProps) {
   }, [targets.length])
 
   return (
-    <div className="space-y-0">
+    <div className="space-y-1">
       <div className="text-sm text-center italic">
         {possibleTargets.length === 0 && (
           <div className="space-y-4">
@@ -92,6 +93,11 @@ export function ActionTargets(props: UnitActionTargetsProps) {
       </div>
       {costFail && (
         <div className="text-red-300 text-center text-xs">Cannot pay costs</div>
+      )}
+      {cooldown > 0 && (
+        <div className="text-red-300 text-center text-xs">
+          On cooldown for {cooldown} turn{cooldown > 1 && `(s)`}
+        </div>
       )}
     </div>
   )

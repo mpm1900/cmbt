@@ -13,7 +13,7 @@ export const DamageAllOnTurnEndRenderer: ModifierRenderer = {
         <TriggerName>On turn end:</TriggerName>
         <div>
           Units take{' '}
-          {modifier.damage && <DamageInline damage={modifier.damage} />}
+          {modifier.damage && <DamageInline damage={modifier.damage} />} damage
         </div>
       </div>
     )

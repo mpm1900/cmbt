@@ -11,7 +11,7 @@ export function MagicArmor({
 }: PropsWithChildren<PropsWithClassname>) {
   return (
     <Tooltip>
-      <TooltipTrigger asChild>
+      <TooltipTrigger>
         <Badge
           variant="outline"
           className={cn('space-x-1 px-1 bg-blue-600 text-white num', className)}

@@ -11,11 +11,11 @@ export const AncientGolem: UnitBase = {
   name: 'Ancient Golem',
   stats: {
     ...BASE_UNIT.stats,
-    health: 110,
+    health: 130,
     attack: 160,
     defense: 110,
-    magic: 90,
-    speed: 100,
+    magic: 100,
+    speed: 90,
 
     focus: 0,
     stamina: 0,

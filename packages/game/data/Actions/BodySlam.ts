@@ -51,8 +51,11 @@ export class BodySlam extends Action {
   threshold = (source: Unit): number | undefined => {
     return 85 + source.stats.accuracy
   }
-  criticalThreshold = (source: Unit): number | undefined => undefined
-  criticalFactor = (source: Unit): number | undefined => undefined
+  criticalThreshold = (source: Unit): number | undefined => {
+    return 5 + source.stats.criticalChance
+  }
+  criticalFactor = (source: Unit): number | undefined =>
+    2 + source.stats.criticalDamage
   getAi(targets: Unit[], ctx: CombatContext): ActionAi {
     return getDamageAiRating(this, targets, ctx)
   }

@@ -17,7 +17,7 @@ export function DamageListInline(props: DamageListInlineProps) {
     damages,
     className,
     damageClassName,
-    children = 'damage',
+    children = '',
     seporator = ', ',
   } = props
   return (

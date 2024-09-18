@@ -65,6 +65,10 @@ export const WitchConfig: UnitBaseConfig = {
       make: (u) => new Bane(u.id, u.teamId),
     },
     {
+      id: BoastId,
+      make: (u) => new Boast(u.id, u.teamId),
+    },
+    {
       id: ChillingGraspId,
       make: (u) => new ChillingGrasp(u.id, u.teamId),
     },
@@ -95,10 +99,6 @@ export const WitchConfig: UnitBaseConfig = {
     {
       id: SongOfRuinId,
       make: (u) => new SongOfRuin(u.id, u.teamId),
-    },
-    {
-      id: BoastId,
-      make: (u) => new Boast(u.id, u.teamId),
     },
     {
       id: TrickRoomId,

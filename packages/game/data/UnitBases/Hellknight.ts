@@ -55,7 +55,7 @@ export const Hellknight: UnitBase = {
   ],
   resistances: [
     { type: 'fire', factor: 25 },
-    { type: 'force', factor: 10 },
+    { type: 'force', factor: 25 },
   ],
   weaknesses: [
     { type: 'arcane', factor: 25 },

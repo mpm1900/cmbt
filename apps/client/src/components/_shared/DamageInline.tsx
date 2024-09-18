@@ -40,6 +40,7 @@ export function DamageInline(props: DamageInlineProps) {
         color={color}
         damageType={damage?.damageType}
         className="h-[20px] w-[20px] self-center"
+        content={(name) => <>{name} Power</>}
       />
     </span>
   )

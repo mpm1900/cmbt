@@ -13,7 +13,6 @@ import {
 import { isUnitAliveCtx } from '@repo/game/utils'
 import { useActions, useCombat } from './state'
 import { useResults } from './state/useResults'
-import { useCombatContext } from './useCombatContext'
 
 export type CommitResultOptions = {
   enableLog?: boolean
@@ -30,20 +29,19 @@ export function useCombatActions() {
   const actionsQueue = useActions()
   const results = useResults()
   const actions = useActions()
-  let ctx = useCombatContext()
 
-  const cleanupResult = (result: ActionResult) => {
+  const cleanupResult = (result: ActionResult, context: CombatContext) => {
     const first = results.queue[0]
     if (first.id !== result.id) return
 
-    const deadActiveUnits = ctx.units.filter(
-      (u) => u.flags.isActive && !isUnitAliveCtx(u, ctx)
+    const deadActiveUnits = context.units.filter(
+      (u) => u.flags.isActive && !isUnitAliveCtx(u, context)
     )
     deadActiveUnits.forEach((u) => {
       combat.log(<LogCritical>{u.name} fell.</LogCritical>)
     })
 
-    ctx.units = combat.mutate([new SetDeadAsInactive()], ctx)
+    context.units = combat.mutate([new SetDeadAsInactive()], context)
     actions.setQueue((items) =>
       items.map((item) => {
         return {
@@ -56,13 +54,13 @@ export function useCombatActions() {
     )
 
     if (deadActiveUnits.length > 0) {
-      pushTriggers('on Unit Die', ctx, {
+      pushTriggers('on Unit Die', context, {
         units: deadActiveUnits,
       })
     }
 
-    ctx.modifiers = combat.removeWhere((modifier) => {
-      const parent = ctx.units.find((u) => u.id === modifier.parentId)
+    context.modifiers = combat.removeWhere((modifier) => {
+      const parent = context.units.find((u) => u.id === modifier.parentId)
       return !!parent && !parent?.flags.isActive
     })
   }
@@ -77,7 +75,6 @@ export function useCombatActions() {
       updateModifiers,
       updateActionQueue,
     } = result
-
     logResult(result, combat.log, context)
 
     if (removedUnits?.length) {

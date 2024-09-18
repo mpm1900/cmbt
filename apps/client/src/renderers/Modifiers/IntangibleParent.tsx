@@ -7,7 +7,7 @@ export const IntangibleParentRenderer: ModifierRenderer = {
     return (
       <div>
         {MODIFIER_NAMES[mod.registryId]} cannot be targeted by all actions or
-        damaged.
+        damaged by all sources.
       </div>
     )
   },

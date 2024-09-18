@@ -1,10 +1,10 @@
 import { nanoid } from 'nanoid'
 import { UnitBase, UnitBaseConfig } from '../../types'
 import {
-  BattleStance,
   Block,
   Boast,
   BodySlam,
+  ElixirOfPower,
   FirePunch,
   PiercingStrike,
   PowerSink,
@@ -64,7 +64,7 @@ export const SnorlaxConfig: UnitBaseConfig = {
     },
     {
       id: ElixirOfPowerId,
-      make: (u) => new BattleStance(u.id, u.teamId),
+      make: (u) => new ElixirOfPower(u.id, u.teamId),
     },
     {
       id: BodySlamId,

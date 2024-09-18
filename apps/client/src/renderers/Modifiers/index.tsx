@@ -10,6 +10,7 @@ import {
   DisabledParentId,
   DrainLifeParentOnTurnEndId,
   EnragedParentId,
+  HealingPrayerTriggerId,
   HealParentOnTurnEndId,
   HealParentOnUnitSwitchId,
   HiddenParentId,
@@ -85,7 +86,6 @@ export const ModifierRenderers: Record<string, ModifierRenderer> = {
   [UpdateStatTeamId]: UpdateStatTeamRenderer,
 
   // Triggers
-
   [CreateFirestormOnUnitEnterId]: CreateSandstormOnUnitEnterRenderer,
   [DamageAllOnTurnEndId]: DamageAllOnTurnEndRenderer,
   [DamageNewUnitsOnUnitEnterId]: DamageNewUnitsOnUnitEnterRenderer,
@@ -94,6 +94,7 @@ export const ModifierRenderers: Record<string, ModifierRenderer> = {
   [HealParentOnTurnEndId]: HealParentOnTurnEndRenderer,
   [HealParentOnUnitSwitchId]: HealParentOnUnitSwitchRenderer,
   [IntangibleParentId]: IntangibleParentRenderer,
+  [HealingPrayerTriggerId]: HealParentOnTurnEndRenderer,
   [InspectAllOnUnitEnterId]: InspectAllOnUnitEnterRenderer,
   [KillParentOnTurnEndId]: KillParentOnTurnEndRenderer,
   [StatDownStaticAllOnUnitEnterId]: StatDownStaticAllOnUnitEnterRenderer,

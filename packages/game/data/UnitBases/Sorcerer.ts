@@ -3,6 +3,7 @@ import { UnitBase, UnitBaseConfig } from '../../types'
 import {
   ACallBeyond,
   CallLightning,
+  ChainLightning,
   DragonBreath,
   Fireball,
   InfernalBlast,
@@ -16,6 +17,7 @@ import { Scholar } from '../Augments'
 import {
   ACallBeyondId,
   CallLightningId,
+  ChainLightningId,
   DragonBreathId,
   FireballId,
   InfernalBlastId,
@@ -63,6 +65,10 @@ export const SorcererConfig: UnitBaseConfig = {
       make: (u) => new CallLightning(u.id, u.teamId),
     },
     {
+      id: ChainLightningId,
+      make: (u) => new ChainLightning(u.id, u.teamId),
+    },
+    {
       id: DragonBreathId,
       make: (u) => new DragonBreath(u.id, u.teamId),
     },
@@ -98,6 +104,7 @@ export const SorcererConfig: UnitBaseConfig = {
   defaultAbilityId: ScholarId,
   defaultActionIds: [
     CallLightningId,
+    ChainLightningId,
     FireballId,
     MagicMissileId,
     PowerWordKillId,

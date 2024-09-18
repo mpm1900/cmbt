@@ -10,7 +10,7 @@ import { UpdateStatStageParent } from '../Modifiers'
 import { Identity } from '../Mutations'
 import { EmptyArray } from '../Queries/EmptyArray'
 
-export class BattleStance extends Action {
+export class ElixirOfPower extends Action {
   offset = 1
 
   constructor(sourceId: Id, teamId: Id) {

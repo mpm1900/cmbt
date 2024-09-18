@@ -10,7 +10,7 @@ import { HealParent, Identity } from '../Mutations'
 import { GetUnits } from '../Queries'
 
 export class SearingLight extends Action {
-  healthFactor = 0.5
+  healthFactor = 0.3
 
   constructor(sourceId: Id, teamId: Id) {
     super(SearingLightId, {

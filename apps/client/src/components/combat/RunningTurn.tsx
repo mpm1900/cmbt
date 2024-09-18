@@ -43,8 +43,8 @@ export function RunningTurn() {
           <div className="text-muted-foreground text-sm">
             on{' '}
             <TextList>
-              {logTargets.map((t) => (
-                <LogUnit key={t.id} unit={t} user={user}>
+              {Array.from(new Set(logTargets)).map((t, i) => (
+                <LogUnit key={t.id + i} unit={t} user={user}>
                   {t.name}
                 </LogUnit>
               ))}

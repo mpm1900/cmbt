@@ -67,7 +67,6 @@ export function UnitCard(props: UnitCardProps) {
           combat.stagedActions[unit.id],
       })}
     >
-      {unit.id}
       <div
         className={cn(
           'rounded transition-colors ease-in-out bg-slate-950 border max-h-[62px]',

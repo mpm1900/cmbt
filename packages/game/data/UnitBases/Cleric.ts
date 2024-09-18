@@ -7,8 +7,8 @@ import {
   Boast,
   DispelMagic,
   GuidingRay,
+  HealingPrayer,
   Protect,
-  QuickAttack,
   SearingLight,
   Smite,
   VampiricTouch,
@@ -24,9 +24,9 @@ import {
   DispelMagicId,
   DivineHealingId,
   GuidingRayId,
+  HealingPrayerId,
   HoldPersonId,
   ProtectId,
-  QuickAttackId,
   SearingLightId,
   SmiteId,
   VampiricTouchId,
@@ -83,16 +83,16 @@ export const ClericConfig: UnitBaseConfig = {
       make: (u) => new GuidingRay(u.id, u.teamId),
     },
     {
+      id: HealingPrayerId,
+      make: (u) => new HealingPrayer(u.id, u.teamId),
+    },
+    {
       id: HoldPersonId,
       make: (u) => new HoldPerson(u.id, u.teamId),
     },
     {
       id: ProtectId,
       make: (u) => new Protect(u.id, u.teamId),
-    },
-    {
-      id: QuickAttackId,
-      make: (u) => new QuickAttack(u.id, u.teamId),
     },
     {
       id: SearingLightId,

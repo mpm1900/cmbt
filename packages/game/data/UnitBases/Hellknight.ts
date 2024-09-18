@@ -1,10 +1,10 @@
 import { nanoid } from 'nanoid'
 import { UnitBase, UnitBaseConfig } from '../../types'
 import {
-  BattleStance,
   Block,
   DragonStance,
   Earthquake,
+  ElixirOfPower,
   Fireball,
   Firestorm,
   InfernalBlast,
@@ -84,7 +84,7 @@ export const TyranitarConfig: UnitBaseConfig = {
     },
     {
       id: ElixirOfPowerId,
-      make: (unit) => new BattleStance(unit.id, unit.teamId),
+      make: (unit) => new ElixirOfPower(unit.id, unit.teamId),
     },
     {
       id: FireballId,

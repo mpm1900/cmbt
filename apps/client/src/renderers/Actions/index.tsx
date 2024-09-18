@@ -10,6 +10,7 @@ import {
   BodySlamId,
   Burn,
   CallLightningId,
+  ChainLightningId,
   ChillingGraspId,
   DamageNewUnitsOnUnitEnter,
   DeathRitesId,
@@ -26,6 +27,7 @@ import {
   FirestormId,
   GhostFlameId,
   GuidingRayId,
+  HealingPrayerId,
   HideId,
   HoldPerson,
   HoldPersonId,
@@ -105,6 +107,7 @@ import { BlockRenderer } from './Block'
 import { TauntRenderer } from './Boast'
 import { BodySlamRenderer } from './BodySlam'
 import { CallLightningRenderer } from './CallLightning'
+import { ChainLightningRenderer } from './ChainLightning'
 import { ChillingGraspRenderer } from './ChillingGrasp'
 import { DeathRitesRenderer } from './DeathRites'
 import { DispelMagicRenderer } from './DispelMagic'
@@ -114,6 +117,7 @@ import { ElixirOfPowerRenderer } from './ElixirOfPower'
 import { FirestormRenderer } from './Firestorm'
 import { GhostFlameRenderer } from './GhostFlame'
 import { GuidingrayRenderer } from './GuidingRay'
+import { HealingPrayerRenderer } from './HealingPrayer'
 import { HideRenderer } from './Hide'
 import { InfernalBlastRenderer } from './InfernalBlast'
 import { IntoxicateRenderer } from './Intoxicate'
@@ -168,6 +172,7 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
   [BlockId]: BlockRenderer,
   [BodySlamId]: BodySlamRenderer,
   [CallLightningId]: CallLightningRenderer,
+  [ChainLightningId]: ChainLightningRenderer,
   [ChillingGraspId]: ChillingGraspRenderer,
   [DeathRitesId]: DeathRitesRenderer,
   [DispelMagicId]: DispelMagicRenderer,
@@ -177,6 +182,7 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
   [FirestormId]: FirestormRenderer,
   [GhostFlameId]: GhostFlameRenderer,
   [GuidingRayId]: GuidingrayRenderer,
+  [HealingPrayerId]: HealingPrayerRenderer,
   [HideId]: HideRenderer,
   [InfernalBlastId]: InfernalBlastRenderer,
   [IntoxicateId]: IntoxicateRenderer,

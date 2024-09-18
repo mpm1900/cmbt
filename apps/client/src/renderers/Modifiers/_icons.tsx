@@ -29,6 +29,7 @@ import {
   FireDamageUpParentId,
   FireNegationUpParentId,
   FirestormOnTurnEndId,
+  HealingPrayerTriggerId,
   HealParentOnUnitSwitchId,
   HiddenParentId,
   InspectAllOnUnitEnterId,
@@ -67,6 +68,7 @@ import {
   GiDragonSpiral,
   GiFireRing,
   GiGhostAlly,
+  GiHeartWings,
   GiMagicSwirl,
   GiOverkill,
   GiPoisonGas,
@@ -198,5 +200,8 @@ export const MODIFIER_ICONS: Record<Id, ReactNode> = {
   ),
   [DrainLifeParentOnTurnEndId]: (
     <GiDeathJuice className="fill-white h-full w-full" />
+  ),
+  [HealingPrayerTriggerId]: (
+    <GiHeartWings className="fill-white h-full w-full" />
   ),
 }

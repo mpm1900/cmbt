@@ -16,6 +16,8 @@ export function useEndController() {
     if (isEnd) {
       if (results.queue.length === 0) {
         if (!combat.turn.hasRanOnTurnEndTriggers && combat.turn.count > 0) {
+          ctx.modifiers = combat.decrementModifiers()
+          combat.decrementActionCooldowns()
           fns.pushTriggers('on Turn End', ctx)
           combat.setTurn((t) => ({ hasRanOnTurnEndTriggers: true }))
         } else {

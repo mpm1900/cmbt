@@ -40,6 +40,7 @@ export function handleTriggerEvent(
         trigger.mutations ? trigger.mutations(ctx, args) : [trigger]
       ),
   }
+
   if (result.addedModifiers?.length || result.mutations?.length) {
     logTriggers(triggers, event, log, ctx, args)
   }

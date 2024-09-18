@@ -31,8 +31,8 @@ export function logActionIntent(
           <span>
             {' on '}
             <TextList>
-              {logTargets.map((t) => (
-                <LogUnit key={t.id} unit={t} user={ctx.user}>
+              {logTargets.map((t, i) => (
+                <LogUnit key={t.id + i} unit={t} user={ctx.user}>
                   {t.name}
                 </LogUnit>
               ))}

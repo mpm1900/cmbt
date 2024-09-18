@@ -1,7 +1,7 @@
 import {
   AttackStageUpParentId,
-  BattleStance,
   DefenseStageUpParentId,
+  ElixirOfPower,
   ElixirOfPowerId,
   SpeedStageDownParentId,
   UpdateStatStageParent,
@@ -12,7 +12,7 @@ import { ACTION_NAMES, ActionRenderer } from '.'
 export const ElixirOfPowerRenderer: ActionRenderer = {
   name: ACTION_NAMES[ElixirOfPowerId],
   description: (action, props) => {
-    const battlestance = action as BattleStance
+    const battlestance = action as ElixirOfPower
     return (
       <div>
         Applies{' '}

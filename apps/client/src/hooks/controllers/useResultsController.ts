@@ -45,11 +45,13 @@ export function useResultsController() {
 
         if (shouldCommitResult) {
           setTimeout(() => {
-            fns.commitResult(first, ctx)
+            ctx = fns.commitResult(first, ctx)
             setTimeout(() => {
-              fns.cleanupResult(first)
-              results.dequeue()
-            }, speed * 1.5)
+              fns.cleanupResult(first, ctx)
+              setTimeout(() => {
+                results.dequeue()
+              }, speed)
+            }, speed)
           }, speed)
         } else {
           results.dequeue()
@@ -58,5 +60,5 @@ export function useResultsController() {
         combat.setStatus('done')
       }
     }
-  }, [first, combat.turn.status])
+  }, [first])
 }

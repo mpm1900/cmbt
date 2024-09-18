@@ -24,27 +24,29 @@ export function logTriggers(
   if (triggers.length > 0) {
     log(<LogTriggerName>{event}</LogTriggerName>)
 
-    triggers.forEach((trigger) => {
-      const parent = ctx.units.find((u) => u.id === trigger.parentId)
-      log(
-        <div className="text-muted-foreground">
-          {parent && (
-            <LogUnit
-              unit={parent}
-              user={ctx.user}
-              className="opacity-70 font-normal"
-            >
-              {parent.name}'s{' '}
-            </LogUnit>
-          )}
-          <ModifierInline
-            side="left"
-            className="font-normal text-white"
-            modifier={trigger}
-          />{' '}
-          Trigger
-        </div>
-      )
-    })
+    triggers
+      .filter((t) => (t.delay ?? 0) <= 0)
+      .forEach((trigger) => {
+        const parent = ctx.units.find((u) => u.id === trigger.parentId)
+        log(
+          <div className="text-muted-foreground">
+            {parent && (
+              <LogUnit
+                unit={parent}
+                user={ctx.user}
+                className="opacity-70 font-normal"
+              >
+                {parent.name}'s{' '}
+              </LogUnit>
+            )}
+            <ModifierInline
+              side="left"
+              className="font-normal text-white"
+              modifier={trigger}
+            />{' '}
+            Trigger
+          </div>
+        )
+      })
   }
 }

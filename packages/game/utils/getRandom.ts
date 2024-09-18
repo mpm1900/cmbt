@@ -1,3 +1,3 @@
 export function getRandom<T>(array: T[]): T {
-  return array[Math.round(Math.random() * array.length)]
+  return array[Math.floor(Math.random() * array.length)]
 }

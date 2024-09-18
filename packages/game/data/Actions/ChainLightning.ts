@@ -91,9 +91,12 @@ export class ChainLightning extends Action {
 
   mapTargets = (targets: Unit[], ctx: CombatContext): Unit[] => {
     const activeEnemyUnits = ctx.units.filter(
-      (u) => u.flags.isActive && u.teamId !== this.teamId
+      (u) =>
+        u.flags.isActive &&
+        u.teamId !== this.teamId &&
+        !targets.some((t) => t.id === u.id)
     )
-    this.setResults(getResults([50, 25]))
+    this.setResults(getResults([50]))
     return [
       ...targets,
       ...this.results

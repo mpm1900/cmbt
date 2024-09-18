@@ -11,10 +11,8 @@ export const ChainLightningRenderer: ActionRenderer = {
       <>
         Deals <DamageListInline damages={action.damages} /> to target enemy
         unit. Then, {action.chainChances[0]}% chance to deal{' '}
-        <DamageListInline damages={[action.chainDamages[0]]} /> to a random
-        active enemy unit. Then {action.chainChances[1]}% chance to deal{' '}
-        <DamageListInline damages={[action.chainDamages[1]]} /> to a random
-        active enemy unit. {action.chargeChance}% chance to apply{' '}
+        <DamageListInline damages={[action.chainDamages[0]]} /> to another
+        random active enemy unit. {action.chargeChance}% chance to apply{' '}
         <StatusInline side={props?.side} status={Charged} /> to this unit.
       </>
     )

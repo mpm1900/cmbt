@@ -49,6 +49,7 @@ export class SetIsActive extends Action {
   ): ActionResult[] => {
     return [
       {
+        id: nanoid(),
         action: this,
         shouldLog: true,
         source,

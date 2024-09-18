@@ -1,3 +1,4 @@
+import { nanoid } from 'nanoid'
 import {
   Action,
   ActionResolveData,
@@ -10,7 +11,7 @@ import { applyModifiers } from './applyModifiers'
 
 export type ParseActionResult = Omit<
   ActionResult,
-  'success' | 'source' | 'targets' | 'data' | 'action'
+  'id' | 'success' | 'source' | 'targets' | 'data' | 'action'
 >
 
 export function buildActionResult(
@@ -62,6 +63,7 @@ export function buildActionResult(
   if (success) {
     const { mutations = [], ...rest } = onSuccess
     return {
+      id: nanoid(),
       ...rest,
       shouldLog,
       success: true,
@@ -77,6 +79,7 @@ export function buildActionResult(
   if (!success) {
     const { mutations = [], ...rest } = onFailure
     return {
+      id: nanoid(),
       ...rest,
       shouldLog,
       success: false,
@@ -89,5 +92,7 @@ export function buildActionResult(
       mutations: [setLastUsed, ...mutations],
     }
   }
-  return {}
+  return {
+    id: nanoid(),
+  }
 }

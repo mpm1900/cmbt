@@ -3,6 +3,7 @@ import {
   getTeamsWithSelectionRequired,
 } from '@/utils'
 import { getTeamsWithLiveUnits, isUnitAliveCtx } from '@repo/game/utils'
+import { nanoid } from 'nanoid'
 import { useEffect } from 'react'
 import { useActions, useCleanup, useCombat } from '../state'
 import { useResults } from '../state/useResults'
@@ -30,7 +31,10 @@ export function useCombatController() {
 
           if (shouldCommitAction) {
             const actionResults = getResultsFromActionItem(item, ctx)
-            results.enqueue({ mutations: [item.action.cost] }, ...actionResults)
+            results.enqueue(
+              { id: nanoid(), mutations: [item.action.cost] },
+              ...actionResults
+            )
             combat.setActionCooldown(
               item.action.sourceId,
               item.action.id,

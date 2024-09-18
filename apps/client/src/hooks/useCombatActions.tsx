@@ -13,6 +13,7 @@ import {
 import { isUnitAliveCtx } from '@repo/game/utils'
 import { useActions, useCombat } from './state'
 import { useResults } from './state/useResults'
+import { useCombatContext } from './useCombatContext'
 
 export type CommitResultOptions = {
   enableLog?: boolean
@@ -24,23 +25,25 @@ export type CommitResult = (
   args?: MutationFilterArgs
 ) => CombatContext
 
-export type CleanupResult = (context: CombatContext) => CombatContext
-
 export function useCombatActions() {
   const combat = useCombat()
   const actionsQueue = useActions()
   const results = useResults()
   const actions = useActions()
+  let ctx = useCombatContext()
 
-  const cleanupResult: CleanupResult = (context) => {
-    const deadActiveUnits = context.units.filter(
-      (u) => u.flags.isActive && !isUnitAliveCtx(u, context)
+  const cleanupResult = (result: ActionResult) => {
+    const first = results.queue[0]
+    if (first.id !== result.id) return
+
+    const deadActiveUnits = ctx.units.filter(
+      (u) => u.flags.isActive && !isUnitAliveCtx(u, ctx)
     )
     deadActiveUnits.forEach((u) => {
       combat.log(<LogCritical>{u.name} fell.</LogCritical>)
     })
 
-    context.units = combat.mutate([new SetDeadAsInactive()], context)
+    ctx.units = combat.mutate([new SetDeadAsInactive()], ctx)
     actions.setQueue((items) =>
       items.map((item) => {
         return {
@@ -53,17 +56,15 @@ export function useCombatActions() {
     )
 
     if (deadActiveUnits.length > 0) {
-      pushTriggers('on Unit Die', context, {
+      pushTriggers('on Unit Die', ctx, {
         units: deadActiveUnits,
       })
     }
 
-    context.modifiers = combat.removeWhere((modifier) => {
-      const parent = context.units.find((u) => u.id === modifier.parentId)
+    ctx.modifiers = combat.removeWhere((modifier) => {
+      const parent = ctx.units.find((u) => u.id === modifier.parentId)
       return !!parent && !parent?.flags.isActive
     })
-
-    return context
   }
 
   const commitResult: CommitResult = (result, context, args) => {

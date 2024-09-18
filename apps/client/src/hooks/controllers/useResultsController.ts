@@ -26,13 +26,11 @@ export function useResultsController() {
       if (aliveTeams.length === ctx.teams.length) {
         const shouldCommitResult =
           (!first.action ||
-            !first.expandedTargets ||
-            first.expandedTargets.length === 0 ||
+            !first.expandedTargets?.length ||
             first.expandedTargets?.some((t) =>
               isUnitAlive(ctx.units.find((u) => u.id === t.id))
             )) &&
           aliveTeams.length === ctx.teams.length
-
         if (
           first.action &&
           first.shouldLog &&
@@ -47,9 +45,9 @@ export function useResultsController() {
 
         if (shouldCommitResult) {
           setTimeout(() => {
-            ctx = fns.commitResult(first, ctx)
+            fns.commitResult(first, ctx)
             setTimeout(() => {
-              ctx = fns.cleanupResult(ctx)
+              fns.cleanupResult(first)
               results.dequeue()
             }, speed * 1.5)
           }, speed)

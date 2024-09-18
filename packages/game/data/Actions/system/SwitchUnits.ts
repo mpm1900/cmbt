@@ -1,3 +1,4 @@
+import { nanoid } from 'nanoid'
 import {
   Action,
   ACTION_PRIORITIES,
@@ -42,6 +43,7 @@ export class SwitchUnit extends Action {
     if (!target) throw new Error('No target for SwitchUnit action.')
     return [
       {
+        id: nanoid(),
         action: this,
         shouldLog: true,
         source,

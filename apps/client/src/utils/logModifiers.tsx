@@ -1,5 +1,6 @@
 import { LogSecondary, LogUnit } from '@/components/ui/log'
 import { CombatLogger } from '@/hooks/state'
+import { ModifierRenderers } from '@/renderers'
 import { CombatContext, Modifier, MutationFilterArgs } from '@repo/game/types'
 import { isUnitAliveCtx } from '@repo/game/utils'
 import { ModifierInline } from '@shared/ModifierInline'
@@ -27,7 +28,8 @@ export function logModifiers(
       (m) => m.filter(unit, ctx, args) && !unitHasModifier(m)
     )
     const nonStatusModifiers = unitModifiers.filter((m) => {
-      return !m.statusId
+      const r = ModifierRenderers[m.registryId] ?? ModifierRenderers[m.id]
+      return !m.statusId && !!r
     })
 
     const statuses = getStatusesFromModifiers(unitModifiers)

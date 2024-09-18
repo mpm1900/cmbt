@@ -7,6 +7,7 @@ import {
   TriggerEvent,
 } from '@repo/game/types'
 import { getTriggersByEvent, validateModifiers } from '@repo/game/utils'
+import { nanoid } from 'nanoid/non-secure'
 import { logTriggers } from './logTriggers'
 
 export type HandleTriggerEventResult = {
@@ -26,6 +27,7 @@ export function handleTriggerEvent(
     []
   ) as Trigger[]
   const result: ActionResult = {
+    id: nanoid(),
     shouldLog: true,
     addedModifiers: triggers
       .filter((trigger) => !!trigger.modifiers)

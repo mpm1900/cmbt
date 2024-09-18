@@ -34,6 +34,7 @@ export class PotionAction extends Action {
     const target = targets[0]
     return [
       {
+        id: nanoid(),
         action: this,
         source,
         targets,

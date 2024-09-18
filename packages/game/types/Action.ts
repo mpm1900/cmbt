@@ -49,6 +49,7 @@ export type ActionAi = ActionsQueueItem & {
 }
 
 export type ActionResult = {
+  id: Id
   success?: boolean
   action?: Action
   source?: Unit

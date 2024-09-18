@@ -9,7 +9,7 @@ export function getResultsFromActionItem(
   let targets = ctx.units.filter((u) => targetIds?.includes(u.id))
   if (indexTarget) {
     const possibleTargets = ctx.units.filter(
-      (u, i) => u.teamId === indexTarget.teamId
+      (u, i) => u.flags.isActive && u.teamId === indexTarget.teamId
     )
     const slotTargets = possibleTargets.filter((u, i) =>
       indexTarget.indexes.includes(i)

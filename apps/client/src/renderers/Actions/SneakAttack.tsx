@@ -4,7 +4,6 @@ import {
   SneakAttackId,
   UpdateFlagParent,
 } from '@repo/game/data'
-import { DamageInline } from '@shared/DamageInline'
 import { DamageListInline } from '@shared/DamageListInline'
 import { ModifierInline } from '@shared/ModifierInline'
 import { ACTION_NAMES, ActionRenderer } from '.'
@@ -28,8 +27,8 @@ export const SneakAttackRenderer: ActionRenderer = {
           }
         />
         , deals{' '}
-        <DamageInline
-          damage={{ ...action.damages[0], power: action.hiddenPower }}
+        <DamageListInline
+          damages={[{ ...action.damages[0], power: action.hiddenPower }]}
         />{' '}
         with +1 priority instead. High critical chance.
       </>

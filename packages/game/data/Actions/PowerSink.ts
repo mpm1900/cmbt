@@ -11,15 +11,15 @@ import {
   getActionData,
   getModifiersFromUnit,
 } from '../../utils'
-import { PowerSwapId } from '../Ids'
+import { PowerSinkId } from '../Ids'
 import { UpdateStatStageParent } from '../Modifiers'
 import { Identity, SetIsActiveParent } from '../Mutations'
 import { SetModifiersParent } from '../Mutations/system/SetModifiersParent'
 import { GetUnits } from '../Queries'
 
-export class PowerSwap extends Action {
+export class PowerSink extends Action {
   constructor(sourceId: Id, teamId: Id) {
-    super(PowerSwapId, {
+    super(PowerSinkId, {
       sourceId,
       teamId,
       priority: ACTION_PRIORITIES.SLOW,

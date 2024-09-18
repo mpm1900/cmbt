@@ -1,6 +1,8 @@
+import { nanoid } from 'nanoid'
 import {
   Action,
   ACTION_PRIORITIES,
+  ActionAi,
   ActionResult,
   CombatContext,
   Id,
@@ -25,6 +27,15 @@ export class Protect extends Action {
       priority: ACTION_PRIORITIES.PROTECT,
       cooldown: 2,
     })
+  }
+
+  getAi(targets: Unit[], ctx: CombatContext): ActionAi {
+    return {
+      id: nanoid(),
+      action: this,
+      weight: [200, 0][Math.round(Math.random())],
+      targetIds: [],
+    }
   }
 
   resolve = (

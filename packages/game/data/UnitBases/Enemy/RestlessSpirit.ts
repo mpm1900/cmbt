@@ -1,7 +1,12 @@
 import { nanoid } from 'nanoid'
 import { UnitBase, UnitBaseConfig } from '../../../types'
-import { GhostFlame, MagicMissile, Protect } from '../../Actions'
-import { GhostFlameId, MagicMissileId, ProtectId } from '../../Ids'
+import { GhostFlame, Protect, VampiricTouch } from '../../Actions'
+import {
+  GhostFlameId,
+  MagicMissileId,
+  ProtectId,
+  VampiricTouchId,
+} from '../../Ids'
 import { BASE_UNIT } from '../../Units/system/BASE_UNIT'
 
 export const RestlessSpiritId = nanoid()
@@ -24,12 +29,12 @@ export const RestlessSpirit: UnitBase = {
   augmentSlots: 3,
   affinities: [],
   resistances: [
-    { type: 'blight', factor: 100 },
+    { type: 'blight', factor: 50 },
     { type: 'force', factor: 100 },
   ],
   weaknesses: [
     { type: 'holy', factor: 100 },
-    { type: 'shock', factor: 33 },
+    { type: 'shock', factor: 25 },
   ],
 }
 
@@ -38,8 +43,8 @@ export const RestlessSpiritConfig: UnitBaseConfig = {
   actionsCount: 5,
   actions: [
     {
-      id: MagicMissileId,
-      make: (u) => new MagicMissile(u.id, u.teamId),
+      id: VampiricTouchId,
+      make: (u) => new VampiricTouch(u.id, u.teamId),
     },
     {
       id: ProtectId,

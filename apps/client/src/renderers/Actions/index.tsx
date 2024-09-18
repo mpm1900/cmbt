@@ -50,8 +50,8 @@ import {
   PoisonSprayId,
   PotionActionId,
   PowerCleaveId,
+  PowerSinkId,
   PowerStanceId,
-  PowerSwapId,
   PowerWordKillId,
   Protect,
   ProtectedParentId,
@@ -88,7 +88,6 @@ import {
   WildStrikesId,
 } from '@repo/game/data'
 import { Action, ActionResult, CombatContext, Unit } from '@repo/game/types'
-import { DamageInline } from '@shared/DamageInline'
 import { DamageListInline } from '@shared/DamageListInline'
 import { MagicArmor } from '@shared/MagicArmor'
 import { ModifierInline } from '@shared/ModifierInline'
@@ -123,8 +122,8 @@ import { NegateArmorRenderer } from './NegateArmor'
 import { PhantomSlashRender } from './PhantomSlash'
 import { PiercingStrikeRenderer } from './PiercingStrike'
 import { PowerCleaveRenderer } from './PowerCleave'
+import { PowerSwapRenderer } from './PowerSink'
 import { PowerStanceRenderer } from './PowerStance'
-import { PowerSwapRenderer } from './PowerSwap'
 import { ProvokeRenderer } from './Provoke'
 import { PyroclashRenderer } from './Pyroclash'
 import { RetreatingBlowRenderer } from './RetreatingBlow'
@@ -186,7 +185,7 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
   [PiercingStrikeId]: PiercingStrikeRenderer,
   [PowerCleaveId]: PowerCleaveRenderer,
   [PowerStanceId]: PowerStanceRenderer,
-  [PowerSwapId]: PowerSwapRenderer,
+  [PowerSinkId]: PowerSwapRenderer,
   [ProvokeId]: ProvokeRenderer,
   [PyroclashId]: PyroclashRenderer,
   [RetreatingBlowId]: RetreatingBlowRenderer,
@@ -277,8 +276,8 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
       return (
         <>
           Deals <DamageListInline damages={action.damages} /> to target enemy
-          unit. Deals <DamageInline damage={fireball.splashDamage} /> to all
-          other active enemy units.
+          unit. Deals <DamageListInline damages={[fireball.splashDamage]} /> to
+          all other active enemy units.
         </>
       )
     },

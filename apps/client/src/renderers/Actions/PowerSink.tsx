@@ -1,8 +1,8 @@
-import { PowerSwapId } from '@repo/game/data'
+import { PowerSinkId } from '@repo/game/data'
 import { ACTION_NAMES, ActionRenderer } from '.'
 
 export const PowerSwapRenderer: ActionRenderer = {
-  name: ACTION_NAMES[PowerSwapId],
+  name: ACTION_NAMES[PowerSinkId],
   description: (action, props) => {
     return (
       <>

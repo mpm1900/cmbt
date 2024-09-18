@@ -14,7 +14,7 @@ export function getDamageAiRating(
   const accuracy = (action.threshold(modifiedSource) ?? 100) / 100
   const rating =
     getActionDamageRating(action).reduce((p, c) => p + c, 0) * targets.length
-  const weight = rating * accuracy * random.float(0.85, 1.15)
+  const weight = rating * accuracy * random.float(0.8, 1.2)
 
   return {
     id: nanoid(),

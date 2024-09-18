@@ -1,9 +1,9 @@
 import { nanoid } from 'nanoid'
 import { UnitBase, UnitBaseConfig } from '../../types'
 import {
+  ACallBeyond,
   DragonBreath,
   Fireball,
-  GhostFlame,
   InfernalBlast,
   LightningBolt,
   MagicMissile,
@@ -12,9 +12,9 @@ import {
 } from '../Actions'
 import { Scholar } from '../Augments'
 import {
+  ACallBeyondId,
   DragonBreathId,
   FireballId,
-  GhostFlameId,
   InfernalBlastId,
   LightningBoltId,
   MagicMissileId,
@@ -52,6 +52,10 @@ export const SorcererConfig: UnitBaseConfig = {
   actionsCount: 6,
   actions: [
     {
+      id: ACallBeyondId,
+      make: (u) => new ACallBeyond(u.id, u.teamId),
+    },
+    {
       id: DragonBreathId,
       make: (u) => new DragonBreath(u.id, u.teamId),
     },
@@ -78,10 +82,6 @@ export const SorcererConfig: UnitBaseConfig = {
     {
       id: LightningBoltId,
       make: (u) => new LightningBolt(u.id, u.teamId),
-    },
-    {
-      id: GhostFlameId,
-      make: (u) => new GhostFlame(u.id, u.teamId),
     },
   ],
   defaultAbilityId: ScholarId,

@@ -1,14 +1,9 @@
 import { nanoid } from 'nanoid'
 import { UnitBase, UnitBaseConfig } from '../../../types'
-import { GhostFlame, PiercingStrike, Protect } from '../../Actions'
+import { PiercingStrike, Protect } from '../../Actions'
 import { PhantomSlash } from '../../Actions/PhantomSlash'
 import { CursedMiasma } from '../../Augments/CursedMiasma'
-import {
-  GhostFlameId,
-  PhantomSlashId,
-  PiercingStrikeId,
-  ProtectId,
-} from '../../Ids'
+import { PhantomSlashId, PiercingStrikeId, ProtectId } from '../../Ids'
 import { BASE_UNIT } from '../../Units/system/BASE_UNIT'
 
 export const RevenantId = nanoid()
@@ -30,18 +25,17 @@ export const Revenant: UnitBase = {
   tags: [],
   augmentSlots: 3,
   affinities: [],
-  resistances: [],
-  weaknesses: [],
+  resistances: [
+    { type: 'blight', factor: 50 },
+    { type: 'force', factor: 50 },
+  ],
+  weaknesses: [{ type: 'holy', factor: 100 }],
 }
 
 export const RevenantConfig: UnitBaseConfig = {
   abilities: [CursedMiasma],
   actionsCount: 5,
   actions: [
-    {
-      id: GhostFlameId,
-      make: (u) => new GhostFlame(u.id, u.teamId),
-    },
     {
       id: PhantomSlashId,
       make: (u) => new PhantomSlash(u.id, u.teamId),

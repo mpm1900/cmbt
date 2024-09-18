@@ -5,6 +5,7 @@ import { Separator } from '@/components/ui/separator'
 import {
   ENEMY_BASES,
   RestlessSpirit,
+  Revenant,
   Snake,
   SpeedUpTeamId,
   TeamId,
@@ -63,6 +64,7 @@ const CombatIntroductionNode: EncounterNode = {
                 Wolf,
                 Snake,
                 RestlessSpirit,
+                Revenant,
               ])
             ),
             commit: true,

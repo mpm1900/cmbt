@@ -1,7 +1,7 @@
 import { nanoid } from 'nanoid'
 import { UnitBase, UnitBaseConfig } from '../../../types'
-import { Bite } from '../../Actions'
-import { BiteId } from '../../Ids'
+import { Bite, Protect } from '../../Actions'
+import { BiteId, ProtectId } from '../../Ids'
 import { Beast } from '../../Tags'
 import { BASE_UNIT } from '../../Units/system/BASE_UNIT'
 
@@ -36,7 +36,11 @@ export const WolfConfig: UnitBaseConfig = {
       id: BiteId,
       make: (u) => new Bite(u.id, u.teamId),
     },
+    {
+      id: ProtectId,
+      make: (u) => new Protect(u.id, u.teamId),
+    },
   ],
   defaultAbilityId: undefined,
-  defaultActionIds: [BiteId],
+  defaultActionIds: [BiteId, ProtectId],
 }

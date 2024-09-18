@@ -1,4 +1,5 @@
 export * from './Celebi'
 export * from './RestlessSpirit'
+export * from './Revenant'
 export * from './Snake'
 export * from './Wolf'

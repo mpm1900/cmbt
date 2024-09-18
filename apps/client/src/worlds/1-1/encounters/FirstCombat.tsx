@@ -45,7 +45,7 @@ const IntroductionNode: EncounterNode = {
             enemyUnits: Array.from({ length: 3 }).map(() => {
               const e = makeUnit({ level: 2, teamId: enemyTeam.id }, [
                 Wolf,
-                // Snake,
+                // Revenant,
               ])
 
               return e

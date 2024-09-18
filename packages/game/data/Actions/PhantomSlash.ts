@@ -1,9 +1,17 @@
 import { nanoid } from 'nanoid'
-import { Action, ActionResult, CombatContext, Id, Unit } from '../../types'
+import {
+  Action,
+  ActionAi,
+  ActionResult,
+  CombatContext,
+  Id,
+  Unit,
+} from '../../types'
 import {
   buildActionResult,
   calculateDamages,
   getActionData,
+  getDamageAiRating,
   getMutationsFromDamageResult,
 } from '../../utils'
 import {
@@ -41,6 +49,10 @@ export class PhantomSlash extends Action {
         damageType: 'blight',
       },
     ]
+  }
+
+  getAi(targets: Unit[], ctx: CombatContext): ActionAi {
+    return getDamageAiRating(this, targets, ctx)
   }
 
   resolve(source: Unit, targets: Unit[], ctx: CombatContext): ActionResult[] {

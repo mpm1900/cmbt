@@ -6,7 +6,7 @@ import {
   BodySlam,
   FirePunch,
   PiercingStrike,
-  PowerSwap,
+  PowerSink,
   Protect,
   Rest,
 } from '../Actions'
@@ -20,7 +20,7 @@ import {
   InsulatedId,
   IntoxicateId,
   PiercingStrikeId,
-  PowerSwapId,
+  PowerSinkId,
   ProtectId,
   RestId,
 } from '../Ids'
@@ -77,8 +77,8 @@ export const SnorlaxConfig: UnitBaseConfig = {
       make: (u) => new PiercingStrike(u.id, u.teamId),
     },
     {
-      id: PowerSwapId,
-      make: (u) => new PowerSwap(u.id, u.teamId),
+      id: PowerSinkId,
+      make: (u) => new PowerSink(u.id, u.teamId),
     },
     {
       id: ProtectId,

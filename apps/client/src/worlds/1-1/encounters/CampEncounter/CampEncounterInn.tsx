@@ -5,7 +5,7 @@ import { Quote } from '@/components/encounter/Quote'
 import { StatRenderers } from '@/renderers/Stats'
 import { check, choice, initializeNpcCombat } from '@/worlds/_utils'
 import { Separator } from '@radix-ui/react-menubar'
-import { Celebi } from '@repo/game/data'
+import { Wizard } from '@repo/game/data'
 import { EncounterChoice, EncounterNode } from '@repo/game/types'
 import { nanoid } from 'nanoid'
 import { GiCreditsCurrency, GiVillage } from 'react-icons/gi'
@@ -186,7 +186,7 @@ export const CampEncounterInn: EncounterNode = {
             configs: {
               [npc!.id]: {
                 level: 9,
-                bases: [Celebi],
+                bases: [Wizard],
               },
             },
             xp: 55,

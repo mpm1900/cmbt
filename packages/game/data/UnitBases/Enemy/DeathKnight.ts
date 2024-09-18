@@ -4,9 +4,9 @@ import { PiercingStrike, Protect } from '../../Actions'
 import { PiercingStrikeId, ProtectId } from '../../Ids'
 import { BASE_UNIT } from '../../Units/system/BASE_UNIT'
 
-export const CelebiId = nanoid()
-export const Celebi: UnitBase = {
-  id: CelebiId,
+export const DeathKnightId = nanoid()
+export const DeathKnight: UnitBase = {
+  id: DeathKnightId,
   name: 'Death Knight',
   stats: {
     ...BASE_UNIT.stats,
@@ -27,7 +27,7 @@ export const Celebi: UnitBase = {
   weaknesses: [],
 }
 
-export const CelebiConfig: UnitBaseConfig = {
+export const DeathKnightConfig: UnitBaseConfig = {
   abilities: [],
   actionsCount: 5,
   actions: [

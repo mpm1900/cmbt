@@ -13,7 +13,7 @@ export const TallGrass: Augment = {
         sourceId: unit.id,
         parentId: unit.id,
         maxInstances: 1,
-        duration: 1,
+        duration: 2,
         persistOnSwitch: true,
       }),
     ]

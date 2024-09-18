@@ -16,11 +16,10 @@ export function useNextController() {
       if (teams.length === 0) {
         setTimeout(
           () => {
-            if (combat.turn.count > 0) {
-              combat.decrementModifiers()
-              combat.removeZeroModifiers()
-              combat.decrementActionCooldowns()
-            }
+            combat.decrementModifiers()
+            combat.removeZeroModifiers()
+            combat.decrementActionCooldowns()
+
             combat.next()
             combat.mutate(
               [new IncrementActiveTurns({}), new IncrementInactiveTurns({})],

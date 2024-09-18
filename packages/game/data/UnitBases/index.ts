@@ -4,8 +4,10 @@ import { Cleric, ClericConfig } from './Cleric'
 import { DemonSlayer, TempestKnightConfig } from './DemonSlayer'
 import { DraconicDiscipleConfig, DraconicScion } from './DraconicScion'
 import {
-  Celebi,
-  CelebiConfig,
+  Bear,
+  BearConfig,
+  DeathKnight,
+  DeathKnightConfig,
   RestlessSpirit,
   RestlessSpiritConfig,
   Snake,
@@ -20,6 +22,7 @@ import { Witch, WitchConfig } from './Witch'
 import { Wizard, WizardConfig } from './Wizard'
 
 export * from './Enemy'
+export * from './Wizard'
 
 export const PLAYER_BASES: UnitBase[] = [
   // Wolf,
@@ -38,14 +41,21 @@ export const PLAYER_BASES: UnitBase[] = [
   // RestlessSpirit,
 ]
 
-export const ENEMY_BASES = [Celebi, RestlessSpirit, Revenant, Snake, Wolf]
+export const ENEMY_BASES = [
+  Bear,
+  DeathKnight,
+  RestlessSpirit,
+  Revenant,
+  Snake,
+  Wolf,
+]
 
 export const ALL_BASES: UnitBase[] = [...PLAYER_BASES, ...ENEMY_BASES]
 
 export const BASE_CONFIGS: Record<Id, UnitBaseConfig> = {
   [Blissy.id]: BlissyConfig,
   [Cleric.id]: ClericConfig,
-  [Celebi.id]: CelebiConfig,
+  [DeathKnight.id]: DeathKnightConfig,
   [DemonSlayer.id]: TempestKnightConfig,
   [Wizard.id]: WizardConfig,
   [DraconicScion.id]: DraconicDiscipleConfig,
@@ -54,6 +64,7 @@ export const BASE_CONFIGS: Record<Id, UnitBaseConfig> = {
   [Witch.id]: WitchConfig,
   [Sorcerer.id]: SorcererConfig,
 
+  [Bear.id]: BearConfig,
   [RestlessSpirit.id]: RestlessSpiritConfig,
   [Revenant.id]: RevenantConfig,
   [Snake.id]: SnakeConfig,

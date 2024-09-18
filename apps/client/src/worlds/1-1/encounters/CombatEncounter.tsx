@@ -3,6 +3,7 @@ import { ChoiceLabel } from '@/components/encounter/ChoiceLabel'
 import { Narration } from '@/components/encounter/Narration'
 import { Separator } from '@/components/ui/separator'
 import {
+  Bear,
   ENEMY_BASES,
   RestlessSpirit,
   Revenant,
@@ -65,6 +66,7 @@ const CombatIntroductionNode: EncounterNode = {
                 Snake,
                 RestlessSpirit,
                 Revenant,
+                Bear,
               ])
             ),
             commit: true,

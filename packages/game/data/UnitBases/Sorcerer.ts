@@ -10,6 +10,7 @@ import {
   MagicMissile,
   PowerWordKill,
   Protect,
+  Ward,
 } from '../Actions'
 import { Scholar } from '../Augments'
 import {
@@ -23,6 +24,7 @@ import {
   PowerWordKillId,
   ProtectId,
   ScholarId,
+  WardId,
 } from '../Ids'
 import { BASE_UNIT } from '../Units/system/BASE_UNIT'
 
@@ -87,6 +89,10 @@ export const SorcererConfig: UnitBaseConfig = {
     {
       id: LightningBoltId,
       make: (u) => new LightningBolt(u.id, u.teamId),
+    },
+    {
+      id: WardId,
+      make: (u) => new Ward(u.id, u.teamId),
     },
   ],
   defaultAbilityId: ScholarId,

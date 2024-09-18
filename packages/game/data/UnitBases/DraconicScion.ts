@@ -2,6 +2,7 @@ import { nanoid } from 'nanoid'
 import { UnitBase, UnitBaseConfig } from '../../types'
 import {
   Bane,
+  Block,
   Boast,
   DragonBreath,
   DragonStance,
@@ -15,6 +16,7 @@ import {
 import { DraconicAura } from '../Augments'
 import {
   BaneId,
+  BlockId,
   BoastId,
   DraconicAuraId,
   DragonBreathId,
@@ -57,6 +59,10 @@ export const DraconicDiscipleConfig: UnitBaseConfig = {
     {
       id: BaneId,
       make: (unit) => new Bane(unit.id, unit.teamId),
+    },
+    {
+      id: BlockId,
+      make: (u) => new Block(u.id, u.teamId),
     },
     {
       id: BoastId,

@@ -2,6 +2,7 @@ import { nanoid } from 'nanoid'
 import { UnitBase, UnitBaseConfig } from '../../types'
 import {
   BattleStance,
+  Block,
   Boast,
   BodySlam,
   FirePunch,
@@ -13,6 +14,7 @@ import {
 import { Intoxicate } from '../Actions/Intoxicate'
 import { Insulated } from '../Augments'
 import {
+  BlockId,
   BoastId,
   BodySlamId,
   ElixirOfPowerId,
@@ -52,6 +54,10 @@ export const SnorlaxConfig: UnitBaseConfig = {
   abilities: [Insulated],
   actionsCount: 5,
   actions: [
+    {
+      id: BlockId,
+      make: (u) => new Block(u.id, u.teamId),
+    },
     {
       id: BoastId,
       make: (u) => new Boast(u.id, u.teamId),

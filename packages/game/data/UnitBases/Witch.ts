@@ -12,6 +12,7 @@ import {
   SongOfRuin,
   TrickRoom,
   VampiricTouch,
+  Ward,
 } from '../Actions'
 import { HoldPerson } from '../Actions/HoldPerson'
 import { Regeneration } from '../Augments'
@@ -29,6 +30,7 @@ import {
   SongOfRuinId,
   TrickRoomId,
   VampiricTouchId,
+  WardId,
 } from '../Ids'
 import { BASE_UNIT } from '../Units/system/BASE_UNIT'
 
@@ -107,6 +109,10 @@ export const WitchConfig: UnitBaseConfig = {
     {
       id: VampiricTouchId,
       make: (u) => new VampiricTouch(u.id, u.teamId),
+    },
+    {
+      id: WardId,
+      make: (u) => new Ward(u.id, u.teamId),
     },
   ],
   defaultAbilityId: RegenerationId,

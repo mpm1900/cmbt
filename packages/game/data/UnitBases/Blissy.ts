@@ -1,7 +1,7 @@
 import { nanoid } from 'nanoid'
 import { UnitBase, UnitBaseConfig } from '../../types'
 import {
-  ArmorUp,
+  Block,
   NegateArmor,
   PoisonSpray,
   Protect,
@@ -10,7 +10,7 @@ import {
 } from '../Actions'
 import { DivineHealing } from '../Augments'
 import {
-  ArmorUpId,
+  BlockId,
   DivineHealingId,
   NegateArmorId,
   PoisonSprayId,
@@ -51,8 +51,8 @@ export const BlissyConfig: UnitBaseConfig = {
   actionsCount: 5,
   actions: [
     {
-      id: ArmorUpId,
-      make: (u) => new ArmorUp(u.id, u.teamId),
+      id: BlockId,
+      make: (u) => new Block(u.id, u.teamId),
     },
     {
       id: NegateArmorId,
@@ -76,5 +76,5 @@ export const BlissyConfig: UnitBaseConfig = {
     },
   ],
   defaultAbilityId: DivineHealingId,
-  defaultActionIds: [ArmorUpId, PoisonSprayId, ProtectId, SpikesId, WardId],
+  defaultActionIds: [BlockId, PoisonSprayId, ProtectId, SpikesId, WardId],
 }

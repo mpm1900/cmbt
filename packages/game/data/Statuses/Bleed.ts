@@ -8,7 +8,7 @@ export const Bleed: Status = {
   duration: 5,
   modifiers: (source, parent) => [
     new UpdateStatParent({
-      stat: 'speed',
+      stat: 'attack',
       registryId: SpeedDownParentId,
       sourceId: source.id,
       parentId: parent.id,

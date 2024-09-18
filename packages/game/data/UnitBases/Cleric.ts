@@ -3,7 +3,9 @@ import { UnitBase, UnitBaseConfig } from '../../types'
 import {
   Bane,
   Bless,
+  Block,
   Boast,
+  DispelMagic,
   GuidingRay,
   Protect,
   QuickAttack,
@@ -17,7 +19,9 @@ import { DivineHealing } from '../Augments'
 import {
   BaneId,
   BlessId,
+  BlockId,
   BoastId,
+  DispelMagicId,
   DivineHealingId,
   GuidingRayId,
   HoldPersonId,
@@ -65,6 +69,14 @@ export const ClericConfig: UnitBaseConfig = {
     {
       id: BlessId,
       make: (u) => new Bless(u.id, u.teamId),
+    },
+    {
+      id: BlockId,
+      make: (u) => new Block(u.id, u.teamId),
+    },
+    {
+      id: DispelMagicId,
+      make: (u) => new DispelMagic(u.id, u.teamId),
     },
     {
       id: GuidingRayId,

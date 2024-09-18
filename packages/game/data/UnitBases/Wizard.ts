@@ -3,7 +3,6 @@ import { UnitBase, UnitBaseConfig } from '../../types'
 import {
   ACallBeyond,
   Fireball,
-  GhostFlame,
   LightningBolt,
   MagicMissile,
   MemoryLeak,
@@ -11,14 +10,15 @@ import {
   MindShatter,
   PowerWordKill,
   Protect,
+  PsyStab,
   TimeBend,
+  Ward,
 } from '../Actions'
 import { MindTwist } from '../Actions/MindTwist'
 import { Scholar } from '../Augments'
 import {
   ACallBeyondId,
   FireballId,
-  GhostFlameId,
   LightningBoltId,
   MagicMissileId,
   MemoryLeakId,
@@ -27,8 +27,10 @@ import {
   MindTwistId,
   PowerWordKillId,
   ProtectId,
+  PsyStabId,
   ScholarId,
   TimeBendId,
+  WardId,
 } from '../Ids'
 import { BASE_UNIT } from '../Units/system/BASE_UNIT'
 
@@ -103,6 +105,10 @@ export const WizardConfig: UnitBaseConfig = {
       make: (u) => new Protect(u.id, u.teamId),
     },
     {
+      id: PsyStabId,
+      make: (u) => new PsyStab(u.id, u.teamId),
+    },
+    {
       id: LightningBoltId,
       make: (u) => new LightningBolt(u.id, u.teamId),
     },
@@ -111,8 +117,8 @@ export const WizardConfig: UnitBaseConfig = {
       make: (u) => new TimeBend(u.id, u.teamId),
     },
     {
-      id: GhostFlameId,
-      make: (u) => new GhostFlame(u.id, u.teamId),
+      id: WardId,
+      make: (u) => new Ward(u.id, u.teamId),
     },
   ],
   defaultAbilityId: ScholarId,

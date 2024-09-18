@@ -1,11 +1,11 @@
 import { LogUnit } from '@/components/ui/log'
 import {
   ACallBeyondId,
-  ArmorUpId,
   AttackStageUpParentId,
   BaneId,
   BiteId,
   BlessId,
+  BlockId,
   BoastId,
   BodySlamId,
   Burn,
@@ -58,6 +58,7 @@ import {
   ProtectedParentId,
   ProtectId,
   ProvokeId,
+  PsyStabId,
   PyroclashId,
   QuickAttack,
   QuickAttackId,
@@ -97,10 +98,10 @@ import { TextList } from '@shared/TextList'
 import { ReactNode } from 'react'
 import { ACTION_NAMES } from './_names'
 import { ACallBeyondRenderer } from './ACallBeyond'
-import { ArmorUpRenderer } from './ArmorUp'
 import { BaneRenderer } from './Bane'
 import { BiteRenderer } from './Bite'
 import { BlessRenderer } from './Bless'
+import { BlockRenderer } from './Block'
 import { TauntRenderer } from './Boast'
 import { BodySlamRenderer } from './BodySlam'
 import { CallLightningRenderer } from './CallLightning'
@@ -127,6 +128,7 @@ import { PowerCleaveRenderer } from './PowerCleave'
 import { PowerSwapRenderer } from './PowerSink'
 import { PowerStanceRenderer } from './PowerStance'
 import { ProvokeRenderer } from './Provoke'
+import { PsyStabRenderer } from './PsyStab'
 import { PyroclashRenderer } from './Pyroclash'
 import { RetreatingBlowRenderer } from './RetreatingBlow'
 import { SearingLightRenderer } from './SearingLight'
@@ -160,10 +162,10 @@ export type ActionRenderer = {
 
 export const ActionRenderers: Record<string, ActionRenderer> = {
   [ACallBeyondId]: ACallBeyondRenderer,
-  [ArmorUpId]: ArmorUpRenderer,
   [BaneId]: BaneRenderer,
   [BiteId]: BiteRenderer,
   [BlessId]: BlessRenderer,
+  [BlockId]: BlockRenderer,
   [BodySlamId]: BodySlamRenderer,
   [CallLightningId]: CallLightningRenderer,
   [ChillingGraspId]: ChillingGraspRenderer,
@@ -190,6 +192,7 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
   [PowerStanceId]: PowerStanceRenderer,
   [PowerSinkId]: PowerSwapRenderer,
   [ProvokeId]: ProvokeRenderer,
+  [PsyStabId]: PsyStabRenderer,
   [PyroclashId]: PyroclashRenderer,
   [RetreatingBlowId]: RetreatingBlowRenderer,
   [SearingLightId]: SearingLightRenderer,
@@ -515,7 +518,7 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
     },
   },
   [TrickRoomId]: {
-    name: 'Trick Room',
+    name: ACTION_NAMES[TrickRoomId],
     description: (action, props) => (
       <>
         Applies{' '}

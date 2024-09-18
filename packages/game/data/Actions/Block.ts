@@ -1,20 +1,20 @@
 import { Action, ActionResult, CombatContext, Id, Unit } from '../../types'
 import { buildActionResult, getActionData } from '../../utils'
-import { ArmorUpId } from '../Ids'
+import { BlockId } from '../Ids'
 import { Identity, UpdateValueParent } from '../Mutations'
 import { EmptyArray } from '../Queries'
 
-export class ArmorUp extends Action {
-  amount: number
+export class Block extends Action {
+  factor: number
   constructor(sourceId: Id, teamId: Id) {
-    super(ArmorUpId, {
+    super(BlockId, {
       sourceId,
       teamId,
       cost: new Identity({ sourceId }),
       targets: new EmptyArray(),
       maxTargetCount: 0,
     })
-    this.amount = 50
+    this.factor = 0.25
   }
 
   resolve = (
@@ -38,7 +38,7 @@ export class ArmorUp extends Action {
                 sourceId: source.id,
                 parentId: source.id,
                 valueKey: 'physicalArmor',
-                static: this.amount,
+                static: Math.round(this.factor * data.source.stats.health),
               }),
             ],
           },

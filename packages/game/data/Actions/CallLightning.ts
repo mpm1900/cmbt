@@ -1,3 +1,4 @@
+import random from 'random'
 import {
   Action,
   ActionAi,
@@ -7,49 +8,49 @@ import {
   Unit,
 } from '../../types'
 import {
-  applyModifiers,
   buildActionResult,
   calculateDamages,
   getActionData,
+  getDamageAiRating,
   getMutationsFromDamageResult,
 } from '../../utils'
-import { getDamageAiRating } from '../../utils/getDamageAiRating'
-import { MindBlastId } from '../Ids'
+import { CallLightningId } from '../Ids'
 import { Identity } from '../Mutations'
-import { EmptyArray } from '../Queries'
+import { GetUnits } from '../Queries'
+import { Charged } from '../Statuses'
 
-export class MindBlast extends Action {
+export class CallLightning extends Action {
+  chargeChance: number = 20
+
   constructor(sourceId: Id, teamId: Id) {
-    super(MindBlastId, {
+    super(CallLightningId, {
       sourceId,
       teamId,
       cost: new Identity({}),
-      targets: new EmptyArray(),
-      maxTargetCount: 0,
+      targets: new GetUnits({
+        notTeamId: teamId,
+        isActive: true,
+        isHidden: false,
+      }),
+      maxTargetCount: 1,
     })
 
     this.damages = [
       {
-        power: 50,
+        power: 110,
         attackType: 'magic',
-        damageType: 'psychic',
+        damageType: 'shock',
       },
     ]
   }
 
-  threshold = (source: Unit): number | undefined => 95 + source.stats.accuracy
+  threshold = (source: Unit): number | undefined => {
+    return 75 + source.stats.accuracy
+  }
   criticalThreshold = (source: Unit): number | undefined => undefined
   criticalFactor = (source: Unit): number | undefined => undefined
-
   getAi(targets: Unit[], ctx: CombatContext): ActionAi {
     return getDamageAiRating(this, targets, ctx)
-  }
-
-  mapTargets = (targets: Unit[], ctx: CombatContext): Unit[] => {
-    const source = ctx.units.find((u) => u.id === this.sourceId)
-    return ctx.units
-      .map((u) => applyModifiers(u, ctx).unit)
-      .filter((u) => u.flags.isActive && u.teamId !== source?.teamId)
   }
 
   resolve = (
@@ -58,6 +59,8 @@ export class MindBlast extends Action {
     ctx: CombatContext
   ): ActionResult[] => {
     const data = getActionData(source, this, ctx)
+    const applyModifierRoll = random.int(0, 100)
+    const applyCharge = applyModifierRoll <= this.chargeChance
 
     return [
       buildActionResult(
@@ -77,6 +80,9 @@ export class MindBlast extends Action {
               )
               return getMutationsFromDamageResult(source, target, damage)
             }),
+            addedModifiers: applyCharge
+              ? Charged.modifiers(source, source)
+              : [],
           },
         })
       ),

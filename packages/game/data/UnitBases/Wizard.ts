@@ -39,7 +39,7 @@ export const Wizard: UnitBase = {
     ...BASE_UNIT.stats,
     health: 50,
     attack: 50,
-    defense: 80,
+    defense: 95,
     magic: 140,
     speed: 100,
 

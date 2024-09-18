@@ -8,7 +8,7 @@ import {
   Id,
   Unit,
 } from '../../types'
-import { buildActionResult, getActionData } from '../../utils'
+import { buildActionResult, getActionData, getRandom } from '../../utils'
 import { ProtectedParentId, ProtectId } from '../Ids'
 import { UpdateFlagParent } from '../Modifiers'
 import { Identity } from '../Mutations'
@@ -33,7 +33,7 @@ export class Protect extends Action {
     return {
       id: nanoid(),
       action: this,
-      weight: [200, 0][Math.round(Math.random())],
+      weight: getRandom([200, 0]),
       targetIds: [],
     }
   }

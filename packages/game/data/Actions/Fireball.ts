@@ -35,7 +35,7 @@ export class Fireball extends Action {
       maxTargetCount: 1,
     })
 
-    const power = 60
+    const power = 50
     this.damages = [
       {
         power,

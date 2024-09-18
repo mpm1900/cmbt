@@ -39,7 +39,7 @@ export class MindTwist extends Action {
 
     this.damages = [
       {
-        power: 90,
+        power: 85,
         attackType: 'magic',
         damageType: 'psychic',
       },

@@ -73,6 +73,7 @@ export type ActionMaker = {
 }
 
 export type ActionProps = {
+  registryId?: Id
   sourceId: Id
   teamId: Id
   cost: Mutation
@@ -85,6 +86,7 @@ export type ActionProps = {
 export abstract class Action {
   readonly id: Id
   readonly rtid: Id
+  readonly registryId: Id
   readonly sourceId: Id
   readonly teamId: Id
   readonly priority: number
@@ -143,6 +145,7 @@ export abstract class Action {
   constructor(id: Id, props: ActionProps) {
     this.id = id
     this.rtid = nanoid()
+    this.registryId = props.registryId ?? id
     this.sourceId = props.sourceId
     this.teamId = props.teamId
     this.cost = props.cost

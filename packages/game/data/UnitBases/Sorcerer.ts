@@ -2,6 +2,7 @@ import { nanoid } from 'nanoid'
 import { UnitBase, UnitBaseConfig } from '../../types'
 import {
   ACallBeyond,
+  CallLightning,
   DragonBreath,
   Fireball,
   InfernalBlast,
@@ -13,12 +14,12 @@ import {
 import { Scholar } from '../Augments'
 import {
   ACallBeyondId,
+  CallLightningId,
   DragonBreathId,
   FireballId,
   InfernalBlastId,
   LightningBoltId,
   MagicMissileId,
-  MindTwistId,
   PowerWordKillId,
   ProtectId,
   ScholarId,
@@ -56,6 +57,10 @@ export const SorcererConfig: UnitBaseConfig = {
       make: (u) => new ACallBeyond(u.id, u.teamId),
     },
     {
+      id: CallLightningId,
+      make: (u) => new CallLightning(u.id, u.teamId),
+    },
+    {
       id: DragonBreathId,
       make: (u) => new DragonBreath(u.id, u.teamId),
     },
@@ -86,9 +91,9 @@ export const SorcererConfig: UnitBaseConfig = {
   ],
   defaultAbilityId: ScholarId,
   defaultActionIds: [
+    CallLightningId,
     FireballId,
     MagicMissileId,
-    MindTwistId,
     PowerWordKillId,
     LightningBoltId,
   ],

@@ -13,7 +13,7 @@ import {
   TurnStatus,
   Unit,
 } from '@repo/game/types'
-import { validateModifiers } from '@repo/game/utils'
+import { getRandom, validateModifiers } from '@repo/game/utils'
 import { nanoid } from 'nanoid/non-secure'
 import { ReactNode } from 'react'
 import { create } from 'zustand'
@@ -182,7 +182,7 @@ export const useCombat = create<CombatStore>((set, get) => {
     user: '',
     setTeams: (teams) => set({ teams }),
     setUser: (user) => set({ user }),
-    getRandomTeamId: () => get().teams[Math.round(Math.random())]?.id,
+    getRandomTeamId: () => getRandom(get().teams)?.id,
     addItems: (teamId, ...items) =>
       set((s) => ({
         teams: s.teams.map((t) =>

@@ -33,7 +33,7 @@ export class MagicMissile extends Action {
 
     this.damages = [
       {
-        power: 60,
+        power: 50,
         damageType: 'arcane',
         attackType: 'magic',
       },

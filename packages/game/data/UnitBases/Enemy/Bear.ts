@@ -1,7 +1,7 @@
 import { nanoid } from 'nanoid'
 import { UnitBase, UnitBaseConfig } from '../../../types'
 import { Protect, Slash } from '../../Actions'
-import { BiteId, ProtectId, SlashId } from '../../Ids'
+import { ProtectId, SlashId } from '../../Ids'
 import { Beast } from '../../Tags'
 import { BASE_UNIT } from '../../Units/system/BASE_UNIT'
 
@@ -24,7 +24,7 @@ export const Bear: UnitBase = {
   tags: [Beast],
   augmentSlots: 3,
   affinities: [],
-  resistances: [],
+  resistances: [{ type: 'force', factor: 25 }],
   weaknesses: [],
 }
 
@@ -42,5 +42,5 @@ export const BearConfig: UnitBaseConfig = {
     },
   ],
   defaultAbilityId: undefined,
-  defaultActionIds: [BiteId, ProtectId],
+  defaultActionIds: [SlashId, ProtectId],
 }

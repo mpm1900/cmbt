@@ -1,7 +1,7 @@
 import { ChoiceAttributes } from '@/components/encounter/ChoiceAttributes'
 import { Narration } from '@/components/encounter/Narration'
 import { choice } from '@/worlds/_utils'
-import { Snake, TeamId } from '@repo/game/data'
+import { TeamId, Wolf } from '@repo/game/data'
 import { Encounter, EncounterNode, Team } from '@repo/game/types'
 import { makeUnit } from '@repo/game/utils'
 import { nanoid } from 'nanoid'
@@ -44,8 +44,8 @@ const IntroductionNode: EncounterNode = {
             enemyTeam,
             enemyUnits: Array.from({ length: 3 }).map(() => {
               const e = makeUnit({ level: 2, teamId: enemyTeam.id }, [
-                // Wolf,
-                Snake,
+                Wolf,
+                // Snake,
               ])
 
               return e

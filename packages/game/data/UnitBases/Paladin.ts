@@ -14,14 +14,13 @@ import {
   Smite,
 } from '../Actions'
 import { HoldPerson } from '../Actions/HoldPerson'
-import { DivineHealing } from '../Augments'
 import { DivineLight } from '../Augments/DivineLight'
 import {
   BaneId,
   BlessId,
   BlockId,
   BoastId,
-  DivineHealingId,
+  DivineLightId,
   HealingPrayerId,
   HealingWordId,
   HoldPersonId,
@@ -64,7 +63,7 @@ export const Paladin: UnitBase = {
 }
 
 export const PaladinConfig: UnitBaseConfig = {
-  abilities: [DivineHealing, DivineLight],
+  abilities: [DivineLight],
   actionsCount: 5,
   actions: [
     {
@@ -116,7 +115,7 @@ export const PaladinConfig: UnitBaseConfig = {
       make: (u) => new Smite(u.id, u.teamId),
     },
   ],
-  defaultAbilityId: DivineHealingId,
+  defaultAbilityId: DivineLightId,
   defaultActionIds: [
     BaneId,
     HoldPersonId,

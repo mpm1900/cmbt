@@ -15,7 +15,7 @@ export const UpdateStatStageParentRenderer: ModifierRenderer = {
   },
   description: (mod) => {
     const modifier = mod as UpdateStatStageParent
-    const renderer = StatRenderers[modifier.stat]
+    const renderer = StatRenderers[modifier.stat!]
     return (
       <div>
         <span>

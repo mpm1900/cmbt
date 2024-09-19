@@ -7,7 +7,7 @@ export const UpdateStatParentRenderer: ModifierRenderer = {
   name: (mod) => <ModifierName>{MODIFIER_NAMES[mod.registryId]}</ModifierName>,
   description: (mod) => {
     const modifier = mod as UpdateStatParent
-    const renderer = StatRenderers[modifier.stat]
+    const renderer = StatRenderers[modifier.stat!]
     return (
       <ModifierValues
         factor={modifier.factor}

@@ -8,6 +8,6 @@ export type UnitBaseRenderer = {
 
 export const UnitBaseRenderers: { [key: Id]: UnitBaseRenderer } = {
   [Cleric.id]: {
-    description: () => <>A cleric an hybrid healer and damage support.</>,
+    description: () => <>A cleric is a hybrid healer and damage support.</>,
   },
 }

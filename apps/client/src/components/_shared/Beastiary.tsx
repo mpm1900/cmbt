@@ -2,8 +2,9 @@ import { UnitBaseRenderers } from '@/renderers/UnitBases'
 import { ALL_BASES } from '@repo/game/data'
 import { UnitBase } from '@repo/game/types'
 import { useState } from 'react'
-import { UnitBaseStats } from '../builder/UnitBaseStats'
 import { Tabs, TabsList, TabsTrigger } from '../ui/tabs'
+import { UnitBaseAffinities } from './UnitBaseAffinities'
+import { UnitBaseStats } from './UnitBaseStats'
 
 export function Beastiary() {
   const [base, set] = useState<UnitBase>(ALL_BASES[0])
@@ -32,8 +33,9 @@ export function Beastiary() {
         <div>
           <div className="text-xl p-4">{base.name}</div>
           <div className="flex-1 flex">
-            <div className="p-4 pt-0 space-y-4 min-w-[320px]">
+            <div className="p-4 pt-0 space-y-2 min-w-[320px]">
               <UnitBaseStats base={base} />
+              <UnitBaseAffinities base={base} />
             </div>
             <div className="p-4 pt-0 space-y-4">
               <div>{UnitBaseRenderers[base.id]?.description()}</div>

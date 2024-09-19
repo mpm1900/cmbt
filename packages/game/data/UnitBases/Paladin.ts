@@ -7,6 +7,7 @@ import {
   Boast,
   HealingPrayer,
   HealingWord,
+  PhantomSlash,
   PowerSink,
   Protect,
   RetreatingBlow,
@@ -24,6 +25,7 @@ import {
   HealingPrayerId,
   HealingWordId,
   HoldPersonId,
+  PhantomSlashId,
   PowerSinkId,
   ProtectId,
   RetreatingBlowId,
@@ -93,6 +95,10 @@ export const PaladinConfig: UnitBaseConfig = {
     {
       id: HoldPersonId,
       make: (u) => new HoldPerson(u.id, u.teamId),
+    },
+    {
+      id: PhantomSlashId,
+      make: (u) => new PhantomSlash(u.id, u.teamId),
     },
     {
       id: PowerSinkId,

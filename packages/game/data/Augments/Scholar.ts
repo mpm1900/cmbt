@@ -16,6 +16,7 @@ export const Scholar: Augment = {
         targetsLabel: 'all enemies',
         makeModifiers: () => [
           new UpdateFlagTeam({
+            maxInstances: 1,
             registryId: InspectedAllId,
             sourceId: unit.id,
             parentId: unit.id,

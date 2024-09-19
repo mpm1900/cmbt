@@ -36,8 +36,6 @@ export function useUpkeepController() {
           !applyModifiers(u, ctx).unit.flags.isStunned
       )
       ui.setActiveUnit(foundUnit)
-
-      fns.pushTriggers('on Turn Start', ctx)
       combat.setStatus('main')
     }
   }, [isUpkeep])

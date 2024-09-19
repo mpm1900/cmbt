@@ -7,6 +7,7 @@ import { ModifierInline } from '@shared/ModifierInline'
 import { StatusInline } from '@shared/StatusInline'
 import { TextList } from '@shared/TextList'
 import { getStatusesFromModifiers } from './getStatusesFromModifiers'
+import { getUnitModifierRenderList } from './getUnitModifierRenderList'
 
 export function logModifiers(
   modifiers: Modifier[],
@@ -20,19 +21,19 @@ export function logModifiers(
       isUnitAliveCtx(u, ctx) && modifiers.some((m) => m.filter(u, ctx, args))
   )
   units.forEach((unit, index) => {
+    const existing = getUnitModifierRenderList(unit, ctx)
     const unitHasModifier = (modifier: Modifier) =>
-      unit.modifiers().some((m) => m.rtid === modifier.rtid)
+      existing.some((m) => m.rtid === modifier.rtid)
 
-    const unitModifiers = modifiers.filter(
-      (m) => m.filter(unit, ctx, args) && !unitHasModifier(m)
+    const unitModifiers = validateModifiers(
+      modifiers.filter((m) => m.filter(unit, ctx, args) && !unitHasModifier(m)),
+      existing
     )
-    const nonStatusModifiers = validateModifiers(
-      unitModifiers.filter((m) => {
-        const r = ModifierRenderers[m.registryId] ?? ModifierRenderers[m.id]
-        return !m.statusId && !!r
-      }),
-      []
-    )
+
+    const nonStatusModifiers = unitModifiers.filter((m) => {
+      const r = ModifierRenderers[m.registryId] ?? ModifierRenderers[m.id]
+      return !m.statusId && !!r
+    })
 
     const statuses = getStatusesFromModifiers(unitModifiers)
 

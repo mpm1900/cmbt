@@ -3,7 +3,6 @@ import { CombatContext } from './CombatContext'
 import { Modifier, ModifierProps } from './Modifier'
 
 export type TriggerEvent =
-  | 'on Turn Start'
   | 'on Turn End'
   | 'on Unit Enter'
   | 'on Unit Switch Out'
@@ -12,7 +11,6 @@ export type TriggerEvent =
   | 'on Unit Die'
 
 export const AllTriggerEvents: TriggerEvent[] = [
-  'on Turn Start',
   'on Turn End',
   'on Unit Enter',
   'on Unit Switch Out',

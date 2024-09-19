@@ -8,10 +8,9 @@ import {
   AttackStageUpParentId,
   AttackUpParentId,
   BanedParentId,
-  BleedDamageId,
+  BleedDamageOnTurnEndId,
   BlessedParentId,
-  BurnDamageId,
-  CreateFirestormOnUnitEnterId,
+  BurnDamageOnTurnEndId,
   CriticalChanceDownParentId,
   CriticalChanceUpParentId,
   CriticalDamageDownParentId,
@@ -39,7 +38,7 @@ import {
   HealParentOnTurnEndId,
   HealParentOnUnitSwitchId,
   HiddenParentId,
-  InspectAllOnUnitEnterId,
+  InfernoId,
   InspectedAllId,
   IntangibleParentId,
   InvertSpeedAllId,
@@ -53,6 +52,7 @@ import {
   PoisonedDamageOnTurnEndId,
   PowerStanceId,
   ProtectedParentId,
+  ScholarId,
   SeenAllId,
   SleepingParentId,
   SpeedDownParentId,
@@ -69,7 +69,6 @@ export const MODIFIER_NAMES: Record<string, string> = {
   [InvertSpeedAllId]: 'Invert Speed',
 
   // Triggers
-  [CreateFirestormOnUnitEnterId]: 'Inferno',
   [DamageNewUnitsOnUnitEnterId]: 'Spikes', // TODO RegistryId-ify
   [DamageParentOnTurnEndId]: 'Damage on Turn End',
   [DrainLifeParentOnTurnEndId]: 'Drain Life',
@@ -123,14 +122,15 @@ export const MODIFIER_NAMES: Record<string, string> = {
   [SleepingParentId]: 'Sleeping',
 
   // Override Triggers
-  [BleedDamageId]: 'Bleed Damage',
-  [BurnDamageId]: 'Burn Damage',
+  [BleedDamageOnTurnEndId]: 'Bleed Damage',
+  [BurnDamageOnTurnEndId]: 'Burn Damage',
   [CursedMiasmaId]: 'Cursed Miasma',
   [DivineHealingId]: 'Divine Healing',
   [DivineLightId]: 'Divine Light',
   [DraconicAuraId]: 'Draconic Aura',
   [HealingPrayerId]: 'Healing Prayer',
+  [InfernoId]: 'Inferno',
   [FirestormOnTurnEndId]: 'Firestorm',
-  [InspectAllOnUnitEnterId]: 'Scholar',
+  [ScholarId]: 'Scholar',
   [PoisonedDamageOnTurnEndId]: 'Poisoned',
 }

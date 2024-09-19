@@ -3,7 +3,7 @@ import { Mutation, Unit } from '../types'
 import { CalculateDamageResult } from './calculateDamage'
 
 export function getMutationsFromDamageResult(
-  source: Unit,
+  source: Unit | undefined,
   target: Unit,
   result: CalculateDamageResult
 ): Mutation[] {
@@ -11,19 +11,19 @@ export function getMutationsFromDamageResult(
 
   return [
     new UpdateValueParent({
-      sourceId: source.id,
+      sourceId: source?.id,
       parentId: target.id,
       valueKey: 'magicArmor',
       static: magicArmor * -1,
     }),
     new UpdateValueParent({
-      sourceId: source.id,
+      sourceId: source?.id,
       parentId: target.id,
       valueKey: 'physicalArmor',
       static: physicalArmor * -1,
     }),
     new DamageParent({
-      sourceId: source.id,
+      sourceId: source?.id,
       parentId: target.id,
       static: damage,
       evasionSuccess,

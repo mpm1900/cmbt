@@ -1,21 +1,29 @@
 import { Augment, Unit } from '../../types'
 import { DivineLightId, HiddenParentId, SeenAllId } from '../Ids'
-import { UpdateFlagParent } from '../Modifiers'
-import { AddModifiersToRegistryStaticAllOnUnitEnter } from '../Triggers'
+import { AddModifiersToRegistryAll, UpdateFlagParent } from '../Modifiers'
+import { AddModifiersOnSelfEnter } from '../Triggers'
 
 export const DivineLight: Augment = {
   id: DivineLightId,
   modifiers: (unit: Unit) => [
-    new AddModifiersToRegistryStaticAllOnUnitEnter({
+    new AddModifiersOnSelfEnter({
       registryId: DivineLightId,
-      childRegistryId: SeenAllId,
       sourceId: unit.id,
       parentId: unit.id,
-      mods: [
-        new UpdateFlagParent({
-          registryId: HiddenParentId,
-          flag: 'isHidden',
-          value: true,
+      targetsLabel: 'all units',
+      persistOnSwitch: true,
+      modifiersToAdd: [
+        new AddModifiersToRegistryAll({
+          registryId: SeenAllId,
+          sourceId: unit.id,
+          parentId: unit.id,
+          modifiers: [
+            new UpdateFlagParent({
+              registryId: HiddenParentId,
+              flag: 'isHidden',
+              value: true,
+            }),
+          ],
         }),
       ],
     }),

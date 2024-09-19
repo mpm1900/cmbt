@@ -34,14 +34,13 @@ export class DamageAllOnTurnEnd extends Trigger {
   }
 
   mutations = (ctx: CombatContext, args: MutationFilterArgs) => {
-    const source = ctx.units.find((u) => u.id === this.sourceId)!
     const units = ctx.units.filter((u) => this.filter(u, ctx, args))
     return units.flatMap((parent) => {
       const target = applyModifiers(parent, ctx, args).unit
       const result = calculateDamages([this.damage], undefined, target, {
         evasionSuccess: false,
       })
-      return getMutationsFromDamageResult(source, parent, result)
+      return getMutationsFromDamageResult(undefined, parent, result)
     })
   }
 

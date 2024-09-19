@@ -1,18 +1,28 @@
 import { Augment, Modifier, Mutation, Unit } from '../../types'
-import { CursedMiasmaId } from '../Ids'
-import { StatDownStaticAllOnUnitEnter } from '../Triggers'
+import { AttackDownAllId, CursedMiasmaId } from '../Ids'
+import { UpdateStatAll } from '../Modifiers'
+import { AddModifiersOnSelfEnter } from '../Triggers'
 
 export const CursedMiasma: Augment = {
   id: CursedMiasmaId,
   modifiers: (unit: Unit): Modifier[] => {
     return [
-      new StatDownStaticAllOnUnitEnter({
+      new AddModifiersOnSelfEnter({
         registryId: CursedMiasmaId,
         sourceId: unit.id,
         parentId: unit.id,
-        stat: 'attack',
-        factor: -0.5,
+        maxInstances: 1,
         persistOnSwitch: true,
+        targetsLabel: 'all units',
+        modifiersToAdd: [
+          new UpdateStatAll({
+            sourceId: unit.id,
+            parentId: unit.id,
+            registryId: AttackDownAllId,
+            stat: 'attack',
+            factor: -0.5,
+          }),
+        ],
       }),
     ]
   },

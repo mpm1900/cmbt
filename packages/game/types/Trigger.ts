@@ -43,7 +43,7 @@ export abstract class Trigger extends Modifier {
   }
 
   resolve(unit: Unit): Partial<Unit> {
-    return {}
+    return unit
   }
 
   filter(unit: Unit, ctx: CombatContext, args: MutationFilterArgs): boolean {
@@ -55,5 +55,18 @@ export abstract class Trigger extends Modifier {
       this.uses -= 1
     }
     return this
+  }
+
+  public static OnSelfEnter(
+    trigger: Trigger,
+    unit: Unit,
+    ctx: CombatContext,
+    args: MutationFilterArgs
+  ) {
+    const newUnits = args.units
+    return (
+      !!newUnits?.some((u) => u.id === trigger.sourceId) &&
+      unit.id === trigger.sourceId
+    )
   }
 }

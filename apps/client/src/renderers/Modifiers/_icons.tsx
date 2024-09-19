@@ -9,7 +9,6 @@ import {
   AttackUpParentId,
   BanedParentId,
   BlessedParentId,
-  CreateFirestormOnUnitEnterId,
   CriticalChanceDownParentId,
   CriticalChanceUpParentId,
   CriticalDamageDownParentId,
@@ -33,7 +32,7 @@ import {
   HealingPrayerId,
   HealParentOnUnitSwitchId,
   HiddenParentId,
-  InspectAllOnUnitEnterId,
+  InfernoId,
   IntangibleParentId,
   KillParentOnTurnEndId,
   MagicDownParentId,
@@ -44,6 +43,7 @@ import {
   MaxAttackParentId,
   PowerStanceId,
   ProtectedParentId,
+  ScholarId,
   SeenAllId,
   SleepingParentId,
   SpeedStageDownParentId,
@@ -102,9 +102,7 @@ export const MODIFIER_ICONS: Record<Id, ReactNode> = {
   [StunnedParentId]: <TiSpiral className="fill-red-200 h-full w-full" />,
 
   // Triggeres
-  [CreateFirestormOnUnitEnterId]: (
-    <GiFireRing className="fill-orange-300 h-full w-full" />
-  ),
+  [InfernoId]: <GiFireRing className="fill-orange-300 h-full w-full" />,
   [DrainLifeParentOnTurnEndId]: (
     <GiDeathJuice className="fill-white h-full w-full" />
   ),
@@ -116,9 +114,6 @@ export const MODIFIER_ICONS: Record<Id, ReactNode> = {
         style={{ bottom: 0, left: 0 }}
       />
     </div>
-  ),
-  [InspectAllOnUnitEnterId]: (
-    <PiScrollFill className="fill-white h-full w-full" />
   ),
 
   // Override Modifiers
@@ -198,5 +193,6 @@ export const MODIFIER_ICONS: Record<Id, ReactNode> = {
   [KillParentOnTurnEndId]: (
     <GiDeathNote className="fill-teal-400 h-full w-full" />
   ),
+  [ScholarId]: <PiScrollFill className="fill-white h-full w-full" />,
   [SleepingParentId]: <RiZzzFill className="fill-violet-300 h-full w-full" />,
 }

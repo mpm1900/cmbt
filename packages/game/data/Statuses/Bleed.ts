@@ -1,5 +1,5 @@
 import { Status } from '../../types'
-import { BleedDamageId, BleedId, SpeedDownParentId } from '../Ids'
+import { BleedDamageOnTurnEndId, BleedId, SpeedDownParentId } from '../Ids'
 import { UpdateStatParent } from '../Modifiers'
 import { DamageParentOnTurnEnd } from '../Triggers'
 
@@ -20,7 +20,7 @@ export const Bleed: Status = {
       persistOnSwitch: true,
     }),
     new DamageParentOnTurnEnd({
-      registryId: BleedDamageId,
+      registryId: BleedDamageOnTurnEndId,
       sourceId: source.id,
       parentId: parent.id,
       statusId: BleedId,

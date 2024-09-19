@@ -84,11 +84,12 @@ export class Bite extends Action {
               )
               return getMutationsFromDamageResult(source, target, damage)
             }),
-            addedModifiers: applyBleed
-              ? modifiedTargets.flatMap((target) =>
-                  Bleed.modifiers(source, target)
-                )
-              : [],
+            addedModifiers:
+              applyBleed && modifiedTargets.length > 0
+                ? modifiedTargets.flatMap((target) =>
+                    Bleed.modifiers(source, target)
+                  )
+                : [],
           },
         })
       ),

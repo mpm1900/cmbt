@@ -8,16 +8,16 @@ import {
 } from '../../types'
 import {
   AttackStageDownParentId,
-  StatStageDownAllOtherOnUnitEnterId,
+  UpdateStatStageAllOtherOnUnitEnterId,
 } from '../Ids'
 import { UpdateStatStageParent } from '../Modifiers'
 
-export class StatStageDownAllOtherOnUnitEnter extends Trigger {
+export class UpdateStatStageAllOtherOnUnitEnter extends Trigger {
   stages: number
   stat: StatKey
 
   constructor(props: TriggerProps<{ stages: number; stat: StatKey }>) {
-    super(StatStageDownAllOtherOnUnitEnterId, {
+    super(UpdateStatStageAllOtherOnUnitEnterId, {
       ...props,
       events: ['on Unit Enter'],
       maxInstances: 1,

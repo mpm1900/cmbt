@@ -21,10 +21,10 @@ import {
   KillParentOnTurnEndId,
   ProtectedParentId,
   SleepingParentId,
-  StatStageDownAllOtherOnUnitEnterId,
   StunnedParentId,
   UpdateStatAllId,
   UpdateStatParentId,
+  UpdateStatStageAllOtherOnUnitEnterId,
   UpdateStatStageParentId,
   UpdateStatTeamId,
 } from '@repo/game/data'
@@ -51,7 +51,7 @@ import { DrainLifeParentOnTurnEndRenderer } from './Triggers/DrainLifeParentOnTu
 import { HealParentOnTurnEndRenderer } from './Triggers/HealParentOnTurnEnd'
 import { HealParentOnUnitSwitchRenderer } from './Triggers/HealParentOnUnitSwitch'
 import { KillParentOnTurnEndRenderer } from './Triggers/KillParentOnTurnEnd'
-import { StatStageDownAllOtherOnUnitEnterRenderer } from './Triggers/StatStageDownAllOtherOnUnitEnter'
+import { UpdateStatStageAllOtherOnUnitEnterRenderer } from './Triggers/StatStageDownAllOtherOnUnitEnter'
 import { UpdateStatAllRenderer } from './UpdateStatAll'
 import { UpdateStatParentRenderer } from './UpdateStatParent'
 import { UpdateStatStageParentRenderer } from './UpdateStatStageParent'
@@ -66,19 +66,10 @@ export type ModifierRenderer = {
 }
 
 export const ModifierRenderers: Record<string, ModifierRenderer> = {
+  // Modifiers
   [AddActionParentId]: AddActionParentRenderer,
   [AddModifiersToRegistryAllId]: AddModifiersToRegistryAllRenderer,
-  [AddStatModifiersImmunityAllId]: AddStatModifiersImmunityAllRenderer,
-  [BanedParentId]: BanedParentRenderer,
-  [BlessedParentId]: BlessedParentRenderer,
-  [DisabledParentId]: DisabledParentRenderer,
-  [EnragedParentId]: EnragedParentRenderer,
-  [HiddenParentId]: HiddenParentRenderer,
-  [InspectedAllId]: InspectedAllRenderer,
   [InvertSpeedAllId]: InvertSpeedAllRenderer,
-  [ProtectedParentId]: ProtectedParentRenderer,
-  [StunnedParentId]: StunnedParentRenderer,
-  [SleepingParentId]: StunnedParentRenderer,
   [UpdateStatAllId]: UpdateStatAllRenderer,
   [UpdateStatParentId]: UpdateStatParentRenderer,
   [UpdateStatStageParentId]: UpdateStatStageParentRenderer,
@@ -95,10 +86,20 @@ export const ModifierRenderers: Record<string, ModifierRenderer> = {
   [IntangibleParentId]: IntangibleParentRenderer,
 
   [KillParentOnTurnEndId]: KillParentOnTurnEndRenderer,
-  [StatStageDownAllOtherOnUnitEnterId]:
-    StatStageDownAllOtherOnUnitEnterRenderer,
+  [UpdateStatStageAllOtherOnUnitEnterId]:
+    UpdateStatStageAllOtherOnUnitEnterRenderer,
 
   // Override Modifiers
+  [AddStatModifiersImmunityAllId]: AddStatModifiersImmunityAllRenderer, // Dispel Magic
+  [BanedParentId]: BanedParentRenderer,
+  [BlessedParentId]: BlessedParentRenderer,
+  [DisabledParentId]: DisabledParentRenderer,
+  [EnragedParentId]: EnragedParentRenderer,
+  [HiddenParentId]: HiddenParentRenderer,
+  [InspectedAllId]: InspectedAllRenderer,
+  [ProtectedParentId]: ProtectedParentRenderer,
+  [StunnedParentId]: StunnedParentRenderer,
+  [SleepingParentId]: StunnedParentRenderer,
 
   // Override Triggers
   [HealingPrayerId]: HealParentOnTurnEndRenderer,

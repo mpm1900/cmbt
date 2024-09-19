@@ -3,6 +3,7 @@ import {
   ACallBeyondId,
   AttackStageUpParentId,
   BaneId,
+  BecomeTheStormId,
   BiteId,
   BlessId,
   BlockId,
@@ -28,6 +29,7 @@ import {
   GhostFlameId,
   GuidingRayId,
   HealingPrayerId,
+  HealingWordId,
   HideId,
   HoldPerson,
   HoldPersonId,
@@ -101,6 +103,7 @@ import { ReactNode } from 'react'
 import { ACTION_NAMES } from './_names'
 import { ACallBeyondRenderer } from './ACallBeyond'
 import { BaneRenderer } from './Bane'
+import { BecomeTheStormRenderer } from './BecomeTheStorm'
 import { BiteRenderer } from './Bite'
 import { BlessRenderer } from './Bless'
 import { BlockRenderer } from './Block'
@@ -118,6 +121,7 @@ import { FirestormRenderer } from './Firestorm'
 import { GhostFlameRenderer } from './GhostFlame'
 import { GuidingrayRenderer } from './GuidingRay'
 import { HealingPrayerRenderer } from './HealingPrayer'
+import { HealingWordRenderer } from './HealingWord'
 import { HideRenderer } from './Hide'
 import { InfernalBlastRenderer } from './InfernalBlast'
 import { IntoxicateRenderer } from './Intoxicate'
@@ -167,6 +171,7 @@ export type ActionRenderer = {
 export const ActionRenderers: Record<string, ActionRenderer> = {
   [ACallBeyondId]: ACallBeyondRenderer,
   [BaneId]: BaneRenderer,
+  [BecomeTheStormId]: BecomeTheStormRenderer,
   [BiteId]: BiteRenderer,
   [BlessId]: BlessRenderer,
   [BlockId]: BlockRenderer,
@@ -183,6 +188,7 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
   [GhostFlameId]: GhostFlameRenderer,
   [GuidingRayId]: GuidingrayRenderer,
   [HealingPrayerId]: HealingPrayerRenderer,
+  [HealingWordId]: HealingWordRenderer,
   [HideId]: HideRenderer,
   [InfernalBlastId]: InfernalBlastRenderer,
   [IntoxicateId]: IntoxicateRenderer,

@@ -1,6 +1,7 @@
 import {
   ACallBeyondId,
   BaneId,
+  BecomeTheStormId,
   BiteId,
   BlessId,
   BlockId,
@@ -21,6 +22,7 @@ import {
   GhostFlameId,
   GuidingRayId,
   HealingPrayerId,
+  HealingWordId,
   HideId,
   HoldPersonId,
   HyperBeamId,
@@ -95,6 +97,7 @@ export const ACTION_NAMES: Record<string, string> = {
 
   [ACallBeyondId]: 'A Call Beyond',
   [BaneId]: 'Bane',
+  [BecomeTheStormId]: 'Become the Storm',
   [BiteId]: 'Bite',
   [BoastId]: 'Boast',
   [BlessId]: 'Bless',
@@ -112,6 +115,7 @@ export const ACTION_NAMES: Record<string, string> = {
   [GhostFlameId]: 'Ghost Flame',
   [GuidingRayId]: 'Guiding Ray',
   [HealingPrayerId]: 'Healing Prayer',
+  [HealingWordId]: 'Healing Word',
   [HideId]: 'Hide',
   [InfernalBlastId]: 'Infernal Blast',
   [IntoxicateId]: 'Intoxicate',

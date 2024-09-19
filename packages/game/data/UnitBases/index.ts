@@ -18,6 +18,7 @@ import { Revenant, RevenantConfig } from './Enemy/Revenant'
 import { Wolf, WolfConfig } from './Enemy/Wolf'
 import { Hellknight, TyranitarConfig } from './Hellknight'
 import { Juggernaut, SnorlaxConfig } from './Juggernaut'
+import { Paladin, PaladinConfig } from './Paladin'
 import { Sorcerer, SorcererConfig } from './Sorcerer'
 import { Witch, WitchConfig } from './Witch'
 import { Wizard, WizardConfig } from './Wizard'
@@ -30,13 +31,13 @@ export const PLAYER_BASES: UnitBase[] = [
 
   Cleric,
   Sorcerer,
-  Hellknight,
-  Wizard,
-  Juggernaut,
-
-  DraconicScion,
   Witch,
+  Paladin,
+  Hellknight,
+  Juggernaut,
+  DraconicScion,
 
+  Wizard,
   DemonSlayer,
 
   // Celebi,
@@ -67,6 +68,7 @@ export const BASE_CONFIGS: Record<Id, UnitBaseConfig> = {
   [Hellknight.id]: TyranitarConfig,
   [Witch.id]: WitchConfig,
   [Sorcerer.id]: SorcererConfig,
+  [Paladin.id]: PaladinConfig,
 
   [Bear.id]: BearConfig,
   [RestlessSpirit.id]: RestlessSpiritConfig,

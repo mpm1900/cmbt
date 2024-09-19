@@ -2,6 +2,7 @@ import { nanoid } from 'nanoid'
 import { UnitBase, UnitBaseConfig } from '../../types'
 import {
   ACallBeyond,
+  BecomeTheStorm,
   CallLightning,
   ChainLightning,
   DragonBreath,
@@ -16,6 +17,7 @@ import {
 import { Scholar } from '../Augments'
 import {
   ACallBeyondId,
+  BecomeTheStormId,
   CallLightningId,
   ChainLightningId,
   DragonBreathId,
@@ -59,6 +61,10 @@ export const SorcererConfig: UnitBaseConfig = {
     {
       id: ACallBeyondId,
       make: (u) => new ACallBeyond(u.id, u.teamId),
+    },
+    {
+      id: BecomeTheStormId,
+      make: (u) => new BecomeTheStorm(u.id, u.teamId),
     },
     {
       id: CallLightningId,

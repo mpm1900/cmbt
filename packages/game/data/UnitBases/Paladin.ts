@@ -5,14 +5,14 @@ import {
   Bless,
   Block,
   Boast,
-  DispelMagic,
   GuidingRay,
   HealingPrayer,
   HealingWord,
   Protect,
+  RetreatingBlow,
   SearingLight,
-  VampiricTouch,
-  Ward,
+  Slash,
+  Smite,
 } from '../Actions'
 import { HoldPerson } from '../Actions/HoldPerson'
 import { DivineHealing } from '../Augments'
@@ -21,29 +21,29 @@ import {
   BlessId,
   BlockId,
   BoastId,
-  DispelMagicId,
   DivineHealingId,
   GuidingRayId,
   HealingPrayerId,
   HealingWordId,
   HoldPersonId,
   ProtectId,
+  RetreatingBlowId,
   SearingLightId,
-  VampiricTouchId,
-  WardId,
+  SlashId,
+  SmiteId,
 } from '../Ids'
 import { BASE_UNIT } from '../Units/system/BASE_UNIT'
 
-export const Cleric: UnitBase = {
+export const Paladin: UnitBase = {
   id: nanoid(),
-  name: 'Cleric',
+  name: 'Paladin',
   stats: {
     ...BASE_UNIT.stats,
-    health: 70,
-    attack: 55,
-    defense: 100,
+    health: 125,
+    attack: 100,
+    defense: 95,
     magic: 100,
-    speed: 65,
+    speed: 60,
 
     focus: 40,
     stamina: 30,
@@ -58,7 +58,7 @@ export const Cleric: UnitBase = {
   weaknesses: [],
 }
 
-export const ClericConfig: UnitBaseConfig = {
+export const PaladinConfig: UnitBaseConfig = {
   abilities: [DivineHealing],
   actionsCount: 5,
   actions: [
@@ -75,8 +75,8 @@ export const ClericConfig: UnitBaseConfig = {
       make: (u) => new Block(u.id, u.teamId),
     },
     {
-      id: DispelMagicId,
-      make: (u) => new DispelMagic(u.id, u.teamId),
+      id: BoastId,
+      make: (u) => new Boast(u.id, u.teamId),
     },
     {
       id: GuidingRayId,
@@ -99,28 +99,22 @@ export const ClericConfig: UnitBaseConfig = {
       make: (u) => new Protect(u.id, u.teamId),
     },
     {
+      id: RetreatingBlowId,
+      make: (u) => new RetreatingBlow(u.id, u.teamId),
+    },
+    {
       id: SearingLightId,
       make: (u) => new SearingLight(u.id, u.teamId),
     },
     {
-      id: BoastId,
-      make: (u) => new Boast(u.id, u.teamId),
+      id: SlashId,
+      make: (u) => new Slash(u.id, u.teamId),
     },
     {
-      id: VampiricTouchId,
-      make: (u) => new VampiricTouch(u.id, u.teamId),
-    },
-    {
-      id: WardId,
-      make: (u) => new Ward(u.id, u.teamId),
+      id: SmiteId,
+      make: (u) => new Smite(u.id, u.teamId),
     },
   ],
   defaultAbilityId: DivineHealingId,
-  defaultActionIds: [
-    BaneId,
-    BlessId,
-    HealingPrayerId,
-    HoldPersonId,
-    GuidingRayId,
-  ],
+  defaultActionIds: [BaneId, BlessId, HoldPersonId, GuidingRayId, SmiteId],
 }

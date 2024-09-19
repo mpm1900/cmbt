@@ -47,6 +47,7 @@ export class HealingPrayer extends Action {
                   factor: this.healingFactor,
                   duration: 2,
                   delay: 2,
+                  persistOnSwitch: true,
                 })
             ),
           },

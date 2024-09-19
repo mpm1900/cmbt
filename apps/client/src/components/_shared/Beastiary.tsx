@@ -4,6 +4,7 @@ import { UnitBase } from '@repo/game/types'
 import { useState } from 'react'
 import { Tabs, TabsList, TabsTrigger } from '../ui/tabs'
 import { UnitBaseAffinities } from './UnitBaseAffinities'
+import { UnitBaseImmunities } from './UnitBaseImmunities'
 import { UnitBaseStats } from './UnitBaseStats'
 
 export function Beastiary() {
@@ -36,6 +37,7 @@ export function Beastiary() {
             <div className="p-4 pt-0 space-y-2 min-w-[320px]">
               <UnitBaseStats base={base} />
               <UnitBaseAffinities base={base} />
+              <UnitBaseImmunities base={base} />
             </div>
             <div className="p-4 pt-0 space-y-4">
               <div>{UnitBaseRenderers[base.id]?.description()}</div>

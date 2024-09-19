@@ -35,6 +35,7 @@ export function UnitBuilder() {
               <Separator />
               <UnitBaseStats base={builder.base} />
               <Separator />
+
               <UnitBaseAffinities base={builder.base} />
               <UnitBaseImmunities base={builder.base} />
             </div>

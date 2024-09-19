@@ -23,7 +23,7 @@ export function UnitBaseImmunities(props: UnitBaseImmunitiesProps) {
   return (
     <div>
       <div className="text-muted-foreground">Immunities</div>
-      <div className="text-muted-foreground">
+      <div className="text-muted-foreground pl-4">
         <ModifierListInline modifiers={nonStatusModifiers} conjunction="" />
         <StatusListInline statuses={statuses} conjunction="" />
       </div>

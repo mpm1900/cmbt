@@ -9,7 +9,7 @@ export const AddModifiersToRegistryAllRenderer: ModifierRenderer = {
     const modifier = mod as AddModifiersToRegistryParent
     return (
       <div>
-        All units are no longer{' '}
+        {MODIFIER_NAMES[mod.registryId]} units are no longer{' '}
         {modifier.modifiers.map((m) => (
           <ModifierInline modifier={m} />
         ))}

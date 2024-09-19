@@ -26,6 +26,7 @@ export function handleTriggerEvent(
     getTriggersByEvent(ctx.modifiers, event, ctx, args),
     []
   ) as Trigger[]
+
   const result: ActionResult = {
     id: nanoid(),
     shouldLog: true,

@@ -15,10 +15,11 @@ export function getTriggersByEvent(
   args = args || {}
   return modifiers
     .filter((m) => m instanceof Trigger)
-    .filter(
-      (t) =>
+    .filter((t) => {
+      return (
         t.events.includes(event) &&
-        (t.delay ?? 0) >= 0 &&
+        (t.delay ?? 0) <= 0 &&
         ctx.units.some((u) => t.filter(u, ctx, args))
-    )
+      )
+    })
 }

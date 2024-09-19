@@ -49,7 +49,10 @@ export const Sorcerer: UnitBase = {
   },
   tags: [],
   augmentSlots: 3,
-  affinities: [],
+  affinities: [
+    { type: 'fire', factor: 25 },
+    { type: 'shock', factor: 25 },
+  ],
   resistances: [],
   weaknesses: [{ type: 'psychic', factor: 50 }],
 }

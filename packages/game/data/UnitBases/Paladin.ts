@@ -5,12 +5,11 @@ import {
   Bless,
   Block,
   Boast,
-  GuidingRay,
   HealingPrayer,
   HealingWord,
+  PowerSink,
   Protect,
   RetreatingBlow,
-  SearingLight,
   Slash,
   Smite,
 } from '../Actions'
@@ -22,13 +21,12 @@ import {
   BlockId,
   BoastId,
   DivineHealingId,
-  GuidingRayId,
   HealingPrayerId,
   HealingWordId,
   HoldPersonId,
+  PowerSinkId,
   ProtectId,
   RetreatingBlowId,
-  SearingLightId,
   SlashId,
   SmiteId,
 } from '../Ids'
@@ -53,9 +51,15 @@ export const Paladin: UnitBase = {
   },
   tags: [],
   augmentSlots: 3,
-  affinities: [],
-  resistances: [],
-  weaknesses: [],
+  affinities: [
+    { type: 'holy', factor: 20 },
+    { type: 'force', factor: 20 },
+  ],
+  resistances: [
+    { type: 'holy', factor: 25 },
+    { type: 'blight', factor: 25 },
+  ],
+  weaknesses: [{ type: 'psychic', factor: 25 }],
 }
 
 export const PaladinConfig: UnitBaseConfig = {
@@ -79,10 +83,6 @@ export const PaladinConfig: UnitBaseConfig = {
       make: (u) => new Boast(u.id, u.teamId),
     },
     {
-      id: GuidingRayId,
-      make: (u) => new GuidingRay(u.id, u.teamId),
-    },
-    {
       id: HealingPrayerId,
       make: (u) => new HealingPrayer(u.id, u.teamId),
     },
@@ -95,16 +95,16 @@ export const PaladinConfig: UnitBaseConfig = {
       make: (u) => new HoldPerson(u.id, u.teamId),
     },
     {
+      id: PowerSinkId,
+      make: (u) => new PowerSink(u.id, u.teamId),
+    },
+    {
       id: ProtectId,
       make: (u) => new Protect(u.id, u.teamId),
     },
     {
       id: RetreatingBlowId,
       make: (u) => new RetreatingBlow(u.id, u.teamId),
-    },
-    {
-      id: SearingLightId,
-      make: (u) => new SearingLight(u.id, u.teamId),
     },
     {
       id: SlashId,
@@ -116,5 +116,5 @@ export const PaladinConfig: UnitBaseConfig = {
     },
   ],
   defaultAbilityId: DivineHealingId,
-  defaultActionIds: [BaneId, BlessId, HoldPersonId, GuidingRayId, SmiteId],
+  defaultActionIds: [BaneId, BlessId, HoldPersonId, HealingPrayerId, SmiteId],
 }

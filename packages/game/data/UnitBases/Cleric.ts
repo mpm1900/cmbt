@@ -54,7 +54,7 @@ export const Cleric: UnitBase = {
   tags: [],
   augmentSlots: 3,
   affinities: [],
-  resistances: [],
+  resistances: [{ type: 'holy', factor: 50 }],
   weaknesses: [],
 }
 

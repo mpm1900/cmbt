@@ -54,7 +54,10 @@ export const Witch: UnitBase = {
   tags: [],
   augmentSlots: 3,
   affinities: [],
-  resistances: [],
+  resistances: [
+    { type: 'blight', factor: 25 },
+    { type: 'psychic', factor: 25 },
+  ],
   weaknesses: [],
 }
 

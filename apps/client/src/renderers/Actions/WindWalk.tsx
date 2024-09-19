@@ -27,7 +27,7 @@ export const WindWalkRenderer: ActionRenderer = {
             })
           }
         />{' '}
-        to this unit's team.
+        to all allies.
       </>
     )
   },

@@ -59,6 +59,7 @@ export const Witch: UnitBase = {
     { type: 'psychic', factor: 25 },
   ],
   weaknesses: [],
+  immunities: [],
 }
 
 export const WitchConfig: UnitBaseConfig = {

@@ -82,6 +82,7 @@ export type UnitBase = {
   affinities: UnitBaseAffinity[]
   resistances: UnitBaseAffinity[]
   weaknesses: UnitBaseAffinity[]
+  immunities: Modifier[]
 }
 
 export type UnitBaseConfig = {

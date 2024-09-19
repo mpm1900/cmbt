@@ -26,6 +26,7 @@ export const Wolf: UnitBase = {
   affinities: [],
   resistances: [],
   weaknesses: [],
+  immunities: [],
 }
 
 export const WolfConfig: UnitBaseConfig = {

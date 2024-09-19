@@ -50,6 +50,7 @@ export const DraconicScion: UnitBase = {
   affinities: [{ type: 'fire', factor: 50 }],
   resistances: [{ type: 'fire', factor: 50 }],
   weaknesses: [],
+  immunities: [],
 }
 
 export const DraconicDiscipleConfig: UnitBaseConfig = {

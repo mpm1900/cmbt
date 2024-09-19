@@ -67,6 +67,10 @@ export function resolveUnitBuilder(builder: UnitBuilder, teamId: Id): Unit {
       speed: mapBaseStat('speed', builder.base.stats.speed, builder.level),
     },
     tags: builder.base.tags,
+    registry: {
+      ...BASE_UNIT.registry,
+      modifiers: builder.base.immunities.map((m) => m.registryId),
+    },
   }
 
   unit.stats = {

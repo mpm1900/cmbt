@@ -48,6 +48,7 @@ export const Juggernaut: UnitBase = {
   affinities: [],
   resistances: [],
   weaknesses: [],
+  immunities: [],
 }
 
 export const SnorlaxConfig: UnitBaseConfig = {

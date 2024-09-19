@@ -1,5 +1,6 @@
 import { useBuilderUi } from '@/hooks/state/useBuilderUi'
 import { useUnitBuilders } from '@/hooks/state/useUnitBuilders'
+import { UnitBaseImmunities } from '@shared/UnitBaseImmunities'
 import { UnitBaseStats } from '@shared/UnitBaseStats'
 import { FaRegSquareFull, FaSquare } from 'react-icons/fa6'
 import { UnitBaseAffinities } from '../_shared/UnitBaseAffinities'
@@ -35,6 +36,7 @@ export function UnitBuilder() {
               <UnitBaseStats base={builder.base} />
               <Separator />
               <UnitBaseAffinities base={builder.base} />
+              <UnitBaseImmunities base={builder.base} />
             </div>
           </CardContent>
         </Card>

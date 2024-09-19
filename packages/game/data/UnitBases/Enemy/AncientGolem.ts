@@ -29,6 +29,7 @@ export const AncientGolem: UnitBase = {
     { type: 'blight', factor: 50 },
   ],
   weaknesses: [{ type: 'shock', factor: 50 }],
+  immunities: [],
 }
 
 export const AncientGolemConfig: UnitBaseConfig = {

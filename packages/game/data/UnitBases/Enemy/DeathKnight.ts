@@ -25,6 +25,7 @@ export const DeathKnight: UnitBase = {
   affinities: [],
   resistances: [],
   weaknesses: [],
+  immunities: [],
 }
 
 export const DeathKnightConfig: UnitBaseConfig = {

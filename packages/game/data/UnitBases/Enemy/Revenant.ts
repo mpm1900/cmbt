@@ -4,6 +4,7 @@ import { PiercingStrike, Protect } from '../../Actions'
 import { PhantomSlash } from '../../Actions/PhantomSlash'
 import { CursedMiasma } from '../../Augments/CursedMiasma'
 import { PhantomSlashId, PiercingStrikeId, ProtectId } from '../../Ids'
+import { Bleed, Poison } from '../../Statuses'
 import { BASE_UNIT } from '../../Units/system/BASE_UNIT'
 
 export const RevenantId = nanoid()
@@ -30,6 +31,10 @@ export const Revenant: UnitBase = {
     { type: 'force', factor: 50 },
   ],
   weaknesses: [{ type: 'holy', factor: 100 }],
+  immunities: [
+    ...Bleed.modifiers(BASE_UNIT, BASE_UNIT),
+    ...Poison.modifiers(BASE_UNIT, BASE_UNIT),
+  ],
 }
 
 export const RevenantConfig: UnitBaseConfig = {

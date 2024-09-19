@@ -62,6 +62,7 @@ export const Wizard: UnitBase = {
     { type: 'force', factor: 25 },
     { type: 'psychic', factor: 50 },
   ],
+  immunities: [],
 }
 
 export const WizardConfig: UnitBaseConfig = {

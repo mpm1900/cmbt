@@ -42,6 +42,7 @@ export const DemonSlayer: UnitBase = {
   affinities: [],
   resistances: [],
   weaknesses: [],
+  immunities: [],
 }
 
 export const TempestKnightConfig: UnitBaseConfig = {

@@ -62,6 +62,7 @@ export const Paladin: UnitBase = {
     { type: 'blight', factor: 25 },
   ],
   weaknesses: [{ type: 'psychic', factor: 25 }],
+  immunities: [],
 }
 
 export const PaladinConfig: UnitBaseConfig = {

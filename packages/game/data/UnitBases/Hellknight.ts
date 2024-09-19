@@ -64,6 +64,7 @@ export const Hellknight: UnitBase = {
     { type: 'psychic', factor: 25 },
     { type: 'holy', factor: 25 },
   ],
+  immunities: [],
 }
 
 export const TyranitarConfig: UnitBaseConfig = {

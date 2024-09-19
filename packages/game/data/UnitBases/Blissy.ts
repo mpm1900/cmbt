@@ -44,6 +44,7 @@ export const Blissy: UnitBase = {
     { type: 'holy', factor: 100 / 2 },
   ],
   weaknesses: [],
+  immunities: [],
 }
 
 export const BlissyConfig: UnitBaseConfig = {

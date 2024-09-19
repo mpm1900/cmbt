@@ -31,6 +31,7 @@ export const RestlessSpirit: UnitBase = {
     { type: 'holy', factor: 100 },
     { type: 'shock', factor: 25 },
   ],
+  immunities: [],
 }
 
 export const RestlessSpiritConfig: UnitBaseConfig = {

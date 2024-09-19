@@ -26,6 +26,7 @@ export const Snake: UnitBase = {
   affinities: [],
   resistances: [],
   weaknesses: [],
+  immunities: [],
 }
 
 export const SnakeConfig: UnitBaseConfig = {

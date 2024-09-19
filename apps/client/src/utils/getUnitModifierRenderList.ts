@@ -9,6 +9,7 @@ export function getUnitModifierRenderList(unit: Unit, ctx: CombatContext) {
     (m) =>
       m instanceof Trigger &&
       m.parentId === unit.id &&
+      !m.statusId && // this line was added to not show immune statuses
       !registeredTriggers.some((t) => t.rtid === m.rtid) &&
       !delayedModifiers.some((t) => t.rtid === m.rtid)
   )

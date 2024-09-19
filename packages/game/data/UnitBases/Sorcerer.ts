@@ -57,6 +57,7 @@ export const Sorcerer: UnitBase = {
   ],
   resistances: [],
   weaknesses: [{ type: 'psychic', factor: 50 }],
+  immunities: [],
 }
 
 export const SorcererConfig: UnitBaseConfig = {

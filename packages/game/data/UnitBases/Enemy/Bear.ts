@@ -26,6 +26,7 @@ export const Bear: UnitBase = {
   affinities: [],
   resistances: [{ type: 'force', factor: 25 }],
   weaknesses: [],
+  immunities: [],
 }
 
 export const BearConfig: UnitBaseConfig = {

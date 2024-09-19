@@ -1,6 +1,6 @@
 import { Augment, Modifier, Mutation, Unit } from '../../types'
 import { InspectedAllId, ScholarId } from '../Ids'
-import { UpdateFlagAll } from '../Modifiers'
+import { UpdateFlagTeam } from '../Modifiers'
 import { AddModifiersOnSelfEnter } from '../Triggers'
 
 export const Scholar: Augment = {
@@ -13,12 +13,13 @@ export const Scholar: Augment = {
         parentId: unit.id,
         maxInstances: 1,
         persistOnSwitch: true,
-        targetsLabel: 'all units',
+        targetsLabel: 'all enemies',
         makeModifiers: () => [
-          new UpdateFlagAll({
+          new UpdateFlagTeam({
             registryId: InspectedAllId,
             sourceId: unit.id,
             parentId: unit.id,
+            notTeamId: unit.teamId,
             flag: 'isInspected',
             value: true,
           }),

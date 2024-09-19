@@ -59,6 +59,7 @@ export class UpdateStatTeam extends Modifier {
   ): boolean => {
     return (
       super.filter(unit, ctx, args) &&
+      unit.flags.isActive &&
       getTeamIdValue(unit.teamId, this.teamId, this.notTeamId)
     )
   }

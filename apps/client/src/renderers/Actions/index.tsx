@@ -30,6 +30,7 @@ import {
   GuidingRayId,
   HealingPrayerId,
   HealingWordId,
+  HealSelfId,
   HideId,
   HoldPerson,
   HoldPersonId,
@@ -122,6 +123,7 @@ import { GhostFlameRenderer } from './GhostFlame'
 import { GuidingrayRenderer } from './GuidingRay'
 import { HealingPrayerRenderer } from './HealingPrayer'
 import { HealingWordRenderer } from './HealingWord'
+import { HealSelfRenderer } from './HealSelf'
 import { HideRenderer } from './Hide'
 import { InfernalBlastRenderer } from './InfernalBlast'
 import { IntoxicateRenderer } from './Intoxicate'
@@ -189,6 +191,7 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
   [GuidingRayId]: GuidingrayRenderer,
   [HealingPrayerId]: HealingPrayerRenderer,
   [HealingWordId]: HealingWordRenderer,
+  [HealSelfId]: HealSelfRenderer,
   [HideId]: HideRenderer,
   [InfernalBlastId]: InfernalBlastRenderer,
   [IntoxicateId]: IntoxicateRenderer,

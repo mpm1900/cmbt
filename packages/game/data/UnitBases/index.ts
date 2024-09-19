@@ -23,25 +23,28 @@ import { Sorcerer, SorcererConfig } from './Sorcerer'
 import { Witch, WitchConfig } from './Witch'
 import { Wizard, WizardConfig } from './Wizard'
 
+export * from './Blissy'
+export * from './Cleric'
+export * from './DemonSlayer'
+export * from './DraconicScion'
 export * from './Enemy'
+export * from './Hellknight'
+export * from './Juggernaut'
+export * from './Paladin'
+export * from './Sorcerer'
+export * from './Witch'
 export * from './Wizard'
 
 export const PLAYER_BASES: UnitBase[] = [
-  // Wolf,
-
   Cleric,
   Sorcerer,
-  Witch,
+  Wizard,
   Paladin,
   Hellknight,
   Juggernaut,
   DraconicScion,
-
-  Wizard,
+  Witch,
   DemonSlayer,
-
-  // Celebi,
-  // RestlessSpirit,
 ]
 
 export const ENEMY_BASES = [

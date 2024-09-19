@@ -1,6 +1,7 @@
 import { useUnitBuilders } from '@/hooks/state'
 import { useBuilderUi } from '@/hooks/state/useBuilderUi'
 import { AUGMENT_NAMES } from '@/renderers'
+import { BeastiaryMenu } from '@shared/BeastiaryMenu'
 import { PageHeader } from '@shared/PageHeader'
 import {
   Menubar,
@@ -14,14 +15,13 @@ import {
 export function BuilderHeader() {
   const store = useUnitBuilders()
   const ui = useBuilderUi()
+
   return (
     <PageHeader>
-      <div className="flex flex-1 justify-between items-center px-1">
+      <div className="flex flex-1 items-center px-1">
         <Menubar className="border-0">
           <MenubarMenu>
-            <MenubarTrigger className="space-x-2">
-              <div>Units</div>
-            </MenubarTrigger>
+            <MenubarTrigger>Units</MenubarTrigger>
             <MenubarContent>
               <MenubarRadioGroup
                 value={ui.activeBuilderId}
@@ -51,6 +51,8 @@ export function BuilderHeader() {
             </MenubarContent>
           </MenubarMenu>
         </Menubar>
+
+        <BeastiaryMenu />
       </div>
     </PageHeader>
   )

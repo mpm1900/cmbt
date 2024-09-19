@@ -116,5 +116,11 @@ export const PaladinConfig: UnitBaseConfig = {
     },
   ],
   defaultAbilityId: DivineHealingId,
-  defaultActionIds: [BaneId, BlessId, HoldPersonId, HealingPrayerId, SmiteId],
+  defaultActionIds: [
+    BaneId,
+    HoldPersonId,
+    PowerSinkId,
+    RetreatingBlowId,
+    SmiteId,
+  ],
 }

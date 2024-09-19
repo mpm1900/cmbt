@@ -1,4 +1,5 @@
 import { useCy, useGame } from '@/hooks/state'
+import { BeastiaryMenu } from '@shared/BeastiaryMenu'
 import { Counter } from '@shared/Counter'
 import { ItemsMenu } from '@shared/ItemsMenu'
 import { PageHeader } from '@shared/PageHeader'
@@ -21,28 +22,31 @@ export function WorldHeader() {
   return (
     <PageHeader>
       <div className="flex flex-1 justify-between">
-        <Menubar className="border-0">
-          <UnitsMenu units={game.units} />
-          <ItemsMenu items={game.team.items} />
-          <MenubarMenu>
-            <MenubarTrigger>View</MenubarTrigger>
-            {cy && (
-              <MenubarContent>
-                <MenubarItem onClick={() => fitAll(cy)}>Zoom Out</MenubarItem>
-                <MenubarItem onClick={() => centerActive(cy)}>
-                  Center
-                </MenubarItem>
-                <MenubarItem onClick={() => fitActive(cy)}>Reset</MenubarItem>
+        <div className="flex flex-1 justify-start items-center">
+          <Menubar className="border-0">
+            <UnitsMenu units={game.units} />
+            <ItemsMenu items={game.team.items} />
+            <MenubarMenu>
+              <MenubarTrigger>View</MenubarTrigger>
+              {cy && (
+                <MenubarContent>
+                  <MenubarItem onClick={() => fitAll(cy)}>Zoom Out</MenubarItem>
+                  <MenubarItem onClick={() => centerActive(cy)}>
+                    Center
+                  </MenubarItem>
+                  <MenubarItem onClick={() => fitActive(cy)}>Reset</MenubarItem>
+                </MenubarContent>
+              )}
+            </MenubarMenu>
+            <MenubarMenu>
+              <MenubarTrigger>Legend</MenubarTrigger>
+              <MenubarContent className="px-4">
+                <WorldLegend />
               </MenubarContent>
-            )}
-          </MenubarMenu>
-          <MenubarMenu>
-            <MenubarTrigger>Legend</MenubarTrigger>
-            <MenubarContent className="px-4">
-              <WorldLegend />
-            </MenubarContent>
-          </MenubarMenu>
-        </Menubar>
+            </MenubarMenu>
+          </Menubar>
+          <BeastiaryMenu />
+        </div>
 
         <div className="flex items-center space-x-1 px-4">
           <Counter

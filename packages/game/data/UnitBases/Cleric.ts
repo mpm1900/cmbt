@@ -3,34 +3,32 @@ import { UnitBase, UnitBaseConfig } from '../../types'
 import {
   Bane,
   Bless,
-  Block,
   Boast,
   DispelMagic,
   GuidingRay,
   HealingPrayer,
   HealingWord,
+  HealSelf,
   Protect,
   SearingLight,
   VampiricTouch,
-  Ward,
 } from '../Actions'
 import { HoldPerson } from '../Actions/HoldPerson'
 import { DivineHealing } from '../Augments'
 import {
   BaneId,
   BlessId,
-  BlockId,
   BoastId,
   DispelMagicId,
   DivineHealingId,
   GuidingRayId,
   HealingPrayerId,
   HealingWordId,
+  HealSelfId,
   HoldPersonId,
   ProtectId,
   SearingLightId,
   VampiricTouchId,
-  WardId,
 } from '../Ids'
 import { BASE_UNIT } from '../Units/system/BASE_UNIT'
 
@@ -53,7 +51,7 @@ export const Cleric: UnitBase = {
   },
   tags: [],
   augmentSlots: 3,
-  affinities: [],
+  affinities: [{ type: 'holy', factor: 50 }],
   resistances: [{ type: 'holy', factor: 50 }],
   weaknesses: [],
 }
@@ -71,10 +69,6 @@ export const ClericConfig: UnitBaseConfig = {
       make: (u) => new Bless(u.id, u.teamId),
     },
     {
-      id: BlockId,
-      make: (u) => new Block(u.id, u.teamId),
-    },
-    {
       id: DispelMagicId,
       make: (u) => new DispelMagic(u.id, u.teamId),
     },
@@ -89,6 +83,10 @@ export const ClericConfig: UnitBaseConfig = {
     {
       id: HealingWordId,
       make: (u) => new HealingWord(u.id, u.teamId),
+    },
+    {
+      id: HealSelfId,
+      make: (u) => new HealSelf(u.id, u.teamId),
     },
     {
       id: HoldPersonId,
@@ -110,17 +108,13 @@ export const ClericConfig: UnitBaseConfig = {
       id: VampiricTouchId,
       make: (u) => new VampiricTouch(u.id, u.teamId),
     },
-    {
-      id: WardId,
-      make: (u) => new Ward(u.id, u.teamId),
-    },
   ],
   defaultAbilityId: DivineHealingId,
   defaultActionIds: [
     BaneId,
-    BlessId,
     HealingPrayerId,
-    HoldPersonId,
     GuidingRayId,
+    SearingLightId,
+    VampiricTouchId,
   ],
 }

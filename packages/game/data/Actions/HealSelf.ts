@@ -1,21 +1,19 @@
 import { Action, ActionResult, CombatContext, Id, Unit } from '../../types'
 import { buildActionResult, getActionData } from '../../utils'
-import { HealingWordId } from '../Ids'
+import { HealSelfId } from '../Ids'
 import { HealParent, Identity } from '../Mutations'
-import { GetUnits } from '../Queries'
+import { EmptyArray } from '../Queries'
 
-export class HealingWord extends Action {
-  healthFactor = 0.3
+export class HealSelf extends Action {
+  healthFactor = 0.5
 
   constructor(sourceId: Id, teamId: Id) {
-    super(HealingWordId, {
+    super(HealSelfId, {
       sourceId,
       teamId,
       cost: new Identity({}),
-      targets: new GetUnits({
-        teamId: teamId,
-      }),
-      maxTargetCount: 1,
+      targets: new EmptyArray(),
+      maxTargetCount: 0,
     })
 
     this.damages = []
@@ -28,13 +26,13 @@ export class HealingWord extends Action {
       buildActionResult(this, data, source, targets, ctx, (modifiedTargets) => {
         return {
           onSuccess: {
-            mutations: modifiedTargets.map((target) => {
-              return new HealParent({
+            mutations: [
+              new HealParent({
                 sourceId: source.id,
-                parentId: target.id,
+                parentId: source.id,
                 healthFactor: this.healthFactor,
-              })
-            }),
+              }),
+            ],
           },
         }
       }),

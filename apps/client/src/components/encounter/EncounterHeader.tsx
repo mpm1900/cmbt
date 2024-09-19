@@ -1,4 +1,5 @@
 import { useGame } from '@/hooks/state'
+import { BeastiaryMenu } from '@shared/BeastiaryMenu'
 import { Counter } from '@shared/Counter'
 import { ItemsMenu } from '@shared/ItemsMenu'
 import { PageHeader } from '@shared/PageHeader'
@@ -13,10 +14,13 @@ export function EncounterHeader() {
   return (
     <PageHeader>
       <div className="flex flex-1 justify-between">
-        <Menubar>
-          <UnitsMenu units={game.units} />
-          <ItemsMenu items={game.team.items} />
-        </Menubar>
+        <div className="flex flex-1 justify-start items-center">
+          <Menubar className="border-0">
+            <UnitsMenu units={game.units} />
+            <ItemsMenu items={game.team.items} />
+          </Menubar>
+          <BeastiaryMenu />
+        </div>
 
         <div className="flex items-center space-x-1 px-4">
           <Counter

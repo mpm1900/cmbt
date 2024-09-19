@@ -30,7 +30,7 @@ export function ItemsMenu(props: ItemsMenuProps) {
           resources={{ credits: 0 }}
           action={(item) => (
             <>
-              {item.action && <ItemUseButton action={item.action} />}
+              {item.action && <ItemUseButton item={item} />}
               {item.augment && <Button size="sm">equip</Button>}
             </>
           )}

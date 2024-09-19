@@ -78,6 +78,7 @@ export function resolveUnitBuilder(builder: UnitBuilder, teamId: Id): Unit {
     focus: unit.stats.focus,
     stamina: unit.stats.stamina,
     devotion: unit.stats.devotion,
+    damage: unit.stats.health - 5,
   }
 
   unit.actions = [...builder.actions.map((a) => a.make(unit))]

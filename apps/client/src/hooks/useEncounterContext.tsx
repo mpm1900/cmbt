@@ -50,7 +50,7 @@ export function useEncounterContext(): EncounterContext {
     if (item.action) {
       const action = item.action(BASE_UNIT)
       const result = action.resolve(BASE_UNIT, [target], ctx)
-      console.log(result)
+      game.mutate(result.flatMap((r) => r.mutations ?? []))
     }
   }
 

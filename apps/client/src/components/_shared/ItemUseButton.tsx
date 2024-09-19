@@ -1,24 +1,30 @@
 import { useCombatContext, useEncounterContext } from '@/hooks'
 import { PopoverPortal } from '@radix-ui/react-popover'
 import { BASE_UNIT } from '@repo/game/data'
-import { Action, Unit } from '@repo/game/types'
+import { Item } from '@repo/game/types'
 import { Button } from '../ui/button'
 import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover'
 
 export type ItemUseButtonProps = {
-  action: (unit: Unit) => Action
+  item: Item
 }
 
 export function ItemUseButton(props: ItemUseButtonProps) {
-  const { action } = props
-  const baseAction = action(BASE_UNIT)
+  const { item } = props
+  const baseAction = item.action!(BASE_UNIT)
   const ctx = useEncounterContext()
   const cmbt = useCombatContext()
 
   const units = ctx.units
     .filter((u) => baseAction.filter(u, cmbt))
     .map((unit) => (
-      <Button key={unit.id} variant="outline" onClick={() => {}}>
+      <Button
+        key={unit.id}
+        variant="outline"
+        onClick={() => {
+          ctx.useItem(item, unit)
+        }}
+      >
         {unit.name}
       </Button>
     ))

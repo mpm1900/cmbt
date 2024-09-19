@@ -1,4 +1,14 @@
-import { Id, Item, Team, Unit, World, WorldNode } from '@repo/game/types'
+import {
+  CombatContext,
+  Id,
+  Item,
+  Mutation,
+  MutationFilterArgs,
+  Team,
+  Unit,
+  World,
+  WorldNode,
+} from '@repo/game/types'
 import { create } from 'zustand'
 
 export type GameState = {
@@ -22,7 +32,10 @@ export type GameStore = GameState & {
     fn: (n: WorldNode) => Partial<WorldNode>
   ) => void
   updateTeam: (fn: (team: Team) => Partial<Team>) => void
+
   updateUnits: (fn: (unit: Unit) => Partial<Unit>) => void
+  mutate(mutations: Mutation[], args?: MutationFilterArgs): void
+
   buyItem: (item: Item, cost: number) => void
   addVisitedNodes: (...ids: Id[]) => void
 }
@@ -85,6 +98,24 @@ export const useGame = create<GameStore>((set) => ({
         ...u,
         ...fn(u),
       })),
+    }))
+  },
+  mutate(mutations, args) {
+    args = args ?? {}
+    set((s) => ({
+      units: s.units.map((unit) =>
+        mutations.reduce<Unit>((u, mutation) => {
+          const ctx: CombatContext = {
+            units: s.units,
+            modifiers: [],
+            user: s.team.id,
+            actionCooldowns: {},
+          }
+          return mutation.filter(u, ctx, args)
+            ? { ...u, ...mutation.resolve(u) }
+            : u
+        }, unit)
+      ),
     }))
   },
   buyItem: (item, cost) => {

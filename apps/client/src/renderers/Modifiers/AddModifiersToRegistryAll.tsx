@@ -9,11 +9,11 @@ export const AddModifiersToRegistryAllRenderer: ModifierRenderer = {
     const modifier = mod as AddModifiersToRegistryParent
     return (
       <div>
-        All units lose their{' '}
+        All units are no longer{' '}
         {modifier.modifiers.map((m) => (
           <ModifierInline modifier={m} />
-        ))}{' '}
-        abilities
+        ))}
+        .
       </div>
     )
   },

@@ -3,6 +3,7 @@ import {
   AddModifiersOnSelfEnterId,
   AddModifiersPerUnitOnSelfEnterId,
   AddModifiersToRegistryAllId,
+  AddModifiersToRegistryTeamId,
   AddStatModifiersImmunityAllId,
   BanedParentId,
   BlessedParentId,
@@ -68,6 +69,7 @@ export const ModifierRenderers: Record<string, ModifierRenderer> = {
   // Modifiers
   [AddActionParentId]: AddActionParentRenderer,
   [AddModifiersToRegistryAllId]: AddModifiersToRegistryAllRenderer,
+  [AddModifiersToRegistryTeamId]: AddModifiersToRegistryAllRenderer,
   [InvertSpeedAllId]: InvertSpeedAllRenderer,
   [UpdateStatAllId]: UpdateStatAllRenderer,
   [UpdateStatParentId]: UpdateStatParentRenderer,

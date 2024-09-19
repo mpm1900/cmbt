@@ -3,6 +3,7 @@ import { ModifierId } from './_base'
 export const AddActionParentId = ModifierId()
 export const AddModifiersToRegistryAllId = ModifierId()
 export const AddModifiersToRegistryParentId = ModifierId()
+export const AddModifiersToRegistryTeamId = ModifierId()
 export const DisabledParentId = ModifierId()
 export const InspectedAllId = ModifierId()
 export const IntangibleParentId = ModifierId()

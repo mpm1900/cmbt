@@ -9,7 +9,7 @@ import {
 import { AddModifiersToRegistryAllId } from '../Ids'
 
 export class AddModifiersToRegistryAll extends Modifier {
-  private modifiers: Modifier[]
+  modifiers: Modifier[]
 
   constructor(props: ModifierProps<{ modifiers: Modifier[] }>) {
     super(AddModifiersToRegistryAllId, props)

@@ -1,19 +1,27 @@
 import {
   CombatContext,
+  Id,
   Modifier,
   MODIFIER_PRIORITIES,
   ModifierProps,
   MutationFilterArgs,
   Unit,
 } from '../../types'
-import { AddModifiersToRegistryParentId } from '../Ids'
+import { getTeamIdValue } from '../../utils'
+import { AddModifiersToRegistryAllId } from '../Ids'
 
-export class AddModifiersToRegistryParent extends Modifier {
+export class AddModifiersToRegistryTeam extends Modifier {
+  teamId?: Id
+  notTeamId?: Id
   modifiers: Modifier[]
 
-  constructor(props: ModifierProps<{ modifiers: Modifier[] }>) {
-    super(AddModifiersToRegistryParentId, props)
+  constructor(
+    props: ModifierProps<{ teamId?: Id; notTeamId?: Id; modifiers: Modifier[] }>
+  ) {
+    super(AddModifiersToRegistryAllId, props)
     this.priority = MODIFIER_PRIORITIES.IMMUNITIES
+    this.teamId = props.teamId
+    this.notTeamId = props.notTeamId
     this.modifiers = props.modifiers
   }
 
@@ -34,6 +42,10 @@ export class AddModifiersToRegistryParent extends Modifier {
     ctx: CombatContext,
     args: MutationFilterArgs
   ): boolean => {
-    return super.filter(unit, ctx, args) && unit.id === this.parentId
+    return (
+      super.filter(unit, ctx, args) &&
+      unit.flags.isActive &&
+      getTeamIdValue(unit.teamId, this.teamId, this.notTeamId)
+    )
   }
 }

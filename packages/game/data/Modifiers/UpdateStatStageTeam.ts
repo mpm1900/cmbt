@@ -8,11 +8,12 @@ import {
   StatKey,
   Unit,
 } from '../../types'
-import { clampStatStage } from '../../utils'
+import { clampStatStage, getTeamIdValue } from '../../utils'
 import { UpdateStatStageTeamId } from '../Ids'
 
 export class UpdateStatStageTeam extends Modifier {
-  teamId: Id
+  teamId?: Id
+  notTeamId?: Id
   stat?: StatKey
   stages: number
 
@@ -21,11 +22,17 @@ export class UpdateStatStageTeam extends Modifier {
   }
 
   constructor(
-    props: ModifierProps<{ teamId: Id; stat?: StatKey; stages?: number }>
+    props: ModifierProps<{
+      teamId: Id
+      notTeamId?: Id
+      stat?: StatKey
+      stages?: number
+    }>
   ) {
     super(UpdateStatStageTeamId, props)
 
     this.teamId = props.teamId
+    this.notTeamId = props.notTeamId
     this.stat = props.stat
     this.stages = clampStatStage(props.stages ?? 0)
     this.priority = MODIFIER_PRIORITIES.STAGES
@@ -48,6 +55,9 @@ export class UpdateStatStageTeam extends Modifier {
     ctx: CombatContext,
     args: MutationFilterArgs
   ): boolean => {
-    return super.filter(unit, ctx, args) && unit.teamId === this.teamId
+    return (
+      super.filter(unit, ctx, args) &&
+      getTeamIdValue(unit.teamId, this.teamId, this.notTeamId)
+    )
   }
 }

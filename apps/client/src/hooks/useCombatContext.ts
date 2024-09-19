@@ -1,4 +1,5 @@
 import { CombatContext } from '@repo/game/types'
+import { validateModifiers } from '@repo/game/utils'
 import { useCombat } from './state'
 
 export function useCombatContext(): CombatContext {
@@ -13,5 +14,6 @@ export function useCombatContext(): CombatContext {
 
   return {
     ...combat,
+    modifiers: validateModifiers(combat.modifiers, []),
   }
 }

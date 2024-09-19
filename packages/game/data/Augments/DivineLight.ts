@@ -1,6 +1,6 @@
 import { Augment, Unit } from '../../types'
 import { DivineLightId, HiddenParentId, SeenAllId } from '../Ids'
-import { AddModifiersToRegistryAll, UpdateFlagParent } from '../Modifiers'
+import { AddModifiersToRegistryTeam, UpdateFlagParent } from '../Modifiers'
 import { AddModifiersOnSelfEnter } from '../Triggers'
 
 export const DivineLight: Augment = {
@@ -10,10 +10,11 @@ export const DivineLight: Augment = {
       registryId: DivineLightId,
       sourceId: unit.id,
       parentId: unit.id,
-      targetsLabel: 'all units',
+      targetsLabel: 'all enemies',
       persistOnSwitch: true,
       makeModifiers: () => [
-        new AddModifiersToRegistryAll({
+        new AddModifiersToRegistryTeam({
+          notTeamId: unit.teamId,
           registryId: SeenAllId,
           sourceId: unit.id,
           parentId: unit.id,

@@ -7,22 +7,25 @@ import {
   StatKey,
   Unit,
 } from '../../types'
+import { getTeamIdValue } from '../../utils'
 import { UpdateStatTeamId } from '../Ids'
 
 export class UpdateStatTeam extends Modifier {
-  teamId: Id
+  teamId?: Id
+  notTeamId?: Id
   stat?: StatKey
   percentage?: boolean
   factor: number
   static: number
 
   get key(): string {
-    return `${this.id}.${this.parentId ?? this.sourceId}@${this.stat}${this.factor}/${this.static}`
+    return `${this.id}.${this.teamId ?? this.notTeamId}@${this.stat}${this.factor}/${this.static}`
   }
 
   constructor(
     props: ModifierProps<{
-      teamId: Id
+      teamId?: Id
+      notTeamId?: Id
       stat?: StatKey
       factor?: number
       static?: number
@@ -32,6 +35,7 @@ export class UpdateStatTeam extends Modifier {
     super(UpdateStatTeamId, props)
 
     this.teamId = props.teamId
+    this.notTeamId = props.notTeamId
     this.stat = props.stat
     this.factor = props.factor ?? 0
     this.static = props.static ?? 0
@@ -53,6 +57,9 @@ export class UpdateStatTeam extends Modifier {
     ctx: CombatContext,
     args: MutationFilterArgs
   ): boolean => {
-    return super.filter(unit, ctx, args) && unit.teamId === this.teamId
+    return (
+      super.filter(unit, ctx, args) &&
+      getTeamIdValue(unit.teamId, this.teamId, this.notTeamId)
+    )
   }
 }

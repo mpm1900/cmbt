@@ -15,7 +15,7 @@ export class UpdateStatAll extends Modifier {
   static: number
 
   get key(): string {
-    return `${this.id}.${this.parentId ?? this.sourceId}@${this.stat}${this.factor}/${this.static}`
+    return `${this.id}.${this.stat}.${this.factor}/${this.static}`
   }
 
   constructor(

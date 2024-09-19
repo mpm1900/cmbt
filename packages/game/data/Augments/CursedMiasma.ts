@@ -19,6 +19,7 @@ export const CursedMiasma: Augment = {
             sourceId: unit.id,
             parentId: unit.id,
             registryId: AttackDownAllId,
+            maxInstances: 1,
             stat: 'attack',
             factor: -0.5,
           }),

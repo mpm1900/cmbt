@@ -13,7 +13,7 @@ export class UpdateFlagAll extends Modifier {
   value?: boolean
 
   get key(): string {
-    return `${this.id}.${this.parentId ?? this.sourceId}`
+    return `${this.id}.${this.flag}.${this.value}`
   }
 
   constructor(props: ModifierProps & { flag?: FlagKey; value?: boolean }) {

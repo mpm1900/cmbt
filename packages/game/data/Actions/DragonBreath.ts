@@ -80,11 +80,12 @@ export class DragonBreath extends Action {
               )
               return getMutationsFromDamageResult(source, target, damage)
             }),
-            addedModifiers: applyBurn
-              ? modifiedTargets.flatMap((target) =>
-                  Burn.modifiers(source, target)
-                )
-              : [],
+            addedModifiers:
+              applyBurn && modifiedTargets.length > 0
+                ? modifiedTargets.flatMap((target) =>
+                    Burn.modifiers(source, target)
+                  )
+                : [],
           },
         })
       ),

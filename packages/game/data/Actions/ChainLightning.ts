@@ -116,7 +116,7 @@ export class ChainLightning extends Action {
     const [first, ...chainTargets] = this.mapTargets(targets, ctx)
 
     const results = [
-      buildActionResult(this, data, source, targets, ctx, () => {
+      buildActionResult(this, data, source, targets, ctx, (modifiedTargets) => {
         const damage = calculateDamages(
           this.damages,
           data.source,
@@ -128,9 +128,10 @@ export class ChainLightning extends Action {
           expandedTargets: [first],
           onSuccess: {
             mutations: getMutationsFromDamageResult(source, first, damage),
-            addedModifiers: applyCharge
-              ? Charged.modifiers(source, source)
-              : [],
+            addedModifiers:
+              applyCharge && modifiedTargets.length > 0
+                ? Charged.modifiers(source, source)
+                : [],
           },
         }
       }),

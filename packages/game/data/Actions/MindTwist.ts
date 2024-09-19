@@ -83,7 +83,7 @@ export class MindTwist extends Action {
               return getMutationsFromDamageResult(source, target, damage)
             }),
             addedModifiers: ifArray(
-              applyMagicDown,
+              applyMagicDown && modifiedTargets.length > 0,
               modifiedTargets.map(
                 (target) =>
                   new UpdateStatStageParent({

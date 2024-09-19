@@ -80,9 +80,10 @@ export class CallLightning extends Action {
               )
               return getMutationsFromDamageResult(source, target, damage)
             }),
-            addedModifiers: applyCharge
-              ? Charged.modifiers(source, source)
-              : [],
+            addedModifiers:
+              applyCharge && modifiedTargets.length > 0
+                ? Charged.modifiers(source, source)
+                : [],
           },
         })
       ),

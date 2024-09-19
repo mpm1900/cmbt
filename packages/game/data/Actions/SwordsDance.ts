@@ -6,7 +6,7 @@ import { Identity } from '../Mutations'
 import { EmptyArray } from '../Queries/EmptyArray'
 
 export class SwordsDance extends Action {
-  offset = 2
+  stages = 2
 
   constructor(sourceId: Id, teamId: Id) {
     super(SwordsDanceId, {
@@ -40,7 +40,7 @@ export class SwordsDance extends Action {
                 stat: 'attack',
                 sourceId: source.id,
                 parentId: source.id,
-                stages: 2,
+                stages: this.stages,
               }),
             ],
           },

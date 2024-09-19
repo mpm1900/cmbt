@@ -1,4 +1,11 @@
-import { Action, ActionResult, CombatContext, Id, Unit } from '../../types'
+import {
+  Action,
+  ActionResult,
+  CombatContext,
+  Damage,
+  Id,
+  Unit,
+} from '../../types'
 import { buildActionResult, getActionData } from '../../utils'
 import { SpikesId } from '../Ids'
 import { Identity } from '../Mutations'
@@ -6,7 +13,7 @@ import { EmptyArray } from '../Queries/EmptyArray'
 import { DamageNewUnitsOnUnitEnter } from '../Triggers'
 
 export class Spikes extends Action {
-  enterDamage: number = 20
+  spikeDamage: Damage
 
   constructor(sourceId: Id, teamId: Id) {
     super(SpikesId, {
@@ -16,6 +23,12 @@ export class Spikes extends Action {
       targets: new EmptyArray(),
       maxTargetCount: 0,
     })
+
+    this.spikeDamage = {
+      attackType: 'physical',
+      damageType: 'force',
+      factor: 1 / 8,
+    }
   }
 
   resolve = (
@@ -32,11 +45,7 @@ export class Spikes extends Action {
             new DamageNewUnitsOnUnitEnter({
               sourceId: source.id,
               maxInstances: 3,
-              damage: {
-                attackType: 'physical',
-                damageType: 'force',
-                factor: 1 / 8,
-              },
+              damage: this.spikeDamage,
             }),
           ],
         },

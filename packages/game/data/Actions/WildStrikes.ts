@@ -19,6 +19,8 @@ import { Identity } from '../Mutations'
 import { GetUnits } from '../Queries'
 
 export class WildStrikes extends Action {
+  range: [number, number] = [2, 6]
+
   constructor(sourceId: Id, teamId: Id) {
     super(WildStrikesId, {
       sourceId,

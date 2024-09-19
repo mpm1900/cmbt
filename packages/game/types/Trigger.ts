@@ -69,4 +69,14 @@ export abstract class Trigger extends Modifier {
       unit.id === trigger.sourceId
     )
   }
+
+  public static OnNewEnter(
+    trigger: Trigger,
+    unit: Unit,
+    ctx: CombatContext,
+    args: MutationFilterArgs
+  ) {
+    const newUnits = args.units
+    return !!newUnits?.find((u) => u.id === unit.id)
+  }
 }

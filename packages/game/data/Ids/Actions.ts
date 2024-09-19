@@ -65,6 +65,7 @@ export const TrickRoomId = ActionId()
 export const VampiricTouchId = ActionId()
 export const WardId = ActionId()
 export const WildStrikesId = ActionId()
+export const WindWalkId = ActionId()
 
 export const InspectAllId = ActionId()
 export const SetIsActiveId = ActionId()

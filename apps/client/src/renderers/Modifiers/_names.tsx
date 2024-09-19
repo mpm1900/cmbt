@@ -65,10 +65,10 @@ import {
 
 export const MODIFIER_NAMES: Record<string, string> = {
   // Modifiers
-  [DamageAllOnTurnEndId]: 'Damage All on Turn End',
   [InvertSpeedAllId]: 'Invert Speed',
 
   // Triggers
+  [DamageAllOnTurnEndId]: 'Damage All on Turn End',
   [DamageNewUnitsOnUnitEnterId]: 'Spikes', // TODO RegistryId-ify
   [DamageParentOnTurnEndId]: 'Damage on Turn End',
   [DrainLifeParentOnTurnEndId]: 'Drain Life',

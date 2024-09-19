@@ -93,6 +93,7 @@ import {
   WardId,
   WildStrikes,
   WildStrikesId,
+  WindWalkId,
 } from '@repo/game/data'
 import { Action, ActionResult, CombatContext, Unit } from '@repo/game/types'
 import { DamageListInline } from '@shared/DamageListInline'
@@ -147,6 +148,7 @@ import { SneakAttackRenderer } from './SneakAttack'
 import { SongOfRuinRenderer } from './SongOfRuin'
 import { TimeBendRenderer } from './TimeBend'
 import { VampiricTouchRenderer } from './VampiricTouch'
+import { WindWalkRenderer } from './WindWalk'
 
 export * from './_names'
 
@@ -217,6 +219,7 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
   [BoastId]: TauntRenderer,
   [TimeBendId]: TimeBendRenderer,
   [VampiricTouchId]: VampiricTouchRenderer,
+  [WindWalkId]: WindWalkRenderer,
 
   /// SYSTEM ACTIONS
   [SetIsActiveId]: {

@@ -67,6 +67,7 @@ import {
   VampiricTouchId,
   WardId,
   WildStrikesId,
+  WindWalkId,
 } from '@repo/game/data'
 
 export const ACTION_NAMES: Record<string, string> = {
@@ -141,4 +142,5 @@ export const ACTION_NAMES: Record<string, string> = {
   [SongOfRuinId]: 'Song of Ruin',
   [TimeBendId]: 'Time Bend',
   [VampiricTouchId]: 'Vampiric Touch',
+  [WindWalkId]: 'Wind Walk',
 }

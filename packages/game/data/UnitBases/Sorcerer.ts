@@ -13,6 +13,7 @@ import {
   PowerWordKill,
   Protect,
   Ward,
+  WindWalk,
 } from '../Actions'
 import { Scholar } from '../Augments'
 import {
@@ -29,6 +30,7 @@ import {
   ProtectId,
   ScholarId,
   WardId,
+  WindWalkId,
 } from '../Ids'
 import { BASE_UNIT } from '../Units/system/BASE_UNIT'
 
@@ -108,6 +110,10 @@ export const SorcererConfig: UnitBaseConfig = {
     {
       id: WardId,
       make: (u) => new Ward(u.id, u.teamId),
+    },
+    {
+      id: WindWalkId,
+      make: (u) => new WindWalk(u.id, u.teamId),
     },
   ],
   defaultAbilityId: ScholarId,

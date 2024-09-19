@@ -30,14 +30,13 @@ export class DamageNewUnitsOnUnitEnter extends Trigger {
   }
 
   mutations = (ctx: CombatContext, args: MutationFilterArgs) => {
-    const source = ctx.units.find((u) => u.id === this.sourceId)!
     const units = ctx.units.filter((u) => this.filter(u, ctx, args))
     return units.flatMap((unit) => {
       const modified = applyModifiers(unit, ctx, args).unit
       const result = calculateDamages([this.damage], undefined, modified, {
         evasionSuccess: false,
       })
-      return getMutationsFromDamageResult(source, unit, result)
+      return getMutationsFromDamageResult(undefined, unit, result)
     })
   }
 
@@ -46,9 +45,8 @@ export class DamageNewUnitsOnUnitEnter extends Trigger {
     ctx: CombatContext,
     args: MutationFilterArgs
   ): boolean => {
-    const newUnits = args.units
     return (
-      super.filter(unit, ctx, args) && !!newUnits?.find((u) => u.id === unit.id)
+      super.filter(unit, ctx, args) && Trigger.OnNewEnter(this, unit, ctx, args)
     )
   }
 }

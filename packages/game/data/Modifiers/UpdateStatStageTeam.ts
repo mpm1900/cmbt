@@ -1,5 +1,6 @@
 import {
   CombatContext,
+  Id,
   Modifier,
   MODIFIER_PRIORITIES,
   ModifierProps,
@@ -8,9 +9,10 @@ import {
   Unit,
 } from '../../types'
 import { clampStatStage } from '../../utils'
-import { UpdateStatStageParentId } from '../Ids'
+import { UpdateStatStageTeamId } from '../Ids'
 
-export class UpdateStatStageParent extends Modifier {
+export class UpdateStatStageTeam extends Modifier {
+  teamId: Id
   stat?: StatKey
   stages: number
 
@@ -18,9 +20,12 @@ export class UpdateStatStageParent extends Modifier {
     return `${this.id}.${this.parentId}.${this.stat}`
   }
 
-  constructor(props: ModifierProps<{ stat?: StatKey; stages?: number }>) {
-    super(UpdateStatStageParentId, props)
+  constructor(
+    props: ModifierProps<{ teamId: Id; stat?: StatKey; stages?: number }>
+  ) {
+    super(UpdateStatStageTeamId, props)
 
+    this.teamId = props.teamId
     this.stat = props.stat
     this.stages = clampStatStage(props.stages ?? 0)
     this.priority = MODIFIER_PRIORITIES.STAGES
@@ -43,6 +48,6 @@ export class UpdateStatStageParent extends Modifier {
     ctx: CombatContext,
     args: MutationFilterArgs
   ): boolean => {
-    return super.filter(unit, ctx, args) && unit.id === this.parentId
+    return super.filter(unit, ctx, args) && unit.teamId === this.teamId
   }
 }

@@ -67,6 +67,7 @@ export * from './TrickRoom'
 export * from './VampiricTouch'
 export * from './Ward'
 export * from './WildStrikes'
+export * from './WindWalk'
 
 export const GLOBAL_ACTIONS: ActionMaker[] = [
   {

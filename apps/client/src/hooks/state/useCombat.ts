@@ -38,6 +38,7 @@ export type CombatState = Omit<CombatContext, 'queue'> & {
   reward: CombatRewards
   logs: CombatLog[]
   stagedActions: Record<Id, ActionsQueueItem[] | undefined>
+  turn: Turn
   log: CombatLogger
   updateLog: (id: Id, fn: (log: CombatLog) => Partial<CombatLog>) => void
 }

@@ -32,8 +32,8 @@ export function UnitCard(props: UnitCardProps) {
   const { reverse, isEnemy } = props
   const ctx = useCombatContext()
   const combat = useCombat()
-  const status = ctx.turn.status
-  const result = ctx.turn.results[ctx.turn.results.length - 1]
+  const status = combat.turn.status
+  const result = combat.turn.results[combat.turn.results.length - 1]
   const { queue } = useActions()
   const { activeUnit, setActiveUnit, hoverTargetUnitIds } = useCombatUi()
   const { unit } = applyModifiers(props.unit, ctx)

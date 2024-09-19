@@ -6,10 +6,11 @@ import {
   getBestAiAction,
 } from '@repo/game/utils'
 import { useEffect } from 'react'
-import { useActions, useCleanup, useCombatSettings } from '../state'
+import { useActions, useCleanup, useCombat, useCombatSettings } from '../state'
 import { useCombatContext } from '../useCombatContext'
 
 export function useAiActions() {
+  const combat = useCombat()
   const ctx = useCombatContext()
   const actions = useActions()
   const cleanup = useCleanup()
@@ -17,7 +18,7 @@ export function useAiActions() {
 
   useEffect(() => {
     if (debug.isDebugMode) return
-    if (ctx.turn.status === 'main') {
+    if (combat.turn.status === 'main') {
       const units = ctx.units.map((u) => applyModifiers(u, ctx).unit)
       const aiUnits = getActionableUnits(units).filter(
         (u) => u.teamId !== ctx.user
@@ -39,10 +40,10 @@ export function useAiActions() {
         actions.enqueue(...aiActions)
       }
     }
-  }, [ctx.turn.status, actions.queue.length])
+  }, [combat.turn.status, actions.queue.length])
 
   useEffect(() => {
-    if (ctx.turn.status === 'cleanup') {
+    if (combat.turn.status === 'cleanup') {
       const teams = getTeamsWithSelectionRequired(ctx)
       const aiTeam = teams.find((t) => t.id !== ctx.user)
       if (aiTeam && cleanup.queue.length === 0) {
@@ -65,5 +66,5 @@ export function useAiActions() {
         cleanup.enqueue(item)
       }
     }
-  }, [ctx.turn.status, cleanup.queue.length])
+  }, [combat.turn.status, cleanup.queue.length])
 }

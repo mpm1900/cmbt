@@ -16,7 +16,7 @@ export function useCombatController() {
   const results = useResults()
   let ctx = useCombatContext()
 
-  const status = ctx.turn.status
+  const status = combat.turn.status
   const isCombat = status === 'combat'
 
   useEffect(() => {

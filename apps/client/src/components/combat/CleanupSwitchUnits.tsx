@@ -1,4 +1,4 @@
-import { useCleanup } from '@/hooks/state'
+import { useCleanup, useCombat } from '@/hooks/state'
 import { getTeamsWithSelectionRequired } from '@/utils'
 import { GetUnits, SetIsActive } from '@repo/game/data'
 import { nanoid } from 'nanoid/non-secure'
@@ -9,6 +9,7 @@ import { SwitchUnits } from './SwitchUnits'
 export type CleanupSwitchUnitsProps = {}
 
 export function CleanupSwitchUnits(props: CleanupSwitchUnitsProps) {
+  const combat = useCombat()
   const ctx = useCombatContext()
   const cleanup = useCleanup()
   const aliveActiveUnits = new GetUnits({
@@ -23,7 +24,7 @@ export function CleanupSwitchUnits(props: CleanupSwitchUnitsProps) {
 
   return (
     <div className="w-[580px]">
-      {ctx.turn.count === 0 && (
+      {combat.turn.count === 0 && (
         <div className="p-5 mb-8 space-y-2 flex flex-col items-center">
           <LuSwords className="h-[64px] w-[64px]" />
           <div className="text-5xl font-black">Combat Start!</div>

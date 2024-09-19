@@ -1,8 +1,7 @@
 import { CombatContext } from '@repo/game/types'
-import { useActions, useCombat } from './state'
+import { useCombat } from './state'
 
 export function useCombatContext(): CombatContext {
-  const queue = useActions()
   const combat = useCombat((s) => ({
     modifiers: s.modifiers,
     teams: s.teams,
@@ -14,6 +13,5 @@ export function useCombatContext(): CombatContext {
 
   return {
     ...combat,
-    queue: queue.queue,
   }
 }

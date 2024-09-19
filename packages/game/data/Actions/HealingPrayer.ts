@@ -1,6 +1,6 @@
 import { Action, ActionResult, CombatContext, Id, Unit } from '../../types'
 import { buildActionResult, getActionData } from '../../utils'
-import { HealingPrayerId, HealingPrayerTriggerId } from '../Ids'
+import { HealingPrayerId } from '../Ids'
 import { Identity } from '../Mutations'
 import { GetUnits } from '../Queries'
 import { HealParentOnTurnEnd } from '../Triggers'
@@ -41,7 +41,7 @@ export class HealingPrayer extends Action {
             addedModifiers: modifiedTargets.map(
               (target) =>
                 new HealParentOnTurnEnd({
-                  registryId: HealingPrayerTriggerId,
+                  registryId: HealingPrayerId,
                   sourceId: source.id,
                   parentId: target.id,
                   factor: this.healingFactor,

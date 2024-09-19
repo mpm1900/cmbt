@@ -80,7 +80,7 @@ export class BecomeTheStorm extends Action {
                 registryId: StunnedParentId,
                 sourceId: source.id,
                 parentId: source.id,
-                flagKey: 'isStunned',
+                flag: 'isStunned',
                 value: true,
                 duration: 2,
               }),

@@ -14,7 +14,7 @@ export const HideRenderer: ActionRenderer = {
           modifier={
             new UpdateFlagParent({
               registryId: HiddenParentId,
-              flagKey: 'isHidden',
+              flag: 'isHidden',
               value: true,
               duration: action.duration,
             })

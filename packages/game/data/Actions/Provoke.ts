@@ -50,7 +50,7 @@ export class Provoke extends Action {
                 registryId: EnragedParentId,
                 sourceId: source.id,
                 parentId: target.id,
-                flagKey: 'isDamageLocked',
+                flag: 'isDamageLocked',
                 value: true,
                 maxInstances: 1,
                 duration: 5,

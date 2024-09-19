@@ -41,7 +41,7 @@ export class Bless extends Action {
                 registryId: BlessedParentId,
                 sourceId: source.id,
                 parentId: target.id,
-                flagKey: 'isBlessed',
+                flag: 'isBlessed',
                 value: true,
                 maxInstances: 1,
                 duration: 1,

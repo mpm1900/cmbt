@@ -6,14 +6,18 @@ import {
   MutationFilterArgs,
   Unit,
 } from '../../types'
-import { UpdateFlagParentId } from '../Ids'
+import { UpdateFlagAllId } from '../Ids'
 
-export class UpdateFlagParent extends Modifier {
+export class UpdateFlagAll extends Modifier {
   flag?: FlagKey
   value?: boolean
 
+  get key(): string {
+    return `${this.id}.${this.parentId ?? this.sourceId}`
+  }
+
   constructor(props: ModifierProps & { flag?: FlagKey; value?: boolean }) {
-    super(UpdateFlagParentId, props)
+    super(UpdateFlagAllId, props)
 
     this.flag = props.flag
     this.value = props.value
@@ -33,6 +37,6 @@ export class UpdateFlagParent extends Modifier {
     ctx: CombatContext,
     args: MutationFilterArgs
   ): boolean => {
-    return super.filter(unit, ctx, args) && unit.id === this.parentId
+    return super.filter(unit, ctx, args) && unit.flags.isActive
   }
 }

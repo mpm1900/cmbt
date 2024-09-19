@@ -46,7 +46,7 @@ export class Rest extends Action {
                 registryId: SleepingParentId,
                 sourceId: source.id,
                 parentId: source.id,
-                flagKey: 'isStunned',
+                flag: 'isStunned',
                 value: true,
                 duration: this.duration,
               }),

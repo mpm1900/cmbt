@@ -14,7 +14,7 @@ export const DivineLight: Augment = {
       mods: [
         new UpdateFlagParent({
           registryId: HiddenParentId,
-          flagKey: 'isHidden',
+          flag: 'isHidden',
           value: true,
         }),
       ],

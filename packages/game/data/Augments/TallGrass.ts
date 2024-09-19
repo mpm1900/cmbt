@@ -8,7 +8,7 @@ export const TallGrass: Augment = {
     return [
       new UpdateFlagParent({
         registryId: HiddenParentId,
-        flagKey: 'isHidden',
+        flag: 'isHidden',
         value: true,
         sourceId: unit.id,
         parentId: unit.id,

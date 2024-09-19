@@ -14,13 +14,13 @@ import {
   getDamageAiRating,
   getMutationsFromDamageResult,
 } from '../../utils'
-import { QuickAttackId } from '../Ids'
+import { RapidStrikeId } from '../Ids'
 import { Identity } from '../Mutations'
 import { GetUnits } from '../Queries'
 
-export class QuickAttack extends Action {
+export class RapidStrike extends Action {
   constructor(sourceId: Id, teamId: Id) {
-    super(QuickAttackId, {
+    super(RapidStrikeId, {
       sourceId,
       teamId,
       cost: new Identity({ sourceId }),

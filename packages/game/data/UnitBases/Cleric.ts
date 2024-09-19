@@ -13,7 +13,7 @@ import {
   SearingLight,
   VampiricTouch,
 } from '../Actions'
-import { HoldPerson } from '../Actions/HoldPerson'
+import { HoldCreature } from '../Actions/HoldCreature'
 import { DivineHealing } from '../Augments'
 import {
   BaneId,
@@ -25,7 +25,7 @@ import {
   HealingPrayerId,
   HealingWordId,
   HealSelfId,
-  HoldPersonId,
+  HoldCreatureId,
   ProtectId,
   SearingLightId,
   VampiricTouchId,
@@ -89,8 +89,8 @@ export const ClericConfig: UnitBaseConfig = {
       make: (u) => new HealSelf(u.id, u.teamId),
     },
     {
-      id: HoldPersonId,
-      make: (u) => new HoldPerson(u.id, u.teamId),
+      id: HoldCreatureId,
+      make: (u) => new HoldCreature(u.id, u.teamId),
     },
     {
       id: ProtectId,

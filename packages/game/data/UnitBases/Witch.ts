@@ -14,7 +14,7 @@ import {
   VampiricTouch,
   Ward,
 } from '../Actions'
-import { HoldPerson } from '../Actions/HoldPerson'
+import { HoldCreature } from '../Actions/HoldCreature'
 import { Regeneration } from '../Augments'
 import {
   BaneId,
@@ -22,7 +22,7 @@ import {
   ChillingGraspId,
   DeathRitesId,
   DispelMagicId,
-  HoldPersonId,
+  HoldCreatureId,
   MemoryLeakId,
   PoisonSprayId,
   ProtectId,
@@ -86,8 +86,8 @@ export const WitchConfig: UnitBaseConfig = {
       make: (u) => new DispelMagic(u.id, u.teamId),
     },
     {
-      id: HoldPersonId,
-      make: (u) => new HoldPerson(u.id, u.teamId),
+      id: HoldCreatureId,
+      make: (u) => new HoldCreature(u.id, u.teamId),
     },
     {
       id: MemoryLeakId,
@@ -122,7 +122,7 @@ export const WitchConfig: UnitBaseConfig = {
   defaultActionIds: [
     BaneId,
     MemoryLeakId,
-    HoldPersonId,
+    HoldCreatureId,
     PoisonSprayId,
     ProtectId,
   ],

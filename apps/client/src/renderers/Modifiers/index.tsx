@@ -12,7 +12,7 @@ import {
   DisabledParentId,
   DrainLifeParentOnTurnEndId,
   EnragedParentId,
-  HealingPrayerTriggerId,
+  HealingPrayerId,
   HealParentOnTurnEndId,
   HealParentOnUnitSwitchId,
   HiddenParentId,
@@ -26,6 +26,7 @@ import {
   StatDownStaticAllOnUnitEnterId,
   StatStageDownAllOtherOnUnitEnterId,
   StunnedParentId,
+  UpdateFlagAllId,
   UpdateStatAllId,
   UpdateStatParentId,
   UpdateStatStageParentId,
@@ -101,10 +102,19 @@ export const ModifierRenderers: Record<string, ModifierRenderer> = {
   [HealParentOnTurnEndId]: HealParentOnTurnEndRenderer,
   [HealParentOnUnitSwitchId]: HealParentOnUnitSwitchRenderer,
   [IntangibleParentId]: IntangibleParentRenderer,
-  [HealingPrayerTriggerId]: HealParentOnTurnEndRenderer,
-  [InspectAllOnUnitEnterId]: InspectAllOnUnitEnterRenderer,
+
   [KillParentOnTurnEndId]: KillParentOnTurnEndRenderer,
   [StatDownStaticAllOnUnitEnterId]: StatDownStaticAllOnUnitEnterRenderer,
   [StatStageDownAllOtherOnUnitEnterId]:
     StatStageDownAllOtherOnUnitEnterRenderer,
+  [UpdateFlagAllId]: {
+    name: () => 'test',
+    description: () => <>test</>,
+  },
+
+  // Override Modifiers
+
+  // Override Triggers
+  [InspectAllOnUnitEnterId]: InspectAllOnUnitEnterRenderer,
+  [HealingPrayerId]: HealParentOnTurnEndRenderer,
 }

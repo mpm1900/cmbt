@@ -21,7 +21,7 @@ export const BecomeTheStormRenderer: ActionRenderer = {
           modifier={
             new UpdateFlagParent({
               registryId: StunnedParentId,
-              flagKey: 'isStunned',
+              flag: 'isStunned',
               value: true,
               duration: action.stunDuration,
             })

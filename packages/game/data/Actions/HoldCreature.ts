@@ -1,14 +1,14 @@
 import random from 'random'
 import { Action, ActionResult, CombatContext, Id, Unit } from '../../types'
 import { buildActionResult, getActionData } from '../../utils'
-import { HoldPersonId, StunnedParentId } from '../Ids'
+import { HoldCreatureId, StunnedParentId } from '../Ids'
 import { UpdateFlagParent } from '../Modifiers'
 import { Identity } from '../Mutations'
 import { GetUnits } from '../Queries'
 
-export class HoldPerson extends Action {
+export class HoldCreature extends Action {
   constructor(sourceId: Id, teamId: Id) {
-    super(HoldPersonId, {
+    super(HoldCreatureId, {
       sourceId,
       teamId,
       cost: new Identity({ sourceId }),
@@ -46,7 +46,7 @@ export class HoldPerson extends Action {
                   registryId: StunnedParentId,
                   sourceId: source.id,
                   parentId: target.id,
-                  flagKey: 'isStunned',
+                  flag: 'isStunned',
                   value: true,
                   duration: duration,
                 })

@@ -5,8 +5,8 @@ import {
   TriggerProps,
   Unit,
 } from '../../types'
-import { InspectAllOnUnitEnterId } from '../Ids'
-import { InspectedAll } from '../Modifiers'
+import { InspectAllOnUnitEnterId, InspectedAllId } from '../Ids'
+import { UpdateFlagAll } from '../Modifiers'
 
 export class InspectAllOnUnitEnter extends Trigger {
   get key() {
@@ -19,9 +19,12 @@ export class InspectAllOnUnitEnter extends Trigger {
       events: ['on Unit Enter'],
       maxInstances: 1,
       modifiers: (ctx) => [
-        new InspectedAll({
+        new UpdateFlagAll({
+          registryId: InspectedAllId,
           sourceId: props.sourceId,
           parentId: props.parentId,
+          flag: 'isInspected',
+          value: true,
         }),
       ],
     })

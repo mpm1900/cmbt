@@ -35,7 +35,7 @@ import {
   FireDamageUpParentId,
   FireNegationUpParentId,
   FirestormOnTurnEndId,
-  HealingPrayerTriggerId,
+  HealingPrayerId,
   HealParentOnTurnEndId,
   HealParentOnUnitSwitchId,
   HiddenParentId,
@@ -64,26 +64,20 @@ import {
 } from '@repo/game/data'
 
 export const MODIFIER_NAMES: Record<string, string> = {
-  [DraconicAuraId]: 'Draconic Aura',
-  [CreateFirestormOnUnitEnterId]: 'Inferno',
+  // Modifiers
   [DamageAllOnTurnEndId]: 'Damage All on Turn End',
-  [BleedDamageId]: 'Bleed Damage',
-  [BurnDamageId]: 'Burn Damage',
-  [DamageNewUnitsOnUnitEnterId]: 'Spikes',
+  [InvertSpeedAllId]: 'Invert Speed',
+
+  // Triggers
+  [CreateFirestormOnUnitEnterId]: 'Inferno',
+  [DamageNewUnitsOnUnitEnterId]: 'Spikes', // TODO RegistryId-ify
   [DamageParentOnTurnEndId]: 'Damage on Turn End',
   [DrainLifeParentOnTurnEndId]: 'Drain Life',
-  [DivineHealingId]: 'Divine Healing',
-  [DivineLightId]: 'Divine Light',
-  [SeenAllId]: 'Seen',
   [HealParentOnTurnEndId]: 'Heal Parent On Turn End',
-  [HealParentOnUnitSwitchId]: 'Regenerate',
-  [HealingPrayerTriggerId]: 'Healing Prayer',
-  [InspectAllOnUnitEnterId]: 'Scholar',
-  [PoisonedDamageOnTurnEndId]: 'Poisoned',
-  [FirestormOnTurnEndId]: 'Firestorm',
-  [KillParentOnTurnEndId]: 'Destined Death',
-  [CursedMiasmaId]: 'Cursed Miasma',
+  [HealParentOnUnitSwitchId]: 'Regenerate', // TODO Maybe registryId?
+  [KillParentOnTurnEndId]: 'Destined Death', // TODO Maybe registryId?
 
+  // Override Modifiers
   [AccuracyDownParentId]: 'Accuracy Down',
   [AccuracyUpParentId]: 'Accuracy Up',
   [AddStatModifiersImmunityAllId]: 'Dispel Stat Changes',
@@ -92,6 +86,7 @@ export const MODIFIER_NAMES: Record<string, string> = {
   [AttackStageDownParentId]: 'Attack Down',
   [AttackStageUpParentId]: 'Attack Up',
   [AttackUpParentId]: 'Attack Up',
+  [BanedParentId]: 'Baned',
   [CriticalChanceDownParentId]: 'Crit Chance Down',
   [CriticalChanceUpParentId]: 'Crit Chance Up',
   [CriticalDamageDownParentId]: 'Crit Damage Down',
@@ -108,10 +103,10 @@ export const MODIFIER_NAMES: Record<string, string> = {
   [FireDamageUpParentId]: 'Fire Damage Up',
   [FireNegationUpParentId]: 'Fire Damage Negation Up',
   [HiddenParentId]: 'Hidden',
-  [BanedParentId]: 'Baned',
   [InspectedAllId]: 'Inspected',
   [IntangibleParentId]: 'Intangible',
-  [InvertSpeedAllId]: 'Invert Speed',
+  [ProtectedParentId]: 'Protected',
+  [StunnedParentId]: 'Stunned',
   [MagicDownParentId]: 'Magic Down',
   [MagicStageDownParentId]: 'Magic Down',
   [MagicStageUpParentId]: 'Magic Up',
@@ -119,12 +114,23 @@ export const MODIFIER_NAMES: Record<string, string> = {
   [MagicExpansionUpParentId]: 'Magic Damage Negation Up',
   [MaxAttackParentId]: 'Max Attack',
   [PowerStanceId]: 'Power Stance',
-  [ProtectedParentId]: 'Protected',
+  [SeenAllId]: 'Seen',
   [SpeedDownParentId]: 'Speed Down',
   [SpeedStageDownParentId]: 'Speed Down',
   [SpeedStageUpParentId]: 'Speed Up',
   [SpeedUpParentId]: 'Speed Up',
   [SpeedUpTeamId]: 'Speed Up',
-  [StunnedParentId]: 'Stunned',
   [SleepingParentId]: 'Sleeping',
+
+  // Override Triggers
+  [BleedDamageId]: 'Bleed Damage',
+  [BurnDamageId]: 'Burn Damage',
+  [CursedMiasmaId]: 'Cursed Miasma',
+  [DivineHealingId]: 'Divine Healing',
+  [DivineLightId]: 'Divine Light',
+  [DraconicAuraId]: 'Draconic Aura',
+  [HealingPrayerId]: 'Healing Prayer',
+  [FirestormOnTurnEndId]: 'Firestorm',
+  [InspectAllOnUnitEnterId]: 'Scholar',
+  [PoisonedDamageOnTurnEndId]: 'Poisoned',
 }

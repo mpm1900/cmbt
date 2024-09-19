@@ -58,7 +58,7 @@ export class Bane extends Action {
                 registryId: BanedParentId,
                 sourceId: source.id,
                 parentId: target.id,
-                flagKey: 'isBaned',
+                flag: 'isBaned',
                 value: true,
                 maxInstances: 1,
                 duration: 1,

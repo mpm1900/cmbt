@@ -32,13 +32,12 @@ import {
   HealingWordId,
   HealSelfId,
   HideId,
-  HoldPerson,
-  HoldPersonId,
+  HoldCreature,
+  HoldCreatureId,
   HyperBeam,
   HyperBeamId,
   InfernalBlastId,
   InspectAllId,
-  InspectedAll,
   IntoxicateId,
   InvertSpeedAll,
   LightningBoltId,
@@ -65,8 +64,8 @@ import {
   ProvokeId,
   PsyStabId,
   PyroclashId,
-  QuickAttack,
-  QuickAttackId,
+  RapidStrike,
+  RapidStrikeId,
   Rest,
   RestId,
   RetreatingBlowId,
@@ -86,6 +85,7 @@ import {
   SwordsDanceId,
   TimeBendId,
   TrickRoomId,
+  UpdateFlagAll,
   UpdateFlagParent,
   UpdateStatStageParent,
   VampiricTouchId,
@@ -255,8 +255,11 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
     description: (action, props) => (
       <>
         Applies{' '}
-        <ModifierInline modifier={new InspectedAll({})} side={props?.side} /> to
-        all enemy units.
+        <ModifierInline
+          modifier={new UpdateFlagAll({ registryId: InspectAllId })}
+          side={props?.side}
+        />{' '}
+        to all enemy units.
       </>
     ),
   },
@@ -328,10 +331,10 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
       )
     },
   },
-  [HoldPersonId]: {
-    name: ACTION_NAMES[HoldPersonId],
+  [HoldCreatureId]: {
+    name: ACTION_NAMES[HoldCreatureId],
     description: (action, props) => {
-      const holdperson = action as HoldPerson
+      const holdperson = action as HoldCreature
       return (
         <div>
           Applies{' '}
@@ -340,7 +343,7 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
             modifier={
               new UpdateFlagParent({
                 registryId: StunnedParentId,
-                flagKey: 'isStunned',
+                flag: 'isStunned',
                 value: true,
               })
             }
@@ -365,7 +368,7 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
             modifier={
               new UpdateFlagParent({
                 registryId: StunnedParentId,
-                flagKey: 'isStunned',
+                flag: 'isStunned',
                 value: true,
                 duration: hyperbeam.stunDuration,
               })
@@ -385,10 +388,10 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
       </>
     ),
   },
-  [QuickAttackId]: {
-    name: ACTION_NAMES[QuickAttackId],
+  [RapidStrikeId]: {
+    name: ACTION_NAMES[RapidStrikeId],
     description: (action) => {
-      const quickAttack = action as QuickAttack
+      const quickAttack = action as RapidStrike
       return (
         <>
           Deals <DamageListInline damages={action.damages} /> to target enemy
@@ -400,7 +403,7 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
   [PoisonSprayId]: {
     name: ACTION_NAMES[PoisonSprayId],
     description: (action, props) => {
-      const poisionSpray = action as QuickAttack
+      const poisionSpray = action as RapidStrike
       return (
         <>
           Deals <DamageListInline damages={action.damages} /> to target enemy
@@ -433,7 +436,7 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
             modifier={
               new UpdateFlagParent({
                 registryId: ProtectedParentId,
-                flagKey: 'isProtected',
+                flag: 'isProtected',
                 value: true,
                 duration: protect.duration,
               })
@@ -457,7 +460,7 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
             modifier={
               new UpdateFlagParent({
                 registryId: SleepingParentId,
-                flagKey: 'isStunned',
+                flag: 'isStunned',
                 value: true,
                 duration: rest.duration,
               })

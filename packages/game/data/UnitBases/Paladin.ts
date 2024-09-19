@@ -14,7 +14,7 @@ import {
   Slash,
   Smite,
 } from '../Actions'
-import { HoldPerson } from '../Actions/HoldPerson'
+import { HoldCreature } from '../Actions/HoldCreature'
 import { DivineLight } from '../Augments/DivineLight'
 import {
   BaneId,
@@ -24,7 +24,7 @@ import {
   DivineLightId,
   HealingPrayerId,
   HealingWordId,
-  HoldPersonId,
+  HoldCreatureId,
   PhantomSlashId,
   PowerSinkId,
   ProtectId,
@@ -93,8 +93,8 @@ export const PaladinConfig: UnitBaseConfig = {
       make: (u) => new HealingWord(u.id, u.teamId),
     },
     {
-      id: HoldPersonId,
-      make: (u) => new HoldPerson(u.id, u.teamId),
+      id: HoldCreatureId,
+      make: (u) => new HoldCreature(u.id, u.teamId),
     },
     {
       id: PhantomSlashId,
@@ -124,7 +124,7 @@ export const PaladinConfig: UnitBaseConfig = {
   defaultAbilityId: DivineLightId,
   defaultActionIds: [
     BaneId,
-    HoldPersonId,
+    HoldCreatureId,
     PowerSinkId,
     RetreatingBlowId,
     SmiteId,

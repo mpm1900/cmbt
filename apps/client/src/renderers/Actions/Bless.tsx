@@ -19,7 +19,7 @@ export const BlessRenderer: ActionRenderer = {
           modifier={
             new UpdateFlagParent({
               registryId: BlessedParentId,
-              flagKey: 'isBlessed',
+              flag: 'isBlessed',
               value: true,
               duration: 1,
             })

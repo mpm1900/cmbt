@@ -30,11 +30,10 @@ import {
   FireDamageUpParentId,
   FireNegationUpParentId,
   FirestormOnTurnEndId,
-  HealingPrayerTriggerId,
+  HealingPrayerId,
   HealParentOnUnitSwitchId,
   HiddenParentId,
   InspectAllOnUnitEnterId,
-  InspectedAllId,
   IntangibleParentId,
   KillParentOnTurnEndId,
   MagicDownParentId,
@@ -62,7 +61,6 @@ import {
   AiOutlineEyeInvisible,
   AiOutlineUserSwitch,
 } from 'react-icons/ai'
-import { BiSearch } from 'react-icons/bi'
 import { BsFire, BsShieldFillPlus } from 'react-icons/bs'
 import { FaHeartCirclePlus, FaShieldHalved } from 'react-icons/fa6'
 import {
@@ -88,6 +86,42 @@ import { RiZzzFill } from 'react-icons/ri'
 import { TiSpiral } from 'react-icons/ti'
 
 export const MODIFIER_ICONS: Record<Id, ReactNode> = {
+  // Modifiers
+  [BanedParentId]: <MdFrontHand className="fill-white h-full w-full" />,
+  [BlessedParentId]: <GiSpikedHalo className="fill-white h-full w-full" />,
+  [DisabledParentId]: <HiMiniNoSymbol className="fill-white h-full w-full" />,
+  [EnragedParentId]: <GiOverkill className="fill-white h-full w-full" />,
+  [HiddenParentId]: (
+    <AiOutlineEyeInvisible className="fill-white h-full w-full" />
+  ),
+  [IntangibleParentId]: <GiGhostAlly className="fill-white h-full w-full" />,
+  // TODO: InvertSpeedAll
+  [ProtectedParentId]: (
+    <GiVibratingShield className="fill-white h-full w-full" />
+  ),
+  [StunnedParentId]: <TiSpiral className="fill-red-200 h-full w-full" />,
+
+  // Triggeres
+  [CreateFirestormOnUnitEnterId]: (
+    <GiFireRing className="fill-orange-300 h-full w-full" />
+  ),
+  [DrainLifeParentOnTurnEndId]: (
+    <GiDeathJuice className="fill-white h-full w-full" />
+  ),
+  [HealParentOnUnitSwitchId]: (
+    <div className="h-full w-full relative">
+      <AiOutlineUserSwitch className="fill-white h-full w-full" />
+      <FaHeartCirclePlus
+        className="absolute fill-green-400 h-[12px] w-[12px]"
+        style={{ bottom: 0, left: 0 }}
+      />
+    </div>
+  ),
+  [InspectAllOnUnitEnterId]: (
+    <PiScrollFill className="fill-white h-full w-full" />
+  ),
+
+  // Override Modifiers
   [AccuracyDownParentId]: <StatModifierIcon stat="accuracy" type="down" />,
   [AccuracyUpParentId]: <StatModifierIcon stat="accuracy" type="up" />,
   [AddStatModifiersImmunityAllId]: (
@@ -115,9 +149,9 @@ export const MODIFIER_ICONS: Record<Id, ReactNode> = {
   [DefenseStageDownParentId]: <StatModifierIcon stat="defense" type="down" />,
   [DefenseStageUpParentId]: <StatModifierIcon stat="defense" type="up" />,
   [DefneseUpParentId]: <StatModifierIcon stat="defense" type="up" />,
-  [EnragedParentId]: <GiOverkill className="fill-white h-full w-full" />,
   [EvasionDownParentId]: <StatModifierIcon stat="evasion" type="down" />,
   [EvasionUpParentId]: <StatModifierIcon stat="evasion" type="up" />,
+  // [InspectedAllId]: <BiSearch className="fill-white h-full w-full" />,
   [MagicDownParentId]: <StatModifierIcon stat="magic" type="down" />,
   [MagicStageDownParentId]: <StatModifierIcon stat="magic" type="down" />,
   [MagicStageUpParentId]: <StatModifierIcon stat="magic" type="up" />,
@@ -147,67 +181,22 @@ export const MODIFIER_ICONS: Record<Id, ReactNode> = {
       />
     </div>
   ),
-  [DraconicAuraId]: <GiDragonSpiral className="fill-white h-full w-full" />,
-  [CursedMiasmaId]: <GiPoisonGas className="fill-white h-full w-full" />,
-  [CreateFirestormOnUnitEnterId]: (
-    <GiFireRing className="fill-orange-300 h-full w-full" />
-  ),
-  [FirestormOnTurnEndId]: <GiFireRing className="fill-white h-full w-full" />,
-  [DisabledParentId]: <HiMiniNoSymbol className="fill-white h-full w-full" />,
-  [IntangibleParentId]: <GiGhostAlly className="fill-white h-full w-full" />,
-  [InspectAllOnUnitEnterId]: (
-    <PiScrollFill className="fill-white h-full w-full" />
-  ),
-  [InspectedAllId]: <BiSearch className="fill-white h-full w-full" />,
-  [ProtectedParentId]: (
-    <GiVibratingShield className="fill-white h-full w-full" />
-  ),
-  [StunnedParentId]: <TiSpiral className="fill-red-200 h-full w-full" />,
-  [SleepingParentId]: <RiZzzFill className="fill-violet-300 h-full w-full" />,
+  [PowerStanceId]: <GiSpinningBlades className="fill-white h-full w-full" />,
+  [SeenAllId]: <AiOutlineEye className="fill-white h-full w-full" />,
 
-  [HealParentOnUnitSwitchId]: (
-    <div className="h-full w-full relative">
-      <AiOutlineUserSwitch className="fill-white h-full w-full" />
-      <FaHeartCirclePlus
-        className="absolute fill-green-400 h-[12px] w-[12px]"
-        style={{ bottom: 0, left: 0 }}
-      />
-    </div>
-  ),
-  [PowerStanceId]: (
-    <div>
-      <GiSpinningBlades className="fill-white h-full w-full" />
-    </div>
-  ),
-  [BlessedParentId]: (
-    <div>
-      <GiSpikedHalo className="fill-white h-full w-full" />
-    </div>
-  ),
-  [BanedParentId]: (
-    <div>
-      <MdFrontHand className="fill-white h-full w-full" />
-    </div>
-  ),
-  [HiddenParentId]: (
-    <div>
-      <AiOutlineEyeInvisible className="fill-white h-full w-full" />
-    </div>
-  ),
+  // Override Triggers
+  [CursedMiasmaId]: <GiPoisonGas className="fill-white h-full w-full" />,
   [DivineHealingId]: (
     <div className="p-0.5">
       <GiTemplarHeart className="fill-amber-200 h-full w-full" />
     </div>
   ),
   [DivineLightId]: <GiGlowingHands className="fill-white h-full w-full" />,
-  [SeenAllId]: <AiOutlineEye className="fill-white h-full w-full" />,
+  [DraconicAuraId]: <GiDragonSpiral className="fill-white h-full w-full" />,
+  [FirestormOnTurnEndId]: <GiFireRing className="fill-white h-full w-full" />,
+  [HealingPrayerId]: <GiHeartWings className="fill-white h-full w-full" />,
   [KillParentOnTurnEndId]: (
     <GiDeathNote className="fill-teal-400 h-full w-full" />
   ),
-  [DrainLifeParentOnTurnEndId]: (
-    <GiDeathJuice className="fill-white h-full w-full" />
-  ),
-  [HealingPrayerTriggerId]: (
-    <GiHeartWings className="fill-white h-full w-full" />
-  ),
+  [SleepingParentId]: <RiZzzFill className="fill-violet-300 h-full w-full" />,
 }

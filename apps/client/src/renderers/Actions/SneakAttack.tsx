@@ -21,7 +21,7 @@ export const SneakAttackRenderer: ActionRenderer = {
           modifier={
             new UpdateFlagParent({
               registryId: HiddenParentId,
-              flagKey: 'isHidden',
+              flag: 'isHidden',
               value: true,
             })
           }

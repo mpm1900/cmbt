@@ -4,7 +4,7 @@ import {
   Hide,
   LightningBolt,
   PiercingStrike,
-  QuickAttack,
+  RapidStrike,
   RetreatingBlow,
   Slash,
   SneakAttack,
@@ -14,7 +14,7 @@ import {
   HideId,
   LightningBoltId,
   PiercingStrikeId,
-  QuickAttackId,
+  RapidStrikeId,
   RetreatingBlowId,
   SlashId,
   SneakAttackId,
@@ -61,8 +61,8 @@ export const TempestKnightConfig: UnitBaseConfig = {
       make: (unit) => new PiercingStrike(unit.id, unit.teamId),
     },
     {
-      id: QuickAttackId,
-      make: (unit) => new QuickAttack(unit.id, unit.teamId),
+      id: RapidStrikeId,
+      make: (unit) => new RapidStrike(unit.id, unit.teamId),
     },
     {
       id: RetreatingBlowId,

@@ -54,7 +54,7 @@ export class Protect extends Action {
               sourceId: source.id,
               parentId: source.id,
               duration: this.duration,
-              flagKey: 'isProtected',
+              flag: 'isProtected',
               value: true,
             }),
           ],

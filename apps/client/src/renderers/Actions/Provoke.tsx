@@ -19,7 +19,7 @@ export const ProvokeRenderer: ActionRenderer = {
           modifier={
             new UpdateFlagParent({
               registryId: EnragedParentId,
-              flagKey: 'isDamageLocked',
+              flag: 'isDamageLocked',
               value: true,
               duration: 1,
             })

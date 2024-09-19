@@ -14,7 +14,7 @@ export const BaneRenderer: ActionRenderer = {
           modifier={
             new UpdateFlagParent({
               registryId: BanedParentId,
-              flagKey: 'isBaned',
+              flag: 'isBaned',
               value: true,
               duration: 1,
             })

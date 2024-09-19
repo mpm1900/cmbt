@@ -1,7 +1,7 @@
 import { Action, ActionResult, CombatContext, Id, Unit } from '../../../types'
 import { buildActionResult, getActionData } from '../../../utils'
-import { InspectAllId } from '../../Ids'
-import { InspectedAll } from '../../Modifiers'
+import { InspectAllId, InspectedAllId } from '../../Ids'
+import { UpdateFlagAll } from '../../Modifiers'
 import { Identity } from '../../Mutations'
 import { EmptyArray } from '../../Queries/EmptyArray'
 
@@ -27,7 +27,10 @@ export class InspectAll extends Action {
       buildActionResult(this, data, source, targets, ctx, () => ({
         onSuccess: {
           addedModifiers: [
-            new InspectedAll({
+            new UpdateFlagAll({
+              registryId: InspectedAllId,
+              flag: 'isHidden',
+              value: true,
               sourceId: source.id,
               maxInstances: 1,
             }),

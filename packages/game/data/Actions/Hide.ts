@@ -39,7 +39,7 @@ export class Hide extends Action {
                 registryId: HiddenParentId,
                 sourceId: source.id,
                 parentId: source.id,
-                flagKey: 'isHidden',
+                flag: 'isHidden',
                 value: true,
                 duration: this.duration,
               }),

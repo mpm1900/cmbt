@@ -1,13 +1,13 @@
 import { useNavigate } from '@tanstack/react-router'
 import { useEffect } from 'react'
-import { useCombatContext } from './useCombatContext'
+import { useCombat } from './state'
 
 export function useCombatSetup() {
-  const ctx = useCombatContext()
+  const combat = useCombat()
   const navigate = useNavigate()
 
   useEffect(() => {
-    if (ctx.teams.length === 0) {
+    if (combat.teams.length === 0) {
       navigate({ to: '/' })
     }
   }, [])

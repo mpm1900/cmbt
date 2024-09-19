@@ -12,7 +12,7 @@ export function useNextController() {
 
   useEffect(() => {
     if (isNext) {
-      const teams = getTeamsWithSelectionRequired(ctx)
+      const teams = getTeamsWithSelectionRequired(combat.teams, ctx)
       if (teams.length === 0) {
         setTimeout(
           () => {

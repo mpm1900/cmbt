@@ -17,7 +17,7 @@ export function ItemsList(props: ItemsListProps) {
   const unit = useCombatUi((u) => u.activeUnit)
   const combat = useCombat()
   const ctx = useCombatContext()
-  const team = ctx.teams.find((t) => t.id === unit?.teamId)
+  const team = combat.teams.find((t) => t.id === unit?.teamId)
   const items = groupItemsById(team?.items ?? [])
   const [activeItem, setActiveItem] = useState<Item>()
   const activeAction =

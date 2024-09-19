@@ -34,6 +34,7 @@ export type InitializeProps = {
 
 export type CombatLog = { id: Id; delay: number; node: ReactNode }
 export type CombatState = Omit<CombatContext, 'queue'> & {
+  teams: Team[]
   commit: boolean
   reward: CombatRewards
   logs: CombatLog[]

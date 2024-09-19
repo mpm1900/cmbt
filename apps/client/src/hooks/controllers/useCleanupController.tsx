@@ -15,7 +15,7 @@ export function useCleanupController() {
   const ctx = useCombatContext()
 
   const status = combat.turn.status
-  const teams = getTeamsWithSelectionRequired(ctx)
+  const teams = getTeamsWithSelectionRequired(combat.teams, ctx)
 
   useEffect(() => {
     if (status === 'cleanup' || status === 'cleanup-running') {

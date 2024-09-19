@@ -21,10 +21,10 @@ export function useCombatController() {
 
   useEffect(() => {
     if (isCombat && results.queue.length === 0 && cleanup.queue.length === 0) {
-      const liveTeams = getTeamsWithLiveUnits(ctx)
-      if (liveTeams.length === ctx.teams.length) {
+      const liveTeams = getTeamsWithLiveUnits(combat.teams, ctx)
+      if (liveTeams.length === combat.teams.length) {
         const item = actions.first(ctx)
-        const teams = getTeamsWithSelectionRequired(ctx)
+        const teams = getTeamsWithSelectionRequired(combat.teams, ctx)
         if (item && teams.length === 0) {
           const source = ctx.units.find((u) => u.id === item.action.sourceId)
           const shouldCommitAction = isUnitAliveCtx(source, ctx)

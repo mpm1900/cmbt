@@ -44,7 +44,7 @@ export function useAiActions() {
 
   useEffect(() => {
     if (combat.turn.status === 'cleanup') {
-      const teams = getTeamsWithSelectionRequired(ctx)
+      const teams = getTeamsWithSelectionRequired(combat.teams, ctx)
       const aiTeam = teams.find((t) => t.id !== ctx.user)
       if (aiTeam && cleanup.queue.length === 0) {
         const aliveActiveUnits = new GetUnits({

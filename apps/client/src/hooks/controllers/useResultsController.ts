@@ -21,16 +21,15 @@ export function useResultsController() {
 
   useEffect(() => {
     if (first) {
-      const aliveTeams = getTeamsWithLiveUnits(ctx)
+      const aliveTeams = getTeamsWithLiveUnits(combat.teams, ctx)
 
-      if (aliveTeams.length === ctx.teams.length) {
+      if (aliveTeams.length === combat.teams.length) {
         const shouldCommitResult =
-          (!first.action ||
-            !first.expandedTargets?.length ||
-            first.expandedTargets?.some((t) =>
-              isUnitAlive(ctx.units.find((u) => u.id === t.id))
-            )) &&
-          aliveTeams.length === ctx.teams.length
+          !first.action ||
+          !first.expandedTargets?.length ||
+          first.expandedTargets?.some((t) =>
+            isUnitAlive(ctx.units.find((u) => u.id === t.id))
+          )
         if (
           first.action &&
           first.shouldLog &&

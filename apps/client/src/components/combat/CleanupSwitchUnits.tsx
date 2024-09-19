@@ -17,7 +17,7 @@ export function CleanupSwitchUnits(props: CleanupSwitchUnitsProps) {
     isActive: true,
     isAlive: true,
   }).resolve(ctx)
-  const team = getTeamsWithSelectionRequired(ctx).find(
+  const team = getTeamsWithSelectionRequired(combat.teams, ctx).find(
     (team) => team.id === ctx.user
   )
   const selectCount = (team?.maxActiveUnits ?? 0) - aliveActiveUnits.length

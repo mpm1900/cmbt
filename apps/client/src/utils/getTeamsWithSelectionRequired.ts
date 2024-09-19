@@ -1,8 +1,11 @@
 import { GetUnits } from '@repo/game/data'
-import { CombatContext } from '@repo/game/types'
+import { CombatContext, Team } from '@repo/game/types'
 
-export function getTeamsWithSelectionRequired(ctx: CombatContext) {
-  return ctx.teams.filter((team) => {
+export function getTeamsWithSelectionRequired(
+  teams: Team[],
+  ctx: CombatContext
+) {
+  return teams.filter((team) => {
     const activeUnits = new GetUnits({
       teamId: team.id,
       isActive: true,

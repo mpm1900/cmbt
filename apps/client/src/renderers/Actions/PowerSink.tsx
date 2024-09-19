@@ -6,8 +6,8 @@ export const PowerSwapRenderer: ActionRenderer = {
   description: (action, props) => {
     return (
       <>
-        This unit is swtiched with target allied unit. All staged stat modifiers
-        are transfered from this unit to the new active unit.
+        This unit is swtiched with target ally. All staged stat modifiers are
+        transfered from this unit to the new active unit.
       </>
     )
   },

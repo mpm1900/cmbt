@@ -14,8 +14,8 @@ export const BecomeTheStormRenderer: ActionRenderer = {
     const action = a as BecomeTheStorm
     return (
       <div>
-        Deals <DamageListInline damages={action.damages} /> to target enemy
-        unit. Applies{' '}
+        Deals <DamageListInline damages={action.damages} /> to target active
+        enemy. Applies{' '}
         <ModifierInline
           side={props?.side}
           modifier={

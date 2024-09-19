@@ -9,8 +9,8 @@ export const DragonBreathRenderer: ActionRenderer = {
     const dragonbreath = action as DragonBreath
     return (
       <div>
-        Deals <DamageListInline damages={action.damages} /> to target enemy
-        unit. {dragonbreath.burnChance}% chance to apply{' '}
+        Deals <DamageListInline damages={action.damages} /> to target active
+        enemy. {dragonbreath.burnChance}% chance to apply{' '}
         <StatusInline status={Burn} side={props?.side} />.
       </div>
     )

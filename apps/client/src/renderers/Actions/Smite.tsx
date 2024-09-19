@@ -8,8 +8,8 @@ export const SmiteRenderer: ActionRenderer = {
     const action = a as Smite
     return (
       <>
-        Deals <DamageListInline damages={action.damages} /> to target enemy
-        unit.
+        Deals <DamageListInline damages={action.damages} /> to target active
+        enemy.
       </>
     )
   },

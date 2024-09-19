@@ -9,8 +9,8 @@ export const BodySlamRenderer: ActionRenderer = {
     const action = a as BodySlam
     return (
       <div>
-        Deals <DamageListInline damages={action.damages} /> to target enemey
-        unit. If this attack misses, deals{' '}
+        Deals <DamageListInline damages={action.damages} /> to target active
+        enemey. If this attack misses, deals{' '}
         <DamageInline damage={action.missDamage} /> to this unit instead. High
         critical ratio.
       </div>

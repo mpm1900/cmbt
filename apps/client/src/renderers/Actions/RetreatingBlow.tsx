@@ -7,8 +7,8 @@ export const RetreatingBlowRenderer: ActionRenderer = {
   description: (action, props) => {
     return (
       <div>
-        Deals <DamageListInline damages={action.damages} /> to target enemy
-        unit. This unit switches out after attacking.
+        Deals <DamageListInline damages={action.damages} /> to target active
+        enemy. This unit switches out after attacking.
       </div>
     )
   },

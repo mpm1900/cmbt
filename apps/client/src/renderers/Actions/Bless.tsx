@@ -25,7 +25,7 @@ export const BlessRenderer: ActionRenderer = {
             })
           }
         />{' '}
-        to target ally unit until end of turn.
+        to target active ally until end of turn.
       </div>
     )
   },

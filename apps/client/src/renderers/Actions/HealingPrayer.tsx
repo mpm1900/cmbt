@@ -7,7 +7,7 @@ export const HealingPrayerRenderer: ActionRenderer = {
     const action = a as HealingPrayer
     return (
       <>
-        Heals target allied unit for up to {action.healingFactor * 100}% of
+        Heals target active ally for up to {action.healingFactor * 100}% of
         their max health at the end of the next turn.
       </>
     )

@@ -25,7 +25,7 @@ export const ProvokeRenderer: ActionRenderer = {
             })
           }
         />{' '}
-        to target enemy unit.
+        to target active enemy.
       </div>
     )
   },

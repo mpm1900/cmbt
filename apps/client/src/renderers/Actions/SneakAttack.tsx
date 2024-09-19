@@ -14,8 +14,8 @@ export const SneakAttackRenderer: ActionRenderer = {
     const action = a as SneakAttack
     return (
       <>
-        Deals <DamageListInline damages={action.damages} /> to target enemy
-        unit. If this unit is{' '}
+        Deals <DamageListInline damages={action.damages} /> to target active
+        enemy. If this unit is{' '}
         <ModifierInline
           side={props?.side}
           modifier={

@@ -8,8 +8,8 @@ export const PsyStabRenderer: ActionRenderer = {
     const action = a as PsyStab
     return (
       <>
-        Deals <DamageListInline damages={action.damages} /> to target enemy
-        unit. Usually goes first.
+        Deals <DamageListInline damages={action.damages} /> to target active
+        enemy. Usually goes first.
       </>
     )
   },

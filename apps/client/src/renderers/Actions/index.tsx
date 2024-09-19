@@ -32,7 +32,6 @@ import {
   HealingWordId,
   HealSelfId,
   HideId,
-  HoldCreature,
   HoldCreatureId,
   HyperBeam,
   HyperBeamId,
@@ -91,7 +90,6 @@ import {
   VampiricTouchId,
   Ward,
   WardId,
-  WildStrikes,
   WildStrikesId,
   WindWalkId,
 } from '@repo/game/data'
@@ -262,7 +260,7 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
           modifier={new UpdateFlagAll({ registryId: InspectAllId })}
           side={props?.side}
         />{' '}
-        to all enemy units.
+        to all enemies.
       </>
     ),
   },
@@ -283,7 +281,7 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
               })
             }
           />{' '}
-          to target enemy unit for {disable.duration} turns.
+          to target active enemy.
         </div>
       )
     },
@@ -302,9 +300,9 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
       const fireball = action as Fireball
       return (
         <>
-          Deals <DamageListInline damages={action.damages} /> to target enemy
-          unit. Deals <DamageListInline damages={[fireball.splashDamage]} /> to
-          all other active enemy units.
+          Deals <DamageListInline damages={action.damages} /> to target active
+          enemy. Deals <DamageListInline damages={[fireball.splashDamage]} /> to
+          all other active enemies.
         </>
       )
     },
@@ -315,8 +313,8 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
       const firepunch = action as FirePunch
       return (
         <div>
-          Deals <DamageListInline damages={action.damages} /> to target enemy
-          unit. {firepunch.burnChance}% chance to apply{' '}
+          Deals <DamageListInline damages={action.damages} /> to target active
+          enemy. {firepunch.burnChance}% chance to apply{' '}
           <StatusInline status={Burn} side={props?.side} />.
         </div>
       )
@@ -325,11 +323,10 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
   [WildStrikesId]: {
     name: ACTION_NAMES[WildStrikesId],
     description: (action) => {
-      const furySwipes = action as WildStrikes
       return (
         <div>
-          Deals <DamageListInline damages={action.damages} /> to target enemy
-          unit. Repeats 2-6 times.
+          Deals <DamageListInline damages={action.damages} /> to target active
+          enemy. Repeats 2-6 times.
         </div>
       )
     },
@@ -337,7 +334,6 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
   [HoldCreatureId]: {
     name: ACTION_NAMES[HoldCreatureId],
     description: (action, props) => {
-      const holdperson = action as HoldCreature
       return (
         <div>
           Applies{' '}
@@ -351,7 +347,7 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
               })
             }
           />{' '}
-          to target enemy unit for 1-3 turns.
+          to target active enemy for 1-3 turns.
         </div>
       )
     },
@@ -365,7 +361,7 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
       return (
         <div>
           Deals <DamageListInline damages={action.damages} /> equal to twice
-          this unit's base magic stat to target enemy unit. Applies{' '}
+          this unit's base magic stat to target active enemy. Applies{' '}
           <ModifierInline
             side={props?.side}
             modifier={
@@ -386,8 +382,8 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
     name: 'Magic Missile',
     description: (action) => (
       <>
-        Deals <DamageListInline damages={action.damages} /> to 2 target enemy
-        units. This action cannot miss.
+        Deals <DamageListInline damages={action.damages} /> to 2 target active
+        enemies. This action cannot miss.
       </>
     ),
   },
@@ -397,8 +393,8 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
       const quickAttack = action as RapidStrike
       return (
         <>
-          Deals <DamageListInline damages={action.damages} /> to target enemy
-          unit. Usually goes first.
+          Deals <DamageListInline damages={action.damages} /> to target active
+          enemy. Usually goes first.
         </>
       )
     },
@@ -409,8 +405,8 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
       const poisionSpray = action as RapidStrike
       return (
         <>
-          Deals <DamageListInline damages={action.damages} /> to target enemy
-          unit and applies <StatusInline side={props?.side} status={Poison} />.
+          Deals <DamageListInline damages={action.damages} /> to target active
+          enemy and applies <StatusInline side={props?.side} status={Poison} />.
         </>
       )
     },
@@ -419,8 +415,8 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
     name: ACTION_NAMES[PowerWordKillId],
     description: (action) => (
       <>
-        Deals <DamageListInline damages={action.damages} /> to target enemy
-        unit. Ignores all damage negation.
+        Deals <DamageListInline damages={action.damages} /> to target active
+        enemy. Ignores all damage negation.
       </>
     ),
     lore: () => (
@@ -480,8 +476,8 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
       const slash = action as Slash
       return (
         <>
-          Deals <DamageListInline damages={action.damages} /> to target enemy
-          unit. High critical chance.
+          Deals <DamageListInline damages={action.damages} /> to target active
+          enemy. High critical chance.
         </>
       )
     },

@@ -14,8 +14,8 @@ export const ACallBeyondRenderer: ActionRenderer = {
     const action = a as ACallBeyond
     return (
       <div>
-        Deals <DamageListInline damages={action.damages} /> to target enemy
-        unit. Applies{' '}
+        Deals <DamageListInline damages={action.damages} /> to target active
+        enemy. Applies{' '}
         <ModifierInline
           modifier={
             new UpdateStatStageParent({

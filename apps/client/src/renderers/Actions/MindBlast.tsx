@@ -8,8 +8,8 @@ export const MindBlastRenderer: ActionRenderer = {
     const mindblast = action as MindBlast
     return (
       <div>
-        Deals <DamageListInline damages={action.damages} /> to all active enemy
-        units.
+        Deals <DamageListInline damages={action.damages} /> to all active
+        enemies.
       </div>
     )
   },

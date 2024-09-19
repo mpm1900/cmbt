@@ -14,8 +14,8 @@ export const MindTwistRenderer: ActionRenderer = {
     const mindtwist = action as MindTwist
     return (
       <div>
-        Deals <DamageListInline damages={action.damages} /> to target enemy
-        unit. {mindtwist.magicDownChance}% to apply{' '}
+        Deals <DamageListInline damages={action.damages} /> to target active
+        enemy. {mindtwist.magicDownChance}% to apply{' '}
         <ModifierInline
           modifier={
             new UpdateStatStageParent({

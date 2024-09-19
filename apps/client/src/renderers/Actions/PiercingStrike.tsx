@@ -14,8 +14,8 @@ export const PiercingStrikeRenderer: ActionRenderer = {
     const piercingstrike = action as PiercingStrike
     return (
       <div>
-        Deals <DamageListInline damages={action.damages} /> to target enemy
-        unit. {piercingstrike.defenseDownChance}% chance to apply{' '}
+        Deals <DamageListInline damages={action.damages} /> to active target
+        enemy. {piercingstrike.defenseDownChance}% chance to apply{' '}
         <ModifierInline
           side={props?.side}
           modifier={

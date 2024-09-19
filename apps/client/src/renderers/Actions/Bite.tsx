@@ -9,8 +9,8 @@ export const BiteRenderer: ActionRenderer = {
     const action = a as Bite
     return (
       <div>
-        Deals <DamageListInline damages={action.damages} /> to target enemy
-        unit. {action.bleedChance}% chance to apply{' '}
+        Deals <DamageListInline damages={action.damages} /> to target active
+        enemy. {action.bleedChance}% chance to apply{' '}
         <StatusInline status={Bleed} side={props?.side} />.
       </div>
     )

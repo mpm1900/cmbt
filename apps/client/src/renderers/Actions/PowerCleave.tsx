@@ -8,8 +8,8 @@ export const PowerCleaveRenderer: ActionRenderer = {
     const powercleave = action as PowerCleave
     return (
       <>
-        Deals <DamageListInline damages={action.damages} /> to target enemy
-        unit. High critical chance.
+        Deals <DamageListInline damages={action.damages} /> to target active
+        enemy. High critical chance.
       </>
     )
   },

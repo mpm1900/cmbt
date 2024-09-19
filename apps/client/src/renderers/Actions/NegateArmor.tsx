@@ -7,7 +7,7 @@ export const NegateArmorRenderer: ActionRenderer = {
   name: ACTION_NAMES[NegateArmorId],
   description: () => (
     <div>
-      Removes all <PhysicalArmor /> and <MagicArmor /> from target enemy unit.
+      Removes all <PhysicalArmor /> and <MagicArmor /> from target active enemy.
     </div>
   ),
 }

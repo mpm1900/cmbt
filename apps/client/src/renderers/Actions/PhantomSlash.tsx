@@ -18,7 +18,7 @@ export const PhantomSlashRender: ActionRenderer = {
           }
         />
         . On the next turn, deals <DamageListInline damages={action.damages} />{' '}
-        to target enemy unit. This action takes 2 turns.
+        to target active enemy. This action takes 2 turns.
       </>
     )
   },

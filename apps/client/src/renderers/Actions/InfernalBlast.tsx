@@ -9,8 +9,8 @@ export const InfernalBlastRenderer: ActionRenderer = {
     const fireblast = action as InfernalBlast
     return (
       <div>
-        Deals <DamageListInline damages={action.damages} /> to target enemy
-        unit. {fireblast.burnChance}% chance to apply{' '}
+        Deals <DamageListInline damages={action.damages} /> to target active
+        enemy. {fireblast.burnChance}% chance to apply{' '}
         <StatusInline status={Burn} side={props?.side} />.
       </div>
     )

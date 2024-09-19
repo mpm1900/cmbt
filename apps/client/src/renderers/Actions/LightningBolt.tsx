@@ -9,8 +9,8 @@ export const LightningBoltRenderer: ActionRenderer = {
     const lightningbolt = action as LightningBolt
     return (
       <div>
-        Deals <DamageListInline damages={action.damages} /> to target enemy
-        unit. {lightningbolt.chargeChance}% chance to apply{' '}
+        Deals <DamageListInline damages={action.damages} /> to target active
+        enemy. {lightningbolt.chargeChance}% chance to apply{' '}
         <StatusInline side={props?.side} status={Charged} /> to this unit.
       </div>
     )

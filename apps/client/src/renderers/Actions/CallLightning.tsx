@@ -9,8 +9,8 @@ export const CallLightningRenderer: ActionRenderer = {
     const action = a as CallLightning
     return (
       <div>
-        Deals <DamageListInline damages={action.damages} /> to target enemy
-        unit. {action.chargeChance}% chance to apply{' '}
+        Deals <DamageListInline damages={action.damages} /> to target active
+        enemy. {action.chargeChance}% chance to apply{' '}
         <StatusInline side={props?.side} status={Charged} /> to this unit.
       </div>
     )

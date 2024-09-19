@@ -7,8 +7,8 @@ export const HealingWordRenderer: ActionRenderer = {
     const action = a as HealingWord
     return (
       <div>
-        Heals target allied unit for up to {action.healthFactor * 100}% of their
-        max health.
+        Heals target ally for up to {action.healthFactor * 100}% of their max
+        health.
       </div>
     )
   },

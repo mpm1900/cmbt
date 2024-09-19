@@ -20,7 +20,7 @@ export const BaneRenderer: ActionRenderer = {
             })
           }
         />{' '}
-        to target enemy unit until end of turn. Usable only on the first turn
+        to target active enemy until end of turn. Usable only on the first turn
         after switching in.
       </div>
     )

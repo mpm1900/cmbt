@@ -5,8 +5,8 @@ export const TauntRenderer: ActionRenderer = {
   name: ACTION_NAMES[BoastId],
   description: () => (
     <div>
-      Single-target actions that would target allied units this turn target this
-      unit instead.
+      Single-target actions that would target an allied unit this turn, target
+      this unit instead.
     </div>
   ),
   successLog: (result) => (

@@ -11,7 +11,7 @@ export const GhostFlameRenderer: ActionRenderer = {
     return (
       <div>
         Applies <StatusInline status={Burn} side={props?.side} /> to target
-        enemy unit.
+        active enemy.
       </div>
     )
   },

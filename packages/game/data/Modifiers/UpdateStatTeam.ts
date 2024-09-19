@@ -11,7 +11,7 @@ import { UpdateStatTeamId } from '../Ids'
 
 export class UpdateStatTeam extends Modifier {
   teamId: Id
-  stat: StatKey
+  stat?: StatKey
   percentage?: boolean
   factor: number
   static: number
@@ -23,7 +23,7 @@ export class UpdateStatTeam extends Modifier {
   constructor(
     props: ModifierProps<{
       teamId: Id
-      stat: StatKey
+      stat?: StatKey
       factor?: number
       static?: number
       percentage?: boolean
@@ -39,10 +39,11 @@ export class UpdateStatTeam extends Modifier {
   }
 
   resolve = (unit: Unit): Partial<Unit> => {
+    if (!this.stat) return unit
     return {
       stats: Modifier.setStats(unit, (stats) => ({
-        [this.stat]:
-          stats[this.stat] + stats[this.stat] * this.factor + this.static,
+        [this.stat!]:
+          stats[this.stat!] + stats[this.stat!] * this.factor + this.static,
       })),
     }
   }

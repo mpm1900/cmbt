@@ -14,22 +14,23 @@ export const MAX_STAT_STAGE = 6
 export const MIN_STAT_STAGE = -6
 
 export class UpdateStatStageParent extends Modifier {
-  stat: StatKey
+  stat?: StatKey
   stages: number
 
   get key(): string {
     return `${this.id}.${this.parentId}.${this.stat}`
   }
 
-  constructor(props: ModifierProps<{ stat: StatKey; stages: number }>) {
+  constructor(props: ModifierProps<{ stat?: StatKey; stages?: number }>) {
     super(UpdateStatStageParentId, props)
 
     this.stat = props.stat
-    this.stages = clampStatStage(props.stages)
+    this.stages = clampStatStage(props.stages ?? 0)
     this.priority = MODIFIER_PRIORITIES.STAGES
   }
 
   resolve = (unit: Unit): Partial<Unit> => {
+    if (!this.stat) return unit
     return {
       stages: {
         ...unit.stages,

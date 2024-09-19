@@ -9,7 +9,7 @@ import {
 import { UpdateStatParentId } from '../Ids'
 
 export class UpdateStatParent extends Modifier {
-  stat: StatKey
+  stat?: StatKey
   percentage?: boolean
   factor: number
   static: number
@@ -20,7 +20,7 @@ export class UpdateStatParent extends Modifier {
 
   constructor(
     props: ModifierProps<{
-      stat: StatKey
+      stat?: StatKey
       factor?: number
       static?: number
       percentage?: boolean
@@ -35,10 +35,11 @@ export class UpdateStatParent extends Modifier {
   }
 
   resolve = (unit: Unit): Partial<Unit> => {
+    if (!this.stat) return unit
     return {
       stats: Modifier.setStats(unit, (stats) => ({
-        [this.stat]:
-          stats[this.stat] + stats[this.stat] * this.factor + this.static,
+        [this.stat!]:
+          stats[this.stat!] + stats[this.stat!] * this.factor + this.static,
       })),
     }
   }

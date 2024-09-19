@@ -1,6 +1,5 @@
 import {
   CombatContext,
-  Id,
   Modifier,
   MODIFIER_PRIORITIES,
   ModifierProps,
@@ -10,18 +9,18 @@ import {
 import { AddModifiersToRegistryParentId } from '../Ids'
 
 export class AddModifiersToRegistryParent extends Modifier {
-  private modifierIds: Id[]
+  modifiers: Modifier[]
 
-  constructor(props: ModifierProps<{ modifierIds: Id[] }>) {
+  constructor(props: ModifierProps<{ modifiers: Modifier[] }>) {
     super(AddModifiersToRegistryParentId, props)
     this.priority = MODIFIER_PRIORITIES.IMMUNITIES
-    this.modifierIds = props.modifierIds
+    this.modifiers = props.modifiers
   }
 
   resolve = (unit: Unit): Partial<Unit> => {
-    const modifierIdsToAdd = this.modifierIds.filter(
-      (mid) => !unit.registry.modifiers.includes(mid)
-    )
+    const modifierIdsToAdd = this.modifiers
+      .filter((mod) => !unit.registry.modifiers.includes(mod.id))
+      .map((mod) => mod.id)
     return {
       registry: {
         ...unit.registry,

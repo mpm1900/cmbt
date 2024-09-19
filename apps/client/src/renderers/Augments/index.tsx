@@ -2,6 +2,7 @@ import {
   CursedMiasmaId,
   DamageAllOnTurnEnd,
   DivineHealingId,
+  DivineLightId,
   DraconicAuraId,
   FirestormOnTurnEndId,
   InfernoId,
@@ -28,6 +29,10 @@ export const AugmentRenderers: Record<Id, AugmentRenderer> = {
   [DivineHealingId]: {
     name: <div className="text-white">{AUGMENT_NAMES[DivineHealingId]}</div>,
   },
+  [DivineLightId]: {
+    name: <div className="text-white">{AUGMENT_NAMES[DivineLightId]}</div>,
+  },
+
   [DraconicAuraId]: {
     name: <div className="text-white">{AUGMENT_NAMES[DraconicAuraId]}</div>,
   },

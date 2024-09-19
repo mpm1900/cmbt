@@ -1,16 +1,13 @@
 import { Action, ActionResult, CombatContext, Id, Unit } from '../../types'
 import { buildActionResult, getActionData } from '../../utils'
+import { AddStatModifiersImmunityAllId, DispelMagicId } from '../Ids'
 import {
-  AddStatModifiersImmunityAllId,
-  DispelMagicId,
-  UpdateStatAllId,
-  UpdateStatParentId,
-  UpdateStatStageAllId,
-  UpdateStatStageParentId,
-  UpdateStatStageTeamId,
-  UpdateStatTeamId,
-} from '../Ids'
-import { AddModifiersToRegistryAll } from '../Modifiers'
+  AddModifiersToRegistryAll,
+  UpdateStatAll,
+  UpdateStatParent,
+  UpdateStatStageParent,
+  UpdateStatTeam,
+} from '../Modifiers'
 import { Identity } from '../Mutations'
 import { EmptyArray } from '../Queries/EmptyArray'
 
@@ -42,13 +39,13 @@ export class DispelMagic extends Action {
               registryId: AddStatModifiersImmunityAllId,
               sourceId: source.id,
               duration: this.duration,
-              modifierIds: [
-                UpdateStatAllId,
-                UpdateStatParentId,
-                UpdateStatStageAllId,
-                UpdateStatStageParentId,
-                UpdateStatStageTeamId,
-                UpdateStatTeamId,
+              modifiers: [
+                // UpdateStatStageAllId,
+                new UpdateStatAll({}),
+                new UpdateStatParent({}),
+                new UpdateStatStageParent({}),
+                // UpdateStatStageTeamId,
+                new UpdateStatTeam({ teamId: '' }),
               ],
             }),
           ],

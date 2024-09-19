@@ -21,6 +21,7 @@ import {
   DefneseUpParentId,
   DisabledParentId,
   DivineHealingId,
+  DivineLightId,
   DraconicAuraId,
   DrainLifeParentOnTurnEndId,
   EnragedParentId,
@@ -44,6 +45,7 @@ import {
   MaxAttackParentId,
   PowerStanceId,
   ProtectedParentId,
+  SeenAllId,
   SleepingParentId,
   SpeedStageDownParentId,
   SpeedStageUpParentId,
@@ -56,6 +58,7 @@ import { StatModifierIcon } from '@shared/StatModifierIcon'
 import { ReactNode } from 'react'
 import {
   AiFillCaretUp,
+  AiOutlineEye,
   AiOutlineEyeInvisible,
   AiOutlineUserSwitch,
 } from 'react-icons/ai'
@@ -68,6 +71,7 @@ import {
   GiDragonSpiral,
   GiFireRing,
   GiGhostAlly,
+  GiGlowingHands,
   GiHeartWings,
   GiMagicSwirl,
   GiOverkill,
@@ -195,6 +199,8 @@ export const MODIFIER_ICONS: Record<Id, ReactNode> = {
       <GiTemplarHeart className="fill-amber-200 h-full w-full" />
     </div>
   ),
+  [DivineLightId]: <GiGlowingHands className="fill-white h-full w-full" />,
+  [SeenAllId]: <AiOutlineEye className="fill-white h-full w-full" />,
   [KillParentOnTurnEndId]: (
     <GiDeathNote className="fill-teal-400 h-full w-full" />
   ),

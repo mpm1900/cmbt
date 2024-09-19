@@ -1,5 +1,6 @@
 import { TriggerId } from './_base'
 
+export const AddModifiersToRegistryStaticAllOnUnitEnterId = TriggerId()
 export const CreateFirestormOnUnitEnterId = TriggerId()
 export const DamageAllOnTurnEndId = TriggerId()
 export const DamageNewUnitsOnUnitEnterId = TriggerId()

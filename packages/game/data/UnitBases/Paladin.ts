@@ -15,6 +15,7 @@ import {
 } from '../Actions'
 import { HoldPerson } from '../Actions/HoldPerson'
 import { DivineHealing } from '../Augments'
+import { DivineLight } from '../Augments/DivineLight'
 import {
   BaneId,
   BlessId,
@@ -63,7 +64,7 @@ export const Paladin: UnitBase = {
 }
 
 export const PaladinConfig: UnitBaseConfig = {
-  abilities: [DivineHealing],
+  abilities: [DivineHealing, DivineLight],
   actionsCount: 5,
   actions: [
     {

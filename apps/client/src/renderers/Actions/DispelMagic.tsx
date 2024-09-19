@@ -3,12 +3,10 @@ import {
   AddStatModifiersImmunityAllId,
   DispelMagic,
   DispelMagicId,
-  UpdateStatAllId,
-  UpdateStatParentId,
-  UpdateStatStageAllId,
-  UpdateStatStageParentId,
-  UpdateStatStageTeamId,
-  UpdateStatTeamId,
+  UpdateStatAll,
+  UpdateStatParent,
+  UpdateStatStageParent,
+  UpdateStatTeam,
 } from '@repo/game/data'
 import { ModifierInline } from '@shared/ModifierInline'
 import { ACTION_NAMES, ActionRenderer } from '.'
@@ -26,13 +24,12 @@ export const DispelMagicRenderer: ActionRenderer = {
             new AddModifiersToRegistryAll({
               registryId: AddStatModifiersImmunityAllId,
               duration: dispelmagic.duration,
-              modifierIds: [
-                UpdateStatAllId,
-                UpdateStatParentId,
-                UpdateStatStageAllId,
-                UpdateStatStageParentId,
-                UpdateStatStageTeamId,
-                UpdateStatTeamId,
+              modifiers: [
+                new UpdateStatAll({}),
+                new UpdateStatParent({}),
+                new UpdateStatStageParent({}),
+                // UpdateStatStageTeamId,
+                new UpdateStatTeam({ teamId: '' }),
               ],
             })
           }

@@ -14,11 +14,7 @@ import {
   getDamageAiRating,
   getMutationsFromDamageResult,
 } from '../../utils'
-import {
-  IntangibleParentId,
-  PhantomSlashId,
-  PhantomSlashStagedId,
-} from '../Ids'
+import { PhantomSlashId, PhantomSlashStagedId } from '../Ids'
 import { AddModifiersToRegistryParent, IntangibleParent } from '../Modifiers'
 import { Identity } from '../Mutations'
 import { GetUnits } from '../Queries'
@@ -157,7 +153,7 @@ export class PhantomSlashStaged extends Action {
                 sourceId: source.id,
                 parentId: source.id,
                 duration: 1,
-                modifierIds: [IntangibleParentId],
+                modifiers: [new IntangibleParent({})],
               }),
             ],
           },

@@ -1,6 +1,7 @@
 import {
   CursedMiasmaId,
   DivineHealingId,
+  DivineLightId,
   DraconicAuraId,
   InfernoId,
   InsulatedId,
@@ -16,6 +17,7 @@ export const AUGMENT_NAMES: Record<Id, string> = {
 
   [CursedMiasmaId]: 'Cursed Miasma',
   [DivineHealingId]: 'Divine Healing',
+  [DivineLightId]: 'Divine Light',
   [DraconicAuraId]: 'Draconic Aura',
   [InsulatedId]: 'Insulated',
   [RegenerationId]: 'Regeneration',

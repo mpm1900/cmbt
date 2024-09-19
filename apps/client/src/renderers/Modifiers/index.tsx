@@ -1,5 +1,7 @@
 import {
   AddActionParentId,
+  AddModifiersToRegistryAllId,
+  AddModifiersToRegistryStaticAllOnUnitEnterId,
   AddStatModifiersImmunityAllId,
   BanedParentId,
   BlessedParentId,
@@ -32,6 +34,7 @@ import {
 import { Modifier } from '@repo/game/types'
 import { ReactNode } from 'react'
 import { AddActionParentRenderer } from './AddActionParent'
+import { AddModifiersToRegistryAllRenderer } from './AddModifiersToRegistryAll'
 import { AddStatModifiersImmunityAllRenderer } from './AddStatModifiersImmunityAll'
 import { BanedParentRenderer } from './BanedParent'
 import { BlessedParentRenderer } from './BlessedParent'
@@ -43,6 +46,7 @@ import { IntangibleParentRenderer } from './IntangibleParent'
 import { InvertSpeedAllRenderer } from './InvertSpeedAll'
 import { ProtectedParentRenderer } from './ProtectedParent'
 import { StunnedParentRenderer } from './StunnedParent'
+import { AddModifiersToRegistryStaticAllOnUnitEnterRenderer } from './Triggers/AddModifiersToRegistryStaticAllOnUnitEnter'
 import { CreateSandstormOnUnitEnterRenderer } from './Triggers/CreateFirestormOnUnitEnter'
 import { DamageAllOnTurnEndRenderer } from './Triggers/DamageAllOnTurnEnd'
 import { DamageNewUnitsOnUnitEnterRenderer } from './Triggers/DamageNewUnitsOnUnitEnter'
@@ -69,6 +73,7 @@ export type ModifierRenderer = {
 
 export const ModifierRenderers: Record<string, ModifierRenderer> = {
   [AddActionParentId]: AddActionParentRenderer,
+  [AddModifiersToRegistryAllId]: AddModifiersToRegistryAllRenderer,
   [AddStatModifiersImmunityAllId]: AddStatModifiersImmunityAllRenderer,
   [BanedParentId]: BanedParentRenderer,
   [BlessedParentId]: BlessedParentRenderer,
@@ -86,6 +91,8 @@ export const ModifierRenderers: Record<string, ModifierRenderer> = {
   [UpdateStatTeamId]: UpdateStatTeamRenderer,
 
   // Triggers
+  [AddModifiersToRegistryStaticAllOnUnitEnterId]:
+    AddModifiersToRegistryStaticAllOnUnitEnterRenderer,
   [CreateFirestormOnUnitEnterId]: CreateSandstormOnUnitEnterRenderer,
   [DamageAllOnTurnEndId]: DamageAllOnTurnEndRenderer,
   [DamageNewUnitsOnUnitEnterId]: DamageNewUnitsOnUnitEnterRenderer,

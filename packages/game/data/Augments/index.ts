@@ -1,5 +1,6 @@
 export * from './CursedMiasma'
 export * from './DivineHealing'
+export * from './DivineLight'
 export * from './DraconicAura'
 export * from './Inferno'
 export * from './Insulated'

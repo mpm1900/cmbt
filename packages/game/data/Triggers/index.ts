@@ -1,3 +1,4 @@
+export * from './AddModifiersToRegistryStaticAllOnUnitEnter'
 export * from './CreateFirestormOnUnitEnter'
 export * from './DamageAllOnTurnEnd'
 export * from './DamageNewUnitsOnUnitEnter'

@@ -14,7 +14,7 @@ export const CursedMiasma: Augment = {
         maxInstances: 1,
         persistOnSwitch: true,
         targetsLabel: 'all units',
-        modifiersToAdd: [
+        makeModifiers: () => [
           new UpdateStatAll({
             sourceId: unit.id,
             parentId: unit.id,

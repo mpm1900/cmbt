@@ -1,6 +1,7 @@
 import {
   AddActionParentId,
   AddModifiersOnSelfEnterId,
+  AddModifiersPerUnitOnSelfEnterId,
   AddModifiersToRegistryAllId,
   AddStatModifiersImmunityAllId,
   BanedParentId,
@@ -24,7 +25,6 @@ import {
   StunnedParentId,
   UpdateStatAllId,
   UpdateStatParentId,
-  UpdateStatStageAllOtherOnUnitEnterId,
   UpdateStatStageParentId,
   UpdateStatTeamId,
 } from '@repo/game/data'
@@ -51,7 +51,6 @@ import { DrainLifeParentOnTurnEndRenderer } from './Triggers/DrainLifeParentOnTu
 import { HealParentOnTurnEndRenderer } from './Triggers/HealParentOnTurnEnd'
 import { HealParentOnUnitSwitchRenderer } from './Triggers/HealParentOnUnitSwitch'
 import { KillParentOnTurnEndRenderer } from './Triggers/KillParentOnTurnEnd'
-import { UpdateStatStageAllOtherOnUnitEnterRenderer } from './Triggers/StatStageDownAllOtherOnUnitEnter'
 import { UpdateStatAllRenderer } from './UpdateStatAll'
 import { UpdateStatParentRenderer } from './UpdateStatParent'
 import { UpdateStatStageParentRenderer } from './UpdateStatStageParent'
@@ -77,6 +76,7 @@ export const ModifierRenderers: Record<string, ModifierRenderer> = {
 
   // Triggers
   [AddModifiersOnSelfEnterId]: AddModifiersOnSelfEnterRenderer,
+  [AddModifiersPerUnitOnSelfEnterId]: AddModifiersOnSelfEnterRenderer,
   [DamageAllOnTurnEndId]: DamageAllOnTurnEndRenderer,
   [DamageNewUnitsOnUnitEnterId]: DamageNewUnitsOnUnitEnterRenderer,
   [DamageParentOnTurnEndId]: DamageParentOnTurnEndRenderer,
@@ -84,10 +84,7 @@ export const ModifierRenderers: Record<string, ModifierRenderer> = {
   [HealParentOnTurnEndId]: HealParentOnTurnEndRenderer,
   [HealParentOnUnitSwitchId]: HealParentOnUnitSwitchRenderer,
   [IntangibleParentId]: IntangibleParentRenderer,
-
   [KillParentOnTurnEndId]: KillParentOnTurnEndRenderer,
-  [UpdateStatStageAllOtherOnUnitEnterId]:
-    UpdateStatStageAllOtherOnUnitEnterRenderer,
 
   // Override Modifiers
   [AddStatModifiersImmunityAllId]: AddStatModifiersImmunityAllRenderer, // Dispel Magic

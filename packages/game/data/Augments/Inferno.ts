@@ -13,7 +13,7 @@ export const Inferno: Augment = {
         parentId: unit.id,
         persistOnSwitch: true,
         targetsLabel: 'the battlefield',
-        modifiersToAdd: [
+        makeModifiers: () => [
           new DamageAllOnTurnEnd({
             sourceId: unit.id,
             registryId: FirestormOnTurnEndId,

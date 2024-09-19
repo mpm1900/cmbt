@@ -12,7 +12,7 @@ export const DivineLight: Augment = {
       parentId: unit.id,
       targetsLabel: 'all units',
       persistOnSwitch: true,
-      modifiersToAdd: [
+      makeModifiers: () => [
         new AddModifiersToRegistryAll({
           registryId: SeenAllId,
           sourceId: unit.id,

@@ -14,7 +14,7 @@ export const Scholar: Augment = {
         maxInstances: 1,
         persistOnSwitch: true,
         targetsLabel: 'all units',
-        modifiersToAdd: [
+        makeModifiers: () => [
           new UpdateFlagAll({
             registryId: InspectedAllId,
             sourceId: unit.id,

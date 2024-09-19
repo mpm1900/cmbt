@@ -11,7 +11,8 @@ export const AddModifiersOnSelfEnterRenderer: ModifierRenderer = {
       <div>
         <TriggerName>On self enter:</TriggerName>
         <span>
-          Applies <ModifierListInline modifiers={modifier.modifiersToAdd} />
+          Applies{' '}
+          <ModifierListInline modifiers={modifier.makeModifiers(undefined)} />
           to {modifier.targetsLabel}.
         </span>
       </div>

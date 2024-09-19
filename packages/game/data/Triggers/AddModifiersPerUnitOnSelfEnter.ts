@@ -6,25 +6,32 @@ import {
   TriggerProps,
   Unit,
 } from '../../types'
-import { AddModifiersOnSelfEnterId } from '../Ids'
+import { AddModifiersPerUnitOnSelfEnterId } from '../Ids'
 
-export class AddModifiersOnSelfEnter extends Trigger {
+export class AddModifiersPerUnitOnSelfEnter extends Trigger {
+  filterUnits?: (unit: Unit) => boolean
   makeModifiers: (unit: Unit | undefined) => Modifier[]
   targetsLabel: string
 
   constructor(
     props: TriggerProps & {
+      filterUnits?: (unit: Unit) => boolean
       makeModifiers: (unit: Unit | undefined) => Modifier[]
       targetsLabel: string
     }
   ) {
-    super(AddModifiersOnSelfEnterId, {
+    const { filterUnits = () => true } = props
+    super(AddModifiersPerUnitOnSelfEnterId, {
       ...props,
       events: ['on Unit Enter'],
       maxInstances: 1,
-      modifiers: (ctx) => props.makeModifiers(undefined),
+      modifiers: (ctx) =>
+        ctx.units
+          .filter((u) => super.filter(u, ctx, {}) && filterUnits(u))
+          .flatMap((u) => props.makeModifiers(u)),
     })
 
+    this.filterUnits = filterUnits
     this.makeModifiers = props.makeModifiers
     this.targetsLabel = props.targetsLabel
   }

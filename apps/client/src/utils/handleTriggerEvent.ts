@@ -31,9 +31,7 @@ export function handleTriggerEvent(
     shouldLog: true,
     addedModifiers: triggers
       .filter((trigger) => !!trigger.modifiers)
-      .flatMap(
-        (trigger) => (trigger.modifiers && trigger.modifiers(ctx, args)) ?? []
-      ),
+      .flatMap((trigger) => trigger.modifiers!(ctx, args) ?? []),
     mutations: triggers
       .filter((trigger) => !trigger.modifiers)
       .flatMap((trigger) =>

@@ -61,7 +61,7 @@ export function useCombatActions() {
 
     context.modifiers = combat.removeWhere((modifier) => {
       const parent = context.units.find((u) => u.id === modifier.parentId)
-      return !!parent && !parent?.flags.isActive
+      return !parent || !parent?.flags.isActive
     })
   }
 
@@ -135,6 +135,9 @@ export function useCombatActions() {
       context,
       args
     )
+    if (event === 'on Unit Enter') {
+      console.log(result.addedModifiers)
+    }
     combat.updateModifiers((mods) =>
       mods
         .map((mod) =>

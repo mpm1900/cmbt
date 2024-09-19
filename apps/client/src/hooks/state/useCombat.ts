@@ -13,7 +13,7 @@ import {
   TurnStatus,
   Unit,
 } from '@repo/game/types'
-import { getRandom, validateModifiers } from '@repo/game/utils'
+import { getRandom } from '@repo/game/utils'
 import { nanoid } from 'nanoid/non-secure'
 import { ReactNode } from 'react'
 import { create } from 'zustand'
@@ -111,7 +111,7 @@ export const useCombat = create<CombatStore>((set, get) => {
         user: user.id,
         commit,
         reward,
-        modifiers: validateModifiers(initialModifiers, []),
+        modifiers: initialModifiers,
         turn: {
           count: 0,
           status: 'cleanup',
@@ -149,11 +149,10 @@ export const useCombat = create<CombatStore>((set, get) => {
     modifiers: [],
     add(modifiers) {
       set((state) => ({
-        modifiers: [
-          ...state.modifiers,
-          ...validateModifiers(modifiers, state.modifiers),
-        ],
+        // used to have a validate modifiers call here
+        modifiers: [...state.modifiers, ...modifiers],
       }))
+      console.log('added mods', modifiers, get().modifiers)
       return get().modifiers
     },
     removeWhere(clause) {

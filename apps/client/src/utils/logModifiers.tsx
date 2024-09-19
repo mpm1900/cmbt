@@ -2,11 +2,12 @@ import { LogSecondary, LogUnit } from '@/components/ui/log'
 import { CombatLogger } from '@/hooks/state'
 import { ModifierRenderers } from '@/renderers'
 import { CombatContext, Modifier, MutationFilterArgs } from '@repo/game/types'
-import { isUnitAliveCtx } from '@repo/game/utils'
+import { isUnitAliveCtx, validateModifiers } from '@repo/game/utils'
 import { ModifierInline } from '@shared/ModifierInline'
 import { StatusInline } from '@shared/StatusInline'
 import { TextList } from '@shared/TextList'
 import { getStatusesFromModifiers } from './getStatusesFromModifiers'
+import { getUnitModifierRenderList } from './getUnitModifierRenderList'
 
 export function logModifiers(
   modifiers: Modifier[],
@@ -20,12 +21,14 @@ export function logModifiers(
       isUnitAliveCtx(u, ctx) && modifiers.some((m) => m.filter(u, ctx, args))
   )
   units.forEach((unit, index) => {
+    const existingModifiers = getUnitModifierRenderList(unit, ctx)
     const unitHasModifier = (modifier: Modifier) =>
-      unit.modifiers().some((m) => m.rtid === modifier.rtid)
+      existingModifiers.some((m) => m.rtid === modifier.rtid)
 
     // NOTE: this used to be wraped in a validatModifiers() call
-    const unitModifiers = modifiers.filter(
-      (m) => m.filter(unit, ctx, args) && !unitHasModifier(m)
+    const unitModifiers = validateModifiers(
+      modifiers.filter((m) => m.filter(unit, ctx, args) && !unitHasModifier(m)),
+      existingModifiers
     )
     const nonStatusModifiers = unitModifiers.filter((m) => {
       const r = ModifierRenderers[m.registryId] ?? ModifierRenderers[m.id]

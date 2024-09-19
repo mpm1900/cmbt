@@ -1,6 +1,7 @@
 import { ApplyStatStages, ApplyStatStagesId } from '../data'
 import { CombatContext, Modifier, Trigger, Unit } from '../types'
 import { Mutation, MutationFilterArgs } from '../types/Mutation'
+import { validateModifiers } from './validateModifiers'
 
 export type ApplyModifiersResult = {
   unit: Unit
@@ -45,7 +46,7 @@ export function applyModifiers(
   // one example is if a modifier grants an immunity in a prior layer
   // or if modifiers have stat requirements in their fns, things can change during
   // this functions's execution
-  const result = modifiers
+  const result = validateModifiers(modifiers, [])
     .sort((a, b) => a.priority - b.priority)
     .reduce<ApplyModifiersResult>(
       (result, modifier) => {

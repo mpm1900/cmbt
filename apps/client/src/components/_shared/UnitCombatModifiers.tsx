@@ -13,6 +13,7 @@ export function UnitCombatModifiers(
   props: PropsWithClassname<UnitCombatModifiersProps>
 ) {
   const ctx = useCombatContext()
+  console.log('all', ctx.modifiers)
   const modifiers = getUnitModifierRenderList(props.unit, ctx)
 
   return (

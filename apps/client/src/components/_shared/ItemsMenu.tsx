@@ -31,7 +31,11 @@ export function ItemsMenu(props: ItemsMenuProps) {
           action={(item) => (
             <>
               {item.action && <ItemUseButton item={item} />}
-              {item.augment && <Button size="sm">equip</Button>}
+              {item.augment && (
+                <Button size="sm" variant="ghost">
+                  equip
+                </Button>
+              )}
             </>
           )}
         />

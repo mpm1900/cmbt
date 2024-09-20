@@ -29,7 +29,7 @@ export function NodeRenderer(props: NodeRendererProps) {
   }
 
   const tabs = node.tabs ? node.tabs(ctx, renderProps) : undefined
-  const activeTab = tabs?.find((t) => t.active)?.id
+  const activeTab = tabs?.find((t) => t?.active)?.id
 
   useEffect(() => {
     if (render) {
@@ -47,16 +47,19 @@ export function NodeRenderer(props: NodeRendererProps) {
           </CardTitle>
           {node.actions && (
             <div className="flex">
-              {node.actions(ctx, renderProps).map((tab) => (
-                <Button
-                  key={tab.id}
-                  variant="ghost"
-                  size="icon"
-                  onClick={() => tab.resolve(ctx)}
-                >
-                  {tab.label}
-                </Button>
-              ))}
+              {node
+                .actions(ctx, renderProps)
+                .filter((t) => t !== undefined)
+                .map((tab) => (
+                  <Button
+                    key={tab.id}
+                    variant="ghost"
+                    size="icon"
+                    onClick={() => tab.resolve(ctx)}
+                  >
+                    {tab.label}
+                  </Button>
+                ))}
             </div>
           )}
         </div>
@@ -66,15 +69,17 @@ export function NodeRenderer(props: NodeRendererProps) {
           {tabs && (
             <Tabs value={activeTab}>
               <TabsList>
-                {tabs.map((tab) => (
-                  <TabsTrigger
-                    key={tab.id}
-                    value={tab.id}
-                    onClick={() => tab.resolve(ctx)}
-                  >
-                    {tab.label}
-                  </TabsTrigger>
-                ))}
+                {tabs
+                  .filter((t) => t !== undefined)
+                  .map((tab) => (
+                    <TabsTrigger
+                      key={tab.id}
+                      value={tab.id}
+                      onClick={() => tab.resolve(ctx)}
+                    >
+                      {tab.label}
+                    </TabsTrigger>
+                  ))}
               </TabsList>
             </Tabs>
           )}
@@ -92,28 +97,32 @@ export function NodeRenderer(props: NodeRendererProps) {
           )}
           {choices && (
             <div className="flex flex-col w-full">
-              {choices(ctx, renderProps).map((choice, index) => (
-                <Choice
-                  key={choice.id}
-                  choice={choice}
-                  index={index}
-                  ctx={ctx}
-                />
-              ))}
+              {choices(ctx, renderProps)
+                .filter((c) => c !== undefined)
+                .map((choice, index) => (
+                  <Choice
+                    key={choice.id}
+                    choice={choice}
+                    index={index}
+                    ctx={ctx}
+                  />
+                ))}
             </div>
           )}
           {footer && (
             <div className="flex w-full justify-end space-x-4">
-              {footer(ctx, renderProps).map((choice) => (
-                <Button
-                  key={choice.id}
-                  variant="secondary"
-                  className="space-x-2"
-                  onClick={() => choice.resolve(ctx)}
-                >
-                  {choice.label}
-                </Button>
-              ))}
+              {footer(ctx, renderProps)
+                .filter((c) => c !== undefined)
+                .map((choice) => (
+                  <Button
+                    key={choice.id}
+                    variant="secondary"
+                    className="space-x-2"
+                    onClick={() => choice.resolve(ctx)}
+                  >
+                    {choice.label}
+                  </Button>
+                ))}
             </div>
           )}
         </div>

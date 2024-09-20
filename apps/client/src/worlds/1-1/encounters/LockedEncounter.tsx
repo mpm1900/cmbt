@@ -17,6 +17,24 @@ const LockedNode1 = (): EncounterNode => {
     choices: (ctx) => {
       const choices: EncounterChoice[] = [
         {
+          id: LockedNodeId,
+          label: (
+            <ChoiceLabel
+              before={<MdOutlineVpnKey />}
+              after={<IoMdReturnLeft />}
+            >
+              Unlock the door
+            </ChoiceLabel>
+          ),
+          resolve: (ctx) => {
+            ctx.updateActiveWorldNode((n) => ({
+              locked: false,
+              completed: true,
+            }))
+            ctx.back()
+          },
+        },
+        {
           id: nanoid(),
           label: <ChoiceLabel after={<IoMdReturnLeft />}>Leave</ChoiceLabel>,
           resolve: (ctx) => ctx.back(),

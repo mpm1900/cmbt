@@ -2,7 +2,6 @@ import { nanoid } from 'nanoid'
 import { UnitBase, UnitBaseConfig } from '../../../types'
 import { BodySlam, Earthquake, Protect } from '../../Actions'
 import { BodySlamId, EarthquakeId, ProtectId } from '../../Ids'
-import { Beast } from '../../Tags'
 import { BASE_UNIT } from '../../Units/system/BASE_UNIT'
 
 export const AncientGolemId = nanoid()
@@ -21,7 +20,7 @@ export const AncientGolem: UnitBase = {
     stamina: 0,
     devotion: 0,
   },
-  tags: [Beast],
+  tags: [],
   augmentSlots: 3,
   affinities: [{ type: 'force', factor: 50 }],
   resistances: [

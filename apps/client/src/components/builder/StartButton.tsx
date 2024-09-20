@@ -2,7 +2,7 @@ import { useGame, useNpcs, useUnitBuilders } from '@/hooks/state'
 import { cn } from '@/lib/utils'
 import { PropsWithClassname } from '@/types'
 import { makeWorld1_1 } from '@/worlds'
-import { Potion } from '@repo/game/data'
+import { MysteriousOrb, Potion } from '@repo/game/data'
 import { Team } from '@repo/game/types'
 import { resolveUnitBuilder } from '@repo/game/utils'
 import { useNavigate } from '@tanstack/react-router'
@@ -19,7 +19,7 @@ export function StartButton(props: PropsWithClassname) {
   function initialize() {
     const team: Team = {
       id: nanoid(),
-      items: [Potion()],
+      items: [Potion(), MysteriousOrb],
       resources: {
         credits: 1500,
       },

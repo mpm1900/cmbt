@@ -100,21 +100,21 @@ export type EncounterNode = {
   tabs?: (
     ctx: EncounterContext,
     props: EncounterRenderProps
-  ) => EncounterChoice[]
+  ) => (EncounterChoice | undefined)[]
   actions?: (
     ctx: EncounterContext,
     props: EncounterRenderProps
-  ) => EncounterChoice[]
+  ) => (EncounterChoice | undefined)[]
   choices?: (
     ctx: EncounterContext,
     props: EncounterRenderProps
-  ) => EncounterChoice[]
+  ) => (EncounterChoice | undefined)[]
   Choice?: EncounterChoiceComponent
   Component?: EncounterComponent
   footer?: (
     ctx: EncounterContext,
     props: EncounterRenderProps
-  ) => EncounterChoice[]
+  ) => (EncounterChoice | undefined)[]
 }
 
 export type EncounterChoice = {

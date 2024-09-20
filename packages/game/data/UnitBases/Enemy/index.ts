@@ -1,3 +1,4 @@
+export * from './AncientGolem'
 export * from './Bear'
 export * from './DeathKnight'
 export * from './RestlessSpirit'

@@ -35,6 +35,7 @@ export type ChoiceProps = Pick<
   Partial<EncounterChoice>,
   'active' | 'resolve'
 > & {
+  filter?: boolean
   disabled?: boolean
   label: ReactNode
   before?: ReactNode
@@ -45,7 +46,8 @@ export type ChoiceProps = Pick<
   to?: Id
   clearLog?: boolean
 }
-export function choice(props: ChoiceProps): EncounterChoice {
+export function choice(props: ChoiceProps): EncounterChoice | undefined {
+  if (props.filter === false) return undefined
   return {
     id: nanoid(),
     active: props.active,

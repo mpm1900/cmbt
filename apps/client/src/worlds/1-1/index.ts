@@ -3,12 +3,11 @@ import { nanoid } from 'nanoid'
 import { edge, NodeMaker } from '../_utils'
 import {
   CampEncounter,
-  CombatEncounter,
   FirstCombatEncounter,
   HealingEncounter,
-  LockedEncounter,
   ReviveEncounter,
 } from './encounters'
+import { GolemEncounter } from './encounters/GolemEncounter'
 
 const fcombat = (app: Id) => 'FirstCombat' + app
 const heal = (app: Id) => 'Spring' + app
@@ -98,7 +97,8 @@ const TestNode: NodeMaker = (id, edges, overrides) => ({
   seenIcon: 'combat',
   visitedIcon: 'combat',
   completedIcon: 'combat',
-  encounter: CombatEncounter(),
+  // encounter: CombatEncounter(),
+  encounter: FirstCombatEncounter(),
   edges,
   seen: false,
   completed: false,
@@ -131,7 +131,7 @@ const LockedNode: NodeMaker = (id, edges, overrides) => ({
   size: 20,
   icon: 'locked',
   completedIcon: 'unlocked',
-  encounter: LockedEncounter,
+  encounter: GolemEncounter(),
   edges,
   seen: false,
   completed: false,

@@ -8,6 +8,6 @@ export const MysteriousOrb: Item = {
   rtid: nanoid(),
   name: 'Mysterious Orb',
   cost: 1800,
-  rarity: 'rare',
+  rarity: 'legendary',
   key: MysteriousOrbKey,
 }

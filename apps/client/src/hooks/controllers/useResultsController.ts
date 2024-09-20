@@ -15,9 +15,9 @@ export function useResultsController() {
   const { log, setTurn } = useCombat()
 
   const first = results.queue[0]
-  const speed =
-    settings.gameSpeed *
-    (first && first.action && combat.turn.count > 0 ? 1 : 0)
+  const speedFactor =
+    first && first.action && first.shouldLog && combat.turn.count > 0 ? 1 : 0
+  const speed = settings.gameSpeed * speedFactor
 
   useEffect(() => {
     if (first) {
@@ -30,13 +30,14 @@ export function useResultsController() {
           first.expandedTargets?.some((t) =>
             isUnitAlive(ctx.units.find((u) => u.id === t.id))
           )
-        if (
+        const shouldRenderResult =
           first.action &&
           first.shouldLog &&
           shouldCommitResult &&
           aliveTeams.length > 0
-        ) {
-          logActionIntent(first.action, first, log, ctx)
+
+        if (shouldRenderResult) {
+          logActionIntent(first.action!, first, log, ctx)
           setTurn((t) => ({
             results: t.results.concat(first),
           }))

@@ -22,34 +22,36 @@ export function useCombatController() {
   useEffect(() => {
     if (isCombat && results.queue.length === 0 && cleanup.queue.length === 0) {
       const liveTeams = getTeamsWithLiveUnits(combat.teams, ctx)
-      if (liveTeams.length === combat.teams.length) {
-        const item = actions.first(ctx)
-        const teams = getTeamsWithSelectionRequired(combat.teams, ctx)
-        if (item && teams.length === 0) {
-          const source = ctx.units.find((u) => u.id === item.action.sourceId)
-          const shouldCommitAction = isUnitAliveCtx(source, ctx)
-
-          if (shouldCommitAction) {
-            const actionResults = getResultsFromActionItem(item, ctx)
-            results.enqueue(
-              { id: nanoid(), mutations: [item.action.cost] },
-              ...actionResults
-            )
-            combat.setActionCooldown(
-              item.action.sourceId,
-              item.action.id,
-              item.action.cooldown
-            )
-          }
-          combat.stageAction(item.action.sourceId, undefined)
-          actions.remove((i) => i.id === item.id)
-        } else {
-          combat.setStatus('cleanup')
-        }
-      } else {
+      if (liveTeams.length !== combat.teams.length) {
         actions.setQueue(() => [])
         combat.setStatus('done')
+        return
       }
+
+      const item = actions.first(ctx)
+      const teams = getTeamsWithSelectionRequired(combat.teams, ctx)
+      if (!item || teams.length !== 0) {
+        combat.setStatus('cleanup')
+        return
+      }
+
+      const source = ctx.units.find((u) => u.id === item.action.sourceId)
+      const shouldCommitAction = isUnitAliveCtx(source, ctx)
+
+      if (shouldCommitAction) {
+        const actionResults = getResultsFromActionItem(item, ctx)
+        results.enqueue(
+          { id: nanoid(), mutations: [item.action.cost] },
+          ...actionResults
+        )
+        combat.setActionCooldown(
+          item.action.sourceId,
+          item.action.id,
+          item.action.cooldown
+        )
+      }
+      combat.stageAction(item.action.sourceId, undefined)
+      actions.remove((i) => i.id === item.id)
     }
   }, [isCombat, actions.queue.length, results.queue.length])
 }

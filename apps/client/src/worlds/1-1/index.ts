@@ -3,6 +3,7 @@ import { nanoid } from 'nanoid'
 import { edge, NodeMaker } from '../_utils'
 import {
   CampEncounter,
+  CombatEncounter,
   FirstCombatEncounter,
   HealingEncounter,
   ReviveEncounter,
@@ -97,8 +98,8 @@ const TestNode: NodeMaker = (id, edges, overrides) => ({
   seenIcon: 'combat',
   visitedIcon: 'combat',
   completedIcon: 'combat',
-  // encounter: CombatEncounter(),
-  encounter: FirstCombatEncounter(),
+  encounter: CombatEncounter(),
+  // encounter: FirstCombatEncounter(),
   edges,
   seen: false,
   completed: false,
@@ -129,8 +130,9 @@ const ReviveNode: NodeMaker = (id, edges, overrides) => ({
 const LockedNode: NodeMaker = (id, edges, overrides) => ({
   id: lock(id),
   size: 20,
-  icon: 'locked',
-  completedIcon: 'unlocked',
+  icon: '?',
+  visitedIcon: '?',
+  completedIcon: 'combat',
   encounter: GolemEncounter(),
   edges,
   seen: false,

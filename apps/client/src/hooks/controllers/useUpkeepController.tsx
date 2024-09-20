@@ -2,7 +2,6 @@ import { LogHeader } from '@/components/ui/log'
 import { applyModifiers } from '@repo/game/utils'
 import { useEffect } from 'react'
 import { useActions, useCombat, useCombatUi } from '../state'
-import { useCombatActions } from '../useCombatActions'
 import { useCombatContext } from '../useCombatContext'
 
 export function useUpkeepController() {
@@ -10,7 +9,6 @@ export function useUpkeepController() {
   const actions = useActions()
   const ui = useCombatUi()
   const ctx = useCombatContext()
-  const fns = useCombatActions()
   const isUpkeep = combat.turn.status === 'upkeep'
 
   useEffect(() => {

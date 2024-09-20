@@ -8,7 +8,6 @@ export function useMainController() {
   const ctx = useCombatContext()
   const actions = useActions()
   const { isDebugMode } = useCombatSettings()
-
   const isMain = combat.turn.status === 'main'
 
   useEffect(() => {

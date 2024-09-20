@@ -13,6 +13,7 @@ export function logResult(
   ctx: CombatContext
 ) {
   const { addedModifiers: modifiers, mutations, shouldLog } = result
+  if (!shouldLog) return
 
   logMiss(result, log, ctx)
   logCritical(result, log, ctx)

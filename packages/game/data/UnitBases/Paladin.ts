@@ -6,8 +6,8 @@ import {
   Block,
   Boast,
   Cleave,
-  HealingPrayer,
   HealingWord,
+  LayOnHands,
   PhantomSlash,
   PowerSink,
   Protect,
@@ -24,9 +24,9 @@ import {
   BoastId,
   CleaveId,
   DivineLightId,
-  HealingPrayerId,
   HealingWordId,
   HoldCreatureId,
+  LayOnHandsId,
   PhantomSlashId,
   PowerSinkId,
   ProtectId,
@@ -92,16 +92,16 @@ export const PaladinConfig: UnitBaseConfig = {
       make: (u) => new Cleave(u.id, u.teamId),
     },
     {
-      id: HealingPrayerId,
-      make: (u) => new HealingPrayer(u.id, u.teamId),
-    },
-    {
       id: HealingWordId,
       make: (u) => new HealingWord(u.id, u.teamId),
     },
     {
       id: HoldCreatureId,
       make: (u) => new HoldCreature(u.id, u.teamId),
+    },
+    {
+      id: LayOnHandsId,
+      make: (u) => new LayOnHands(u.id, u.teamId),
     },
     {
       id: PhantomSlashId,

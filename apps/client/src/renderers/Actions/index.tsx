@@ -31,6 +31,7 @@ import {
   InfernalBlastId,
   InspectAllId,
   IntoxicateId,
+  LayOnHandsId,
   LightningBoltId,
   MagicMissileId,
   MemoryLeakId,
@@ -106,6 +107,7 @@ import { HideRenderer } from './Hide'
 import { HoldCreatureRenderer } from './HoldCreature'
 import { InfernalBlastRenderer } from './InfernalBlast'
 import { IntoxicateRenderer } from './Intoxicate'
+import { LayOnHandsRenderer } from './LayOnHands'
 import { LightningBoltRenderer } from './LightningBolt'
 import { MagicMissileRenderer } from './MagicMissile'
 import { MemoryLeakRenderer } from './MemoryLeak'
@@ -193,6 +195,7 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
   [HoldCreatureId]: HoldCreatureRenderer,
   [InfernalBlastId]: InfernalBlastRenderer,
   [IntoxicateId]: IntoxicateRenderer,
+  [LayOnHandsId]: LayOnHandsRenderer,
   [LightningBoltId]: LightningBoltRenderer,
   [MagicMissileId]: MagicMissileRenderer,
   [MemoryLeakId]: MemoryLeakRenderer,

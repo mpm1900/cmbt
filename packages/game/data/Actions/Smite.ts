@@ -39,7 +39,7 @@ export class Smite extends Action {
       },
       {
         power: 40,
-        attackType: 'physical',
+        attackType: 'magic',
         damageType: 'holy',
       },
     ]

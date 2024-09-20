@@ -44,7 +44,7 @@ export function ActionListTable(props: ActionListTableProps) {
           <TableHead>Req</TableHead>
           <TableHead>Name</TableHead>
           <TableHead>Type</TableHead>
-          <TableHead>Base Damage</TableHead>
+          <TableHead>Power</TableHead>
           <TableHead>Accuracy</TableHead>
           <TableHead>Cost</TableHead>
           <TableHead>Critical</TableHead>

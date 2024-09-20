@@ -4,7 +4,7 @@ import { AttackType } from '@repo/game/types'
 import { Badge } from '../ui/badge'
 
 export type AttackTypeBadgeProps = ElementProps<{
-  attackType: AttackType
+  attackType: AttackType | 'hybrid'
 }>
 
 export function AttackTypeBadge(props: AttackTypeBadgeProps) {
@@ -17,6 +17,7 @@ export function AttackTypeBadge(props: AttackTypeBadgeProps) {
         {
           'bg-blue-600 text-blue-200': attackType === 'magic',
           'bg-green-600 text-green-100': attackType === 'physical',
+          'bg-cyan-600 text-teal-100': attackType === 'hybrid',
         },
         className
       )}

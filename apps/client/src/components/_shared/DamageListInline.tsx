@@ -1,5 +1,6 @@
 import { ElementProps } from '@/types'
 import { Damage } from '@repo/game/types'
+import { getAttackTypesFromDamages } from '@repo/game/utils'
 import { DamageInline } from './DamageInline'
 
 export type DamageListInlineProps = ElementProps<{
@@ -20,6 +21,8 @@ export function DamageListInline(props: DamageListInlineProps) {
     children = '',
     seporator = ', ',
   } = props
+
+  const attackTypes = getAttackTypesFromDamages(damages)
   return (
     <span className={className}>
       {damages.map((damage, i) => (
@@ -32,6 +35,7 @@ export function DamageListInline(props: DamageListInlineProps) {
           <DamageInline
             damage={damage}
             color={color}
+            showAttackTypeIndicator={attackTypes.length > 1}
             className={damageClassName}
           />
         </span>

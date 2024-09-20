@@ -1,5 +1,5 @@
 import { Item } from '@repo/game/types'
-import { nanoid } from 'nanoid/non-secure'
+import { nanoid } from 'nanoid'
 
 export function rebaseItem(item: Item): Item {
   const rtid = nanoid()

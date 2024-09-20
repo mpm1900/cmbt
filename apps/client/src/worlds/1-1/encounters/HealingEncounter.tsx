@@ -9,7 +9,7 @@ import {
   Trigger,
 } from '@repo/game/types'
 import { applyMutations, getAllModifiersFromUnit } from '@repo/game/utils'
-import { nanoid } from 'nanoid/non-secure'
+import { nanoid } from 'nanoid'
 import { GiWaterfall } from 'react-icons/gi'
 import { IoMdReturnLeft, IoMdReturnRight } from 'react-icons/io'
 

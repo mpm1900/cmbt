@@ -14,7 +14,7 @@ import {
   Unit,
 } from '@repo/game/types'
 import { getRandom, validateModifiers } from '@repo/game/utils'
-import { nanoid } from 'nanoid/non-secure'
+import { nanoid } from 'nanoid'
 import { ReactNode } from 'react'
 import { create } from 'zustand'
 

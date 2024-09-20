@@ -1,6 +1,6 @@
 import { useGame } from '@/hooks/state'
 import { Augment, Unit } from '@repo/game/types'
-import { nanoid } from 'nanoid/non-secure'
+import { nanoid } from 'nanoid'
 import {
   Select,
   SelectContent,

@@ -7,7 +7,7 @@ import {
   TriggerEvent,
 } from '@repo/game/types'
 import { getTriggersByEvent, validateModifiers } from '@repo/game/utils'
-import { nanoid } from 'nanoid/non-secure'
+import { nanoid } from 'nanoid'
 import { logTriggers } from './logTriggers'
 
 export type HandleTriggerEventResult = {

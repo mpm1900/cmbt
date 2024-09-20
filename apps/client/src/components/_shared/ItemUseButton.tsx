@@ -14,21 +14,7 @@ export function ItemUseButton(props: ItemUseButtonProps) {
   const baseAction = item.action!(BASE_UNIT)
   const ctx = useEncounterContext()
   const cmbt = useCombatContext()
-
-  const units = ctx.units
-    .filter((u) => baseAction.filter(u, cmbt))
-    .map((unit) => (
-      <Button
-        key={unit.id}
-        variant="outline"
-        onClick={() => {
-          ctx.useItem(item, unit)
-        }}
-      >
-        {unit.name}
-      </Button>
-    ))
-
+  const units = ctx.units.filter((u) => baseAction.filter(u, cmbt))
   if (units.length === 0) return null
 
   return (
@@ -40,7 +26,19 @@ export function ItemUseButton(props: ItemUseButtonProps) {
       </PopoverTrigger>
       <PopoverPortal>
         <PopoverContent className="w-full">
-          <div className="flex space-x-2">{units}</div>
+          <div className="flex space-x-2">
+            {units.map((unit) => (
+              <Button
+                key={unit.id}
+                variant="outline"
+                onClick={() => {
+                  ctx.useItem(item, unit)
+                }}
+              >
+                {unit.name}
+              </Button>
+            ))}
+          </div>
         </PopoverContent>
       </PopoverPortal>
     </Popover>

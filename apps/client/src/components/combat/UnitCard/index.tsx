@@ -7,7 +7,7 @@ import { cn } from '@/lib/utils'
 import { TAG_ICONS } from '@/renderers/Tags'
 import { getUnitModifierRenderList } from '@/utils'
 import { SwitchUnitId } from '@repo/game/data'
-import { Unit } from '@repo/game/types'
+import { ActionResult, Id, TurnStatus, Unit } from '@repo/game/types'
 import { applyModifiers } from '@repo/game/utils'
 import { MagicArmor } from '@shared/MagicArmor'
 import { PhysicalArmor } from '@shared/PhysicalArmor'
@@ -28,6 +28,35 @@ export type UnitCardProps = {
   reverse?: boolean
 }
 
+type GetUnitCardStateConfig = {
+  unitId: Id
+  activeUnitId: Id | undefined
+  status: TurnStatus
+  hoverIds: Id[]
+  result: ActionResult | undefined
+}
+function getUnitCardState(config: GetUnitCardStateConfig) {
+  const action = config.result?.action
+  const targets =
+    ((config.result?.expandedTargets ?? []).length === 0
+      ? config.result?.targets
+      : config.result?.expandedTargets) ?? []
+  const isMain = config.status === 'main'
+  const isCombat = config.status === 'combat'
+  const isSource = action?.sourceId === config.unitId
+  const isActiveUnit = isMain && config.activeUnitId === config.unitId
+  const isTarget = targets.some((t) => t.id === config.unitId)
+  const isTargeted =
+    config.hoverIds.includes(config.unitId) || (isCombat && isTarget)
+  const isTargetedSwitch = isTargeted && action?.id === SwitchUnitId
+  const isActive = isCombat ? isSource || isTargetedSwitch : isActiveUnit
+
+  return {
+    isActive,
+    isTargeted,
+  }
+}
+
 export function UnitCard(props: UnitCardProps) {
   const { reverse, isEnemy } = props
   const ctx = useCombatContext()
@@ -39,22 +68,14 @@ export function UnitCard(props: UnitCardProps) {
   const { unit } = applyModifiers(props.unit, ctx)
   const modifiers = getUnitModifierRenderList(props.unit, ctx)
   const stagedItem = queue.find((i) => i.action.sourceId === unit.id)
-  const targets =
-    ((result?.expandedTargets ?? []).length === 0
-      ? result?.targets
-      : result?.expandedTargets) ?? []
-
-  const isTargeted =
-    hoverTargetUnitIds?.includes(unit.id) ||
-    (status === 'combat' && targets.some((t) => t.id === unit.id))
-
-  const isActive =
-    (status === 'combat'
-      ? result?.action?.sourceId === unit.id
-      : status === 'main' && activeUnit?.id === unit.id) ||
-    (isTargeted && result?.action?.id === SwitchUnitId)
-
   const isSelectable = status === 'main' && !unit.flags.isStunned && !stagedItem
+  const { isActive, isTargeted } = getUnitCardState({
+    unitId: unit.id,
+    activeUnitId: activeUnit?.id,
+    status: status,
+    hoverIds: hoverTargetUnitIds ?? [],
+    result,
+  })
 
   return (
     <motion.div

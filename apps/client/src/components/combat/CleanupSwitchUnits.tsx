@@ -1,7 +1,7 @@
 import { useCleanup, useCombat } from '@/hooks/state'
 import { getTeamsWithSelectionRequired } from '@/utils'
 import { GetUnits, SetIsActive } from '@repo/game/data'
-import { nanoid } from 'nanoid/non-secure'
+import { nanoid } from 'nanoid'
 import { LuSwords } from 'react-icons/lu'
 import { useCombatContext } from '../../hooks'
 import { SwitchUnits } from './SwitchUnits'

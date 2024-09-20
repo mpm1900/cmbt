@@ -2,8 +2,8 @@ import { useEncounterContext } from '@/hooks'
 import { groupItemsById } from '@/utils'
 import { BASE_UNIT } from '@repo/game/data'
 import { Item } from '@repo/game/types'
-import { Button } from '../ui/button'
 import { MenubarContent, MenubarMenu, MenubarTrigger } from '../ui/menubar'
+import { ItemEquipButton } from './ItemEquipButton'
 import { ItemListTable } from './ItemListTable'
 import { ItemUseButton } from './ItemUseButton'
 
@@ -31,11 +31,7 @@ export function ItemsMenu(props: ItemsMenuProps) {
           action={(item) => (
             <>
               {item.action && <ItemUseButton item={item} />}
-              {item.augment && (
-                <Button size="sm" variant="ghost">
-                  equip
-                </Button>
-              )}
+              {item.augment && <ItemEquipButton item={item} />}
             </>
           )}
         />

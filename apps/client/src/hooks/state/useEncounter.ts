@@ -1,6 +1,6 @@
 import { Encounter, EncounterNode, Id } from '@repo/game/types'
 import { ReactNode } from '@tanstack/react-router'
-import { nanoid } from 'nanoid/non-secure'
+import { nanoid } from 'nanoid'
 import { create } from 'zustand'
 
 export type EncounterLog = { id: Id; node: ReactNode }

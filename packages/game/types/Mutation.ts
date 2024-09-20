@@ -1,11 +1,12 @@
 import { nanoid } from 'nanoid'
-import { Id } from '.'
+import { ActionResult, Id } from '.'
 import { CombatContext } from './CombatContext'
 import { Flags, Stats, Unit, Values } from './Unit'
 
 export type MutationFilterArgs = {
   units?: Unit[]
   damage?: number
+  result?: ActionResult
 }
 
 export type MutationProps<T = {}> = T & {

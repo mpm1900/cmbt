@@ -22,4 +22,29 @@ export const PhantomSlashRender: ActionRenderer = {
       </>
     )
   },
+  successLog(result) {
+    if (!result.source) return undefined
+    return <>{result.source.name} faded away.</>
+  },
+}
+
+export const PhantomSlashStagedRenderer: ActionRenderer = {
+  name: ACTION_NAMES[PhantomSlashId],
+  description: (a, props) => {
+    const action = a as PhantomSlash
+    return (
+      <>
+        This unit gains{' '}
+        <ModifierInline
+          modifier={
+            new IntangibleParent({
+              duration: 2,
+            })
+          }
+        />
+        . On the next turn, deals <DamageListInline damages={action.damages} />{' '}
+        to target active enemy. This action takes 2 turns.
+      </>
+    )
+  },
 }

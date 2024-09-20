@@ -4,6 +4,7 @@ import {
   Bane,
   Block,
   Boast,
+  Cleave,
   DragonBreath,
   DragonStance,
   Fireball,
@@ -18,6 +19,7 @@ import {
   BaneId,
   BlockId,
   BoastId,
+  CleaveId,
   DraconicAuraId,
   DragonBreathId,
   DragonStanceId,
@@ -68,6 +70,10 @@ export const DraconicDiscipleConfig: UnitBaseConfig = {
     {
       id: BoastId,
       make: (unit) => new Boast(unit.id, unit.teamId),
+    },
+    {
+      id: CleaveId,
+      make: (u) => new Cleave(u.id, u.teamId),
     },
     {
       id: DragonBreathId,

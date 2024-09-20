@@ -6,7 +6,7 @@ export function getResultsFromActionItem(
 ): ActionResult[] {
   const { action, targetIds, indexTarget } = item
   const source = ctx.units.find((u) => u.id === action.sourceId)!
-  let targets = ctx.units.filter((u) => targetIds?.includes(u.id))
+  const targets = ctx.units.filter((u) => targetIds?.includes(u.id))
   if (indexTarget) {
     const possibleTargets = ctx.units.filter(
       (u, i) => u.flags.isActive && u.teamId === indexTarget.teamId

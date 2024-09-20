@@ -33,8 +33,10 @@ import {
   HealParentOnUnitSwitchId,
   HiddenParentId,
   InfernoId,
+  InspectedAllId,
   IntangibleParentId,
   KillParentOnTurnEndId,
+  LightningAuraOnTakeDamageId,
   MagicDownParentId,
   MagicExpansionUpParentId,
   MagicStageDownParentId,
@@ -71,6 +73,7 @@ import {
   GiGhostAlly,
   GiGlowingHands,
   GiHeartWings,
+  GiLightningTree,
   GiMagicSwirl,
   GiOverkill,
   GiPoisonGas,
@@ -83,7 +86,7 @@ import { HiMiniNoSymbol } from 'react-icons/hi2'
 import { MdFrontHand } from 'react-icons/md'
 import { PiScrollFill } from 'react-icons/pi'
 import { RiZzzFill } from 'react-icons/ri'
-import { TiSpiral } from 'react-icons/ti'
+import { TiInfoLarge, TiSpiral } from 'react-icons/ti'
 
 export const MODIFIER_ICONS: Record<Id, ReactNode> = {
   // Modifiers
@@ -146,7 +149,7 @@ export const MODIFIER_ICONS: Record<Id, ReactNode> = {
   [DefneseUpParentId]: <StatModifierIcon stat="defense" type="up" />,
   [EvasionDownParentId]: <StatModifierIcon stat="evasion" type="down" />,
   [EvasionUpParentId]: <StatModifierIcon stat="evasion" type="up" />,
-  // [InspectedAllId]: <BiSearch className="fill-white h-full w-full" />,
+  [InspectedAllId]: <TiInfoLarge className="fill-white h-full w-full" />,
   [MagicDownParentId]: <StatModifierIcon stat="magic" type="down" />,
   [MagicStageDownParentId]: <StatModifierIcon stat="magic" type="down" />,
   [MagicStageUpParentId]: <StatModifierIcon stat="magic" type="up" />,
@@ -195,4 +198,7 @@ export const MODIFIER_ICONS: Record<Id, ReactNode> = {
   ),
   [ScholarId]: <PiScrollFill className="fill-white h-full w-full" />,
   [SleepingParentId]: <RiZzzFill className="fill-violet-300 h-full w-full" />,
+  [LightningAuraOnTakeDamageId]: (
+    <GiLightningTree className="fill-blue-100 h-full w-full" />
+  ),
 }

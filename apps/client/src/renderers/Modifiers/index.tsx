@@ -10,6 +10,7 @@ import {
   DamageAllOnTurnEndId,
   DamageNewUnitsOnUnitEnterId,
   DamageParentOnTurnEndId,
+  DamageSourceOnSelfTakeDamageId,
   DisabledParentId,
   DrainLifeParentOnTurnEndId,
   EnragedParentId,
@@ -48,6 +49,7 @@ import { AddModifiersOnSelfEnterRenderer } from './Triggers/AddModifiersOnSelfEn
 import { DamageAllOnTurnEndRenderer } from './Triggers/DamageAllOnTurnEnd'
 import { DamageNewUnitsOnUnitEnterRenderer } from './Triggers/DamageNewUnitsOnUnitEnter'
 import { DamageParentOnTurnEndRenderer } from './Triggers/DamageParentOnTurnEnd'
+import { DamageSourceOnSelfTakeDamageRenderer } from './Triggers/DamageSourceOnSelfTakeDamage'
 import { DrainLifeParentOnTurnEndRenderer } from './Triggers/DrainLifeParentOnTurnEnd'
 import { HealParentOnTurnEndRenderer } from './Triggers/HealParentOnTurnEnd'
 import { HealParentOnUnitSwitchRenderer } from './Triggers/HealParentOnUnitSwitch'
@@ -82,6 +84,7 @@ export const ModifierRenderers: Record<string, ModifierRenderer> = {
   [DamageAllOnTurnEndId]: DamageAllOnTurnEndRenderer,
   [DamageNewUnitsOnUnitEnterId]: DamageNewUnitsOnUnitEnterRenderer,
   [DamageParentOnTurnEndId]: DamageParentOnTurnEndRenderer,
+  [DamageSourceOnSelfTakeDamageId]: DamageSourceOnSelfTakeDamageRenderer,
   [DrainLifeParentOnTurnEndId]: DrainLifeParentOnTurnEndRenderer,
   [HealParentOnTurnEndId]: HealParentOnTurnEndRenderer,
   [HealParentOnUnitSwitchId]: HealParentOnUnitSwitchRenderer,

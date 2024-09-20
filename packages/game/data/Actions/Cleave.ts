@@ -13,27 +13,23 @@ import {
   getDamageAiRating,
   getMutationsFromDamageResult,
 } from '../../utils'
-import { SlashId } from '../Ids'
+import { CleaveId } from '../Ids'
 import { Identity } from '../Mutations'
-import { GetUnits } from '../Queries'
+import { EmptyArray, GetUnits } from '../Queries'
 
-export class Slash extends Action {
+export class Cleave extends Action {
   constructor(sourceId: Id, teamId: Id) {
-    super(SlashId, {
+    super(CleaveId, {
       sourceId,
       teamId,
       cost: new Identity({ sourceId }),
-      targets: new GetUnits({
-        notTeamId: teamId,
-        isActive: true,
-        isHidden: false,
-      }),
-      maxTargetCount: 1,
+      targets: new EmptyArray(),
+      maxTargetCount: 0,
     })
 
     this.damages = [
       {
-        power: 75,
+        power: 45,
         attackType: 'physical',
         damageType: 'force',
       },
@@ -41,16 +37,23 @@ export class Slash extends Action {
   }
 
   threshold = (source: Unit): number | undefined => {
-    return 100 + source.stats.accuracy
+    return 85 + source.stats.accuracy
   }
   criticalThreshold = (source: Unit): number | undefined => {
-    return 20 + source.stats.criticalChance
+    return 10 + source.stats.criticalChance
   }
   criticalFactor = (source: Unit): number | undefined =>
     1.5 + source.stats.criticalDamage
 
   getAi(targets: Unit[], ctx: CombatContext): ActionAi {
     return getDamageAiRating(this, targets, ctx)
+  }
+
+  mapTargets = (targets: Unit[], ctx: CombatContext): Unit[] => {
+    return new GetUnits({
+      isActive: true,
+      notTeamId: this.teamId,
+    }).resolve(ctx)
   }
 
   resolve = (

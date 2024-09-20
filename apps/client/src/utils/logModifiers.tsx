@@ -6,8 +6,8 @@ import { isUnitAliveCtx, validateModifiers } from '@repo/game/utils'
 import { ModifierInline } from '@shared/ModifierInline'
 import { StatusInline } from '@shared/StatusInline'
 import { TextList } from '@shared/TextList'
+import { getActiveUnitModifiers } from './getActiveUnitModifiers'
 import { getStatusesFromModifiers } from './getStatusesFromModifiers'
-import { getUnitModifierRenderList } from './getUnitModifierRenderList'
 
 export function logModifiers(
   modifiers: Modifier[],
@@ -21,7 +21,7 @@ export function logModifiers(
       isUnitAliveCtx(u, ctx) && modifiers.some((m) => m.filter(u, ctx, args))
   )
   units.forEach((unit, index) => {
-    const existing = getUnitModifierRenderList(unit, ctx)
+    const existing = getActiveUnitModifiers(unit, ctx)
     const unitHasModifier = (modifier: Modifier) =>
       existing.some((m) => m.rtid === modifier.rtid)
 

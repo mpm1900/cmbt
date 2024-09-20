@@ -43,6 +43,7 @@ import {
   IntangibleParentId,
   InvertSpeedAllId,
   KillParentOnTurnEndId,
+  LightningAuraOnTakeDamageId,
   MagicDownParentId,
   MagicExpansionUpParentId,
   MagicStageDownParentId,
@@ -133,4 +134,5 @@ export const MODIFIER_NAMES: Record<string, string> = {
   [FirestormOnTurnEndId]: 'Firestorm',
   [ScholarId]: 'Scholar',
   [PoisonedDamageOnTurnEndId]: 'Poisoned',
+  [LightningAuraOnTakeDamageId]: 'Lightning Aura',
 }

@@ -1,6 +1,6 @@
 import { useCombatContext } from '@/hooks'
 import { PropsWithClassname } from '@/types'
-import { getUnitModifierRenderList } from '@/utils'
+import { getActiveUnitModifiers } from '@/utils'
 import { Unit } from '@repo/game/types'
 import { UnitModifiers } from './UnitModifiers'
 
@@ -13,7 +13,7 @@ export function UnitCombatModifiers(
   props: PropsWithClassname<UnitCombatModifiersProps>
 ) {
   const ctx = useCombatContext()
-  const modifiers = getUnitModifierRenderList(props.unit, ctx)
+  const modifiers = getActiveUnitModifiers(props.unit, ctx)
 
   return (
     <UnitModifiers

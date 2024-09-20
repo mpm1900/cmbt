@@ -14,6 +14,18 @@ export const DivineHealing: Augment = {
         maxInstances: 1,
         persistOnSwitch: true,
       }),
+      /*
+      new DamageSourceOnSelfTakeDamage({
+        registryId: LightningAuraOnTakeDamageId,
+        sourceId: unit.id,
+        parentId: unit.id,
+        damage: {
+          factor: 0.1,
+          attackType: 'magic',
+          damageType: 'shock',
+        },
+      }),
+      */
     ]
   },
   mutations(unit) {

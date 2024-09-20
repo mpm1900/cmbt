@@ -93,12 +93,14 @@ export function useCombatActions() {
           pushTriggers('on Unit Take Damage', context, {
             units: [target],
             damage,
+            result,
           })
         }
         if (result.source) {
           pushTriggers('on Unit Deal Damage', context, {
             units: [result.source],
             damage,
+            result,
           })
         }
       })

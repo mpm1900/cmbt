@@ -5,7 +5,7 @@ import {
 } from '@/components/ui/tooltip'
 import { cn } from '@/lib/utils'
 import { TAG_ICONS } from '@/renderers/Tags'
-import { getUnitModifierRenderList } from '@/utils'
+import { getActiveUnitModifiers } from '@/utils'
 import { SwitchUnitId } from '@repo/game/data'
 import { ActionResult, Id, TurnStatus, Unit } from '@repo/game/types'
 import { applyModifiers } from '@repo/game/utils'
@@ -66,7 +66,7 @@ export function UnitCard(props: UnitCardProps) {
   const { queue } = useActions()
   const { activeUnit, setActiveUnit, hoverTargetUnitIds } = useCombatUi()
   const { unit } = applyModifiers(props.unit, ctx)
-  const modifiers = getUnitModifierRenderList(props.unit, ctx)
+  const modifiers = getActiveUnitModifiers(props.unit, ctx)
   const stagedItem = queue.find((i) => i.action.sourceId === unit.id)
   const isSelectable = status === 'main' && !unit.flags.isStunned && !stagedItem
   const { isActive, isTargeted } = getUnitCardState({
@@ -77,9 +77,6 @@ export function UnitCard(props: UnitCardProps) {
     result,
   })
 
-  if (unit.name === 'Antonette') {
-    console.log(unit, combat.stagedActions)
-  }
   return (
     <motion.div
       layout

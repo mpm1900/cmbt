@@ -11,6 +11,7 @@ import {
   CallLightningId,
   ChainLightningId,
   ChillingGraspId,
+  CleaveId,
   DeathRitesId,
   DispelMagicId,
   DragonBreathId,
@@ -86,6 +87,7 @@ import { BodySlamRenderer } from './BodySlam'
 import { CallLightningRenderer } from './CallLightning'
 import { ChainLightningRenderer } from './ChainLightning'
 import { ChillingGraspRenderer } from './ChillingGrasp'
+import { CleaveRenderer } from './Cleave'
 import { DeathRitesRenderer } from './DeathRites'
 import { DispelMagicRenderer } from './DispelMagic'
 import { DragonBreathRenderer } from './DragonBreath'
@@ -111,7 +113,7 @@ import { MindBlastRenderer } from './MindBlast'
 import { MindShatterRenderer } from './MindShatter'
 import { MindTwistRenderer } from './MindTwist'
 import { NegateArmorRenderer } from './NegateArmor'
-import { PhantomSlashRender } from './PhantomSlash'
+import { PhantomSlashRender, PhantomSlashStagedRenderer } from './PhantomSlash'
 import { PiercingStrikeRenderer } from './PiercingStrike'
 import { PoisonSprayRenderer } from './PoisonSpray'
 import { PowerCleaveRenderer } from './PowerCleave'
@@ -172,6 +174,7 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
   [CallLightningId]: CallLightningRenderer,
   [ChainLightningId]: ChainLightningRenderer,
   [ChillingGraspId]: ChillingGraspRenderer,
+  [CleaveId]: CleaveRenderer,
   [DeathRitesId]: DeathRitesRenderer,
   [DispelMagicId]: DispelMagicRenderer,
   [DragonBreathId]: DragonBreathRenderer,
@@ -198,7 +201,7 @@ export const ActionRenderers: Record<string, ActionRenderer> = {
   [MindTwistId]: MindTwistRenderer,
   [NegateArmorId]: NegateArmorRenderer,
   [PhantomSlashId]: PhantomSlashRender,
-  [PhantomSlashStagedId]: PhantomSlashRender,
+  [PhantomSlashStagedId]: PhantomSlashStagedRenderer,
   [PiercingStrikeId]: PiercingStrikeRenderer,
   [PoisonSprayId]: PoisonSprayRenderer,
   [PowerCleaveId]: PowerCleaveRenderer,

@@ -2,6 +2,7 @@ import { nanoid } from 'nanoid'
 import { UnitBase, UnitBaseConfig } from '../../types'
 import {
   Block,
+  Cleave,
   DragonStance,
   Earthquake,
   ElixirOfPower,
@@ -18,6 +19,7 @@ import { Spikes } from '../Actions/Spikes'
 import { Inferno } from '../Augments'
 import {
   BlockId,
+  CleaveId,
   DragonStanceId,
   EarthquakeId,
   ElixirOfPowerId,
@@ -74,6 +76,10 @@ export const TyranitarConfig: UnitBaseConfig = {
     {
       id: BlockId,
       make: (u) => new Block(u.id, u.teamId),
+    },
+    {
+      id: CleaveId,
+      make: (u) => new Cleave(u.id, u.teamId),
     },
     {
       id: DragonStanceId,

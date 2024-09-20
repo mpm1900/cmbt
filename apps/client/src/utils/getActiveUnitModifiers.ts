@@ -1,7 +1,7 @@
 import { CombatContext, Trigger, Unit } from '@repo/game/types'
 import { applyModifiers } from '@repo/game/utils'
 
-export function getUnitModifierRenderList(unit: Unit, ctx: CombatContext) {
+export function getActiveUnitModifiers(unit: Unit, ctx: CombatContext) {
   const { appliedModifiers, delayedModifiers, registeredTriggers } =
     applyModifiers(unit, ctx)
 

@@ -1,10 +1,22 @@
 import { logActionIntent } from '@/utils'
+import { ActionResult } from '@repo/game/types'
 import { getTeamsWithLiveUnits, isUnitAlive } from '@repo/game/utils'
 import { useEffect } from 'react'
 import { useCombat, useCombatSettings } from '../state'
 import { useResults } from '../state/useResults'
 import { useCombatActions } from '../useCombatActions'
 import { useCombatContext } from '../useCombatContext'
+
+export function getSpeedFactor(result: ActionResult | undefined, turn: number) {
+  if (turn === 0 || !result) return 0
+  if (result.shouldLog && result.action) return 1
+
+  const mutations = result.mutations ?? []
+  if (result.shouldLog && mutations.length > 0) return 0.2
+  if (mutations.length > 0) return 0.1
+  console.log(result)
+  return 0
+}
 
 export function useResultsController() {
   const results = useResults()
@@ -15,8 +27,7 @@ export function useResultsController() {
   const { log, setTurn } = useCombat()
 
   const first = results.queue[0]
-  const speedFactor =
-    first && first.action && first.shouldLog && combat.turn.count > 0 ? 1 : 0
+  const speedFactor = getSpeedFactor(first, combat.turn.count)
   const speed = settings.gameSpeed * speedFactor
 
   useEffect(() => {

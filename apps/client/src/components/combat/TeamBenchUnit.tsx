@@ -1,6 +1,6 @@
 import { useCombatContext } from '@/hooks'
 import { cn } from '@/lib/utils'
-import { getUnitModifierRenderList } from '@/utils'
+import { getActiveUnitModifiers } from '@/utils'
 import { Unit } from '@repo/game/types'
 import {
   applyModifiers,
@@ -20,7 +20,7 @@ export function TeamBenchUnit(props: TeamBenchUnitProps) {
   const ctx = useCombatContext()
   const { unit } = applyModifiers(props.unit, ctx)
   const modifiers = unit.flags.isActive
-    ? getUnitModifierRenderList(props.unit, ctx)
+    ? getActiveUnitModifiers(props.unit, ctx)
     : getModifiersFromUnit(props.unit)
   const isAlive = isUnitAlive(unit)
 

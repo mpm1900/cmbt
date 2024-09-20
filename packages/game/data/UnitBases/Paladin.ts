@@ -5,6 +5,7 @@ import {
   Bless,
   Block,
   Boast,
+  Cleave,
   HealingPrayer,
   HealingWord,
   PhantomSlash,
@@ -21,6 +22,7 @@ import {
   BlessId,
   BlockId,
   BoastId,
+  CleaveId,
   DivineLightId,
   HealingPrayerId,
   HealingWordId,
@@ -84,6 +86,10 @@ export const PaladinConfig: UnitBaseConfig = {
     {
       id: BoastId,
       make: (u) => new Boast(u.id, u.teamId),
+    },
+    {
+      id: CleaveId,
+      make: (u) => new Cleave(u.id, u.teamId),
     },
     {
       id: HealingPrayerId,

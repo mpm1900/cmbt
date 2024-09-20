@@ -1,6 +1,7 @@
 export * from './AncientGolem'
 export * from './Bear'
 export * from './DeathKnight'
+export * from './FlameCultist'
 export * from './RestlessSpirit'
 export * from './Revenant'
 export * from './Snake'

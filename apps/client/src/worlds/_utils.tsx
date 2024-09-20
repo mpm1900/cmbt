@@ -18,7 +18,7 @@ import random from 'random'
 import { ReactNode } from 'react'
 import { BsQuestionLg } from 'react-icons/bs'
 
-export function edge(target: Id): WorldEdge {
+export function e(target: Id): WorldEdge {
   return {
     id: nanoid(),
     target,

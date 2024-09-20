@@ -1,6 +1,6 @@
 import { Id, World, WorldNode } from '@repo/game/types'
 import { nanoid } from 'nanoid'
-import { edge, NodeMaker } from '../_utils'
+import { e, NodeMaker } from '../_utils'
 import {
   CampEncounter,
   CombatEncounter,
@@ -48,7 +48,7 @@ const StartNode: WorldNode = {
     values: {},
     setup: () => {},
   },
-  edges: [edge(fcombat('0'))],
+  edges: [e(fcombat('0'))],
   seen: false,
   completed: true,
   repeatable: false,
@@ -150,19 +150,19 @@ export function makeWorld1_1(): World {
     activeNodeId: StartId,
     nodes: [
       StartNode,
-      { ...FirstCombatNode('0', [edge(village('0'))]), seen: true },
-      ShopNode('0', [edge(combat('1'))]),
-      CombatNode('0', [edge(combat('2'))], { retreatable: false }),
-      CombatNode('1', [edge(combat('2'))]),
-      CombatNode('4', [edge(golem('0')), edge(revive('0'))]),
-      ReviveNode('0', [edge(combat('4')), edge(combat('5'))]),
-      CombatNode('2', [edge(village('0')), edge(heal('0'))]),
-      HealingNode('0', [edge(combat('0')), edge(combat('3'))]),
-      CombatNode('3', [edge(golem('0')), edge(combat('6'))]),
-      GolemNode('0', [edge(combat('1')), edge(combat('4')), edge(heal('1'))]),
+      { ...FirstCombatNode('0', [e(village('0'))]), seen: true },
+      ShopNode('0', [e(combat('1'))]),
+      CombatNode('0', [e(combat('2'))], { retreatable: false }),
+      CombatNode('1', [e(combat('2'))]),
+      CombatNode('4', [e(golem('0')), e(revive('0'))]),
+      ReviveNode('0', [e(combat('4')), e(combat('5'))]),
+      CombatNode('2', [e(village('0')), e(heal('0'))]),
+      HealingNode('0', [e(combat('0')), e(combat('3'))]),
+      CombatNode('3', [e(golem('0')), e(combat('6'))]),
+      GolemNode('0', [e(combat('1')), e(combat('4')), e(heal('1'))]),
       CombatNode('5', [], { size: 30 }),
-      CombatNode('6', [edge(combat('3')), edge(revive('0'))]),
-      HealingNode('1', [edge(golem('0'))]),
+      CombatNode('6', [e(combat('3')), e(revive('0'))]),
+      HealingNode('1', [e(golem('0'))]),
     ],
   }
 }

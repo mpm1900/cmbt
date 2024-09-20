@@ -1,16 +1,5 @@
-import {
-  Action,
-  ActionAi,
-  ActionResult,
-  CombatContext,
-  Id,
-  Unit,
-} from '../../types'
-import {
-  buildActionResult,
-  getActionData,
-  getDamageAiRating,
-} from '../../utils'
+import { Action, ActionResult, CombatContext, Id, Unit } from '../../types'
+import { buildActionResult, getActionData } from '../../utils'
 import { PowerWordKillId } from '../Ids'
 import { DamageParent, Identity } from '../Mutations'
 import { GetUnits } from '../Queries'
@@ -43,9 +32,11 @@ export class PowerWordKill extends Action {
   }
   criticalThreshold = (source: Unit): number | undefined => undefined
   criticalFactor = (source: Unit): number | undefined => undefined
+  /*
   getAi(targets: Unit[], ctx: CombatContext): ActionAi {
     return getDamageAiRating(this, targets, ctx)
   }
+  */
 
   resolve = (
     source: Unit,

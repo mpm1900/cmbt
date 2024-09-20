@@ -1,5 +1,6 @@
 import {
   Bear,
+  FlameCultist,
   RestlessSpirit,
   Revenant,
   Snake,
@@ -33,6 +34,7 @@ export function CombatEncounter(): Encounter {
               RestlessSpirit,
               Revenant,
               Bear,
+              FlameCultist,
             ])
           ),
           commit: true,

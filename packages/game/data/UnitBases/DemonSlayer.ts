@@ -27,11 +27,11 @@ export const DemonSlayer: UnitBase = {
   name: 'Demon Slayer',
   stats: {
     ...BASE_UNIT.stats,
-    health: 80,
+    health: 70,
     attack: 120,
     defense: 60,
     magic: 60,
-    speed: 136,
+    speed: 130,
 
     focus: 40,
     stamina: 30,

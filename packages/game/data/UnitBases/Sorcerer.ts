@@ -39,7 +39,7 @@ export const Sorcerer: UnitBase = {
   name: 'Sorcerer',
   stats: {
     ...BASE_UNIT.stats,
-    health: 55,
+    health: 60,
     attack: 55,
     defense: 55,
     magic: 135,

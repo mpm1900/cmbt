@@ -94,7 +94,8 @@ export class ChainLightning extends Action {
       (u) =>
         u.flags.isActive &&
         u.teamId !== this.teamId &&
-        !targets.some((t) => t.id === u.id)
+        !targets.some((t) => t.id === u.id) &&
+        !u.flags.isProtected
     )
     this.setResults(getResults([50]))
     return [

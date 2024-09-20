@@ -16,7 +16,7 @@ export function getDamageAiRating(
   const enemeyTargets = targets.filter((u) => u.teamId !== source.id)
   const rating = getActionDamageRating(action).reduce((p, c) => p + c, 0)
   const targetFactor = enemeyTargets.length - allyTargets.length
-  const weight = rating * targetFactor * accuracy * random.float(0.8, 1.2)
+  const weight = rating * targetFactor * accuracy * random.float(0, 1.2)
 
   return {
     id: nanoid(),

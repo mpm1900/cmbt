@@ -12,9 +12,9 @@ import { GolemEncounter } from './encounters/GolemEncounter'
 
 const fcombat = (app: Id) => 'FirstCombat' + app
 const heal = (app: Id) => 'Spring' + app
-const shop = (app: Id) => 'Shop' + app
-const test = (app: Id) => 'Test' + app
-const lock = (app: Id) => 'Locked' + app
+const village = (app: Id) => 'Village' + app
+const combat = (app: Id) => 'Combat' + app
+const golem = (app: Id) => 'Golem' + app
 const revive = (app: Id) => 'Revive' + app
 
 export const FirstCombatId = nanoid()
@@ -58,7 +58,7 @@ const StartNode: WorldNode = {
 }
 
 const ShopNode: NodeMaker = (id, edges, overrides) => ({
-  id: shop(id),
+  id: village(id),
   size: 40,
   icon: '?',
   seenIcon: 'shop',
@@ -91,8 +91,8 @@ const HealingNode: NodeMaker = (id, edges, overrides) => ({
   ...overrides,
 })
 
-const TestNode: NodeMaker = (id, edges, overrides) => ({
-  id: test(id),
+const CombatNode: NodeMaker = (id, edges, overrides) => ({
+  id: combat(id),
   size: 20,
   icon: '?',
   seenIcon: 'combat',
@@ -127,8 +127,8 @@ const ReviveNode: NodeMaker = (id, edges, overrides) => ({
   ...overrides,
 })
 
-const LockedNode: NodeMaker = (id, edges, overrides) => ({
-  id: lock(id),
+const GolemNode: NodeMaker = (id, edges, overrides) => ({
+  id: golem(id),
   size: 20,
   icon: '?',
   visitedIcon: '?',
@@ -150,18 +150,19 @@ export function makeWorld1_1(): World {
     activeNodeId: StartId,
     nodes: [
       StartNode,
-      { ...FirstCombatNode('0', [edge(shop('0'))]), seen: true },
-      ShopNode('0', [edge(test('1'))]),
-      TestNode('0', [edge(test('2'))], { retreatable: false }),
-      TestNode('1', [edge(test('2'))]),
-      TestNode('4', [edge(lock('0')), edge(revive('0'))]),
-      ReviveNode('0', [edge(test('4')), edge(test('5'))]),
-      TestNode('2', [edge(shop('0')), edge(heal('0'))]),
-      HealingNode('0', [edge(test('0')), edge(test('3'))]),
-      TestNode('3', [edge(lock('0')), edge(test('6'))]),
-      LockedNode('0', [edge(test('1')), edge(test('4'))]),
-      TestNode('5', [], { size: 30 }),
-      TestNode('6', [edge(test('3')), edge(revive('0'))]),
+      { ...FirstCombatNode('0', [edge(village('0'))]), seen: true },
+      ShopNode('0', [edge(combat('1'))]),
+      CombatNode('0', [edge(combat('2'))], { retreatable: false }),
+      CombatNode('1', [edge(combat('2'))]),
+      CombatNode('4', [edge(golem('0')), edge(revive('0'))]),
+      ReviveNode('0', [edge(combat('4')), edge(combat('5'))]),
+      CombatNode('2', [edge(village('0')), edge(heal('0'))]),
+      HealingNode('0', [edge(combat('0')), edge(combat('3'))]),
+      CombatNode('3', [edge(golem('0')), edge(combat('6'))]),
+      GolemNode('0', [edge(combat('1')), edge(combat('4')), edge(heal('1'))]),
+      CombatNode('5', [], { size: 30 }),
+      CombatNode('6', [edge(combat('3')), edge(revive('0'))]),
+      HealingNode('1', [edge(golem('0'))]),
     ],
   }
 }

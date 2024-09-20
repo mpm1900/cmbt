@@ -77,6 +77,9 @@ export function UnitCard(props: UnitCardProps) {
     result,
   })
 
+  if (unit.name === 'Antonette') {
+    console.log(unit, combat.stagedActions)
+  }
   return (
     <motion.div
       layout

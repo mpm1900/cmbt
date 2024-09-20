@@ -3,7 +3,7 @@ import { UnitId } from '../data/Ids/_base'
 import { BASE_UNIT } from '../data/Units/system/BASE_UNIT'
 import { Id, Modifier, Mutation, Unit, UnitBuilder } from '../types'
 import { applyMutations } from './applyModifiers'
-import { mapBaseStat } from './mapBaseStat'
+import { getBaseStatValue } from './getBaseStatValue'
 
 function getMutationsFromBuilder(builder: UnitBuilder, unit: Unit): Mutation[] {
   const abilityMutations = builder.ability?.mutations(unit) ?? []
@@ -56,15 +56,23 @@ export function resolveUnitBuilder(builder: UnitBuilder, teamId: Id): Unit {
     xp: 0,
     stats: {
       ...builder.base.stats,
-      health: mapBaseStat('health', builder.base.stats.health, builder.level),
-      attack: mapBaseStat('attack', builder.base.stats.attack, builder.level),
-      defense: mapBaseStat(
+      health: getBaseStatValue(
+        'health',
+        builder.base.stats.health,
+        builder.level
+      ),
+      attack: getBaseStatValue(
+        'attack',
+        builder.base.stats.attack,
+        builder.level
+      ),
+      defense: getBaseStatValue(
         'defense',
         builder.base.stats.defense,
         builder.level
       ),
-      magic: mapBaseStat('magic', builder.base.stats.magic, builder.level),
-      speed: mapBaseStat('speed', builder.base.stats.speed, builder.level),
+      magic: getBaseStatValue('magic', builder.base.stats.magic, builder.level),
+      speed: getBaseStatValue('speed', builder.base.stats.speed, builder.level),
     },
     tags: builder.base.tags,
     registry: {

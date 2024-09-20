@@ -1,9 +1,10 @@
 import { useCombatContext } from '@/hooks'
 import { useGame } from '@/hooks/state'
-import { Trigger, Unit } from '@repo/game/types'
+import { Unit } from '@repo/game/types'
 import {
   applyMutations,
   getAllModifiersFromUnit,
+  getNonTriggerModifiers,
   getUnitBase,
   validateModifiers,
 } from '@repo/game/utils'
@@ -25,15 +26,10 @@ export function MenuUnit(props: SidebarUnitProps) {
     ...props.unit,
     flags: { ...props.unit.flags, isActive: true },
   }
-  const unit = applyMutations(
-    props.unit,
-    validateModifiers(
-      getAllModifiersFromUnit(mock).filter(
-        (m) => !(m instanceof Trigger) && m.filter(mock, ctx, {})
-      ),
-      []
-    )
-  )
+  const menuModifiers = getNonTriggerModifiers(
+    getAllModifiersFromUnit(mock)
+  ).filter((m) => m.filter(mock, ctx, {}))
+  const unit = applyMutations(props.unit, validateModifiers(menuModifiers))
   const remainingHealth = Math.max(unit.stats.health - unit.values.damage, 0)
   const ratio = (remainingHealth / unit.stats.health) * 100
 

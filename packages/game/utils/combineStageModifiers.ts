@@ -9,7 +9,9 @@ export function combineStageModifiers(modifiers: Modifier[]) {
       ) as UpdateStatStageParent
       if (base) {
         const stages = base.stages + modifier.stages
-        if (stages === 0) return result.filter((mod) => mod.key !== base.key)
+        if (stages === 0) {
+          return result.filter((mod) => mod.key !== base.key)
+        }
         return result.map((mod) => {
           if (mod.key === base.key) {
             return new UpdateStatStageParent({

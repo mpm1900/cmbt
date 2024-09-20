@@ -62,6 +62,7 @@ export class PhantomSlash extends Action {
         targets,
         ctx,
         (modifiedTargets) => ({
+          forceSuccess: true,
           onSuccess: {
             addedModifiers: [
               new IntangibleParent({
@@ -70,7 +71,7 @@ export class PhantomSlash extends Action {
                 duration: 2,
               }),
             ],
-            stagedActions: modifiedTargets.flatMap((target) => {
+            stagedActions: targets.flatMap((target) => {
               const index = ctx.units
                 .filter((u) => u.teamId === target.teamId && u.flags.isActive)
                 .map((u) => u.id)

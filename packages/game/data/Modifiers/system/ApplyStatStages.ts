@@ -8,7 +8,7 @@ import {
   StatKey,
   Unit,
 } from '../../../types'
-import { mapStageToMultiplier } from '../../../utils'
+import { getStageMultiplier } from '../../../utils'
 
 export const ApplyStatStagesId = nanoid()
 export class ApplyStatStages extends Modifier {
@@ -24,7 +24,7 @@ export class ApplyStatStages extends Modifier {
         Object.fromEntries(
           Object.entries(stats).map(([key, value]) => {
             const stage = unit.stages[key as StatKey] ?? 0
-            return [key, value * mapStageToMultiplier(stage)]
+            return [key, value * getStageMultiplier(stage)]
           })
         )
       ),

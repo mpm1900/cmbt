@@ -1,10 +1,6 @@
 import { getTeamsWithSelectionRequired } from '@/utils'
 import { GetUnits, SetIsActive } from '@repo/game/data'
-import {
-  applyModifiers,
-  getActionableUnits,
-  getBestAiAction,
-} from '@repo/game/utils'
+import { getActionableUnitsCtx, getBestAiAction } from '@repo/game/utils'
 import { useEffect } from 'react'
 import { useActions, useCleanup, useCombat, useCombatSettings } from '../state'
 import { useCombatContext } from '../useCombatContext'
@@ -19,8 +15,7 @@ export function useAiActions() {
   useEffect(() => {
     if (debug.isDebugMode) return
     if (combat.turn.status === 'main') {
-      const units = ctx.units.map((u) => applyModifiers(u, ctx).unit)
-      const aiUnits = getActionableUnits(units).filter(
+      const aiUnits = getActionableUnitsCtx(ctx).filter(
         (u) => u.teamId !== ctx.user
       )
       const aiActions = actions.queue.filter((i) =>

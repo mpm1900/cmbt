@@ -20,45 +20,48 @@ export function useResultsController() {
   const speed = settings.gameSpeed * speedFactor
 
   useEffect(() => {
-    if (first) {
-      const aliveTeams = getTeamsWithLiveUnits(combat.teams, ctx)
+    if (!first) {
+      return
+    }
 
-      if (aliveTeams.length === combat.teams.length) {
-        const shouldCommitResult =
-          !first.action ||
-          !first.expandedTargets?.length ||
-          first.expandedTargets?.some((t) =>
-            isUnitAlive(ctx.units.find((u) => u.id === t.id))
-          )
-        const shouldRenderResult =
-          first.action &&
-          first.shouldLog &&
-          shouldCommitResult &&
-          aliveTeams.length > 0
+    const aliveTeams = getTeamsWithLiveUnits(combat.teams, ctx)
+    if (aliveTeams.length !== combat.teams.length) {
+      combat.setStatus('done')
+      return
+    }
 
-        if (shouldRenderResult) {
-          logActionIntent(first.action!, first, log, ctx)
-          setTurn((t) => ({
-            results: t.results.concat(first),
-          }))
-        }
+    const hasLiveTarget = first.expandedTargets?.some((t) => {
+      const unit = ctx.units.find((u) => u.id === t.id)
+      return isUnitAlive(unit)
+    })
+    const shouldCommitResult =
+      !first.action || !first.expandedTargets?.length || hasLiveTarget
+    const shouldRenderResult =
+      first.action &&
+      first.shouldLog &&
+      shouldCommitResult &&
+      aliveTeams.length > 0
 
-        if (shouldCommitResult) {
+    if (shouldRenderResult) {
+      logActionIntent(first.action!, first, log, ctx)
+      setTurn((t) => ({
+        results: t.results.concat(first),
+      }))
+    }
+
+    if (shouldCommitResult) {
+      setTimeout(() => {
+        ctx = fns.commitResult(first, ctx)
+        setTimeout(() => {
+          fns.cleanupResult(first, ctx)
           setTimeout(() => {
-            ctx = fns.commitResult(first, ctx)
-            setTimeout(() => {
-              fns.cleanupResult(first, ctx)
-              setTimeout(() => {
-                results.dequeue()
-              }, speed)
-            }, speed)
+            results.dequeue()
           }, speed)
-        } else {
-          results.dequeue()
-        }
-      } else {
-        combat.setStatus('done')
-      }
+        }, speed)
+      }, speed)
+    } else {
+      results.dequeue()
+      return
     }
   }, [first])
 }

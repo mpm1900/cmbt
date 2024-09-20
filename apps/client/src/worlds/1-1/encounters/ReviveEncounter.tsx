@@ -1,12 +1,7 @@
 import { ChoiceLabel } from '@/components/encounter/ChoiceLabel'
 import { Narration } from '@/components/encounter/Narration'
-import {
-  Encounter,
-  EncounterChoice,
-  EncounterNode,
-  Trigger,
-} from '@repo/game/types'
-import { applyMutations, getAllModifiersFromUnit } from '@repo/game/utils'
+import { Encounter, EncounterChoice, EncounterNode } from '@repo/game/types'
+import { applyModifiersEncounter } from '@repo/game/utils'
 import { nanoid } from 'nanoid'
 import { GiHeartWings, GiStarAltar } from 'react-icons/gi'
 import { IoMdReturnLeft, IoMdReturnRight } from 'react-icons/io'
@@ -25,12 +20,7 @@ const ReviveIntroductionNode: EncounterNode = {
   ),
   choices: (ctx) => {
     const deadUnits = ctx.units
-      .map((u) => {
-        return applyMutations(
-          u,
-          getAllModifiersFromUnit(u).filter((m) => !(m instanceof Trigger))
-        )
-      })
+      .map((u) => applyModifiersEncounter(u))
       .filter((u) => u.stats.health <= u.values.damage)
 
     return [

@@ -2,7 +2,7 @@ import { LogCritical } from '@/components/ui/log'
 import { getDamageFromMutations } from '@/utils'
 import { handleTriggerEvent } from '@/utils/handleTriggerEvent'
 import { logResult } from '@/utils/logResult'
-import { SetDeadAsInactive } from '@repo/game/data'
+import { GetUnits, SetDeadAsInactive } from '@repo/game/data'
 import {
   ActionResult,
   CombatContext,
@@ -10,7 +10,6 @@ import {
   Trigger,
   TriggerEvent,
 } from '@repo/game/types'
-import { isUnitAliveCtx } from '@repo/game/utils'
 import { useActions, useCombat } from './state'
 import { useResults } from './state/useResults'
 
@@ -34,9 +33,11 @@ export function useCombatActions() {
     const first = results.queue[0]
     if (first.id !== result.id) return
 
-    const deadActiveUnits = context.units.filter(
-      (u) => u.flags.isActive && !isUnitAliveCtx(u, context)
-    )
+    const deadActiveUnits = new GetUnits({
+      isActive: true,
+      isAlive: false,
+    }).resolve(context)
+
     deadActiveUnits.forEach((u) => {
       combat.log(<LogCritical>{u.name} fell.</LogCritical>)
     })

@@ -1,6 +1,6 @@
 import { StatKey } from '../types'
 
-export function mapBaseStat(
+export function getBaseStatValue(
   key: StatKey,
   base: number,
   _level: number

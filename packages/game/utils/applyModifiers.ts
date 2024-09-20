@@ -1,6 +1,8 @@
 import { ApplyStatStages, ApplyStatStagesId } from '../data'
 import { CombatContext, Modifier, Trigger, Unit } from '../types'
 import { Mutation, MutationFilterArgs } from '../types/Mutation'
+import { getAllModifiersFromUnit } from './getModifiersFromUnit'
+import { getNonTriggerModifiers } from './getNonTriggerModifiers'
 
 export type ApplyModifiersResult = {
   unit: Unit
@@ -83,4 +85,9 @@ export function applyModifiers(
       },
     },
   }
+}
+
+export function applyModifiersEncounter(unit: Unit): Unit {
+  const modifiers = getNonTriggerModifiers(getAllModifiersFromUnit(unit))
+  return applyMutations(unit, modifiers)
 }

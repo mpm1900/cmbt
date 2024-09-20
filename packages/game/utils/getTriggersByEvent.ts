@@ -16,10 +16,8 @@ export function getTriggersByEvent(
   return modifiers
     .filter((m) => m instanceof Trigger)
     .filter((t) => {
-      return (
-        t.events.includes(event) &&
-        (t.delay ?? 0) <= 0 &&
-        ctx.units.some((u) => t.filter(u, ctx, args))
-      )
+      const hasUnits = ctx.units.some((u) => t.filter(u, ctx, args))
+      const isDelayed = (t.delay ?? 0) > 0
+      return t.events.includes(event) && !isDelayed && hasUnits
     })
 }

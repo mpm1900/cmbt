@@ -1,5 +1,5 @@
 import { CombatContext, Id, Query, Unit } from '../../types'
-import { isUnitAliveCtx, isUnitHiddenCtx } from '../../utils'
+import { applyModifiers, isUnitAlive, isUnitHidden } from '../../utils'
 
 export type GetUnitsProps = {
   notId?: Id
@@ -43,11 +43,13 @@ export class GetUnits extends Query<Unit[]> {
       if (this.isActive !== undefined) {
         value = value && unit.flags.isActive === this.isActive
       }
+
+      unit = applyModifiers(unit, ctx).unit
       if (this.isAlive !== undefined) {
-        value = value && this.isAlive === isUnitAliveCtx(unit, ctx)
+        value = value && this.isAlive === isUnitAlive(unit)
       }
       if (this.isHidden !== undefined) {
-        value = value && this.isHidden === isUnitHiddenCtx(unit, ctx)
+        value = value && this.isHidden === isUnitHidden(unit)
       }
 
       return value

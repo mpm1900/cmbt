@@ -7,10 +7,13 @@ import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover'
 
 export type ItemUseButtonProps = {
   item: Item
+  onClose: () => void
+  onClick: () => void
+  onUnitClick: () => void
 }
 
 export function ItemUseButton(props: ItemUseButtonProps) {
-  const { item } = props
+  const { item, onClose, onClick, onUnitClick } = props
   const baseAction = item.action!(BASE_UNIT)
   const ctx = useEncounterContext()
   const cmbt = useCombatContext()
@@ -20,12 +23,12 @@ export function ItemUseButton(props: ItemUseButtonProps) {
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <Button size="sm" variant="ghost">
+        <Button size="sm" variant="ghost" onClick={onClick}>
           Use
         </Button>
       </PopoverTrigger>
       <PopoverPortal>
-        <PopoverContent className="w-full">
+        <PopoverContent className="w-full" onCloseAutoFocus={onClose}>
           <div className="flex space-x-2">
             {units.map((unit) => (
               <Button
@@ -33,6 +36,7 @@ export function ItemUseButton(props: ItemUseButtonProps) {
                 variant="outline"
                 onClick={() => {
                   ctx.useItem(item, unit)
+                  onUnitClick()
                 }}
               >
                 {unit.name}

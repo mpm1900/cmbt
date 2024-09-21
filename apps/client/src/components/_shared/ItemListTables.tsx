@@ -13,7 +13,7 @@ export function ItemListTables(
   const { items, team, unit, costMultiplier, sellTeam, onSellClick } = props
   const consumables = items.filter((i) => !!i.action)
   const augments = items.filter((i) => !!i.augment)
-  const sellItems = groupItemsById(team.items)
+  const sellItems = groupItemsById(team?.items ?? [])
 
   return (
     <Tabs defaultValue="all">

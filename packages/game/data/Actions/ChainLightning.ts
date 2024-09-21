@@ -135,7 +135,6 @@ export class ChainLightning extends Action {
         expandedTargets: expandedTargets,
         mutations: expandedTargets.flatMap((t) => {
           const damages = i === 0 ? this.damages : [this.chainDamages[i - 1]]
-          console.log(damages)
           const damage = calculateDamages(
             damages,
             data.source,

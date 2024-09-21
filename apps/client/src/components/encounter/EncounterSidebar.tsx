@@ -41,10 +41,6 @@ export function EncounterSidebar(props: EncounterSidebarProps) {
                 unit={ZERO_UNIT}
                 items={groupedItems}
                 costMultiplier={1}
-                quantities={Object.fromEntries(
-                  groupedItems.map((i) => [i.id, i.count])
-                )}
-                resources={{ credits: 0 }}
               />
             </div>
           </TabsContent>

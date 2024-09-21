@@ -10,13 +10,14 @@ export type ItemHoverProps = PropsWithChildren<{
   item: Item
   unit: Unit
   side?: 'top' | 'right' | 'bottom' | 'left'
+  open?: boolean
 }>
 
 export function ItemHover(props: ItemHoverProps) {
-  const { item, unit, children, side } = props
+  const { item, unit, children, side, open } = props
   const renderer = ItemRarityRenderers[item.rarity]
   return (
-    <HoverCard openDelay={100} closeDelay={0}>
+    <HoverCard openDelay={100} closeDelay={0} open={open}>
       <HoverCardTrigger asChild>{children}</HoverCardTrigger>
 
       <HoverCardPortal>

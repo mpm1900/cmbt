@@ -83,7 +83,7 @@ export function EditUnitModal(props: EditUnitModalProps) {
                     />
                     <Button
                       variant="destructive"
-                      className="p-2 opacity-60 hover:opacity-100"
+                      className="p-2 hover:opacity-100"
                       onClick={() => {
                         onChange({
                           augments: unit.augments.filter((a, i) => i !== index),

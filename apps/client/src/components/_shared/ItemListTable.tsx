@@ -18,13 +18,14 @@ export type ItemListTableProps = {
   unit: Unit
   items: GroupedItem[]
   costMultiplier: number
-  team: Team
+  team?: Team
+  open?: boolean
   action?: (item: Item) => ReactNode
   onClick?: (item: Item) => void
 }
 
 export function ItemListTable(props: ItemListTableProps) {
-  const { unit, items, costMultiplier, team, onClick, action } = props
+  const { unit, items, costMultiplier, team, open, onClick, action } = props
   const quantities = Object.fromEntries(items.map((i) => [i.id, i.count]))
 
   return (
@@ -47,7 +48,13 @@ export function ItemListTable(props: ItemListTableProps) {
             .map((item) => {
               const cost = Math.round(item.cost * costMultiplier)
               return (
-                <ItemHover key={item.rtid} item={item} unit={unit} side="right">
+                <ItemHover
+                  key={item.rtid}
+                  item={item}
+                  unit={unit}
+                  side="right"
+                  open={open}
+                >
                   <TableRow>
                     <TableCell
                       className={cn('w-full')}
@@ -59,7 +66,7 @@ export function ItemListTable(props: ItemListTableProps) {
                     <TableCell
                       className={cn('', {
                         'text-red-400':
-                          !!onClick && (team.resources.credits ?? 0) < cost,
+                          !!onClick && (team?.resources.credits ?? 0) < cost,
                       })}
                     >
                       <div className="flex items-center">
@@ -80,14 +87,14 @@ export function ItemListTable(props: ItemListTableProps) {
                       <TableCell className="p-0">
                         <Button
                           disabled={
-                            (team.resources.credits ?? 0) < cost ||
+                            (team?.resources.credits ?? 0) < cost ||
                             quantities[item.id] <= 0
                           }
                           size="sm"
                           variant="ghost"
                           className={cn({
                             'text-red-400':
-                              (team.resources.credits ?? 0) < cost ||
+                              (team?.resources.credits ?? 0) < cost ||
                               quantities[item.id] <= 0,
                           })}
                           onClick={() => {

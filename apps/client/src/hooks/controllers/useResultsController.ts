@@ -14,7 +14,6 @@ export function getSpeedFactor(result: ActionResult | undefined, turn: number) {
   const mutations = result.mutations ?? []
   if (result.shouldLog && mutations.length > 0) return 0.2
   if (mutations.length > 0) return 0.1
-  console.log(result)
   return 0
 }
 

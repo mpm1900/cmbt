@@ -12,11 +12,6 @@ export function CampEncounterTabs(ctx: EncounterContext) {
   const nid = ctx.activeNode.id
   return [
     choice({
-      label: <>Inn</>,
-      active: nid === CampEncounterInnId,
-      to: CampEncounterInnId,
-    }),
-    choice({
       active:
         nid === CampEncounterCombatTraining01Id ||
         nid === CampEncounterCombatTraining02Id ||
@@ -24,6 +19,11 @@ export function CampEncounterTabs(ctx: EncounterContext) {
         nid === CampEncounterCombatTrainingCombatEndId,
       label: <>Combat Training</>,
       to: CampEncounterCombatTraining02Id,
+    }),
+    choice({
+      label: <>Inn</>,
+      active: nid === CampEncounterInnId,
+      to: CampEncounterInnId,
     }),
   ]
 }

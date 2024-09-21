@@ -31,13 +31,13 @@ export const CampEncounterStart: EncounterNode = {
   choices() {
     return [
       choice({
-        label: 'Go to the Inn',
-        to: CampEncounterInnId,
+        label: 'Go to combat training',
+        to: CampEncounterCombatTraining02Id,
         action: true,
       }),
       choice({
-        label: 'Go to combat training',
-        to: CampEncounterCombatTraining02Id,
+        label: 'Go to the Inn',
+        to: CampEncounterInnId,
         action: true,
       }),
       choice({

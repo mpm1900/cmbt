@@ -1,3 +1,4 @@
+import { nanoid } from 'nanoid'
 import random from 'random'
 import {
   Action,
@@ -9,7 +10,7 @@ import {
   Unit,
 } from '../../types'
 import {
-  buildActionResult,
+  applyModifiers,
   calculateDamages,
   getActionData,
   getDamageAiRating,
@@ -58,7 +59,7 @@ export class ChainLightning extends Action {
     ]
     this.chainDamages = [
       {
-        power: 40,
+        power: 20,
         attackType: 'magic',
         damageType: 'shock',
       },
@@ -89,23 +90,6 @@ export class ChainLightning extends Action {
     return getDamageAiRating(this, targets, ctx)
   }
 
-  mapTargets = (targets: Unit[], ctx: CombatContext): Unit[] => {
-    const activeEnemyUnits = ctx.units.filter(
-      (u) =>
-        u.flags.isActive &&
-        u.teamId !== this.teamId &&
-        !targets.some((t) => t.id === u.id) &&
-        !u.flags.isProtected
-    )
-    this.setResults(getResults([50]))
-    return [
-      ...targets,
-      ...this.results
-        .filter(Boolean)
-        .map((result) => getRandom(activeEnemyUnits)),
-    ]
-  }
-
   resolve = (
     source: Unit,
     targets: Unit[],
@@ -114,45 +98,58 @@ export class ChainLightning extends Action {
     const data = getActionData(source, this, ctx)
     const applyModifierRoll = random.int(0, 100)
     const applyCharge = applyModifierRoll <= this.chargeChance
-    const [first, ...chainTargets] = this.mapTargets(targets, ctx)
+    const enemyUnits = ctx.units.filter(
+      (u) => u.flags.isActive && u.teamId !== this.teamId
+    )
+    const modifiedTargets = targets.map((t) => applyModifiers(t, ctx).unit)
+    const baseTargets = this.mapTargets(modifiedTargets, ctx)
+    const modifiedEnemyUnits = enemyUnits.map(
+      (u) => applyModifiers(u, ctx).unit
+    )
+    const availableEnemyUnits = modifiedEnemyUnits.filter(
+      (u) => !targets.some((t) => t.id === u.id)
+    )
 
-    const results = [
-      buildActionResult(this, data, source, targets, ctx, (modifiedTargets) => {
-        const damage = calculateDamages(
-          this.damages,
-          data.source,
-          first,
-          data.accuracyRoll
-        )
+    const success =
+      data.source.flags.isBlessed ||
+      (data.accuracyRoll.success &&
+        !data.source.flags.isBaned &&
+        this.filter(data.source, ctx))
 
-        return {
-          expandedTargets: [first],
-          onSuccess: {
-            mutations: getMutationsFromDamageResult(source, first, damage),
-            addedModifiers:
-              applyCharge && modifiedTargets.length > 0
-                ? Charged.modifiers(source, source)
-                : [],
-          },
-        }
-      }),
-      ...chainTargets.map((target, i) => {
-        return buildActionResult(this, data, source, targets, ctx, () => {
+    this.setResults(getResults([success ? 100 : 0, ...this.chainChances]))
+
+    const results = this.results.map<ActionResult>((s, i) => {
+      const resultTargets =
+        i === 0 ? baseTargets : [getRandom(availableEnemyUnits)]
+      const expandedTargets = resultTargets.filter((t) => !t.flags.isProtected)
+
+      return {
+        id: nanoid(),
+        data,
+        shouldLog: true,
+        success: s,
+        action: this,
+        source,
+        targets: resultTargets,
+        protectedTargets: baseTargets.filter((t) => t.flags.isProtected),
+        expandedTargets: expandedTargets,
+        mutations: expandedTargets.flatMap((t) => {
+          const damages = i === 0 ? this.damages : [this.chainDamages[i - 1]]
+          console.log(damages)
           const damage = calculateDamages(
-            [this.chainDamages[i]],
+            damages,
             data.source,
-            target,
+            t,
             data.accuracyRoll
           )
-          return {
-            expandedTargets: [target],
-            onSuccess: {
-              mutations: getMutationsFromDamageResult(source, target, damage),
-            },
-          }
-        })
-      }),
-    ]
+          return getMutationsFromDamageResult(source, t, damage)
+        }),
+        addedModifiers:
+          applyCharge && s && i === 0 && modifiedTargets.length > 0
+            ? Charged.modifiers(source, source)
+            : [],
+      }
+    })
 
     this.clearResults()
     return results

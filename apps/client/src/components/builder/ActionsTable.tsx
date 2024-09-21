@@ -15,7 +15,7 @@ export function ActionsTable(props: ActionsTablePrpos) {
     <ActionListTable
       makers={builder.config.actions}
       selectedActionIds={builder.actions.map((m) => m.make(ZERO_UNIT).id)}
-      maxActionCount={builder.config.actionsCount}
+      maxActionCount={builder.base.stats.memory}
       onSelect={(maker, isSelected) => {
         if (isSelected) {
           store.updateBuilder(builder.id, (b) => ({

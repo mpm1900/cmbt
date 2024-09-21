@@ -44,7 +44,7 @@ export type CombatState = Omit<CombatContext, 'queue'> & {
   updateLog: (id: Id, fn: (log: CombatLog) => Partial<CombatLog>) => void
 }
 export type CombatStore = CombatState & {
-  initialize: (props: InitializeProps) => CombatStore
+  initialize: (props: InitializeProps, ctx: CombatContext) => CombatStore
 
   // units
   setUnits: (units: Unit[]) => Unit[]
@@ -55,8 +55,8 @@ export type CombatStore = CombatState & {
   ): Unit[]
 
   // modifiers
-  add(modifiers: Modifier[]): Modifier[]
-  removeWhere(filter: (modifier: Modifier) => boolean): Modifier[]
+  addModifiers(modifiers: Modifier[]): Modifier[]
+  removeModifiersWhere(filter: (modifier: Modifier) => boolean): Modifier[]
   updateModifiers: (setter: (modifiers: Modifier[]) => Modifier[]) => Modifier[]
   removeZeroModifiers(): Modifier[]
   decrementModifiers(): Modifier[]
@@ -84,8 +84,23 @@ export type CombatStore = CombatState & {
 }
 
 export const useCombat = create<CombatStore>((set, get) => {
+  function mutate(
+    units: Unit[],
+    mutations: Mutation[],
+    ctx: CombatContext,
+    args: MutationFilterArgs
+  ): Unit[] {
+    return units.map((unit) =>
+      mutations.reduce<Unit>(
+        (u, mutation) =>
+          mutation.filter(u, ctx, args) ? { ...u, ...mutation.resolve(u) } : u,
+        unit
+      )
+    )
+  }
+
   return {
-    initialize: (props) => {
+    initialize: (props, ctx) => {
       const {
         units,
         user,
@@ -106,7 +121,7 @@ export const useCombat = create<CombatStore>((set, get) => {
       ]
 
       set({
-        units: units,
+        units: mutate(units, mutations, ctx, {}),
         teams: [user, enemy],
         user: user.id,
         commit,
@@ -134,26 +149,18 @@ export const useCombat = create<CombatStore>((set, get) => {
     mutate(mutations, ctx, args) {
       args = args ?? {}
       set(({ units }) => ({
-        units: units.map((unit) =>
-          mutations.reduce<Unit>(
-            (u, mutation) =>
-              mutation.filter(u, ctx, args)
-                ? { ...u, ...mutation.resolve(u) }
-                : u,
-            unit
-          )
-        ),
+        units: mutate(units, mutations, ctx, args),
       }))
       return get().units
     },
     modifiers: [],
-    add(modifiers) {
+    addModifiers(modifiers) {
       set((state) => ({
         modifiers: [...state.modifiers, ...modifiers],
       }))
       return get().modifiers
     },
-    removeWhere(clause) {
+    removeModifiersWhere(clause) {
       set(({ modifiers }) => ({
         modifiers: modifiers.filter((m) => !clause(m)),
       }))

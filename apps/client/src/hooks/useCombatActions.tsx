@@ -60,7 +60,7 @@ export function useCombatActions() {
       })
     }
 
-    context.modifiers = combat.removeWhere((modifier) => {
+    context.modifiers = combat.removeModifiersWhere((modifier) => {
       const parent = context.units.find((u) => u.id === modifier.parentId)
       return !!parent && !parent?.flags.isActive
     })
@@ -106,7 +106,7 @@ export function useCombatActions() {
       })
     }
     if (addedModifiers?.length) {
-      context.modifiers = combat.add(addedModifiers)
+      context.modifiers = combat.addModifiers(addedModifiers)
     }
     if (updateModifiers) {
       context.modifiers = combat.updateModifiers(updateModifiers)

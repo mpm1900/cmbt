@@ -52,7 +52,7 @@ export class ChainLightning extends Action {
 
     this.damages = [
       {
-        power: 80,
+        power: 70,
         attackType: 'magic',
         damageType: 'shock',
       },

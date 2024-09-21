@@ -88,6 +88,9 @@ export const StatRenderers: Record<StatKey, StatRenderer> = {
   magicNegation: {
     name: <>Magic Negation</>,
   },
+  memory: {
+    name: <>Memory </>,
+  },
   physicalExpansion: {
     name: <>Physical Damage</>,
   },

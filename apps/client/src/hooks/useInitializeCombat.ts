@@ -26,20 +26,23 @@ export function useInitializeCombat() {
     const units = [...userUnits, ...enemyUnits]
     actions.setQueue(() => [])
     cleanup.setQueue(() => [])
-    combat.initialize({
-      units: units.map((u) => ({
-        ...u,
-        modifiers: () => getAllModifiersFromUnit(u),
-      })),
-      user: userTeam,
-      enemy: enemyTeam,
-      commit,
-      reward,
-      modifiers,
-      mutations,
-      onFailure,
-      onSuccess,
-    })
+    combat.initialize(
+      {
+        units: units.map((u) => ({
+          ...u,
+          modifiers: () => getAllModifiersFromUnit(u),
+        })),
+        user: userTeam,
+        enemy: enemyTeam,
+        commit,
+        reward,
+        modifiers,
+        mutations,
+        onFailure,
+        onSuccess,
+      },
+      combat
+    )
 
     navigate({
       to: '/combat',

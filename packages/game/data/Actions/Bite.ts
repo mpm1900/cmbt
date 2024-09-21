@@ -20,7 +20,7 @@ import { GetUnits } from '../Queries'
 import { Bleed } from '../Statuses'
 
 export class Bite extends Action {
-  bleedChance: number = 100
+  bleedChance: number = 10
 
   constructor(sourceId: Id, teamId: Id) {
     super(BiteId, {

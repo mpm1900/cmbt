@@ -11,9 +11,12 @@ import {
   StatKey,
   Unit,
 } from '@repo/game/types'
-import { getAllModifiersFromUnit, getUnitBase } from '@repo/game/utils'
+import {
+  convertAttackType,
+  getAllModifiersFromUnit,
+  getUnitBase,
+} from '@repo/game/utils'
 import { ReactNode } from '@tanstack/react-router'
-import { convertAttackType } from '../../../../../packages/game/utils/convertAttackType'
 import { AttackTypeBadge } from './AttackTypeBadge'
 import { HealthBadge } from './HealthBadge'
 import { MagicArmor } from './MagicArmor'

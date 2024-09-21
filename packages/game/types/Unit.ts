@@ -41,7 +41,7 @@ export type ValueKey =
   | 'devotion'
   | 'focus'
   | 'stamina'
-  | `${AttackType}Armor`
+  | `${UnitAttackType}Armor`
 export type Values = Record<ValueKey, number>
 
 export type FlagKey =

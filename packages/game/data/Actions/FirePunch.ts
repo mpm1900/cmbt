@@ -37,8 +37,13 @@ export class FirePunch extends Action {
 
     this.damages = [
       {
-        power: 75,
+        power: 65,
         attackType: 'physical',
+        damageType: 'fire',
+      },
+      {
+        power: 20,
+        attackType: 'magic',
         damageType: 'fire',
       },
     ]

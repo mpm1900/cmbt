@@ -1,4 +1,5 @@
 import { Id, Unit, UnitBase } from '../types'
+import { getRandom } from './getRandom'
 import { makeUnitBuilder } from './makeUnitBuilder'
 import { rebuildUnit } from './rebuildUnit'
 import { resolveUnitBuilder } from './resolveUnitBuilder'
@@ -10,8 +11,7 @@ export type MakeUnitConfig = {
 
 export function makeUnit(config: MakeUnitConfig, bases: UnitBase[]): Unit {
   const { level, teamId } = config
-  const baseIndex = Math.floor(Math.random() * bases.length)
-  const base = bases[baseIndex]
+  const base = getRandom(bases)
   const builder = makeUnitBuilder(base.id, level)
   const unit = resolveUnitBuilder(builder, teamId)
   // unit.values.damage = unit.stats.health - 2

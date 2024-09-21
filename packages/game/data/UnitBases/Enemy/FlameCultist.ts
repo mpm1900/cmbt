@@ -1,7 +1,7 @@
 import { nanoid } from 'nanoid'
 import { UnitBase, UnitBaseConfig } from '../../../types'
-import { Fireball, Protect } from '../../Actions'
-import { FireballId, ProtectId } from '../../Ids'
+import { Bane, Fireball, Protect } from '../../Actions'
+import { BaneId, FireballId, ProtectId } from '../../Ids'
 import { BASE_UNIT } from '../../Units/system/BASE_UNIT'
 
 export const FlameCultistId = nanoid()
@@ -33,6 +33,10 @@ export const FlameCultistConfig: UnitBaseConfig = {
   actionsCount: 5,
   actions: [
     {
+      id: BaneId,
+      make: (u) => new Bane(u.id, u.teamId),
+    },
+    {
       id: FireballId,
       make: (u) => new Fireball(u.id, u.teamId),
     },
@@ -42,5 +46,5 @@ export const FlameCultistConfig: UnitBaseConfig = {
     },
   ],
   defaultAbilityId: undefined,
-  defaultActionIds: [FireballId, ProtectId],
+  defaultActionIds: [BaneId, FireballId, ProtectId],
 }

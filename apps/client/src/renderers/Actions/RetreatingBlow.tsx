@@ -13,6 +13,8 @@ export const RetreatingBlowRenderer: ActionRenderer = {
     )
   },
   failureLog: (result) => {
-    return <>Cannot retreat. Attack failed.</>
+    if (result.data?.source.flags.isBaned || !result.data?.accuracyRoll.success)
+      return <></>
+    return <>No available allies, attack failed.</>
   },
 }

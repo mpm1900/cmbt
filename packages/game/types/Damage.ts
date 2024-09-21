@@ -19,6 +19,8 @@ export const DAMAGE_TYPES: DamageType[] = [
   'force',
 ]
 
+// export type DamageAttackType = AttackType | 'physical-reverse' | 'magic-reverse'
+
 export type Damage = {
   attackType?: AttackType
   damageType?: DamageType

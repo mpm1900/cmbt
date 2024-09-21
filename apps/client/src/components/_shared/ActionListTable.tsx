@@ -41,11 +41,11 @@ export function ActionListTable(props: ActionListTableProps) {
       <TableHeader>
         <TableRow>
           {onSelect && <TableHead></TableHead>}
-          <TableHead>Req</TableHead>
+          <TableHead>Lv</TableHead>
           <TableHead>Name</TableHead>
           <TableHead>Type</TableHead>
           <TableHead>Power</TableHead>
-          <TableHead>Accuracy</TableHead>
+          <TableHead>Acc</TableHead>
           <TableHead>Cost</TableHead>
           <TableHead>Critical</TableHead>
         </TableRow>

@@ -1,6 +1,9 @@
+import { nanoid } from 'nanoid'
+import random from 'random'
 import {
   Action,
   ACTION_PRIORITIES,
+  ActionAi,
   ActionResult,
   CombatContext,
   Id,
@@ -34,6 +37,15 @@ export class Bane extends Action {
 
   filter = (source: Unit, ctx: CombatContext) => {
     return super.filter(source, ctx) && source.metadata.activeTurns === 1
+  }
+
+  getAi(targets: Unit[], ctx: CombatContext): ActionAi {
+    return {
+      id: nanoid(),
+      action: this,
+      weight: targets.every((t) => t.flags.isBaned) ? 0 : random.int(201, 401),
+      targetIds: targets.map((t) => t.id),
+    }
   }
 
   resolve = (

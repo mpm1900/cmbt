@@ -22,6 +22,14 @@ export function getAttackDefenseRatio(
     return power * (source.stats.magic / target.stats.magic)
   }
 
+  if (attackType === 'physical-reverse') {
+    return power * (source.stats.attack / target.stats.magic)
+  }
+
+  if (attackType === 'magic-reverse') {
+    return power * (source.stats.magic / target.stats.defense)
+  }
+
   return power
 }
 
@@ -70,6 +78,8 @@ export function getAttackTypeNegation(
   target: Unit | undefined
 ) {
   if (!type || !target) return 1
+  // if (type === 'magic-reverse') type = 'physical'
+  // if (type === 'physical-reverse') type = 'magic'
   const typeNegation = target.stats[`${type}Negation`]
   return (100 - typeNegation) / 100
 }
@@ -78,6 +88,8 @@ export function getAttackTypeExpansion(
   target: Unit | undefined
 ) {
   if (!type || !target) return 1
+  // if (type === 'magic-reverse') type = 'magic'
+  // if (type === 'physical-reverse') type = 'physical'
   const typeExpansion = target.stats[`${type}Expansion`]
   return typeExpansion / 100
 }

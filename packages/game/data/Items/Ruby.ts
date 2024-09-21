@@ -13,6 +13,7 @@ export const Ruby = (): Item => {
     name: 'Ruby',
     cost: 1000,
     rarity: 'rare',
+    canSell: true,
     augment: {
       id: RubyAugmentId,
       itemRtid: rtid,

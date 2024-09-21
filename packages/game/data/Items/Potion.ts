@@ -58,6 +58,7 @@ export const Potion = (): Item => ({
   rtid: nanoid(),
   name: 'Potion',
   rarity: 'common',
+  canSell: true,
   action: (u: Unit) =>
     new PotionAction({
       sourceId: u.id,

@@ -1,6 +1,6 @@
 import { cn } from '@/lib/utils'
 import { ItemRarityRenderers } from '@/renderers/ItemRarity'
-import { GroupedItem, Id, Item, TeamResources, Unit } from '@repo/game/types'
+import { GroupedItem, Item, Team, Unit } from '@repo/game/types'
 import { ReactNode } from 'react'
 import { GiCreditsCurrency } from 'react-icons/gi'
 import { Button } from '../ui/button'
@@ -18,22 +18,14 @@ export type ItemListTableProps = {
   unit: Unit
   items: GroupedItem[]
   costMultiplier: number
-  quantities: Record<Id, number>
-  resources: TeamResources
+  team: Team
   action?: (item: Item) => ReactNode
   onClick?: (item: Item) => void
 }
 
 export function ItemListTable(props: ItemListTableProps) {
-  const {
-    unit,
-    items,
-    costMultiplier,
-    quantities,
-    resources,
-    onClick,
-    action,
-  } = props
+  const { unit, items, costMultiplier, team, onClick, action } = props
+  const quantities = Object.fromEntries(items.map((i) => [i.id, i.count]))
 
   return (
     <div>
@@ -67,7 +59,7 @@ export function ItemListTable(props: ItemListTableProps) {
                     <TableCell
                       className={cn('', {
                         'text-red-400':
-                          !!onClick && (resources.credits ?? 0) < cost,
+                          !!onClick && (team.resources.credits ?? 0) < cost,
                       })}
                     >
                       <div className="flex items-center">
@@ -88,13 +80,14 @@ export function ItemListTable(props: ItemListTableProps) {
                       <TableCell className="p-0">
                         <Button
                           disabled={
-                            (resources.credits ?? 0) < cost ||
+                            (team.resources.credits ?? 0) < cost ||
                             quantities[item.id] <= 0
                           }
+                          size="sm"
                           variant="ghost"
                           className={cn({
                             'text-red-400':
-                              (resources.credits ?? 0) < cost ||
+                              (team.resources.credits ?? 0) < cost ||
                               quantities[item.id] <= 0,
                           })}
                           onClick={() => {

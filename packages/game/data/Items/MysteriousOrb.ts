@@ -9,5 +9,6 @@ export const MysteriousOrb: Item = {
   name: 'Mysterious Orb',
   cost: 1800,
   rarity: 'legendary',
+  canSell: false,
   key: MysteriousOrbKey,
 }

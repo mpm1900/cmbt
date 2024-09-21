@@ -1,6 +1,7 @@
 import { ChoiceAttributes } from '@/components/encounter/ChoiceAttributes'
 import { ChoiceLabel } from '@/components/encounter/ChoiceLabel'
 import { ChoiceLog } from '@/components/encounter/ChoiceLog'
+import { Separator } from '@/components/ui/separator'
 import { TeamId } from '@repo/game/data'
 import {
   EncounterChoice,
@@ -74,6 +75,7 @@ export function choice(props: ChoiceProps): EncounterChoice | undefined {
         ctx.back(true)
       }
       if (props.to) {
+        ctx.log(<Separator />)
         ctx.log(<ChoiceLog>{props.label}</ChoiceLog>)
         ctx.gotoNode(props.to)
       }

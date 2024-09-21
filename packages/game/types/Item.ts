@@ -8,6 +8,7 @@ export type Item = {
   name: string
   cost: number
   rarity: ItemRarity
+  canSell: boolean
 
   action?: (unit: Unit) => Action
   augment?: Augment

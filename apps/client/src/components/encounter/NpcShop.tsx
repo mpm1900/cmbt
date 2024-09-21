@@ -2,6 +2,7 @@ import { groupItemsById } from '@/utils'
 import { BASE_UNIT } from '@repo/game/data'
 import { EncounterContext, Item, Npc } from '@repo/game/types'
 import { ItemListTables } from '@shared/ItemListTables'
+import { nanoid } from 'nanoid'
 
 export type NpcShopProps = {
   ctx: EncounterContext
@@ -10,13 +11,22 @@ export type NpcShopProps = {
 
 export function NpcShop(props: NpcShopProps) {
   const { ctx, npc } = props
-  const buyItem = (item: Item) => {
+  function buyItem(item: Item) {
     ctx.updateNpcItems(npc.id, (items) =>
       items.filter((i) => i.rtid !== item.rtid)
     )
     const cost = Math.round(item.cost * npc.values.costMultiplier)
     ctx.buyItem(item, cost)
   }
+  function sellItem(item: Item) {
+    ctx.updateNpcItems(npc.id, (items) => [...items, item])
+    const cost = Math.round(item.cost * (1 / npc.values.costMultiplier))
+    ctx.updateTeam((team) => ({
+      resources: { ...team.resources, credits: team.resources.credits + cost },
+      items: team.items.filter((i) => i.rtid !== item.rtid),
+    }))
+  }
+
   const items = groupItemsById(npc.items)
 
   return (
@@ -26,10 +36,18 @@ export function NpcShop(props: NpcShopProps) {
           unit={BASE_UNIT}
           items={items}
           costMultiplier={npc.values.costMultiplier}
-          resources={ctx.team.resources}
-          quantities={Object.fromEntries(items.map((i) => [i.id, i.count]))}
+          team={ctx.team}
           onClick={(item) => {
             buyItem(item)
+          }}
+          onSellClick={(item) => {
+            sellItem(item)
+          }}
+          sellTeam={{
+            id: nanoid(),
+            items: [],
+            resources: npc.resources,
+            maxActiveUnits: 0,
           }}
         />
       )}

@@ -35,7 +35,6 @@ export class ChainLightning extends Action {
   chargeChance: number = 5
   chainDamages: Damage[]
   chainChances: [number, number] = [50, 25]
-  private results: boolean[] = []
 
   constructor(sourceId: Id, teamId: Id) {
     super(ChainLightningId, {
@@ -69,16 +68,6 @@ export class ChainLightning extends Action {
         damageType: 'shock',
       },
     ]
-  }
-
-  setResults(results: boolean[]) {
-    if (this.results.length === 0) {
-      this.results = results
-    }
-  }
-
-  clearResults() {
-    this.results = []
   }
 
   threshold = (source: Unit): number | undefined => {
@@ -116,9 +105,9 @@ export class ChainLightning extends Action {
         !data.source.flags.isBaned &&
         this.filter(data.source, ctx))
 
-    this.setResults(getResults([success ? 100 : 0, ...this.chainChances]))
+    const randomResults = getResults([success ? 100 : 0, ...this.chainChances])
 
-    const results = this.results.map<ActionResult>((s, i) => {
+    const results = randomResults.map<ActionResult>((s, i) => {
       const resultTargets =
         i === 0 ? baseTargets : [getRandom(availableEnemyUnits)]
 
@@ -152,7 +141,6 @@ export class ChainLightning extends Action {
       }
     })
 
-    this.clearResults()
     return results
   }
 }

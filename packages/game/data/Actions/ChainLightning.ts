@@ -121,6 +121,8 @@ export class ChainLightning extends Action {
     const results = this.results.map<ActionResult>((s, i) => {
       const resultTargets =
         i === 0 ? baseTargets : [getRandom(availableEnemyUnits)]
+
+      const protectedTargets = resultTargets.filter((t) => t.flags.isProtected)
       const expandedTargets = resultTargets.filter((t) => !t.flags.isProtected)
 
       return {
@@ -130,9 +132,9 @@ export class ChainLightning extends Action {
         success: s,
         action: this,
         source,
-        targets: resultTargets,
-        protectedTargets: baseTargets.filter((t) => t.flags.isProtected),
-        expandedTargets: expandedTargets,
+        targets: expandedTargets,
+        protectedTargets,
+        expandedTargets,
         mutations: expandedTargets.flatMap((t) => {
           const damages = i === 0 ? this.damages : [this.chainDamages[i - 1]]
           const damage = calculateDamages(

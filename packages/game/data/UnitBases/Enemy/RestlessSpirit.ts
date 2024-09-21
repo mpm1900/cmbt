@@ -15,6 +15,7 @@ export const RestlessSpirit: UnitBase = {
     defense: 145,
     magic: 100,
     speed: 30,
+    memory: 5,
 
     focus: 40,
     stamina: 30,
@@ -36,7 +37,6 @@ export const RestlessSpirit: UnitBase = {
 
 export const RestlessSpiritConfig: UnitBaseConfig = {
   abilities: [],
-  actionsCount: 5,
   actions: [
     {
       id: GhostFlameId,

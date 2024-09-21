@@ -32,6 +32,7 @@ export const DemonSlayer: UnitBase = {
     defense: 60,
     magic: 60,
     speed: 130,
+    memory: 5,
 
     focus: 40,
     stamina: 30,
@@ -47,7 +48,6 @@ export const DemonSlayer: UnitBase = {
 
 export const TempestKnightConfig: UnitBaseConfig = {
   abilities: [],
-  actionsCount: 5,
   actions: [
     {
       id: HideId,

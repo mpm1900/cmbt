@@ -15,6 +15,7 @@ export const FlameCultist: UnitBase = {
     defense: 60,
     magic: 100,
     speed: 90,
+    memory: 5,
 
     focus: 40,
     stamina: 30,
@@ -30,7 +31,6 @@ export const FlameCultist: UnitBase = {
 
 export const FlameCultistConfig: UnitBaseConfig = {
   abilities: [],
-  actionsCount: 5,
   actions: [
     {
       id: BaneId,

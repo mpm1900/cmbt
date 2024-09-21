@@ -30,6 +30,7 @@ export const Blissy: UnitBase = {
     defense: 10,
     magic: 100,
     speed: 55,
+    memory: 5,
 
     focus: 40,
     stamina: 30,
@@ -49,7 +50,6 @@ export const Blissy: UnitBase = {
 
 export const BlissyConfig: UnitBaseConfig = {
   abilities: [DivineHealing],
-  actionsCount: 5,
   actions: [
     {
       id: BlockId,

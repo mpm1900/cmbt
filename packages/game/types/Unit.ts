@@ -13,6 +13,7 @@ export type UnitAttackType = 'physical' | 'magic'
 export const ATTACK_TYPES: AttackType[] = ['magic', 'physical']
 
 export type StatKey =
+  | 'attack'
   | 'accuracy'
   | 'criticalChance'
   | 'criticalDamage'
@@ -21,13 +22,13 @@ export type StatKey =
   | 'evasion'
   | 'focus'
   | 'health'
+  | 'magic'
+  | 'memory'
+  | 'nonDamagePriority'
+  | 'priority'
   | 'speed'
   | 'stamina'
-  | 'attack'
-  | 'magic'
   | 'xpMultiplier'
-  | 'priority'
-  | 'nonDamagePriority'
   | `${UnitAttackType}Expansion`
   | `${UnitAttackType}Negation`
   | `${UnitAttackType}Priority`
@@ -92,7 +93,6 @@ export type UnitBase = {
 
 export type UnitBaseConfig = {
   abilities: Augment[]
-  actionsCount: number
   actions: ActionMaker[]
   defaultAbilityId: Id | undefined
   defaultActionIds: Id[]

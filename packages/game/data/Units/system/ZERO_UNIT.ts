@@ -13,6 +13,7 @@ export const ZERO_UNIT: Unit = {
     attack: 0,
     magic: 0,
     speed: 0,
+    memory: 0,
 
     accuracy: 0,
     evasion: 0,

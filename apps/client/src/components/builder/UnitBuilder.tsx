@@ -49,11 +49,11 @@ export function UnitBuilder() {
               <div>
                 <CardTitle>Actions</CardTitle>
                 <CardDescription>
-                  Select up to {builder.config.actionsCount} actions.
+                  Select up to {builder.base.stats.memory} actions.
                 </CardDescription>
               </div>
               <div className="flex space-x-1 justify-center">
-                {Array.from({ length: builder.config.actionsCount }).map(
+                {Array.from({ length: builder.base.stats.memory }).map(
                   (_, i) =>
                     builder.actions.length >= i + 1 ? (
                       <FaSquare key={i} className="fill-muted-foreground" />

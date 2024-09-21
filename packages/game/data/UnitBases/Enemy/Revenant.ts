@@ -18,6 +18,7 @@ export const Revenant: UnitBase = {
     defense: 80,
     magic: 80,
     speed: 135,
+    memory: 5,
 
     focus: 40,
     stamina: 30,
@@ -39,7 +40,6 @@ export const Revenant: UnitBase = {
 
 export const RevenantConfig: UnitBaseConfig = {
   abilities: [CursedMiasma],
-  actionsCount: 5,
   actions: [
     {
       id: PhantomSlashId,

@@ -111,13 +111,13 @@ export function EditUnitModal(props: EditUnitModalProps) {
             </div>
           )}
           <Separator orientation="vertical" />
-          {config && (
+          {base && (
             <div className="space-y-4 flex-1">
               <div>
                 <div className="flex justify-between items-center">
                   <div className="font-bold">Actions</div>
                   <div className="flex space-x-1 justify-center">
-                    {Array.from({ length: config.actionsCount }).map((_, i) =>
+                    {Array.from({ length: unit.stats.memory }).map((_, i) =>
                       unit.actions.length >= i + 1 ? (
                         <FaSquare key={i} className="fill-muted-foreground" />
                       ) : (
@@ -130,14 +130,14 @@ export function EditUnitModal(props: EditUnitModalProps) {
                   </div>
                 </div>
                 <div className="text-muted-foreground text-xs">
-                  Select up to {config.actionsCount} actions.
+                  Select up to {unit.stats.memory} actions.
                 </div>
               </div>
               <Separator />
               <ActionListTable
                 makers={config.actions}
                 unit={unit}
-                maxActionCount={config.actionsCount}
+                maxActionCount={unit.stats.memory}
                 selectedActionIds={selectedActionIds}
                 onSelect={(maker, isSelected) => {
                   if (isSelected) {

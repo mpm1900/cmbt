@@ -44,6 +44,7 @@ export const Wizard: UnitBase = {
     defense: 95,
     magic: 140,
     speed: 105,
+    memory: 6,
 
     focus: 40,
     stamina: 30,
@@ -67,7 +68,6 @@ export const Wizard: UnitBase = {
 
 export const WizardConfig: UnitBaseConfig = {
   abilities: [Scholar],
-  actionsCount: 6,
   actions: [
     {
       id: ACallBeyondId,

@@ -46,6 +46,7 @@ export const Paladin: UnitBase = {
     defense: 95,
     magic: 100,
     speed: 60,
+    memory: 5,
 
     focus: 40,
     stamina: 30,
@@ -69,7 +70,6 @@ export const Paladin: UnitBase = {
 
 export const PaladinConfig: UnitBaseConfig = {
   abilities: [DivineLight],
-  actionsCount: 5,
   actions: [
     {
       id: BaneId,

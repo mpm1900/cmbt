@@ -44,6 +44,7 @@ export const Sorcerer: UnitBase = {
     defense: 55,
     magic: 135,
     speed: 135,
+    memory: 6,
 
     focus: 40,
     stamina: 30,
@@ -62,7 +63,6 @@ export const Sorcerer: UnitBase = {
 
 export const SorcererConfig: UnitBaseConfig = {
   abilities: [Scholar],
-  actionsCount: 6,
   actions: [
     {
       id: ACallBeyondId,

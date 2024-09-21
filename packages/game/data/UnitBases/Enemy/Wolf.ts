@@ -16,6 +16,7 @@ export const Wolf: UnitBase = {
     defense: 70,
     magic: 50,
     speed: 70,
+    memory: 5,
 
     focus: 0,
     stamina: 0,
@@ -31,7 +32,6 @@ export const Wolf: UnitBase = {
 
 export const WolfConfig: UnitBaseConfig = {
   abilities: [],
-  actionsCount: 5,
   actions: [
     {
       id: BiteId,

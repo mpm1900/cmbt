@@ -15,6 +15,7 @@ export const DeathKnight: UnitBase = {
     defense: 100,
     magic: 100,
     speed: 95,
+    memory: 5,
 
     focus: 40,
     stamina: 30,
@@ -30,7 +31,6 @@ export const DeathKnight: UnitBase = {
 
 export const DeathKnightConfig: UnitBaseConfig = {
   abilities: [],
-  actionsCount: 5,
   actions: [
     {
       id: PiercingStrikeId,

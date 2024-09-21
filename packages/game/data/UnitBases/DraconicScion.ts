@@ -42,6 +42,7 @@ export const DraconicScion: UnitBase = {
     defense: 90,
     magic: 80,
     speed: 60,
+    memory: 5,
 
     focus: 40,
     stamina: 30,
@@ -57,7 +58,6 @@ export const DraconicScion: UnitBase = {
 
 export const DraconicDiscipleConfig: UnitBaseConfig = {
   abilities: [DraconicAura],
-  actionsCount: 5,
   actions: [
     {
       id: BaneId,

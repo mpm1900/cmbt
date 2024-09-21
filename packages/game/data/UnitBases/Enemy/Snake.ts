@@ -16,6 +16,7 @@ export const Snake: UnitBase = {
     defense: 45,
     magic: 45,
     speed: 160,
+    memory: 5,
 
     focus: 0,
     stamina: 0,
@@ -31,7 +32,6 @@ export const Snake: UnitBase = {
 
 export const SnakeConfig: UnitBaseConfig = {
   abilities: [TallGrass],
-  actionsCount: 5,
   actions: [
     {
       id: BiteId,

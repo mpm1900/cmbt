@@ -38,6 +38,7 @@ export const Juggernaut: UnitBase = {
     defense: 95,
     magic: 80,
     speed: 50,
+    memory: 5,
 
     focus: 40,
     stamina: 30,
@@ -53,7 +54,6 @@ export const Juggernaut: UnitBase = {
 
 export const SnorlaxConfig: UnitBaseConfig = {
   abilities: [Insulated],
-  actionsCount: 5,
   actions: [
     {
       id: BlockId,

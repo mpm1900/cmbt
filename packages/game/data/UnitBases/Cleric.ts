@@ -42,6 +42,7 @@ export const Cleric: UnitBase = {
     defense: 100,
     magic: 100,
     speed: 65,
+    memory: 5,
 
     focus: 40,
     stamina: 30,
@@ -59,7 +60,6 @@ export const Cleric: UnitBase = {
 
 export const ClericConfig: UnitBaseConfig = {
   abilities: [DivineHealing],
-  actionsCount: 5,
   actions: [
     {
       id: BaneId,

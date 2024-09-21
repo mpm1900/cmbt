@@ -16,6 +16,7 @@ export const Bear: UnitBase = {
     defense: 75,
     magic: 75,
     speed: 75,
+    memory: 5,
 
     focus: 0,
     stamina: 0,
@@ -31,7 +32,6 @@ export const Bear: UnitBase = {
 
 export const BearConfig: UnitBaseConfig = {
   abilities: [],
-  actionsCount: 5,
   actions: [
     {
       id: SlashId,

@@ -46,6 +46,7 @@ export const Hellknight: UnitBase = {
     defense: 110,
     magic: 90,
     speed: 61,
+    memory: 5,
 
     focus: 40,
     stamina: 30,
@@ -71,7 +72,6 @@ export const Hellknight: UnitBase = {
 
 export const TyranitarConfig: UnitBaseConfig = {
   abilities: [Inferno],
-  actionsCount: 4,
   actions: [
     {
       id: BlockId,

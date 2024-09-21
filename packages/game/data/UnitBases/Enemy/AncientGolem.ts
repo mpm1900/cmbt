@@ -15,6 +15,7 @@ export const AncientGolem: UnitBase = {
     defense: 110,
     magic: 100,
     speed: 90,
+    memory: 5,
 
     focus: 0,
     stamina: 0,
@@ -33,7 +34,7 @@ export const AncientGolem: UnitBase = {
 
 export const AncientGolemConfig: UnitBaseConfig = {
   abilities: [],
-  actionsCount: 5,
+
   actions: [
     {
       id: BodySlamId,

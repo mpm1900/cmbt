@@ -44,6 +44,7 @@ export const Witch: UnitBase = {
     defense: 70,
     magic: 85,
     speed: 50,
+    memory: 5,
 
     focus: 40,
     stamina: 30,
@@ -64,7 +65,6 @@ export const Witch: UnitBase = {
 
 export const WitchConfig: UnitBaseConfig = {
   abilities: [Regeneration],
-  actionsCount: 5,
   actions: [
     {
       id: BaneId,

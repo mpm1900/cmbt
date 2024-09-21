@@ -2,6 +2,7 @@ import { ActionMaker, Augment, Id } from '.'
 import { Action } from './Action'
 import { DamageType } from './Damage'
 import { Modifier } from './Modifier'
+import { Tag } from './Tag'
 
 export type AttackType =
   | 'physical'
@@ -69,11 +70,6 @@ export type UnitMetadata = {
   inactiveTurns: number
 }
 
-export type UnitTag = {
-  id: Id
-  label: string
-}
-
 export type UnitBaseAffinity = {
   type: DamageType
   factor: number
@@ -83,7 +79,7 @@ export type UnitBase = {
   id: Id
   name: string
   stats: Stats
-  tags: UnitTag[]
+  tags: Tag[]
   augmentSlots: number
   affinities: UnitBaseAffinity[]
   resistances: UnitBaseAffinity[]
@@ -115,7 +111,7 @@ export type Unit = {
   modifiers(): Modifier[]
   actions: Action[]
   metadata: UnitMetadata
-  tags: UnitTag[]
+  tags: Tag[]
 }
 
 export type UnitBuilder = {

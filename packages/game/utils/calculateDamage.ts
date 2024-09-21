@@ -1,10 +1,12 @@
 import random from 'random'
+import { FlyingId, GroundBasedId } from '../data'
 import {
   ActionAccuracyResult,
   AttackType,
   Damage,
   DamageType,
   Id,
+  Tag,
   Unit,
 } from '../types'
 import { convertAttackType } from './convertAttackType'
@@ -107,6 +109,15 @@ export function getAttackTypeMultiplier(
     getAttackTypeExpansion(type, source) * getAttackTypeNegation(type, target)
   )
 }
+const hasTag = (tags: Tag[]) => (finder: Partial<Tag>) => {
+  return tags.some((t) => t.id === finder.id || t.label === finder.label)
+}
+export function getTagsMultiplier(actionTags: Tag[], targetTags: Tag[]) {
+  const action = hasTag(actionTags)
+  const target = hasTag(targetTags)
+  if (action({ id: GroundBasedId }) && target({ id: FlyingId })) return 0
+  return 1
+}
 
 export function getDamageResult(props: {
   target: Unit
@@ -165,6 +176,7 @@ export function getDamageResult(props: {
 }
 
 export type CalculateDamageConfig = Partial<ActionAccuracyResult> & {
+  actionTags?: Tag[]
   randomFactor?: number
   evasionSuccess?: boolean
 }
@@ -202,9 +214,16 @@ export function calculateDamageAmount(
     ? (config?.criticalFactor ?? 1)
     : 1
   const randomFactor = config?.randomFactor ?? 1
+  const tagsFactor = getTagsMultiplier(config?.actionTags ?? [], target.tags)
 
   const raw =
-    base * attackTypeFactor * damageTypeFactor * criticalFactor * randomFactor
+    base *
+    attackTypeFactor *
+    damageTypeFactor *
+    criticalFactor *
+    randomFactor *
+    tagsFactor
+
   const remainingHealth = target.stats.health - target.values.damage
   const final = Math.min(remainingHealth, Math.round(raw))
 

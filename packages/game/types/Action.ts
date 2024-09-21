@@ -1,6 +1,6 @@
 import { nanoid } from 'nanoid'
 import { checkActionCost } from '../utils'
-import { Damage, Id } from './'
+import { Damage, Id, Tag } from './'
 import { CombatContext } from './CombatContext'
 import { Modifier } from './Modifier'
 import { Mutation } from './Mutation'
@@ -82,6 +82,7 @@ export type ActionProps = {
   priority?: number
   maxTargetCount: number
   cooldown?: number
+  tags?: Tag[]
 }
 
 export abstract class Action {
@@ -95,6 +96,7 @@ export abstract class Action {
   readonly cost: Mutation
   readonly cooldown: number
   readonly targets: Query<Unit[]>
+  readonly tags: Tag[]
   damages: Damage[] = []
 
   threshold = (source: Unit): number | undefined => undefined
@@ -154,5 +156,6 @@ export abstract class Action {
     this.priority = props.priority ?? ACTION_PRIORITIES.DEFAULT
     this.maxTargetCount = props.maxTargetCount
     this.cooldown = props.cooldown ?? 0
+    this.tags = props.tags ?? []
   }
 }

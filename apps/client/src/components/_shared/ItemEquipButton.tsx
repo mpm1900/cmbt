@@ -28,18 +28,25 @@ export function ItemEquipButton(props: ItemEquipButtonProps) {
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <Button size="sm" variant="ghost" onClick={onClick}>
+        <Button
+          size="sm"
+          variant="ghost"
+          onClick={(e) => {
+            onClick()
+          }}
+        >
           Equip
         </Button>
       </PopoverTrigger>
       <PopoverPortal>
-        <PopoverContent className="w-full z-40" onCloseAutoFocus={onClose}>
+        <PopoverContent className="w-full" onCloseAutoFocus={onClose}>
           <div className="flex space-x-2">
             {equipableUnits.map((unit) => (
               <Button
                 key={unit.id}
                 variant="outline"
-                onClick={() => {
+                onClick={(e) => {
+                  e.preventDefault()
                   onUnitClick()
                 }}
               >

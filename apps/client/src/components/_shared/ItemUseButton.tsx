@@ -23,7 +23,13 @@ export function ItemUseButton(props: ItemUseButtonProps) {
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <Button size="sm" variant="ghost" onClick={onClick}>
+        <Button
+          size="sm"
+          variant="ghost"
+          onClick={(e) => {
+            onClick()
+          }}
+        >
           Use
         </Button>
       </PopoverTrigger>
@@ -34,7 +40,8 @@ export function ItemUseButton(props: ItemUseButtonProps) {
               <Button
                 key={unit.id}
                 variant="outline"
-                onClick={() => {
+                onClick={(e) => {
+                  e.preventDefault()
                   ctx.useItem(item, unit)
                   onUnitClick()
                 }}

@@ -3,7 +3,12 @@ import { Action } from './Action'
 import { DamageType } from './Damage'
 import { Modifier } from './Modifier'
 
-export type AttackType = 'physical' | 'magic'
+export type AttackType =
+  | 'physical'
+  | 'magic'
+  | 'physical-reverse'
+  | 'magic-reverse'
+export type UnitAttackType = 'physical' | 'magic'
 
 export const ATTACK_TYPES: AttackType[] = ['magic', 'physical']
 
@@ -23,9 +28,9 @@ export type StatKey =
   | 'xpMultiplier'
   | 'priority'
   | 'nonDamagePriority'
-  | `${AttackType}Expansion`
-  | `${AttackType}Negation`
-  | `${AttackType}Priority`
+  | `${UnitAttackType}Expansion`
+  | `${UnitAttackType}Negation`
+  | `${UnitAttackType}Priority`
   | `${DamageType}Expansion`
   | `${DamageType}Negation`
   | `${DamageType}Priority`

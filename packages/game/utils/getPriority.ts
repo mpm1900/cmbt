@@ -1,4 +1,5 @@
 import { Action, CombatContext, Unit } from '../types'
+import { convertAttackType } from './convertAttackType'
 import { getAttackTypesFromDamages } from './getAttackTypesFromDamages'
 import { getDamageTypesFromDamages } from './getDamageTypesFromDamages'
 
@@ -11,7 +12,7 @@ export function getPriority(
   const attackTypes = getAttackTypesFromDamages(action.damages)
   const damageTypes = getDamageTypesFromDamages(action.damages)
   const attackTypePriorities = attackTypes.map(
-    (t) => unit.stats[`${t}Priority`]
+    (t) => unit.stats[`${convertAttackType(t)}Priority`]
   )
   const damageTypePriorities = damageTypes.map(
     (t) => unit.stats[`${t}Priority`]

@@ -7,6 +7,7 @@ import {
   Id,
   Unit,
 } from '../types'
+import { convertAttackType } from './convertAttackType'
 
 export function getAttackDefenseRatio(
   power: number,
@@ -78,9 +79,7 @@ export function getAttackTypeNegation(
   target: Unit | undefined
 ) {
   if (!type || !target) return 1
-  // if (type === 'magic-reverse') type = 'physical'
-  // if (type === 'physical-reverse') type = 'magic'
-  const typeNegation = target.stats[`${type}Negation`]
+  const typeNegation = target.stats[`${convertAttackType(type, true)}Negation`]
   return (100 - typeNegation) / 100
 }
 export function getAttackTypeExpansion(
@@ -88,9 +87,7 @@ export function getAttackTypeExpansion(
   target: Unit | undefined
 ) {
   if (!type || !target) return 1
-  // if (type === 'magic-reverse') type = 'magic'
-  // if (type === 'physical-reverse') type = 'physical'
-  const typeExpansion = target.stats[`${type}Expansion`]
+  const typeExpansion = target.stats[`${convertAttackType(type)}Expansion`]
   return typeExpansion / 100
 }
 

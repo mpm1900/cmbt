@@ -13,6 +13,7 @@ import {
 } from '@repo/game/types'
 import { getAllModifiersFromUnit, getUnitBase } from '@repo/game/utils'
 import { ReactNode } from '@tanstack/react-router'
+import { convertAttackType } from '../../../../../packages/game/utils/convertAttackType'
 import { AttackTypeBadge } from './AttackTypeBadge'
 import { HealthBadge } from './HealthBadge'
 import { MagicArmor } from './MagicArmor'
@@ -228,7 +229,7 @@ export function UnitDetails(props: UnitDetailsProps) {
               })}
               <Separator className="my-2" />
               {ATTACK_TYPES.map((attackType) => {
-                const stat: StatKey = `${attackType}Expansion`
+                const stat: StatKey = `${convertAttackType(attackType)}Expansion`
                 return (
                   <div
                     key={attackType}
@@ -271,7 +272,7 @@ export function UnitDetails(props: UnitDetailsProps) {
               })}
               <Separator className="my-2" />
               {ATTACK_TYPES.map((attackType) => {
-                const stat: StatKey = `${attackType}Negation`
+                const stat: StatKey = `${convertAttackType(attackType)}Negation`
                 return (
                   <div
                     key={attackType}

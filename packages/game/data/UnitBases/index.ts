@@ -14,6 +14,8 @@ import {
   RestlessSpiritConfig,
   Snake,
   SnakeConfig,
+  VillageSoldier,
+  VillageSoldierConfig,
 } from './Enemy'
 import { AncientGolem, AncientGolemConfig } from './Enemy/AncientGolem'
 import { Revenant, RevenantConfig } from './Enemy/Revenant'
@@ -57,6 +59,7 @@ export const ENEMY_BASES = [
   RestlessSpirit,
   Revenant,
   Snake,
+  VillageSoldier,
   Wolf,
 ]
 
@@ -81,5 +84,6 @@ export const BASE_CONFIGS: Record<Id, UnitBaseConfig> = {
   [RestlessSpirit.id]: RestlessSpiritConfig,
   [Revenant.id]: RevenantConfig,
   [Snake.id]: SnakeConfig,
+  [VillageSoldier.id]: VillageSoldierConfig,
   [Wolf.id]: WolfConfig,
 }

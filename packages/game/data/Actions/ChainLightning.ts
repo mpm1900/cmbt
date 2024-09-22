@@ -23,12 +23,14 @@ import { GetUnits } from '../Queries'
 import { Charged } from '../Statuses'
 
 function getResults(thresholds: number[]): boolean[] {
-  return thresholds.reduce<boolean[]>((prev, threshold) => {
-    const roll = random.int(0, 100)
-    const value = threshold > roll
-    const last = prev[prev.length - 1]
-    return prev.concat(last !== undefined ? value && last : value)
-  }, [])
+  return thresholds
+    .reduce<boolean[]>((prev, threshold) => {
+      const roll = random.int(0, 100)
+      const value = threshold > roll
+      const last = prev[prev.length - 1] ?? true
+      return prev.concat(value && last)
+    }, [])
+    .filter(Boolean)
 }
 
 export class ChainLightning extends Action {

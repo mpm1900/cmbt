@@ -14,26 +14,26 @@ export function useAiActions() {
 
   useEffect(() => {
     if (debug.isDebugMode) return
-    if (combat.turn.status === 'main') {
-      const aiUnits = getActionableUnitsCtx(ctx).filter(
-        (u) => u.teamId !== ctx.user
-      )
-      const aiActions = actions.queue.filter((i) =>
-        aiUnits.some((u) => u.id === i.action.sourceId)
-      )
-      if (aiActions.length === 0) {
-        const aiActions = aiUnits.map((unit) => {
-          const aiActions = unit.actions
-            .filter((a) => a.filter(unit, ctx))
-            .map((action) => getBestAiAction(action, ctx))
-            .sort((a, b) => b.weight - a.weight)
+    if (combat.turn.status !== 'main') return
 
-          const bestAiAction = aiActions[0]
-          return bestAiAction
-        })
+    const aiUnits = getActionableUnitsCtx(ctx).filter(
+      (u) => u.teamId !== ctx.user && !combat.stagedActions[u.id]
+    )
+    const aiActions = actions.queue.filter((i) =>
+      aiUnits.some((u) => u.id === i.action.sourceId)
+    )
+    if (aiActions.length === 0) {
+      const aiActions = aiUnits.map((unit) => {
+        const aiActions = unit.actions
+          .filter((a) => a.filter(unit, ctx))
+          .map((action) => getBestAiAction(action, ctx))
+          .sort((a, b) => b.weight - a.weight)
 
-        actions.enqueue(...aiActions)
-      }
+        const bestAiAction = aiActions[0]
+        return bestAiAction
+      })
+
+      actions.enqueue(...aiActions)
     }
   }, [combat.turn.status, actions.queue.length])
 

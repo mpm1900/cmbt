@@ -31,6 +31,7 @@ export class PhantomSlash extends Action {
         isHidden: false,
       }),
       maxTargetCount: 1,
+      priority: -1,
     })
 
     this.damages = [
@@ -62,7 +63,8 @@ export class PhantomSlash extends Action {
         targets,
         ctx,
         (modifiedTargets) => ({
-          forceSuccess: true,
+          forceSuccess: !data.source.flags.isBaned,
+          forceFailure: data.source.flags.isBaned,
           onSuccess: {
             addedModifiers: [
               new IntangibleParent({

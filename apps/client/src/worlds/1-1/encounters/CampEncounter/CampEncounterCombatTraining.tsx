@@ -3,7 +3,12 @@ import { Narration } from '@/components/encounter/Narration'
 import { Quote } from '@/components/encounter/Quote'
 import { Separator } from '@/components/ui/separator'
 import { choice } from '@/worlds/_utils'
-import { TeamId, Wolf } from '@repo/game/data'
+import {
+  DemonSlayer,
+  Juggernaut,
+  TeamId,
+  VillageSoldier,
+} from '@repo/game/data'
 import { EncounterNode, Team } from '@repo/game/types'
 import { makeUnit } from '@repo/game/utils'
 import { nanoid } from 'nanoid'
@@ -164,14 +169,22 @@ export const CampEncounterCombatTrainingCombatStart: EncounterNode = {
           ctx.initializeCombat({
             enemyTeam,
             enemyUnits: Array.from({ length: 4 }).map((_, i) => {
-              const e = makeUnit(
-                { level: i > 2 ? 2 : 4, teamId: enemyTeam.id },
-                [Wolf]
-              )
-              e.name = 'Village Soldier'
-              if (i === 0) e.name = 'Dan'
-              if (i === 1) e.name = 'Ryab'
-              return e
+              const level = Math.max(...ctx.units.map((u) => u.level))
+              if (i === 0) {
+                const e = makeUnit({ level, teamId: enemyTeam.id }, [
+                  DemonSlayer,
+                ])
+                e.name = 'Dan'
+                return e
+              }
+              if (i === 1) {
+                const e = makeUnit({ level, teamId: enemyTeam.id }, [
+                  Juggernaut,
+                ])
+                e.name = 'Ryab'
+                return e
+              }
+              return makeUnit({ level, teamId: enemyTeam.id }, [VillageSoldier])
             }),
             commit: false,
             reward: {

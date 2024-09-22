@@ -33,7 +33,8 @@ export const GolemEncounterPreCombat: EncounterNode = {
           ctx.initializeCombat({
             enemyTeam,
             enemyUnits: Array.from({ length: 1 }).map((_, i) => {
-              const e = makeUnit({ level: 6, teamId: enemyTeam.id }, [
+              const level = Math.max(...ctx.units.map((u) => u.level + 3, 7))
+              const e = makeUnit({ level, teamId: enemyTeam.id }, [
                 AncientGolem,
               ])
               return e

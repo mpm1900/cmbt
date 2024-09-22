@@ -19,6 +19,7 @@ export function getEdgeStylesheet(
         return 'white'
       },
       'line-opacity': function (edge) {
+        // return 0.5
         const state = getEdgeState(edge, options)
         const sourceState = getNodeState(edge.source(), options)
         const targetState = getNodeState(edge.target(), options)

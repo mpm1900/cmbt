@@ -67,8 +67,8 @@ export function useResultsController() {
           setTimeout(() => {
             results.dequeue()
           }, speed)
-        }, speed)
-      }, speed)
+        }, speed * 2)
+      }, speed / 2)
     } else {
       results.dequeue()
       return

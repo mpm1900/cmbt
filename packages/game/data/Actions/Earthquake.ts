@@ -17,6 +17,7 @@ import { getDamageAiRating } from '../../utils/getDamageAiRating'
 import { EarthquakeId } from '../Ids'
 import { Identity } from '../Mutations'
 import { EmptyArray } from '../Queries'
+import { FlyingId } from '../Tags'
 
 export class Earthquake extends Action {
   constructor(sourceId: Id, teamId: Id) {
@@ -70,8 +71,12 @@ export class Earthquake extends Action {
         (modifiedTargets) => ({
           onSuccess: {
             mutations: modifiedTargets.flatMap((target) => {
+              const isFlying = target.tags.some((t) => t.id === FlyingId)
               const damage = calculateDamages(
-                this.damages,
+                this.damages.map((d) => ({
+                  ...d,
+                  power: isFlying ? 0 : d.power,
+                })),
                 data.source,
                 target,
                 data.accuracyRoll

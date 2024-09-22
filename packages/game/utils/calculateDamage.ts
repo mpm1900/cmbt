@@ -214,15 +214,9 @@ export function calculateDamageAmount(
     ? (config?.criticalFactor ?? 1)
     : 1
   const randomFactor = config?.randomFactor ?? 1
-  const tagsFactor = getTagsMultiplier(config?.actionTags ?? [], target.tags)
 
   const raw =
-    base *
-    attackTypeFactor *
-    damageTypeFactor *
-    criticalFactor *
-    randomFactor *
-    tagsFactor
+    base * attackTypeFactor * damageTypeFactor * criticalFactor * randomFactor
 
   const remainingHealth = target.stats.health - target.values.damage
   const final = Math.min(remainingHealth, Math.round(raw))

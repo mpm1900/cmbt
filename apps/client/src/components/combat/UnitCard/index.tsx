@@ -123,7 +123,7 @@ export function UnitCard(props: UnitCardProps) {
               {stagedItem && '*'}
             </span>
           </div>
-          <div className="flex flex-1 justify-start">
+          <div className="flex flex-1 justify-start space-x-1">
             {unit.tags.map((tag, i) => {
               const icon = TAG_ICONS[tag.id]
               return (

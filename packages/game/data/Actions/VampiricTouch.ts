@@ -91,6 +91,7 @@ export class VampiricTouch extends Action {
 
       buildActionResult(this, data, source, targets, ctx, (modifiedTargets) => {
         return {
+          forceFailure: damages.length === 0,
           shouldLog: false,
           expandedTargets: [data.source],
           onSuccess: {

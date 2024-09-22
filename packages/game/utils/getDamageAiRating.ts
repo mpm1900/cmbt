@@ -12,11 +12,14 @@ export function getDamageAiRating(
   const source = ctx.units.find((u) => u.id === action.sourceId) as Unit
   const modifiedSource = applyModifiers(source, ctx).unit
   const accuracy = (action.threshold(modifiedSource) ?? 100) / 100
-  const allyTargets = targets.filter((u) => u.teamId === source.id)
-  const enemeyTargets = targets.filter((u) => u.teamId !== source.id)
-  const rating = getActionDamageRating(action).reduce((p, c) => p + c, 0)
-  const targetFactor = enemeyTargets.length - allyTargets.length
-  const weight = rating * targetFactor * accuracy * random.float(0, 1.2)
+  const rating = targets
+    .flatMap((target) => {
+      const isAlly = target.teamId === source.teamId
+      const damages = getActionDamageRating(action, source, target)
+      return damages.map((d) => (isAlly ? d * -1 : d))
+    })
+    .reduce((p, c) => p + c, 0)
+  const weight = rating * accuracy * random.float(0.8, 1.2)
 
   return {
     id: nanoid(),

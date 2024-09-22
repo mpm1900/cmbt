@@ -12,12 +12,14 @@ export const DivineLight: Augment = {
       parentId: unit.id,
       targetsLabel: 'all enemies',
       persistOnSwitch: true,
+      maxInstances: 1,
       makeModifiers: () => [
         new AddModifiersToRegistryTeam({
           notTeamId: unit.teamId,
           registryId: SeenAllId,
           sourceId: unit.id,
           parentId: unit.id,
+          maxInstances: 1,
           modifiers: [
             new UpdateFlagParent({
               registryId: HiddenParentId,

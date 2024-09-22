@@ -15,6 +15,10 @@ export class AddModifiersToRegistryTeam extends Modifier {
   notTeamId?: Id
   modifiers: Modifier[]
 
+  get key(): string {
+    return `${this.registryId}.${this.teamId}`
+  }
+
   constructor(
     props: ModifierProps<{ teamId?: Id; notTeamId?: Id; modifiers: Modifier[] }>
   ) {

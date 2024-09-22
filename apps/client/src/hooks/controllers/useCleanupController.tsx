@@ -2,6 +2,8 @@ import {
   getResultsFromActionItem,
   getTeamsWithSelectionRequired,
 } from '@/utils'
+import { SetIsActive, SetIsActiveId } from '@repo/game/data'
+import { nanoid } from 'nanoid'
 import { useEffect } from 'react'
 import { useActions, useCleanup, useCombat } from '../state'
 import { useResults } from '../state/useResults'
@@ -21,6 +23,15 @@ export function useCleanupController() {
     if (status === 'cleanup' || status === 'cleanup-running') {
       if (status === 'cleanup') {
         if (cleanup.queue.length === teams.length) {
+          if (cleanup.queue.every((i) => i.action.id === SetIsActiveId)) {
+            cleanup.setQueue((items) => [
+              {
+                id: nanoid(),
+                action: new SetIsActive('', 0),
+                targetIds: items.flatMap((i) => i.targetIds),
+              },
+            ])
+          }
           combat.setStatus('cleanup-running')
         }
       }

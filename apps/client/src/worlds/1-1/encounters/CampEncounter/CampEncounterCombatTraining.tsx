@@ -220,10 +220,12 @@ export const CampEncounterCombatTrainingCombatEnd: EncounterNode = {
   render(ctx, props) {
     ctx.log(<Separator />)
     ctx.log(
-      <Narration>
-        [ Your party's health and items are reset to what they were before
-        combat ]
-      </Narration>
+      <ChoiceAttributes className="text-green-300/80">
+        <Narration className="text-green-300/80">
+          Your party's health and items are reset to what they were before
+          combat
+        </Narration>
+      </ChoiceAttributes>
     )
     ctx.log(
       <Quote name="Dan">

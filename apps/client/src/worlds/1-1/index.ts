@@ -16,6 +16,7 @@ const village = (app: Id) => 'Village' + app
 const combat = (app: Id) => 'Combat' + app
 const golem = (app: Id) => 'Golem' + app
 const revive = (app: Id) => 'Revive' + app
+const loot = (app: Id) => 'Loot' + app
 
 export const FirstCombatId = nanoid()
 const FirstCombatNode: NodeMaker = (id, edges, overrides) => ({
@@ -57,7 +58,7 @@ const StartNode: WorldNode = {
   visited: true,
 }
 
-const ShopNode: NodeMaker = (id, edges, overrides) => ({
+const VillageNode: NodeMaker = (id, edges, overrides) => ({
   id: village(id),
   size: 40,
   icon: '?',
@@ -99,7 +100,6 @@ const CombatNode: NodeMaker = (id, edges, overrides) => ({
   visitedIcon: 'combat',
   completedIcon: 'combat',
   encounter: CombatEncounter(),
-  // encounter: FirstCombatEncounter(),
   edges,
   seen: false,
   completed: false,
@@ -144,6 +144,23 @@ const GolemNode: NodeMaker = (id, edges, overrides) => ({
   ...overrides,
 })
 
+const LootNode: NodeMaker = (id, edges, overrides) => ({
+  id: loot(id),
+  size: 20,
+  icon: '?',
+  visitedIcon: 'shop',
+  completedIcon: 'shop',
+  encounter: GolemEncounter(),
+  edges,
+  seen: false,
+  completed: false,
+  repeatable: false,
+  retreatable: true,
+  locked: false,
+  visited: false,
+  ...overrides,
+})
+
 export function makeWorld1_1(): World {
   return {
     startingNodeId: StartId,
@@ -151,8 +168,8 @@ export function makeWorld1_1(): World {
     nodes: [
       StartNode,
       { ...FirstCombatNode('0', [e(village('0'))]), seen: true },
-      ShopNode('0', [e(combat('1'))]),
-      CombatNode('0', [e(combat('2'))], { retreatable: false }),
+      VillageNode('0', [e(combat('1'))]),
+      CombatNode('0', [e(combat('2')), e(loot('0'))], { retreatable: false }),
       CombatNode('1', [e(combat('2'))]),
       CombatNode('4', [e(golem('0')), e(revive('0'))]),
       ReviveNode('0', [e(combat('4')), e(combat('5'))]),
@@ -163,6 +180,7 @@ export function makeWorld1_1(): World {
       CombatNode('5', [], { size: 30 }),
       CombatNode('6', [e(combat('3')), e(revive('0'))]),
       HealingNode('1', [e(golem('0'))]),
+      LootNode('0', [e(combat('0')), e(combat('6'))]),
     ],
   }
 }

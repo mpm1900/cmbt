@@ -39,6 +39,7 @@ export function CyContextProvider(props: PropsWithChildren) {
   }
 
   function centerActive(core: Core) {
+    if (!game.world.activeNodeId) return
     const active = core.nodes(`#${game.world.activeNodeId}`).first()
     core.animate({
       duration: 200,
@@ -50,6 +51,7 @@ export function CyContextProvider(props: PropsWithChildren) {
   }
 
   function fitActive(core: Core) {
+    if (!game.world.activeNodeId) return
     const activeNode = core.nodes(`#${game.world.activeNodeId}`).first()
     const nodes = core.nodes().filter((n) => {
       const state = getNodeState(n, {

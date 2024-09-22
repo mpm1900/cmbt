@@ -18,7 +18,7 @@ export function useWorldMapEvents(cy: Core | undefined) {
   const nav = useNavigate()
 
   useEffect(() => {
-    if (cy) {
+    if (cy && game.world.activeNodeId) {
       const activeNode = cy.nodes(`#${game.world.activeNodeId}`).first()
       const options = {
         activeNode,

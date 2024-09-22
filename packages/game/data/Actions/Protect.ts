@@ -35,7 +35,7 @@ export class Protect extends Action {
     return {
       id: nanoid(),
       action: this,
-      weight: random.float(0, source.stats.health),
+      weight: random.float(0, source.stats.health / 2),
       targetIds: [],
     }
   }

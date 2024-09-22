@@ -63,13 +63,8 @@ export class DragonBreath extends Action {
     const applyBurn = applyModifierRoll <= this.burnChance
 
     return [
-      buildActionResult(
-        this,
-        data,
-        source,
-        targets,
-        ctx,
-        (modifiedTargets) => ({
+      buildActionResult(this, data, source, targets, ctx, (modifiedTargets) => {
+        return {
           onSuccess: {
             mutations: modifiedTargets.flatMap((target) => {
               const damage = calculateDamages(
@@ -87,8 +82,8 @@ export class DragonBreath extends Action {
                   )
                 : [],
           },
-        })
-      ),
+        }
+      }),
     ]
   }
 }

@@ -20,7 +20,7 @@ import { GetUnits } from '../Queries'
 import { Bleed } from '../Statuses'
 
 export class Bite extends Action {
-  bleedChance: number = 10
+  bleedChance: number = 100
 
   constructor(sourceId: Id, teamId: Id) {
     super(BiteId, {
@@ -67,13 +67,8 @@ export class Bite extends Action {
     const applyBleed = applyModifierRoll <= this.bleedChance
 
     return [
-      buildActionResult(
-        this,
-        data,
-        source,
-        targets,
-        ctx,
-        (modifiedTargets) => ({
+      buildActionResult(this, data, source, targets, ctx, (modifiedTargets) => {
+        return {
           onSuccess: {
             mutations: modifiedTargets.flatMap((target) => {
               const damage = calculateDamages(
@@ -91,8 +86,8 @@ export class Bite extends Action {
                   )
                 : [],
           },
-        })
-      ),
+        }
+      }),
     ]
   }
 }

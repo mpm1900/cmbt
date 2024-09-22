@@ -45,13 +45,8 @@ export class PowerWordKill extends Action {
   ): ActionResult[] => {
     const data = getActionData(source, this, ctx)
     return [
-      buildActionResult(
-        this,
-        data,
-        source,
-        targets,
-        ctx,
-        (modifiedTargets) => ({
+      buildActionResult(this, data, source, targets, ctx, (modifiedTargets) => {
+        return {
           onSuccess: {
             mutations: modifiedTargets.map((target) => {
               const damage = target.stats.health
@@ -62,8 +57,8 @@ export class PowerWordKill extends Action {
               })
             }),
           },
-        })
-      ),
+        }
+      }),
     ]
   }
 }

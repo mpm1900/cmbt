@@ -41,7 +41,7 @@ export function Combat() {
   useAiActions()
 
   useEffect(() => {
-    console.log(status)
+    // console.log(status)
   }, [status])
 
   const userTeam = teams.find((t) => t.id === user)
@@ -57,16 +57,16 @@ export function Combat() {
         <div className="flex flex-col p-2 h-full">
           <Team teamId={aiTeam?.id} />
           <div className="flex flex-1 items-center justify-center">
-            <RequireTurnStatus status="done">
+            <RequireTurnStatus statuses={['done']}>
               <CombatComplete />
             </RequireTurnStatus>
-            <RequireTurnStatus status="combat">
+            <RequireTurnStatus statuses={['combat', 'cleanup-running']}>
               <RunningTurn />
             </RequireTurnStatus>
-            <RequireTurnStatus status="main">
+            <RequireTurnStatus statuses={['main']}>
               <ActiveUnit />
             </RequireTurnStatus>
-            <RequireTurnStatus status="cleanup">
+            <RequireTurnStatus statuses={['cleanup']}>
               <CleanupSwitchUnits />
             </RequireTurnStatus>
           </div>

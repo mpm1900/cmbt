@@ -116,6 +116,17 @@ export class ChainLightning extends Action {
       const protectedTargets = resultTargets.filter((t) => t.flags.isProtected)
       const expandedTargets = resultTargets.filter((t) => !t.flags.isProtected)
 
+      const damages = expandedTargets.flatMap((target) => {
+        const damages = i === 0 ? this.damages : [this.chainDamages[i - 1]]
+        const damage = calculateDamages(
+          damages,
+          data.source,
+          target,
+          data.accuracyRoll
+        )
+        return { damage, target }
+      })
+
       return {
         id: nanoid(),
         data,
@@ -126,15 +137,9 @@ export class ChainLightning extends Action {
         targets: expandedTargets,
         protectedTargets,
         expandedTargets,
-        mutations: expandedTargets.flatMap((t) => {
-          const damages = i === 0 ? this.damages : [this.chainDamages[i - 1]]
-          const damage = calculateDamages(
-            damages,
-            data.source,
-            t,
-            data.accuracyRoll
-          )
-          return getMutationsFromDamageResult(source, t, damage)
+        damages: damages.map((v) => v.damage),
+        mutations: damages.flatMap((v) => {
+          return getMutationsFromDamageResult(source, v.target, v.damage)
         }),
         addedModifiers:
           applyCharge && s && i === 0 && modifiedTargets.length > 0

@@ -60,13 +60,8 @@ export class MindBlast extends Action {
     const data = getActionData(source, this, ctx)
 
     return [
-      buildActionResult(
-        this,
-        data,
-        source,
-        targets,
-        ctx,
-        (modifiedTargets) => ({
+      buildActionResult(this, data, source, targets, ctx, (modifiedTargets) => {
+        return {
           onSuccess: {
             mutations: modifiedTargets.flatMap((target) => {
               const damage = calculateDamages(
@@ -78,8 +73,8 @@ export class MindBlast extends Action {
               return getMutationsFromDamageResult(source, target, damage)
             }),
           },
-        })
-      ),
+        }
+      }),
     ]
   }
 }

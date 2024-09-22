@@ -62,13 +62,8 @@ export class Earthquake extends Action {
     const data = getActionData(source, this, ctx)
 
     return [
-      buildActionResult(
-        this,
-        data,
-        source,
-        targets,
-        ctx,
-        (modifiedTargets) => ({
+      buildActionResult(this, data, source, targets, ctx, (modifiedTargets) => {
+        return {
           onSuccess: {
             mutations: modifiedTargets.flatMap((target) => {
               const isFlying = target.tags.some((t) => t.id === FlyingId)
@@ -84,8 +79,8 @@ export class Earthquake extends Action {
               return getMutationsFromDamageResult(source, target, damage)
             }),
           },
-        })
-      ),
+        }
+      }),
     ]
   }
 }

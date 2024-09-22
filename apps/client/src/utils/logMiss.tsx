@@ -8,7 +8,7 @@ export function logMiss(
   ctx: CombatContext
 ) {
   if (result.data) {
-    if (!result.data.accuracyRoll.success) {
+    if (!result.success && !result.data.accuracyRoll.success) {
       log(
         <LogSecondary>
           Miss!{' '}

@@ -6,7 +6,7 @@ import {
 import { cn } from '@/lib/utils'
 import { TAG_ICONS } from '@/renderers/Tags'
 import { getActiveUnitModifiers } from '@/utils'
-import { SwitchUnitId } from '@repo/game/data'
+import { SetIsActiveId, SwitchUnitId } from '@repo/game/data'
 import { ActionResult, Id, TurnStatus, Unit } from '@repo/game/types'
 import { applyModifiers } from '@repo/game/utils'
 import { MagicArmor } from '@shared/MagicArmor'
@@ -42,14 +42,15 @@ function getUnitCardState(config: GetUnitCardStateConfig) {
       ? config.result?.targets
       : config.result?.expandedTargets) ?? []
   const isMain = config.status === 'main'
-  const isCombat = config.status === 'combat'
-  const isSource = action?.sourceId === config.unitId
+  const isCombat =
+    config.status === 'combat' || config.status === 'cleanup-running'
+  const isSource = isCombat && action?.sourceId === config.unitId
   const isActiveUnit = isMain && config.activeUnitId === config.unitId
-  const isTarget = targets.some((t) => t.id === config.unitId)
-  const isTargeted =
-    config.hoverIds.includes(config.unitId) || (isCombat && isTarget)
-  const isTargetedSwitch = isTargeted && action?.id === SwitchUnitId
-  const isActive = isCombat ? isSource || isTargetedSwitch : isActiveUnit
+  const isTarget = isCombat && targets.some((t) => t.id === config.unitId)
+  const isTargeted = config.hoverIds.includes(config.unitId) || isTarget
+  const isTargetedSwitch =
+    isTargeted && (action?.id === SwitchUnitId || action?.id === SetIsActiveId)
+  const isActive = isSource || isTargetedSwitch || isActiveUnit
 
   return {
     isActive,
@@ -62,7 +63,7 @@ export function UnitCard(props: UnitCardProps) {
   const ctx = useCombatContext()
   const combat = useCombat()
   const status = combat.turn.status
-  const result = combat.turn.results[combat.turn.results.length - 1]
+  const result = combat.turn.results[0]
   const { queue } = useActions()
   const { activeUnit, setActiveUnit, hoverTargetUnitIds } = useCombatUi()
   const { unit } = applyModifiers(props.unit, ctx)
@@ -93,8 +94,8 @@ export function UnitCard(props: UnitCardProps) {
           'rounded transition-colors ease-in-out bg-slate-950 border max-h-[62px]',
           {
             'hover:bg-slate-900': isSelectable,
+            'bg-red-500/40': isTargeted,
             'bg-slate-200 hover:bg-slate-200': isActive,
-            'bg-red-500/40': isTargeted && !isActive,
             'cursor-pointer': isSelectable,
             'max-h-[62px]': isEnemy,
             'max-h-[68px]': !isEnemy,

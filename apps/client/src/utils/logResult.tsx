@@ -26,7 +26,7 @@ export function logResult(
   }
 
   logActionSuccessFailure(result, log, ctx)
-  if (result.protectedTargets) {
+  if (result.success && result.protectedTargets) {
     result.protectedTargets.forEach((unit) => {
       log(
         <LogSecondary className="italic">

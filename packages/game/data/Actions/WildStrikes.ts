@@ -61,13 +61,8 @@ export class WildStrikes extends Action {
     const length = random.int(2, 6)
 
     return Array.from({ length }).map(() =>
-      buildActionResult(
-        this,
-        data,
-        source,
-        targets,
-        ctx,
-        (modifiedTargets) => ({
+      buildActionResult(this, data, source, targets, ctx, (modifiedTargets) => {
+        return {
           onSuccess: {
             mutations: modifiedTargets.flatMap((target) => {
               const damage = calculateDamages(
@@ -79,8 +74,8 @@ export class WildStrikes extends Action {
               return getMutationsFromDamageResult(source, target, damage)
             }),
           },
-        })
-      )
+        }
+      })
     )
   }
 }

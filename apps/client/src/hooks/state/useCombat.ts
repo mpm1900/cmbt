@@ -1,5 +1,4 @@
 import {
-  ActionResult,
   ActionsQueueItem,
   CombatContext,
   CombatRewards,
@@ -72,7 +71,6 @@ export type CombatStore = CombatState & {
   next: () => void
   setStatus: (status: TurnStatus) => void
   setTurn: (fn: (turn: Turn) => Partial<Turn>) => Turn
-  pushResult: (result: ActionResult | undefined) => void
 
   // encounter link back
   onSuccess: () => void
@@ -233,13 +231,6 @@ export const useCombat = create<CombatStore>((set, get) => {
       }))
       return get().turn
     },
-    pushResult: (result) =>
-      set((s) => ({
-        turn: {
-          ...s.turn,
-          results: [...s.turn.results, result],
-        },
-      })),
 
     commit: false,
     reward: {

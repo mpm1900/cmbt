@@ -58,22 +58,25 @@ export class BecomeTheStorm extends Action {
     const data = getActionData(source, this, ctx)
 
     return [
-      buildActionResult(
-        this,
-        data,
-        source,
-        targets,
-        ctx,
-        (modifiedTargets) => ({
+      buildActionResult(this, data, source, targets, ctx, (modifiedTargets) => {
+        const damages = modifiedTargets.flatMap((target) => {
+          const damage = calculateDamages(
+            this.damages,
+            data.source,
+            target,
+            data.accuracyRoll
+          )
+          return { damage, target }
+        })
+        return {
           onSuccess: {
-            mutations: modifiedTargets.flatMap((target) => {
-              const damage = calculateDamages(
-                this.damages,
-                data.source,
-                target,
-                data.accuracyRoll
+            damages: damages.map((v) => v.damage),
+            mutations: damages.flatMap((value) => {
+              return getMutationsFromDamageResult(
+                source,
+                value.target,
+                value.damage
               )
-              return getMutationsFromDamageResult(source, target, damage)
             }),
             addedModifiers: [
               new UpdateFlagParent({
@@ -86,8 +89,8 @@ export class BecomeTheStorm extends Action {
               }),
             ],
           },
-        })
-      ),
+        }
+      }),
     ]
   }
 }

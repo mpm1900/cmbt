@@ -38,20 +38,22 @@ export function useCombatController() {
       const source = ctx.units.find((u) => u.id === item.action.sourceId)
       const shouldCommitAction = isUnitAliveCtx(source, ctx)
 
-      if (shouldCommitAction) {
-        const actionResults = getResultsFromActionItem(item, ctx)
-        results.enqueue(
-          { id: nanoid(), mutations: [item.action.cost] },
-          ...actionResults
-        )
-        combat.setActionCooldown(
-          item.action.sourceId,
-          item.action.id,
-          item.action.cooldown
-        )
-      }
-      combat.stageAction(item.action.sourceId, undefined)
-      actions.remove((i) => i.id === item.id)
+      setTimeout(() => {
+        if (shouldCommitAction) {
+          const actionResults = getResultsFromActionItem(item, ctx)
+          results.enqueue(
+            { id: nanoid(), mutations: [item.action.cost] },
+            ...actionResults
+          )
+          combat.setActionCooldown(
+            item.action.sourceId,
+            item.action.id,
+            item.action.cooldown
+          )
+        }
+        combat.stageAction(item.action.sourceId, undefined)
+        actions.remove((i) => i.id === item.id)
+      }, 500)
     }
   }, [isCombat, actions.queue.length, results.queue.length])
 }

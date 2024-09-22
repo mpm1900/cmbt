@@ -63,13 +63,8 @@ export class LightningBolt extends Action {
     const applyCharge = applyModifierRoll <= this.chargeChance
 
     return [
-      buildActionResult(
-        this,
-        data,
-        source,
-        targets,
-        ctx,
-        (modifiedTargets) => ({
+      buildActionResult(this, data, source, targets, ctx, (modifiedTargets) => {
+        return {
           onSuccess: {
             mutations: modifiedTargets.flatMap((target) => {
               const damage = calculateDamages(
@@ -85,8 +80,8 @@ export class LightningBolt extends Action {
                 ? Charged.modifiers(source, source)
                 : [],
           },
-        })
-      ),
+        }
+      }),
     ]
   }
 }

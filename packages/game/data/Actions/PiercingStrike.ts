@@ -69,13 +69,8 @@ export class PiercingStrike extends Action {
     const applyDefenseDown = applyModifierRoll <= this.defenseDownChance
 
     return [
-      buildActionResult(
-        this,
-        data,
-        source,
-        targets,
-        ctx,
-        (modifiedTargets) => ({
+      buildActionResult(this, data, source, targets, ctx, (modifiedTargets) => {
+        return {
           onSuccess: {
             mutations: modifiedTargets.flatMap((target) => {
               const damage = calculateDamages(
@@ -101,8 +96,8 @@ export class PiercingStrike extends Action {
               )
             ),
           },
-        })
-      ),
+        }
+      }),
     ]
   }
 }

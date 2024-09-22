@@ -24,23 +24,28 @@ export function useCleanupController() {
       if (status === 'cleanup') {
         if (cleanup.queue.length === teams.length) {
           if (cleanup.queue.every((i) => i.action.id === SetIsActiveId)) {
-            cleanup.setQueue((items) => [
-              {
-                id: nanoid(),
-                action: new SetIsActive('', 0),
-                targetIds: items.flatMap((i) => i.targetIds),
-              },
-            ])
+            const hasTargets =
+              cleanup.queue.flatMap((i) => i.targetIds).length > 0
+            if (hasTargets) {
+              cleanup.setQueue((items) => [
+                {
+                  id: nanoid(),
+                  action: new SetIsActive('', 0),
+                  targetIds: items.flatMap((i) => i.targetIds),
+                },
+              ])
+            }
           }
           combat.setStatus('cleanup-running')
         }
       }
 
       if (status === 'cleanup-running') {
-        const item = cleanup.dequeue(ctx)
+        const item = cleanup.first(ctx)
         if (item) {
           const actionResults = getResultsFromActionItem(item, ctx)
           results.enqueue(...actionResults)
+          cleanup.remove((i) => i.id === item.id)
         } else {
           if (results.queue.length === 0) {
             if (actions.queue.length === 0) {

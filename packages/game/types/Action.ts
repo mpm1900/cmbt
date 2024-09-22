@@ -1,5 +1,5 @@
 import { nanoid } from 'nanoid'
-import { checkActionCost } from '../utils'
+import { CalculateDamageResult, checkActionCost } from '../utils'
 import { Damage, Id, Tag } from './'
 import { CombatContext } from './CombatContext'
 import { Modifier } from './Modifier'
@@ -62,6 +62,7 @@ export type ActionResult = {
   addedUnits?: Unit[]
   removedUnits?: Unit[]
   stagedActions?: ActionsQueueItem[]
+  damages?: CalculateDamageResult[]
   shouldLog?: boolean
   updateModifiers?: (modifiers: Modifier[]) => Modifier[]
   updateActionQueue?: (queue: ActionsQueueItem[]) => ActionsQueueItem[]

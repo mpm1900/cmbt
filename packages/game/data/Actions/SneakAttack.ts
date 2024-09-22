@@ -73,13 +73,8 @@ export class SneakAttack extends Action {
     const data = getActionData(source, this, ctx)
 
     return [
-      buildActionResult(
-        this,
-        data,
-        source,
-        targets,
-        ctx,
-        (modifiedTargets) => ({
+      buildActionResult(this, data, source, targets, ctx, (modifiedTargets) => {
+        return {
           onSuccess: {
             mutations: modifiedTargets.flatMap((target) => {
               const power = data.source.flags.isHidden
@@ -99,8 +94,8 @@ export class SneakAttack extends Action {
               return getMutationsFromDamageResult(source, target, damage)
             }),
           },
-        })
-      ),
+        }
+      }),
     ]
   }
 }

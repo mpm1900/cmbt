@@ -65,13 +65,8 @@ export class MindTwist extends Action {
     const applyMagicDown = applyModifierRoll <= this.magicDownChance
 
     return [
-      buildActionResult(
-        this,
-        data,
-        source,
-        targets,
-        ctx,
-        (modifiedTargets) => ({
+      buildActionResult(this, data, source, targets, ctx, (modifiedTargets) => {
+        return {
           onSuccess: {
             mutations: modifiedTargets.flatMap((target) => {
               const damage = calculateDamages(
@@ -96,8 +91,8 @@ export class MindTwist extends Action {
               )
             ),
           },
-        })
-      ),
+        }
+      }),
     ]
   }
 }

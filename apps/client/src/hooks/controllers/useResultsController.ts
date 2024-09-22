@@ -53,9 +53,10 @@ export function useResultsController() {
       aliveTeams.length > 0
 
     if (shouldRenderResult) {
+      console.log('rendering result')
       logActionIntent(first.action!, first, log, ctx)
       setTurn((t) => ({
-        results: t.results.concat(first),
+        results: [first, ...t.results],
       }))
     }
 
@@ -68,7 +69,7 @@ export function useResultsController() {
             results.dequeue()
           }, speed)
         }, speed * 2)
-      }, speed / 2)
+      }, speed * 2)
     } else {
       results.dequeue()
       return

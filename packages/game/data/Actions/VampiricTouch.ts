@@ -54,9 +54,11 @@ export class VampiricTouch extends Action {
     const data = getActionData(source, this, ctx)
 
     const modifierFilter = (mod: Modifier) => !data.accuracyRoll.criticalSuccess
-    const modifiedTargets = targets.map(
-      (target) => applyModifiers(target, ctx, undefined, modifierFilter).unit
-    )
+    const modifiedTargets = targets
+      .map(
+        (target) => applyModifiers(target, ctx, undefined, modifierFilter).unit
+      )
+      .filter((t) => !t.flags.isProtected)
 
     const damages = modifiedTargets.map((target) => ({
       target,

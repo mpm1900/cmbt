@@ -36,7 +36,7 @@ const IntroductionNode: EncounterNode = {
           id: TeamId(),
           resources: { credits: 0 },
           items: [],
-          maxActiveUnits: 2,
+          maxActiveUnits: 3,
         }
         const unit = ctx.units.find((u) => true)
         if (unit) {

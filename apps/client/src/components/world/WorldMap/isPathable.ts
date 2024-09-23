@@ -7,10 +7,21 @@ export function isPathableNode(
   options: GetPathOptions & GetNodeStateOptions
 ) {
   const state = getNodeState(node, options)
+  if (state.isActive) {
+    return {
+      ...state,
+      isPathable: true,
+    }
+  }
+  if (!state.isSelectable) {
+    return {
+      ...state,
+      isPathable: false,
+    }
+  }
   const finder = getPath(options)
   const distance = finder?.distanceTo(node)
-  const isPathable =
-    state.isActive || (state.isSelectable && distance && distance !== Infinity)
+  const isPathable = distance && distance !== Infinity
   return {
     ...state,
     isPathable,

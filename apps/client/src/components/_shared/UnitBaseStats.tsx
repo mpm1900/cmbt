@@ -38,12 +38,14 @@ export function UnitBaseStats(props: UnitBaseStatsProps) {
       </div>
       <div className="flex items-center justify-end space-x-2">
         <div className="pr-2">
-          Total:{' '}
-          <span className="num">
+          <span className="text-muted-foreground/40 font-bold">
+            Power Rating:
+          </span>{' '}
+          <span className="num font-black">
             {base.stats.health +
               base.stats.attack +
               base.stats.defense +
-              base.stats.magic +
+              base.stats.magic * 2 +
               base.stats.speed}
           </span>
         </div>

@@ -24,10 +24,11 @@ import { PageLayout } from '@shared/PageLayout'
 import { useEffect } from 'react'
 
 export function Combat() {
-  const { teams, user, status } = useCombat((s) => ({
+  const { teams, user, turn, status } = useCombat((s) => ({
     teams: s.teams,
     user: s.user,
     status: s.turn.status,
+    turn: s.turn.count,
   }))
 
   useCombatSetup()
@@ -60,9 +61,11 @@ export function Combat() {
             <RequireTurnStatus statuses={['done']}>
               <CombatComplete />
             </RequireTurnStatus>
-            <RequireTurnStatus statuses={['combat', 'cleanup-running']}>
-              <RunningTurn />
-            </RequireTurnStatus>
+            {turn > 0 && (
+              <RequireTurnStatus statuses={['combat', 'cleanup-running']}>
+                <RunningTurn />
+              </RequireTurnStatus>
+            )}
             <RequireTurnStatus statuses={['main']}>
               <ActiveUnit />
             </RequireTurnStatus>

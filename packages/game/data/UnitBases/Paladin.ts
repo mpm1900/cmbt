@@ -41,7 +41,7 @@ export const Paladin: UnitBase = {
   name: 'Paladin',
   stats: {
     ...BASE_UNIT.stats,
-    health: 125,
+    health: 120,
     attack: 100,
     defense: 95,
     magic: 100,

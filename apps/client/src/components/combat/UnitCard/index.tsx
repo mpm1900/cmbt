@@ -29,11 +29,12 @@ export type UnitCardProps = {
 }
 
 type GetUnitCardStateConfig = {
-  unitId: Id
   activeUnitId: Id | undefined
-  status: TurnStatus
   hoverIds: Id[]
   result: ActionResult | undefined
+  unitId: Id
+  status: TurnStatus
+  turn: number
 }
 function getUnitCardState(config: GetUnitCardStateConfig) {
   const action = config.result?.action
@@ -43,7 +44,8 @@ function getUnitCardState(config: GetUnitCardStateConfig) {
       : config.result?.expandedTargets) ?? []
   const isMain = config.status === 'main'
   const isCombat =
-    config.status === 'combat' || config.status === 'cleanup-running'
+    config.status === 'combat' ||
+    (config.status === 'cleanup-running' && config.turn > 0)
   const isSource = isCombat && action?.sourceId === config.unitId
   const isActiveUnit = isMain && config.activeUnitId === config.unitId
   const isTarget = isCombat && targets.some((t) => t.id === config.unitId)
@@ -76,6 +78,7 @@ export function UnitCard(props: UnitCardProps) {
     status: status,
     hoverIds: hoverTargetUnitIds ?? [],
     result,
+    turn: combat.turn.count,
   })
 
   return (

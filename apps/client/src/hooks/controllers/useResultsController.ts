@@ -39,7 +39,6 @@ export function useResultsController() {
       combat.setStatus('done')
       return
     }
-
     const hasLiveTarget = first.expandedTargets?.some((t) => {
       const unit = ctx.units.find((u) => u.id === t.id)
       return isUnitAlive(unit)
@@ -60,19 +59,19 @@ export function useResultsController() {
       }))
     }
 
-    if (shouldCommitResult) {
-      setTimeout(() => {
-        ctx = fns.commitResult(first, ctx)
-        setTimeout(() => {
-          fns.cleanupResult(first, ctx)
-          setTimeout(() => {
-            results.dequeue()
-          }, speed)
-        }, speed * 2)
-      }, speed * 2)
-    } else {
+    if (!shouldCommitResult) {
       results.dequeue()
       return
     }
+
+    setTimeout(() => {
+      ctx = fns.commitResult(first, ctx)
+      setTimeout(() => {
+        fns.cleanupResult(first, ctx)
+        setTimeout(() => {
+          results.dequeue()
+        }, speed)
+      }, speed * 2)
+    }, speed * 2)
   }, [first])
 }

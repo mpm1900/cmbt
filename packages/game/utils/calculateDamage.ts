@@ -112,9 +112,15 @@ export function getAttackTypeMultiplier(
 const hasTag = (tags: Tag[]) => (finder: Partial<Tag>) => {
   return tags.some((t) => t.id === finder.id || t.label === finder.label)
 }
-export function getTagsMultiplier(actionTags: Tag[], targetTags: Tag[]) {
-  const action = hasTag(actionTags)
-  const target = hasTag(targetTags)
+export type GetTagsMultiplierConfig = {
+  actionTags: Tag[]
+  targetTags: Tag[]
+  sourceTags: Tag[]
+}
+export function getTagsMultiplier(config: GetTagsMultiplierConfig) {
+  const action = hasTag(config.actionTags)
+  const target = hasTag(config.targetTags)
+  const source = hasTag(config.sourceTags)
   if (action({ id: GroundBasedId }) && target({ id: FlyingId })) return 0
   return 1
 }
@@ -214,9 +220,19 @@ export function calculateDamageAmount(
     ? (config?.criticalFactor ?? 1)
     : 1
   const randomFactor = config?.randomFactor ?? 1
+  const tagFactor = getTagsMultiplier({
+    actionTags: config?.actionTags ?? [],
+    sourceTags: source?.tags ?? [],
+    targetTags: target.tags,
+  })
 
   const raw =
-    base * attackTypeFactor * damageTypeFactor * criticalFactor * randomFactor
+    base *
+    attackTypeFactor *
+    damageTypeFactor *
+    criticalFactor *
+    tagFactor *
+    randomFactor
 
   const remainingHealth = target.stats.health - target.values.damage
   const final = Math.min(remainingHealth, Math.round(raw))

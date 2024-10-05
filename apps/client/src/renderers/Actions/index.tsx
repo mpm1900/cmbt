@@ -161,8 +161,8 @@ export type ActionRenderer = {
     targets: Unit[],
     ctx: CombatContext
   ) => ReactNode
-  successLog?: (result: ActionResult) => ReactNode
-  failureLog?: (result: ActionResult) => ReactNode
+  successLog?: (result: ActionResult, ctx: CombatContext) => ReactNode
+  failureLog?: (result: ActionResult, ctx: CombatContext) => ReactNode
 }
 
 export const ActionRenderers: Record<string, ActionRenderer> = {

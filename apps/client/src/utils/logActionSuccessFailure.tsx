@@ -10,11 +10,11 @@ export function logActionSuccessFailure(
 ) {
   const renderer = ActionRenderers[result.action?.id || '']
   if (result.success && renderer?.successLog) {
-    log(<LogSecondary>{renderer.successLog(result)}</LogSecondary>)
+    log(<LogSecondary>{renderer.successLog(result, ctx)}</LogSecondary>)
   }
   if (!result.success) {
     if (renderer?.failureLog) {
-      log(<LogSecondary>{renderer.failureLog(result)}</LogSecondary>)
+      log(<LogSecondary>{renderer.failureLog(result, ctx)}</LogSecondary>)
     }
     if (result.data?.source?.flags.isBaned) {
       log(

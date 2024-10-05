@@ -1,3 +1,4 @@
+import { LogUnit } from '@/components/ui/log'
 import { RetreatingBlowId } from '@repo/game/data'
 import { DamageListInline } from '@shared/DamageListInline'
 import { ACTION_NAMES, ActionRenderer } from '.'
@@ -16,5 +17,17 @@ export const RetreatingBlowRenderer: ActionRenderer = {
     if (result.data?.source.flags.isBaned || !result.data?.accuracyRoll.success)
       return <></>
     return <>No available allies, attack failed.</>
+  },
+  successLog: (result, ctx) => {
+    if (result.source) {
+      return (
+        <>
+          <LogUnit unit={result.source} user={ctx.user}>
+            {result.source?.name}
+          </LogUnit>{' '}
+          retreated.
+        </>
+      )
+    }
   },
 }

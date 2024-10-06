@@ -72,6 +72,11 @@ export function resolveUnitBuilder(builder: UnitBuilder, teamId: Id): Unit {
         builder.level
       ),
       magic: getBaseStatValue('magic', builder.base.stats.magic, builder.level),
+      magicDefense: getBaseStatValue(
+        'magicDefense',
+        builder.base.stats.magicDefense,
+        builder.level
+      ),
       speed: getBaseStatValue('speed', builder.base.stats.speed, builder.level),
     },
     tags: builder.base.tags,

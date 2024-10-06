@@ -44,7 +44,8 @@ export const Paladin: UnitBase = {
     health: 120,
     attack: 100,
     defense: 95,
-    magic: 100,
+    magic: 95,
+    magicDefense: 100,
     speed: 60,
     memory: 5,
 

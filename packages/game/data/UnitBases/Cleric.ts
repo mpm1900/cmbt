@@ -38,9 +38,10 @@ export const Cleric: UnitBase = {
   stats: {
     ...BASE_UNIT.stats,
     health: 70,
-    attack: 55,
+    attack: 70,
     defense: 100,
     magic: 100,
+    magicDefense: 115,
     speed: 65,
     memory: 5,
 

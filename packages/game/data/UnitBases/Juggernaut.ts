@@ -37,6 +37,7 @@ export const Juggernaut: UnitBase = {
     attack: 110,
     defense: 95,
     magic: 80,
+    magicDefense: 80,
     speed: 50,
     memory: 5,
 

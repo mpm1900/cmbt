@@ -15,6 +15,7 @@ export const Snake: UnitBase = {
     attack: 80,
     defense: 45,
     magic: 45,
+    magicDefense: 50,
     speed: 160,
     memory: 5,
 

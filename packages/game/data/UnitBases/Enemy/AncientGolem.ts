@@ -14,6 +14,7 @@ export const AncientGolem: UnitBase = {
     attack: 160,
     defense: 110,
     magic: 100,
+    magicDefense: 100,
     speed: 90,
     memory: 5,
 

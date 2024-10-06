@@ -17,23 +17,24 @@ export function getAttackDefenseRatio(
   source: Unit,
   target: Unit
 ) {
+  let result = power
   if (attackType === 'physical') {
-    return power * (source.stats.attack / target.stats.defense)
+    result = power * (source.stats.attack / target.stats.defense)
   }
 
   if (attackType === 'magic') {
-    return power * (source.stats.magic / target.stats.magic)
+    result = power * (source.stats.magic / target.stats.magicDefense)
   }
 
   if (attackType === 'physical-reverse') {
-    return power * (source.stats.attack / target.stats.magic)
+    result = power * (source.stats.attack / target.stats.magicDefense)
   }
 
   if (attackType === 'magic-reverse') {
-    return power * (source.stats.magic / target.stats.defense)
+    result = power * (source.stats.magic / target.stats.defense)
   }
 
-  return power
+  return result
 }
 
 export function calculateBaseDamage(

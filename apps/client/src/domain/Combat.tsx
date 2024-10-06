@@ -42,7 +42,7 @@ export function Combat() {
   useAiActions()
 
   useEffect(() => {
-    // console.log(status)
+    console.log(status)
   }, [status])
 
   const userTeam = teams.find((t) => t.id === user)

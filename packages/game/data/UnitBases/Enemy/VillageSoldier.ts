@@ -14,6 +14,7 @@ export const VillageSoldier: UnitBase = {
     attack: 105,
     defense: 79,
     magic: 35,
+    magicDefense: 55,
     speed: 76,
     memory: 5,
 

@@ -52,7 +52,6 @@ export function useResultsController() {
       aliveTeams.length > 0
 
     if (shouldRenderResult) {
-      console.log('rendering result')
       logActionIntent(first.action!, first, log, ctx)
       setTurn((t) => ({
         results: [first, ...t.results],

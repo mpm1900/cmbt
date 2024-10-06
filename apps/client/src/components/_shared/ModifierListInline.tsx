@@ -23,7 +23,7 @@ export function ModifierListInline(props: ModifierListInlineProps) {
   return (
     <span className={className}>
       {modifiers.map((modifier, i) => (
-        <span key={i}>
+        <span key={i + modifier.id}>
           {seporator && i > 0 && seporator}
           {conjunction &&
             i > 0 &&

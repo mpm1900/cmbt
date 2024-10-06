@@ -31,6 +31,7 @@ export const DemonSlayer: UnitBase = {
     attack: 120,
     defense: 60,
     magic: 60,
+    magicDefense: 60,
     speed: 130,
     memory: 5,
 

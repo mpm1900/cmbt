@@ -14,6 +14,7 @@ export const FlameCultist: UnitBase = {
     attack: 60,
     defense: 60,
     magic: 100,
+    magicDefense: 100,
     speed: 90,
     memory: 5,
 

@@ -17,6 +17,7 @@ export const Revenant: UnitBase = {
     attack: 120,
     defense: 80,
     magic: 80,
+    magicDefense: 100,
     speed: 135,
     memory: 5,
 

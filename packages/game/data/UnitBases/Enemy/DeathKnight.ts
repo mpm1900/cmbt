@@ -14,6 +14,7 @@ export const DeathKnight: UnitBase = {
     attack: 100,
     defense: 100,
     magic: 100,
+    magicDefense: 100,
     speed: 95,
     memory: 5,
 

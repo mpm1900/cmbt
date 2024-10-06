@@ -10,8 +10,7 @@ export type AttackType =
   | 'physical-reverse'
   | 'magic-reverse'
 export type UnitAttackType = 'physical' | 'magic'
-
-export const ATTACK_TYPES: AttackType[] = ['magic', 'physical']
+export const ATTACK_TYPES: UnitAttackType[] = ['magic', 'physical']
 
 export type StatKey =
   | 'attack'
@@ -24,6 +23,7 @@ export type StatKey =
   | 'focus'
   | 'health'
   | 'magic'
+  | 'magicDefense'
   | 'memory'
   | 'nonDamagePriority'
   | 'priority'

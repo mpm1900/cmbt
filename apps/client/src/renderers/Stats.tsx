@@ -8,6 +8,7 @@ import {
   GiCursedStar,
   GiDiceTarget,
   GiDodging,
+  GiMagicShield,
   GiSprint,
 } from 'react-icons/gi'
 import { PiTargetFill } from 'react-icons/pi'
@@ -81,6 +82,10 @@ export const StatRenderers: Record<StatKey, StatRenderer> = {
   magic: {
     name: <>Magic</>,
     icon: <GiCursedStar className="h-full w-full" />,
+  },
+  magicDefense: {
+    name: <>Magic Defense</>,
+    icon: <GiMagicShield className="h-full w-full" />,
   },
   magicExpansion: {
     name: <>Magic Damage</>,

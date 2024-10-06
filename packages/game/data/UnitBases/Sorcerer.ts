@@ -43,6 +43,7 @@ export const Sorcerer: UnitBase = {
     attack: 55,
     defense: 55,
     magic: 135,
+    magicDefense: 130,
     speed: 135,
     memory: 6,
 

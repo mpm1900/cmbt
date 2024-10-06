@@ -41,6 +41,7 @@ export const DraconicScion: UnitBase = {
     attack: 115,
     defense: 90,
     magic: 80,
+    magicDefense: 80,
     speed: 60,
     memory: 5,
 

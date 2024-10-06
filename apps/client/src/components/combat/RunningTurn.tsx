@@ -18,8 +18,6 @@ export function RunningTurn() {
       : result?.expandedTargets) ?? []
 
   if (!result) return null
-
-  console.log(renderer.name)
   if (renderer.log && result.action) {
     return (
       <div className="text-3xl">

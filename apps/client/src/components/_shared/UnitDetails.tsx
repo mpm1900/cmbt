@@ -127,6 +127,7 @@ export function UnitDetails(props: UnitDetailsProps) {
             <UnitStat unit={unit} comp={original} stat="attack" />
             <UnitStat unit={unit} comp={original} stat="defense" />
             <UnitStat unit={unit} comp={original} stat="magic" />
+            <UnitStat unit={unit} comp={original} stat="magicDefense" />
             <UnitStat unit={unit} comp={original} stat="speed" />
 
             <Separator className="my-2" />

@@ -14,6 +14,7 @@ export const RestlessSpirit: UnitBase = {
     attack: 50,
     defense: 145,
     magic: 100,
+    magicDefense: 100,
     speed: 30,
     memory: 5,
 

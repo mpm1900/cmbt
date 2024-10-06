@@ -20,7 +20,7 @@ import { GetUnits } from '../Queries'
 import { Charged } from '../Statuses'
 
 export class CallLightning extends Action {
-  chargeChance: number = 20
+  chargeChance: number = 80
 
   constructor(sourceId: Id, teamId: Id) {
     super(CallLightningId, {

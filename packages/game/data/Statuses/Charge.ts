@@ -1,5 +1,5 @@
 import { Status } from '../../types'
-import { ChargeId, MagicExpansionUpParentId, SpeedDownParentId } from '../Ids'
+import { ChargeId, ShockNegationUpParentId, SpeedDownParentId } from '../Ids'
 import { UpdateStatParent } from '../Modifiers'
 
 export const Charged: Status = {
@@ -17,11 +17,11 @@ export const Charged: Status = {
       maxInstances: 1,
     }),
     new UpdateStatParent({
-      registryId: MagicExpansionUpParentId,
+      registryId: ShockNegationUpParentId,
       sourceId: source.id,
       parentId: parent.id,
       statusId: ChargeId,
-      stat: 'magicNegation',
+      stat: 'shockNegation',
       static: 50,
       duration: 5,
       maxInstances: 1,

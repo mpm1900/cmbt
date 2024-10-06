@@ -45,7 +45,7 @@ export const Hellknight: UnitBase = {
     attack: 134,
     defense: 110,
     magic: 85,
-    magicDefense: 85,
+    magicDefense: 80,
     speed: 61,
     memory: 5,
 

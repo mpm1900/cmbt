@@ -1,8 +1,10 @@
 import { cn } from '@/lib/utils'
 import { DamageRenderers } from '@/renderers/Damage'
 import { ElementProps } from '@/types'
+import { TooltipPortal } from '@radix-ui/react-tooltip'
 import { Damage } from '@repo/game/types'
 import { GiPlainCircle } from 'react-icons/gi'
+import { Tooltip, TooltipContent, TooltipTrigger } from '../ui/tooltip'
 import { DamageIcon } from './DamageIcon'
 
 export type DamageInlineProps = ElementProps<{
@@ -17,6 +19,12 @@ export function DamageInline(props: DamageInlineProps) {
     ? DamageRenderers[damage.damageType]
     : undefined
 
+  const isPhysical =
+    damage?.attackType === 'physical' ||
+    damage?.attackType === 'physical-reverse'
+  const isMagic =
+    damage?.attackType === 'magic' || damage?.attackType === 'magic-reverse'
+
   return (
     <span
       className={cn(
@@ -26,12 +34,36 @@ export function DamageInline(props: DamageInlineProps) {
       style={{ color: color || renderer?.color }}
     >
       {showAttackTypeIndicator && (
-        <GiPlainCircle
-          className={cn('h-2 w-2 self-center', {
-            'fill-green-400': damage?.attackType === 'physical',
-            'fill-blue-400': damage?.attackType === 'magic',
-          })}
-        />
+        <Tooltip>
+          <TooltipTrigger className="self-center">
+            <GiPlainCircle
+              className={cn('h-2 w-2 self-center', {
+                'fill-green-400': isPhysical,
+                'fill-blue-400': isMagic,
+              })}
+            />
+          </TooltipTrigger>
+          <TooltipPortal>
+            <TooltipContent>
+              {isPhysical && (
+                <span>
+                  <span className="font-bold">Physical</span>{' '}
+                  <span className="text-muted-foreground">
+                    (uses Attack stat)
+                  </span>
+                </span>
+              )}
+              {isMagic && (
+                <span>
+                  <span className="font-bold">Magic</span>{' '}
+                  <span className="text-muted-foreground">
+                    (uses Magic stat)
+                  </span>
+                </span>
+              )}
+            </TooltipContent>
+          </TooltipPortal>
+        </Tooltip>
       )}
 
       {damage && damage.power === Infinity && (

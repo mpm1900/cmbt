@@ -10,9 +10,9 @@ export const VillageSoldier: UnitBase = {
   name: 'Village Soldier',
   stats: {
     ...BASE_UNIT.stats,
-    health: 70,
-    attack: 105,
-    defense: 79,
+    health: 63,
+    attack: 70,
+    defense: 60,
     magic: 35,
     magicDefense: 55,
     speed: 76,

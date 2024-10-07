@@ -111,14 +111,16 @@ function ActionListRow(props: ActionListRowProps) {
             />
           </TableCell>
         )}
-        <TableCell>{maker.level ? `Lv.${maker.level}` : '—'}</TableCell>
+        <TableCell>
+          {maker.level ? (
+            `Lv.${maker.level}`
+          ) : (
+            <span className="text-muted-foreground">—</span>
+          )}
+        </TableCell>
         <TableCell>{renderer.name}</TableCell>
         <TableCell>
-          {action.damages.length > 0 ? (
-            <DamagesAttackTypes damages={action.damages} />
-          ) : (
-            '—'
-          )}
+          <DamagesAttackTypes damages={action.damages} />
         </TableCell>
 
         <TableCell className="num">
@@ -133,20 +135,30 @@ function ActionListRow(props: ActionListRowProps) {
               />
             </span>
           ) : (
-            '—'
+            <span className="text-muted-foreground">—</span>
           )}
         </TableCell>
         <TableCell className="num">
-          {accuracy !== undefined ? `${accuracy}%` : '—'}
+          {accuracy !== undefined ? (
+            `${accuracy}%`
+          ) : (
+            <span className="text-muted-foreground">—</span>
+          )}
         </TableCell>
-        <TableCell>{(renderer.cost && renderer.cost(action)) || '—'}</TableCell>
+        <TableCell>
+          {(renderer.cost && renderer.cost(action)) || (
+            <span className="text-muted-foreground">—</span>
+          )}
+        </TableCell>
         {action.criticalFactor(ZERO_UNIT) ? (
           <TableCell className="num">
             {action.criticalThreshold(ZERO_UNIT)}%{', '}
             {action.criticalFactor(ZERO_UNIT)}x
           </TableCell>
         ) : (
-          <TableCell>—</TableCell>
+          <TableCell>
+            <span className="text-muted-foreground">—</span>
+          </TableCell>
         )}
       </TableRow>
     </ActionHover>

@@ -14,8 +14,8 @@ export const Wolf: UnitBase = {
     health: 70,
     attack: 90,
     defense: 70,
-    magic: 50,
-    magicDefense: 50,
+    magic: 20,
+    magicDefense: 60,
     speed: 70,
     memory: 5,
 

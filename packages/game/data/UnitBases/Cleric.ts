@@ -41,7 +41,7 @@ export const Cleric: UnitBase = {
     attack: 70,
     defense: 100,
     magic: 100,
-    magicDefense: 115,
+    magicDefense: 125,
     speed: 65,
     memory: 5,
 

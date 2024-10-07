@@ -43,7 +43,7 @@ export const Witch: UnitBase = {
     attack: 40,
     defense: 80,
     magic: 90,
-    magicDefense: 115,
+    magicDefense: 110,
     speed: 50,
     memory: 5,
 

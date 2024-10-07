@@ -14,8 +14,8 @@ export const Bear: UnitBase = {
     health: 90,
     attack: 130,
     defense: 75,
-    magic: 75,
-    magicDefense: 75,
+    magic: 20,
+    magicDefense: 80,
     speed: 75,
     memory: 5,
 
